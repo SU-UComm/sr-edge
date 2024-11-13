@@ -5,8 +5,8 @@ to Components at Edge. See the
 [stanford-report repo](https://github.com/SU-UComm/stanford-report])
 for the original code.
 
-Feel free to edit this README as appropriate. I've added some section
-as suggestion.
+Please edit this README as appropriate. I've added some sections as a
+suggested structure.
 
 ## System dependencies
 
