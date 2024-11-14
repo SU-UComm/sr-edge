@@ -1,0 +1,170 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "image-gallery-modal",
+    "type": "edge",
+    "version": "3.1.3",
+    "namespace": "pnp-stanford-edge-components",
+    "description": "An image gallery that opens in a modal.",
+    "displayName": "Image gallery with modal",
+    "mainFunction": "main",
+    "environment": [
+        {
+            "name": "API_IDENTIFIER",
+            "required": true
+        },
+        {
+            "name": "BASE_DOMAIN",
+            "required": true
+        }
+    ],
+    "icon": {
+        "id": "auto_awesome_mosaic",
+        "color": {
+            "type": "enum",
+            "value": "gray"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "contentConfiguration": {
+                        "required": [],
+                        "properties": {
+                            "layout": {
+                                "title": "Layout",
+                                "type": "string",
+                                "enum": ["Title & Content", "Content Only"],
+                                "default": "Title & Content"
+                            },
+                            "caption": {
+                                "title": "Gallery caption",
+                                "type": "string",
+                                "format": "multi-line",
+                                "default": ""
+                            },
+                            "credit": {
+                                "title": "Gallery credit",
+                                "type": "string",
+                                "default": ""
+                            },
+                            "images": {
+                                "title": "Images",
+                                "type": "array",
+                                "minItems": 4,
+                                "maxItems": 20,
+                                "items": {
+                                    "type": "object",
+                                    "required": ["image"],
+                                    "properties": {
+                                        "image": {
+                                            "title": "Image asset",
+                                            "format": "matrix-asset-uri",
+                                            "type": "string"
+                                        },
+                                        "caption": {
+                                            "title": "Description",
+                                            "description": "The image's caption",
+                                            "type": "string",
+                                            "format": "multi-line"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "allOf": [
+                            {
+                                "if": {
+                                    "required": [],
+                                    "properties": {
+                                        "layout": {
+                                            "const": "Title & Content"
+                                        }
+                                    }
+                                },
+                                "then": {
+                                    "required": [],
+                                    "properties": {
+                                        "title": {
+                                            "title": "Heading",
+                                            "type": "string"
+                                        },
+                                        "summary": {
+                                            "title": "Summary",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "displayConfiguration": {
+                        "required": [],
+                        "properties": {
+                            "displayIconHeading": {
+                                "title": "Show Icon Heading",
+                                "type": "boolean",
+                                "default": true
+                            },
+                            "backgroundColor": {
+                                "title": "Background Color",
+                                "enum": ["Grey", "Transparent"],
+                                "type": "string",
+                                "default": "Grey"
+                            },
+                            "width": {
+                                "title": "Width",
+                                "type": "string",
+                                "enum": ["Wide", "Content"],
+                                "default": "Wide"
+                            }
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://api-identifier/125801": {
+            "type": "file",
+            "path": "mocked-uris/125801.json"
+        },
+        "matrix-asset://api-identifier/99100": {
+            "type": "file",
+            "path": "mocked-uris/99100.json"
+        },
+        "matrix-asset://api-identifier/125800": {
+            "type": "file",
+            "path": "mocked-uris/125800.json"
+        },
+        "matrix-asset://api-identifier/125802": {
+            "type": "file",
+            "path": "mocked-uris/125802.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        }
+    }
+}

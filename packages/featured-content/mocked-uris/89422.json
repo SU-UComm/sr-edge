@@ -1,0 +1,92 @@
+{
+  "id": "89422",
+  "type": "page_standard",
+  "type_name": "Standard Page",
+  "version": "0.1.1",
+  "name": "Give &amp; Go program finds new purpose for tons of unwanted items",
+  "short_name": "Give & Go program finds new purpose for tons of unwanted items",
+  "status": { "id": 16, "code": "live", "name": "Live" },
+  "created": { "date": "2023-12-04T00:34:28-08:00", "user_id": "32242" },
+  "updated": { "date": "2023-12-05T00:24:06-08:00", "user_id": "32242" },
+  "published": { "date": "2023-12-04T23:25:20-08:00", "user_id": "33171" },
+  "status_changed": { "date": "2023-12-04T23:25:20-08:00", "user_id": "33171" },
+  "urls": [
+    "https://sug-web.matrix.squiz.cloud/report/stories/give-and-go-program-finds-new-purpose-for-tons-of-unwanted-items"
+  ],
+  "url": "https://sug-web.matrix.squiz.cloud/report/stories/give-and-go-program-finds-new-purpose-for-tons-of-unwanted-items",
+  "attributes": {
+    "short_name": "Give & Go program finds new purpose for tons of unwanted items",
+    "name": "Give & Go program finds new purpose for tons of unwanted items"
+  },
+  "metadata": {
+    "csFeaturedImageUrl": [
+      "https://sug-web.matrix.squiz.cloud/__data/assets/image/0019/99100/RDE-Sustainability-Waste-Specialist-Haley-Todd-with-a-Recycle-for-Change-Bin-scaled-1.jpg"
+    ],
+    "csFeaturedImageAlt": [],
+    "csTaxonomyName": ["Earth & Climate"],
+    "csTaxonomyUrl": [
+      "https://sug-web.matrix.squiz.cloud/_media/taxonomy/content-warehouse/front-end-taxonomy/content-topic/research-and-scholarship/earth-and-climate"
+    ],
+    "csContentTypeName": ["News"],
+    "srAudience": ["28168"],
+    "srMessage": [],
+    "srLandingPage": [],
+    "srContentType": ["28192"],
+    "srFeaturedUnit": [],
+    "srContentCategory": ["28375"],
+    "srContentMainTopic": ["28401"],
+    "srContentTopic": [],
+    "srContentSubtopic": ["28502"],
+    "seoTitle": [
+      "Give and Go program finds new purpose for tons of unwanted items"
+    ],
+    "canonicalUrl": [],
+    "seoDescription": [],
+    "seoKeywords": [],
+    "robots": ["max-image-preview:large"],
+    "pageType": ["story"],
+    "summary": [],
+    "teaser": [
+      "<p>Thirty-five bales of hay, a handful of silverware, and a guitar are just a few of the items the Give & Go program has recovered on campus as part of R&DE’s efforts to divert materials that might otherwise end up trashed.</p>"
+    ],
+    "publishedDate": ["2023-04-27 00:00:00"],
+    "modifiedDate": ["2023-01-01 00:00:00"],
+    "featuredImage": ["99100"],
+    "featuredVideo": ["12345"],
+    "bannerImg": [],
+    "bannerCaption": [],
+    "bannerImgType": ["normal"],
+    "mediaContacts": [],
+    "storyFormat": ["standard"],
+    "mediaAttachments": [],
+    "featuredImageTwitter": [],
+    "featuredImageOg": [],
+    "hideSocialMedia": [],
+    "hideBottomBox": [],
+    "bylineAuthor": [],
+    "bylineText": [],
+    "bylineUrl": [],
+    "ogLocale": ["en_US"],
+    "ogType": ["article"],
+    "twitterCard": ["summary_large_image"],
+    "authorId": [],
+    "authorName": [],
+    "srcOrigin": [],
+    "srcOriginType": [],
+    "srcContentSource": [],
+    "srcTitle": [],
+    "srcSummary": [],
+    "srcPublishedDate": ["2023-01-01 00:00:00"],
+    "srcFeaturedImage": [],
+    "slug": [],
+    "srcKeywords": [],
+    "srcPostId": [],
+    "srcUrl": [],
+    "srcStatus": [],
+    "debugFeedUrl": [],
+    "debugPushTs": [],
+    "debugBlueprintId": []
+  },
+  "contents": "",
+  "additional": {}
+}

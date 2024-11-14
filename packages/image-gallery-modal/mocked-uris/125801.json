@@ -1,0 +1,1004 @@
+{
+  "id": "125801",
+  "type": "image",
+  "type_name": "Image",
+  "version": "0.1.0",
+  "name": "random-robot.png",
+  "short_name": "Random Robot",
+  "status": {
+    "id": 16,
+    "code": "live",
+    "name": "Live"
+  },
+  "created": {
+    "date": "2023-12-10T21:24:03-08:00",
+    "user_id": "32325"
+  },
+  "updated": {
+    "date": "2023-12-10T21:24:20-08:00",
+    "user_id": "32325"
+  },
+  "published": {
+    "date": "2023-12-10T21:24:19-08:00",
+    "user_id": "32325"
+  },
+  "status_changed": {
+    "date": "2023-12-10T21:24:20-08:00",
+    "user_id": "32325"
+  },
+  "urls": [
+    "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/random-robot.png"
+  ],
+  "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/random-robot.png",
+  "attributes": {
+    "title": "Random Robot",
+    "allow_unrestricted": true,
+    "variety_count": 19,
+    "size": 1410610,
+    "height": 1000,
+    "width": 1500,
+    "caption": "",
+    "alt": "",
+    "name": "random-robot.png"
+  },
+  "metadata": null,
+  "contents": "<img src=\"https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/random-robot.png\" width=\"1500\" height=\"1000\" alt=\"\" title=\"Random Robot\" />",
+  "additional": {
+    "file_info": {
+      "file_name": "random-robot.png",
+      "size_readable": "1.3 MB",
+      "size_bytes": 1410610,
+      "width": 1500,
+      "height": 1000,
+      "modified_readable": "Dec 10, 2023 9:24 PM",
+      "modified_unix": 1702272244
+    },
+    "varieties": [
+      {
+        "id": "125801:v1",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "100w",
+        "short_name": "100w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/100w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/100w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "100w.png",
+          "name": "100w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 21250,
+          "variety_height": 100,
+          "variety_width": 100,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 100,
+          "height": 0,
+          "width": 0,
+          "constrain": "centre_weighted_square"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v2",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "150w",
+        "short_name": "150w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/150w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/150w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "150w.png",
+          "name": "150w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 43359,
+          "variety_height": 150,
+          "variety_width": 150,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 150,
+          "height": 0,
+          "width": 0,
+          "constrain": "centre_weighted_square"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v3",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "200w",
+        "short_name": "200w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/200w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/200w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "200w.png",
+          "name": "200w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 52084,
+          "variety_height": 133,
+          "variety_width": 200,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 200,
+          "width": 200,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v4",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "300w",
+        "short_name": "300w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/300w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/300w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "300w.png",
+          "name": "300w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 52084,
+          "variety_height": 133,
+          "variety_width": 200,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 300,
+          "width": 200,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v5",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "345w",
+        "short_name": "345w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/345w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/345w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "345w.png",
+          "name": "345w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 134525,
+          "variety_height": 230,
+          "variety_width": 345,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 555,
+          "width": 345,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v6",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "375w",
+        "short_name": "375w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/375w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/375w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "375w.png",
+          "name": "375w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 144379,
+          "variety_height": 250,
+          "variety_width": 375,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 200,
+          "width": 375,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v7",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "400w",
+        "short_name": "400w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/400w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/400w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "400w.png",
+          "name": "400w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 171086,
+          "variety_height": 267,
+          "variety_width": 400,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 100,
+          "width": 400,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v8",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "555w",
+        "short_name": "555w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/555w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/555w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "555w.png",
+          "name": "555w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 299054,
+          "variety_height": 370,
+          "variety_width": 555,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 555,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v9",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "600w",
+        "short_name": "600w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/600w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/600w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "600w.png",
+          "name": "600w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 318240,
+          "variety_height": 400,
+          "variety_width": 600,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 600,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v10",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "690w",
+        "short_name": "690w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/690w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/690w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "690w.png",
+          "name": "690w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 428907,
+          "variety_height": 460,
+          "variety_width": 690,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 690,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v11",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "705w",
+        "short_name": "705w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/705w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/705w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "705w.png",
+          "name": "705w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 442930,
+          "variety_height": 470,
+          "variety_width": 705,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 705,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v12",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "750w",
+        "short_name": "750w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/750w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/750w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "750w.png",
+          "name": "750w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 442421,
+          "variety_height": 500,
+          "variety_width": 750,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 750,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v13",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "795w",
+        "short_name": "795w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/795w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/795w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "795w.png",
+          "name": "795w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 540566,
+          "variety_height": 530,
+          "variety_width": 795,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 795,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v14",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "960w",
+        "short_name": "960w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/960w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/960w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "960w.png",
+          "name": "960w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 653245,
+          "variety_height": 640,
+          "variety_width": 960,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 960,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v15",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1024w",
+        "short_name": "1024w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/1024w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/1024w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1024w.png",
+          "name": "1024w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 818611,
+          "variety_height": 683,
+          "variety_width": 1024,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1024,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v16",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1110w",
+        "short_name": "1110w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/1110w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/1110w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1110w.png",
+          "name": "1110w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 933154,
+          "variety_height": 740,
+          "variety_width": 1110,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1110,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v17",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1410w",
+        "short_name": "1410w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/1410w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/1410w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1410w.png",
+          "name": "1410w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 1377603,
+          "variety_height": 940,
+          "variety_width": 1410,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1410,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125801:v18",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1500w",
+        "short_name": "1500w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/1500w.png"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0017/125801/varieties/1500w.png",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1500w.png",
+          "name": "1500w",
+          "title": "Random Robot",
+          "caption": "",
+          "variety_size": 1178314,
+          "variety_height": 1000,
+          "variety_width": 1500,
+          "alt": "",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1500,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      }
+    ],
+    "exif": {
+      "image": {
+        "ImageHeight": 1000,
+        "ImageWidth": 1500
+      },
+      "thumbnail": {
+        "Compression": 0
+      }
+    }
+  }
+}

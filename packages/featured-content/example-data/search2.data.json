@@ -1,0 +1,17 @@
+{
+    "headingConfiguration": {
+        "title": "Featured Content Grid",
+        "ctaText": "View all",
+        "ctaUrl": "matrix-asset://api-identifier/89422",
+        "ctaNewWindow": false
+    },
+    "contentConfiguration": {
+        "source": "Search",
+        "searchQuery": "?f.University+News|topicawardshonorsappointments=Awards%2C+Honors+%26+Appointments&collection=sug~sp-stanford-report-search"
+    },
+    "displayConfiguration": {
+        "alignment": "left",
+        "displayThumbnails": true,
+        "displayDescriptions": false
+    }
+}

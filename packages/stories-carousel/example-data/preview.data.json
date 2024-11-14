@@ -1,0 +1,11 @@
+{
+    "headingConfiguration": {
+        "title": "Read next",
+        "ctaText": "View all",
+        "ctaUrl": "matrix-asset://api-identifier/89422",
+        "ctaNewWindow": false
+    },
+    "contentConfiguration": {
+        "searchQuery": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser=false&meta_taxonomyContentTypeText_not=Announcement+Leadership%20Messages&num_ranks=6"
+    }
+}

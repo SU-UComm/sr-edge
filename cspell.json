@@ -1,0 +1,21 @@
+{
+    "language": "en-au, en-gb, en-us, aws, css, html, npm, node, bash, git, lorem-ipsum",
+    "dictionaries": ["customDictionary"],
+    "dictionaryDefinitions": [{ "name": "customDictionary", "path": "./cspell-dictionary.txt" }],
+    "patterns": [
+        {
+            "name": "comments",
+            "pattern": "(?:\\/\\*(?:[\\s\\S]*?)\\*\\/)|(?:^\\s*\\/\\/(?:.*)$)"
+        },
+        {
+            "name": "url-encoded",
+            "pattern": "/[^\\s]{40,}/"
+        }
+    ],
+    "ignoreRegExpList": ["comments", "url-encoded", "regex"],
+    "ignorePaths": [
+        "./**/*.stories.*",
+        "./**/package.json",
+        "./**/preview.data.json"
+    ]
+}

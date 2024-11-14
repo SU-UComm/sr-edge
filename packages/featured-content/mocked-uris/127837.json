@@ -1,0 +1,764 @@
+{
+  "id": "127837",
+  "type": "image",
+  "type_name": "Image",
+  "version": "0.1.1",
+  "name": "test-750x500.jpg",
+  "short_name": "test-750x500.jpg",
+  "status": { "id": 16, "code": "live", "name": "Live" },
+  "created": { "date": "2024-01-11T20:52:35-08:00", "user_id": "32242" },
+  "updated": { "date": "2024-01-11T20:53:13-08:00", "user_id": "32242" },
+  "published": { "date": "2024-01-11T20:52:45-08:00", "user_id": "32242" },
+  "status_changed": { "date": "2024-01-11T20:52:45-08:00", "user_id": "32242" },
+  "urls": [
+    "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/test-750x500.jpg"
+  ],
+  "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/test-750x500.jpg",
+  "attributes": {
+    "variety_count": 19,
+    "size": 43598,
+    "height": 500,
+    "width": 750,
+    "title": "test-750x500.jpg",
+    "name": "test-750x500.jpg",
+    "alt": "Top don view of a desktop with a MAC computer",
+    "allow_unrestricted": true,
+    "caption": ""
+  },
+  "metadata": {
+    "mediaPublished": ["2024-01-01 00:00:00"],
+    "mediaModified": ["2024-01-01 00:00:00"],
+    "mediaDescription": [],
+    "mediaCredit": [],
+    "mediaId": [],
+    "fileFeed": []
+  },
+  "contents": "",
+  "additional": {
+    "file_info": {
+      "file_name": "test-750x500.jpg",
+      "size_readable": "42.6 KB",
+      "size_bytes": 43598,
+      "width": 750,
+      "height": 500,
+      "modified_readable": "Jan 11, 2024 8:52 PM",
+      "modified_unix": 1705035156
+    },
+    "varieties": [
+      {
+        "id": "127837:v1",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "100w",
+        "short_name": "100w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/100w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/100w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "100w.jpg",
+          "name": "100w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 3596,
+          "variety_height": 100,
+          "variety_width": 100,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 100,
+          "height": 0,
+          "width": 0,
+          "constrain": "centre_weighted_square"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v2",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "150w",
+        "short_name": "150w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/150w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/150w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "150w.jpg",
+          "name": "150w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 5842,
+          "variety_height": 150,
+          "variety_width": 150,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 150,
+          "height": 0,
+          "width": 0,
+          "constrain": "centre_weighted_square"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v3",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "200w",
+        "short_name": "200w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/200w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/200w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "200w.jpg",
+          "name": "200w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 7014,
+          "variety_height": 133,
+          "variety_width": 200,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 200,
+          "width": 200,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v4",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "300w",
+        "short_name": "300w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/300w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/300w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "300w.jpg",
+          "name": "300w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 7014,
+          "variety_height": 133,
+          "variety_width": 200,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 300,
+          "width": 200,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v5",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "345w",
+        "short_name": "345w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/345w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/345w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "345w.jpg",
+          "name": "345w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 15313,
+          "variety_height": 230,
+          "variety_width": 345,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 555,
+          "width": 345,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v6",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "375w",
+        "short_name": "375w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/375w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/375w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "375w.jpg",
+          "name": "375w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 18145,
+          "variety_height": 250,
+          "variety_width": 375,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 200,
+          "width": 375,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v7",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "400w",
+        "short_name": "400w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/400w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/400w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "400w.jpg",
+          "name": "400w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 18981,
+          "variety_height": 267,
+          "variety_width": 400,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 100,
+          "width": 400,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v8",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "555w",
+        "short_name": "555w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/555w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/555w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "555w.jpg",
+          "name": "555w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 31070,
+          "variety_height": 370,
+          "variety_width": 555,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 555,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v9",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "600w",
+        "short_name": "600w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/600w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/600w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "600w.jpg",
+          "name": "600w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 34249,
+          "variety_height": 400,
+          "variety_width": 600,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 600,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v10",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "690w",
+        "short_name": "690w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/690w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/690w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "690w.jpg",
+          "name": "690w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 42130,
+          "variety_height": 460,
+          "variety_width": 690,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 690,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v11",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "705w",
+        "short_name": "705w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/705w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/705w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "705w.jpg",
+          "name": "705w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 43480,
+          "variety_height": 470,
+          "variety_width": 705,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 705,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v12",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "750w",
+        "short_name": "750w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/750w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/750w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "750w.jpg",
+          "name": "750w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 47759,
+          "variety_height": 500,
+          "variety_width": 750,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 750,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v13",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "795w",
+        "short_name": "795w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/795w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/795w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "795w.jpg",
+          "name": "795w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 51957,
+          "variety_height": 530,
+          "variety_width": 795,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 795,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v14",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "960w",
+        "short_name": "960w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/960w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/960w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "960w.jpg",
+          "name": "960w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 69327,
+          "variety_height": 640,
+          "variety_width": 960,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 960,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v15",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1024w",
+        "short_name": "1024w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/1024w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/1024w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1024w.jpg",
+          "name": "1024w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 76558,
+          "variety_height": 683,
+          "variety_width": 1024,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1024,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v16",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1110w",
+        "short_name": "1110w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/1110w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/1110w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1110w.jpg",
+          "name": "1110w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 87600,
+          "variety_height": 740,
+          "variety_width": 1110,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1110,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v17",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1410w",
+        "short_name": "1410w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/1410w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/1410w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1410w.jpg",
+          "name": "1410w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 126292,
+          "variety_height": 940,
+          "variety_width": 1410,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1410,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "127837:v18",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1500w",
+        "short_name": "1500w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/1500w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0028/127837/varieties/1500w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1500w.jpg",
+          "name": "1500w",
+          "title": "test-750x500.jpg",
+          "caption": "",
+          "variety_size": 133570,
+          "variety_height": 1000,
+          "variety_width": 1500,
+          "alt": "An image of a desktop top down",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1500,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      }
+    ],
+    "exif": {
+      "image": {
+        "ImageHeight": 500,
+        "ImageWidth": 750,
+        "Orientation": 0,
+        "ResolutionUnit": 0,
+        "XResolution": 72,
+        "YCbCrPositioning": 0,
+        "YResolution": 72
+      },
+      "exif": { "ColorSpace": 0, "ExifImageHeight": 500, "ExifImageWidth": 750 }
+    }
+  }
+}

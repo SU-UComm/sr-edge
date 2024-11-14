@@ -1,0 +1,28 @@
+{
+  "id": "124970",
+  "type": "page_standard",
+  "type_name": "Standard Page",
+  "version": "0.0.1",
+  "name": "Leadership & Governance",
+  "short_name": "Leadership & Governance",
+  "status": {
+    "id": 2,
+    "code": "under_construction",
+    "name": "Under Construction"
+  },
+  "created": { "date": "2023-12-10T15:23:30-08:00", "user_id": "32242" },
+  "updated": { "date": "2023-12-10T15:23:31-08:00", "user_id": "32242" },
+  "published": { "date": null, "user_id": null },
+  "status_changed": { "date": "2023-12-10T15:23:30-08:00", "user_id": "32242" },
+  "urls": [
+    "https://sug-web.matrix.squiz.cloud/report/university-news/leadership-and-governance"
+  ],
+  "url": "https://sug-web.matrix.squiz.cloud/report/university-news/leadership-and-governance",
+  "attributes": {
+    "short_name": "Leadership & Governance",
+    "name": "Leadership & Governance"
+  },
+  "metadata": null,
+  "contents": "",
+  "additional": {}
+}

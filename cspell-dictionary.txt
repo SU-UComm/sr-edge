@@ -1,0 +1,55 @@
+# New words of abbreviations we allow
+squiz
+funnelback
+dxp
+xaccel
+
+# Technical terms or properties of existing modules we need to allow
+adate
+AWSCLIV
+daygrid
+disp
+dtitle
+durl
+firstname
+fullcalendar
+gitbeaker
+iife
+labelledby
+loglevel
+ondemand
+outdir
+outfile
+postversion
+rcompare
+rrule
+scrollgrid
+snapforms
+stylelint
+stylelintrc
+timegrid
+vdom
+WCAG
+fontawesome
+basicstory
+featuredstory
+campaigncta
+imagegallery
+describedby
+assetid
+contextable
+attrid
+haspopup
+ismodal
+currentcolor
+mediagallery
+
+# Lorem Ipsum 
+ezgif
+Asimo
+rsquo
+Lagunita
+Brodhead
+
+# Banned words list
+!testid #Do not include testing hooks into production code

@@ -1,0 +1,210 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "stories-carousel",
+    "type": "edge",
+    "version": "3.2.8",
+    "namespace": "pnp-stanford-edge-components",
+    "description": "Links to stories displayed as cards in a carousel.",
+    "displayName": "Stories carousel",
+    "mainFunction": "main",
+    "environment": [
+        {
+            "name": "NEWS_ARCHIVE_PATH",
+            "required": true
+        },
+        {
+            "name": "BASE_PATH",
+            "required": true
+        },
+        {
+            "name": "BASE_DOMAIN",
+            "required": true
+        },
+        {
+            "name": "API_IDENTIFIER",
+            "required": true
+        },
+        {
+            "name": "FB_JSON_URL",
+            "required": true
+        }
+    ],
+    "icon": {
+        "id": "view_carousel",
+        "color": {
+            "type": "enum",
+            "value": "red"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "headingConfiguration": {
+                        "title": "Section Heading Configuration",
+                        "description": "The heading for the section, appearing before the carousel of cards. If the title is empty, the heading and call to action link will be hidden.",
+                        "type": "object",
+                        "required": [],
+                        "properties": {
+                            "title": {
+                                "title": "Heading",
+                                "type": "string",
+                                "default": "Recent Stories"
+                            },
+                            "ctaUrl": {
+                                "title": "Matrix Asset Link",
+                                "type": "string",
+                                "description": "Select an asset to link to. If this field is filled out, it will be used instead of the manual link",
+                                "format": "matrix-asset-uri"
+                            },
+                            "ctaManualUrl": {
+                                "title": "Manual Link",
+                                "type": "string",
+                                "description": "Enter the full URL, including https://"
+                            },
+                            "ctaText": {
+                                "title": "Link text",
+                                "type": "string",
+                                "default": "View all"
+                            },
+                            "ctaNewWindow": {
+                                "title": "Open link in a new window",
+                                "type": "boolean",
+                                "default": false
+                            }
+                        }
+                    },
+                    "contentConfiguration": {
+                        "title": "Grid Content",
+                        "description": "The cards to display in the carousel area of the component.",
+                        "type": "object",
+                        "required": ["searchQuery"],
+                        "properties": {
+                            "searchQuery": {
+                                "type": "string",
+                                "title": "The Funnelback search query",
+                                "default": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser=false&meta_taxonomyContentTypeText_not=Announcement+Leadership%20Messages&num_ranks=6"
+                            }
+                        }
+                    }
+                },
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://api-identifier/28207": {
+            "type": "file",
+            "path": "mocked-uris/28207.json"
+        },
+        "matrix-asset://api-identifier/125002": {
+            "type": "file",
+            "path": "mocked-uris/125002.json"
+        },
+        "matrix-asset://api-identifier/28375": {
+            "type": "file",
+            "path": "mocked-uris/28375.json"
+        },
+        "matrix-asset://api-identifier/28401": {
+            "type": "file",
+            "path": "mocked-uris/28401.json"
+        },
+        "matrix-asset://api-identifier/28406": {
+            "type": "file",
+            "path": "mocked-uris/28406.json"
+        },
+        "matrix-asset://api-identifier/124970": {
+            "type": "file",
+            "path": "mocked-uris/124970.json"
+        },
+        "matrix-asset://api-identifier/124986": {
+            "type": "file",
+            "path": "mocked-uris/124986.json"
+        },
+        "matrix-asset://api-identifier/28397": {
+            "type": "file",
+            "path": "mocked-uris/28397.json"
+        },
+        "matrix-asset://api-identifier/89422": {
+            "type": "file",
+            "path": "mocked-uris/89422.json"
+        },
+        "matrix-asset://api-identifier/89430": {
+            "type": "file",
+            "path": "mocked-uris/89430.json"
+        },
+        "matrix-asset://api-identifier/89426": {
+            "type": "file",
+            "path": "mocked-uris/89426.json"
+        },
+        "matrix-asset://api-identifier/99100": {
+            "type": "file",
+            "path": "mocked-uris/99100.json"
+        },
+        "matrix-asset://api-identifier/125800": {
+            "type": "file",
+            "path": "mocked-uris/125800.json"
+        },
+        "matrix-asset://api-identifier/125801": {
+            "type": "file",
+            "path": "mocked-uris/125801.json"
+        },
+        "matrix-asset://api-identifier/28192": {
+            "type": "file",
+            "path": "mocked-uris/28192.json"
+        },
+        "matrix-asset://api-identifier/28205": {
+            "type": "file",
+            "path": "mocked-uris/28205.json"
+        },
+        "matrix-asset://api-identifier/127834": {
+            "type": "file",
+            "path": "mocked-uris/127834.json"
+        },
+        "matrix-asset://api-identifier/28193": {
+            "type": "file",
+            "path": "mocked-uris/28193.json"
+        },
+        "matrix-asset://api-identifier/127837": {
+            "type": "file",
+            "path": "mocked-uris/127837.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "frontend": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/frontend.html"
+                    }
+                }
+            }
+        }
+    }
+}

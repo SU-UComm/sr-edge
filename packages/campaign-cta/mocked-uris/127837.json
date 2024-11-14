@@ -1,0 +1,47 @@
+{
+   "id":"9071",
+   "type":"image",
+   "type_name":"Image",
+   "version":"0.0.2",
+   "name":"Obama_Asimo1-555x370.jpg",
+   "short_name":"Obama_Asimo1-555x370.jpg",
+   "status":{
+      "id":2,
+      "code":"under_construction",
+      "name":"Under Construction"
+   },
+   "created":{
+      "date":"2023-05-18T10:45:38-07:00",
+      "user_id":"8993"
+   },
+   "updated":{
+      "date":"2023-05-29T04:17:03-07:00",
+      "user_id":"57"
+   },
+   "published":{
+      "date":null,
+      "user_id":null
+   },
+   "status_changed":{
+      "date":"2023-05-18T10:45:38-07:00",
+      "user_id":"8993"
+   },
+   "urls":[
+      "https://sug-web.matrix.squiz.cloud/_media/test-images/Obama_Asimo1-555x370.jpg"
+   ],
+   "url":"https://sug-web.matrix.squiz.cloud/_media/test-images/Obama_Asimo1-555x370.jpg",
+   "attributes":{
+      "variety_count":8,
+      "size":37671,
+      "height":370,
+      "width":555,
+      "title":"Obama_Asimo1-555x370.jpg",
+      "name":"Obama_Asimo1-555x370.jpg",
+      "caption":"Caption",
+      "alt":"Alt Text",
+      "allow_unrestricted":true
+   },
+   "metadata":null,
+   "contents":"<img src=\"https://sug-web.matrix.squiz.cloud/_media/test-images/Obama_Asimo1-555x370.jpg\" width=\"\" height=\"\" alt=\"Alt text\" title=\"Obama_Asimo1-555x370.jpg\">",
+   "additional":{}
+}

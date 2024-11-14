@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "wix.vscode-import-cost",
+        "esbenp.prettier-vscode",
+        "stylelint.vscode-stylelint",
+        "vscode.mdx",
+        "streetsidesoftware.code-spell-checker",
+        "EditorConfig.EditorConfig"
+    ]
+}

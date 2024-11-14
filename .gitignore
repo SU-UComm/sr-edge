@@ -1,6 +1,20 @@
 node_modules
 dist
-components/.dxp/
-.DS_Store
+lib
+# export is used in the component exporter local export location to test without sending data to S3
+export
 coverage
+cdk.out
+
+# OS generated files #
+######################
+.DS_Store
+
+# dotenv environment variables file
 .env
+.env.test
+.env*.local
+
+# IntelliJ
+.idea
+.vscode``

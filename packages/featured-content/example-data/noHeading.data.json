@@ -1,0 +1,28 @@
+{
+    "headingConfiguration": {
+        "title": "",
+        "ctaText": "View all",
+        "ctaUrl": "matrix-asset://api-identifier/63411",
+        "ctaNewWindow": false
+    },
+    "contentConfiguration": {
+        "source": "Select",
+        "cards": [
+            {
+                "cardAsset": "matrix-asset://api-identifier/63418"
+            },
+            {
+                "cardAsset": "matrix-asset://api-identifier/63436"
+            },
+            {
+                "cardAsset": "matrix-asset://api-identifier/63412"
+            }
+        ],
+        "featuredDescription": ""
+    },
+    "displayConfiguration": {
+        "alignment": "left",
+        "displayThumbnails": true,
+        "displayDescriptions": true
+    }
+}

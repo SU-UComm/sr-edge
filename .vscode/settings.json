@@ -1,0 +1,42 @@
+{
+    "workbench.colorCustomizations": {
+        "titleBar.activeForeground": "#000",
+        "titleBar.inactiveForeground": "#000000CC",
+        "titleBar.activeBackground": "#8868BC",
+        "titleBar.inactiveBackground": "#8868BC"
+    },
+    // These are all my auto-save configs
+    "[javascript]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "stylelint.vscode-stylelint"
+    },
+    "[scss]": {
+        "editor.formatOnSave": false,
+        "editor.defaultFormatter": "stylelint.vscode-stylelint"
+    },
+    "stylelint.validate": ["css", "scss"],
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.fixAll.sortJSON": "never"
+    },
+    // Set Prettier as the default formatter
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    // Default the editor tab size to 4 (as defined by ES Lint / Style lint)
+    "editor.tabSize": 4,
+    // Don't have closing comments when using emmet
+    "emmet.preferences": {
+        "filter.commentAfter": ""
+    },
+    "css.validate": false,
+    "scss.validate": false,
+    "[xml]": {
+        "editor.defaultFormatter": "DotJoshJohnson.xml"
+    },
+    "cSpell.words": ["fortawesome", "tailwindcss"]
+}
