@@ -106,14 +106,14 @@ export function VerticalCard({
     
     let cardThumb = imageUrl;
     
-    // cardThumb = `${liveUrl.match(/https:\/\/.*?\//)[0]}__data/assets/image/0015/130443/Quad-Arch-Close.png`; // default img for sranford
+    // cardThumb = `${liveUrl.match(/https:\/\/.*?\//)[0]}__data/assets/image/0040/68998/Quad-Arch-Close.png`;
     if (!cardThumb && liveUrl && !(liveUrl instanceof Array)) {
-        cardThumb = `${liveUrl.match(/https:\/\/.*?\//)[0]}__data/assets/image/0040/68998/Quad-Arch-Close.png`;
+        cardThumb = `${liveUrl.match(/https:\/\/.*?\//)[0]}__data/assets/image/0015/130443/Quad-Arch-Close.png`; // default img for Stanford
     }
 
     const isRealExternalLink =
-    !!liveUrl && !liveUrl?.includes("canary-us.uat.matrix.squiz.cloud/_pnp-stanford"); 
-    /* !!liveUrl && !liveUrl?.includes("news.stanford.edu"); */
+    !!liveUrl && !liveUrl?.includes("news.stanford.edu");
+    /* !!liveUrl && !liveUrl?.includes("canary-us.uat.matrix.squiz.cloud/_pnp-stanford"); */
 
 
     let typeIcon = type ? type.toLowerCase().replace(/\s/g, '') : 'news';
