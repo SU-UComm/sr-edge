@@ -90,6 +90,12 @@ Make sure you have the following installed:
     npm install
     ```
 
+3. Install the DXP CLI for this version of npm:
+
+    ```bash
+    npm install --global @squiz/dxp-cli-next
+    ```
+
 ### Environment Variables
 
 This project requires specific environment variables to function properly. You can find an `.example.env` file in the root directory, which contains all the necessary environment variables for this project. To set up your environment:
@@ -118,7 +124,7 @@ Make sure your .env file is not included in version control, as it contains sens
     npm run watch
     ```
 
-3. Run local environment:ą
+3. Run local environment:
 
     Note that you need to export your local variables before running a local dxp.
 
