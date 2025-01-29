@@ -1,103 +1,93 @@
-import xss from 'xss';
-import { CardDataAdapter, MatrixImageCardService, formatCardDataImage, containerClasses } from "../../global/js/utils";
+import imageGalleryModalTemplate from './image-gallery-modal.hbs';
+import { cardDataAdapter, matrixImageCardService, formatCardDataImage, containerClasses } from "../../global/js/utils";
 import { ImageMosaic,  mosaic, carouselImages, SidebarHeading, Modal, Carousel } from "../../global/js/helpers";
 
 export default {
     async main(args, info) {
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { layout, images, caption, credit, title, summary } = args?.contentConfiguration || {};
+        const { displayIconHeading, backgroundColor, width } = args?.displayConfiguration || {};
 
         // Check for environment vars
         try {
             if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, API_IDENTIFIER variable cannot be undefined and must be non-empty string. The "${API_IDENTIFIER}" was received.`
+                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
                 );
             }
             if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, BASE_DOMAIN variable cannot be undefined and must be non-empty string. The "${BASE_DOMAIN}" was received.`
+                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
                 );
             }
             if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, info.fns cannot be undefined or null. The "${fnsCtx}" was received.`
+                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
                 );
             }
         } catch (er) {
-            console.error(er);
-            return `<!-- ${er} -->`;
+            console.error('Error occurred in the Image gallery with modal component: ', er);
+            return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
         }
 
         // Validating fields
         try {
-            if (!args.contentConfiguration) {
+            if (typeof layout !== 'string' || !['Title & Content', 'Content Only'].includes(layout)) {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, contentConfiguration prop cannot be undefined. The "${args}" was received.`
+                    `The "layout" field cannot be undefined and must be one of ["Title & Content", "Content Only"] value. The ${JSON.stringify(layout)} was received.`
                 );
             }
-            if (!args.displayConfiguration) {
+            if (!Array.isArray(images) || images.length === 0) {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, displayConfiguration prop cannot be undefined. The "${args}" was received.`
+                    `The "images" field must be an array. The ${JSON.stringify(images)} was received.`
                 );
             }
-            if (typeof args.contentConfiguration.layout !== 'string' || !['Title & Content', 'Content Only'].includes(args.contentConfiguration.layout)) {
+            if (caption && typeof caption !== 'string') {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, layout field cannot be undefined and must be one of ["Title & Content", "Content Only"] value. The "${args.contentConfiguration.layout}" was received.`
+                    `The "caption" field must be a string. The ${JSON.stringify(caption)} was received.`
                 );
             }
-            if (typeof args.contentConfiguration.images === 'undefined' || typeof args.contentConfiguration.images !== 'object') {
+            if (credit && typeof credit !== 'string') {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, images field must be an array. The "${args.contentConfiguration.images}" was received.`
+                    `The "credit" field must be a string. The ${JSON.stringify(credit)} was received.`
                 );
             }
-            if (args.contentConfiguration.caption && typeof args.contentConfiguration.caption !== 'string') {
+            if (layout === 'Title & Content' && typeof title !== 'string') {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, caption field must be a string. The "${args.contentConfiguration.caption}" was received.`
+                    `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
                 );
             }
-            if (args.contentConfiguration.credit && typeof args.contentConfiguration.credit !== 'string') {
+            if (layout === 'Title & Content' && typeof summary !== 'string') {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, credit field must be a string. The "${args.contentConfiguration.credit}" was received.`
+                    `The "summary" field must be a string. The ${JSON.stringify(summary)} was received.`
                 );
             }
-            if (args.contentConfiguration.title && typeof args.contentConfiguration.title !== 'string') {
+            if (typeof displayIconHeading !== 'boolean') {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, title field must be a string. The "${args.contentConfiguration.title}" was received.`
+                    `The "displayIconHeading" field must be a boolean. The ${JSON.stringify(displayIconHeading)} was received.`
                 );
             }
-            if (args.contentConfiguration.summary && typeof args.contentConfiguration.summary !== 'string') {
+            if (typeof backgroundColor !== 'string' || !['Grey', 'Transparent'].includes(backgroundColor)) {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, summary field must be a string. The "${args.contentConfiguration.summary}" was received.`
+                    `The "backgroundColor" field cannot be undefined and must be one of ["Grey", "Transparent"] value. The ${JSON.stringify(backgroundColor)} was received.`
                 );
             }
-            if (typeof args.displayConfiguration.displayIconHeading !== 'boolean') {
+            if (typeof width !== 'string' || !['Wide', 'Content'].includes(width)) {
                 throw new Error(
-                    `Error occurred in the image gallery with modal component, displayIconHeading field must be a boolean. The "${args.displayConfiguration.displayIconHeading}" was received.`
-                );
-            }
-            if (typeof args.displayConfiguration.backgroundColor !== 'string' || !['Grey', 'Transparent'].includes(args.displayConfiguration.backgroundColor)) {
-                throw new Error(
-                    `Error occurred in the image gallery with modal component, backgroundColor field cannot be undefined and must be one of ["Grey", "Transparent"] value. The "${args.displayConfiguration.backgroundColor}" was received.`
-                );
-            }
-            if (typeof args.displayConfiguration.width !== 'string' || !['Wide', 'Content'].includes(args.displayConfiguration.width)) {
-                throw new Error(
-                    `Error occurred in the image gallery with modal component, width field cannot be undefined and must be one of ["Wide", "Content"] value. The "${args.displayConfiguration.width}" was received.`
+                    `The "width" field cannot be undefined and must be one of ["Wide", "Content"] value. The ${JSON.stringify(width)} was received.`
                 );
             }
         } catch (er) {
-            console.error(er);
-            return `<!-- ${er} -->`;
+            console.error('Error occurred in the Image gallery with modal component: ', er);
+            return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
         }
 
-        const adapter = new CardDataAdapter();
+        const adapter = new cardDataAdapter();
         let data = null;
 
-        const { images } = args.contentConfiguration;
-
         // Create our service
-        const service = new MatrixImageCardService({ BASE_DOMAIN, API_IDENTIFIER });
+        const service = new matrixImageCardService({ BASE_DOMAIN, API_IDENTIFIER });
         
         // Set our card service
         adapter.setCardService(service);
@@ -116,14 +106,21 @@ export default {
             return { ...imgData, caption: filteredImages[`${index}`]?.caption };
         });
 
-        const props = {
-            ...args,
-            data: imageData,
-        };
+        // Validating data 
+        try {
+            if (typeof imageData !== 'object' || JSON.stringify(imageData) === JSON.stringify([null, null, null, null]) || imageData.length < 4) {
+                throw new Error(
+                    `The imageData cannot have less then 4 elements. The ${JSON.stringify(data)} was received.`
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the Image gallery with modal component: ', er);
+            return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
+        }
 
         // generate the preview images
         const previewData = mosaic(
-            props.data,
+            imageData,
             `
             {v:v}
             {h:h:h:h}
@@ -134,48 +131,27 @@ export default {
             {h:h:h:v}
             `
         );
-        const modalImages = carouselImages(props.data);
-        const width = props?.displayConfiguration?.width === "Wide" ? props.displayConfiguration.width : "narrow";
-        const captionCredit = props?.contentConfiguration?.caption && props?.contentConfiguration?.credit ? `${props.contentConfiguration.caption} | ${props.contentConfiguration.credit}` : props.contentConfiguration.caption || props.contentConfiguration.credit;
-        const leftOverImages = props?.data?.length - previewData.length;    
+        const modalImages = carouselImages(imageData);
+        const widthToRender = width === "Wide" ? width : "narrow";
+        const captionCredit = caption && credit ? `${caption} | ${credit}` : caption || credit;
+        const leftOverImages = imageData.length - previewData.length;    
         const backgroundClasses = {
             'Grey': 'su-bg-fog-light su-rs-pt-6 su-rs-pb-8 dark:su-bg-black/[0.5]',
             'Transparent': '',
         };
     
-        return `
-        <section class="${backgroundClasses[props.displayConfiguration.backgroundColor]}" data-component="image-gallery-modal">
-            <div class="${containerClasses({width: width})}">
-                <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
-                    <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
-                        ${props?.displayConfiguration?.displayIconHeading ? SidebarHeading({ color: "media",  icon: "mediagallery", title: "Media gallery" }) : ''}
-                        ${props?.contentConfiguration?.layout === "Title & Content" && props?.contentConfiguration?.title ? `
-                        <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
-                            ${props.contentConfiguration.title}
-                        </h2>
-                        `: '' }
-                    </div>
-                    ${props?.contentConfiguration?.layout === "Title & Content" && props?.contentConfiguration?.summary ? `
-                    <div class="su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
-                        ${xss(props.contentConfiguration.summary)}
-                    </div>
-                    ` : '' }
-                </div>
-                <button
-                    data-click="open-gallery-modal"
-                    title="Open image gallery"
-                    aria-label="Open image gallery"
-                    class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
-                >
-                    ${ImageMosaic({ data: previewData, remainingImageCount: leftOverImages})}
-                </button>
-                ${captionCredit ? `
-                <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
-                    <p class="su-m-0 su-text-left">${captionCredit}</p>
-                </div>
-                ` : ''}
-            </div>
-            ${Modal({content: Carousel({ variant: 'imagegallery', slides: modalImages, isDark: true }), describedby: 'image-gallery-modal' })}
-        </section>`;
+        const componentData = {
+            classes: containerClasses({width: widthToRender}),
+            backgroundClasses: backgroundClasses[backgroundColor],
+            layout: layout,
+            sidebarHeading: displayIconHeading ? SidebarHeading({ color: "media",  icon: "mediagallery", title: "Media gallery" }) : '',
+            title: title,
+            summary: summary,
+            images: ImageMosaic({ data: previewData, remainingImageCount: leftOverImages}),
+            captionCredit,
+            modal: Modal({content: Carousel({ variant: 'imagegallery', slides: modalImages, isDark: true }), describedby: 'image-gallery-modal' })
+        };
+
+        return imageGalleryModalTemplate(componentData);
     }
 };

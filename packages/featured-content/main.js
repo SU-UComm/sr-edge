@@ -1,130 +1,119 @@
 import hash from "object-hash";
-import { CardDataAdapter, FunnelbackCardService, linkedHeadingService, MatrixCardService, containerClasses } from "../../global/js/utils";
+import featureContentTemplate from './featured-content.hbs';
+import { cardDataAdapter, funnelbackCardService, linkedHeadingService, matrixCardService, containerClasses } from "../../global/js/utils";
 import { LinkedHeading, Card, Modal, EmbedVideo } from "../../global/js/helpers";
  
 export default {
     async main(args, info) {
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
-
+        const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
+        const { source, searchQuery, featuredDescription, cards } = args?.contentConfiguration || {};
+        const { alignment, displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
+        
         // Check for environment vars
         try {
             if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
                 throw new Error(
-                    `Error occurred in the feature content component, FB_JSON_URL variable cannot be undefined and must be non-empty string. The "${FB_JSON_URL}" was received.`
+                    `The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(FB_JSON_URL)} was received.`
                 );
             }
             if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
                 throw new Error(
-                    `Error occurred in the feature content component, API_IDENTIFIER variable cannot be undefined and must be non-empty string. The "${API_IDENTIFIER}" was received.`
+                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
                 );
             }
             if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
                 throw new Error(
-                    `Error occurred in the feature content component, BASE_DOMAIN variable cannot be undefined and must be non-empty string. The "${BASE_DOMAIN}" was received.`
+                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
                 );
             }
             if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
                 throw new Error(
-                    `Error occurred in the feature content component, info.fns cannot be undefined or null. The "${fnsCtx}" was received.`
+                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
                 );
             }
         } catch (er) {
-            console.error(er);
-            return `<!-- ${er} -->`;
+            console.error('Error occurred in the Feature content component: ', er);
+            return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
         }
 
         // Validating fields
         try {
-            if (!args.contentConfiguration) {
+            if (!['Search', 'Select'].includes(source) ) {
                 throw new Error(
-                    `Error occurred in the feature content component, contentConfiguration prop cannot be undefined. The "${args}" was received.`
+                    `The "source" field cannot be undefined and must be one of ["Search", "Select"]. The ${JSON.stringify(source)} was received.`
                 );
             }
-            if (!args.headingConfiguration) {
+            if (source === 'Search' && (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?')) {
                 throw new Error(
-                    `Error occurred in the feature content component, headingConfiguration prop cannot be undefined. The "${args}" was received.`
+                    `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
                 );
             }
-            if (!args.displayConfiguration) {
+            if (source === 'Select' && typeof cards !== 'object') {
                 throw new Error(
-                    `Error occurred in the feature content component, displayConfiguration prop cannot be undefined. The "${args}" was received.`
+                    `The "cards" field must be an array. The ${JSON.stringify(cards)} was received.`
                 );
             }
-            if (typeof args.contentConfiguration.source !== 'string' || !['Search', 'Select'].includes(args.contentConfiguration.source) ) {
+            if (source === 'Select' && featuredDescription && typeof featuredDescription !== 'string') {
                 throw new Error(
-                    `Error occurred in the feature content component, source field cannot be undefined and must be one of ["Search", "Select"]. The "${args.contentConfiguration.source}" was received.`
+                    `The "featuredDescription" field must be a string. The ${JSON.stringify(featuredDescription)} was received.`
                 );
             }
-            if (args.contentConfiguration.source === 'Search' && (typeof args.contentConfiguration.searchQuery !== 'string' || args.contentConfiguration.searchQuery === '' || args.contentConfiguration.searchQuery === '?')) {
+            if (title && typeof title !== 'string') {
                 throw new Error(
-                    `Error occurred in the feature content component, searchQuery field cannot be undefined and must be a non-empty string. The "${args.contentConfiguration.searchQuery}" was received.`
+                    `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
                 );
             }
-            if (args.contentConfiguration.source === 'Select' && typeof args.contentConfiguration.cards !== 'object') {
+            if (ctaUrl && typeof ctaUrl !== 'string') {
                 throw new Error(
-                    `Error occurred in the feature content component, cards field must be an array. The "${args.contentConfiguration.cards}" was received.`
+                    `The "ctaUrl" field must be a string. The ${JSON.stringify(ctaUrl)} was received.`
                 );
             }
-            if (args.contentConfiguration.source === 'Select' && args.contentConfiguration.featuredDescription && typeof args.contentConfiguration.featuredDescription !== 'string') {
+            if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
                 throw new Error(
-                    `Error occurred in the feature content component, featuredDescription field must be a string. The "${args.contentConfiguration.featuredDescription}" was received.`
+                    `The "ctaManualUrl" field must be a string. The ${JSON.stringify(ctaManualUrl)} was received.`
                 );
             }
-            if (args.headingConfiguration.title && typeof args.headingConfiguration.title !== 'string') {
+            if (ctaText && typeof ctaText !== 'string') {
                 throw new Error(
-                    `Error occurred in the feature content component, title field must be a string. The "${args.headingConfiguration.title}" was received.`
+                    `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
                 );
             }
-            if (args.headingConfiguration.ctaUrl && typeof args.headingConfiguration.ctaUrl !== 'string') {
+            if (typeof ctaNewWindow !== 'boolean') {
                 throw new Error(
-                    `Error occurred in the feature content component, ctaUrl field must be a string. The "${args.headingConfiguration.ctaUrl}" was received.`
+                    `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
                 );
             }
-            if (args.headingConfiguration.ctaManualUrl && typeof args.headingConfiguration.ctaManualUrl !== 'string') {
+            if (typeof alignment !== 'string' || !['left', 'right'].includes(alignment) ) {
                 throw new Error(
-                    `Error occurred in the feature content component, ctaManualUrl field must be a string. The "${args.headingConfiguration.ctaManualUrl}" was received.`
+                    `The "alignment" field cannot be undefined and must be one of ["left", "right"]. The ${JSON.stringify(alignment)} was received.`
                 );
             }
-            if (args.headingConfiguration.ctaText && typeof args.headingConfiguration.ctaText !== 'string') {
+            if (typeof displayThumbnails !== 'boolean') {
                 throw new Error(
-                    `Error occurred in the feature content component, ctaText field must be a string. The "${args.headingConfiguration.ctaText}" was received.`
+                    `The "displayThumbnails" field must be a boolean. The ${JSON.stringify(displayThumbnails)} was received.`
                 );
             }
-            if (typeof args.headingConfiguration.ctaNewWindow !== 'boolean') {
+            if (typeof displayDescriptions !== 'boolean') {
                 throw new Error(
-                    `Error occurred in the feature content component, ctaNewWindow field must be a boolean. The "${args.headingConfiguration.ctaNewWindow}" was received.`
-                );
-            }
-            if (typeof args.displayConfiguration.alignment !== 'string' || !['left', 'right'].includes(args.displayConfiguration.alignment) ) {
-                throw new Error(
-                    `Error occurred in the feature content component, alignment field cannot be undefined and must be one of ["left", "right"]. The "${args.displayConfiguration.alignment}" was received.`
-                );
-            }
-            if (typeof args.displayConfiguration.displayThumbnails !== 'boolean') {
-                throw new Error(
-                    `Error occurred in the feature content component, displayThumbnails field must be a boolean. The "${args.displayConfiguration.displayThumbnails}" was received.`
-                );
-            }
-            if (typeof args.displayConfiguration.displayDescriptions !== 'boolean') {
-                throw new Error(
-                    `Error occurred in the feature content component, displayDescriptions field must be a boolean. The "${args.displayConfiguration.displayDescriptions}" was received.`
+                    `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
                 );
             }
             
         } catch (er) {
-            console.error(er);
-            return `<!-- ${er} -->`;
+            console.error('Error occurred in the Feature content component: ', er);
+            return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
         }
 
-        const adapter = new CardDataAdapter();
+        const adapter = new cardDataAdapter();
         let data = null;
 
         // Check what data source "Search" or "Select"
-        if (args.contentConfiguration.source.toLowerCase() === "search") {
+        if (source.toLowerCase() === "search") {
             // Compose and fetch the FB search results
-            const query = args.contentConfiguration.searchQuery;
-            const service = new FunnelbackCardService({ FB_JSON_URL, query });
+            const query = searchQuery;
+            const service = new funnelbackCardService({ FB_JSON_URL, query });
 
             // Set our card service
             adapter.setCardService(service);
@@ -134,10 +123,8 @@ export default {
         }
         // When Select, use Matix Content API
         else {
-            // Get our card URI's from the args object
-            const { cards } = args.contentConfiguration;
             // Create our service
-            const service = new MatrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
+            const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
 
             // Set our card service
             adapter.setCardService(service);
@@ -149,12 +136,18 @@ export default {
         // Resolve the URI for the section heading link
         const headingData = await linkedHeadingService(
             fnsCtx,
-            args.headingConfiguration
+            { 
+                title, 
+                ctaUrl, 
+                ctaManualUrl, 
+                ctaText, 
+                ctaNewWindow
+            } 
         );
 
         const featuredCardData = data && data[0];
-        if (args.contentConfiguration.featuredDescription && args.contentConfiguration.featuredDescription !== "") {
-            featuredCardData.description = args.contentConfiguration.featuredDescription;
+        if (featuredDescription && featuredDescription !== "") {
+            featuredCardData.description = featuredDescription;
         }
 
         const cardData = data && [data[1], data[2]];
@@ -175,17 +168,17 @@ export default {
         try {
             if (typeof featuredCardData !== 'object' || featuredCardData === null) {
                 throw new Error(
-                    `Error occurred in the feature content component, data cannot be undefined or null. The "${data}" was received.`
+                    `The data cannot be undefined or null. The ${JSON.stringify(data)} was received.`
                 );
             }
             if (typeof cardData !== 'object' || JSON.stringify(cardData) === JSON.stringify([null, null]) || cardData.length < 2) {
                 throw new Error(
-                    `Error occurred in the feature content component, data cannot have less then 3 elements. The "${data}" was received.`
+                    `The data cannot have less then 3 elements. The ${JSON.stringify(data)} was received.`
                 );
             }
         } catch (er) {
-            console.error(er);
-            return `<!-- ${er} -->`;
+            console.error('Error occurred in the Feature content component: ', er);
+            return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
         }
 
         const alignClasses = {
@@ -193,29 +186,26 @@ export default {
             'right': 'before:su-right-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-right-[-36px] before:lg:su-right-[-80px]',
         };
 
-        return `
-        <section data-component="featured-content">
-            <div class="${containerClasses({width: "large"})}">
-                ${headingData ? 
-                LinkedHeading(headingData)
-                : '' }
-                <div class="su-w-full su-component-featured-grid">
-                    <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
-                        <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow${args.displayConfiguration.alignment === 'right' ? ' md:su-order-2' : ''}">
-                            ${Card({ data: featuredCardData, cardSize:"featured", headingLvl: headingData?.title ? 3 : 2 })}
-                        </div>
-                        <div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start ${alignClasses[args.displayConfiguration.alignment]}">
-                            ${cardData.map((card, idx) => `
-                            ${idx === 0 ? `<div class="su-relative su-w-full">`: `<div class="su-relative su-w-full before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px]">`}
-                                ${Card({ data: card, cardSize: "small", displayThumbnail: args.displayConfiguration.displayThumbnails, displayDescription: args.displayConfiguration.displayDescriptions, headingLvl: headingData?.title ? 3 : 2 })}
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
+        const growClass = alignment === 'right' ? 'md:su-order-2' : '';
+
+        const cardsToRender = cardData.map((card, idx) => `
+            ${idx === 0 ? `<div class="su-relative su-w-full">`: `<div class="su-relative su-w-full before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px]">`}
+                ${Card({ data: card, cardSize: "small", displayThumbnail: displayThumbnails, displayDescription: displayDescriptions, headingLvl: title ? 3 : 2 })}
                 </div>
-            </div>
-            ${cardModal.join('')}
-        </section>
-        `
+            `).join('');
+
+        const componentData = {
+            classes: containerClasses({width: "large"}),
+            alignClasses: alignClasses[alignment],
+            growClass,
+            headingData: await LinkedHeading(headingData),
+            featureCard: Card({ data: featuredCardData, cardSize:"featured", headingLvl: title ? 3 : 2 }),
+            cards: cardsToRender,
+            cardModal: cardModal.join('')
+        };
+
+
+
+        return featureContentTemplate(componentData);
     }
 };

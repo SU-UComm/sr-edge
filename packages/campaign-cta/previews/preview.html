@@ -25,20 +25,32 @@
         </header>
         <main
             role="main"
-            class="su-page su-page-wrap su-page--hero su-page--top-margin su-page--bottom-margin"
+            class="su-page su-page--hero su-page--top-margin su-page--bottom-margin"
         >
             <div class="su-upper-content"></div>
             <div class="su-page-content">
-                <div
-                    class="su-mx-auto su-component-container su-container-full"
-                >
-                    [component://output]
-                </div>
-                <div class="su-lower-content" id="component_130052"></div>
+                [component://output]
                 <div class="su-lower-content"></div>
             </div>
             <div class="su-above-footer"></div>
         </main>
+        <script>
+            function _init() {
+                const b = document.getElementById('toggle');
+                const e = document.querySelector('html');
+                b &&
+                    b.addEventListener('click', () => {
+                        if (e.classList.contains('su-dark')) {
+                            e.classList.remove('su-dark');
+                        } else {
+                            e.classList.add('su-dark');
+                        }
+                    });
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                _init();
+            });
+        </script>
         <!-- [[inline-scripts]] -->
     </body>
 </html>

@@ -1,0 +1,1 @@
+export { CardThumbnail } from './CardThumbnail';

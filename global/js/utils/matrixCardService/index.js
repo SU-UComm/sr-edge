@@ -1,0 +1,1 @@
+export { matrixCardService } from './matrixCardService';

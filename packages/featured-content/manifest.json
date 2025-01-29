@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "featured-content",
     "type": "edge",
-    "version": "3.14.4",
+    "version": "4.0.0",
     "namespace": "pnp-stanford-edge-components",
     "description": "",
     "displayName": "Featured content",
@@ -178,97 +178,21 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://api-identifier/63411": {
+        "matrix-asset://api-identifier/141464": {
             "type": "file",
-            "path": "mocked-uris/63411.json"
+            "path": "mocked-uris/141464.json"
         },
-        "matrix-asset://api-identifier/63412": {
+        "matrix-asset://api-identifier/162603": {
             "type": "file",
-            "path": "mocked-uris/63412.json"
+            "path": "mocked-uris/162603.json"
         },
-        "matrix-asset://api-identifier/63418": {
+        "matrix-asset://api-identifier/162707": {
             "type": "file",
-            "path": "mocked-uris/63418.json"
+            "path": "mocked-uris/162707.json"
         },
-        "matrix-asset://api-identifier/63436": {
+        "matrix-asset://api-identifier/162759": {
             "type": "file",
-            "path": "mocked-uris/63436.json"
-        },
-        "matrix-asset://api-identifier/28207": {
-            "type": "file",
-            "path": "mocked-uris/28207.json"
-        },
-        "matrix-asset://api-identifier/125002": {
-            "type": "file",
-            "path": "mocked-uris/125002.json"
-        },
-        "matrix-asset://api-identifier/28375": {
-            "type": "file",
-            "path": "mocked-uris/28375.json"
-        },
-        "matrix-asset://api-identifier/28401": {
-            "type": "file",
-            "path": "mocked-uris/28401.json"
-        },
-        "matrix-asset://api-identifier/28406": {
-            "type": "file",
-            "path": "mocked-uris/28406.json"
-        },
-        "matrix-asset://api-identifier/124970": {
-            "type": "file",
-            "path": "mocked-uris/124970.json"
-        },
-        "matrix-asset://api-identifier/124986": {
-            "type": "file",
-            "path": "mocked-uris/124986.json"
-        },
-        "matrix-asset://api-identifier/28397": {
-            "type": "file",
-            "path": "mocked-uris/28397.json"
-        },
-        "matrix-asset://api-identifier/89422": {
-            "type": "file",
-            "path": "mocked-uris/89422.json"
-        },
-        "matrix-asset://api-identifier/89430": {
-            "type": "file",
-            "path": "mocked-uris/89430.json"
-        },
-        "matrix-asset://api-identifier/89426": {
-            "type": "file",
-            "path": "mocked-uris/89426.json"
-        },
-        "matrix-asset://api-identifier/99100": {
-            "type": "file",
-            "path": "mocked-uris/99100.json"
-        },
-        "matrix-asset://api-identifier/125800": {
-            "type": "file",
-            "path": "mocked-uris/125800.json"
-        },
-        "matrix-asset://api-identifier/125801": {
-            "type": "file",
-            "path": "mocked-uris/125801.json"
-        },
-        "matrix-asset://api-identifier/28192": {
-            "type": "file",
-            "path": "mocked-uris/28192.json"
-        },
-        "matrix-asset://api-identifier/28205": {
-            "type": "file",
-            "path": "mocked-uris/28205.json"
-        },
-        "matrix-asset://api-identifier/127834": {
-            "type": "file",
-            "path": "mocked-uris/127834.json"
-        },
-        "matrix-asset://api-identifier/28193": {
-            "type": "file",
-            "path": "mocked-uris/28193.json"
-        },
-        "matrix-asset://api-identifier/127837": {
-            "type": "file",
-            "path": "mocked-uris/127837.json"
+            "path": "mocked-uris/162759.json"
         }
     },
     "previews": {
@@ -280,7 +204,20 @@
                         "path": "example-data/select.data.json"
                     },
                     "wrapper": {
-                        "path": "preview.html"
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/select.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
                     }
                 }
             }
@@ -293,7 +230,7 @@
                         "path": "example-data/select.data.json"
                     },
                     "wrapper": {
-                        "path": "preview.html"
+                        "path": "previews/preview.html"
                     }
                 }
             }
@@ -306,7 +243,7 @@
                         "path": "example-data/noHeading.data.json"
                     },
                     "wrapper": {
-                        "path": "preview.html"
+                        "path": "previews/preview.html"
                     }
                 }
             }
@@ -319,7 +256,7 @@
                         "path": "example-data/search.data.json"
                     },
                     "wrapper": {
-                        "path": "preview.html"
+                        "path": "previews/preview.html"
                     }
                 }
             }
@@ -332,7 +269,7 @@
                         "path": "example-data/search2.data.json"
                     },
                     "wrapper": {
-                        "path": "preview.html"
+                        "path": "previews/preview.html"
                     }
                 }
             }

@@ -1,0 +1,1 @@
+export { LinkedHeading } from './LinkedHeading';

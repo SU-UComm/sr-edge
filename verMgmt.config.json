@@ -1,17 +1,26 @@
-{
-    "manifestGlob": "dist/*/manifest.json",
-    "customCommands": [
-        {
-            "name": "Preview",
-            "value": "npx @squiz/dxp-cli-next cmp dev --edge-components ."
-        },
-        {
-            "name": "Deploy",
-            "value": "FEATURE_EDGE_COMPONENTS=true dxp-next cmp deploy ."
-        },
-        {
-            "name": "List root files (command: ls -l)",
-            "value": "ls -l"
-        }
-    ]
-}
+[
+    {
+        "name": "Packages",
+        "manifestGlob": "packages/*/manifest.json",
+        "customCommands": [
+            {
+                "name": "List root files (command: ls -l)",
+                "value": "ls -l"
+            }
+        ]
+    },
+    {
+        "name": "Dist",
+        "manifestGlob": "dist/*/manifest.json",
+        "customCommands": [
+            {
+                "name": "Deploy Edge Components",
+                "value": "FEATURE_EDGE_COMPONENTS=true dxp-next cmp deploy ."
+            },
+            {
+                "name": "List root files (command: ls -l)",
+                "value": "ls -l"
+            }
+        ]
+    }
+]

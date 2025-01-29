@@ -1,0 +1,2 @@
+
+export { formatCardDataFunnelback } from './formatCardDataFunnelback';

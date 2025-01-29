@@ -94,6 +94,23 @@
                 ></div>
             </div>
         </main>
+        <script>
+            function _init() {
+                const b = document.getElementById('toggle');
+                const e = document.querySelector('html');
+                b &&
+                    b.addEventListener('click', () => {
+                        if (e.classList.contains('su-dark')) {
+                            e.classList.remove('su-dark');
+                        } else {
+                            e.classList.add('su-dark');
+                        }
+                    });
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                _init();
+            });
+        </script>
         <!-- [[inline-scripts]] -->
     </body>
 </html>

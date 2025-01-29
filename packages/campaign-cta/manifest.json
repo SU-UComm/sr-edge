@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "campaign-cta",
     "type": "edge",
-    "version": "3.5.0",
+    "version": "4.0.0",
     "namespace": "pnp-stanford-edge-components",
     "description": "This component serves as a preview & to promote campaign pages.",
     "displayName": "Campaign CTA",
@@ -70,89 +70,13 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://api-identifier/63353": {
+        "matrix-asset://api-identifier/163293": {
             "type": "file",
-            "path": "mocked-uris/63353.json"
+            "path": "mocked-uris/163293.json"
         },
-        "matrix-asset://api-identifier/63492": {
+        "matrix-asset://api-identifier/141464": {
             "type": "file",
-            "path": "mocked-uris/63492.json"
-        },
-        "matrix-asset://api-identifier/28207": {
-            "type": "file",
-            "path": "mocked-uris/28207.json"
-        },
-        "matrix-asset://api-identifier/125002": {
-            "type": "file",
-            "path": "mocked-uris/125002.json"
-        },
-        "matrix-asset://api-identifier/28375": {
-            "type": "file",
-            "path": "mocked-uris/28375.json"
-        },
-        "matrix-asset://api-identifier/28401": {
-            "type": "file",
-            "path": "mocked-uris/28401.json"
-        },
-        "matrix-asset://api-identifier/28406": {
-            "type": "file",
-            "path": "mocked-uris/28406.json"
-        },
-        "matrix-asset://api-identifier/124970": {
-            "type": "file",
-            "path": "mocked-uris/124970.json"
-        },
-        "matrix-asset://api-identifier/124986": {
-            "type": "file",
-            "path": "mocked-uris/124986.json"
-        },
-        "matrix-asset://api-identifier/28397": {
-            "type": "file",
-            "path": "mocked-uris/28397.json"
-        },
-        "matrix-asset://api-identifier/89422": {
-            "type": "file",
-            "path": "mocked-uris/89422.json"
-        },
-        "matrix-asset://api-identifier/89430": {
-            "type": "file",
-            "path": "mocked-uris/89430.json"
-        },
-        "matrix-asset://api-identifier/89426": {
-            "type": "file",
-            "path": "mocked-uris/89426.json"
-        },
-        "matrix-asset://api-identifier/99100": {
-            "type": "file",
-            "path": "mocked-uris/99100.json"
-        },
-        "matrix-asset://api-identifier/125800": {
-            "type": "file",
-            "path": "mocked-uris/125800.json"
-        },
-        "matrix-asset://api-identifier/125801": {
-            "type": "file",
-            "path": "mocked-uris/125801.json"
-        },
-        "matrix-asset://api-identifier/28192": {
-            "type": "file",
-            "path": "mocked-uris/28192.json"
-        },
-        "matrix-asset://api-identifier/28205": {
-            "type": "file",
-            "path": "mocked-uris/28205.json"
-        },
-        "matrix-asset://api-identifier/127834": {
-            "type": "file",
-            "path": "mocked-uris/127834.json"
-        },
-        "matrix-asset://api-identifier/28193": {
-            "type": "file",
-            "path": "mocked-uris/28193.json"
-        },
-        "matrix-asset://api-identifier/127837": {
-            "type": "file",
-            "path": "mocked-uris/127837.json"
+            "path": "mocked-uris/141464.json"
         }
     },
     "previews": {
@@ -164,12 +88,12 @@
                         "path": "example-data/preview.data.json"
                     },
                     "wrapper": {
-                        "path": "previews/basicstory.html"
+                        "path": "previews/preview.html"
                     }
                 }
             }
         },
-        "featuredstory": {
+        "basicstory": {
             "functionData": {
                 "main": {
                     "inputData": {
@@ -177,7 +101,7 @@
                         "path": "example-data/preview.data.json"
                     },
                     "wrapper": {
-                        "path": "previews/preview.html"
+                        "path": "previews/basicstory.html"
                     }
                 }
             }

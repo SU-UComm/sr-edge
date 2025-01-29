@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "image-gallery-modal",
     "type": "edge",
-    "version": "3.1.3",
+    "version": "4.0.0",
     "namespace": "pnp-stanford-edge-components",
     "description": "An image gallery that opens in a modal.",
     "displayName": "Image gallery with modal",
@@ -135,21 +135,37 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://api-identifier/125801": {
+        "matrix-asset://api-identifier/163904": {
             "type": "file",
-            "path": "mocked-uris/125801.json"
+            "path": "mocked-uris/163904.json"
         },
-        "matrix-asset://api-identifier/99100": {
+        "matrix-asset://api-identifier/163293": {
             "type": "file",
-            "path": "mocked-uris/99100.json"
+            "path": "mocked-uris/163293.json"
         },
-        "matrix-asset://api-identifier/125800": {
+        "matrix-asset://api-identifier/163591": {
             "type": "file",
-            "path": "mocked-uris/125800.json"
+            "path": "mocked-uris/163591.json"
         },
-        "matrix-asset://api-identifier/125802": {
+        "matrix-asset://api-identifier/163980": {
             "type": "file",
-            "path": "mocked-uris/125802.json"
+            "path": "mocked-uris/163980.json"
+        },
+        "matrix-asset://api-identifier/163985": {
+            "type": "file",
+            "path": "mocked-uris/163985.json"
+        },
+        "matrix-asset://api-identifier/163996": {
+            "type": "file",
+            "path": "mocked-uris/163996.json"
+        },
+        "matrix-asset://api-identifier/164139": {
+            "type": "file",
+            "path": "mocked-uris/164139.json"
+        },
+        "matrix-asset://api-identifier/164142": {
+            "type": "file",
+            "path": "mocked-uris/164142.json"
         }
     },
     "previews": {
@@ -162,6 +178,19 @@
                     },
                     "wrapper": {
                         "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
                     }
                 }
             }

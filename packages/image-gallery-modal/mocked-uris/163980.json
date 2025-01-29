@@ -1,0 +1,1237 @@
+{
+    "assetid": "163980",
+    "type_code": "image",
+    "version": "0.1.0",
+    "name": "GettyImages-1480536872.jpg",
+    "short_name": "Easing the pain of layoffs",
+    "external_id": true,
+    "status": "16",
+    "languages": "en",
+    "charset": "utf-8",
+    "created": "2025-01-14 13:07:46",
+    "created_userid": "127820",
+    "updated": "2025-01-14 13:08:00",
+    "updated_userid": "127820",
+    "published": "2025-01-14 13:07:58",
+    "published_userid": "127820",
+    "status_changed": "2025-01-14 13:07:58",
+    "status_changed_userid": "127820",
+    "thumbnail": "",
+    "attributes": {
+        "variety_count": {
+            "attrid": "923",
+            "type": "int",
+            "value": "19",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "varieties": {
+            "attrid": "922",
+            "type": "serialise",
+            "value": {
+                "lookups": {
+                    "100w": "v1",
+                    "150w": "v2",
+                    "200w": "v3",
+                    "300w": "v4",
+                    "345w": "v5",
+                    "375w": "v6",
+                    "400w": "v7",
+                    "555w": "v8",
+                    "600w": "v9",
+                    "690w": "v10",
+                    "705w": "v11",
+                    "750w": "v12",
+                    "795w": "v13",
+                    "960w": "v14",
+                    "1024w": "v15",
+                    "1110w": "v16",
+                    "1410w": "v17",
+                    "1500w": "v18"
+                },
+                "data": {
+                    "v1": {
+                        "variety_type": "resize",
+                        "filename": "100w.jpg",
+                        "name": "100w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 2979,
+                        "variety_height": 100,
+                        "variety_width": 100,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "100",
+                        "height": "0",
+                        "width": "0",
+                        "constrain": "centre_weighted_square"
+                    },
+                    "v2": {
+                        "variety_type": "resize",
+                        "filename": "150w.jpg",
+                        "name": "150w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 4646,
+                        "variety_height": 150,
+                        "variety_width": 150,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "150",
+                        "height": "0",
+                        "width": "0",
+                        "constrain": "centre_weighted_square"
+                    },
+                    "v3": {
+                        "variety_type": "resize",
+                        "filename": "200w.jpg",
+                        "name": "200w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 5621,
+                        "variety_height": 133,
+                        "variety_width": 200,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "200",
+                        "width": "200",
+                        "constrain": "width"
+                    },
+                    "v4": {
+                        "variety_type": "resize",
+                        "filename": "300w.jpg",
+                        "name": "300w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 5621,
+                        "variety_height": 133,
+                        "variety_width": 200,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "300",
+                        "width": "200",
+                        "constrain": "width"
+                    },
+                    "v5": {
+                        "variety_type": "resize",
+                        "filename": "345w.jpg",
+                        "name": "345w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 11568,
+                        "variety_height": 230,
+                        "variety_width": 345,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "555",
+                        "width": "345",
+                        "constrain": "width"
+                    },
+                    "v6": {
+                        "variety_type": "resize",
+                        "filename": "375w.jpg",
+                        "name": "375w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 12991,
+                        "variety_height": 250,
+                        "variety_width": 375,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "200",
+                        "width": "375",
+                        "constrain": "width"
+                    },
+                    "v7": {
+                        "variety_type": "resize",
+                        "filename": "400w.jpg",
+                        "name": "400w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 13962,
+                        "variety_height": 267,
+                        "variety_width": 400,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "100",
+                        "width": "400",
+                        "constrain": "width"
+                    },
+                    "v8": {
+                        "variety_type": "resize",
+                        "filename": "555w.jpg",
+                        "name": "555w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 22267,
+                        "variety_height": 370,
+                        "variety_width": 555,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "555",
+                        "constrain": "width"
+                    },
+                    "v9": {
+                        "variety_type": "resize",
+                        "filename": "600w.jpg",
+                        "name": "600w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 24433,
+                        "variety_height": 400,
+                        "variety_width": 600,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "600",
+                        "constrain": "width"
+                    },
+                    "v10": {
+                        "variety_type": "resize",
+                        "filename": "690w.jpg",
+                        "name": "690w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 30242,
+                        "variety_height": 460,
+                        "variety_width": 690,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "690",
+                        "constrain": "width"
+                    },
+                    "v11": {
+                        "variety_type": "resize",
+                        "filename": "705w.jpg",
+                        "name": "705w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 31212,
+                        "variety_height": 470,
+                        "variety_width": 705,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "705",
+                        "constrain": "width"
+                    },
+                    "v12": {
+                        "variety_type": "resize",
+                        "filename": "750w.jpg",
+                        "name": "750w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 34513,
+                        "variety_height": 500,
+                        "variety_width": 750,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "750",
+                        "constrain": "width"
+                    },
+                    "v13": {
+                        "variety_type": "resize",
+                        "filename": "795w.jpg",
+                        "name": "795w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 37176,
+                        "variety_height": 530,
+                        "variety_width": 795,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "795",
+                        "constrain": "width"
+                    },
+                    "v14": {
+                        "variety_type": "resize",
+                        "filename": "960w.jpg",
+                        "name": "960w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 48520,
+                        "variety_height": 640,
+                        "variety_width": 960,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "960",
+                        "constrain": "width"
+                    },
+                    "v15": {
+                        "variety_type": "resize",
+                        "filename": "1024w.jpg",
+                        "name": "1024w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 53801,
+                        "variety_height": 683,
+                        "variety_width": 1024,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "1024",
+                        "constrain": "width"
+                    },
+                    "v16": {
+                        "variety_type": "resize",
+                        "filename": "1110w.jpg",
+                        "name": "1110w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 61161,
+                        "variety_height": 740,
+                        "variety_width": 1110,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "1110",
+                        "constrain": "width"
+                    },
+                    "v17": {
+                        "variety_type": "resize",
+                        "filename": "1410w.jpg",
+                        "name": "1410w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 88502,
+                        "variety_height": 940,
+                        "variety_width": 1410,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "1410",
+                        "constrain": "width"
+                    },
+                    "v18": {
+                        "variety_type": "resize",
+                        "filename": "1500w.jpg",
+                        "name": "1500w",
+                        "title": "Easing the pain of layoffs",
+                        "caption": "",
+                        "variety_size": 101708,
+                        "variety_height": 1000,
+                        "variety_width": 1500,
+                        "alt": "",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "1500",
+                        "constrain": "width"
+                    }
+                }
+            },
+            "is_contextable": false,
+            "use_default": true
+        },
+        "embedded_data": {
+            "attrid": "924",
+            "type": "serialise",
+            "value": {
+                "filename": {
+                    "name": "FileName",
+                    "value": "GettyImages-1480536872.jpg"
+                },
+                "filesize": {
+                    "name": "FileSize",
+                    "value": "653 KiB"
+                },
+                "filemodifydate": {
+                    "name": "FileModifyDate",
+                    "value": "2025:01:14 21:07:47+00:00"
+                },
+                "fileaccessdate": {
+                    "name": "FileAccessDate",
+                    "value": "2025:01:14 21:07:47+00:00"
+                },
+                "fileinodechangedate": {
+                    "name": "FileInodeChangeDate",
+                    "value": "2025:01:14 21:07:47+00:00"
+                },
+                "filetype": {
+                    "name": "FileType",
+                    "value": "JPEG"
+                },
+                "filetypeextension": {
+                    "name": "FileTypeExtension",
+                    "value": "jpg"
+                },
+                "mimetype": {
+                    "name": "MIMEType",
+                    "value": "image\/jpeg"
+                },
+                "exifbyteorder": {
+                    "name": "ExifByteOrder",
+                    "value": "Little-endian (Intel, II)"
+                },
+                "photometricinterpretation": {
+                    "name": "PhotometricInterpretation",
+                    "value": "RGB"
+                },
+                "imagedescription": {
+                    "name": "ImageDescription",
+                    "value": "Close up of worried businessman gets fired at work. Copy space."
+                },
+                "make": {
+                    "name": "Make",
+                    "value": "Canon"
+                },
+                "model": {
+                    "name": "Model",
+                    "value": "Canon EOS R3"
+                },
+                "orientation": {
+                    "name": "Orientation",
+                    "value": "Horizontal (normal)"
+                },
+                "samplesperpixel": {
+                    "name": "SamplesPerPixel",
+                    "value": "3"
+                },
+                "xresolution": {
+                    "name": "XResolution",
+                    "value": "72"
+                },
+                "yresolution": {
+                    "name": "YResolution",
+                    "value": "72"
+                },
+                "resolutionunit": {
+                    "name": "ResolutionUnit",
+                    "value": "inches"
+                },
+                "software": {
+                    "name": "Software",
+                    "value": "Adobe Photoshop 26.0 (Macintosh)"
+                },
+                "modifydate": {
+                    "name": "ModifyDate",
+                    "value": "2025:01:14 13:05:46"
+                },
+                "artist": {
+                    "name": "Artist",
+                    "value": "Drazen Zigic"
+                },
+                "copyright": {
+                    "name": "Copyright",
+                    "value": "photo by drazen zigic"
+                },
+                "exposuretime": {
+                    "name": "ExposureTime",
+                    "value": "1\/320"
+                },
+                "fnumber": {
+                    "name": "FNumber",
+                    "value": "1.4"
+                },
+                "exposureprogram": {
+                    "name": "ExposureProgram",
+                    "value": "Manual"
+                },
+                "iso": {
+                    "name": "ISO",
+                    "value": "800"
+                },
+                "sensitivitytype": {
+                    "name": "SensitivityType",
+                    "value": "Recommended Exposure Index"
+                },
+                "recommendedexposureindex": {
+                    "name": "RecommendedExposureIndex",
+                    "value": "800"
+                },
+                "exifversion": {
+                    "name": "ExifVersion",
+                    "value": "0230"
+                },
+                "datetimeoriginal": {
+                    "name": "DateTimeOriginal",
+                    "value": "2022:12:10 22:11:08"
+                },
+                "createdate": {
+                    "name": "CreateDate",
+                    "value": "2022:12:10 22:11:08"
+                },
+                "shutterspeedvalue": {
+                    "name": "ShutterSpeedValue",
+                    "value": "1\/320"
+                },
+                "aperturevalue": {
+                    "name": "ApertureValue",
+                    "value": "1.4"
+                },
+                "exposurecompensation": {
+                    "name": "ExposureCompensation",
+                    "value": "0"
+                },
+                "subjectdistance": {
+                    "name": "SubjectDistance",
+                    "value": "1.29 m"
+                },
+                "meteringmode": {
+                    "name": "MeteringMode",
+                    "value": "Multi-segment"
+                },
+                "flash": {
+                    "name": "Flash",
+                    "value": "On, Fired"
+                },
+                "focallength": {
+                    "name": "FocalLength",
+                    "value": "50.0 mm"
+                },
+                "subsectimeoriginal": {
+                    "name": "SubSecTimeOriginal",
+                    "value": "55"
+                },
+                "subsectimedigitized": {
+                    "name": "SubSecTimeDigitized",
+                    "value": "55"
+                },
+                "colorspace": {
+                    "name": "ColorSpace",
+                    "value": "sRGB"
+                },
+                "exifimagewidth": {
+                    "name": "ExifImageWidth",
+                    "value": "1500"
+                },
+                "exifimageheight": {
+                    "name": "ExifImageHeight",
+                    "value": "1000"
+                },
+                "focalplanexresolution": {
+                    "name": "FocalPlaneXResolution",
+                    "value": "4234.297852"
+                },
+                "focalplaneyresolution": {
+                    "name": "FocalPlaneYResolution",
+                    "value": "4232.804199"
+                },
+                "focalplaneresolutionunit": {
+                    "name": "FocalPlaneResolutionUnit",
+                    "value": "inches"
+                },
+                "filesource": {
+                    "name": "FileSource",
+                    "value": "Digital Camera"
+                },
+                "scenetype": {
+                    "name": "SceneType",
+                    "value": "Directly photographed"
+                },
+                "customrendered": {
+                    "name": "CustomRendered",
+                    "value": "Normal"
+                },
+                "exposuremode": {
+                    "name": "ExposureMode",
+                    "value": "Manual"
+                },
+                "whitebalance": {
+                    "name": "WhiteBalance",
+                    "value": "Auto"
+                },
+                "scenecapturetype": {
+                    "name": "SceneCaptureType",
+                    "value": "Standard"
+                },
+                "serialnumber": {
+                    "name": "SerialNumber",
+                    "value": "013031000381"
+                },
+                "lensinfo": {
+                    "name": "LensInfo",
+                    "value": "50mm f\/?"
+                },
+                "lensmodel": {
+                    "name": "LensModel",
+                    "value": "Canon RF 50mm f\/1.2L USM"
+                },
+                "lensserialnumber": {
+                    "name": "LensSerialNumber",
+                    "value": "1250000784"
+                },
+                "gpsversionid": {
+                    "name": "GPSVersionID",
+                    "value": "2.0.0.0"
+                },
+                "compression": {
+                    "name": "Compression",
+                    "value": "JPEG (old-style)"
+                },
+                "thumbnailoffset": {
+                    "name": "ThumbnailOffset",
+                    "value": "1162"
+                },
+                "thumbnaillength": {
+                    "name": "ThumbnailLength",
+                    "value": "4269"
+                },
+                "currentiptcdigest": {
+                    "name": "CurrentIPTCDigest",
+                    "value": "f6c6d58d4e6f6f79d6716faab49601ef"
+                },
+                "codedcharacterset": {
+                    "name": "CodedCharacterSet",
+                    "value": "UTF8"
+                },
+                "applicationrecordversion": {
+                    "name": "ApplicationRecordVersion",
+                    "value": "0"
+                },
+                "caption-abstract": {
+                    "name": "Caption-Abstract",
+                    "value": "Close up of worried businessman gets fired at work. Copy space."
+                },
+                "specialinstructions": {
+                    "name": "SpecialInstructions",
+                    "value": "Model and Property Released (MR&PR) "
+                },
+                "by-line": {
+                    "name": "By-line",
+                    "value": "Drazen Zigic"
+                },
+                "by-linetitle": {
+                    "name": "By-lineTitle",
+                    "value": "Contributor"
+                },
+                "objectname": {
+                    "name": "ObjectName",
+                    "value": "1480536872"
+                },
+                "timecreated": {
+                    "name": "TimeCreated",
+                    "value": "00:00:00+00:00"
+                },
+                "country-primarylocationname": {
+                    "name": "Country-PrimaryLocationName",
+                    "value": "Serbia"
+                },
+                "country-primarylocationcode": {
+                    "name": "Country-PrimaryLocationCode",
+                    "value": "SRB"
+                },
+                "copyrightnotice": {
+                    "name": "CopyrightNotice",
+                    "value": "photo by drazen zigic"
+                },
+                "iptcdigest": {
+                    "name": "IPTCDigest",
+                    "value": "f6c6d58d4e6f6f79d6716faab49601ef"
+                },
+                "displayedunitsx": {
+                    "name": "DisplayedUnitsX",
+                    "value": "inches"
+                },
+                "displayedunitsy": {
+                    "name": "DisplayedUnitsY",
+                    "value": "inches"
+                },
+                "printstyle": {
+                    "name": "PrintStyle",
+                    "value": "Centered"
+                },
+                "printposition": {
+                    "name": "PrintPosition",
+                    "value": "0 0"
+                },
+                "printscale": {
+                    "name": "PrintScale",
+                    "value": "1"
+                },
+                "globalangle": {
+                    "name": "GlobalAngle",
+                    "value": "30"
+                },
+                "globalaltitude": {
+                    "name": "GlobalAltitude",
+                    "value": "30"
+                },
+                "url": {
+                    "name": "Url",
+                    "value": "https:\/\/www.gettyimages.com"
+                },
+                "url_list": {
+                    "name": "URL_List",
+                    "value": []
+                },
+                "slicesgroupname": {
+                    "name": "SlicesGroupName",
+                    "value": "GettyImages-1480536872"
+                },
+                "numslices": {
+                    "name": "NumSlices",
+                    "value": "1"
+                },
+                "pixelaspectratio": {
+                    "name": "PixelAspectRatio",
+                    "value": "1"
+                },
+                "photoshopthumbnail": {
+                    "name": "PhotoshopThumbnail",
+                    "value": "(Binary data 4269 bytes, use -b option to extract)"
+                },
+                "hasrealmergeddata": {
+                    "name": "HasRealMergedData",
+                    "value": "Yes"
+                },
+                "writername": {
+                    "name": "WriterName",
+                    "value": "Adobe Photoshop"
+                },
+                "readername": {
+                    "name": "ReaderName",
+                    "value": "Adobe Photoshop 2025"
+                },
+                "photoshopquality": {
+                    "name": "PhotoshopQuality",
+                    "value": "12"
+                },
+                "photoshopformat": {
+                    "name": "PhotoshopFormat",
+                    "value": "Standard"
+                },
+                "progressivescans": {
+                    "name": "ProgressiveScans",
+                    "value": "3 Scans"
+                },
+                "xmptoolkit": {
+                    "name": "XMPToolkit",
+                    "value": "Adobe XMP Core 9.1-c002 79.b7c64ccf9, 2024\/07\/16-12:39:04 "
+                },
+                "source": {
+                    "name": "Source",
+                    "value": "iStockphoto"
+                },
+                "authorsposition": {
+                    "name": "AuthorsPosition",
+                    "value": "Contributor"
+                },
+                "copyrightflag": {
+                    "name": "CopyrightFlag",
+                    "value": "1"
+                },
+                "country": {
+                    "name": "Country",
+                    "value": "Serbia"
+                },
+                "datecreated": {
+                    "name": "DateCreated",
+                    "value": "2022:12:10"
+                },
+                "credit": {
+                    "name": "Credit",
+                    "value": "Getty Images"
+                },
+                "headline": {
+                    "name": "Headline",
+                    "value": "Close up of depressed businessman after being fired from his job."
+                },
+                "instructions": {
+                    "name": "Instructions",
+                    "value": "Model and Property Released (MR&PR) "
+                },
+                "legacyiptcdigest": {
+                    "name": "LegacyIPTCDigest",
+                    "value": "21E7D69664CC3CAE68A81BD956093C58"
+                },
+                "urgency": {
+                    "name": "Urgency",
+                    "value": "3"
+                },
+                "colormode": {
+                    "name": "ColorMode",
+                    "value": "RGB"
+                },
+                "iccprofilename": {
+                    "name": "ICCProfileName",
+                    "value": "sRGB IEC61966-2.1"
+                },
+                "countrycode": {
+                    "name": "CountryCode",
+                    "value": "SRB"
+                },
+                "dlref": {
+                    "name": "Dlref",
+                    "value": "XXiIMkyIjBpp45RPCaAwQQ=="
+                },
+                "imagerank": {
+                    "name": "ImageRank",
+                    "value": "3"
+                },
+                "assetid": {
+                    "name": "AssetID",
+                    "value": "1480536872"
+                },
+                "format": {
+                    "name": "Format",
+                    "value": "image\/jpeg"
+                },
+                "webstatement": {
+                    "name": "WebStatement",
+                    "value": "https:\/\/www.gettyimages.com\/eula?utm_medium=organic&utm_source=google&utm_campaign=iptcurl"
+                },
+                "datamining": {
+                    "name": "DataMining",
+                    "value": "http:\/\/ns.useplus.org\/ldf\/vocab\/DMI-PROHIBITED-EXCEPTSEARCHENGINEINDEXING"
+                },
+                "creatortool": {
+                    "name": "CreatorTool",
+                    "value": "Capture One 16 Macintosh"
+                },
+                "metadatadate": {
+                    "name": "MetadataDate",
+                    "value": "2025:01:14 13:05:46-08:00"
+                },
+                "lens": {
+                    "name": "Lens",
+                    "value": "Canon RF 50mm f\/1.2L USM"
+                },
+                "approximatefocusdistance": {
+                    "name": "ApproximateFocusDistance",
+                    "value": "1.29"
+                },
+                "documentid": {
+                    "name": "DocumentID",
+                    "value": "0D0958D2A38FCBDCAB66F64AE72E6EDD"
+                },
+                "instanceid": {
+                    "name": "InstanceID",
+                    "value": "xmp.iid:b66da668-a77b-4c3b-a1d4-388679032117"
+                },
+                "originaldocumentid": {
+                    "name": "OriginalDocumentID",
+                    "value": "0D0958D2A38FCBDCAB66F64AE72E6EDD"
+                },
+                "title": {
+                    "name": "Title",
+                    "value": "1480536872"
+                },
+                "creator": {
+                    "name": "Creator",
+                    "value": "Drazen Zigic"
+                },
+                "description": {
+                    "name": "Description",
+                    "value": "Close up of worried businessman gets fired at work. Copy space."
+                },
+                "rights": {
+                    "name": "Rights",
+                    "value": "photo by drazen zigic"
+                },
+                "licensorurl": {
+                    "name": "LicensorURL",
+                    "value": "https:\/\/www.gettyimages.com\/detail\/1480536872?utm_medium=organic&utm_source=google&utm_campaign=iptcurl"
+                },
+                "historyaction": {
+                    "name": "HistoryAction",
+                    "value": "saved"
+                },
+                "historyinstanceid": {
+                    "name": "HistoryInstanceID",
+                    "value": "xmp.iid:b66da668-a77b-4c3b-a1d4-388679032117"
+                },
+                "historywhen": {
+                    "name": "HistoryWhen",
+                    "value": "2025:01:14 13:05:46-08:00"
+                },
+                "historysoftwareagent": {
+                    "name": "HistorySoftwareAgent",
+                    "value": "Adobe Photoshop 26.0 (Macintosh)"
+                },
+                "historychanged": {
+                    "name": "HistoryChanged",
+                    "value": "\/"
+                },
+                "profilecmmtype": {
+                    "name": "ProfileCMMType",
+                    "value": "Linotronic"
+                },
+                "profileversion": {
+                    "name": "ProfileVersion",
+                    "value": "2.1.0"
+                },
+                "profileclass": {
+                    "name": "ProfileClass",
+                    "value": "Display Device Profile"
+                },
+                "colorspacedata": {
+                    "name": "ColorSpaceData",
+                    "value": "RGB "
+                },
+                "profileconnectionspace": {
+                    "name": "ProfileConnectionSpace",
+                    "value": "XYZ "
+                },
+                "profiledatetime": {
+                    "name": "ProfileDateTime",
+                    "value": "1998:02:09 06:49:00"
+                },
+                "profilefilesignature": {
+                    "name": "ProfileFileSignature",
+                    "value": "acsp"
+                },
+                "primaryplatform": {
+                    "name": "PrimaryPlatform",
+                    "value": "Microsoft Corporation"
+                },
+                "cmmflags": {
+                    "name": "CMMFlags",
+                    "value": "Not Embedded, Independent"
+                },
+                "devicemanufacturer": {
+                    "name": "DeviceManufacturer",
+                    "value": "Hewlett-Packard"
+                },
+                "devicemodel": {
+                    "name": "DeviceModel",
+                    "value": "sRGB"
+                },
+                "deviceattributes": {
+                    "name": "DeviceAttributes",
+                    "value": "Reflective, Glossy, Positive, Color"
+                },
+                "renderingintent": {
+                    "name": "RenderingIntent",
+                    "value": "Perceptual"
+                },
+                "connectionspaceilluminant": {
+                    "name": "ConnectionSpaceIlluminant",
+                    "value": "0.9642 1 0.82491"
+                },
+                "profilecreator": {
+                    "name": "ProfileCreator",
+                    "value": "Hewlett-Packard"
+                },
+                "profileid": {
+                    "name": "ProfileID",
+                    "value": "0"
+                },
+                "profilecopyright": {
+                    "name": "ProfileCopyright",
+                    "value": "Copyright (c) 1998 Hewlett-Packard Company"
+                },
+                "profiledescription": {
+                    "name": "ProfileDescription",
+                    "value": "sRGB IEC61966-2.1"
+                },
+                "mediawhitepoint": {
+                    "name": "MediaWhitePoint",
+                    "value": "0.95045 1 1.08905"
+                },
+                "mediablackpoint": {
+                    "name": "MediaBlackPoint",
+                    "value": "0 0 0"
+                },
+                "redmatrixcolumn": {
+                    "name": "RedMatrixColumn",
+                    "value": "0.43607 0.22249 0.01392"
+                },
+                "greenmatrixcolumn": {
+                    "name": "GreenMatrixColumn",
+                    "value": "0.38515 0.71687 0.09708"
+                },
+                "bluematrixcolumn": {
+                    "name": "BlueMatrixColumn",
+                    "value": "0.14307 0.06061 0.7141"
+                },
+                "devicemfgdesc": {
+                    "name": "DeviceMfgDesc",
+                    "value": "IEC http:\/\/www.iec.ch"
+                },
+                "devicemodeldesc": {
+                    "name": "DeviceModelDesc",
+                    "value": "IEC 61966-2.1 Default RGB colour space - sRGB"
+                },
+                "viewingconddesc": {
+                    "name": "ViewingCondDesc",
+                    "value": "Reference Viewing Condition in IEC61966-2.1"
+                },
+                "viewingcondilluminant": {
+                    "name": "ViewingCondIlluminant",
+                    "value": "19.6445 20.3718 16.8089"
+                },
+                "viewingcondsurround": {
+                    "name": "ViewingCondSurround",
+                    "value": "3.92889 4.07439 3.36179"
+                },
+                "viewingcondilluminanttype": {
+                    "name": "ViewingCondIlluminantType",
+                    "value": "D50"
+                },
+                "luminance": {
+                    "name": "Luminance",
+                    "value": "76.03647 80 87.12462"
+                },
+                "measurementobserver": {
+                    "name": "MeasurementObserver",
+                    "value": "CIE 1931"
+                },
+                "measurementbacking": {
+                    "name": "MeasurementBacking",
+                    "value": "0 0 0"
+                },
+                "measurementgeometry": {
+                    "name": "MeasurementGeometry",
+                    "value": "Unknown"
+                },
+                "measurementflare": {
+                    "name": "MeasurementFlare",
+                    "value": "0.999%"
+                },
+                "measurementilluminant": {
+                    "name": "MeasurementIlluminant",
+                    "value": "D65"
+                },
+                "technology": {
+                    "name": "Technology",
+                    "value": "Cathode Ray Tube Display"
+                },
+                "redtrc": {
+                    "name": "RedTRC",
+                    "value": "(Binary data 2060 bytes, use -b option to extract)"
+                },
+                "greentrc": {
+                    "name": "GreenTRC",
+                    "value": "(Binary data 2060 bytes, use -b option to extract)"
+                },
+                "bluetrc": {
+                    "name": "BlueTRC",
+                    "value": "(Binary data 2060 bytes, use -b option to extract)"
+                },
+                "dctencodeversion": {
+                    "name": "DCTEncodeVersion",
+                    "value": "100"
+                },
+                "app14flags0": {
+                    "name": "APP14Flags0",
+                    "value": "[14]"
+                },
+                "app14flags1": {
+                    "name": "APP14Flags1",
+                    "value": "(none)"
+                },
+                "colortransform": {
+                    "name": "ColorTransform",
+                    "value": "YCbCr"
+                },
+                "imagewidth": {
+                    "name": "ImageWidth",
+                    "value": "1500"
+                },
+                "imageheight": {
+                    "name": "ImageHeight",
+                    "value": "1000"
+                },
+                "encodingprocess": {
+                    "name": "EncodingProcess",
+                    "value": "Baseline DCT, Huffman coding"
+                },
+                "bitspersample": {
+                    "name": "BitsPerSample",
+                    "value": "8"
+                },
+                "colorcomponents": {
+                    "name": "ColorComponents",
+                    "value": "3"
+                },
+                "ycbcrsubsampling": {
+                    "name": "YCbCrSubSampling",
+                    "value": "YCbCr4:4:4 (1 1)"
+                },
+                "aperture": {
+                    "name": "Aperture",
+                    "value": "1.4"
+                },
+                "imagesize": {
+                    "name": "ImageSize",
+                    "value": "1500x1000"
+                },
+                "lensid": {
+                    "name": "LensID",
+                    "value": "Canon RF 50mm f\/1.2L USM"
+                },
+                "megapixels": {
+                    "name": "Megapixels",
+                    "value": "1.5"
+                },
+                "scalefactor35efl": {
+                    "name": "ScaleFactor35efl",
+                    "value": "4"
+                },
+                "shutterspeed": {
+                    "name": "ShutterSpeed",
+                    "value": "1\/320"
+                },
+                "subseccreatedate": {
+                    "name": "SubSecCreateDate",
+                    "value": "2022:12:10 22:11:08.55"
+                },
+                "subsecdatetimeoriginal": {
+                    "name": "SubSecDateTimeOriginal",
+                    "value": "2022:12:10 22:11:08.55"
+                },
+                "thumbnailimage": {
+                    "name": "ThumbnailImage",
+                    "value": "(Binary data 4269 bytes, use -b option to extract)"
+                },
+                "datetimecreated": {
+                    "name": "DateTimeCreated",
+                    "value": "2022:12:10 00:00:00+00:00"
+                },
+                "circleofconfusion": {
+                    "name": "CircleOfConfusion",
+                    "value": "0.008 mm"
+                },
+                "dof": {
+                    "name": "DOF",
+                    "value": "0.013 m (1.283 - 1.297 m)"
+                },
+                "fov": {
+                    "name": "FOV",
+                    "value": "10.3 deg"
+                },
+                "focallength35efl": {
+                    "name": "FocalLength35efl",
+                    "value": "50.0 mm (35 mm equivalent: 200.0 mm)"
+                },
+                "hyperfocaldistance": {
+                    "name": "HyperfocalDistance",
+                    "value": "237.76 m"
+                },
+                "lightvalue": {
+                    "name": "LightValue",
+                    "value": "6.3"
+                }
+            },
+            "is_contextable": false,
+            "use_default": true
+        },
+        "size": {
+            "attrid": "921",
+            "type": "int",
+            "value": "668449",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "height": {
+            "attrid": "920",
+            "type": "int",
+            "value": "1000",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "width": {
+            "attrid": "919",
+            "type": "int",
+            "value": "1500",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "name": {
+            "attrid": "915",
+            "type": "text",
+            "value": "GettyImages-1480536872.jpg",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "title": {
+            "attrid": "916",
+            "type": "text",
+            "value": "Easing the pain of layoffs",
+            "is_contextable": true,
+            "use_default": true
+        },
+        "allow_unrestricted": {
+            "attrid": "914",
+            "type": "boolean",
+            "value": true,
+            "is_contextable": false,
+            "use_default": true
+        },
+        "caption": {
+            "attrid": "918",
+            "type": "text",
+            "value": "",
+            "is_contextable": true,
+            "use_default": true
+        },
+        "alt": {
+            "attrid": "917",
+            "type": "text",
+            "value": "",
+            "is_contextable": true,
+            "use_default": true
+        }
+    },
+    "metadata": {
+        "mediaPublished": {
+            "value": "2025-01-01 00:00:00",
+            "fieldid": "6085",
+            "type": "metadata_field_date",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "mediaModified": {
+            "value": "2025-01-01 00:00:00",
+            "fieldid": "6086",
+            "type": "metadata_field_date",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "mediaDescription": {
+            "value": "",
+            "fieldid": "6087",
+            "type": "metadata_field_wysiwyg",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "mediaCredit": {
+            "value": "",
+            "fieldid": "10688",
+            "type": "metadata_field_wysiwyg",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "mediaId": {
+            "value": "",
+            "fieldid": "6088",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "fileFeed": {
+            "value": "",
+            "fieldid": "25491",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        }
+    }
+}

@@ -1,0 +1,149 @@
+{
+    "assetid": "141464",
+    "type_code": "page_content",
+    "version": "0.22.10",
+    "name": "University News",
+    "short_name": "University News",
+    "external_id": true,
+    "status": "16",
+    "languages": "en",
+    "charset": "utf-8",
+    "created": "2024-04-11 09:16:20",
+    "created_userid": "33171",
+    "updated": "2025-01-27 10:41:17",
+    "updated_userid": "33458",
+    "published": "2025-01-13 08:48:04",
+    "published_userid": "127824",
+    "status_changed": "2025-01-13 08:48:04",
+    "status_changed_userid": "127824",
+    "thumbnail": "",
+    "attributes": {
+        "dxp_page_content_id": {
+            "attrid": "4265",
+            "type": "text",
+            "value": "354bbee2-ab40-4ba8-bbe9-689f8e085d66",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "short_name": {
+            "attrid": "4264",
+            "type": "text",
+            "value": "University News",
+            "is_contextable": true,
+            "use_default": true
+        },
+        "name": {
+            "attrid": "4263",
+            "type": "text",
+            "value": "University News",
+            "is_contextable": true,
+            "use_default": true
+        }
+    },
+    "metadata": {
+        "seoTitle": {
+            "value": "University News",
+            "fieldid": "4541",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "canonicalUrl": {
+            "value": "",
+            "fieldid": "5989",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "seoDescription": {
+            "value": "",
+            "fieldid": "4542",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "seoKeywords": {
+            "value": "",
+            "fieldid": "4560",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "robots": {
+            "value": "max-image-preview:large",
+            "fieldid": "4544",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "publishedDate": {
+            "value": "2024-01-01 00:00:00",
+            "fieldid": "4538",
+            "type": "metadata_field_date",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "modifiedDate": {
+            "value": "2024-01-01 00:00:10",
+            "fieldid": "4555",
+            "type": "metadata_field_date",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "includePageTopMargin": {
+            "value": "yes",
+            "fieldid": "130274",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "includePageBottomMargin": {
+            "value": "yes",
+            "fieldid": "130275",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "includePageHero": {
+            "value": "no",
+            "fieldid": "130276",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "pageTitleAlignment": {
+            "value": "left",
+            "fieldid": "130908",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "campaignPage": {
+            "value": "no",
+            "fieldid": "156915",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "publishToMobile": {
+            "value": "true",
+            "fieldid": "131337",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        }
+    }
+}

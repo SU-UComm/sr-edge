@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-
 import '@testing-library/jest-dom';
 import { fireEvent } from '@testing-library/dom';
+import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 import * as multicolumnListing from './scripts';
 
 describe('[Multicolumn Listing][Client]', () => {
@@ -22,7 +22,7 @@ describe('[Multicolumn Listing][Client]', () => {
 
     afterEach(() => {
         document.body.innerHTML = ''; // Clear DOM
-        jest.clearAllMocks();
+        vi.clearAllMocks();
     });
 
     describe('[DOMContentLoaded]', () => {
@@ -31,7 +31,7 @@ describe('[Multicolumn Listing][Client]', () => {
             section.setAttribute('data-component', 'multicolumn-listing');
             document.body.appendChild(section);
 
-            const _modalInitSpy = jest.spyOn(multicolumnListing, '_modalInit');
+            const _modalInitSpy = vi.spyOn(multicolumnListing, '_modalInit');
 
              // Simulate DOMContentLoaded event
              const event = new Event('DOMContentLoaded');

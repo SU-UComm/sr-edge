@@ -1,0 +1,1 @@
+export { funnelbackCardService } from './funnelbackCardService';

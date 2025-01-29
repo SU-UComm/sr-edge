@@ -1,4 +1,4 @@
-import { VerticalCard } from "./VerticalCard";
+import { VerticalCard } from "../VerticalCard";
 // import PullQuoteCard from "./PullQuoteCard";
 // import HorizontalCard from "./HorizontalCard";
 // import TeaserCard from "./TeaserCard";
@@ -30,7 +30,7 @@ import { VerticalCard } from "./VerticalCard";
  *
  * @return {string}
  */
-export function Card({
+export function Card ({
         data,
         cardType,
         cardSize = "small",

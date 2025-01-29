@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-
 import '@testing-library/jest-dom';
+import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent } from '@testing-library/dom';
 import * as featuredContent from './scripts';
 
@@ -22,7 +22,7 @@ describe('[Feature Content][Client]', () => {
 
     afterEach(() => {
         document.body.innerHTML = ''; // Clear DOM
-        jest.clearAllMocks();
+        vi.clearAllMocks();
     });
 
     describe('[DOMContentLoaded]', () => {
@@ -31,7 +31,7 @@ describe('[Feature Content][Client]', () => {
             section.setAttribute('data-component', 'featured-content');
             document.body.appendChild(section);
 
-            const _modalInitSpy = jest.spyOn(featuredContent, '_modalInit');
+            const _modalInitSpy = vi.spyOn(featuredContent, '_modalInit');
 
              // Simulate DOMContentLoaded event
              const event = new Event('DOMContentLoaded');

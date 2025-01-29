@@ -3,8 +3,11 @@ squiz
 funnelback
 dxp
 xaccel
+vermgmt
 
 # Technical terms or properties of existing modules we need to allow
+nomatch
+zshell
 adate
 AWSCLIV
 daygrid
@@ -43,6 +46,7 @@ haspopup
 ismodal
 currentcolor
 mediagallery
+videoplay
 
 # Lorem Ipsum 
 ezgif
@@ -50,6 +54,9 @@ Asimo
 rsquo
 Lagunita
 Brodhead
+Kagurabadza
+
+#testing hooks
+testid 
 
 # Banned words list
-!testid #Do not include testing hooks into production code

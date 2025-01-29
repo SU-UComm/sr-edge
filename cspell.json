@@ -1,7 +1,9 @@
 {
     "language": "en-au, en-gb, en-us, aws, css, html, npm, node, bash, git, lorem-ipsum",
     "dictionaries": ["customDictionary"],
-    "dictionaryDefinitions": [{ "name": "customDictionary", "path": "./cspell-dictionary.txt" }],
+    "dictionaryDefinitions": [
+        { "name": "customDictionary", "path": "./cspell-dictionary.txt" }
+    ],
     "patterns": [
         {
             "name": "comments",
@@ -13,9 +15,5 @@
         }
     ],
     "ignoreRegExpList": ["comments", "url-encoded", "regex"],
-    "ignorePaths": [
-        "./**/*.stories.*",
-        "./**/package.json",
-        "./**/preview.data.json"
-    ]
+    "ignorePaths": ["./**/package.json", "./**/preview.data.json"]
 }

@@ -1,0 +1,1 @@
+export { formatCardDataMatrix } from './formatCardDataMatrix';

@@ -13,7 +13,7 @@ rm -rf ./**/node_modules
 rm -rf ./**/dist
 rm -rf ./**/lib
 rm -rf ./**/export
-rm -rf ./**/coverage
+rm -rf ./**/__coverage__
 setopt nomatch # start reporting no matches
 
 npm i

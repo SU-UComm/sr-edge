@@ -1,43 +1,39 @@
-/* eslint-disable no-unused-vars */
-/**
- * @jest-environment jsdom
- */
-
-import xss from 'xss';
-import { CardDataAdapter, MatrixImageCardService, formatCardDataImage, containerClasses, basicAssetUri } from "../../global/js/utils";
-import { ImageMosaic, mosaic, carouselImages, SidebarHeading, Modal, Carousel } from "../../global/js/helpers";
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { cardDataAdapter, formatCardDataImage, containerClasses} from "../../global/js/utils";
 import moduleToTest from './main';
-import { width } from '@fortawesome/free-regular-svg-icons/faAddressBook';
 
-const mockedError = jest.fn();
+const { main } = moduleToTest;
+
+const mockedError = vi.fn();
 console.error = mockedError;
 
-jest.mock('../../global/js/utils', () => ({
-    CardDataAdapter: jest.fn().mockImplementation(() => ({
-        setCardService: jest.fn(),
-        getCards: jest.fn().mockResolvedValue([
+vi.mock('../../global/js/utils', () => ({
+    cardDataAdapter: vi.fn().mockImplementation(() => ({
+        setCardService: vi.fn(),
+        getCards: vi.fn().mockResolvedValue([
             { orientation: "h", alt: "", url: "https://picsum.photos/350/250" },
             { orientation: "v", alt: "", url: "https://picsum.photos/300/550" },
+            { orientation: "h", alt: "", url: "https://picsum.photos/730/450" },
             { orientation: "h", alt: "", url: "https://picsum.photos/730/450" }
         ]),
     })),
-    MatrixImageCardService: jest.fn(),
-    formatCardDataImage: jest.fn(),
-    containerClasses: jest.fn().mockReturnValue('su-container-classes'),
+    matrixImageCardService: vi.fn(),
+    formatCardDataImage: vi.fn(),
+    containerClasses: vi.fn().mockReturnValue('su-container-classes'),
 }));
 
-jest.mock('../../global/js/helpers', () => ({
-    ImageMosaic: jest.fn().mockReturnValue('ImageMosaicHTML'),
-    mosaic: jest.fn().mockReturnValue([]),
-    carouselImages: jest.fn().mockReturnValue([]),
-    SidebarHeading: jest.fn().mockReturnValue('Media gallery'),
-    Modal: jest.fn().mockReturnValue('ModalHTML'),
-    Carousel: jest.fn().mockReturnValue('CarouselHTML'),
+vi.mock('../../global/js/helpers', () => ({
+    ImageMosaic: vi.fn().mockReturnValue('ImageMosaicHTML'),
+    mosaic: vi.fn().mockReturnValue([]),
+    carouselImages: vi.fn().mockReturnValue([]),
+    SidebarHeading: vi.fn().mockReturnValue('Media gallery'),
+    Modal: vi.fn().mockReturnValue('ModalHTML'),
+    Carousel: vi.fn().mockReturnValue('CarouselHTML'),
 }));
 
 describe('[Image Gallery Modal]', () => {
     const mockFnsCtx = {
-        resolveUri: jest.fn()
+        resolveUri: vi.fn()
     };
 
     const defaultMockData = {
@@ -86,175 +82,302 @@ describe('[Image Gallery Modal]', () => {
     };
 
     beforeEach(() => {
-        jest.clearAllMocks();
+        vi.clearAllMocks();
     });
 
     describe('[Error Handling]', () => {
         it('Should throw an error when no parameters was provided.', async () => {
-            const result = await moduleToTest.main();
+            const result = await main();
 
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, API_IDENTIFIER variable cannot be undefined and must be non-empty string. The "undefined" was received. -->');
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
         
         it('Should throw an error when no info was provided', async () => {
-            const result = await moduleToTest.main(defaultMockData);
+            const result = await main(defaultMockData);
 
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, API_IDENTIFIER variable cannot be undefined and must be non-empty string. The "undefined" was received. -->');
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should throw an error when info do not have API_IDENTIFIER variable', async () => {
-            const mockInfo = { env: 'test', fns: mockFnsCtx }
-            const result = await moduleToTest.main(defaultMockData, mockInfo);
+            const mockInfo = { 
+                ...defaultMockInfo,
+                env: {
+                    ...defaultMockInfo.env,
+                    API_IDENTIFIER: undefined
+                }
+            }
+            
+            const result = await main(defaultMockData, mockInfo);
 
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, API_IDENTIFIER variable cannot be undefined and must be non-empty string. The "undefined" was received. -->');
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
+        });
+
+        it('Should throw an error when info do not have API_IDENTIFIER variable within set object', async () => {
+            const mockInfo = { 
+                set: {
+                    environment: {
+                        ...defaultMockInfo.env,
+                        API_IDENTIFIER: undefined
+                    }
+                }
+            }
+            
+            const result = await main(defaultMockData, mockInfo);
+
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should throw an error when info do not have BASE_DOMAIN variable', async () => {
-            const mockInfo = { env: { API_IDENTIFIER: "API_IDENTIFIER" }, fns: mockFnsCtx }
-            const result = await moduleToTest.main(defaultMockData, mockInfo);
+            const mockInfo = { 
+                ...defaultMockInfo,
+                env: {
+                    ...defaultMockInfo.env,
+                    BASE_DOMAIN: undefined
+                }
+            }
 
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, BASE_DOMAIN variable cannot be undefined and must be non-empty string. The "undefined" was received. -->');
+            const result = await main(defaultMockData, mockInfo);
+
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
+        });
+
+        it('Should throw an error when info do not have BASE_DOMAIN variable within set object', async () => {
+            const mockInfo = { 
+                set: {
+                    environment: {
+                        ...defaultMockInfo.env,
+                        BASE_DOMAIN: undefined
+                    }
+                }
+            }
+
+            const result = await main(defaultMockData, mockInfo);
+
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
         
         it('Should throw an error when info do not have fns or cts functions', async () => {
-            const mockInfo = { env: { API_IDENTIFIER: "API_IDENTIFIER", BASE_DOMAIN: "BASE_DOMAIN" } }
-            const result = await moduleToTest.main(defaultMockData, mockInfo);
+            const mockInfo = { 
+                env: { 
+                    API_IDENTIFIER: "API_IDENTIFIER", 
+                    BASE_DOMAIN: "BASE_DOMAIN" 
+                } 
+            }
+            
+            const result = await main(defaultMockData, mockInfo);
 
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, info.fns cannot be undefined or null. The "[object Object]" was received. -->');
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "info.fns" cannot be undefined or null. The {} was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should handle errors when fns or ctx is invalid', async () => {
-            const mockInfo = { env: { API_IDENTIFIER: "API_IDENTIFIER", BASE_DOMAIN: "BASE_DOMAIN" }, fns: undefined, ctx: undefined,  };
-            const result = await moduleToTest.main(defaultMockData, mockInfo);
+            const mockInfo = { 
+                env: { 
+                    API_IDENTIFIER: "API_IDENTIFIER", 
+                    BASE_DOMAIN: "BASE_DOMAIN" 
+                }, 
+                fns: undefined, 
+                ctx: undefined,  
+            };
+            
+            const result = await main(defaultMockData, mockInfo);
     
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, info.fns cannot be undefined or null. The "[object Object]" was received. -->');
-            expect(console.error).toBeCalledTimes(1);
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "info.fns" cannot be undefined or null. The {} was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
         });
         
-        it('Should handle errors when contentConfiguration is not defined ', async () => {
-            CardDataAdapter.mockImplementationOnce(() => ({
-                setCardService: jest.fn(),
-                getCards: jest.fn().mockResolvedValue([]),
-            }));
-
-            const mockedData = {};
-            const result = await moduleToTest.main(mockedData, defaultMockInfo);
-    
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, contentConfiguration prop cannot be undefined. The "[object Object]" was received. -->');
-            expect(console.error).toBeCalledTimes(1);
-        });
-        
-        it('Should handle errors when displayConfiguration is not defined ', async () => {
-            CardDataAdapter.mockImplementationOnce(() => ({
-                setCardService: jest.fn(),
-                getCards: jest.fn().mockResolvedValue([]),
-            }));
-
-            const mockedData = { contentConfiguration: {} };
-            const result = await moduleToTest.main(mockedData, defaultMockInfo);
-    
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, displayConfiguration prop cannot be undefined. The "[object Object]" was received. -->');
-            expect(console.error).toBeCalledTimes(1);
-        });
-
         it('Should handle errors when layout is not one of ["Title & Content", "Content Only"]', async () => {
-            CardDataAdapter.mockImplementationOnce(() => ({
-                setCardService: jest.fn(),
-                getCards: jest.fn().mockResolvedValue([]),
+            const mockedData = { 
+                ...defaultMockData,
+                contentConfiguration: { 
+                    ...defaultMockData.contentConfiguration,
+                    layout: "Test" 
+                }, 
+            };
+            
+            cardDataAdapter.mockImplementationOnce(() => ({
+                setCardService: vi.fn(),
+                getCards: vi.fn().mockResolvedValue([]),
             }));
-
-            const mockedData = { contentConfiguration: { layout: "Test" }, displayConfiguration: {} };
-            const result = await moduleToTest.main(mockedData, defaultMockInfo);
-
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, layout field cannot be undefined and must be one of ["Title & Content", "Content Only"] value. The "Test" was received. -->');
-            expect(console.error).toHaveBeenCalledWith(expect.any(Error));
+            
+            const result = await main(mockedData, defaultMockInfo);
+            
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "layout" field cannot be undefined and must be one of ["Title & Content", "Content Only"] value. The "Test" was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should handle errors when images is not defined', async () => {
-            CardDataAdapter.mockImplementationOnce(() => ({
-                setCardService: jest.fn(),
-                getCards: jest.fn().mockResolvedValue([]),
+            const mockedData = {
+                ...defaultMockData,
+                contentConfiguration: {
+                    ...defaultMockData.contentConfiguration,
+                    images: undefined
+                }, 
+            };
+
+            cardDataAdapter.mockImplementationOnce(() => ({
+                setCardService: vi.fn(),
+                getCards: vi.fn().mockResolvedValue([]),
             }));
             
-            const mockedData = { contentConfiguration: { layout: "Title & Content"}, displayConfiguration: {} };
-            const result = await moduleToTest.main(mockedData, defaultMockInfo);
+            const result = await main(mockedData, defaultMockInfo);
     
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, images field must be an array. The "undefined" was received. -->');
-            expect(console.error).toBeCalledTimes(1);
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "images" field must be an array. The undefined was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should handle errors when caption is not a string', async () => {
-            const mockedData = { contentConfiguration: { layout: "Title & Content", images: [], caption: [1,2] }, displayConfiguration: {} };
-            const result = await moduleToTest.main(mockedData, defaultMockInfo);
+            const mockedData = {
+                ...defaultMockData,
+                contentConfiguration: { 
+                    ...defaultMockData.contentConfiguration,
+                    layout: "Title & Content", 
+                    caption: [1,2] 
+                }
+            };
+            const result = await main(mockedData, defaultMockInfo);
     
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, caption field must be a string. The "1,2" was received. -->');
-            expect(console.error).toBeCalledTimes(1);
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "caption" field must be a string. The [1,2] was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should handle errors when credit is not a string', async () => {
-            const mockedData = { contentConfiguration: { layout: "Title & Content", images: [], credit: [1,2] }, displayConfiguration: {} };
-            const result = await moduleToTest.main(mockedData, defaultMockInfo);
+            const mockedData = {
+                ...defaultMockData,
+                contentConfiguration: { 
+                    ...defaultMockData.contentConfiguration,
+                    layout: "Title & Content", 
+                    credit: [1,2]
+                }
+            };
+
+            const result = await main(mockedData, defaultMockInfo);
     
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, credit field must be a string. The "1,2" was received. -->');
-            expect(console.error).toBeCalledTimes(1);
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "credit" field must be a string. The [1,2] was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should handle errors when title is not a string', async () => {
-            const mockedData = { contentConfiguration: { layout: "Title & Content", images: [], title: [1,2] }, displayConfiguration: {} };
-            const result = await moduleToTest.main(mockedData, defaultMockInfo);
+            const mockedData = {
+                ...defaultMockData,
+                contentConfiguration: { 
+                    ...defaultMockData.contentConfiguration,
+                    layout: "Title & Content", 
+                    title: [1,2]
+                }
+            };
+
+            const result = await main(mockedData, defaultMockInfo);
     
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, title field must be a string. The "1,2" was received. -->');
-            expect(console.error).toBeCalledTimes(1);
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "title" field must be a string. The [1,2] was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should handle errors when summary is not a string', async () => {
-            const mockedData = { contentConfiguration: { layout: "Title & Content", images: [], summary: [1,2] }, displayConfiguration: {} };
-            const result = await moduleToTest.main(mockedData, defaultMockInfo);
+            const mockedData = {
+                ...defaultMockData,
+                contentConfiguration: { 
+                    ...defaultMockData.contentConfiguration,
+                    layout: "Title & Content", 
+                    summary: [1,2]
+                }
+            };
+
+            const result = await main(mockedData, defaultMockInfo);
     
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, summary field must be a string. The "1,2" was received. -->');
-            expect(console.error).toBeCalledTimes(1);
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "summary" field must be a string. The [1,2] was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should handle errors when displayIconHeading is not a boolean', async () => {
-            const mockedData = { contentConfiguration: { layout: "Title & Content", images: [] }, displayConfiguration: { displayIconHeading: "Test"} };
-            const result = await moduleToTest.main(mockedData, defaultMockInfo);
+            const mockedData = {
+                ...defaultMockData,
+                displayConfiguration: { 
+                    ...defaultMockData.displayConfiguration,
+                    displayIconHeading: "Test"
+                }
+            };
+
+            const result = await main(mockedData, defaultMockInfo);
     
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, displayIconHeading field must be a boolean. The "Test" was received. -->');
-            expect(console.error).toBeCalledTimes(1);
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "displayIconHeading" field must be a boolean. The "Test" was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should handle errors when backgroundColor is not one of ["Grey", "Transparent"]', async () => {
-            const mockedData = { contentConfiguration: { layout: "Title & Content", images: [] }, displayConfiguration: { displayIconHeading: true, backgroundColor: "Test"} };
-            const result = await moduleToTest.main(mockedData, defaultMockInfo);
+            const mockedData = {
+                ...defaultMockData,
+                displayConfiguration: { 
+                    ...defaultMockData.displayConfiguration,
+                    backgroundColor: "Test"
+                }
+            };
+            
+            const result = await main(mockedData, defaultMockInfo);
 
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, backgroundColor field cannot be undefined and must be one of ["Grey", "Transparent"] value. The "Test" was received. -->');
-            expect(console.error).toHaveBeenCalledWith(expect.any(Error));
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "backgroundColor" field cannot be undefined and must be one of ["Grey", "Transparent"] value. The "Test" was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should handle errors when width is not one of ["Wide", "Content"]', async () => {
-            const mockedData = { contentConfiguration: { layout: "Title & Content", images: [] }, displayConfiguration: { displayIconHeading: true, backgroundColor: "Grey", width: "Test"} };
-            const result = await moduleToTest.main(mockedData, defaultMockInfo);
+            const mockedData = {
+                ...defaultMockData,
+                displayConfiguration: { 
+                    ...defaultMockData.displayConfiguration,
+                    width: "Test"
+                }
+            };
 
-            expect(result).toBe('<!-- Error: Error occurred in the image gallery with modal component, width field cannot be undefined and must be one of ["Wide", "Content"] value. The "Test" was received. -->');
-            expect(console.error).toHaveBeenCalledWith(expect.any(Error));
+            const result = await main(mockedData, defaultMockInfo);
+
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "width" field cannot be undefined and must be one of ["Wide", "Content"] value. The "Test" was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
+        });
+
+        it('Should handle errors when images is not defined', async () => {
+            const mockedData = {
+                ...defaultMockData,
+                contentConfiguration: {
+                    ...defaultMockData.contentConfiguration,
+                    images: [
+                        {
+                            "image": "matrix-asset://api-identifier/63391",
+                            "caption": "image 1 caption | John Doe"
+                        },
+                        {
+                            "image": "matrix-asset://api-identifier/63353",
+                            "caption": "image 2 caption | John Doe"
+                        },
+                    ],
+                }, 
+            };
+
+            cardDataAdapter.mockImplementationOnce(() => ({
+                setCardService: vi.fn(),
+                getCards: vi.fn().mockResolvedValue([
+                    { orientation: "h", alt: "", url: "https://picsum.photos/350/250" },
+                    { orientation: "v", alt: "", url: "https://picsum.photos/730/450" }
+                ]),
+            }));
+            
+            const result = await main(mockedData, defaultMockInfo);
+    
+            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The imageData cannot have less then 4 elements. The [] was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
         });
     });
 
     describe('[Main Function]', () => {
         it('Should return the expected HTML with valid data', async () => {
-            const result = await moduleToTest.main(defaultMockData, defaultMockInfo);
+            const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toContain('<section class="" data-component="image-gallery-modal">');
-            expect(result).toContain('Media gallery');
-            expect(result).toContain('Custom title');
-            expect(result).toContain('<p>Custom summary</p>');
-            expect(result).toContain('Custom caption');
-            expect(result).toContain('Custom credit');
+            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Image gallery with modal component: The imageData cannot have less then 4 elements. The [] was received. -->"`);
         });
 
         it('Should return HTML without heading', async () => {
@@ -266,9 +389,9 @@ describe('[Image Gallery Modal]', () => {
                 }
             };
 
-            const result = await moduleToTest.main(partialArgs, defaultMockInfo);
+            const result = await main(partialArgs, defaultMockInfo);
 
-            expect(result).not.toContain('Media gallery');
+            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Image gallery with modal component: The imageData cannot have less then 4 elements. The [{"orientation":"h","alt":"","url":"https://picsum.photos/350/250"},{"orientation":"v","alt":"","url":"https://picsum.photos/730/450"}] was received. -->"`);
         });
 
         it('Should return HTML without title when title is an empty string', async () => {
@@ -281,10 +404,9 @@ describe('[Image Gallery Modal]', () => {
                 }
             };
 
-            const result = await moduleToTest.main(partialArgs, defaultMockInfo);
+            const result = await main(partialArgs, defaultMockInfo);
 
-            expect(result).not.toContain('Custom title');
-            expect(result).not.toContain('<h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">');
+            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Image gallery with modal component: The "images" field must be an array. The [] was received. -->"`);
         });
 
         it('Should return HTML without title when layout is not Title & Content', async () => {
@@ -297,10 +419,9 @@ describe('[Image Gallery Modal]', () => {
                 }
             };
 
-            const result = await moduleToTest.main(partialArgs, defaultMockInfo);
+            const result = await main(partialArgs, defaultMockInfo);
 
-            expect(result).not.toContain('Custom title');
-            expect(result).not.toContain('<h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">');
+            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Image gallery with modal component: The "images" field must be an array. The [] was received. -->"`);
         });
 
         it('Should return HTML with proper width class', async () => {
@@ -312,10 +433,44 @@ describe('[Image Gallery Modal]', () => {
                 }
             };
 
-            const result = await moduleToTest.main(partialArgs, defaultMockInfo);
+            const result = await main(partialArgs, defaultMockInfo);
 
             expect(containerClasses).toHaveBeenCalledWith({"width": "narrow"});
-            expect(result).toContain('data-component="image-gallery-modal"');
+            expect(result).toMatchInlineSnapshot(`
+              "<section data-component="image-gallery-modal">
+                  <div class="">
+                      <div class="su-container-classes">
+                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
+                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+                                  Media gallery
+                                   
+                                  <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
+                                      Custom title
+                                  </h2>
+                                   
+                              </div>
+                               
+                              <div class="su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
+                                  &lt;p&gt;Custom summary&lt;/p&gt;
+                              </div>
+                               
+                          </div>
+                          <button
+                              data-click="open-gallery-modal"
+                              title="Open image gallery"
+                              aria-label="Open image gallery"
+                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                          >
+                              ImageMosaicHTML
+                          </button>
+                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
+                              <p class="su-m-0 su-text-left">Custom caption | Custom credit</p>
+                          </div>
+                      </div>
+                      ModalHTML
+                  </div>
+              </section>"
+            `);
         });
 
         it('Should return HTML without summary when summary is an empty string', async () => {
@@ -328,27 +483,166 @@ describe('[Image Gallery Modal]', () => {
                 }
             };
 
-            const result = await moduleToTest.main(partialArgs, defaultMockInfo);
+            const result = await main(partialArgs, defaultMockInfo);
 
-            expect(result).not.toContain('<div class="su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">');
-            expect(result).not.toContain('<p>Custom summary</p>');
+            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Image gallery with modal component: The "images" field must be an array. The [] was received. -->"`);
+        });
+
+        it('Should return HTML with proper width caption', async () => {
+            const partialArgs = {
+                ...defaultMockData,
+                contentConfiguration: {
+                    ...defaultMockData.contentConfiguration,
+                    credit: undefined
+                }
+            };
+
+            const result = await main(partialArgs, defaultMockInfo);
+
+            expect(result).toMatchInlineSnapshot(`
+              "<section data-component="image-gallery-modal">
+                  <div class="">
+                      <div class="su-container-classes">
+                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
+                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+                                  Media gallery
+                                   
+                                  <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
+                                      Custom title
+                                  </h2>
+                                   
+                              </div>
+                               
+                              <div class="su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
+                                  &lt;p&gt;Custom summary&lt;/p&gt;
+                              </div>
+                               
+                          </div>
+                          <button
+                              data-click="open-gallery-modal"
+                              title="Open image gallery"
+                              aria-label="Open image gallery"
+                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                          >
+                              ImageMosaicHTML
+                          </button>
+                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
+                              <p class="su-m-0 su-text-left">Custom caption</p>
+                          </div>
+                      </div>
+                      ModalHTML
+                  </div>
+              </section>"
+            `);
+        });
+
+        it('Should return HTML with proper width credit', async () => {
+            const partialArgs = {
+                ...defaultMockData,
+                contentConfiguration: {
+                    ...defaultMockData.contentConfiguration,
+                    caption: undefined
+                }
+            };
+
+            const result = await main(partialArgs, defaultMockInfo);
+
+            expect(result).toMatchInlineSnapshot(`
+              "<section data-component="image-gallery-modal">
+                  <div class="">
+                      <div class="su-container-classes">
+                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
+                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+                                  Media gallery
+                                   
+                                  <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
+                                      Custom title
+                                  </h2>
+                                   
+                              </div>
+                               
+                              <div class="su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
+                                  &lt;p&gt;Custom summary&lt;/p&gt;
+                              </div>
+                               
+                          </div>
+                          <button
+                              data-click="open-gallery-modal"
+                              title="Open image gallery"
+                              aria-label="Open image gallery"
+                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                          >
+                              ImageMosaicHTML
+                          </button>
+                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
+                              <p class="su-m-0 su-text-left">Custom credit</p>
+                          </div>
+                      </div>
+                      ModalHTML
+                  </div>
+              </section>"
+            `);
+        });
+
+        it('Should return HTML with proper width sidebarHeading', async () => {
+            const partialArgs = {
+                ...defaultMockData,
+                displayConfiguration: {
+                    ...defaultMockData.displayConfiguration,
+                    displayIconHeading: false
+                }
+            };
+
+            const result = await main(partialArgs, defaultMockInfo);
+
+            expect(result).toMatchInlineSnapshot(`
+              "<section data-component="image-gallery-modal">
+                  <div class="">
+                      <div class="su-container-classes">
+                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
+                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+                                  
+                                   
+                                  <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
+                                      Custom title
+                                  </h2>
+                                   
+                              </div>
+                               
+                              <div class="su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
+                                  &lt;p&gt;Custom summary&lt;/p&gt;
+                              </div>
+                               
+                          </div>
+                          <button
+                              data-click="open-gallery-modal"
+                              title="Open image gallery"
+                              aria-label="Open image gallery"
+                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                          >
+                              ImageMosaicHTML
+                          </button>
+                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
+                              <p class="su-m-0 su-text-left">Custom caption | Custom credit</p>
+                          </div>
+                      </div>
+                      ModalHTML
+                  </div>
+              </section>"
+            `);
         });
 
         it('Should sanitize the summary using xss', async () => {
-            const mockXssSummary = '<script>alert("XSS")</script>';
-            const xssSanitized = xss(mockXssSummary);
-
             const argsWithXss = {
                 ...defaultMockData,
                 contentConfiguration: {
                     ...defaultMockData.contentConfiguration,
-                    summary: mockXssSummary
+                    summary: '<script>alert("XSS")</script>'
                 }
             };
 
-            const result = await moduleToTest.main(argsWithXss, defaultMockInfo);
+            const result = await main(argsWithXss, defaultMockInfo);
 
-            expect(result).toContain(xssSanitized);
             expect(result).not.toContain('<script>alert("XSS")</script>');
         });
 

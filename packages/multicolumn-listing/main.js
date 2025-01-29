@@ -1,116 +1,113 @@
 import hash from "object-hash";
-import { CardDataAdapter, FunnelbackCardService, MatrixCardService, linkedHeadingService, multicolumnGrid, containerClasses } from "../../global/js/utils";
-import {Card, Modal, EmbedVideo, LinkedHeading } from '../../global/js/helpers';
+import multicolumnListingTemplate from './multicolumn-listing.hbs';
+import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid, containerClasses } from "../../global/js/utils";
+import { Card, Modal, EmbedVideo, LinkedHeading } from '../../global/js/helpers';
 
 export default {
     async main(args, info) {
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
+        const { source, searchQuery, searchMaxCards, cards } = args?.contentConfiguration || {};
+        const { displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
 
         // Check for environment vars
         try {
             if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, FB_JSON_URL variable cannot be undefined and must be non-empty string. The "${FB_JSON_URL}" was received.`
+                    `The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(FB_JSON_URL)} was received.`
                 );
             }
             if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, API_IDENTIFIER variable cannot be undefined and must be non-empty string. The "${API_IDENTIFIER}" was received.`
+                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
                 );
             }
             if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, BASE_DOMAIN variable cannot be undefined and must be non-empty string. The "${BASE_DOMAIN}" was received.`
+                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
                 );
             }
             if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, info.fns cannot be undefined or null. The "${fnsCtx}" was received.`
+                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
                 );
             }
         } catch (er) {
-            console.error(er);
-            return `<!-- ${er} -->`;
+            console.error('Error occurred in the Multicolumn listing component: ', er);
+            return `<!-- Error occurred in the Multicolumn listing component: ${er.message} -->`;
         }
-
-        const { headingConfiguration={}, contentConfiguration: { source, searchQuery, searchMaxCards }={}, displayConfiguration: { displayThumbnails, displayDescriptions }={} } = args || {}
 
         // Check manifest fields
         try {
-            if (!args.contentConfiguration) {
+            if (title && typeof title !== 'string') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, contentConfiguration prop cannot be undefined. The "${args}" was received.`
+                    `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
                 );
             }
-            if (!args.headingConfiguration) {
+            if (ctaUrl && typeof ctaUrl !== 'string') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, headingConfiguration prop cannot be undefined. The "${args}" was received.`
+                    `The "ctaUrl" field must be a string. The ${JSON.stringify(ctaUrl)} was received.`
                 );
             }
-            if (!args.displayConfiguration) {
+            if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, displayConfiguration prop cannot be undefined. The "${args}" was received.`
+                    `The "ctaManualUrl" field must be a string. The ${JSON.stringify(ctaManualUrl)} was received.`
                 );
             }
-            if (args.headingConfiguration.title && typeof args.headingConfiguration.title !== 'string') {
+            if (ctaText && typeof ctaText !== 'string') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, title field must be a string. The "${args.headingConfiguration.title}" was received.`
+                    `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
                 );
             }
-            if (args.headingConfiguration.ctaUrl && typeof args.headingConfiguration.ctaUrl !== 'string') {
+            if (ctaNewWindow && typeof ctaNewWindow !== 'boolean') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, ctaUrl field must be a string. The "${args.headingConfiguration.ctaUrl}" was received.`
+                    `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
+                );
+            } 
+            if (!['Search', 'Select'].includes(source)) {
+                throw new Error(
+                    `The "source" field cannot be undefined and must be one of ['Search', 'Select'] value, ${JSON.stringify(source)} was received.`
                 );
             }
-            if (args.headingConfiguration.ctaManualUrl && typeof args.headingConfiguration.ctaManualUrl !== 'string') {
+            if (source === 'Search' && (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?')) {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, ctaManualUrl field must be a string. The "${args.headingConfiguration.ctaManualUrl}" was received.`
+                    `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
                 );
             }
-            if (args.headingConfiguration.ctaText && typeof args.headingConfiguration.ctaText !== 'string') {
+            if (source === 'Search' && (typeof searchMaxCards !== 'number' || searchMaxCards  < 2 || searchMaxCards > 3)) {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, ctaText field must be a string. The "${args.headingConfiguration.ctaText}" was received.`
+                    `The "searchMaxCards" field cannot be undefined and must be a number between 2 and 3. The ${JSON.stringify(searchMaxCards)} was received.`
                 );
             }
-            if (typeof args.headingConfiguration.ctaNewWindow !== 'boolean') {
+            if (source === 'Select' && typeof cards !== 'object') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, ctaNewWindow field must be a boolean. The "${args.headingConfiguration.ctaNewWindow}" was received.`
+                    `The "cards" field must be an array. The ${JSON.stringify(cards)} was received.`
                 );
             }
-            if (!args.contentConfiguration.source) {
+            if (displayDescriptions && typeof displayDescriptions !== 'boolean') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, source field cannot be undefined and must be one of ['Search', 'Select'] value, "${args.contentConfiguration.source}" was received`
-                );
-            }   
-            if (typeof args.contentConfiguration.source !== 'string' || !['Search', 'Select'].includes(args.contentConfiguration.source)) {
-                throw new Error(
-                    `Error occurred in the multicolumn content component, source field cannot be undefined and must be one of ['Search', 'Select'] value, "${args.contentConfiguration.source}" was received`
+                    `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
                 );
             }
-            if (typeof args.displayConfiguration.displayDescriptions !== 'boolean') {
+            if (displayThumbnails && typeof displayThumbnails !== 'boolean') {
                 throw new Error(
-                    `Error occurred in the multicolumn content component, displayDescriptions field must be a boolean. The "${args.displayConfiguration.displayDescriptions}" was received.`
-                );
-            }
-            if (typeof args.displayConfiguration.displayThumbnails !== 'boolean') {
-                throw new Error(
-                    `Error occurred in the multicolumn content component, displayThumbnails field must be a boolean. The "${args.displayConfiguration.displayThumbnails}" was received.`
+                    `The "displayThumbnails" field must be a boolean. The ${JSON.stringify(displayThumbnails)} was received.`
                 );
             }
         } catch (er) {
-            console.error(er);
-            return `<!-- ${er} -->`;
+            console.error('Error occurred in the Multicolumn listing component: ', er);
+            return `<!-- Error occurred in the Multicolumn listing component: ${er.message} -->`;
         }
 
 
-        const adapter = new CardDataAdapter();
+        const adapter = new cardDataAdapter();
         let data = null;
 
         if (source.toLowerCase() === "search") {
             // compose and fetch the FB search results
             const query = searchQuery;
-            const service = new FunnelbackCardService({ FB_JSON_URL, query });
+            const service = new funnelbackCardService({ FB_JSON_URL, query });
 
             adapter.setCardService(service);
 
@@ -123,7 +120,7 @@ export default {
             const { cards } = args.contentConfiguration;
 
             // Create our service
-            const service = new MatrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
+            const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
 
             // Set our card service
             adapter.setCardService(service);
@@ -135,9 +132,8 @@ export default {
         // Resolve the URI for the section heading link
         const headingData = await linkedHeadingService(
             fnsCtx,
-            headingConfiguration
+            { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow }
         );
-
 
         const cardsMarkup = [];
 
@@ -176,17 +172,14 @@ export default {
             ? "has-title"
             : "has-no-title";
 
+        const componentData = {
+            classes: containerClasses({width: "large"}),
+            componentTitleStateClass,
+            headingData: LinkedHeading(headingData),
+            multicolumnGrid: multicolumnGrid(cardsMarkup, true),
+            cardModal: cardModal.join('')
+        };
 
-        return `
-        <section data-component="multicolumn-listing">
-            <div class="component-multicolumn-listing ${componentTitleStateClass}">
-                <div class="${containerClasses({width: "large"})}">    
-                    ${LinkedHeading(headingData)}
-                    ${multicolumnGrid(cardsMarkup, true)}
-                </div>
-            </div>
-            ${cardModal.join('')}
-        </section>
-        `
+        return multicolumnListingTemplate(componentData);
     }
 };

@@ -3,15 +3,20 @@
  */
 import '@testing-library/jest-dom';
 import { fireEvent } from '@testing-library/dom';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as imageGallery from './scripts';
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 
-jest.mock('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs', () => jest.fn().mockImplementation(() => ({
-    init: jest.fn(),
-    destroy: jest.fn(),
-})));
+vi.mock('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs', () => ({
+    default: vi.fn(() => ({
+      init: vi.fn(),
+      destroy: vi.fn(),
+    })),
+  }));
+  
+  
 
-const mockedError = jest.fn();
+const mockedError = vi.fn();
 console.error = mockedError;
 
 describe('[Image Gallery Modal][Client]', () => {
@@ -157,7 +162,7 @@ describe('[Image Gallery Modal][Client]', () => {
         };
     
         beforeEach(() => {
-            jest.clearAllMocks();
+            vi.clearAllMocks();
             document.body.innerHTML = '';
             setupGalleryDOM();
 
@@ -175,7 +180,7 @@ describe('[Image Gallery Modal][Client]', () => {
 
         it('Should initialize', () => {
             // Spy on the updateButtonLabel function
-            const _initSpy = jest.spyOn(imageGallery, '_modalInit');
+            const _initSpy = vi.spyOn(imageGallery, '_modalInit');
 
             // Simulate DOMContentLoaded event
             const event = new Event('DOMContentLoaded');

@@ -14,16 +14,18 @@ This repository contains a collection of edge components built with modern tools
 
 ## Table of Contents
 
--   [Getting Started](#getting-started)
--   [Project Structure](#project-structure)
--   [Scripts](#scripts)
-    -   [Reset](#reset)
-    -   [Linting](#linting)
-    -   [Testing](#testing)
-    -   [Build](#build)
-    -   [Development](#development)
--   [Contributing](#contributing)
--   [License](#license)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Scripts](#scripts)
+    - [Reset](#reset)
+    - [Linting](#linting)
+    - [Testing](#testing)
+    - [Build](#build)
+    - [Local development](#local-development)
+    - [Development](#development)
+    - [Version Management and other scripts](#version-management-and-other-scripts)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Getting started
 
@@ -71,9 +73,9 @@ Now you're ready to start working with the correct Node.js version!
 
 Make sure you have the following installed:
 
--   Node.js (v20.17.x or higher)
--   npm (v10.8.x or higher)
--   Zsh shell (for running the reset and post-build scripts)
+- Node.js (v20.17.x or higher)
+- npm (v10.8.x or higher)
+- Zsh shell (for running the reset and post-build scripts)
 
 ### Installation
 
@@ -88,12 +90,6 @@ Make sure you have the following installed:
 
     ```bash
     npm install
-    ```
-
-3. Install the DXP CLI for this version of npm:
-
-    ```bash
-    npm install --global @squiz/dxp-cli-next
     ```
 
 ### Environment Variables
@@ -112,19 +108,15 @@ Make sure your .env file is not included in version control, as it contains sens
 
 ### Usage
 
+#### Running separately
+
 1. Build components:
 
     ```bash
     npm run build
     ```
 
-2. Watch for changes (will automatically build when on save):
-
-    ```bash
-    npm run watch
-    ```
-
-3. Run local environment:
+2. Run local environment:
 
     Note that you need to export your local variables before running a local dxp.
 
@@ -134,36 +126,88 @@ Make sure your .env file is not included in version control, as it contains sens
 
     make sure that you have installed latest version (5.22.0 or higher)
 
+#### Running all at once
+
+1. Build components run watch and local environment:
+
+    ```bash
+    npm run dev
+    ```
+
 ## Project Structure
 
 ```
-packages/
-├── component-1/
-│   ├── main.js
-│   ├── styles.scss
-│   ├── manifest.json
-│   ├── scripts.js
-│   ├── preview-data.json
-│   ├── preview.html
-│   └── ...
-├── component-2/
-│   ├── main.js
-│   ├── styles.scss
-│   ├── manifest.json
-│   └── ...
 dist/
 ├── global/
 │   ├── bundle.js
-│   ├── bundle.css
-│   └── ...
+│   └── bundle.css
 ├── component-1/
 │   ├── main.js
 │   ├── manifest.json
 │   └── ...
-│...
+└── ...
+global/
+├── css/
+│   └── global.css
+├── js/
+│   ├── helpers/
+│   │   ├── helper-1/
+│   │   │   ├── helper.js
+│   │   │   └── index.js
+│   │   ├── helper-2/
+│   │   ├── helper-3/
+│   │   └── index.js
+│   ├── utils/
+│   │   ├── util-1/
+│   │   │   ├── util.js
+│   │   │   └── index.js
+│   │   ├── util-2/
+│   │   ├── util-3/
+│   │   └── index.js
+│   └── ...
+packages/
+├── component-1/
+│   ├── example-data/
+│   │   ├── preview.data.json
+│   │   └── ...
+│   ├── mocked-uris/
+│   │   ├── 123.json
+│   │   └── ...
+│   ├── previews/
+│   │   ├── basicstory.html
+│   │   ├── preview.html
+│   │   └── ...
+│   ├── component.hbs
+│   ├── main.js
+│   ├── main.spec.js
+│   ├── manifest.json
+│   ├── scripts.js
+│   ├── scripts.spec.js
+│   ├── styles.scss
+│   └── ...
+├── component-2/
+│   ├── example-data/
+│   │   ├── preview.data.json
+│   │   └── ...
+│   ├── mocked-uris/
+│   │   ├── 123.json
+│   │   └── ...
+│   ├── previews/
+│   │   ├── basicstory.html
+│   │   ├── preview.html
+│   │   └── ...
+│   ├── component.hbs
+│   ├── main.js
+│   ├── main.spec.js
+│   ├── manifest.json
+│   ├── scripts.js
+│   ├── scripts.spec.js
+│   ├── styles.scss
+│   └── ...
+└── ...
 ```
 
-Each component is developed as a self-contained module, with its own JavaScript, CSS/SCSS, and manifest files. The final build process bundles all components styles and front-end scripts in to one file for production.
+Each component is developed as a self-contained module, with its own Handlebars template, JavaScript, CSS/SCSS, and manifest files. The final build process bundles all components styles and front-end scripts in to one file for production.
 
 ## Scripts
 
@@ -213,24 +257,12 @@ npm run lint:cspell
 
 ### Testing
 
-Unit tests are run using Jest.
+Unit tests are run using vitest.
 
 #### Run all tests:
 
 ```bash
 npm run test
-```
-
-#### Run ESLint checks as part of testing:
-
-```bash
-npm run test:eslint
-```
-
-#### Run unit tests:
-
-```bash
-npm run test:unit
 ```
 
 ### Build
@@ -249,12 +281,6 @@ npm run build
 npm run build:component
 ```
 
-#### Insert inline assets after the build:
-
-```bash
-npm run build:insert
-```
-
 #### Build global assets like bundle.js and bundle.css:
 
 ```bash
@@ -262,6 +288,12 @@ npm run build:global
 ```
 
 ### Development
+
+#### To build components, watch for changes and local environment:
+
+```bash
+npm run dev
+```
 
 #### To watch for changes and automatically rebuild components:
 
@@ -272,8 +304,16 @@ npm run watch
 #### To start the development environment:
 
 ```bash
-dxp-next cmp dev-ui ./dist
+npm run dxp
 ```
+
+### Version Management and other scripts
+
+```bash
+npm run vermgmt
+```
+
+You can easily adjust the version of your components—whether you want to increase, decrease, or set a specific one. Plus, you can run a script to deploy them, making it simple to manage components in both the `packages` and `dist` locations.
 
 ## Contributing
 

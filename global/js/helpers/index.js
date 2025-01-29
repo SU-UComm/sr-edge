@@ -1,5 +1,7 @@
-export { Card, CardThumbnail, VerticalCard } from './Card';
-export { Carousel } from './Carousel';
+export { Card } from './Card';
+export { CardThumbnail } from './CardThumbnail';
+export { VerticalCard } from './VerticalCard';
+export * from './Carousel';
 export { EmbedVideo } from './EmbedVideo';
 export { ImageMosaic,  mosaic, carouselImages } from './ImageMosaic';
 export { LinkedHeading } from './LinkedHeading';

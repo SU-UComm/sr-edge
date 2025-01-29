@@ -4,14 +4,17 @@
 
 import '@testing-library/jest-dom';
 import { fireEvent } from '@testing-library/dom';
+import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
 import * as storiesCarousel from './scripts';
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 
-jest.mock('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs', () => jest.fn().mockImplementation(() => ({
-    init: jest.fn(),
-    destroy: jest.fn(),
-})));
-
+vi.mock('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs', () => ({
+    default: vi.fn(() => ({
+      init: vi.fn(),
+      destroy: vi.fn(),
+    })),
+}));
+  
 describe('[Stories Carousel][Client]', () => {
     let section, modal, openBtn, closeBtn, iframe;
 
@@ -28,7 +31,7 @@ describe('[Stories Carousel][Client]', () => {
 
     afterEach(() => {
         document.body.innerHTML = ''; // Clear DOM
-        jest.clearAllMocks();
+        vi.clearAllMocks();
     });
 
     describe('[DOMContentLoaded]', () => {
@@ -37,8 +40,8 @@ describe('[Stories Carousel][Client]', () => {
             section.setAttribute('data-component', 'stories-carousel');
             document.body.appendChild(section);
 
-            const _carouselInitSpy = jest.spyOn(storiesCarousel, '_carouselInit');
-            const _modalInitSpy = jest.spyOn(storiesCarousel, '_modalInit');
+            const _carouselInitSpy = vi.spyOn(storiesCarousel, '_carouselInit');
+            const _modalInitSpy = vi.spyOn(storiesCarousel, '_modalInit');
 
              // Simulate DOMContentLoaded event
              const event = new Event('DOMContentLoaded');
