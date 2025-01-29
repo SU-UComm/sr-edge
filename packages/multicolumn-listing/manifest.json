@@ -3,7 +3,7 @@
     "name": "multicolumn-listing",
     "type": "edge",
     "version": "4.0.0",
-    "namespace": "pnp-stanford-edge-components",
+    "namespace": "pnp-stanford-edge-components-hbs",
     "description": "",
     "displayName": "Multicolumn listing",
     "mainFunction": "main",

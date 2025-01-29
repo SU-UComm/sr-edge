@@ -3,7 +3,7 @@
     "name": "stories-carousel",
     "type": "edge",
     "version": "4.0.0",
-    "namespace": "pnp-stanford-edge-components",
+    "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Links to stories displayed as cards in a carousel.",
     "displayName": "Stories carousel",
     "mainFunction": "main",
