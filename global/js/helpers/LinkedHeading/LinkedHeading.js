@@ -24,14 +24,14 @@ export function LinkedHeading({
 }) {    
     return `
     ${title !== "" && title !== undefined ? `
-        <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13 ${className ? className : ''}">
+        <div class="su-component-line-heading su-flex su-flex-wrap su-items-center md:su-items-end su-gap-5 su-gap-x-13 md:su-gap-13 ${className ? className : ''}">
             <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white ${isAlwaysLight ? "su-text-white" : "su-text-black"}">
                 ${title}
             </h2>
             <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4" />
             ${ctaLink ? `
-            <a data-test="cta" href="${ctaLink}"${ctaNewWindow ? ' target="_blank"' : ''} class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white ${isAlwaysLight ? "su-text-white hocus:su-text-white/95 dark:hocus:su-text-white/95" : "su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"}">
-                <span class="su-flex su-gap-2 su-items-baseline">
+            <a data-test="cta" href="${ctaLink}"${ctaNewWindow ? ' target="_blank"' : ''} class="su-flex su-no-underline hover:su-underline hover:su-text-digital-red dark:hover:su-text-dark-mode-red su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 dark:su-text-white su-flex-nowrap su-gap-20 md:su-gap-13 su-align-baseline su-text-19 ${isAlwaysLight ? "su-text-white hocus:su-text-white/95 dark:hocus:su-text-white/95" : "su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"}">
+                <span class="su-flex su-gap-2 su-items-center">
                     <span>
                         ${ctaText} <span class="sr-only">${title}</span>
                     </span>
