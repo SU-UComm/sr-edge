@@ -1,4 +1,4 @@
-# Stanford University Component Service - Components at Edge
+# Stanford University Component Service - Components at Edge (Handlebars version)
 
 This repo holds the code for Stanford Report components migrated
 to Components at Edge. See the
