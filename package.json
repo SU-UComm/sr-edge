@@ -42,6 +42,7 @@
         "chokidar-cli": "^3.0.0",
         "concurrently": "^9.1.0",
         "cspell": "^8.3.2",
+        "decanter": "^7.3.1",
         "eslint": "^8.57.1",
         "globals": "^15.14.0",
         "handlebars": "^4.7.7",

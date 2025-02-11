@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-binary-expression */
 import { defineConfig } from 'vite';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
