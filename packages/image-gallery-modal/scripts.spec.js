@@ -71,13 +71,13 @@ describe('[Image Gallery Modal][Client]', () => {
                         </div>
                         <button data-click="open-gallery-modal" title="Open image gallery" aria-label="Open image gallery" class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]">
                             <article class="su-horizontal-image-first  su-relative">
-                                <img src="https://example.com/image.jpg" alt="" class="su-w-full su-h-full su-object-cover">
+                                <img src="https://picsum.photos/400/400" alt="" class="su-w-full su-h-full su-object-cover">
                             </article>
                             <article class="su-horizontal-image-second  su-relative">
-                                <img src="https://example.com/image.jpg" alt="Code on computer screen." class="su-w-full su-h-full su-object-cover">    
+                                <img src="https://picsum.photos/400/400" alt="Code on computer screen." class="su-w-full su-h-full su-object-cover">    
                             </article>
                             <article class="su-horizontal-image-third  su-relative">
-                                <img src="https://example.com/image.jpg" alt="" class="su-w-full su-h-full su-object-cover">
+                                <img src="https://picsum.photos/400/400" alt="" class="su-w-full su-h-full su-object-cover">
                             </article>
                         </button>
                         <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
@@ -94,7 +94,7 @@ describe('[Image Gallery Modal][Client]', () => {
                                             <div class="swiper-slide" lazy="true" role="group" aria-label="1 / 20">
                                                 <article class="c-carousel-image-slide has-caption">
                                                     <div class="c-carousel-image">
-                                                        <img src="https://example.com/image.jpg" alt="" loading="lazy">
+                                                        <img src="https://picsum.photos/400/400" alt="" loading="lazy">
                                                     </div>
                                                     <div class="c-carousel-caption">
                                                         <p>Graduating seniors participate in the Wacky Walk, an annual Stanford Commencement tradition. | Andrew Brodhead</p>
@@ -104,7 +104,7 @@ describe('[Image Gallery Modal][Client]', () => {
                                             <div class="swiper-slide" lazy="true" role="group" aria-label="2 / 20">
                                                 <article class="c-carousel-image-slide has-caption">
                                                     <div class="c-carousel-image">
-                                                        <img src="https://example.com/image.jpg" alt="Code on computer screen." loading="lazy">
+                                                        <img src="https://picsum.photos/400/400" alt="Code on computer screen." loading="lazy">
                                                     </div>
                                                     <div class="c-carousel-caption">
                                                         <p>Graduating seniors participate in the Wacky Walk, an annual Stanford Commencement tradition. | Andrew Brodhead</p>
@@ -114,7 +114,7 @@ describe('[Image Gallery Modal][Client]', () => {
                                             <div class="swiper-slide" lazy="true" role="group" aria-label="3 / 20">
                                                 <article class="c-carousel-image-slide has-caption">
                                                     <div class="c-carousel-image">
-                                                        <img src="https://example.com/image.jpg" alt="" loading="lazy">
+                                                        <img src="https://picsum.photos/400/400" alt="" loading="lazy">
                                                     </div>
                                                     <div class="c-carousel-caption">
                                                         <p>Graduating seniors participate in the Wacky Walk, an annual Stanford Commencement tradition. | Andrew Brodhead</p>
