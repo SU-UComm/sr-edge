@@ -1,153 +1,191 @@
 {
-  "$schema": "http://localhost:3000/schemas/v1.json#",
-  "name": "stories-carousel",
-  "type": "edge",
-  "version": "4.0.1",
-  "namespace": "pnp-stanford-edge-components-hbs",
-  "description": "Links to stories displayed as cards in a carousel.",
-  "displayName": "Stories carousel",
-  "mainFunction": "main",
-  "environment": [
-    {
-      "name": "NEWS_ARCHIVE_PATH",
-      "required": true
-    },
-    {
-      "name": "BASE_PATH",
-      "required": true
-    },
-    {
-      "name": "BASE_DOMAIN",
-      "required": true
-    },
-    {
-      "name": "API_IDENTIFIER",
-      "required": true
-    },
-    {
-      "name": "FB_JSON_URL",
-      "required": true
-    }
-  ],
-  "icon": {
-    "id": "view_carousel",
-    "color": {
-      "type": "enum",
-      "value": "red"
-    }
-  },
-  "functions": [
-    {
-      "name": "main",
-      "entry": "main.js",
-      "input": {
-        "type": "object",
-        "properties": {
-          "headingConfiguration": {
-            "title": "Section Heading Configuration",
-            "description": "The heading for the section, appearing before the carousel of cards. If the title is empty, the heading and call to action link will be hidden.",
-            "type": "object",
-            "required": [],
-            "properties": {
-              "title": {
-                "title": "Heading",
-                "type": "string",
-                "default": "Recent Stories"
-              },
-              "ctaUrl": {
-                "title": "Matrix Asset Link",
-                "type": "string",
-                "description": "Select an asset to link to. If this field is filled out, it will be used instead of the manual link",
-                "format": "matrix-asset-uri"
-              },
-              "ctaManualUrl": {
-                "title": "Manual Link",
-                "type": "string",
-                "description": "Enter the full URL, including https://"
-              },
-              "ctaText": {
-                "title": "Link text",
-                "type": "string",
-                "default": "View all"
-              },
-              "ctaNewWindow": {
-                "title": "Open link in a new window",
-                "type": "boolean",
-                "default": false
-              }
-            }
-          },
-          "contentConfiguration": {
-            "title": "Grid Content",
-            "description": "The cards to display in the carousel area of the component.",
-            "type": "object",
-            "required": [
-              "searchQuery"
-            ],
-            "properties": {
-              "searchQuery": {
-                "type": "string",
-                "title": "The Funnelback search query",
-                "default": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser=false&meta_taxonomyContentTypeText_not=Announcement+Leadership%20Messages&num_ranks=6"
-              }
-            }
-          }
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "stories-carousel",
+    "type": "edge",
+    "version": "4.0.1",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "Links to stories displayed as cards in a carousel.",
+    "displayName": "Stories carousel",
+    "mainFunction": "main",
+    "environment": [
+        {
+            "name": "NEWS_ARCHIVE_PATH",
+            "required": true
         },
-        "required": []
-      },
-      "output": {
-        "responseType": "html"
-      }
-    }
-  ],
-  "staticFiles": {
-    "locationRoot": "./"
-  },
-  "mockedUris": {
-    "matrix-asset://api-identifier/141464": {
-      "type": "file",
-      "path": "mocked-uris/141464.json"
-    }
-  },
-  "previews": {
-    "default": {
-      "functionData": {
-        "main": {
-          "inputData": {
-            "type": "file",
-            "path": "example-data/preview.data.json"
-          },
-          "wrapper": {
-            "path": "previews/preview.html"
-          }
+        {
+            "name": "BASE_PATH",
+            "required": true
+        },
+        {
+            "name": "BASE_DOMAIN",
+            "required": true
+        },
+        {
+            "name": "API_IDENTIFIER",
+            "required": true
+        },
+        {
+            "name": "FB_JSON_URL",
+            "required": true
         }
-      }
+    ],
+    "icon": {
+        "id": "view_carousel",
+        "color": {
+            "type": "enum",
+            "value": "red"
+        }
     },
-    "basicstory": {
-      "functionData": {
-        "main": {
-          "inputData": {
-            "type": "file",
-            "path": "example-data/preview.data.json"
-          },
-          "wrapper": {
-            "path": "previews/basicstory.html"
-          }
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "headingConfiguration": {
+                        "title": "Section Heading Configuration",
+                        "description": "The heading for the section, appearing before the carousel of cards. If the title is empty, the heading and call to action link will be hidden.",
+                        "type": "object",
+                        "required": [],
+                        "properties": {
+                            "title": {
+                                "title": "Heading",
+                                "type": "string",
+                                "default": "Recent Stories"
+                            },
+                            "ctaUrl": {
+                                "title": "Matrix Asset Link",
+                                "type": "string",
+                                "description": "Select an asset to link to. If this field is filled out, it will be used instead of the manual link",
+                                "format": "matrix-asset-uri"
+                            },
+                            "ctaManualUrl": {
+                                "title": "Manual Link",
+                                "type": "string",
+                                "description": "Enter the full URL, including https://"
+                            },
+                            "ctaText": {
+                                "title": "Link text",
+                                "type": "string",
+                                "default": "View all"
+                            },
+                            "ctaNewWindow": {
+                                "title": "Open link in a new window",
+                                "type": "boolean",
+                                "default": false
+                            }
+                        }
+                    },
+                    "contentConfiguration": {
+                        "title": "Grid Content",
+                        "description": "The cards to display in the carousel area of the component.",
+                        "type": "object",
+                        "required": ["searchQuery"],
+                        "properties": {
+                            "searchQuery": {
+                                "type": "string",
+                                "title": "The Funnelback search query",
+                                "default": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser=false&meta_taxonomyContentTypeText_not=Announcement+Leadership%20Messages&num_ranks=6"
+                            }
+                        }
+                    }
+                },
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
         }
-      }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
     },
-    "frontend": {
-      "functionData": {
-        "main": {
-          "inputData": {
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
             "type": "file",
-            "path": "example-data/preview.data.json"
-          },
-          "wrapper": {
-            "path": "previews/frontend.html"
-          }
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/141464": {
+            "type": "file",
+            "path": "mocked-uris/141464.json"
         }
-      }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        },
+        "frontend": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/frontend.html"
+                    }
+                }
+            }
+        }
     }
-  }
 }

@@ -2,11 +2,11 @@
 import { defineConfig } from 'vite';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { readdirSync, statSync } from 'fs';
+import { readdirSync, statSync, readFileSync } from 'fs';
 import process from 'process';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import handlebars from 'vite-plugin-handlebars';
-import helpers from './handlebars-helpers';
+import helpers from './global/hbs/helpers/helpers';
 import Handlebars from 'handlebars';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -23,21 +23,49 @@ function handlebarsPrecompile() {
         Handlebars.registerHelper(key, helpers[key]);
     });
 
+    const partials = {};
+    const globalHbsDir = resolve(__dirname, 'global', 'hbs', 'partials');
+    // Load partials from directories
+    const partialDirs = readdirSync(globalHbsDir);
+
+    partialDirs.forEach(partialName => {
+        const partialDir = resolve(globalHbsDir, partialName);
+        if (statSync(partialDir).isDirectory()) {
+            const partialPath = resolve(partialDir, `${partialName}.hbs`);
+            try {
+                const content = readFileSync(partialPath, 'utf8');
+                partials[partialName] = content;
+            } catch (e) {
+                console.error(`✗ Error loading partial ${partialName}:`, e.message);
+            }
+        }
+    });
+
     return {
         name: 'vite-plugin-handlebars-precompile',
+        enforce: 'pre',
         transform(src, id) {
             if (id.endsWith('.hbs')) {
                 const templateSpec = Handlebars.precompile(src);
+                // Helpers registration code
                 const helpersCode = Object.keys(helpers)
                     .map(
                         (key) =>
-                            `Handlebars.registerHelper('${key}', ${helpers[
-                                key
-                            ].toString()});`,
+                            `Handlebars.registerHelper('${key}', ${helpers[key].toString()});`,
                     )
                     .join('\n');
+
+                // Partials registration code
+                const partialsCode = Object.entries(partials)
+                    .map(([key, content]) => {
+                        const compiled = Handlebars.precompile(content);
+                        // Pass the compiled object directly to Handlebars.template
+                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled});`;
+                    })
+                    .join('\n');
+
                 return {
-                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\nexport default Handlebars.template(${templateSpec});`,
+                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\n${partialsCode}\nexport default Handlebars.template(${templateSpec});`,
                     map: null,
                 };
             }
@@ -85,7 +113,7 @@ export default defineConfig(() => {
         },
         plugins: [
             handlebars({
-                partialDirectory: resolve(__dirname, 'packages'),
+                partialDirectory: resolve(__dirname, 'global'),
             }),
             viteStaticCopy({
                 targets: filteredComponents.flatMap((component) => [

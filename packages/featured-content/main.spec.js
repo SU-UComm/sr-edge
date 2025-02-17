@@ -1,5 +1,5 @@
-import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService } from "../../global/js/utils";
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService } from "../../global/js/utils";
 import moduleToTest from './main';
 
 const { main } = moduleToTest;
@@ -14,44 +14,44 @@ vi.mock('../../global/js/utils', () => ({
             {
                 "title": "Inaugural Lecturer’s Award winners honored",
                 "description": ["Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education."],
-                "liveUrl": "https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford",
-                "imageUrl": ["https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford/image.jpg"],
+                "liveUrl": "https://example.com",
+                "imageUrl": ["https://picsum.photos/400/400"],
                 "videoUrl": "https://example.com",
                 "imageAlt": ["Image of Cathy Haas, Jamie Imam, Provost Jenny Martinez, Elizabeth Kessler, Hayes"],
                 "taxonomy": ["Awards, Honors & Appointments"],
-                "taxonomyUrl": ["https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford/"],
+                "taxonomyUrl": ["https://example.com/"],
                 "type": "Video",
                 "date": 1730073600000,
-                "taxonomyFeaturedUnitLandingPageUrl": ["https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford/"],
+                "taxonomyFeaturedUnitLandingPageUrl": ["https://example.com/"],
                 "taxonomyFeaturedUnitText": ["Office of the Vice Provost for Undergraduate Education"],
                 "isTeaser": ["false"]
             },
             {
                 "title": "Bass Fellows in Undergraduate Education announced",
                 "description": ["The Bass University Fellows in Undergraduate Education Program recognizes faculty for extraordinary contributions to undergraduate education."],
-                "liveUrl": "https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford",
-                "imageUrl": ["https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford/image.jpg"],
+                "liveUrl": "https://example.com",
+                "imageUrl": ["https://picsum.photos/400/400"],
                 "imageAlt": ["Main Quad as seen through arcade arch"],
                 "taxonomy": ["Awards, Honors & Appointments"],
-                "taxonomyUrl": ["https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford/"],
+                "taxonomyUrl": ["https://example.com/"],
                 "type": "News",
                 "date": 1730073600000,
-                "taxonomyFeaturedUnitLandingPageUrl": ["https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford/"],
+                "taxonomyFeaturedUnitLandingPageUrl": ["https://example.com/"],
                 "taxonomyFeaturedUnitText": ["Office of the Vice Provost for Undergraduate Education"],
                 "isTeaser": ["false"]
             },
             {
                 "title": "Inaugural Lecturer’s Award winners honored",
                 "description": ["Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education."],
-                "liveUrl": "https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford",
-                "imageUrl": ["https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford/image.jpg"],
+                "liveUrl": "https://example.com",
+                "imageUrl": ["https://picsum.photos/400/400"],
                 "videoUrl": "https://example.com",
                 "imageAlt": ["Image of Cathy Haas, Jamie Imam, Provost Jenny Martinez, Elizabeth Kessler, Hayes"],
                 "taxonomy": ["Awards, Honors & Appointments"],
-                "taxonomyUrl": ["https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford/"],
+                "taxonomyUrl": ["https://example.com/"],
                 "type": "Video",
                 "date": 1730073600000,
-                "taxonomyFeaturedUnitLandingPageUrl": ["https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford/"],
+                "taxonomyFeaturedUnitLandingPageUrl": ["https://example.com/"],
                 "taxonomyFeaturedUnitText": ["Office of the Vice Provost for Undergraduate Education"],
                 "isTeaser": ["false"]
             }

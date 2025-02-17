@@ -1,10 +1,15 @@
 node_modules
 dist
 lib
+__coverage__
 # export is used in the component exporter local export location to test without sending data to S3
 export
 coverage
 cdk.out
+
+# temp files
+temp-*
+*.temp
 
 # OS generated files #
 ######################

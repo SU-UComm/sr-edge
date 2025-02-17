@@ -168,7 +168,7 @@ describe('[Stories Carousel][Client]', () => {
                                                 <span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block su-aspect-[3/2]">
                                                     <img
                                                         class="su-absolute su-object-cover su-object-center su-size-full"
-                                                        src="https://example.com/image.jpg"
+                                                        src="https://picsum.photos/400/400"
                                                         alt="Open video Image of a young child distracting himself with a VR experience while getting a vaccine. in a modal"
                                                     />
                                                     <span class="*:su-w-[40px] su-absolute su-leading-none su-left-13 su-bottom-13 [&amp;>svg]:su-text-[4rem]">

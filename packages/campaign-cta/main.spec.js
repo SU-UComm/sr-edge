@@ -149,7 +149,7 @@ describe('[Campaign CTA]', () => {
         it('Should return the expected HTML with valid data', async () => {
             // Mocking basicAssetUri to return URL data
             basicAssetUri.mockResolvedValueOnce({ url: 'https://example.com' });
-            basicAssetUri.mockResolvedValueOnce({ url: 'https://example.com/image.jpg', attributes: { alt: 'Alt Text' } });
+            basicAssetUri.mockResolvedValueOnce({ url: 'https://picsum.photos/400/400', attributes: { alt: 'Alt Text' } });
 
             const result = await main(defaultMockData, defaultMockInfo);
 
@@ -167,7 +167,7 @@ describe('[Campaign CTA]', () => {
                           </a>
                           
                       </div>
-                      <img class="su-absolute su-object-cover su-size-full su-z-[1]" src="https://example.com/image.jpg" alt="" />
+                      <img class="su-absolute su-object-cover su-size-full su-z-[1]" src="https://picsum.photos/400/400" alt="" />
                       <div class="su-campaign-cta-gradient su-z-[1]"></div>
                   </div>
               </section>"
@@ -253,7 +253,7 @@ describe('[Campaign CTA]', () => {
         it('Should return HTML with empty alt attribute when attributes alt is missing', async () => {
             // Mocking basicAssetUri to return URL data
             basicAssetUri.mockResolvedValueOnce({ url: 'https://example.com' });
-            basicAssetUri.mockResolvedValueOnce({ url: 'https://example.com/image.jpg'});
+            basicAssetUri.mockResolvedValueOnce({ url: 'https://picsum.photos/400/400'});
 
             const result = await main(defaultMockData, defaultMockInfo);
 
@@ -271,7 +271,7 @@ describe('[Campaign CTA]', () => {
                           </a>
                           
                       </div>
-                      <img class="su-absolute su-object-cover su-size-full su-z-[1]" src="https://example.com/image.jpg" alt="" />
+                      <img class="su-absolute su-object-cover su-size-full su-z-[1]" src="https://picsum.photos/400/400" alt="" />
                       <div class="su-campaign-cta-gradient su-z-[1]"></div>
                   </div>
               </section>"
