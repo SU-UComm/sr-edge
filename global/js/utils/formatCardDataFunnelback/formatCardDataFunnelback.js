@@ -74,23 +74,23 @@ export function formatCardDataFunnelback({
     }
   
     return {
-        title,
-        description,
-        liveUrl,
-        imageUrl,
-        imageAlt,
-        taxonomy,
-        taxonomyUrl,
-        type,
-        videoUrl,
-        date,
-        authorDisplayName,
-        authorAvatar,
-        taxonomyFeaturedUnitLandingPageUrl,
-        taxonomyFeaturedUnitText,
-        isTeaser,
-        storySource,
+        title: Array.isArray(title) ? title[0] : title,
+        description: Array.isArray(description) ? description[0] : description,
+        liveUrl: Array.isArray(liveUrl) ? liveUrl[0] : liveUrl,
+        imageUrl: Array.isArray(imageUrl) ? imageUrl[0] : imageUrl,
+        imageAlt: Array.isArray(imageAlt) ? imageAlt[0] : imageAlt,
+        taxonomy: Array.isArray(taxonomy) ? taxonomy[0] : taxonomy,
+        taxonomyUrl: Array.isArray(taxonomyUrl) ? taxonomyUrl[0] : taxonomyUrl,
+        type: Array.isArray(type) ? type[0] : type,
+        videoUrl: Array.isArray(videoUrl) ? videoUrl[0] : videoUrl,
+        date: Array.isArray(date) ? date[0] : date,
+        authorDisplayName: Array.isArray(authorDisplayName) ? authorDisplayName[0] : authorDisplayName,
+        authorAvatar: Array.isArray(authorAvatar) ? authorAvatar[0] : authorAvatar,
+        taxonomyFeaturedUnitLandingPageUrl: Array.isArray(taxonomyFeaturedUnitLandingPageUrl) ? taxonomyFeaturedUnitLandingPageUrl[0] : taxonomyFeaturedUnitLandingPageUrl,
+        taxonomyFeaturedUnitText: Array.isArray(taxonomyFeaturedUnitText) ? taxonomyFeaturedUnitText[0] : taxonomyFeaturedUnitText,
+        isTeaser: Array.isArray(isTeaser) ? isTeaser[0] : isTeaser,
+        storySource: Array.isArray(storySource) ? storySource[0] : storySource,
     };
 }
-  
+
 export default formatCardDataFunnelback;

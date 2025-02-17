@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import { formatCardDataFunnelback } from "../formatCardDataFunnelback";
 
 export class funnelbackCardService {
