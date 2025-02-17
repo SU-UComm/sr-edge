@@ -149,6 +149,15 @@ dist/
 global/
 ├── css/
 │   └── global.css
+├── hbs/
+│   ├── helpers/
+│   │   └── helpers.js
+│   ├── partials/
+│   │   ├── partial-1/
+│   │   │   └── partial.hbs
+│   │   ├── partial-2/
+│   │   └── ...
+│   └── ...
 ├── js/
 │   ├── helpers/
 │   │   ├── helper-1/
@@ -156,6 +165,7 @@ global/
 │   │   │   └── index.js
 │   │   ├── helper-2/
 │   │   ├── helper-3/
+│   │   ├── ...
 │   │   └── index.js
 │   ├── utils/
 │   │   ├── util-1/
@@ -163,6 +173,7 @@ global/
 │   │   │   └── index.js
 │   │   ├── util-2/
 │   │   ├── util-3/
+│   │   ├── ...
 │   │   └── index.js
 │   └── ...
 packages/
