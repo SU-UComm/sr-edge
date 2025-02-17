@@ -49,7 +49,6 @@ export default {
 
         // Validating fields
         try {
-
             if (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?') {
                 throw new Error(
                     `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
@@ -145,7 +144,7 @@ export default {
             console.error('Error occurred in the Stories carousel component: ', er);
             return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
         }
-
+        
         const componentData = {
             classes: containerClasses({width: "large"}),
             id: uniqueClass,
