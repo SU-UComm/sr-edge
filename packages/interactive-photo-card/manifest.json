@@ -1,0 +1,120 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "interactive-photo-card",
+    "type": "edge",
+    "version": "4.0.1",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "2 side by side cards with 1 being a photo and 1 being a fact with the ability to flip the card over for additional information.",
+    "displayName": "Interactive Photo Card",
+    "mainFunction": "main",
+    "icon": {
+        "id": "cached",
+        "color": {
+            "type": "enum",
+            "value": "gray"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "title": "Title",
+                        "type": "string",
+                        "default": "Card title"
+                    },
+                    "eyebrow": {
+                        "title": "Eyebrow",
+                        "description": "This is the superheading above the title.",
+                        "type": "string",
+                        "default": "Eyebrow"
+                    },
+                    "content": {
+                        "title": "Content",
+                        "description": "This is the text that goes on the flip side of the content card.",
+                        "type": "FormattedText"
+                    },
+                    "image": {
+                        "title": "Image",
+                        "type": "string",
+                        "format": "matrix-asset-uri"
+                    },
+                    "imageAlignment": {
+                        "title": "Image Alignment",
+                        "type": "string",
+                        "default": "right",
+                        "enum": ["left", "right"]
+                    }
+                },
+                "required": ["title", "content", "image"]
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/99100": {
+            "type": "file",
+            "path": "mocked-uris/99100.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
