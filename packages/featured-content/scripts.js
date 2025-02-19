@@ -1,4 +1,12 @@
-// Globals 
+/**
+ * Globals variables 
+ * @constant {string} FEATURED_CONTENT_SELECTOR - Selector for the featured content section.
+ * @constant {string} FEATURED_CONTENT_HIDDEN_CLASS - CSS class to hide elements.
+ * @constant {string} FEATURED_CONTENT_MODAL_SELECTOR - Selector for the modal container.
+ * @constant {string} FEATURED_CONTENT_OPEN_MODAL_BTN - Selector for the button that opens the modal.
+ * @constant {string} FEATURED_CONTENT_CLOSE_MODAL_BTN - Selector for the button that closes the modal.
+ * @constant {string} FEATURED_CONTENT_MODAL_IFRAME - Selector for the modal iframe.
+ */
 export const FEATURED_CONTENT_SELECTOR = 'section[data-component="featured-content"]';
 export const FEATURED_CONTENT_HIDDEN_CLASS = 'su-hidden';
 export const FEATURED_CONTENT_MODAL_SELECTOR = 'div[data-modal="modal"]';
@@ -6,7 +14,10 @@ export const FEATURED_CONTENT_OPEN_MODAL_BTN = 'button[data-click="open-modal"]'
 export const FEATURED_CONTENT_CLOSE_MODAL_BTN = 'button[data-dismiss="modal"]';
 export const FEATURED_CONTENT_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
 
-// open modal by id
+/**
+ * Opens a modal by modifying the iframe's autoplay parameter and removing the hidden class.
+ * @param {HTMLElement} modal - The modal element to open.
+ */
 export function openModal(modal) {
     const iframe =  modal.querySelector(FEATURED_CONTENT_MODAL_IFRAME);
     const currentSrc = iframe.getAttribute('src');
@@ -16,7 +27,10 @@ export function openModal(modal) {
     modal.classList.remove(FEATURED_CONTENT_HIDDEN_CLASS);
 }
 
-// close currently open modal
+/**
+ * Closes a modal by modifying the iframe's autoplay parameter and adding the hidden class.
+ * @param {HTMLElement} modal - The modal element to close.
+ */
 export function closeModal(modal) {
     const iframe =  modal.querySelector(FEATURED_CONTENT_MODAL_IFRAME);
     const currentSrc = iframe.getAttribute('src');
@@ -27,8 +41,8 @@ export function closeModal(modal) {
 }
 
 /**
- * Modal Init function for card
- * @param {HTMLElement} section - The card carousel section DOM Element
+ * Initializes modal functionality for a given section.
+ * @param {HTMLElement} section - The featured content section element.
  */
 export function _modalInit(section) {
     const openModalBtn = section.querySelectorAll(FEATURED_CONTENT_OPEN_MODAL_BTN);
@@ -59,6 +73,14 @@ export function _modalInit(section) {
     });
 };
 
+/**
+ * Initializes modal when the DOM content is fully loaded.
+ *
+ * This function selects all elements matching the `FEATURED_CONTENT_SELECTOR` selector
+ * and applies the `_modalInit` function to each of them.
+ *
+ * @listens DOMContentLoaded
+ */
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll(FEATURED_CONTENT_SELECTOR).forEach(section => {
         _modalInit(section);

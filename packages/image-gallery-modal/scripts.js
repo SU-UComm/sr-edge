@@ -1,6 +1,14 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 
-// Globals 
+/**
+ * Globals variables 
+ * @constant {string} IMAGE_GALLERY_SELECTOR - Selector for image gallery elements.
+ * @constant {string} IMAGE_GALLERY_BTN - Selector for the button that opens the modal.
+ * @constant {string} IMAGE_GALLERY_MODAL - Selector for modal container.
+ * @constant {string} IMAGE_GALLERY_CLOSE_BTN - Selector for the button that closes the modal.
+ * @constant {string} IMAGE_GALLERY_HIDDEN_CLASS - CSS class to hide elements.
+ * @type {import('swiper').Swiper | undefined} swiper - Instance of Swiper for handling gallery interactions.
+ */
 export const IMAGE_GALLERY_SELECTOR = 'section[data-component="image-gallery-modal"]';
 export const IMAGE_GALLERY_BTN = 'button[data-click="open-gallery-modal"]';
 export const IMAGE_GALLERY_MODAL = 'div[data-modal="modal"]';
@@ -8,17 +16,25 @@ export const IMAGE_GALLERY_CLOSE_BTN = 'button[data-dismiss="modal"]';
 export const IMAGE_GALLERY_HIDDEN_CLASS = 'su-hidden';
 export let swiper; 
 
-// open modal by id
+/**
+ * Opens a modal by modifying the iframe's autoplay parameter and removing the hidden class.
+ * @param {HTMLElement} modal - The modal element to open.
+ */
 export function openModal(modal) {
     modal.classList.remove(IMAGE_GALLERY_HIDDEN_CLASS);
 }
 
-// close currently open modal
+/**
+ * Closes a modal by modifying the iframe's autoplay parameter and adding the hidden class.
+ * @param {HTMLElement} modal - The modal element to close.
+ */
 export function closeModal(modal) {
     modal.classList.add(IMAGE_GALLERY_HIDDEN_CLASS);
 }
 
-// Slider init config
+/**
+ * Initializes slider functionality for each modal.
+ */
 export function initSlider() {
     swiper = new Swiper(`${IMAGE_GALLERY_SELECTOR} .swiper`,  {
         slidesPerView: 1,
@@ -92,6 +108,14 @@ export function _modalInit(section) {
     });
 }
 
+/**
+ * Initializes modal when the DOM content is fully loaded.
+ *
+ * This function selects all elements matching the `IMAGE_GALLERY_SELECTOR` selector
+ * and applies the `_modalInit` function to each of them.
+ *
+ * @listens DOMContentLoaded
+ */
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll(IMAGE_GALLERY_SELECTOR).forEach(section => {
         _modalInit(section);

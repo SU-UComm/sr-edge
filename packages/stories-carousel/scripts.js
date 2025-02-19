@@ -1,6 +1,15 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 
-// Globals 
+/**
+ * Globals variables 
+ * @constant {string} STORIES_CAROUSEL_SELECTOR - Selector for stories carousel elements.
+ * @constant {string} STORIES_CAROUSEL_HIDDEN_CLASS - CSS class to hide elements.
+ * @constant {string} STORIES_CAROUSEL_MODAL_SELECTOR - Selector for modal container.
+ * @constant {string} STORIES_CAROUSEL_OPEN_MODAL_BTN - Selector for the button that opens the modal.
+ * @constant {string} STORIES_CAROUSEL_CLOSE_MODAL_BTN - Selector for the button that closes the modal.
+ * @constant {string} STORIES_CAROUSEL_MODAL_IFRAME - Selector for iframe container.
+ * @type {import('swiper').Swiper | undefined} swiper - Instance of Swiper for handling gallery interactions.
+ */
 export const STORIES_CAROUSEL_SELECTOR = 'section[data-component="stories-carousel"]';
 export const STORIES_CAROUSEL_HIDDEN_CLASS = 'su-hidden';
 export const STORIES_CAROUSEL_MODAL_SELECTOR = 'div[data-modal="modal"]';
@@ -9,7 +18,10 @@ export const STORIES_CAROUSEL_CLOSE_MODAL_BTN = 'button[data-dismiss="modal"]';
 export const STORIES_CAROUSEL_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
 export let swiper; 
 
-// open modal by id
+/**
+ * Opens a modal by modifying the iframe's autoplay parameter and removing the hidden class.
+ * @param {HTMLElement} modal - The modal element to open.
+ */
 export function openModal(modal) {
     const iframe =  modal.querySelector(STORIES_CAROUSEL_MODAL_IFRAME);
     const currentSrc = iframe.getAttribute('src');
@@ -19,7 +31,10 @@ export function openModal(modal) {
     modal.classList.remove(STORIES_CAROUSEL_HIDDEN_CLASS);
 }
 
-// close currently open modal
+/**
+ * Closes a modal by modifying the iframe's autoplay parameter and adding the hidden class.
+ * @param {HTMLElement} modal - The modal element to close.
+ */
 export function closeModal(modal) {
     const iframe =  modal.querySelector(STORIES_CAROUSEL_MODAL_IFRAME);
     const currentSrc = iframe.getAttribute('src');
@@ -114,6 +129,14 @@ export function _carouselInit(section) {
     });
 };
 
+/**
+ * Initializes modal when the DOM content is fully loaded.
+ *
+ * This function selects all elements matching the `STORIES_CAROUSEL_SELECTOR` selector
+ * applies the `_carouselInit` and the `_modalInit` functions to each of them
+ *
+ * @listens DOMContentLoaded
+ */
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll(STORIES_CAROUSEL_SELECTOR).forEach(section => {
         _carouselInit(section)

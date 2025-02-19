@@ -1,10 +1,25 @@
 import { containerClasses } from '../../global/js/utils';
 import acknowledgement from './acknowledgement.hbs';
 
+/**
+ * Acknowledgement component that renders a formatted acknowledgment message.
+ */
 export default {
+    /**
+     * Renders the Acknowledgement component.
+     *
+     * @async
+     * @function
+     * @param {Object} args - The arguments for the component.
+     * @param {string} args.title - The title of the acknowledgment.
+     * @param {string} args.content - The content of the acknowledgment.
+     * @returns {Promise<string>} The rendered acknowledgment HTML or an error message.
+     */
     async main( args ) {
+        // Extracting configuration data from arguments
         const { title, content } = args || {};
 
+        // Validate required fields and ensure correct data types
         try {
             if (typeof title !== 'string' || title === '') {
                 throw new Error(
@@ -21,12 +36,13 @@ export default {
             return `<!-- Error occurred in the Acknowledgement component: ${er.message} -->`;
         }
 
-        const props = {
+        // Prepare component data for template rendering
+        const componentData = {
             classes: containerClasses({width: "narrow", paddingX: false}),
             title,
             content
         };
 
-        return acknowledgement(props);
+        return acknowledgement(componentData);
     },
 };

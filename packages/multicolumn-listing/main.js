@@ -3,15 +3,48 @@ import multicolumnListingTemplate from './multicolumn-listing.hbs';
 import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid, containerClasses } from "../../global/js/utils";
 import { Card, Modal, EmbedVideo, LinkedHeading } from '../../global/js/helpers';
 
+/**
+ * Multicolumn lisitng component that renderds a list of features cards based on fetched data
+ */
 export default {
+    /**
+     * Renders the Multicolumn listing component.
+     * 
+     * @async
+     * @function
+     * @param {Object} args - The arguments for the component.
+     * @param {Object} args.headingConfiguration - The header configuration for the component.
+     * @param {string} [args.headingConfiguration.title] - The text for the heading (optional).
+     * @param {string} [args.headingConfiguration.ctaUrl] - The assetid for the CTA link (optional).
+     * @param {string} [args.headingConfiguration.ctaManualUrl] - The URL for the CTA link (optional).
+     * @param {string} [args.headingConfiguration.ctaText] - The text for the CTA link (optional).
+     * @param {string} [args.headingConfiguration.ctaNewWindow] - Flag to open CTA link in new window (optional).
+     * @param {Object} args.contentConfiguration - The content configuration for the component.
+     * @param {string} args.contentConfiguration.source - Flag specifying where the Funnelback or Matrix data should be retrieved from.
+     * @param {string} [args.contentConfiguration.searchQuery] - The query for the search resutls (optional).
+     * @param {string} [args.contentConfiguration.featuredDescription] - The description that shluld be replaced for featured card (optional).
+     * @param {string} [args.contentConfiguration.cards] - The list of cards to display (optional).
+     * @param {Object} args.displayConfiguration - The display configuration for the component.
+     * @param {string} args.displayConfiguration.alignment - The aligment of feature card.
+     * @param {string} [args.displayConfiguration.displayThumbnails] - The flag to show card thumbnails (optional).
+     * @param {string} [args.displayConfiguration.displayDescriptions] - The flag to show card description (optional).
+     * @param {Object} info - Context information for the component.
+     * @param {Object} info.env - Environment variables in the execution context.
+     * @param {Object} info.fns - Functions available in the execution context.
+     * @param {Function} info.fns.resolveUri - Function to resolve URIs.
+     * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
+     */
     async main(args, info) {
+        // Extracting environment variables from provided info
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
+
+        // Extracting configuration data from arguments
         const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
         const { source, searchQuery, searchMaxCards, cards } = args?.contentConfiguration || {};
         const { displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
 
-        // Check for environment vars
+        // Validate required environment variables
         try {
             if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
                 throw new Error(
@@ -38,7 +71,7 @@ export default {
             return `<!-- Error occurred in the Multicolumn listing component: ${er.message} -->`;
         }
 
-        // Check manifest fields
+        // Validate required fields and ensure correct data types
         try {
             if (title && typeof title !== 'string') {
                 throw new Error(
@@ -100,40 +133,26 @@ export default {
             return `<!-- Error occurred in the Multicolumn listing component: ${er.message} -->`;
         }
 
-
         const adapter = new cardDataAdapter();
         let data = null;
 
+        // Determine data source: "Search" (fetching from Funnelback) or "Select" (Matrix API)
         if (source.toLowerCase() === "search") {
-            // compose and fetch the FB search results
             const query = searchQuery;
             const service = new funnelbackCardService({ FB_JSON_URL, query });
 
             adapter.setCardService(service);
-
             data = await adapter.getCards();
-        }
-
-        // When Select, use Matix Content API
-        else {
-            // Get our card URI's from the args object
+        } else {
             const { cards } = args.contentConfiguration;
-
-            // Create our service
             const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
 
-            // Set our card service
             adapter.setCardService(service);
-
-            // get the cards data
             data = await adapter.getCards(cards);
         }
 
         // Resolve the URI for the section heading link
-        const headingData = await linkedHeadingService(
-            fnsCtx,
-            { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow }
-        );
+        const headingData = await linkedHeadingService(fnsCtx, { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow });
 
         const cardsMarkup = [];
 
@@ -143,11 +162,14 @@ export default {
                 : 3;
         const numberOfCards = data.length > maxNumberOfCards ? maxNumberOfCards : data.length;
         const cardSizeMap = new Map();
+
         cardSizeMap.set(3, "small");
         cardSizeMap.set(2, "medium");
 
         const cardModal = [];
-        data.forEach((cardData, i) => {
+
+        // Generate modals for video cards
+        data?.forEach((cardData, i) => {
             if (i < maxNumberOfCards) {
                 if (source === "Search") {
                     cardsMarkup.push(
@@ -168,10 +190,12 @@ export default {
             }
         });
 
+        // CSS class configuration based on heading
         const componentTitleStateClass = headingData.title
             ? "has-title"
             : "has-no-title";
 
+        // Prepare component data for template rendering
         const componentData = {
             classes: containerClasses({width: "large"}),
             componentTitleStateClass,

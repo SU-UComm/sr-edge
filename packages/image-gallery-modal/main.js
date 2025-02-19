@@ -2,14 +2,44 @@ import imageGalleryModalTemplate from './image-gallery-modal.hbs';
 import { cardDataAdapter, matrixImageCardService, formatCardDataImage, containerClasses } from "../../global/js/utils";
 import { ImageMosaic,  mosaic, carouselImages, SidebarHeading, Modal, Carousel } from "../../global/js/helpers";
 
+/**
+ * Image gallery with modal component that renderds a list of images cards that can be viewed in the modal layout.
+ */
+
 export default {
+    /**
+     * Renders the Image gallery with modal component.
+     * 
+     * @async
+     * @function
+     * @param {Object} args - The arguments for the component.
+     * @param {Object} args.contentConfiguration - The content configuration for the component.
+     * @param {string} args.contentConfiguration.images - The list of immages to display in the component.
+     * @param {string} args.contentConfiguration.layout - The flag specifying if show title or not.
+     * @param {string} [args.contentConfiguration.caption] - The text for caption of whole gallery (optional).
+     * @param {string} [args.contentConfiguration.credit] - The text for credit of whole gallery (optional).
+     * @param {string} [args.contentConfiguration.title] - The text of gallery title (optional).
+     * @param {string} [args.contentConfiguration.summary] - The text of gallery summary (optional).
+     * @param {Object} args.displayConfiguration - The display configuration for the component.
+     * @param {string} args.displayConfiguration.backgroundColor - The flag specifying the background color.
+     * @param {string} args.displayConfiguration.width - The flag specifying the width of the gallery.
+     * @param {string} [args.displayConfiguration.displayIconHeading] - The flag to show gallery icon (optional).
+     * @param {Object} info - Context information for the component.
+     * @param {Object} info.env - Environment variables in the execution context.
+     * @param {Object} info.fns - Functions available in the execution context.
+     * @param {Function} info.fns.resolveUri - Function to resolve URIs.
+     * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
+     */
     async main(args, info) {
+        // Extracting environment variables from provided info
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
+
+        // Extracting configuration data from arguments
         const { layout, images, caption, credit, title, summary } = args?.contentConfiguration || {};
         const { displayIconHeading, backgroundColor, width } = args?.displayConfiguration || {};
 
-        // Check for environment vars
+        // Validate required environment variables
         try {
             if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
                 throw new Error(
@@ -31,7 +61,7 @@ export default {
             return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
         }
 
-        // Validating fields
+        // Validate required fields and ensure correct data types
         try {
             if (typeof layout !== 'string' || !['Title & Content', 'Content Only'].includes(layout)) {
                 throw new Error(
@@ -92,21 +122,23 @@ export default {
         // Set our card service
         adapter.setCardService(service);
 
+        // Filter duplicate images based on the "image" property.
         const filteredImages = images?.filter(
             (item, index, self) =>
             index === self.findIndex((t) => t.image === item.image)
         );
 
-        // get the cards data
+        // Retrieve the card data
         data = images && await adapter.getCards(images);
 
+        // Format image data for rendering.
         const imageData = data && data.map((image, index) => {
             const imgData = formatCardDataImage(image);
 
             return { ...imgData, caption: filteredImages[`${index}`]?.caption };
         });
 
-        // Validating data 
+        // Validate generated image data
         try {
             if (typeof imageData !== 'object' || JSON.stringify(imageData) === JSON.stringify([null, null, null, null]) || imageData.length < 4) {
                 throw new Error(
@@ -118,7 +150,7 @@ export default {
             return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
         }
 
-        // generate the preview images
+        // Generate preview images for the mosaic layout
         const previewData = mosaic(
             imageData,
             `
@@ -134,12 +166,15 @@ export default {
         const modalImages = carouselImages(imageData);
         const widthToRender = width === "Wide" ? width : "narrow";
         const captionCredit = caption && credit ? `${caption} | ${credit}` : caption || credit;
-        const leftOverImages = imageData.length - previewData.length;    
+        const leftOverImages = imageData.length - previewData.length;
+
+        // CSS class mapping based on backgroudn color
         const backgroundClasses = {
             'Grey': 'su-bg-fog-light su-rs-pt-6 su-rs-pb-8 dark:su-bg-black/[0.5]',
             'Transparent': '',
         };
     
+        // Prepare component data for template rendering
         const componentData = {
             classes: containerClasses({width: widthToRender}),
             backgroundClasses: backgroundClasses[backgroundColor],

@@ -1,12 +1,35 @@
 import campaignCtaTemplate from './campaign-cta.hbs';
 import { basicAssetUri, containerClasses } from "../../global/js/utils";
 
+/**
+ * Campaign CTA (Call-to-Action) component that renders a campaign block with an image, title, description, and link.
+ */
 export default {
+    /**
+     * Renders the Campaign CTA component.
+     *
+     * @async
+     * @function
+     * @param {Object} args - The arguments for the component.
+     * @param {Object} args.displayConfiguration - The display configuration for the component.
+     * @param {string} args.displayConfiguration.image - The image URL for the CTA.
+     * @param {string} [args.displayConfiguration.title] - The title text for the CTA (optional).
+     * @param {string} [args.displayConfiguration.description] - The description text for the CTA (optional).
+     * @param {string} [args.displayConfiguration.linkUrl] - The URL for the CTA link (optional).
+     * @param {string} [args.displayConfiguration.linkText] - The text for the CTA link (optional).
+     * @param {Object} info - Context information for the component.
+     * @param {Object} info.fns - Functions available in the execution context.
+     * @param {Function} info.fns.resolveUri - Function to resolve URIs.
+     * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
+     */
     async main(args, info) {
+        // Extracting functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+        
+        // Extracting configuration data from arguments
         const { image, title, description, linkUrl, linkText } = (args && args.displayConfiguration) || {};
 
-        // Check for environment vars
+        // Validate required functions
         try {
             if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
                 throw new Error(
@@ -18,7 +41,7 @@ export default {
             return `<!-- Error occurred in the Campaign cta component: ${er.message} -->`;
         }
 
-        // Validating fields
+        // Validate required fields and ensure correct data types
         try {
             if (!image || typeof image !== 'string') {
                 throw new Error(
@@ -53,14 +76,17 @@ export default {
         let imageData = null;
         let linkData = null;
 
+        // Getting link data 
         if (linkUrl) {
             linkData = await basicAssetUri(fnsCtx, linkUrl);
         }
 
+        // Getting image data 
         if (image) {
             imageData = await basicAssetUri(fnsCtx, image);
         }
-
+        
+        // Prepare component data for template rendering
         const componentData = {
             classes: containerClasses({width: "full", paddingX: false}),
             title,

@@ -244,11 +244,15 @@ The project enforces code quality and consistency using ESLint, Stylelint, and C
 
 #### Run all linting tasks:
 
+Runs all linting checks.
+
 ```bash
 npm run lint
 ```
 
 #### Lint JavaScript files:
+
+Runs a eslint check for all js files.
 
 ```bash
 npm run lint:js
@@ -256,11 +260,15 @@ npm run lint:js
 
 #### Lint CSS and SCSS files:
 
+Runs a check for css files.
+
 ```bash
 npm run lint:css
 ```
 
 #### Run CSpell for spelling checks in code and documentation:
+
+Runs a check for spelling mistakes.
 
 ```bash
 npm run lint:cspell
@@ -272,6 +280,8 @@ Unit tests are run using vitest.
 
 #### Run all tests:
 
+Runs the vitest tests and analyze line coverage.
+
 ```bash
 npm run test
 ```
@@ -282,17 +292,23 @@ Build processes include compiling individual components and generating global bu
 
 #### Build all:
 
+Runs all steps of building a component.
+
 ```bash
 npm run build
 ```
 
 #### Build all components:
 
+Starts building the components themselves.
+
 ```bash
 npm run build:component
 ```
 
 #### Build global assets like bundle.js and bundle.css:
+
+Starts building global bundle files and injects itself into preview HTML.
 
 ```bash
 npm run build:global
@@ -302,11 +318,15 @@ npm run build:global
 
 #### To build components, watch for changes and local environment:
 
+Runs build, watch for components and starts local environmental.
+
 ```bash
 npm run dev
 ```
 
 #### To watch for changes and automatically rebuild components:
+
+Runs build and watch for components.
 
 ```bash
 npm run watch
@@ -314,11 +334,15 @@ npm run watch
 
 #### To start the development environment:
 
+Runs a local dxp environment.
+
 ```bash
 npm run dxp
 ```
 
 ### Version Management and other scripts
+
+Runs a version management tool. This tool can increase/decrease version of component. This tool can be used to run custom scripts such as deployment of component.
 
 ```bash
 npm run vermgmt

@@ -3,14 +3,40 @@ import storiesCarouselTemplate from './stories-carousel.hbs';
 import { cardDataAdapter, funnelbackCardService, linkedHeadingService, containerClasses } from "../../global/js/utils";
 import { Carousel, LinkedHeading, Card, Modal, EmbedVideo } from "../../global/js/helpers";
 
+/**
+ * Stories carousel component that renderds a list of cards based on fetched data.
+ */
 export default {
+    /**
+     * Renders the Stories carousel component.
+     * 
+     * @async
+     * @function
+     * @param {Object} args - The arguments for the component.
+     * @param {Object} args.headingConfiguration - The header configuration for the component.
+     * @param {string} [args.headingConfiguration.title] - The text for the heading (optional).
+     * @param {string} [args.headingConfiguration.ctaUrl] - The assetid for the CTA link (optional).
+     * @param {string} [args.headingConfiguration.ctaManualUrl] - The URL for the CTA link (optional).
+     * @param {string} [args.headingConfiguration.ctaText] - The text for the CTA link (optional).
+     * @param {string} [args.headingConfiguration.ctaNewWindow] - Flag to open CTA link in new window (optional).
+     * @param {Object} args.contentConfiguration - The content configuration for the component.
+     * @param {string} args.contentConfiguration.searchQuery - The query for the search resutls.
+     * @param {Object} info - Context information for the component.
+     * @param {Object} info.env - Environment variables in the execution context.
+     * @param {Object} info.fns - Functions available in the execution context.
+     * @param {Function} info.fns.resolveUri - Function to resolve URIs.
+     * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
+     */
     async main(args, info) {
+        // Extracting environment variables from provided info
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN, BASE_PATH, NEWS_ARCHIVE_PATH } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
+        
+        // Extracting configuration data from arguments
         const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
         const { searchQuery } = args?.contentConfiguration || {};
 
-        // Check for environment vars
+        // Validate required environment variables
         try {
             if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
                 throw new Error(
@@ -47,7 +73,7 @@ export default {
             return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
         }
 
-        // Validating fields
+        // Validate required fields and ensure correct data types
         try {
             if (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?') {
                 throw new Error(
@@ -133,7 +159,7 @@ export default {
             });
         }
 
-        // Validating data 
+        // Validate fetched card data
         try {
             if (typeof cardData !== 'object' || cardData.length < 1) {
                 throw new Error(
@@ -144,7 +170,8 @@ export default {
             console.error('Error occurred in the Stories carousel component: ', er);
             return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
         }
-        
+
+        // Prepare component data for template rendering
         const componentData = {
             classes: containerClasses({width: "large"}),
             id: uniqueClass,

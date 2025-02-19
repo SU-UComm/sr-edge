@@ -2,12 +2,34 @@ import interactivePhotoCard from './interactive-photo-card.hbs';
 import { basicAssetUri } from "../../global/js/utils";
 import { ArrowsRotate, Plus } from "../../global/js/helpers/SVG-library";
 
+/**
+ * Interactive photo card component that renders a image and content side by side.
+ */
 export default {
+    /**
+     * Renders the Interactive photo card component.
+     *
+     * @async
+     * @function
+     * @param {Object} args - The arguments for the component.
+     * @param {string} args.title - The title text for card.
+     * @param {string} args.content - The content text for card .
+     * @param {string} args.image - The image to display aside card.
+     * @param {string} args.imageAlignment - The flag specifying image alignment.
+     * @param {string} [args.eyebrow] - The text to display above card title (optional).
+     * @param {Object} info - Context information for the component.
+     * @param {Object} info.fns - Functions available in the execution context.
+     * @param {Function} info.fns.resolveUri - Function to resolve URIs.
+     * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
+     */
     async main( args, info ) {
+        // Extracting functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+
+        // Extracting configuration data from arguments
         const { title, eyebrow, content, image, imageAlignment } = args || {};
 
-        // Check for environment
+        // Validate required functions
          try {
             if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
                 throw new Error(
@@ -19,7 +41,7 @@ export default {
             return `<!-- Error occurred in the Interactive photo card component: ${er.message} -->`;
         }
 
-        // Validating fields
+        // Validate required fields and ensure correct data types
         try {
             if (typeof title !== 'string' || title === '') {
                 throw new Error(
@@ -51,9 +73,11 @@ export default {
             return `<!-- Error occurred in the Interactive photo card component: ${er.message} -->`;
         }
 
+        // Getting image data 
         const imageData = await basicAssetUri(info.fns, image);
 
-        const props = {
+        // Prepare component data for template rendering
+        const componentData = {
             title,
             eyebrow,
             content,
@@ -68,6 +92,6 @@ export default {
             })
         };
 
-        return interactivePhotoCard(props);
+        return interactivePhotoCard(componentData);
     },
 };

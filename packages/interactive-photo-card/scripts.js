@@ -1,15 +1,7 @@
 /**
- * Interactive Photo Card Component
- * =============================
- * A module providing functionality for creating interactive photo cards that can flip on click.
- *
- * @module InteractivePhotoCard
- */
-
-/**
  * Globals variables 
- * @constant {string} INTERACTIVE_PHOTO_CARD - Selector for interactive photo card elements
- * @constant {string} CARD_INNER - Selector for card inner elements within photo cards
+ * @constant {string} INTERACTIVE_PHOTO_CARD - Selector for interactive photo card elements.
+ * @constant {string} CARD_INNER - Selector for card inner elements within photo cards.
  */
 export const INTERACTIVE_PHOTO_CARD = '[data-component="interactive-photo-card"]';
 export const CARD_INNER = '[data-card-inner]';
