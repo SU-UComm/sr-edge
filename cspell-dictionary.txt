@@ -47,6 +47,9 @@ ismodal
 currentcolor
 mediagallery
 videoplay
+pullquote
+quotee's
+quotee
 
 # Lorem Ipsum 
 ezgif
@@ -56,6 +59,7 @@ Lagunita
 Brodhead
 Kagurabadza
 superheading
+picsum
 
 #testing hooks
 testid 
