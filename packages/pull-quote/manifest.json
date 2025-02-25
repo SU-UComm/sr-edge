@@ -1,10 +1,10 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "pullquote",
-    "version": "2.0.10",
-    "namespace": "pnp-stanford-edge-components",
-    "description": "Displays a quote for a story page along with details of the quote",
     "type": "edge",
+    "version": "4.0.1",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "Displays a quote for a story page along with details of the quote",
     "displayName": "Pull quote",
     "mainFunction": "main",
     "environment": [
