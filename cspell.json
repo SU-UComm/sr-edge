@@ -15,5 +15,9 @@
         }
     ],
     "ignoreRegExpList": ["comments", "url-encoded", "regex"],
-    "ignorePaths": ["./**/package.json", "./**/preview.data.json"]
+    "ignorePaths": [
+        "./**/package.json",
+        "./**/preview.data.json",
+        "./**/mocked-uris/*.json"
+    ]
 }
