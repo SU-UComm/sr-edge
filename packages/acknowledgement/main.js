@@ -38,7 +38,7 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            classes: containerClasses({width: "narrow", paddingX: false}),
+            classes: containerClasses({width: "narrow"}),
             title,
             content
         };
