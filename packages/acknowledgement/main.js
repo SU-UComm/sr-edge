@@ -1,4 +1,3 @@
-import { containerClasses } from '../../global/js/utils';
 import acknowledgement from './acknowledgement.hbs';
 
 /**
@@ -38,9 +37,9 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            classes: containerClasses({width: "narrow"}),
             title,
-            content
+            content,
+            width: "narrow"
         };
 
         return acknowledgement(componentData);

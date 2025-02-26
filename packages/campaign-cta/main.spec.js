@@ -9,7 +9,6 @@ console.error = mockedError;
 
 vi.mock('../../global/js/utils', () => ({
     basicAssetUri: vi.fn(),
-    containerClasses: vi.fn().mockReturnValue('su-container-class')
 }));
 
 describe('[Campaign CTA]', () => {
@@ -155,7 +154,7 @@ describe('[Campaign CTA]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="campaign-cta">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-full">
                       <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col">
                           <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row">
                               <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">
@@ -188,7 +187,7 @@ describe('[Campaign CTA]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="campaign-cta">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-full">
                       <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col">
                           <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row">
                               <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">
@@ -216,7 +215,7 @@ describe('[Campaign CTA]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="campaign-cta">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-full">
                       <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col">
                           <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row">
                               <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">
@@ -243,7 +242,7 @@ describe('[Campaign CTA]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="campaign-cta">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-full">
                       <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col">
                           <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row">
                               <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">
@@ -267,7 +266,7 @@ describe('[Campaign CTA]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="campaign-cta">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-full">
                       <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col">
                           <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row">
                               <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">

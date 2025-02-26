@@ -1,6 +1,6 @@
 import hash from "object-hash";
 import storiesCarouselTemplate from './stories-carousel.hbs';
-import { cardDataAdapter, funnelbackCardService, linkedHeadingService, containerClasses } from "../../global/js/utils";
+import { cardDataAdapter, funnelbackCardService, linkedHeadingService } from "../../global/js/utils";
 import { Carousel, LinkedHeading, Card, Modal, EmbedVideo } from "../../global/js/helpers";
 
 /**
@@ -173,11 +173,11 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            classes: containerClasses({width: "large"}),
             id: uniqueClass,
             headingData: LinkedHeading(headingData),
             carousel: Carousel({ variant:"cards", slides: cardData.join(''), uniqueClass: uniqueClass }),
-            cardModal: cardModal.join('')
+            cardModal: cardModal.join(''),
+            width: "large"
         };
 
         return storiesCarouselTemplate(componentData);

@@ -51,7 +51,6 @@ vi.mock('../../global/js/utils', () => ({
         ctaLink: 'https://example.com',
         ctaNewWindow: false
     }),
-    containerClasses: vi.fn().mockReturnValue('su-container-class'),
     faIcon: {
         "ChevronRight": [`<svg class="su-fill-transparent su-stroke-current" data-testid="svg-chevron-right" xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none" aria-hidden=""><path d="M6.75 4.25L12 9.5L6.75 14.75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>`],
         "CirclePlay": [`<svg class="su-fill-transparent su-stroke-current" data-testid="svg-chevron-right" xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none" aria-hidden=""><path d="M6.75 4.25L12 9.5L6.75 14.75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>`]
@@ -407,7 +406,7 @@ describe('[Stories Carousel]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="stories-carousel" data-unique-id="a707350bcf9bea3cb7fe28e0219c12af">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
                       <div class="linked-heading">Linked Heading</div>
                       <div class="component-slider">
                   <div class="swiper component-slider-cards component-slider-peek">
@@ -467,7 +466,7 @@ describe('[Stories Carousel]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="stories-carousel" data-unique-id="a707350bcf9bea3cb7fe28e0219c12af">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
                       <div class="linked-heading">Linked Heading</div>
                       <div class="component-slider">
                   <div class="swiper component-slider-cards component-slider-peek">
@@ -502,7 +501,7 @@ describe('[Stories Carousel]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="stories-carousel" data-unique-id="a707350bcf9bea3cb7fe28e0219c12af">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
                       <div class="linked-heading">Linked Heading</div>
                       <div class="component-slider">
                   <div class="swiper component-slider-cards component-slider-peek">
@@ -549,7 +548,7 @@ describe('[Stories Carousel]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="stories-carousel" data-unique-id="a707350bcf9bea3cb7fe28e0219c12af">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
                       <div class="linked-heading">Linked Heading</div>
                       <div class="component-slider">
                   <div class="swiper component-slider-cards component-slider-peek">
@@ -626,7 +625,7 @@ describe('[Stories Carousel]', () => {
             
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="stories-carousel" data-unique-id="a707350bcf9bea3cb7fe28e0219c12af">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
                       <div class="linked-heading">Linked Heading</div>
                       <div class="component-slider">
                   <div class="swiper component-slider-cards component-slider-peek">

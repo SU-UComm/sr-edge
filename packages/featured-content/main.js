@@ -1,6 +1,6 @@
 import hash from "object-hash";
 import featureContentTemplate from './featured-content.hbs';
-import { cardDataAdapter, funnelbackCardService, linkedHeadingService, matrixCardService, containerClasses } from "../../global/js/utils";
+import { cardDataAdapter, funnelbackCardService, linkedHeadingService, matrixCardService } from "../../global/js/utils";
 import { LinkedHeading, Card, Modal, EmbedVideo } from "../../global/js/helpers";
  
 /**
@@ -214,16 +214,14 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            classes: containerClasses({width: "large"}),
             alignClasses: alignClasses[alignment],
             growClass,
             headingData: await LinkedHeading(headingData),
             featureCard: Card({ data: featuredCardData, cardSize:"featured", headingLvl: title ? 3 : 2 }),
             cards: cardsToRender,
-            cardModal: cardModal.join('')
+            cardModal: cardModal.join(''),
+            width: "large"
         };
-
-
 
         return featureContentTemplate(componentData);
     }

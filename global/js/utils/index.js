@@ -1,6 +1,5 @@
 export { basicAssetUri } from './basicAssetUri';
 export { cardDataAdapter } from './cardDataAdapter';
-export { containerClasses } from './containerClasses';
 export * from './fa-icons';
 export { formatCardDataFunnelback } from './formatCardDataFunnelback';
 export { formatCardDataImage } from './formatCardDataImage';

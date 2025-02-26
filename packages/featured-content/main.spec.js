@@ -66,7 +66,6 @@ vi.mock('../../global/js/utils', () => ({
         ctaNewWindow: true
     }),
     matrixCardService: vi.fn(),
-    containerClasses: vi.fn().mockReturnValue('su-container-class')
 }));
 
 vi.mock('../../global/js/helpers', () => ({
@@ -472,7 +471,7 @@ describe('[Feature Content]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
                       <div class="linked-heading">Linked Heading</div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
@@ -529,7 +528,7 @@ describe('[Feature Content]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
                       <div class="linked-heading">Linked Heading</div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
@@ -579,7 +578,7 @@ describe('[Feature Content]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
                       <div class="linked-heading">Linked Heading</div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
@@ -629,7 +628,7 @@ describe('[Feature Content]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
                       <div class="linked-heading">Linked Heading</div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
@@ -668,7 +667,7 @@ describe('[Feature Content]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
                       <div class="linked-heading">Linked Heading</div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
@@ -707,7 +706,7 @@ describe('[Feature Content]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
                       <div class="linked-heading">Linked Heading</div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">

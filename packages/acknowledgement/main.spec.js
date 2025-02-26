@@ -6,11 +6,6 @@ const { main } = moduleToTest;
 const mockedError = vi.fn();
 console.error = mockedError;
 
-// Mock the containerClasses utility
-vi.mock('../../global/js/utils', () => ({
-    containerClasses: vi.fn().mockReturnValue('su-container-class')
-}));
-
 describe('[Acknowledgement]', () => {
     const defaultMockData = {
         title: 'Test Title',
@@ -102,7 +97,7 @@ describe('[Acknowledgement]', () => {
             
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="acknowledgement">
-                  <div class="su-container-class">
+                  <div class="su-mx-auto su-component-container su-container-narrow su-container-px">
                       <hr aria-hidden="true" class="su-mb-36 su-border-none su-w-100 su-h-6 lg:su-h-9 su-bg-gradient-to-r su-from-digital-red su-to-digital-red-dark dark:su-from-palo-verde dark:su-to-olive">
                       <h2 class="sr-only">Test Title</h2>
                       <div data-test="acknowledgement" class="su-wysiwyg-content *:su-basefont-19 su-mb-36 [&>*:last-child]:su-mb-0">

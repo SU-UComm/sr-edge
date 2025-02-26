@@ -1,6 +1,6 @@
 import hash from "object-hash";
 import multicolumnListingTemplate from './multicolumn-listing.hbs';
-import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid, containerClasses } from "../../global/js/utils";
+import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid } from "../../global/js/utils";
 import { Card, Modal, EmbedVideo, LinkedHeading } from '../../global/js/helpers';
 
 /**
@@ -197,11 +197,11 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            classes: containerClasses({width: "large"}),
             componentTitleStateClass,
             headingData: LinkedHeading(headingData),
             multicolumnGrid: multicolumnGrid(cardsMarkup, true),
-            cardModal: cardModal.join('')
+            cardModal: cardModal.join(''),
+            width: "large"
         };
 
         return multicolumnListingTemplate(componentData);

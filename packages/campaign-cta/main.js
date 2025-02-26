@@ -1,5 +1,5 @@
 import campaignCtaTemplate from './campaign-cta.hbs';
-import { basicAssetUri, containerClasses } from "../../global/js/utils";
+import { basicAssetUri } from "../../global/js/utils";
 
 /**
  * Campaign CTA (Call-to-Action) component that renders a campaign block with an image, title, description, and link.
@@ -88,12 +88,13 @@ export default {
         
         // Prepare component data for template rendering
         const componentData = {
-            classes: containerClasses({width: "full", paddingX: false}),
             title,
             description,
             linkText,
             linkData,
-            imageData
+            imageData,
+            width: "full",
+            paddingX: false
         };
 
         return campaignCtaTemplate(componentData);

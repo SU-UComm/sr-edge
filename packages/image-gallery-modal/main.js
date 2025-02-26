@@ -1,5 +1,5 @@
 import imageGalleryModalTemplate from './image-gallery-modal.hbs';
-import { cardDataAdapter, matrixImageCardService, formatCardDataImage, containerClasses } from "../../global/js/utils";
+import { cardDataAdapter, matrixImageCardService, formatCardDataImage } from "../../global/js/utils";
 import { ImageMosaic,  mosaic, carouselImages, SidebarHeading, Modal, Carousel } from "../../global/js/helpers";
 
 /**
@@ -68,9 +68,9 @@ export default {
                     `The "layout" field cannot be undefined and must be one of ["Title & Content", "Content Only"] value. The ${JSON.stringify(layout)} was received.`
                 );
             }
-            if (!Array.isArray(images) || images.length === 0) {
+            if (!Array.isArray(images) || images.length < 4) {
                 throw new Error(
-                    `The "images" field must be an array. The ${JSON.stringify(images)} was received.`
+                    `The "images" field must be an array and cannot have less then 4 elements. The ${JSON.stringify(images)} was received.`
                 );
             }
             if (caption && typeof caption !== 'string') {
@@ -164,7 +164,7 @@ export default {
             `
         );
         const modalImages = carouselImages(imageData);
-        const widthToRender = width === "Wide" ? width : "narrow";
+        const widthToRender = width === "Wide" ? width.toLocaleLowerCase() : "narrow";
         const captionCredit = caption && credit ? `${caption} | ${credit}` : caption || credit;
         const leftOverImages = imageData.length - previewData.length;
 
@@ -176,7 +176,6 @@ export default {
     
         // Prepare component data for template rendering
         const componentData = {
-            classes: containerClasses({width: widthToRender}),
             backgroundClasses: backgroundClasses[backgroundColor],
             layout: layout,
             sidebarHeading: displayIconHeading ? SidebarHeading({ color: "media",  icon: "mediagallery", title: "Media gallery" }) : '',
@@ -184,7 +183,8 @@ export default {
             summary: summary,
             images: ImageMosaic({ data: previewData, remainingImageCount: leftOverImages}),
             captionCredit,
-            modal: Modal({content: Carousel({ variant: 'imagegallery', slides: modalImages, isDark: true }), describedby: 'image-gallery-modal' })
+            modal: Modal({content: Carousel({ variant: 'imagegallery', slides: modalImages, isDark: true }), describedby: 'image-gallery-modal' }),
+            width: widthToRender
         };
 
         return imageGalleryModalTemplate(componentData);
