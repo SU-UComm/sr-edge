@@ -1,0 +1,15 @@
+
+<section data-component="multicolumn-image">
+    <div class="{{containerClasses "wide"}}">
+        <div class="su-flex su-gap-20 su-items-center lg:su-gap-48">
+            {{#each images}}
+                {{> image src=this.url caption=this.caption numberOfCaptions=@root.numberOfCaptions}}
+            {{/each}}
+        </div>
+        {{#ifEquals numberOfCaptions 1}}
+          <p class="su-text-14 su-text-black-70 dark:su-text-black-30 su-font-normal su-max-w-[63.3rem] su-leading-[119.415%] su-text-center md:su-text-16 su-mb-0">
+            {{images.[0].caption}}
+          </p>
+        {{/ifEquals}}
+    </div>
+</section>

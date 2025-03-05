@@ -92,6 +92,9 @@ export const helpers = {
         
         return avatarImageClasses.get(avatarSize);
     },
+    gtOne: function(value) {
+        return value > 1;
+    }
 }
   
 export default helpers;
