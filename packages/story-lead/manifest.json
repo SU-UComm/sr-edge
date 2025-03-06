@@ -1,0 +1,70 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "story-lead",
+    "type": "edge",
+    "version": "4.0.0",
+    "namespace": "stanford-components",
+    "description": "Introduction to a story, with a decorative first letter.",
+    "displayName": "Story Lead",
+    "mainFunction": "main",
+    "icon": {
+        "id": "text_fields",
+        "color": {
+            "type": "enum",
+            "value": "green"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "content": {
+                        "title": "Lead",
+                        "type": "FormattedText"
+                    },
+                    "variant": {
+                        "title": "Variant",
+                        "type": "string",
+                        "default": "Basic Story",
+                        "enum": ["Basic Story", "Featured Story"]
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/featured.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}

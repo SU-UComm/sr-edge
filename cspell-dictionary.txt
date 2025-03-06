@@ -48,8 +48,7 @@ currentcolor
 mediagallery
 videoplay
 pullquote
-quotee's
-quotee
+Svgs
 
 # Lorem Ipsum 
 ezgif
@@ -60,6 +59,9 @@ Brodhead
 Kagurabadza
 superheading
 picsum
+toreduce
+quotee's
+quotee
 
 #testing hooks
 testid 
