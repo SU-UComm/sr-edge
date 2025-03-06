@@ -5,7 +5,6 @@ export const helpers = {
     unlessEquals: function (arg1, arg2, options) {
         return arg1 != arg2 ? options.fn(this) : options.inverse(this);
     },
-
     containerClasses: function(width = "large", paddingX = true, paddingY = "none", marginTop = "default", marginBottom = "default", customClasses) {   
         const outputClasses = ['su-mx-auto', 'su-component-container'];
 
@@ -73,7 +72,6 @@ export const helpers = {
 
         return outputClasses.join(' ').trim();
     },
-
     avatarWrapperClasses: function(avatarSize) {
         const avatarWrapperClasses = new Map();
         
@@ -99,6 +97,22 @@ export const helpers = {
         variantClasses.set('Basic Story', 'su-story-first-letter *:su-text-18 md:*:su-text-23');
         
         return variantClasses.get(variant);
+    },
+    formatFirstWord: function (content, firstWord) {
+        if (!content) return content;
+        if (!firstWord) return content;
+
+        const truncatedFirstWord = firstWord.trim().substring(1);
+        
+        return truncatedFirstWord.length > 0
+            ? content.replace(/'/g, "'").replace("&nbsp;", " ").replace(/\s+/g, " ").replace(
+                firstWord,
+                `<span aria-hidden="true">${truncatedFirstWord}</span><span class="sr-only">${firstWord}</span>`
+              )
+            : content.replace(/'/g, "'").replace("&nbsp;", " ").replace(/\s+/g, " ").replace(
+                firstWord,
+                `<span class="sr-only">${firstWord}</span>`
+              );
     },
 }
   

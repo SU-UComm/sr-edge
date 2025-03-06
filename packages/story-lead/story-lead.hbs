@@ -3,11 +3,15 @@
     <div class="{{containerClasses width}}">
         {{#if isFeaturedStory}}
         <span data-test="component-story-lead-letter" class="su-float-left [&>svg]:su-mt-3 md:[&>svg]:su--mt-2 lg:[&>svg]:su-mt-4 [&>svg]:su-w-41 [&>svg]:su-h-43 md:[&>svg]:su-w-[97px] md:[&>svg]:su-h-[102px] su-mr-8 lg:su-mr-19">
-            {{{letterSvg}}}
+            {{> svg-letters letter=firstLetter}}
         </span>
         {{/if}}
         <div data-test="component-story-lead" class="su-wysiwyg-content {{variantClasses variant}}">
-            {{{content}}}
+            {{#if isFeaturedStory}}
+                {{{formatFirstWord content firstWord}}}
+            {{else}}
+                {{{content}}}
+            {{/if}}
         </div>
     </div>
 </section>

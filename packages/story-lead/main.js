@@ -1,61 +1,6 @@
 import storyLeadTemplate from './story-lead.hbs';
-import {
-    LetterA,
-    LetterB,
-    LetterC,
-    LetterD,
-    LetterE,
-    LetterF,
-    LetterG,
-    LetterH,
-    LetterI,
-    LetterJ,
-    LetterK,
-    LetterL,
-    LetterM,
-    LetterN,
-    LetterO,
-    LetterP,
-    LetterQ,
-    LetterR,
-    LetterS,
-    LetterT,
-    LetterU,
-    LetterV,
-    LetterW,
-    LetterX,
-    LetterY,
-    LetterZ,
-} from "../../global/js/helpers/SVG-library";
+import { getFirstWord } from '../../global/js/utils';
 
-const letterSvgs = new Map([
-    ['a', LetterA],
-    ['b', LetterB],
-    ['c', LetterC],
-    ['d', LetterD],
-    ['e', LetterE],
-    ['f', LetterF],
-    ['g', LetterG],
-    ['h', LetterH],
-    ['i', LetterI],
-    ['j', LetterJ],
-    ['k', LetterK],
-    ['l', LetterL],
-    ['m', LetterM],
-    ['n', LetterN],
-    ['o', LetterO],
-    ['p', LetterP],
-    ['q', LetterQ],
-    ['r', LetterR],
-    ['s', LetterS],
-    ['t', LetterT],
-    ['u', LetterU],
-    ['v', LetterV],
-    ['w', LetterW],
-    ['x', LetterX],
-    ['y', LetterY],
-    ['z', LetterZ]
-]);
 
 export default {
     async main(args, info) {
@@ -95,36 +40,15 @@ export default {
             return `<!-- Error occurred in the Story lead component: ${er.message} -->`;
         }
 
-        let formattedContent = content ? content.replace(/'/g, "'").replace("&nbsp;", " ").replace(/\s+/g, " ") : "";
-
-        let selectedSvg = null;
         const isFeaturedStory = variant === "Featured Story";
-
-        if (content !== null && content !== undefined) {
-            const textContent = formattedContent.replace(/(<([^>]+)>)/gi, "");
-            const firstWord = textContent.trim().split(" ")[0];
-            const firstLetter = firstWord[0];
-            const svgFunction = letterSvgs.get(firstLetter.toLowerCase());
-            selectedSvg = svgFunction ? svgFunction() : null;
-
-            if (isFeaturedStory) {
-                const truncatedFirstWord = firstWord.trim().substring(1);
-                formattedContent = truncatedFirstWord.length > 0
-                ? formattedContent.replace(
-                    firstWord,
-                    `<span aria-hidden="true">${truncatedFirstWord}</span><span class="sr-only">${firstWord}</span>`
-                    )
-                : formattedContent.replace(
-                    firstWord,
-                    `<span class="sr-only">${firstWord}</span>`
-                    );
-            }
-        }
+        const firstWord = getFirstWord(content);
+        const firstLetter = content ? firstWord[0].toLowerCase() : '';
 
         const componentData = {
-            content: formattedContent,
+            content,
+            firstWord,
+            firstLetter,
             isFeaturedStory,
-            letterSvg: selectedSvg,
             variant,
             width: "narrow"
         };
