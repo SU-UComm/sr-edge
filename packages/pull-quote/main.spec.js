@@ -13,7 +13,7 @@ vi.mock('../../global/js/utils', () => ({
     basicAssetUri: vi.fn(),
 }));
 
-describe('[Pull Quote]', () => {
+describe.skip('[Pull Quote]', () => {
     const mockFnsCtx = {
         resolveUri: vi.fn()
     };

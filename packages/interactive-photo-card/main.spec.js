@@ -186,19 +186,17 @@ describe('[Interactive Photo Card]', () => {
             expect(result).toMatchInlineSnapshot(`"<section data-component="interactive-photo-card">
     <div class="su-cc">
         <article class="su-relative su-grid xl:su-grid-cols-2 su-gap-20 [perspective:100rem] su-transition-transform">
-            <div class="su-flex su-relative [transform-style:preserve-3d] su-duration-1000 "
-                 data-card-inner>
+            <div class="su-flex su-relative [transform-style:preserve-3d] su-duration-1000 xl:su-order-2" data-card-inner="true">
                 <div class="su-group/front su-relative su-bg-white su-backface-hidden su-rounded-[8px] su-shadow-lg su-min-w-full"
-                     aria-hidden="false" data-card-inner-content>
+                     aria-hidden="false" data-card-inner-content="true">
                     <div class="su-flex su-flex-col su-h-full su-rs-px-5 su-rs-pt-6 su-rs-pb-4">
-                            <div class="su-type-1 su-text-black-60 su-font-semibold su-rs-mb-1">
-                                Optional Eyebrow
-                            </div>
+                        <div class="su-type-1 su-text-black-60 su-font-semibold su-rs-mb-1">
+                            Optional Eyebrow
+                        </div>
                         <h2 class="su-grow su-type-4 su-font-bold su-font-sans su-text-black dark:su-text-black su-rs-mb-0">
                             Photo Title
                         </h2>
-                        <button type="button" tabIndex="" aria-label="See additional information"
-                                class="su-block su-ml-auto su-mr-0 su-bg-black su-text-white group-hover/front:su-bg-digital-red focus:su-bg-digital-red su-rounded-full su-p-10 su-stretched-link su-transition-all su-opacity-100 group-aria-hidden/front:su-opacity-0">
+                        <button type="button" tabIndex="" aria-label="See additional information" class="su-block su-ml-auto su-mr-0 su-bg-black su-text-white group-hover/front:su-bg-digital-red focus:su-bg-digital-red su-rounded-full su-p-10 su-stretched-link su-transition-all su-opacity-100 group-aria-hidden/front:su-opacity-0">
                             
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -219,12 +217,10 @@ describe('[Interactive Photo Card]', () => {
                         </button>
                     </div>
                 </div>
-                <div class="su-group/back su-relative su-flex su-flex-col su-h-full su-min-w-full su-rounded-[8px] su-rs-px-5 su-rs-pt-6 su-rs-pb-4 su-bg-digital-red-dark su-text-white [transform:rotateY(180deg)_translate(100%,0)] su-backface-hidden su-transition-transform su-shadow-lg"
-                     aria-hidden="true" data-card-inner-content>
+                <div class="su-group/back su-relative su-flex su-flex-col su-h-full su-min-w-full su-rounded-[8px] su-rs-px-5 su-rs-pt-6 su-rs-pb-4 su-bg-digital-red-dark su-text-white [transform:rotateY(180deg)_translate(100%,0)] su-backface-hidden su-transition-transform su-shadow-lg" aria-hidden="true" data-card-inner-content="true">
                     <div class="su-big-paragraph su-grow">
                         Photo Content
-                        <button type="button" tabIndex="-1" aria-label="Dismiss content"
-                                class="su-block su-ml-auto su-mr-0 su-border-3 su-border-white su-rounded-full su-text-white focus:su-bg-black group-hover/back:su-bg-black su-p-7 lg:su-p-14 su-stretched-link su-transition-colors">
+                        <button type="button" tabIndex="-1" aria-label="Dismiss content" class="su-block su-ml-auto su-mr-0 su-border-3 su-border-white su-rounded-full su-text-white focus:su-bg-black group-hover/back:su-bg-black su-p-7 lg:su-p-14 su-stretched-link su-transition-colors">
                             
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -264,19 +260,17 @@ describe('[Interactive Photo Card]', () => {
             expect(result).toMatchInlineSnapshot(`"<section data-component="interactive-photo-card">
     <div class="su-cc">
         <article class="su-relative su-grid xl:su-grid-cols-2 su-gap-20 [perspective:100rem] su-transition-transform">
-            <div class="su-flex su-relative [transform-style:preserve-3d] su-duration-1000 "
-                 data-card-inner>
+            <div class="su-flex su-relative [transform-style:preserve-3d] su-duration-1000 " data-card-inner="true">
                 <div class="su-group/front su-relative su-bg-white su-backface-hidden su-rounded-[8px] su-shadow-lg su-min-w-full"
-                     aria-hidden="false" data-card-inner-content>
+                     aria-hidden="false" data-card-inner-content="true">
                     <div class="su-flex su-flex-col su-h-full su-rs-px-5 su-rs-pt-6 su-rs-pb-4">
-                            <div class="su-type-1 su-text-black-60 su-font-semibold su-rs-mb-1">
-                                Optional Eyebrow
-                            </div>
+                        <div class="su-type-1 su-text-black-60 su-font-semibold su-rs-mb-1">
+                            Optional Eyebrow
+                        </div>
                         <h2 class="su-grow su-type-4 su-font-bold su-font-sans su-text-black dark:su-text-black su-rs-mb-0">
                             Photo Title
                         </h2>
-                        <button type="button" tabIndex="" aria-label="See additional information"
-                                class="su-block su-ml-auto su-mr-0 su-bg-black su-text-white group-hover/front:su-bg-digital-red focus:su-bg-digital-red su-rounded-full su-p-10 su-stretched-link su-transition-all su-opacity-100 group-aria-hidden/front:su-opacity-0">
+                        <button type="button" tabIndex="" aria-label="See additional information" class="su-block su-ml-auto su-mr-0 su-bg-black su-text-white group-hover/front:su-bg-digital-red focus:su-bg-digital-red su-rounded-full su-p-10 su-stretched-link su-transition-all su-opacity-100 group-aria-hidden/front:su-opacity-0">
                             
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -297,12 +291,10 @@ describe('[Interactive Photo Card]', () => {
                         </button>
                     </div>
                 </div>
-                <div class="su-group/back su-relative su-flex su-flex-col su-h-full su-min-w-full su-rounded-[8px] su-rs-px-5 su-rs-pt-6 su-rs-pb-4 su-bg-digital-red-dark su-text-white [transform:rotateY(180deg)_translate(100%,0)] su-backface-hidden su-transition-transform su-shadow-lg"
-                     aria-hidden="true" data-card-inner-content>
+                <div class="su-group/back su-relative su-flex su-flex-col su-h-full su-min-w-full su-rounded-[8px] su-rs-px-5 su-rs-pt-6 su-rs-pb-4 su-bg-digital-red-dark su-text-white [transform:rotateY(180deg)_translate(100%,0)] su-backface-hidden su-transition-transform su-shadow-lg" aria-hidden="true" data-card-inner-content="true">
                     <div class="su-big-paragraph su-grow">
                         Photo Content
-                        <button type="button" tabIndex="-1" aria-label="Dismiss content"
-                                class="su-block su-ml-auto su-mr-0 su-border-3 su-border-white su-rounded-full su-text-white focus:su-bg-black group-hover/back:su-bg-black su-p-7 lg:su-p-14 su-stretched-link su-transition-colors">
+                        <button type="button" tabIndex="-1" aria-label="Dismiss content" class="su-block su-ml-auto su-mr-0 su-border-3 su-border-white su-rounded-full su-text-white focus:su-bg-black group-hover/back:su-bg-black su-p-7 lg:su-p-14 su-stretched-link su-transition-colors">
                             
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -324,7 +316,7 @@ describe('[Interactive Photo Card]', () => {
                     </div>
                 </div>
             </div>
-            <div class="su-rounded-[8px] su-overflow-hidden su-shadow-lg xl:su-order-first">
+            <div class="su-rounded-[8px] su-overflow-hidden su-shadow-lg ">
                 <img src=https://example.com/image.jpg alt="" class="su-object-cover su-size-full" />
             </div>
         </article>
@@ -339,16 +331,14 @@ describe('[Interactive Photo Card]', () => {
             expect(result).toMatchInlineSnapshot(`"<section data-component="interactive-photo-card">
     <div class="su-cc">
         <article class="su-relative su-grid xl:su-grid-cols-2 su-gap-20 [perspective:100rem] su-transition-transform">
-            <div class="su-flex su-relative [transform-style:preserve-3d] su-duration-1000 "
-                 data-card-inner>
+            <div class="su-flex su-relative [transform-style:preserve-3d] su-duration-1000 xl:su-order-2" data-card-inner="true">
                 <div class="su-group/front su-relative su-bg-white su-backface-hidden su-rounded-[8px] su-shadow-lg su-min-w-full"
-                     aria-hidden="false" data-card-inner-content>
+                     aria-hidden="false" data-card-inner-content="true">
                     <div class="su-flex su-flex-col su-h-full su-rs-px-5 su-rs-pt-6 su-rs-pb-4">
                         <h2 class="su-grow su-type-4 su-font-bold su-font-sans su-text-black dark:su-text-black su-rs-mb-0">
                             Photo Title
                         </h2>
-                        <button type="button" tabIndex="" aria-label="See additional information"
-                                class="su-block su-ml-auto su-mr-0 su-bg-black su-text-white group-hover/front:su-bg-digital-red focus:su-bg-digital-red su-rounded-full su-p-10 su-stretched-link su-transition-all su-opacity-100 group-aria-hidden/front:su-opacity-0">
+                        <button type="button" tabIndex="" aria-label="See additional information" class="su-block su-ml-auto su-mr-0 su-bg-black su-text-white group-hover/front:su-bg-digital-red focus:su-bg-digital-red su-rounded-full su-p-10 su-stretched-link su-transition-all su-opacity-100 group-aria-hidden/front:su-opacity-0">
                             
     <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -369,12 +359,10 @@ describe('[Interactive Photo Card]', () => {
                         </button>
                     </div>
                 </div>
-                <div class="su-group/back su-relative su-flex su-flex-col su-h-full su-min-w-full su-rounded-[8px] su-rs-px-5 su-rs-pt-6 su-rs-pb-4 su-bg-digital-red-dark su-text-white [transform:rotateY(180deg)_translate(100%,0)] su-backface-hidden su-transition-transform su-shadow-lg"
-                     aria-hidden="true" data-card-inner-content>
+                <div class="su-group/back su-relative su-flex su-flex-col su-h-full su-min-w-full su-rounded-[8px] su-rs-px-5 su-rs-pt-6 su-rs-pb-4 su-bg-digital-red-dark su-text-white [transform:rotateY(180deg)_translate(100%,0)] su-backface-hidden su-transition-transform su-shadow-lg" aria-hidden="true" data-card-inner-content="true">
                     <div class="su-big-paragraph su-grow">
                         Photo Content
-                        <button type="button" tabIndex="-1" aria-label="Dismiss content"
-                                class="su-block su-ml-auto su-mr-0 su-border-3 su-border-white su-rounded-full su-text-white focus:su-bg-black group-hover/back:su-bg-black su-p-7 lg:su-p-14 su-stretched-link su-transition-colors">
+                        <button type="button" tabIndex="-1" aria-label="Dismiss content" class="su-block su-ml-auto su-mr-0 su-border-3 su-border-white su-rounded-full su-text-white focus:su-bg-black group-hover/back:su-bg-black su-p-7 lg:su-p-14 su-stretched-link su-transition-colors">
                             
     <svg
         xmlns="http://www.w3.org/2000/svg"
