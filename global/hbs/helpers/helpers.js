@@ -92,6 +92,14 @@ export const helpers = {
         
         return avatarImageClasses.get(avatarSize);
     },
+    variantClasses: function(variant) {
+        const variantClasses = new Map()
+
+        variantClasses.set('Featured Story', '*:su-text-20 md:*:su-text-25 lg:*:su-text-26 su-font-serif su-font-medium');
+        variantClasses.set('Basic Story', 'su-story-first-letter *:su-text-18 md:*:su-text-23');
+        
+        return variantClasses.get(variant);
+    },
 }
   
 export default helpers;
