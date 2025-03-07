@@ -205,6 +205,9 @@ export const helpers = {
         
         return variantClasses.get(variant);
     },
+    gtOne: function(value) {
+        return value > 1;
+    }
 }
   
 export default helpers;
