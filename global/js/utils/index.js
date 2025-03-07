@@ -9,3 +9,5 @@ export { linkedHeadingService } from './linkedHeadingService';
 export { matrixCardService } from './matrixCardService';
 export { matrixImageCardService } from './matrixImageCardService';
 export { multicolumnGrid } from './multicolumnGrid'
+export { getFirstWord } from './getFirstWord';
+export { isRealExternalLink } from './isRealExternalLink';

@@ -1,0 +1,18 @@
+/* stylelint-disable at-rule-prelude-no-invalid */
+/* stylelint-disable at-rule-no-vendor-prefix */
+/* stylelint-disable at-rule-no-deprecated */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+[data-component="story-lead"] .su-story-first-letter > *:first-child {
+  @apply first-letter:su-font-bold first-letter:su-float-left first-letter:su-text-[7.2rem] md:first-letter:su-text-[85px] first-letter:su-mt-2 md:first-letter:su-mt-10 lg:first-letter:su-mt-16 first-letter:su-leading-[35px] first-letter:su-p-0 first-letter:su-mr-9 first-letter:su-font-serif;
+}
+
+/* Firefox treats first letters differently, change margins here */
+@-moz-document url-prefix() {
+  [data-component="story-lead"] .su-story-first-letter > *:first-child {
+    @apply first-letter:su-mt-0 md:first-letter:su-mt-5 lg:first-letter:su-mt-5;
+  }
+}

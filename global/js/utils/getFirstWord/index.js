@@ -1,0 +1,1 @@
+export { getFirstWord } from './getFirstWord';
