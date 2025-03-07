@@ -1,0 +1,13 @@
+{{#ifEquals placement 1}}
+    <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow {{alignClass alignment}}">
+        {{> card-pull-quote imageURL=item.imageURL imageAlt=item.imageAlt quote=item.quote title=item.title description=item.description ctaText=item.ctaText liveUrl=item.liveUrl }}
+    </div>
+{{else ifEquals placement 2}}
+    <div class="su-relative su-w-full">
+        {{> card-teaser title=this.title liveUrl=this.liveUrl source=this.source isCustomDescription=this.isCustomDescription credit=this.credit description=this.description authorName=this.authorName }}
+    </div>
+{{else}}
+    <div class="su-relative su-w-full before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px {{featuredGridContentClasses isNested}}">
+        {{> card-teaser title=this.title liveUrl=this.liveUrl source=this.source isCustomDescription=this.isCustomDescription credit=this.credit description=this.description authorName=this.authorName }}
+    </div>
+{{/ifEquals}}
