@@ -23,3 +23,4 @@ temp-*
 # IntelliJ
 .idea
 .vscode``
+.aider*
