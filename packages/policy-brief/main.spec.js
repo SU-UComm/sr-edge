@@ -92,18 +92,14 @@ describe('[Policy Brief Component Tests]', () => {
       <div class="su-relative su-w-full su-h-[233px] md:su-h-auto md:su-min-w-[257px] lg:su-h-[378.331px] lg:su-flex-1 su-z-2">
         <img src="" class="su-absolute su-size-full su-object-cover" alt="" />
       </div>
-
       <div class="lg:su-flex-1 su-relative su-z-2">
         <div class="su-flex su-gap-6 su-items-center su-text-18 su-font-semibold su-pb-20 md:su-pb-27">
             <span class="dark:su-hidden">[object Object]</span>
             <span class="su-hidden dark:su-block">[object Object]</span>
             <span>Policy Brief</span>
         </div>
-
           <h2 class="su-text-[33px] su-font-bold su-leading-[125%] su-font-serif su-pb-19 su-m-0">Test Policy Brief</h2>
-
           <p class="su-text-19 su-font-normal su-leading-[125%] su-pb-20 md:su-pb-27 su-m-0">Test summary content</p>
-
           <a href="https://example.com" class="su-flex su-gap-2 su-group su-text-19 su-font-semibold su-leading-[125%] su-text-digital-red su-no-underline dark:su-text-dark-mode-red hocus:su-underline">
             Read more
             <span class="su-transition group-hocus:su--translate-y-01em group-hocus:su-translate-x-01em [&>svg]:su-translate-y-1">
@@ -115,8 +111,7 @@ describe('[Policy Brief Component Tests]', () => {
       </div>
     </div>
   </div>
-</section>
-`);
+</section>`);
         });
       
         it('Should process valid Case Study data', async () => {
@@ -136,18 +131,14 @@ describe('[Policy Brief Component Tests]', () => {
       <div class="su-relative su-w-full su-h-[233px] md:su-h-auto md:su-min-w-[257px] lg:su-h-[378.331px] lg:su-flex-1 su-z-2">
         <img src="" class="su-absolute su-size-full su-object-cover" alt="" />
       </div>
-
       <div class="lg:su-flex-1 su-relative su-z-2">
         <div class="su-flex su-gap-6 su-items-center su-text-18 su-font-semibold su-pb-20 md:su-pb-27">
             <span class="dark:su-hidden">[object Object]</span>
             <span class="su-hidden dark:su-block">[object Object]</span>
             <span>Case Study</span>
         </div>
-
           <h2 class="su-text-[33px] su-font-bold su-leading-[125%] su-font-serif su-pb-19 su-m-0">Test Policy Brief</h2>
-
           <p class="su-text-19 su-font-normal su-leading-[125%] su-pb-20 md:su-pb-27 su-m-0">Test summary content</p>
-
           <a href="https://example.com" class="su-flex su-gap-2 su-group su-text-19 su-font-semibold su-leading-[125%] su-text-digital-red su-no-underline dark:su-text-dark-mode-red hocus:su-underline">
             Read more
             <span class="su-transition group-hocus:su--translate-y-01em group-hocus:su-translate-x-01em [&>svg]:su-translate-y-1">
@@ -159,8 +150,7 @@ describe('[Policy Brief Component Tests]', () => {
       </div>
     </div>
   </div>
-</section>
-`);
+</section>`);
         });
       });
 
@@ -178,18 +168,13 @@ describe('[Policy Brief Component Tests]', () => {
       <div class="su-relative su-w-full su-h-[233px] md:su-h-auto md:su-min-w-[257px] lg:su-h-[378.331px] lg:su-flex-1 su-z-2">
         <img src="" class="su-absolute su-size-full su-object-cover" alt="" />
       </div>
-
       <div class="lg:su-flex-1 su-relative su-z-2">
         <div class="su-flex su-gap-6 su-items-center su-text-18 su-font-semibold su-pb-20 md:su-pb-27">
         </div>
-
-
-
       </div>
     </div>
   </div>
-</section>
-`);
+</section>`);
         });
 
         it('Should handle undefined assetData', async () => {
