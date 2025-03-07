@@ -24,30 +24,29 @@ import button from './button.hbs';
  */
 export default {
     async main(args, info) {
+        // Extracting functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+        
+        // Extracting configuration data from arguments
         const { buttonText, internalUrl, externalUrl, isNewWindow } = args || {};
 
+         // Validate required functions
         try {
-            if (
-                typeof fnsCtx !== 'object' ||
-                typeof fnsCtx.resolveUri === 'undefined'
-            ) {
+            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
                 throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`,
+                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
                 );
             }
         } catch (er) {
-            console.error(
-                'Error occurred in the Button component: ',
-                er,
-            );
+            console.error('Error occurred in the Button component: ', er);
             return `<!-- Error occurred in the Button component: ${er.message} -->`;
         }
 
+        // Validate required fields and ensure correct data types
         try {
-            if (typeof buttonText !== 'string' || buttonText === '') {
+            if (buttonText && typeof buttonText !== 'string') {
                 throw new Error(
-                    `The "buttonText" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(buttonText)} was received.`,
+                    `The "buttonText" field must be a string. The ${JSON.stringify(buttonText)} was received.`,
                 );
             }
             if (internalUrl && typeof internalUrl !== 'string') {
@@ -71,12 +70,16 @@ export default {
         }
 
         let linkData = null;
+        
+        // Getting image data 
         if (internalUrl) {
             linkData = await basicAssetUri(info.fns, internalUrl);
         }
 
+        // Getting button URL
         const buttonUrl = linkData?.url || externalUrl;
 
+        // Prepare component data for template rendering
         const componentData = {
             buttonText,
             isNewWindow,
