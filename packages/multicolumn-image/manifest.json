@@ -1,17 +1,23 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
-    "name": "interactive-photo-card",
-    "type": "edge",
-    "version": "4.0.2",
+    "name": "multicolumn-image",
+    "version": "4.0.1",
     "namespace": "pnp-stanford-edge-components-hbs",
-    "description": "2 side by side cards with 1 being a photo and 1 being a fact with the ability to flip the card over for additional information.",
-    "displayName": "Interactive Photo Card",
+    "description": "The multicolumn image is a way to display a series of images in 2 to 3 columns.",
+    "type": "edge",
+    "displayName": "Multicolumn Image",
     "mainFunction": "main",
+    "environment": [
+        {
+            "name": "API_IDENTIFIER",
+            "required": true
+        }
+    ],
     "icon": {
-        "id": "cached",
+        "id": "view_column",
         "color": {
             "type": "enum",
-            "value": "gray"
+            "value": "orange"
         }
     },
     "functions": [
@@ -20,36 +26,37 @@
             "entry": "main.js",
             "input": {
                 "type": "object",
+                "required": [],
                 "properties": {
-                    "title": {
-                        "title": "Title",
-                        "type": "string",
-                        "default": "Card title"
-                    },
-                    "eyebrow": {
-                        "title": "Eyebrow",
-                        "description": "This is the superheading above the title.",
-                        "type": "string",
-                        "default": "Eyebrow"
-                    },
-                    "content": {
-                        "title": "Content",
-                        "description": "This is the text that goes on the flip side of the content card.",
-                        "type": "FormattedText"
-                    },
-                    "image": {
-                        "title": "Image",
-                        "type": "string",
-                        "format": "matrix-asset-uri"
-                    },
-                    "imageAlignment": {
-                        "title": "Image Alignment",
-                        "type": "string",
-                        "default": "right",
-                        "enum": ["left", "right"]
+                    "contentConfiguration": {
+                        "description": "For best results, the content editor should use images of the same dimensions in the deployed component.",
+                        "required": [],
+                        "properties": {
+                            "images": {
+                                "title": "Images",
+                                "description": "Select a minimum of 2 or a maximum of 3 images",
+                                "type": "array",
+                                "minItems": 2,
+                                "maxItems": 3,
+                                "items": {
+                                    "required": [],
+                                    "type": "object",
+                                    "properties": {
+                                        "imageAsset": {
+                                            "title": "Image asset",
+                                            "type": "string",
+                                            "format": "matrix-asset-uri"
+                                        },
+                                        "imageCaption": {
+                                            "title": "Image caption",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
-                },
-                "required": ["title", "content", "image"]
+                }
             },
             "output": {
                 "responseType": "html"
@@ -87,6 +94,14 @@
         "matrix-asset://api-identifier/99100": {
             "type": "file",
             "path": "mocked-uris/99100.json"
+        },
+        "matrix-asset://api-identifier/125800": {
+            "type": "file",
+            "path": "mocked-uris/125800.json"
+        },
+        "matrix-asset://api-identifier/125801": {
+            "type": "file",
+            "path": "mocked-uris/125801.json"
         }
     },
     "previews": {

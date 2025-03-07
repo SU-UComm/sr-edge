@@ -1,17 +1,17 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
-    "name": "interactive-photo-card",
-    "type": "edge",
-    "version": "4.0.2",
+    "name": "button",
+    "version": "4.0.0",
     "namespace": "pnp-stanford-edge-components-hbs",
-    "description": "2 side by side cards with 1 being a photo and 1 being a fact with the ability to flip the card over for additional information.",
-    "displayName": "Interactive Photo Card",
+    "description": "A button that can be linked to internal or external pages.",
+    "displayName": "Button",
     "mainFunction": "main",
+    "type": "edge",
     "icon": {
-        "id": "cached",
+        "id": "link",
         "color": {
             "type": "enum",
-            "value": "gray"
+            "value": "red"
         }
     },
     "functions": [
@@ -21,35 +21,29 @@
             "input": {
                 "type": "object",
                 "properties": {
-                    "title": {
-                        "title": "Title",
+                    "buttonText": {
+                        "title": "Button text",
                         "type": "string",
-                        "default": "Card title"
+                        "default": "Button text"
                     },
-                    "eyebrow": {
-                        "title": "Eyebrow",
-                        "description": "This is the superheading above the title.",
+                    "internalUrl": {
+                        "title": "Internal link (Matrix asset link)",
                         "type": "string",
-                        "default": "Eyebrow"
-                    },
-                    "content": {
-                        "title": "Content",
-                        "description": "This is the text that goes on the flip side of the content card.",
-                        "type": "FormattedText"
-                    },
-                    "image": {
-                        "title": "Image",
-                        "type": "string",
+                        "description": "Select a page/asset to link to. If this field is filled out, it will be used instead of the external link field below.",
                         "format": "matrix-asset-uri"
                     },
-                    "imageAlignment": {
-                        "title": "Image Alignment",
+                    "externalUrl": {
+                        "title": "External (manual) link",
                         "type": "string",
-                        "default": "right",
-                        "enum": ["left", "right"]
+                        "description": "Enter the full URL, including https://. A diagonal arrow icon will be automatically added after the button text if the URL does not contain news.stanford.edu."
+                    },
+                    "isNewWindow": {
+                        "title": "Open link in a new window",
+                        "type": "boolean",
+                        "default": false
                     }
                 },
-                "required": ["title", "content", "image"]
+                "required": []
             },
             "output": {
                 "responseType": "html"
@@ -84,9 +78,25 @@
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://api-identifier/99100": {
+        "matrix-asset://matrixIdentifier/3": {
             "type": "file",
-            "path": "mocked-uris/99100.json"
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/28192": {
+            "type": "file",
+            "path": "mocked-uris/28192.json"
         }
     },
     "previews": {

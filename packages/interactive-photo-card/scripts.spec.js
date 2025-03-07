@@ -6,15 +6,20 @@ const mockedError = vi.fn();
 console.error = mockedError;
 
 describe('[Interactive Photo Card][Client]', () => {
-    let card, inner;
+    let card, inner, content, button;
 
     beforeEach(() => {
         // Setup DOM structure
         card = document.createElement('div');
         inner = document.createElement('div');
+        content = document.createElement('div');
         card.setAttribute('data-component', 'interactive-photo-card');
         inner.setAttribute('data-card-inner', 'true');
+        content.setAttribute('data-card-inner', 'true');
+        button = document.createElement('button');
         card.appendChild(inner);
+        inner.appendChild(content);
+        content.appendChild(button);
     
         document.body.appendChild(card);
     });
@@ -47,6 +52,30 @@ describe('[Interactive Photo Card][Client]', () => {
 
             // Restore the original function after test
             _interactivePhotoCardInitSpy.mockRestore(); 
+        });
+
+        it('Should call _interactivePhotoCardContentInit for each section', () => {
+            const section = document.createElement('section');
+            section.setAttribute('data-component', 'interactive-photo-card');
+            document.body.appendChild(section);
+
+            const _interactivePhotoCardContentInitSpy = vi.spyOn(photoCard, '_interactivePhotoCardContentInit');
+
+            // Simulate DOMContentLoaded event
+            const event = new Event('DOMContentLoaded');
+            document.dispatchEvent(event);
+
+
+            document.querySelectorAll(photoCard.INTERACTIVE_PHOTO_CARD).forEach(section => {
+                // Call the function to set up all event listeners
+                photoCard._interactivePhotoCardContentInit(section);
+            });
+
+            // Check if the spy was called
+            expect(_interactivePhotoCardContentInitSpy).toHaveBeenCalledWith(section);
+
+            // Restore the original function after test
+            _interactivePhotoCardContentInitSpy.mockRestore(); 
         });
     });
 
@@ -104,5 +133,60 @@ describe('[Interactive Photo Card][Client]', () => {
 
 
     });
-});
 
+    describe('toggleCardsVisibility function', () => {
+        it('should toggle aria-hidden state', () => {
+            // Create a spy for the function
+            const spy = vi.spyOn(photoCard, 'toggleCardsVisibility');
+            photoCard.toggleCardsVisibility([content]);
+            
+            expect(content.getAttribute('aria-hidden')).toBe('true');
+            
+            photoCard.toggleCardsVisibility([content]);
+            
+            expect(content.getAttribute('aria-hidden')).toBe('false');
+            expect(spy).toHaveBeenCalled();
+        });
+    });
+
+    describe('_interactivePhotoCardContentInit function', () => {
+        it('Should initialize click handlers for all card inner content elements', () => {
+          // Arrange
+          const cardElement = document.createElement('div');
+          cardElement.setAttribute('data-component', 'interactive-photo-card');
+          document.body.appendChild(cardElement);
+      
+          // Create multiple content elements
+          const contentElements = [
+            document.createElement('div'),
+            document.createElement('div')
+          ];
+          
+          contentElements.forEach(element => {
+            element.setAttribute('data-card-inner-content', 'true');
+            cardElement.appendChild(element);
+          });
+      
+          // Create spy for toggleCardsVisibility
+          const toggleSpy = vi.spyOn(photoCard, 'toggleCardsVisibility');
+      
+          // Act
+          photoCard._interactivePhotoCardContentInit(cardElement);
+      
+          // Assert
+          contentElements.forEach(content => {
+            // Verify event listener exists
+            expect(content.onclick).toBeDefined();
+            
+            // Trigger click event
+            fireEvent.click(content);
+            
+            // Reset spy for next iteration
+            toggleSpy.mockClear();
+          });
+      
+          // Restore original function after all tests
+          toggleSpy.mockRestore();
+        });
+      });
+});

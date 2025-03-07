@@ -49,6 +49,7 @@ mediagallery
 videoplay
 pullquote
 Svgs
+noopener
 
 # Lorem Ipsum 
 ezgif
