@@ -54,20 +54,11 @@ describe('[Button]', () => {
             expect(mockedError).toBeCalledTimes(1);
         });
 
-        it('Should throw an error when buttonText is missing', async () => {
-            const mockData = { ...defaultMockData, buttonText: undefined };
+        it('Should throw an error when buttonText is not a string', async () => {
+            const mockData = { ...defaultMockData, buttonText: [1,2,3] };
             const result = await main(mockData, defaultMockInfo);
             expect(result).toBe(
-                '<!-- Error occurred in the Button component: The "buttonText" field cannot be undefined and must be a non-empty string. The undefined was received. -->',
-            );
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when buttonText is an empty string', async () => {
-            const mockData = { ...defaultMockData, buttonText: '' };
-            const result = await main(mockData, defaultMockInfo);
-            expect(result).toBe(
-                '<!-- Error occurred in the Button component: The "buttonText" field cannot be undefined and must be a non-empty string. The "" was received. -->',
+                '<!-- Error occurred in the Button component: The "buttonText" field must be a string. The [1,2,3] was received. -->',
             );
             expect(mockedError).toBeCalledTimes(1);
         });
@@ -125,8 +116,7 @@ describe('[Button]', () => {
                       <a href="https://example.com/internal-link" class="su-group su-flex su-items-center su-w-fit hocus:su-underline md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">
                           Button Text         
                       </a>    </div>
-              </section>
-              "
+              </section>"
             `);
         });
       
@@ -149,8 +139,7 @@ describe('[Button]', () => {
                                   </svg>
                               </span>
                       </a>    </div>
-              </section>
-              "
+              </section>"
             `);
         });
 
@@ -163,8 +152,7 @@ describe('[Button]', () => {
                       <a href="https://example.com/internal-link" target="_blank" class="su-group su-flex su-items-center su-w-fit hocus:su-underline md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">
                           Button Text         
                       </a>    </div>
-              </section>
-              "
+              </section>"
             `);
         });
       
