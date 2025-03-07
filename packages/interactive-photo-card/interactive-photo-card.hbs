@@ -13,7 +13,7 @@
                             {{title}}
                         </h2>
                         <button type="button" tabIndex="" aria-label="See additional information" class="su-block su-ml-auto su-mr-0 su-bg-black su-text-white group-hover/front:su-bg-digital-red focus:su-bg-digital-red su-rounded-full su-p-10 su-stretched-link su-transition-all su-opacity-100 group-aria-hidden/front:su-opacity-0">
-                            {{{plus}}}
+                            {{> icon-plus iconPlusClasses}}
                         </button>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
                     <div class="su-big-paragraph su-grow">
                         {{{content}}}
                         <button type="button" tabIndex="-1" aria-label="Dismiss content" class="su-block su-ml-auto su-mr-0 su-border-3 su-border-white su-rounded-full su-text-white focus:su-bg-black group-hover/back:su-bg-black su-p-7 lg:su-p-14 su-stretched-link su-transition-colors">
-                            {{{arrow}}}
+                            {{> icon-arrows-rotate iconArrowClasses=iconArrowClasses}}
                         </button>
                     </div>
                 </div>

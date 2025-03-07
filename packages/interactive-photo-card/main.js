@@ -1,6 +1,5 @@
 import interactivePhotoCard from './interactive-photo-card.hbs';
 import { basicAssetUri } from "../../global/js/utils";
-import { ArrowsRotate, Plus } from "../../global/js/helpers/SVG-library";
 
 /**
  * Interactive photo card component that renders a image and content side by side.
@@ -84,12 +83,8 @@ export default {
             imageUrl: imageData?.url,
             contentAlignmentClass: imageAlignment === 'left' ? 'xl:su-order-2' : '',
             imageAlignmentClass: imageAlignment === 'left' ? 'xl:su-order-first' : '',
-            plus: Plus({
-                className: "su-size-30 md:su-size-50 su-fill-none group-hover/front:su-scale-110 group-focus-within/front:su-scale-110 su-transition-transform"
-            }),
-            arrow: ArrowsRotate({
-                className: "su-size-30 lg:su-size-36 su-fill-none group-hover/back:su-rotate-45 su-transition-transform"
-            })
+            iconPlusClasses: "su-size-30 md:su-size-50 su-fill-none group-hover/front:su-scale-110 group-focus-within/front:su-scale-110 su-transition-transform",
+            iconArrowClasses: "su-size-30 lg:su-size-36 su-fill-none group-hover/back:su-rotate-45 su-transition-transform"
         };
 
         return interactivePhotoCard(componentData);
