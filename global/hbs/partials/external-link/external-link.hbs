@@ -1,0 +1,11 @@
+{{#if liveUrl}}
+    <a class="{su-group su-component-external-link su-flex su-items-center su-flex-nowrap su-text-digital-red su-no-underline dark:su-text-dark-mode-red hocus:su-underline hocus:su-text-black dark:hocus:su-text-white {{externalLinkClasses ctaSize}}" href={{liveUrl}}>
+        <span>{{ctaText}}</span>
+        {{> fontawesome-icon
+            icon="arrow-up-right"
+            set="regular"
+            width=12
+            classes="su-inline-block su-ml-5 su-text-18 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-text-black dark:group-hocus:su-text-white group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
+        }}
+    </a>
+{{/if}}

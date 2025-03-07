@@ -1,0 +1,1 @@
+export { isRealExternalLink } from './isRealExternalLink';
