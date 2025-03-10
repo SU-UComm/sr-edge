@@ -1,3 +1,5 @@
+import { fas, far } from '../../js/libraries';
+
 export const helpers = {
     alignClass: function(align) {
         const alignClasses = new Map();
@@ -130,11 +132,22 @@ export const helpers = {
           : "md:su-items-start md:su-content-start " + alignClasses.get(alignment);
     },
     fontawesomePathData: function(arg1, arg2) {
-        const iconObject = Object.values(fas).find(icon => 
-            icon.iconName === arg1 && icon.prefix === arg2
-        );
+        const iconSet = arg2 === "regular" ? far : fas;
+
+        if (!Array.isArray(iconSet)) return 'Icon not found';
         
-        return iconObject?.icon[4] || 'Icon not found';
+        const iconObject = iconSet.find(icon => icon.iconName === arg1);
+        
+        return iconObject?.icon[4] ?? 'Icon not found';
+    },
+    fontawesomeViewData: function(arg1, arg2) {
+        const iconSet = arg2 === "regular" ? far : arg2 === "solid" ? fas : null;
+
+        if (!Array.isArray(iconSet)) return '0 0 0 0';
+
+        const iconObject = iconSet.find(icon => icon.iconName === arg1);
+
+        return iconObject ? `0 0 ${iconObject.icon[0]} ${iconObject.icon[1]}` : '0 0 0 0';
     },
     formatFirstWord: function (content, firstWord) {
         if (!content) return content;

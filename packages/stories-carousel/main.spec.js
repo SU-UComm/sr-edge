@@ -1,7 +1,5 @@
-import hash from 'object-hash';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { cardDataAdapter, funnelbackCardService, linkedHeadingService } from "../../global/js/utils";
-import { LinkedHeading } from "../../global/js/helpers";
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { cardDataAdapter, funnelbackCardService, linkedHeadingService, uuid } from "../../global/js/utils";
 import moduleToTest from './main';
 
 const { main } = moduleToTest;
@@ -10,6 +8,7 @@ const mockedError = vi.fn();
 console.error = mockedError;
 
 vi.mock('../../global/js/utils', () => ({
+    uuid: vi.fn(),
     cardDataAdapter: vi.fn().mockImplementation(() => ({
         setCardService: vi.fn(),
         getCards: vi.fn().mockResolvedValue([
@@ -394,6 +393,10 @@ describe('[Stories Carousel]', () => {
     });
 
     describe('[Main Function]', () => {
+        beforeAll(() => {
+            uuid.mockReturnValue('476f6893-b77b-43d8-ac8c-ac74d3d75dd7');
+        });
+
         it('Should return the expected HTML with valid data', async () => {
             linkedHeadingService.mockResolvedValueOnce({
                 title: "Sample Heading",
@@ -405,9 +408,23 @@ describe('[Stories Carousel]', () => {
             const result = await main(defaultMockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="stories-carousel" data-unique-id="a707350bcf9bea3cb7fe28e0219c12af">
+              "<section data-component="stories-carousel" data-unique-id="476f6893-b77b-43d8-ac8c-ac74d3d75dd7">
                   <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="linked-heading">Linked Heading</div>
+                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
+                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
+                                  Sample Heading
+                              </h2>
+                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
+                                  <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red">
+                                      <span class="su-flex su-gap-2 su-items-baseline">
+                                      <span>
+                                          Learn More <span class="sr-only">Sample Heading</span>
+                                      </span>
+                                      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18">
+                                          <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
+                                      </svg>                </span>
+                                  </a>
+                          </div>
                       <div class="component-slider">
                   <div class="swiper component-slider-cards component-slider-peek">
                       <div class="swiper-wrapper">  
@@ -445,13 +462,53 @@ describe('[Stories Carousel]', () => {
             
             linkedHeadingService.mockResolvedValueOnce(linkedData);
 
-            await main(defaultMockData, defaultMockInfo);
-            
+            const result = await main(defaultMockData, defaultMockInfo);
 
             linkedData.ctaLink = `${defaultMockInfo.env.BASE_DOMAIN}${defaultMockInfo.env.BASE_PATH}${defaultMockInfo.env.NEWS_ARCHIVE_PATH}`;
 
-            expect(LinkedHeading).toHaveBeenCalledWith(linkedData);
-            // expect(result).toContain(expectedDefaultLink);
+            expect(result).toMatchInlineSnapshot(`
+              "<section data-component="stories-carousel" data-unique-id="476f6893-b77b-43d8-ac8c-ac74d3d75dd7">
+                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
+                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
+                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
+                                  Sample Heading
+                              </h2>
+                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
+                                  <a data-test="cta" href="https://example.com/base/archive" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red">
+                                      <span class="su-flex su-gap-2 su-items-baseline">
+                                      <span>
+                                          Learn More <span class="sr-only">Sample Heading</span>
+                                      </span>
+                                      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18">
+                                          <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
+                                      </svg>                </span>
+                                  </a>
+                          </div>
+                      <div class="component-slider">
+                  <div class="swiper component-slider-cards component-slider-peek">
+                      <div class="swiper-wrapper">  
+                      </div>
+                  </div>
+                  <div class="component-slider-controls su-flex su-mt-45 lg:su-mt-48 su-items-center su-content-center">
+                      <div aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination- su-mr-full"></div>
+                      <button class="component-slider-btn component-slider-prev" type="button">
+                          <span class="sr-only">Previous</span>
+                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
+                              
+                          </span>
+                      </button>
+                      <button class="component-slider-btn component-slider-next" type="button">
+                          <span class="sr-only">Next</span>
+                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
+                              
+                          </span>
+                      </button>
+                  </div>
+              </div>
+                  </div>
+                  ModalHTML
+              </section>"
+            `);
         });
 
         it('Should call cardDataAdapter and funnelbackCardService', async () => {
@@ -459,75 +516,6 @@ describe('[Stories Carousel]', () => {
 
             expect(cardDataAdapter).toHaveBeenCalled();
             expect(funnelbackCardService).toHaveBeenCalled();
-        });
-
-        it('Should render LinkedHeading and Carousel components correctly', async () => {
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="stories-carousel" data-unique-id="a707350bcf9bea3cb7fe28e0219c12af">
-                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="linked-heading">Linked Heading</div>
-                      <div class="component-slider">
-                  <div class="swiper component-slider-cards component-slider-peek">
-                      <div class="swiper-wrapper">  
-                      </div>
-                  </div>
-                  <div class="component-slider-controls su-flex su-mt-45 lg:su-mt-48 su-items-center su-content-center">
-                      <div aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination- su-mr-full"></div>
-                      <button class="component-slider-btn component-slider-prev" type="button">
-                          <span class="sr-only">Previous</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                      <button class="component-slider-btn component-slider-next" type="button">
-                          <span class="sr-only">Next</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                  </div>
-              </div>
-                  </div>
-                  ModalHTML
-              </section>"
-            `);
-        });
-
-        it('Should render data-unique-id when data existing', async () => {
-
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="stories-carousel" data-unique-id="a707350bcf9bea3cb7fe28e0219c12af">
-                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="linked-heading">Linked Heading</div>
-                      <div class="component-slider">
-                  <div class="swiper component-slider-cards component-slider-peek">
-                      <div class="swiper-wrapper">  
-                      </div>
-                  </div>
-                  <div class="component-slider-controls su-flex su-mt-45 lg:su-mt-48 su-items-center su-content-center">
-                      <div aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination- su-mr-full"></div>
-                      <button class="component-slider-btn component-slider-prev" type="button">
-                          <span class="sr-only">Previous</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                      <button class="component-slider-btn component-slider-next" type="button">
-                          <span class="sr-only">Next</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                  </div>
-              </div>
-                  </div>
-                  ModalHTML
-              </section>"
-            `);
         });
 
         it('Should render empty data-unique-id when data not provided', async () => {
@@ -541,92 +529,27 @@ describe('[Stories Carousel]', () => {
             expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Stories carousel component: The "data" cannot be undefined or null. The [] was received. -->"`);
         });
 
-        it('Should not render LinkedHeading when was not provided', async () => {
-            linkedHeadingService.mockImplementationOnce(null);
-
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="stories-carousel" data-unique-id="a707350bcf9bea3cb7fe28e0219c12af">
-                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="linked-heading">Linked Heading</div>
-                      <div class="component-slider">
-                  <div class="swiper component-slider-cards component-slider-peek">
-                      <div class="swiper-wrapper">  
-                      </div>
-                  </div>
-                  <div class="component-slider-controls su-flex su-mt-45 lg:su-mt-48 su-items-center su-content-center">
-                      <div aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination- su-mr-full"></div>
-                      <button class="component-slider-btn component-slider-prev" type="button">
-                          <span class="sr-only">Previous</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                      <button class="component-slider-btn component-slider-next" type="button">
-                          <span class="sr-only">Next</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                  </div>
-              </div>
-                  </div>
-                  ModalHTML
-              </section>"
-            `);
-        });
-
-        it('Should generate a unique class ID based on data hash', async () => {
-            const cardData = [
-                {
-                    "title": "Inaugural Lecturer’s Award winners honored",
-                    "description": ["Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education."],
-                    "liveUrl": "https://example.com",
-                    "imageUrl": ["https://picsum.photos/400/400"],
-                    "imageAlt": ["Image of Cathy Haas, Jamie Imam, Provost Jenny Martinez, Elizabeth Kessler Hayes"],
-                    "taxonomy": ["Awards, Honors & Appointments"],
-                    "taxonomyUrl": ["https://example.com/"],
-                    "type": "Photo",
-                    "date": 1730073600000,
-                    "taxonomyFeaturedUnitLandingPageUrl": ["https://example.com/"],
-                    "taxonomyFeaturedUnitText": ["Office of the Vice Provost for Undergraduate Education"],
-                    "isTeaser": ["false"]
-                },
-                {
-                    "title": "Bass Fellows in Undergraduate Education announced",
-                    "description": ["The Bass University Fellows in Undergraduate Education Program recognizes faculty for extraordinary contributions to undergraduate education."],
-                    "liveUrl": "https://example.com",
-                    "imageUrl": ["https://picsum.photos/400/400"],
-                    "imageAlt": ["Main Quad as seen through arcade arch"],
-                    "taxonomy": ["Awards, Honors & Appointments"],
-                    "taxonomyUrl": ["https://example.com/"],
-                    "type": "News",
-                    "date": 1730073600000,
-                    "taxonomyFeaturedUnitLandingPageUrl": ["https://example.com/"],
-                    "taxonomyFeaturedUnitText": ["Office of the Vice Provost for Undergraduate Education"],
-                    "isTeaser": ["false"]
-                }
-            ];
-
-            cardDataAdapter.mockImplementationOnce(() => ({
-                setCardService: vi.fn(),
-                getCards: vi.fn().mockResolvedValue(cardData),
-            }));
-
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            const dataHash = hash.MD5(JSON.stringify(cardData));
-            expect(result).toContain(`data-unique-id="${dataHash}"`);
-        });
-
         it('Should render Card and Modal components based on data type', async () => {
             const result = await main(defaultMockData, defaultMockInfo);
             
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="stories-carousel" data-unique-id="a707350bcf9bea3cb7fe28e0219c12af">
+              "<section data-component="stories-carousel" data-unique-id="476f6893-b77b-43d8-ac8c-ac74d3d75dd7">
                   <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="linked-heading">Linked Heading</div>
+                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
+                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
+                                  Sample Heading
+                              </h2>
+                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
+                                  <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red">
+                                      <span class="su-flex su-gap-2 su-items-baseline">
+                                      <span>
+                                          Learn More <span class="sr-only">Sample Heading</span>
+                                      </span>
+                                      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18">
+                                          <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
+                                      </svg>                </span>
+                                  </a>
+                          </div>
                       <div class="component-slider">
                   <div class="swiper component-slider-cards component-slider-peek">
                       <div class="swiper-wrapper">  
