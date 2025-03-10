@@ -11,3 +11,4 @@ export { matrixImageCardService } from './matrixImageCardService';
 export { multicolumnGrid } from './multicolumnGrid'
 export { getFirstWord } from './getFirstWord';
 export { isRealExternalLink } from './isRealExternalLink';
+export { uuid } from './uuid';

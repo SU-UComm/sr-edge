@@ -18,6 +18,13 @@ const components = readdirSync(resolve(__dirname, 'packages')).filter((dir) => {
 
 // Custom Vite plugin to precompile Handlebars templates
 function handlebarsPrecompile() {
+    // Register custom library for helpers to use
+    const regularFALibDir = resolve(__dirname, 'global', 'js', 'libraries', 'fontawesome', 'regular.js');
+    const solidFALibDir = resolve(__dirname, 'global', 'js', 'libraries', 'fontawesome', 'solid.js');
+    const regularFALib = readFileSync(regularFALibDir, 'utf8');
+    const solidFALib = readFileSync(solidFALibDir, 'utf8');
+
+
     // Register custom helpers
     Object.keys(helpers).forEach((key) => {
         Handlebars.registerHelper(key, helpers[key]);
@@ -65,7 +72,7 @@ function handlebarsPrecompile() {
                     .join('\n');
 
                 return {
-                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\n${partialsCode}\nexport default Handlebars.template(${templateSpec});`,
+                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\n${regularFALib}\n${solidFALib}\n${partialsCode}\nexport default Handlebars.template(${templateSpec});`,
                     map: null,
                 };
             }

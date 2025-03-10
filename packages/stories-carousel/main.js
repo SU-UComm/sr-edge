@@ -1,7 +1,7 @@
 import hash from "object-hash";
 import storiesCarouselTemplate from './stories-carousel.hbs';
-import { cardDataAdapter, funnelbackCardService, linkedHeadingService } from "../../global/js/utils";
-import { Carousel, LinkedHeading, Card, Modal, EmbedVideo } from "../../global/js/helpers";
+import { cardDataAdapter, funnelbackCardService, linkedHeadingService, uuid } from "../../global/js/utils";
+import { Carousel, Card, Modal, EmbedVideo } from "../../global/js/helpers";
 
 /**
  * Stories carousel component that renderds a list of cards based on fetched data.
@@ -139,7 +139,7 @@ export default {
         let uniqueClass = ""
         
         if (data !== null && data !== undefined) {
-            uniqueClass = hash.MD5(JSON.stringify(data));
+            uniqueClass = uuid();
             
             data.forEach((card) => {
                 cardData.push(
@@ -174,7 +174,12 @@ export default {
         // Prepare component data for template rendering
         const componentData = {
             id: uniqueClass,
-            headingData: LinkedHeading(headingData),
+            test: JSON.stringify(headingData),
+            title: headingData.title,
+            isAlwaysLight: false,
+            ctaLink: headingData.ctaLink,
+            ctaNewWindow: headingData.ctaNewWindow,
+            ctaText: headingData.ctaText,
             carousel: Carousel({ variant:"cards", slides: cardData.join(''), uniqueClass: uniqueClass }),
             cardModal: cardModal.join(''),
             width: "large"
