@@ -174,7 +174,6 @@ export default {
         // Prepare component data for template rendering
         const componentData = {
             id: uniqueClass,
-            test: JSON.stringify(headingData),
             title: headingData.title,
             isAlwaysLight: false,
             ctaLink: headingData.ctaLink,
