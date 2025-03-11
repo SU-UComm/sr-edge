@@ -1,0 +1,94 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "policy-brief",
+    "type": "edge",
+    "version": "4.0.2",
+    "namespace": "stanford-components",
+    "description": "This component allows a content manager to create a policy brief that can be externally linked to a policy brief or case study.",
+    "displayName": "Policy brief",
+    "mainFunction": "main",
+    "icon": {
+        "id": "edit_note",
+        "color": {
+            "type": "enum",
+            "value": "yellow"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "contentConfiguration": {
+                        "title": "Policy brief content",
+                        "description": "These options will output to the frontend of the policy brief component.",
+                        "required": [],
+                        "properties": {
+                            "image": {
+                                "title": "Image",
+                                "format": "matrix-asset-uri",
+                                "type": "string"
+                            },
+                            "type": {
+                                "title": "Type",
+                                "enum": ["Policy Brief", "Case Study"],
+                                "default": "Policy Brief",
+                                "type": "string"
+                            },
+                            "title": {
+                                "title": "Heading",
+                                "description": "The heading text",
+                                "type": "string",
+                                "default": ""
+                            },
+                            "summary": {
+                                "title": "Summary",
+                                "type": "string",
+                                "format": "multi-line"
+                            },
+                            "linkUrl": {
+                                "title": "Link URL",
+                                "type": "string"
+                            },
+                            "linkText": {
+                                "title": "Link text",
+                                "type": "string",
+                                "default": "Read the full brief"
+                            }
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://api-identifier/63353": {
+            "type": "file",
+            "path": "mocked-uris/63353.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        }
+    }
+}
