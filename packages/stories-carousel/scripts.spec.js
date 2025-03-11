@@ -76,7 +76,7 @@ describe('[Stories Carousel][Client]', () => {
         it('Should initialize Swiper with the correct configuration', () => {
             storiesCarousel._carouselInit(section);
 
-            expect(Swiper).toHaveBeenCalledWith('section[data-component="stories-carousel"] .swiper', expect.objectContaining({
+            expect(Swiper).toHaveBeenCalledWith('section[data-unique-id="testId"] .swiper', expect.objectContaining({
                 breakpoints: {
                     0: expect.any(Object),
                     768: expect.any(Object),
@@ -95,7 +95,7 @@ describe('[Stories Carousel][Client]', () => {
             storiesCarousel._carouselInit(section);
     
             // Ensure Swiper was called
-            expect(Swiper).toHaveBeenCalledWith('section[data-component="stories-carousel"] .swiper', expect.objectContaining({
+            expect(Swiper).toHaveBeenCalledWith('section[data-unique-id="testId"] .swiper', expect.objectContaining({
                 breakpoints: {
                     0: expect.any(Object),
                     768: expect.any(Object),
