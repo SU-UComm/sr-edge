@@ -16,5 +16,5 @@ rm -rf ./**/export
 rm -rf ./**/__coverage__
 setopt nomatch # start reporting no matches
 
-npm i
-npm install --ignore-scripts
+dotenv -e .env npm i
+dotenv -e .env npm install --ignore-scripts
