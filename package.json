@@ -26,9 +26,11 @@
         "vermgmt": "vermgmt"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-svg-core": "^6.6.0",
+        "@fortawesome/fontawesome-svg-core": "^6.7.2",
         "@fortawesome/free-regular-svg-icons": "^6.6.0",
         "@fortawesome/free-solid-svg-icons": "^6.6.0",
+        "@fortawesome/pro-regular-svg-icons": "^6.7.2",
+        "@fortawesome/pro-solid-svg-icons": "^6.7.2",
         "@testing-library/dom": "^10.4.0",
         "xss": "^1.0.14"
     },
