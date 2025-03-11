@@ -84,7 +84,7 @@ export function _modalInit(section) {
 export function _carouselInit(section) {
     const uniqueClass = section.dataset.uniqueId;
 
-    swiper = new Swiper(`${STORIES_CAROUSEL_SELECTOR} .swiper`, {
+    swiper = new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
         breakpoints: {
             0: {
                 slidesPerView: 1.5,
@@ -115,8 +115,8 @@ export function _carouselInit(section) {
             nextSlideMessage: 'Next slide',
         },
         navigation: {
-            nextEl: `.component-slider-next`,
-            prevEl: `.component-slider-prev`,
+            nextEl: `section[data-unique-id="${uniqueClass}"] .component-slider-next`,
+            prevEl: `section[data-unique-id="${uniqueClass}"] .component-slider-prev`,
         },
         pagination: {
             el: `.component-slider-pagination-${uniqueClass}`,
