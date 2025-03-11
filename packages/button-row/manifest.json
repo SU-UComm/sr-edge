@@ -1,0 +1,124 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "button-row",
+    "version": "2.0.1",
+    "type": "edge",
+    "namespace": "pnp-stanford-edge-components",
+    "description": "Add up to 3 buttons in this row component.",
+    "displayName": "Button row",
+    "mainFunction": "main",
+    "environment": [
+        {
+            "name": "API_IDENTIFIER",
+            "required": true
+        }
+    ],
+    "icon": {
+        "id": "foundation",
+        "color": {
+            "type": "enum",
+            "value": "red"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "buttons": {
+                        "title": "Buttons",
+                        "description": "Enter the details for each button. You can add up to 3 buttons.",
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 3,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "buttonText": {
+                                    "type": "string",
+                                    "title": "Button text"
+                                },
+                                "internalUrl": {
+                                    "title": "Internal link (Matrix asset link)",
+                                    "type": "string",
+                                    "description": "Select a page/asset to link to. If this field is filled out, it will be used instead of the external link field below.",
+                                    "format": "matrix-asset-uri"
+                                },
+                                "externalUrl": {
+                                    "title": "External (manual) link",
+                                    "type": "string",
+                                    "description": "Enter the full URL, including https://. A diagonal arrow icon will be automatically added after the button text if the URL does not contain news.stanford.edu."
+                                },
+                                "isNewWindow": {
+                                    "title": "Open link in a new window",
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            "required": []
+                        }
+                    }
+                },
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/28192": {
+            "type": "file",
+            "path": "mocked-uris/28192.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
