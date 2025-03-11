@@ -1,0 +1,175 @@
+import inTheNewsTemplate from './in-the-news.hbs';
+import { basicAssetUri, cardDataAdapter, matrixCardService } from '../../global/js/utils';
+
+export default {
+    async main(args, info) {
+        const fnsCtx = info?.fns || info?.ctx || {};
+        const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
+        const { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow } = (args && args.headingConfiguration) || {};
+        const { featuredTeaser, personHeadshot, featuredCtaText, featuredTeaserDescription, featuredQuote } = (args && args.featuredContent) || {};
+        const { teaserOne, teaserOneDescription } = (args && args.supplementaryTeaserOne) || {};
+        const { teaserTwo, teaserTwoDescription } = (args && args.supplementaryTeaserTwo) || {};
+
+        try {
+            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                throw new Error(
+                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                );
+            }
+            if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
+                throw new Error(
+                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
+                );
+            }
+            if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
+                throw new Error(
+                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
+                );
+            }
+
+        } catch (er) {
+            console.error('Error occurred in the In the news component: ', er);
+            return `<!-- Error occurred in the In the news component: ${er.message} -->`;
+        }
+
+        try {
+            if (title && typeof title !== 'string') {
+                throw new Error(
+                    `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`
+                );
+            }
+            if (ctaText && typeof ctaText !== 'string') {
+                throw new Error(
+                    `The "ctaText" field must be a string type. The ${JSON.stringify(ctaText)} was received.`
+                );
+            }
+            if (ctaUrl && typeof ctaUrl !== 'string') {
+                throw new Error(
+                    `The "ctaUrl" field must be a string type. The ${JSON.stringify(ctaUrl)} was received.`
+                );
+            }
+            if (featuredTeaser && typeof featuredTeaser !== 'string') {
+                throw new Error(
+                    `The "featuredTeaser" field must be a string type. The ${JSON.stringify(featuredTeaser)} was received.`
+                );
+            }
+            if (personHeadshot && typeof personHeadshot !== 'string') {
+                throw new Error(
+                    `The "personHeadshot" field must be a string type. The ${JSON.stringify(personHeadshot)} was received.`
+                );
+            }
+            if (featuredCtaText && typeof featuredCtaText !== 'string') {
+                throw new Error(
+                    `The "featuredCtaText" field must be a string type. The ${JSON.stringify(featuredCtaText)} was received.`
+                );
+            }
+            if (featuredTeaserDescription && typeof featuredTeaserDescription !== 'string') {
+                throw new Error(
+                    `The "featuredTeaserDescription" field must be a string type. The ${JSON.stringify(featuredTeaserDescription)} was received.`
+                );
+            }
+            if (featuredQuote && typeof featuredQuote !== 'string') {
+                throw new Error(
+                    `The "featuredQuote" field must be a string type. The ${JSON.stringify(featuredQuote)} was received.`
+                );
+            }
+            if (teaserOne && typeof teaserOne !== 'string') {
+                throw new Error(
+                    `The "teaserOne" field must be a string type. The ${JSON.stringify(teaserOne)} was received.`
+                );
+            }
+            if (teaserOneDescription && typeof teaserOneDescription !== 'string') {
+                throw new Error(
+                    `The "teaserOneDescription" field must be a string type. The ${JSON.stringify(teaserOneDescription)} was received.`
+                );
+            }
+            if (teaserTwo && typeof teaserTwo !== 'string') {
+                throw new Error(
+                    `The "teaserTwo" field must be a string type. The ${JSON.stringify(teaserTwo)} was received.`
+                );
+            }
+            if (teaserTwoDescription && typeof teaserTwoDescription !== 'string') {
+                throw new Error(
+                    `The "teaserTwoDescription" field must be a string type. The ${JSON.stringify(teaserTwoDescription)} was received.`
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the In the news component: ', er);
+            return `<!-- Error occurred in the In the news component: ${er.message} -->`;
+        }
+
+
+        const adapter = new cardDataAdapter();
+        let data = null;
+
+        const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
+
+        adapter.setCardService(service);
+
+        data = await adapter.getCards([
+            { cardAsset: featuredTeaser }, 
+            { cardAsset: teaserOne }, 
+            { cardAsset: teaserTwo }
+            ]);
+
+        let resolvedUrl = "";
+        if (ctaUrl !== undefined && ctaUrl !== "" && ctaUrl !== null) {
+            const linkedPageData = await basicAssetUri(fnsCtx, ctaUrl);
+    
+            resolvedUrl = linkedPageData.url || linkedPageData.liveUrl;
+        }
+        const headingCtaLink = resolvedUrl || ctaManualUrl;
+           
+
+        let imageData = null;
+        imageData = await basicAssetUri(fnsCtx, personHeadshot);
+
+        const dataFeatured = {
+            ...data[0],
+            quote: featuredQuote,
+            description: featuredTeaserDescription,
+            ctaText: featuredCtaText,
+            imageURL: imageData.url,
+            imageAlt: imageData.alt
+        };
+
+        const dataOne = data && data[1];
+        if (teaserOneDescription && teaserOneDescription !== "") {
+            dataOne.description = teaserOneDescription;
+        }
+
+        const dataTwo = data && data[2];
+        if (teaserTwoDescription && teaserTwoDescription !== "") {
+            dataTwo.description = teaserTwoDescription;
+        }
+
+        const cardData = data && [dataFeatured, dataOne, dataTwo];
+
+        try {
+            if (typeof dataFeatured !== 'object' || dataFeatured === null) {
+                throw new Error(
+                    `The data cannot be undefined or null. The ${JSON.stringify(data)} was received.`
+                );
+            }
+            if (typeof cardData !== 'object' || JSON.stringify(cardData) === JSON.stringify([null, null]) || cardData.length < 2) {
+                throw new Error(
+                    `The data cannot have less then 3 elements. The ${JSON.stringify(data)} was received.`
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the In the news content component: ', er);
+            return `<!-- Error occurred in the In the news content component: ${er.message} -->`;
+        }
+        
+        const componentData = {
+            headingDataTitle: title,
+            headingDataCtaText: ctaText,
+            headingDataCtaLink: headingCtaLink,
+            headingDataCtaNewWindow: ctaNewWindow,
+            featuredGridItems: cardData,
+        };
+
+        return inTheNewsTemplate(componentData);
+    }
+};
+
