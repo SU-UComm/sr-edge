@@ -112,7 +112,7 @@ export const helpers = {
     externalLinkClasses: function(ctaSize) {
         const externalLinkClass = new Map();
         externalLinkClass.set("small", "");
-        externalLinkClass.set("su-font-semibold su-text-21 su-leading-[26.25px]");
+        externalLinkClass.set("large", "su-font-semibold su-text-21 su-leading-[26.25px]");
         
         return externalLinkClass.get(ctaSize);
     },

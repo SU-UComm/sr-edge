@@ -50,6 +50,7 @@ videoplay
 pullquote
 Svgs
 noopener
+Headshot
 
 # Lorem Ipsum 
 ezgif

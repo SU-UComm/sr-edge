@@ -1,11 +1,11 @@
-<article aria-label={{title}} class="su-group su-relative">
+<article aria-label="{{title}}" class="su-group su-relative">
     {{#if source}}
         <div class="su-text-18 su-leading-snug su-font-semibold md:su-pb-13">
             {{source}}
         </div>
     {{/if}}
     <h3 class="su-font-bold su-leading-display su-text-24 su-m-0 md:su-pb-9">
-        <a href={{liveUrl}} class="su-group su-stretched-link su-inline-block su-text-black dark:su-text-white hocus:su-underline hocus:su-text-digital-red su-transition dark:hocus:su-text-dark-mode-red focus:su-outline-none focus-visible:su-ring-2 focus-visible:su-rounded focus-visible:su-ring-digital-red dark:focus-visible:su-ring-dark-mode-red focus-visible:after:su-outline focus-visible:after:su-outline-offset-8 focus-visible:after:su-outline-digital-red focus-visible:after:su-outline">
+        <a href={{liveUrl}} class="su-group su-stretched-link su-inline-block su-text-black dark:su-text-white hocus:su-underline hocus:su-text-digital-red su-transition dark:hocus:su-text-dark-mode-red focus:su-outline-none focus-visible:su-ring-2 focus-visible:su-rounded focus-visible:su-ring-digital-red dark:focus-visible:su-ring-dark-mode-red focus-visible:su-outline-none focus-visible:after:su-outline focus-visible:after:su-outline-offset-8 focus-visible:after:su-outline-digital-red dark:focus-visible:after:su-outline-dark-mode-red">
             <span>{{title}}</span>
             {{> fontawesome-icon
                 icon="arrow-up-right"
@@ -24,7 +24,7 @@
         </div>
         <div>
             {{#if description}}
-                <div class="*:su-my-0 *:dark:su-text-white *:su-font-sans *:su-w-full *:su-font-normal *:su-leading-snug">
+                <div data-test="pullquote-description" class="*:su-my-0 *:dark:su-text-white *:su-font-sans *:su-w-full *:su-font-normal *:su-leading-snug">
                     <p>
                         {{#if authorName}}
                             <span class="su-font-semibold">{{authorName}}</span>
