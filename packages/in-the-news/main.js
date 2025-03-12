@@ -8,6 +8,36 @@ import inTheNewsTemplate from './in-the-news.hbs';
  */
 
 export default {
+    /**
+     * Renders the In the news component.
+     * 
+     * @async
+     * @function
+     * @param {Object} args - The arguments for the component.
+     * @param {Object} args.headingConfiguration - The header configuration for the component.
+     * @param {string} [args.headingConfiguration.title] - The text for the heading (optional).
+     * @param {string} [args.headingConfiguration.ctaUrl] - The assetid for the CTA link (optional).
+     * @param {string} [args.headingConfiguration.ctaManualUrl] - The URL for the CTA link (optional).
+     * @param {string} [args.headingConfiguration.ctaText] - The text for the CTA link (optional).
+     * @param {string} [args.headingConfiguration.ctaNewWindow] - Flag to open CTA link in new window (optional).
+     * @param {Object} args.featuredContent - The feature content section.
+     * @param {string} args.featuredContent.featuredTeaser - The assetid for the feature teaser(optional).
+     * @param {string} [args.featuredContent.personHeadshot] - The assetid for the persion image (optional).
+     * @param {string} [args.featuredContent.featuredCtaText] - The CTA link tekst for fature teaser (optional).
+     * @param {string} [args.featuredContent.featuredTeaserDescription] - The description for feature teaser (optional).
+     * @param {string} [args.featuredContent.featuredQuote] - The feature qoute (optional).
+     * @param {Object} args.supplementaryTeaserOne - The supplementary teaseer one.
+     * @param {string} args.supplementaryTeaserOne.teaserOne - The assetid for the supplementary teaser one (optional).
+     * @param {string} [args.supplementaryTeaserOne.teaserOneDescription] - The description to be replaced for the supplementary teaser one (optional).
+     * @param {Object} args.supplementaryTeaserTwo - The supplementary teaseer two.
+     * @param {string} args.supplementaryTeaserTwo.teaserTwo - The assetid for the supplementary teaser two (optional).
+     * @param {string} [args.supplementaryTeaserTwo.teaserTwoDescription] - The description to be replaced for the supplementary teaser two (optional).
+     * @param {Object} info - Context information for the component.
+     * @param {Object} info.env - Environment variables in the execution context.
+     * @param {Object} info.fns - Functions available in the execution context.
+     * @param {Function} info.fns.resolveUri - Function to resolve URIs.
+     * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
+     */
     async main(args, info) {
         // Extracting environment variables from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
@@ -56,7 +86,7 @@ export default {
             }
             if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
                 throw new Error(
-                    `The "ctaManualUrl" field must be a string type. The ${JSON.stringify(ctaUrl)} was received.`
+                    `The "ctaManualUrl" field must be a string type. The ${JSON.stringify(ctaManualUrl)} was received.`
                 );
             }
             if (ctaText && typeof ctaText !== 'string') {
@@ -128,6 +158,7 @@ export default {
 
         adapter.setCardService(service);
 
+        // Getting data
         data = await adapter.getCards([
             { cardAsset: featuredTeaser }, 
             { cardAsset: teaserOne }, 
@@ -143,51 +174,51 @@ export default {
         let imageData = null;
         imageData = await basicAssetUri(fnsCtx, personHeadshot);
 
-        const dataFeatured = data && data[0] && {
+        const cardData = [];
+
+        // Prepare feature data
+        data && data[0] && cardData.push({
             ...data[0],
             quote: featuredQuote,
             description: featuredTeaserDescription ? featuredTeaserDescription : '',
             ctaText: featuredCtaText,
-            imageURL: imageData.url,
-            imageAlt: imageData.alt
-        };
+            imageURL: imageData?.url,
+            imageAlt: imageData?.alt
+        });
 
-        const dataOne = data && data[1] && {
+        // Prepare teaser one data
+        data && data[1] && cardData.push({
             ...data[1],
             description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[1].description,
             isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
-        };
+        });
         
-        const dataTwo = data && data[2] && {
+        // Prepare teaser two data
+        data && data[2] && cardData.push({
             ...data[2],
             description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[2].description,
             isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
-        }
+        });
 
-        const cardData = dataFeatured && dataOne && dataTwo && [dataFeatured, dataOne, dataTwo];
 
         try {
-            if (typeof dataFeatured !== 'object' || dataFeatured === null) {
+            if (typeof cardData !== 'object' || cardData.length < 1) {
                 throw new Error(
-                    `The data cannot be undefined or null. The ${JSON.stringify(data)} was received.`
-                );
-            }
-            if (typeof cardData !== 'object' || JSON.stringify(cardData) === JSON.stringify([null, null]) || cardData.length < 2) {
-                throw new Error(
-                    `The data cannot have less then 3 elements. The ${JSON.stringify(data)} was received.`
+                    `The "data" cannot be undefined or null. The ${JSON.stringify(cardData)} was received.`
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the In the news content component: ', er);
-            return `<!-- Error occurred in the In the news content component: ${er.message} -->`;
+            console.error('Error occurred in the In the news component: ', er);
+            return `<!-- Error occurred in the In the news component: ${er.message} -->`;
         }
         
+        // Prepare component data for template rendering
         const componentData = {
-            headingTitle: headingData.title,
+            headingTitle: headingData?.title,
             headingIsAlwaysLight: false,
-            headingCtaLink: headingData.ctaLink,
-            headingCtaNewWindow: headingData.ctaNewWindow,
-            headingCtaText: headingData.ctaText,
+            headingCtaLink: headingData?.ctaLink,
+            headingCtaNewWindow: headingData?.ctaNewWindow,
+            headingCtaText: headingData?.ctaText,
             featuredGridItems: cardData,
         };
 
