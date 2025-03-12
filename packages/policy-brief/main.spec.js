@@ -151,11 +151,9 @@ describe('[Policy Brief Component]', () => {
     });
 
     describe('[Main function]', () => {
-        beforeEach(() => {
-            basicAssetUri.mockResolvedValueOnce({ url: 'https://example.com' });
-        });
-    
         it('Should return the expected HTML with valid data', async () => { 
+            basicAssetUri.mockResolvedValueOnce({ url: 'https://example.com' });
+
             const result = await main(defaultMockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
@@ -163,7 +161,7 @@ describe('[Policy Brief Component]', () => {
                   <div class="su-mx-auto su-component-container su-container-wide">
                       <div class="su-relative su-flex su-flex-col su-gap-20 su-py-30 su-px-20 su-bg-fog-light md:su-mx-50 md:su-flex-row md:su-gap-18 lg:su-gap-48 md:su-p-36 lg:su-py-61 lg:su-px-65 dark:su-bg-transparent dark:before:su-bg-black dark:before:su-opacity-[0.5] dark:before:su-content-[''] dark:before:su-absolute dark:before:su-w-full dark:before:su-h-full dark:before:su-top-0 dark:before:su-left-0 dark:before:su-z-1">
                           <div class="su-relative su-w-full su-h-[233px] md:su-h-auto md:su-min-w-[257px] lg:su-h-[378.331px] lg:su-flex-1 su-z-2">
-                              <img src="" class="su-absolute su-size-full su-object-cover" alt="" />
+                              <img src="https://example.com" class="su-absolute su-size-full su-object-cover" alt="" />
                           </div>
                           <div class="lg:su-flex-1 su-relative su-z-2">
                               <div class="su-flex su-gap-6 su-items-center su-text-18 su-font-semibold su-pb-20 md:su-pb-27">
@@ -226,6 +224,8 @@ describe('[Policy Brief Component]', () => {
         }); 
 
         it('Should return the expected HTML when type is set to Case Study', async () => {
+            basicAssetUri.mockResolvedValueOnce({ url: 'https://example.com' });
+
             const mockData = {
                 ...defaultMockData,
                 contentConfiguration: {
@@ -240,7 +240,7 @@ describe('[Policy Brief Component]', () => {
                   <div class="su-mx-auto su-component-container su-container-wide">
                       <div class="su-relative su-flex su-flex-col su-gap-20 su-py-30 su-px-20 su-bg-fog-light md:su-mx-50 md:su-flex-row md:su-gap-18 lg:su-gap-48 md:su-p-36 lg:su-py-61 lg:su-px-65 dark:su-bg-transparent dark:before:su-bg-black dark:before:su-opacity-[0.5] dark:before:su-content-[''] dark:before:su-absolute dark:before:su-w-full dark:before:su-h-full dark:before:su-top-0 dark:before:su-left-0 dark:before:su-z-1">
                           <div class="su-relative su-w-full su-h-[233px] md:su-h-auto md:su-min-w-[257px] lg:su-h-[378.331px] lg:su-flex-1 su-z-2">
-                              <img src="" class="su-absolute su-size-full su-object-cover" alt="" />
+                              <img src="https://example.com" class="su-absolute su-size-full su-object-cover" alt="" />
                           </div>
                           <div class="lg:su-flex-1 su-relative su-z-2">
                               <div class="su-flex su-gap-6 su-items-center su-text-18 su-font-semibold su-pb-20 md:su-pb-27">
@@ -304,6 +304,7 @@ describe('[Policy Brief Component]', () => {
 
         it('Should return the expected HTML when image url is empty', async () => { 
             basicAssetUri.mockResolvedValueOnce({});
+
             const result = await main(defaultMockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
@@ -311,7 +312,6 @@ describe('[Policy Brief Component]', () => {
                   <div class="su-mx-auto su-component-container su-container-wide">
                       <div class="su-relative su-flex su-flex-col su-gap-20 su-py-30 su-px-20 su-bg-fog-light md:su-mx-50 md:su-flex-row md:su-gap-18 lg:su-gap-48 md:su-p-36 lg:su-py-61 lg:su-px-65 dark:su-bg-transparent dark:before:su-bg-black dark:before:su-opacity-[0.5] dark:before:su-content-[''] dark:before:su-absolute dark:before:su-w-full dark:before:su-h-full dark:before:su-top-0 dark:before:su-left-0 dark:before:su-z-1">
                           <div class="su-relative su-w-full su-h-[233px] md:su-h-auto md:su-min-w-[257px] lg:su-h-[378.331px] lg:su-flex-1 su-z-2">
-                              <img src="" class="su-absolute su-size-full su-object-cover" alt="" />
                           </div>
                           <div class="lg:su-flex-1 su-relative su-z-2">
                               <div class="su-flex su-gap-6 su-items-center su-text-18 su-font-semibold su-pb-20 md:su-pb-27">

@@ -1,4 +1,4 @@
-import { basicAssetUri } from '../../global/js/utils/basicAssetUri/basicAssetUri';
+import { basicAssetUri } from '../../global/js/utils';
 import policyBriefTemplate from './policy-brief.hbs';
 
 /**
@@ -90,7 +90,7 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            imageUrl: assetData?.url,
+            imageUrl: assetData,
             type,
             title,
             summary,
