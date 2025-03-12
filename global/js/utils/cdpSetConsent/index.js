@@ -1,0 +1,1 @@
+export { cdpSetConsent } from './cdpSetConsent';

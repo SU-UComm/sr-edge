@@ -1,0 +1,1 @@
+export { infoBox } from './infoBox';
