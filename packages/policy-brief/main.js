@@ -1,5 +1,4 @@
 import { basicAssetUri } from '../../global/js/utils/basicAssetUri/basicAssetUri';
-import { PolicyBrief, CaseStudy } from '../../global/js/helpers/SVG-library';
 import policyBriefTemplate from './policy-brief.hbs';
 
 /**
@@ -27,10 +26,13 @@ export default {
      * @returns {Promise<string>} Rendered policy brief HTML string
      */
     async main(args, info) {
+        // Extracting environment functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+
+        // Extract configuration data from arguments
         const { image, type, title, summary, linkUrl, linkText } = args?.contentConfiguration || {};
 
-        // Check for environment vars
+        // Validate required functions
         try {
             if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
                 throw new Error(
@@ -38,19 +40,15 @@ export default {
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the Policy Brief component: ', er);
-            return `<!-- Error occurred in the Policy Brief component: ${er.message} -->`;
+            console.error('Error occurred in the Policy brief component: ', er);
+            return `<!-- Error occurred in the Policy brief component: ${er.message} -->`;
         }
 
+        // Validate required fields and ensure correct data types
         try {
             if (image && typeof image !== 'string') {
                 throw new Error(
                     `The "image" field must be a string type. The ${JSON.stringify(image)} was received.`
-                );
-            }
-            if (type && typeof type !== 'string') {
-                throw new Error(
-                    `The "type" field must be a string type. The ${JSON.stringify(type)} was received.`
                 );
             }
             if (type && !["Policy Brief", "Case Study"].includes(type)) {
@@ -79,34 +77,26 @@ export default {
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the In the news component: ', er);
-            return `<!-- Error occurred in the In the news component: ${er.message} -->`;
+            console.error('Error occurred in the Policy brief component: ', er);
+            return `<!-- Error occurred in the Policy brief component: ${er.message} -->`;
         }
 
         let assetData = null;
+
+        // Getting image data 
         if (image) {
             assetData = await basicAssetUri(fnsCtx, image);
         }
 
-        const SVGMap = new Map();
-        SVGMap.set("Policy Brief", {
-            light: PolicyBrief({ variant: "light" }),
-            dark: PolicyBrief({ variant: "dark" })
-        });
-        SVGMap.set("Case Study", {
-            light: CaseStudy({ variant: "light" }),
-            dark: CaseStudy({ variant: "dark" })
-        });
-
+        // Prepare component data for template rendering
         const componentData = {
-            data: assetData?.url,
+            imageUrl: assetData?.url,
             type,
             title,
             summary,
             linkUrl,
             linkText,
-            svgLight: SVGMap.get(type)?.light,
-            svgDark: SVGMap.get(type)?.dark
+            width: "wide",
         };
 
         return policyBriefTemplate(componentData);
