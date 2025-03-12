@@ -1,0 +1,799 @@
+{
+    "assetid": "162634",
+    "type_code": "page_content",
+    "version": "0.2.6",
+    "name": "‘Design Kids’ leverage their craft to build community on campus",
+    "short_name": "Remembering Jon McConnell",
+    "external_id": true,
+    "status": "16",
+    "languages": "en",
+    "charset": "utf-8",
+    "created": "2024-12-02 09:27:15",
+    "created_userid": "127824",
+    "updated": "2025-01-23 07:21:29",
+    "updated_userid": "25323",
+    "published": "2024-12-02 10:16:19",
+    "published_userid": "127824",
+    "status_changed": "2024-12-02 10:16:19",
+    "status_changed_userid": "127824",
+    "thumbnail": "",
+    "isCustomDescription": true,
+    "credit": "Jane Doe",
+    "attributes": {
+        "dxp_page_content_id": {
+            "attrid": "4265",
+            "type": "text",
+            "value": "4785e37d-96ef-4bd2-9f0b-d52d68c9c443",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "short_name": {
+            "attrid": "4264",
+            "type": "text",
+            "value": "Remembering Jon McConnell",
+            "is_contextable": true,
+            "use_default": true
+        },
+        "name": {
+            "attrid": "4263",
+            "type": "text",
+            "value": "Jon McConnell, a leader in student public service, dies at 59",
+            "is_contextable": true,
+            "use_default": true
+        }
+    },
+    "metadata": {
+        "hubStatus": {
+            "value": "published",
+            "fieldid": "31822",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "hubStatusDescription": {
+            "value": "",
+            "fieldid": "31823",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "hubVersionHistory": {
+            "value": "",
+            "fieldid": "31825",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "hubReviewMsg": {
+            "value": "",
+            "fieldid": "32284",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "seoTitle": {
+            "value": "Remembering Jon McConnell",
+            "fieldid": "4541",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "canonicalUrl": {
+            "value": "",
+            "fieldid": "5989",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "seoDescription": {
+            "value": "For more than two decades, Jon McConnell shaped service-learning programs at Stanford’s Haas Center for Public Service, leaving an enduring legacy of community engagement and student mentorship.",
+            "fieldid": "4542",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "seoKeywords": {
+            "value": "",
+            "fieldid": "4560",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "robots": {
+            "value": "max-image-preview:large",
+            "fieldid": "4544",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "publishedDate": {
+            "value": "2024-12-02 00:00:00",
+            "fieldid": "4538",
+            "type": "metadata_field_date",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "modifiedDate": {
+            "value": "2024-01-01 00:00:00",
+            "fieldid": "4555",
+            "type": "metadata_field_date",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "includePageTopMargin": {
+            "value": "yes",
+            "fieldid": "130274",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "includePageBottomMargin": {
+            "value": "yes",
+            "fieldid": "130275",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "includePageHero": {
+            "value": "yes",
+            "fieldid": "130276",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "pageTitleAlignment": {
+            "value": "left",
+            "fieldid": "130908",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "campaignPage": {
+            "value": "no",
+            "fieldid": "156915",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "publishToMobile": {
+            "value": "true",
+            "fieldid": "131337",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srAudience": {
+            "value": "[\"28166\",\"28167\",\"28168\"]",
+            "fieldid": "60023",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srMessage": {
+            "value": "[\"28185\"]",
+            "fieldid": "60024",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srContentType": {
+            "value": "28196",
+            "fieldid": "60078",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srFeaturedUnit": {
+            "value": "28311",
+            "fieldid": "60079",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srContentCategory": {
+            "value": "28173",
+            "fieldid": "60285",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srContentMainTopic": {
+            "value": "28411",
+            "fieldid": "60081",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srContentTopic": {
+            "value": "[\"28465\"]",
+            "fieldid": "60082",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srContentSubtopic": {
+            "value": "[]",
+            "fieldid": "60083",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srAllCategories": {
+            "value": "[]",
+            "fieldid": "130296",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "teaser": {
+            "value": "For more than two decades, Jon McConnell shaped service-learning programs at Stanford’s Haas Center for Public Service, leaving an enduring legacy of community engagement and student mentorship.<\/p>",
+            "fieldid": "5047",
+            "type": "metadata_field_wysiwyg",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "pressCenter": {
+            "value": "false",
+            "fieldid": "131602",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "featuredImage": {
+            "value": "162606",
+            "fieldid": "5043",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "mediaContacts": {
+            "value": "",
+            "fieldid": "5048",
+            "type": "metadata_field_wysiwyg",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "excludeFromIndex": {
+            "value": "false",
+            "fieldid": "132305",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "forceSearchUpdate": {
+            "value": "",
+            "fieldid": "152000",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyLayout": {
+            "value": "Basic",
+            "fieldid": "127701",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "bannerImg": {
+            "value": "162606",
+            "fieldid": "5045",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "featuredMediaCaption": {
+            "value": "",
+            "fieldid": "129304",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "featuredMediaCredit": {
+            "value": "Courtesy Haas Center for Public Service",
+            "fieldid": "129305",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "featuredVideo": {
+            "value": "",
+            "fieldid": "99101",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "featuredMediaOrientation": {
+            "value": "vertical",
+            "fieldid": "128975",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "bannerCaption": {
+            "value": "Jon McConnell<\/p>",
+            "fieldid": "9639",
+            "type": "metadata_field_wysiwyg",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "basicStoryBannerType": {
+            "value": "image",
+            "fieldid": "130206",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "bannerImgType": {
+            "value": "normal",
+            "fieldid": "5046",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "basicStoryBannerCarousel": {
+            "value": "[]",
+            "fieldid": "130801",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "summary": {
+            "value": "For more than two decades, Jon McConnell shaped service-learning programs at Stanford’s Haas Center for Public Service, leaving an enduring legacy of community engagement and student mentorship.<\/p>",
+            "fieldid": "5091",
+            "type": "metadata_field_wysiwyg",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyFormat": {
+            "value": "standard",
+            "fieldid": "8258",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "mediaAttachments": {
+            "value": "[]",
+            "fieldid": "6715",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "featuredImageTwitter": {
+            "value": "",
+            "fieldid": "10689",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "featuredImageOg": {
+            "value": "",
+            "fieldid": "10690",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "hideSocialMedia": {
+            "value": "",
+            "fieldid": "26967",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "hideBottomBox": {
+            "value": "",
+            "fieldid": "26968",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCaption01": {
+            "value": "",
+            "fieldid": "143435",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCredit01": {
+            "value": "",
+            "fieldid": "143436",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCaption02": {
+            "value": "",
+            "fieldid": "143437",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCredit02": {
+            "value": "",
+            "fieldid": "143438",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCaption03": {
+            "value": "",
+            "fieldid": "143439",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCredit03": {
+            "value": "",
+            "fieldid": "143440",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCaption04": {
+            "value": "",
+            "fieldid": "143441",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCredit04": {
+            "value": "",
+            "fieldid": "143442",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCaption05": {
+            "value": "",
+            "fieldid": "143443",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCredit05": {
+            "value": "",
+            "fieldid": "143444",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCaption06": {
+            "value": "",
+            "fieldid": "143445",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "storyCredit06": {
+            "value": "",
+            "fieldid": "143446",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "contributorsAuthors": {
+            "value": "[]",
+            "fieldid": "127739",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "contributorsProducers": {
+            "value": "[]",
+            "fieldid": "127740",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "contributorsWriters": {
+            "value": "[\"162604\"]",
+            "fieldid": "127741",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "contributorsEditors": {
+            "value": "[]",
+            "fieldid": "127742",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "contributorsPhotographers": {
+            "value": "",
+            "fieldid": "163666",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "contributorsVideographers": {
+            "value": "[]",
+            "fieldid": "127743",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "contributorsPhotographyDirector": {
+            "value": "",
+            "fieldid": "127744",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "contributorsMediaContacts": {
+            "value": "[]",
+            "fieldid": "127745",
+            "type": "metadata_field_related_asset",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "bylineAuthor": {
+            "value": "",
+            "fieldid": "4561",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "bylineText": {
+            "value": "",
+            "fieldid": "5052",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "bylineUrl": {
+            "value": "",
+            "fieldid": "5053",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "ogLocale": {
+            "value": "en_US",
+            "fieldid": "4548",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "ogType": {
+            "value": "article",
+            "fieldid": "4549",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "twitterCard": {
+            "value": "summary_large_image",
+            "fieldid": "4559",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "authorId": {
+            "value": "",
+            "fieldid": "6051",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "authorName": {
+            "value": "",
+            "fieldid": "6052",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srcOrigin": {
+            "value": "",
+            "fieldid": "6046",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srcOriginType": {
+            "value": "",
+            "fieldid": "6047",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srcContentSource": {
+            "value": "",
+            "fieldid": "6048",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srcTitle": {
+            "value": "",
+            "fieldid": "31820",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srcSummary": {
+            "value": "",
+            "fieldid": "31821",
+            "type": "metadata_field_wysiwyg",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srcPublishedDate": {
+            "value": "2023-01-01 00:00:00",
+            "fieldid": "31824",
+            "type": "metadata_field_date",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srcFeaturedImage": {
+            "value": "",
+            "fieldid": "32051",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "slug": {
+            "value": "",
+            "fieldid": "19882",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srcKeywords": {
+            "value": "",
+            "fieldid": "32124",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srcPostId": {
+            "value": "",
+            "fieldid": "4563",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srcUrl": {
+            "value": "",
+            "fieldid": "4551",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "srcStatus": {
+            "value": "",
+            "fieldid": "6049",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "debugFeedUrl": {
+            "value": "",
+            "fieldid": "25417",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "debugPushTs": {
+            "value": "",
+            "fieldid": "29348",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "debugBlueprintId": {
+            "value": "",
+            "fieldid": "30853",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "debugTeaserId": {
+            "value": "",
+            "fieldid": "134758",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        },
+        "pageType": {
+            "value": "story",
+            "fieldid": "4857",
+            "type": "metadata_field_select",
+            "is_contextable": true,
+            "default_value": false,
+            "use_default": true
+        }
+    }
+}

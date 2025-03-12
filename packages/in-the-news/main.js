@@ -1,15 +1,25 @@
+import { basicAssetUri, cardDataAdapter, matrixCardService, linkedHeadingService } from '../../global/js/utils';
 import inTheNewsTemplate from './in-the-news.hbs';
-import { basicAssetUri, cardDataAdapter, matrixCardService } from '../../global/js/utils';
+
+/**
+ * In the news component that renders a formatted content card with associated metadata and SVG icons.
+ *
+ * @module InTheNews
+ */
 
 export default {
     async main(args, info) {
+        // Extracting environment variables from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
-        const { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow } = (args && args.headingConfiguration) || {};
-        const { featuredTeaser, personHeadshot, featuredCtaText, featuredTeaserDescription, featuredQuote } = (args && args.featuredContent) || {};
-        const { teaserOne, teaserOneDescription } = (args && args.supplementaryTeaserOne) || {};
-        const { teaserTwo, teaserTwoDescription } = (args && args.supplementaryTeaserTwo) || {};
+        
+        // Extract configuration data from arguments
+        const { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow } = args?.headingConfiguration || {};
+        const { featuredTeaser, personHeadshot, featuredCtaText, featuredTeaserDescription, featuredQuote } = args?.featuredContent || {};
+        const { teaserOne, teaserOneDescription } = args?.supplementaryTeaserOne || {};
+        const { teaserTwo, teaserTwoDescription } = args?.supplementaryTeaserTwo || {};
 
+        // Validate required environment variables
         try {
             if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
                 throw new Error(
@@ -32,10 +42,21 @@ export default {
             return `<!-- Error occurred in the In the news component: ${er.message} -->`;
         }
 
+        // Validate required fields and ensure correct data types
         try {
             if (title && typeof title !== 'string') {
                 throw new Error(
                     `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`
+                );
+            }
+            if (ctaUrl && typeof ctaUrl !== 'string') {
+                throw new Error(
+                    `The "ctaUrl" field must be a string type. The ${JSON.stringify(ctaUrl)} was received.`
+                );
+            }
+            if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
+                throw new Error(
+                    `The "ctaManualUrl" field must be a string type. The ${JSON.stringify(ctaUrl)} was received.`
                 );
             }
             if (ctaText && typeof ctaText !== 'string') {
@@ -43,9 +64,9 @@ export default {
                     `The "ctaText" field must be a string type. The ${JSON.stringify(ctaText)} was received.`
                 );
             }
-            if (ctaUrl && typeof ctaUrl !== 'string') {
+            if (ctaNewWindow && typeof ctaNewWindow !== 'boolean') {
                 throw new Error(
-                    `The "ctaUrl" field must be a string type. The ${JSON.stringify(ctaUrl)} was received.`
+                    `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
                 );
             }
             if (featuredTeaser && typeof featuredTeaser !== 'string') {
@@ -58,9 +79,9 @@ export default {
                     `The "personHeadshot" field must be a string type. The ${JSON.stringify(personHeadshot)} was received.`
                 );
             }
-            if (featuredCtaText && typeof featuredCtaText !== 'string') {
+            if (featuredQuote && typeof featuredQuote !== 'string') {
                 throw new Error(
-                    `The "featuredCtaText" field must be a string type. The ${JSON.stringify(featuredCtaText)} was received.`
+                    `The "featuredQuote" field must be a string type. The ${JSON.stringify(featuredQuote)} was received.`
                 );
             }
             if (featuredTeaserDescription && typeof featuredTeaserDescription !== 'string') {
@@ -68,9 +89,9 @@ export default {
                     `The "featuredTeaserDescription" field must be a string type. The ${JSON.stringify(featuredTeaserDescription)} was received.`
                 );
             }
-            if (featuredQuote && typeof featuredQuote !== 'string') {
+            if (featuredCtaText && typeof featuredCtaText !== 'string') {
                 throw new Error(
-                    `The "featuredQuote" field must be a string type. The ${JSON.stringify(featuredQuote)} was received.`
+                    `The "featuredCtaText" field must be a string type. The ${JSON.stringify(featuredCtaText)} was received.`
                 );
             }
             if (teaserOne && typeof teaserOne !== 'string') {
@@ -101,7 +122,8 @@ export default {
 
         const adapter = new cardDataAdapter();
         let data = null;
-
+        
+        // Compose and fetch the FB search results
         const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
 
         adapter.setCardService(service);
@@ -110,40 +132,37 @@ export default {
             { cardAsset: featuredTeaser }, 
             { cardAsset: teaserOne }, 
             { cardAsset: teaserTwo }
-            ]);
+        ]);
 
-        let resolvedUrl = "";
-        if (ctaUrl !== undefined && ctaUrl !== "" && ctaUrl !== null) {
-            const linkedPageData = await basicAssetUri(fnsCtx, ctaUrl);
-    
-            resolvedUrl = linkedPageData.url || linkedPageData.liveUrl;
-        }
-        const headingCtaLink = resolvedUrl || ctaManualUrl;
-           
+        // Resolve the URI for the section heading link
+        const headingData = await linkedHeadingService(
+            fnsCtx,
+            args.headingConfiguration
+        );
 
         let imageData = null;
         imageData = await basicAssetUri(fnsCtx, personHeadshot);
 
-        const dataFeatured = {
+        const dataFeatured = data && data[0] && {
             ...data[0],
             quote: featuredQuote,
-            description: featuredTeaserDescription,
+            description: featuredTeaserDescription ? featuredTeaserDescription : '',
             ctaText: featuredCtaText,
             imageURL: imageData.url,
             imageAlt: imageData.alt
         };
 
-        const dataOne = data && data[1];
-        if (teaserOneDescription && teaserOneDescription !== "") {
-            dataOne.description = teaserOneDescription;
+        const dataOne = data && data[1] && {
+            ...data[1],
+            description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[1].description
+        };
+        
+        const dataTwo = data && data[2] && {
+            ...data[2],
+            description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[2].description
         }
 
-        const dataTwo = data && data[2];
-        if (teaserTwoDescription && teaserTwoDescription !== "") {
-            dataTwo.description = teaserTwoDescription;
-        }
-
-        const cardData = data && [dataFeatured, dataOne, dataTwo];
+        const cardData = dataFeatured && dataOne && dataTwo && [dataFeatured, dataOne, dataTwo];
 
         try {
             if (typeof dataFeatured !== 'object' || dataFeatured === null) {
@@ -162,10 +181,12 @@ export default {
         }
         
         const componentData = {
-            headingDataTitle: title,
-            headingDataCtaText: ctaText,
-            headingDataCtaLink: headingCtaLink,
-            headingDataCtaNewWindow: ctaNewWindow,
+            data: JSON.stringify(dataOne),
+            headingTitle: headingData.title,
+            headingIsAlwaysLight: false,
+            headingCtaLink: headingData.ctaLink,
+            headingCtaNewWindow: headingData.ctaNewWindow,
+            headingCtaText: headingData.ctaText,
             featuredGridItems: cardData,
         };
 

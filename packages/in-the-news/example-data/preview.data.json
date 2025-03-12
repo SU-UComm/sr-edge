@@ -2,21 +2,21 @@
     "headingConfiguration": {
         "title": "In the news",
         "ctaText": "View all",
-        "ctaUrl": "matrix-asset://api-identifier/89422"
+        "ctaUrl": "matrix-asset://api-identifier/141464"
     },
     "featuredContent": {
-        "featuredTeaser": "matrix-asset://api-identifier/63436",
-        "personHeadshot": "matrix-asset://api-identifier/63353",
-        "featuredCtaText": "Read the story on NPR",
+        "featuredTeaser": "matrix-asset://api-identifier/162707",
+        "personHeadshot": "matrix-asset://api-identifier/163591",
+        "featuredCtaText": "See more",
         "featuredTeaserDescription": "This is a custom feature desc",
-        "featuredQuote": "A sanctuary, it’s a forever thing. And so we want to know not only what’s here now, but how it’s changing over time.”"
+        "featuredQuote": "A sanctuary, it’s a forever thing. And so we want to know not only what’s here now, but how it’s changing over time."
     },
     "supplementaryTeaserOne": {
-        "teaserOne": "matrix-asset://api-identifier/63416",
-        "teaserOneDescription": "Teaser 1 custom description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent suscipit quis nunc non ultricies. Phasellus nisi orci, sagittis eu ligula ut, laoreet accumsan eros. Duis venenatis dolor vel eros gravida laoreet. Etiam accumsan nisl sapien, in convallis arcu volutpat eu. Etiam vehicula, sapien ac convallis fermentum, dui lectus porttitor magna, sit amet venenatis libero augue a justo. Nam convallis quam metus, vel luctus arcu pharetra euismod. Vestibulum imperdiet tempus blandit. Cras volutpat erat dui, ut volutpat massa porttitor sagittis. Etiam condimentum, mi vitae luctus efficitur, libero lorem faucibus lectus, sit amet aliquet eros nisi ut tortor. Nunc sit amet dignissim libero. Nullam nisi augue, gravida a arcu vel, sodales posuere odio. Nulla facilisis, nisl tincidunt fringilla faucibus, nisi risus viverra justo, sit amet tincidunt neque elit quis velit. Integer quam mauris, dapibus vehicula nisi ut, sodales aliquet dui. In ut mi purus. Proin feugiat gravida ex, lobortis iaculis erat interdum eu."
+        "teaserOne": "matrix-asset://api-identifier/162634",
+        "teaserOneDescription": "Teaser 1 custom description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet tempus blandit. Cras volutpat erat dui, ut volutpat massa porttitor sagittis. "
     },
     "supplementaryTeaserTwo": {
-        "teaserTwo": "matrix-asset://api-identifier/63412",
+        "teaserTwo": "matrix-asset://api-identifier/162759",
         "teaserTwoDescription": ""
     }
 }

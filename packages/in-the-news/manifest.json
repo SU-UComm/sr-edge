@@ -1,8 +1,8 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "in-the-news",
-    "version": "1.0.1",
-    "namespace": "pnp-stanford-edge-components",
+    "version": "4.0.1",
+    "namespace": "pnp-stanford-edge-components-hbs",
     "description": "This component contains one featured quote and two supplementary teasers.",
     "type": "edge",
     "displayName": "In the news",
@@ -177,25 +177,25 @@
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/63353": {
+        "matrix-asset://api-identifier/141464": {
             "type": "file",
-            "path": "mocked-uris/63353.json"
+            "path": "mocked-uris/141464.json"
         },
-        "matrix-asset://api-identifier/63411": {
+        "matrix-asset://api-identifier/162634": {
             "type": "file",
-            "path": "mocked-uris/63411.json"
+            "path": "mocked-uris/162634.json"
         },
-        "matrix-asset://api-identifier/63412": {
+        "matrix-asset://api-identifier/162707": {
             "type": "file",
-            "path": "mocked-uris/63412.json"
+            "path": "mocked-uris/162707.json"
         },
-        "matrix-asset://api-identifier/63416": {
+        "matrix-asset://api-identifier/162759": {
             "type": "file",
-            "path": "mocked-uris/63416.json"
+            "path": "mocked-uris/162759.json"
         },
-        "matrix-asset://api-identifier/89422": {
+        "matrix-asset://api-identifier/163591": {
             "type": "file",
-            "path": "mocked-uris/89422.json"
+            "path": "mocked-uris/163591.json"
         }
     },
     "previews": {
