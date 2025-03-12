@@ -1,0 +1,1 @@
+export { formatNewsDate } from './formatNewsDate';

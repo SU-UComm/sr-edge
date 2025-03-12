@@ -1,30 +1,26 @@
-import hash from "object-hash";
-import { Close } from "../SVG-library";
+/**
+ * Creates a modal dialog (server-side only)
+ * 
+ * @param {string} titleId - ID for aria-describedby
+ * @param {string} title - Modal title
+ * @param {string} children - Modal content
+ * @returns {string} HTML string of the modal
+ */
+export function Modal({ titleId, title, children }) {
+  return `
+    <div hidden aria-modal="true" role="dialog" class="su-modal" ${titleId ? `aria-describedby="${titleId}"` : ''}>
+      ${!titleId && title ? `<h2>${title}</h2>` : ''}
+      <span data-focus-scope-start="true" hidden=""></span>
+      <div class="su-modal-content">
+        ${children}
+      </div>
 
-export function Modal({ content, uniqueId = "", describedby="image-gallery-modal" }) {
-
-    let hashId = uniqueId;
-
-    if (!uniqueId) {
-        hashId = hash.MD5(
-            JSON.stringify(content) + hash.MD5(JSON.stringify(describedby))
-        );
-    }
-
-    return `
-    <div data-overlay-container="true" class="su-modal su-hidden" data-modal="modal" data-modal-id="${hashId}">
-        <span data-focus-scope-start="true" hidden=""></span>
-        <div aria-describedby="${describedby}" role="dialog" tabindex="-1" data-modal="modal-dialog" data-ismodal="true" aria-modal="true">
-            <div class="su-modal-content">
-            ${content}
-            </div>
-        </div>
-        <button type="button" class="su-component-close su-text-center" data-dismiss="modal">
-            ${Close()}
-            <span>Close</span>
-        </button>
-        <span data-focus-scope-end="true" hidden=""></span>
-    </div>`;
-};
-
-export default Modal;
+      <button type="button" class="su-component-close su-text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="su-w-[1.1em] su-h-[1.1em]">
+          <path fill="currentColor" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+        </svg>
+        <span>Close</span>
+      </button>
+    </div>
+  `;
+}

@@ -1,0 +1,1 @@
+export { translatePersonalisationProfile } from './translatePersonalisationProfile'
