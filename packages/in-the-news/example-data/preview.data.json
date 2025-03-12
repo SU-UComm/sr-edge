@@ -13,10 +13,10 @@
     },
     "supplementaryTeaserOne": {
         "teaserOne": "matrix-asset://api-identifier/162634",
-        "teaserOneDescription": "Teaser 1 custom description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum imperdiet tempus blandit. Cras volutpat erat dui, ut volutpat massa porttitor sagittis. "
+        "teaserOneDescription": "Jason Borne"
     },
     "supplementaryTeaserTwo": {
         "teaserTwo": "matrix-asset://api-identifier/162759",
-        "teaserTwoDescription": ""
+        "teaserTwoDescription": "Jon Doe"
     }
 }

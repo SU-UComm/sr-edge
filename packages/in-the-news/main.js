@@ -154,12 +154,14 @@ export default {
 
         const dataOne = data && data[1] && {
             ...data[1],
-            description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[1].description
+            description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[1].description,
+            isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
         };
         
         const dataTwo = data && data[2] && {
             ...data[2],
-            description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[2].description
+            description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[2].description,
+            isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
         }
 
         const cardData = dataFeatured && dataOne && dataTwo && [dataFeatured, dataOne, dataTwo];
@@ -181,7 +183,6 @@ export default {
         }
         
         const componentData = {
-            data: JSON.stringify(dataOne),
             headingTitle: headingData.title,
             headingIsAlwaysLight: false,
             headingCtaLink: headingData.ctaLink,
