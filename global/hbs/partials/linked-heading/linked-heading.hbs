@@ -8,7 +8,7 @@
             <a data-test="cta" href="{{ctaLink}}"{{#if ctaNewWindow}} target="{{ctaTarget ctaNewWindow}}"{{/if}} class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white {{linkedHeadingAClasses isAlwaysLight}}">
                 <span class="su-flex su-gap-2 su-items-baseline">
                 <span>
-                    {{ctaText}} <span class="sr-only">{{title}}</span>
+                    {{ctaText}}<!-- --> <span class="sr-only">{{title}}</span>
                 </span>
                 {{> fontawesome-icon
                     icon="chevron-right"

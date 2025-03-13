@@ -2,35 +2,7 @@ import xss from "xss";
 import { cnb } from "cnbuilder";
 import { CardThumbnail } from "./cardThumbnail";
 import { FAIcon } from "../icons/FAIcon";
-import {
-  Alert,
-  AnalysisAndInsights,
-  CaseStudy,
-  Event,
-  EventHighlights,
-  Feature,
-  Infographic,
-  InTheNews,
-  LeadershipMessages,
-  Obituary,
-  Opinion,
-  Photo,
-  PolicyBrief,
-  PollQuiz,
-  Profile,
-  Research,
-  Solutions,
-  Survey,
-  Timeline,
-  TipsAndTakeaways,
-  TypeAnnouncement,
-  UniversityUpdates,
-  News,
-  QuestionAnswer,
-  Video,
-  Podcast,
-  BookOpenCover,
-} from "../SVG-library";
+import { svgIcons } from "../SVG-library";
 
 /**
  * Vertical Card styles and utilities
@@ -113,52 +85,6 @@ export function VerticalCard({
   displayThumbnail = true,
   headingLvl = 2,
 }) {
-  const SVGMap = new Map();
-  SVGMap.set("alert", Alert());
-  SVGMap.set("analysis & insights", AnalysisAndInsights());
-  SVGMap.set("analysis &amp; insights", AnalysisAndInsights());
-  SVGMap.set("analysis&nbsp;&amp;&nbsp;insights", AnalysisAndInsights());
-  SVGMap.set("case study", CaseStudy());
-  SVGMap.set("case&nbsp;study", CaseStudy());
-  SVGMap.set("casestudy", CaseStudy());
-  SVGMap.set("event", Event());
-  SVGMap.set("event&nbsp;highlights", EventHighlights());
-  SVGMap.set("event highlights", EventHighlights());
-  SVGMap.set("feature", Feature());
-  SVGMap.set("infographic", Infographic());
-  SVGMap.set("in&nbsp;the&nbsp;news", InTheNews());
-  SVGMap.set("in the news", InTheNews());
-  SVGMap.set("inthenews", InTheNews());
-  SVGMap.set("leadership&nbsp;messages", LeadershipMessages());
-  SVGMap.set("leadership messages", LeadershipMessages());
-  SVGMap.set("obituary", Obituary());
-  SVGMap.set("opinion", Opinion());
-  SVGMap.set("photo", Photo());
-  SVGMap.set("policy&nbsp;brief", PolicyBrief());
-  SVGMap.set("policy brief", PolicyBrief());
-  SVGMap.set("poll/quiz", PollQuiz());
-  SVGMap.set("poll / quiz", PollQuiz());
-  SVGMap.set("poll&nbsp;/&nbsp;quiz", PollQuiz());
-  SVGMap.set("profile", Profile());
-  SVGMap.set("research", Research());
-  SVGMap.set("solutions", Solutions());
-  SVGMap.set("survey", Survey());
-  SVGMap.set("timeline", Timeline());
-  SVGMap.set("tips & takeaways", TipsAndTakeaways());
-  SVGMap.set("tips &amp; takeaways", TipsAndTakeaways());
-  SVGMap.set("tips&nbsp;&amp;&nbsp;takeaways", TipsAndTakeaways());
-  SVGMap.set("university&nbsp;updates", UniversityUpdates());
-  SVGMap.set("university updates", UniversityUpdates());
-  SVGMap.set("announcement", TypeAnnouncement());
-  SVGMap.set("news", News());
-  SVGMap.set("q&amp;a", QuestionAnswer());
-  SVGMap.set("q&a", QuestionAnswer());
-  SVGMap.set("q & a", QuestionAnswer());
-  SVGMap.set("q&nbsp;&amp;&nbsp;a", QuestionAnswer());
-  SVGMap.set("video", Video());
-  SVGMap.set("podcast", Podcast());
-  SVGMap.set("book", BookOpenCover());
-
   let cardThumb = imageUrl;
 
   if (!cardThumb && liveUrl && !(liveUrl instanceof Array)) {
@@ -228,7 +154,7 @@ export function VerticalCard({
           <p data-testid="vertical-card-type"
              class="su-flex su-font-semibold su-text-black-70 dark:su-text-black-60 su-my-0 su-gap-6 su-flex-nowrap su-items-center su-order-3 ${typeSize(cardSize)}">
             <span class="type-icon" data-type="${type.toLowerCase()}"></span>
-              ${SVGMap.get(type.toLowerCase())}
+              ${svgIcons[type.toLowerCase()]()}
             <span>${xss(type)}</span>
           </p>
         ` : ''}

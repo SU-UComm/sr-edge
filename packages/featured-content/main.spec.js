@@ -472,7 +472,12 @@ describe('[Feature Content]', () => {
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
                   <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="linked-heading">Linked Heading</div>
+                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
+                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
+                                  Sample Heading
+                              </h2>
+                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
+                          </div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
                               <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow ">
@@ -529,7 +534,12 @@ describe('[Feature Content]', () => {
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
                   <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="linked-heading">Linked Heading</div>
+                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
+                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
+                                  Sample Heading
+                              </h2>
+                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
+                          </div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
                               <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow ">
@@ -579,7 +589,12 @@ describe('[Feature Content]', () => {
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
                   <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="linked-heading">Linked Heading</div>
+                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
+                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
+                                  Sample Heading
+                              </h2>
+                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
+                          </div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
                               <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow ">
@@ -629,7 +644,12 @@ describe('[Feature Content]', () => {
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
                   <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="linked-heading">Linked Heading</div>
+                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
+                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
+                                  Sample Heading
+                              </h2>
+                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
+                          </div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
                               <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow ">
@@ -668,7 +688,12 @@ describe('[Feature Content]', () => {
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
                   <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="linked-heading">Linked Heading</div>
+                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
+                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
+                                  Sample Heading
+                              </h2>
+                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
+                          </div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
                               <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow md:su-order-2">
@@ -707,7 +732,12 @@ describe('[Feature Content]', () => {
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="featured-content">
                   <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="linked-heading">Linked Heading</div>
+                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
+                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
+                                  Sample Heading
+                              </h2>
+                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
+                          </div>
                       <div class="su-w-full su-component-featured-grid">
                           <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
                               <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow ">
