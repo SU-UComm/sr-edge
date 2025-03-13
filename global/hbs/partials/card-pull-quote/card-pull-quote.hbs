@@ -1,6 +1,6 @@
 <article aria-label="Quote: {{quote}}" class="su-component-card-pullquote su-relative su-w-full su-pl-0 lg:su-pl-[52px] su-flex su-flex-col su-justify-center su-items-center su-gap-27">
     {{#if quote}}
-        {{> pull-quote imageURL=imageURL imageAlt=imageAlt quote=quote title=title avatarSize="medium"}}
+        {{> pull-quote avatarURL=imageURL avatarAlt=imageAlt avatarSize="medium" quote=quote title=title }}
     {{/if}}
     {{#if description}}
         <div class="*:su-my-0 *:su-text-18 *:dark:su-text-white *:su-font-sans *:su-w-full su-mr-auto">
@@ -12,5 +12,5 @@
             </p>
         </div>
     {{/if}}
-    {{> external-link size="large" ctaText=ctaText liveUrl=liveUrl }}
+    {{> external-link ctaSize="small" ctaText=ctaText liveUrl=liveUrl}}
 </article>

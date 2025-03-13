@@ -1,1 +1,0 @@
-export { VerticalCard } from './VerticalCard';

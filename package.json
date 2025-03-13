@@ -42,6 +42,7 @@
         "@testing-library/jest-dom": "^6.6.3",
         "@vitest/coverage-v8": "^2.1.8",
         "chokidar-cli": "^3.0.0",
+        "cnbuilder": "^3.1.0",
         "concurrently": "^9.1.0",
         "cspell": "^8.3.2",
         "decanter": "^7.3.1",

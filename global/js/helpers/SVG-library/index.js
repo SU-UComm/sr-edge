@@ -68,5 +68,6 @@ export { default as ShareLink } from "./ShareLink";
 export { default as Pause } from "./Pause";
 export { default as Play } from "./Play";
 export { default as ArrowRight } from "./ArrowRight";
+export { default as UniversityUpdates } from "./UniversityUpdates";
 export { default as TrendingUp } from "./TrendingUp";
 export { default as svgIcons } from "./svgIcons";

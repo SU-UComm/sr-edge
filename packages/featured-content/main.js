@@ -1,7 +1,7 @@
 import hash from "object-hash";
 import featureContentTemplate from './featured-content.hbs';
 import { cardDataAdapter, funnelbackCardService, linkedHeadingService, matrixCardService } from "../../global/js/utils";
-import { LinkedHeading, Card, Modal, EmbedVideo } from "../../global/js/helpers";
+import { Card, Modal, EmbedVideo } from "../../global/js/helpers";
  
 /**
  * Feature content component that renderds a list of features cards based on fetched data
@@ -198,25 +198,21 @@ export default {
             return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
         }
 
-        // CSS class configuration based on alignment
-        const alignClasses = {
-            'left': 'before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]',
-            'right': 'before:su-right-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-right-[-36px] before:lg:su-right-[-80px]',
-        };
-        const growClass = alignment === 'right' ? 'md:su-order-2' : '';
-
         // Generate card components to render
         const cardsToRender = cardData.map((card, idx) => `
             ${idx === 0 ? `<div class="su-relative su-w-full">`: `<div class="su-relative su-w-full before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px]">`}
-                ${Card({ data: card, cardSize: "small", displayThumbnail: displayThumbnails, displayDescription: displayDescriptions, headingLvl: title ? 3 : 2 })}
+                ${Card({data: card, cardSize: "small", displayThumbnail: displayThumbnails, displayDescription: displayDescriptions, headingLvl: title ? 3 : 2 })}
                 </div>
             `).join('');
 
         // Prepare component data for template rendering
         const componentData = {
-            alignClasses: alignClasses[alignment],
-            growClass,
-            headingData: await LinkedHeading(headingData),
+            alignment,
+            headingTitle: headingData?.title,
+            headingIsAlwaysLight: false,
+            headingCtaLink: headingData?.ctaLink,
+            headingCtaNewWindow: headingData?.ctaNewWindow,
+            headingCtaText: headingData?.ctaText,
             featureCard: Card({ data: featuredCardData, cardSize:"featured", headingLvl: title ? 3 : 2 }),
             cards: cardsToRender,
             cardModal: cardModal.join(''),

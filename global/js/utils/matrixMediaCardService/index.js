@@ -1,0 +1,1 @@
+export { matrixMediaCardService } from './matrixMediaCardService';

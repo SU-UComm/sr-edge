@@ -15,13 +15,13 @@ export function Carousel({ variant = "cards", slides, uniqueClass = "", isDark =
                 <button class="component-slider-btn component-slider-prev" type="button">
                     <span class="sr-only">Previous</span>
                     <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                        ${ChevronRight({ className: "" })}
+                        ${ChevronRight({ class: "" })}
                     </span>
                 </button>
                 <button class="component-slider-btn component-slider-next" type="button">
                     <span class="sr-only">Next</span>
                     <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                        ${ChevronRight({ className: "" })}
+                        ${ChevronRight({ class: "" })}
                     </span>
                 </button>
             </div>
@@ -41,13 +41,13 @@ export function Carousel({ variant = "cards", slides, uniqueClass = "", isDark =
                 <button class="component-slider-btn component-slider-prev" type="button">
                     <span class="sr-only">Previous</span>
                     <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                        ${ChevronRight({ className: "" })}
+                        ${ChevronRight({ class: "" })}
                     </span>
                 </button>
                 <button class="component-slider-btn component-slider-next" type="button">
                     <span class="sr-only">Next</span>
                     <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                        ${ChevronRight({ className: "" })}
+                        ${ChevronRight({ class: "" })}
                     </span>
                 </button>
             </div>

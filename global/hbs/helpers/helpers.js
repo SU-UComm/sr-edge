@@ -39,6 +39,20 @@ export const helpers = {
 
         return avatarWrapperClasses.get(avatarSize);
     },
+    cardsAlignmentClasses: function(alignment) {
+        const alignClasses = new Map();
+        alignClasses.set("right", "before:su-right-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-right-[-36px] before:lg:su-right-[-80px]");
+        alignClasses.set("left", "before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]");
+        
+        return alignClasses.get(alignment);
+    },
+    cardsGrowClasses: function(alignment) {
+        const alignClasses = new Map();
+        alignClasses.set("right", "md:su-order-2");
+        alignClasses.set("left", "");
+        
+        return alignClasses.get(alignment) || "";
+    },
     containerClasses: function(width = "large", paddingX = true, paddingY = "none", marginTop = "default", marginBottom = "default", customClasses) {   
         const outputClasses = ['su-mx-auto', 'su-component-container'];
 
@@ -112,7 +126,7 @@ export const helpers = {
     externalLinkClasses: function(ctaSize) {
         const externalLinkClass = new Map();
         externalLinkClass.set("small", "");
-        externalLinkClass.set("su-font-semibold su-text-21 su-leading-[26.25px]");
+        externalLinkClass.set("large", "su-font-semibold su-text-21 su-leading-[26.25px]");
         
         return externalLinkClass.get(ctaSize);
     },
@@ -214,6 +228,9 @@ export const helpers = {
     },
     removeParagraphTags: function(text) {
         return text.replace(/<p>|<\/p>/g, "");
+    },
+    titleStateClass: function(hasTitle) {
+        return hasTitle ? "has-title" : "has-no-title";
     },
     unlessEquals: function (arg1, arg2, options) {
         return arg1 != arg2 ? options.fn(this) : options.inverse(this);

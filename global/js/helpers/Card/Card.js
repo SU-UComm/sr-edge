@@ -1,64 +1,54 @@
-import { VerticalCard } from "../VerticalCard";
-// import PullQuoteCard from "./PullQuoteCard";
-// import HorizontalCard from "./HorizontalCard";
-// import TeaserCard from "./TeaserCard";
-// import MediaCard from "./MediaCard";
-// import AvatarCard from "./AvatarCard";
-// import NarrowHorizontalCard from "./NarrowHorizontalCard";
 
+import {VerticalCard} from "./verticalCard";
+import {PullQuoteCard} from "./pullQuoteCard";
+import {HorizontalCard} from "./horizontalCard";
+import {TeaserCard} from "./teaserCard";
+import {MediaCard} from "./mediaCard";
+import {AvatarCard} from "./avatarCard";
+import {NarrowHorizontalCard} from "./narrowHorizontalCard";
 /**
- * This component orchestrates the type of card
- * returned to the main component.
- *
- * @param {object} data
- * The data to feed into the card, containing things such as:
- * title, description, liveUrl, imageUrl, etc...
- *
- * @param {string} cardType
- * the type of card, can be the following:
- * vertical, horizontal, teaser, avatar, etc...
- *
- * @param {string} cardSize
- * The size of the card.
- * small, medium or featured
- *
- * @param {bool} limitedDescription
- * Determines if the card's description should be shown or not.
- *
- * @param {bool} hideImages
- * Determines if the card should display images or not.
- *
- * @return {string}
+ * Creates a card based on the specified type
+ * 
+ * @param {Object} props
+ * @param {Object} props.data - Card data containing title, description, liveUrl, imageUrl, etc.
+ * @param {string} props.cardType - Type of card (vertical, horizontal, teaser, avatar, etc.)
+ * @param {string} props.cardSize - Size of the card (small, medium, featured)
+ * @param {boolean} props.displayDescription - Whether to show description
+ * @param {boolean} props.displayThumbnail - Whether to show thumbnail
+ * @param {number} props.headingLvl - Heading level (2 or 3)
+ * @returns {string} HTML string for the appropriate card type
  */
-export function Card ({
-        data,
-        cardType,
-        cardSize = "small",
-        displayDescription = true,
-        displayThumbnail = true,
-        headingLvl = 2,
-    }) 
-    {
-    if (data === undefined) {
-        return "";
-    }
-    // orchestrate the type of card to output
-    switch (cardType) {
-        // case "horizontal":
-        //     return HorizontalCard({ data, cardSize})
-        // case "teaser":
-        //     return TeaserCard({ data });
-        // case "avatar":
-        //     return AvatarCard({ data });
-        // case "pullquote":
-        //     return PullQuoteCard({ data });
-        // case "media":
-        //     return MediaCard({ data });
-        // case "narrowhorizontal":
-        //     return NarrowHorizontalCard({ data });
-        default:
-            return VerticalCard({ data, cardSize, displayDescription, displayThumbnail, headingLvl });
-    }
-}
+export function Card({
+  data,
+  cardType,
+  cardSize = "small",
+  displayDescription = true,
+  displayThumbnail = true,
+  headingLvl = 2,
+}) {
+  if (!data) return '';
 
-export default Card;
+  // Return appropriate card type
+  switch (cardType) {
+    case "horizontal":
+      return HorizontalCard({ data, cardSize });
+    case "teaser":
+      return TeaserCard({ data });
+    case "avatar":
+      return AvatarCard({ data });
+    case "pullquote":
+      return PullQuoteCard({ data });
+    case "media":
+      return MediaCard({ data });
+    case "narrowhorizontal":
+      return NarrowHorizontalCard({ data });
+    default:
+      return VerticalCard({
+        data,
+        cardSize,
+        displayDescription,
+        displayThumbnail,
+        headingLvl
+      });
+  }
+}
