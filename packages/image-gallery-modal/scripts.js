@@ -37,8 +37,10 @@ export function closeModal(modal) {
 /**
  * Initializes slider functionality for each modal.
  */
-export function initSlider() {
-    swiper = new Swiper(`${IMAGE_GALLERY_SELECTOR} .swiper`,  {
+export function initSlider(modal) {
+    const uniqueID = modal.dataset.modalId;
+
+    swiper = new Swiper(`div[data-modal-id="${uniqueID}"] .swiper`,  {
         slidesPerView: 1,
         variantClassName: "component-slider-imagegallery",
         loop: true,
@@ -51,11 +53,11 @@ export function initSlider() {
             nextSlideMessage: 'Next slide',
         },
         navigation: {
-            nextEl: `.component-slider-next`,
-            prevEl: `.component-slider-prev`,
+            nextEl: `div[data-modal-id="${uniqueID}"] .component-slider-next`,
+            prevEl: `div[data-modal-id="${uniqueID}"] .component-slider-prev`,
         },
         pagination: {
-            el: `.component-slider-pagination-`,
+            el: `.component-slider-pagination-${uniqueID}`,
             clickable: true,
             bulletElement: "button",
             renderBullet: function (index, className) {
@@ -94,7 +96,7 @@ export function _modalInit(section) {
     
     toggleBtn && toggleBtn.addEventListener('click', function() {
         openModal(modal)
-        initSlider()
+        initSlider(modal)
     });
 
     closeBtn && closeBtn.addEventListener('click', function() {

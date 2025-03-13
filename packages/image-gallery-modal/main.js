@@ -1,5 +1,5 @@
 import imageGalleryModalTemplate from './image-gallery-modal.hbs';
-import { cardDataAdapter, matrixImageCardService, formatCardDataImage } from "../../global/js/utils";
+import { cardDataAdapter, matrixImageCardService, formatCardDataImage, uuid } from "../../global/js/utils";
 import { ImageMosaic,  mosaic, carouselImages, SidebarHeading, Modal, Carousel } from "../../global/js/helpers";
 
 /**
@@ -163,8 +163,10 @@ export default {
             {h:h:h:v}
             `
         );
+        const uniqueId = uuid();
+
         const modalImages = carouselImages(imageData);
-        const modalCarousel = Carousel({ variant: 'imagegallery', slides: modalImages, isDark: true });
+        const modalCarousel = Carousel({ variant: 'imagegallery', slides: modalImages, isDark: true, uniqueClass: uniqueId});
         const captionCredit = caption && credit ? `${caption} | ${credit}` : caption || credit;
         const leftOverImages = imageData.length - previewData.length;
     
@@ -177,7 +179,7 @@ export default {
             summary: summary,
             images: ImageMosaic({ data: previewData, remainingImageCount: leftOverImages}),
             captionCredit,
-            modal: Modal({content: modalCarousel, titleId: 'image-gallery-modal' }),
+            modal: Modal({uniqueId, content: modalCarousel, titleId: 'image-gallery-modal' }),
             width: width === "Wide" ? width.toLocaleLowerCase() : "narrow"
         };
 

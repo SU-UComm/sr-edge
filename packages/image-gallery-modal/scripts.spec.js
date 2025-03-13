@@ -84,7 +84,7 @@ describe('[Image Gallery Modal][Client]', () => {
                             <p class="su-m-0 su-text-left">Custom caption</p>
                         </div>            
                     </div>
-                    <div data-overlay-container="true" class="su-modal su-hidden" data-modal="modal">
+                    <div data-overlay-container="true" class="su-modal su-hidden" data-modal="modal" data-modal-id="7f6b9262253c138ddbb3dff687a3ca13">
                         <span data-focus-scope-start="true" hidden=""></span>
                         <div aria-describedby="image-gallery-modal" role="dialog" tabindex="-1" data-modal="modal-dialog" data-ismodal="true" aria-modal="true">
                             <div class="su-modal-content">
@@ -124,7 +124,7 @@ describe('[Image Gallery Modal][Client]', () => {
                                         </div>
                                     </div>
                                 <div class="component-slider-controls su-flex su-mt-45 lg:su-mt-48 su-items-center su-content-center">
-                                    <div aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination- su-mr-full">
+                                    <div aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination-7f6b9262253c138ddbb3dff687a3ca13 su-mr-full">
                                         <button class="swiper-pagination-bullet" tabindex="0"><span class="sr-only">Slide 1</span></button>
                                         <button class="swiper-pagination-bullet" tabindex="0"><span class="sr-only">Slide 2</span></button>
                                         <button class="swiper-pagination-bullet" tabindex="0"><span class="sr-only">Slide 3</span></button>
@@ -226,7 +226,7 @@ describe('[Image Gallery Modal][Client]', () => {
             imageGallery._modalInit(section);
     
             // Ensure Swiper was called
-            expect(Swiper).toHaveBeenCalledWith('section[data-component="image-gallery-modal"] .swiper', expect.objectContaining({
+            expect(Swiper).toHaveBeenCalledWith('div[data-modal-id="7f6b9262253c138ddbb3dff687a3ca13"] .swiper', expect.objectContaining({
                 a11y: {
                     nextSlideMessage: "Next slide",
                     prevSlideMessage: "Previous slide"
@@ -242,11 +242,11 @@ describe('[Image Gallery Modal][Client]', () => {
                 },
                 loop : true,
                 navigation : {
-                    nextEl : ".component-slider-next",
-                    prevEl : ".component-slider-prev"
+                    nextEl : 'div[data-modal-id="7f6b9262253c138ddbb3dff687a3ca13"] .component-slider-next',
+                    prevEl : 'div[data-modal-id="7f6b9262253c138ddbb3dff687a3ca13"] .component-slider-prev'
                 },
                 pagination: expect.objectContaining({
-                    el: `.component-slider-pagination-`,
+                    el: `.component-slider-pagination-7f6b9262253c138ddbb3dff687a3ca13`,
                     clickable: true,
                     bulletElement: "button",
                     renderBullet: expect.any(Function),

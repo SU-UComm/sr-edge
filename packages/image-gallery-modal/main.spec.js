@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { cardDataAdapter, formatCardDataImage} from "../../global/js/utils";
+import { cardDataAdapter, formatCardDataImage } from "../../global/js/utils";
 import moduleToTest from './main';
 
 const { main } = moduleToTest;
@@ -19,6 +19,7 @@ vi.mock('../../global/js/utils', () => ({
     })),
     matrixImageCardService: vi.fn(),
     formatCardDataImage: vi.fn(),
+    uuid: vi.fn(() => '7f6b9262253c138ddbb3dff687a3ca13')
 }));
 
 vi.mock('../../global/js/helpers', () => ({
