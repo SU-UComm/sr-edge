@@ -229,6 +229,9 @@ export const helpers = {
     removeParagraphTags: function(text) {
         return text.replace(/<p>|<\/p>/g, "");
     },
+    titleStateClass: function(hasTitle) {
+        return hasTitle ? "has-title" : "has-no-title";
+    },
     unlessEquals: function (arg1, arg2, options) {
         return arg1 != arg2 ? options.fn(this) : options.inverse(this);
     },

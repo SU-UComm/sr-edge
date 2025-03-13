@@ -1,7 +1,7 @@
 import hash from "object-hash";
 import multicolumnListingTemplate from './multicolumn-listing.hbs';
 import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid } from "../../global/js/utils";
-import { Card, Modal, EmbedVideo, LinkedHeading } from '../../global/js/helpers';
+import { Card, Modal, EmbedVideo } from '../../global/js/helpers';
 
 /**
  * Multicolumn lisitng component that renderds a list of features cards based on fetched data
@@ -190,15 +190,13 @@ export default {
             }
         });
 
-        // CSS class configuration based on heading
-        const componentTitleStateClass = headingData.title
-            ? "has-title"
-            : "has-no-title";
-
         // Prepare component data for template rendering
         const componentData = {
-            componentTitleStateClass,
-            headingData: LinkedHeading(headingData),
+            headingTitle: headingData?.title,
+            headingIsAlwaysLight: false,
+            headingCtaLink: headingData?.ctaLink,
+            headingCtaNewWindow: headingData?.ctaNewWindow,
+            headingCtaText: headingData?.ctaText,
             multicolumnGrid: multicolumnGrid(cardsMarkup, true),
             cardModal: cardModal.join(''),
             width: "large"
