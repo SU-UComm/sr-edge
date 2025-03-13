@@ -51,6 +51,7 @@ pullquote
 Svgs
 noopener
 Headshot
+narrowhorizontal
 
 # Lorem Ipsum 
 ezgif
