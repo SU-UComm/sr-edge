@@ -22,6 +22,7 @@ export let swiper;
  */
 export function openModal(modal) {
     modal.classList.remove(IMAGE_GALLERY_HIDDEN_CLASS);
+    modal.hidden = false;
 }
 
 /**
@@ -30,6 +31,7 @@ export function openModal(modal) {
  */
 export function closeModal(modal) {
     modal.classList.add(IMAGE_GALLERY_HIDDEN_CLASS);
+    modal.hidden = true;
 }
 
 /**

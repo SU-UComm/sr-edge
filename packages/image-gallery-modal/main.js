@@ -177,7 +177,7 @@ export default {
             summary: summary,
             images: ImageMosaic({ data: previewData, remainingImageCount: leftOverImages}),
             captionCredit,
-            modal: Modal({children: modalCarousel, titleId: 'image-gallery-modal' }),
+            modal: Modal({content: modalCarousel, titleId: 'image-gallery-modal' }),
             width: width === "Wide" ? width.toLocaleLowerCase() : "narrow"
         };
 
