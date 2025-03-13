@@ -164,27 +164,21 @@ export default {
             `
         );
         const modalImages = carouselImages(imageData);
-        const widthToRender = width === "Wide" ? width.toLocaleLowerCase() : "narrow";
+        const modalCarousel = Carousel({ variant: 'imagegallery', slides: modalImages, isDark: true });
         const captionCredit = caption && credit ? `${caption} | ${credit}` : caption || credit;
         const leftOverImages = imageData.length - previewData.length;
-
-        // CSS class mapping based on backgroudn color
-        const backgroundClasses = {
-            'Grey': 'su-bg-fog-light su-rs-pt-6 su-rs-pb-8 dark:su-bg-black/[0.5]',
-            'Transparent': '',
-        };
     
         // Prepare component data for template rendering
         const componentData = {
-            backgroundClasses: backgroundClasses[backgroundColor],
+            backgroundColor,
             layout: layout,
             sidebarHeading: displayIconHeading ? SidebarHeading({ color: "media",  icon: "mediagallery", title: "Media gallery" }) : '',
             title: title,
             summary: summary,
             images: ImageMosaic({ data: previewData, remainingImageCount: leftOverImages}),
             captionCredit,
-            modal: Modal({content: Carousel({ variant: 'imagegallery', slides: modalImages, isDark: true }), describedby: 'image-gallery-modal' }),
-            width: widthToRender
+            modal: Modal({children: modalCarousel, titleId: 'image-gallery-modal' }),
+            width: width === "Wide" ? width.toLocaleLowerCase() : "narrow"
         };
 
         return imageGalleryModalTemplate(componentData);

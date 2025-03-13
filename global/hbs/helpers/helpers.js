@@ -196,6 +196,13 @@ export const helpers = {
     increment: function(value) {
         return value + 1;
     },
+    imageBackgroundClasses: function(variant) {
+        const backgroundClasses = new Map();
+        backgroundClasses.set("Grey", "su-bg-fog-light su-rs-pt-6 su-rs-pb-8 dark:su-bg-black/[0.5]");
+        backgroundClasses.set("Transparent", "");
+        
+        return backgroundClasses.get(variant) || '';
+    },
     linkButtonClasses: function(variant, size) {
         const baseClasses = ['su-group su-flex su-items-center su-w-fit hocus:su-underline'];
         

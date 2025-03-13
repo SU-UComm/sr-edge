@@ -8,7 +8,7 @@
  */
 export function Modal({ titleId, title, children }) {
   return `
-    <div hidden aria-modal="true" role="dialog" class="su-modal" ${titleId ? `aria-describedby="${titleId}"` : ''}>
+    <div hidden aria-modal="true" role="dialog" class="su-modal" ${titleId ? `aria-describedby="${titleId}"` : ''} data-modal="modal">
       ${!titleId && title ? `<h2>${title}</h2>` : ''}
       <span data-focus-scope-start="true" hidden=""></span>
       <div class="su-modal-content">
