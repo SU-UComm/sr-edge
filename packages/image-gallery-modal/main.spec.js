@@ -369,35 +369,42 @@ describe('[Image Gallery Modal]', () => {
             const result = await main(defaultMockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="image-gallery-modal">
-                  <div class="">
-                      <div class="su-mx-auto su-component-container su-container-wide su-container-px">
-                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
-                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+              "<section data-component='image-gallery-modal'>
+                  <div class=''>
+                      <div class='su-mx-auto su-component-container su-container-wide su-container-px'>
+                          <div
+                              class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto'
+                          >
+                              <div
+                                  class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]'
+                              >
                                   Media gallery
-                                   
-                                  <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
-                                      Custom title
-                                  </h2>
-                                   
+                                          <h2
+                                              class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]'
+                                          >
+                                              Custom title
+                                          </h2>
                               </div>
-                               
-                              <div class="su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
-                                  &lt;p&gt;Custom summary&lt;/p&gt;
-                              </div>
-                               
+                                      <div
+                                          class='su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]'
+                                          data-test='component-story-lead'
+                                      >
+                                          &lt;p&gt;Custom summary&lt;/p&gt;
+                                      </div>
                           </div>
                           <button
-                              data-click="open-gallery-modal"
-                              title="Open image gallery"
-                              aria-label="Open image gallery"
-                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                              data-click='open-gallery-modal'
+                              title='Open image gallery'
+                              aria-label='Open image gallery'
+                              class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]'
                           >
                               ImageMosaicHTML
                           </button>
-                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
-                              <p class="su-m-0 su-text-left">Custom caption | Custom credit</p>
-                          </div>
+                              <div
+                                  class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto'
+                              >
+                                  <p class='su-m-0 su-text-left'>Custom caption | Custom credit</p>
+                              </div>
                       </div>
                       ModalHTML
                   </div>
@@ -417,35 +424,42 @@ describe('[Image Gallery Modal]', () => {
             const result = await main(mockedData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="image-gallery-modal">
-                  <div class="">
-                      <div class="su-mx-auto su-component-container su-container-narrow su-container-px">
-                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
-                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+              "<section data-component='image-gallery-modal'>
+                  <div class=''>
+                      <div class='su-mx-auto su-component-container su-container-narrow su-container-px'>
+                          <div
+                              class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto'
+                          >
+                              <div
+                                  class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]'
+                              >
                                   Media gallery
-                                   
-                                  <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
-                                      Custom title
-                                  </h2>
-                                   
+                                          <h2
+                                              class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]'
+                                          >
+                                              Custom title
+                                          </h2>
                               </div>
-                               
-                              <div class="su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
-                                  &lt;p&gt;Custom summary&lt;/p&gt;
-                              </div>
-                               
+                                      <div
+                                          class='su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]'
+                                          data-test='component-story-lead'
+                                      >
+                                          &lt;p&gt;Custom summary&lt;/p&gt;
+                                      </div>
                           </div>
                           <button
-                              data-click="open-gallery-modal"
-                              title="Open image gallery"
-                              aria-label="Open image gallery"
-                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                              data-click='open-gallery-modal'
+                              title='Open image gallery'
+                              aria-label='Open image gallery'
+                              class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]'
                           >
                               ImageMosaicHTML
                           </button>
-                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
-                              <p class="su-m-0 su-text-left">Custom caption | Custom credit</p>
-                          </div>
+                              <div
+                                  class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto'
+                              >
+                                  <p class='su-m-0 su-text-left'>Custom caption | Custom credit</p>
+                              </div>
                       </div>
                       ModalHTML
                   </div>
@@ -465,35 +479,42 @@ describe('[Image Gallery Modal]', () => {
             const result = await main(partialArgs, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="image-gallery-modal">
-                  <div class="">
-                      <div class="su-mx-auto su-component-container su-container-wide su-container-px">
-                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
-                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+              "<section data-component='image-gallery-modal'>
+                  <div class=''>
+                      <div class='su-mx-auto su-component-container su-container-wide su-container-px'>
+                          <div
+                              class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto'
+                          >
+                              <div
+                                  class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]'
+                              >
                                   
-                                   
-                                  <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
-                                      Custom title
-                                  </h2>
-                                   
+                                          <h2
+                                              class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]'
+                                          >
+                                              Custom title
+                                          </h2>
                               </div>
-                               
-                              <div class="su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
-                                  &lt;p&gt;Custom summary&lt;/p&gt;
-                              </div>
-                               
+                                      <div
+                                          class='su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]'
+                                          data-test='component-story-lead'
+                                      >
+                                          &lt;p&gt;Custom summary&lt;/p&gt;
+                                      </div>
                           </div>
                           <button
-                              data-click="open-gallery-modal"
-                              title="Open image gallery"
-                              aria-label="Open image gallery"
-                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                              data-click='open-gallery-modal'
+                              title='Open image gallery'
+                              aria-label='Open image gallery'
+                              class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]'
                           >
                               ImageMosaicHTML
                           </button>
-                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
-                              <p class="su-m-0 su-text-left">Custom caption | Custom credit</p>
-                          </div>
+                              <div
+                                  class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto'
+                              >
+                                  <p class='su-m-0 su-text-left'>Custom caption | Custom credit</p>
+                              </div>
                       </div>
                       ModalHTML
                   </div>
@@ -514,31 +535,37 @@ describe('[Image Gallery Modal]', () => {
             const result = await main(partialArgs, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="image-gallery-modal">
-                  <div class="">
-                      <div class="su-mx-auto su-component-container su-container-wide su-container-px">
-                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
-                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+              "<section data-component='image-gallery-modal'>
+                  <div class=''>
+                      <div class='su-mx-auto su-component-container su-container-wide su-container-px'>
+                          <div
+                              class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto'
+                          >
+                              <div
+                                  class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]'
+                              >
                                   Media gallery
-                                    
                               </div>
-                               
-                              <div class="su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
-                                  &lt;p&gt;Custom summary&lt;/p&gt;
-                              </div>
-                               
+                                      <div
+                                          class='su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]'
+                                          data-test='component-story-lead'
+                                      >
+                                          &lt;p&gt;Custom summary&lt;/p&gt;
+                                      </div>
                           </div>
                           <button
-                              data-click="open-gallery-modal"
-                              title="Open image gallery"
-                              aria-label="Open image gallery"
-                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                              data-click='open-gallery-modal'
+                              title='Open image gallery'
+                              aria-label='Open image gallery'
+                              class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]'
                           >
                               ImageMosaicHTML
                           </button>
-                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
-                              <p class="su-m-0 su-text-left">Custom caption | Custom credit</p>
-                          </div>
+                              <div
+                                  class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto'
+                              >
+                                  <p class='su-m-0 su-text-left'>Custom caption | Custom credit</p>
+                              </div>
                       </div>
                       ModalHTML
                   </div>
@@ -559,27 +586,31 @@ describe('[Image Gallery Modal]', () => {
             const result = await main(partialArgs, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="image-gallery-modal">
-                  <div class="">
-                      <div class="su-mx-auto su-component-container su-container-wide su-container-px">
-                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
-                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+              "<section data-component='image-gallery-modal'>
+                  <div class=''>
+                      <div class='su-mx-auto su-component-container su-container-wide su-container-px'>
+                          <div
+                              class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto'
+                          >
+                              <div
+                                  class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]'
+                              >
                                   Media gallery
-                                  
                               </div>
-                              
                           </div>
                           <button
-                              data-click="open-gallery-modal"
-                              title="Open image gallery"
-                              aria-label="Open image gallery"
-                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                              data-click='open-gallery-modal'
+                              title='Open image gallery'
+                              aria-label='Open image gallery'
+                              class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]'
                           >
                               ImageMosaicHTML
                           </button>
-                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
-                              <p class="su-m-0 su-text-left">Custom caption | Custom credit</p>
-                          </div>
+                              <div
+                                  class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto'
+                              >
+                                  <p class='su-m-0 su-text-left'>Custom caption | Custom credit</p>
+                              </div>
                       </div>
                       ModalHTML
                   </div>
@@ -600,31 +631,36 @@ describe('[Image Gallery Modal]', () => {
             const result = await main(partialArgs, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="image-gallery-modal">
-                  <div class="">
-                      <div class="su-mx-auto su-component-container su-container-wide su-container-px">
-                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
-                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+              "<section data-component='image-gallery-modal'>
+                  <div class=''>
+                      <div class='su-mx-auto su-component-container su-container-wide su-container-px'>
+                          <div
+                              class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto'
+                          >
+                              <div
+                                  class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]'
+                              >
                                   Media gallery
-                                   
-                                  <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
-                                      Custom title
-                                  </h2>
-                                   
+                                          <h2
+                                              class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]'
+                                          >
+                                              Custom title
+                                          </h2>
                               </div>
-                                
                           </div>
                           <button
-                              data-click="open-gallery-modal"
-                              title="Open image gallery"
-                              aria-label="Open image gallery"
-                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                              data-click='open-gallery-modal'
+                              title='Open image gallery'
+                              aria-label='Open image gallery'
+                              class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]'
                           >
                               ImageMosaicHTML
                           </button>
-                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
-                              <p class="su-m-0 su-text-left">Custom caption | Custom credit</p>
-                          </div>
+                              <div
+                                  class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto'
+                              >
+                                  <p class='su-m-0 su-text-left'>Custom caption | Custom credit</p>
+                              </div>
                       </div>
                       ModalHTML
                   </div>
@@ -644,35 +680,42 @@ describe('[Image Gallery Modal]', () => {
             const result = await main(partialArgs, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="image-gallery-modal">
-                  <div class="">
-                      <div class="su-mx-auto su-component-container su-container-wide su-container-px">
-                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
-                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+              "<section data-component='image-gallery-modal'>
+                  <div class=''>
+                      <div class='su-mx-auto su-component-container su-container-wide su-container-px'>
+                          <div
+                              class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto'
+                          >
+                              <div
+                                  class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]'
+                              >
                                   Media gallery
-                                   
-                                  <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
-                                      Custom title
-                                  </h2>
-                                   
+                                          <h2
+                                              class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]'
+                                          >
+                                              Custom title
+                                          </h2>
                               </div>
-                               
-                              <div class="su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
-                                  &lt;p&gt;Custom summary&lt;/p&gt;
-                              </div>
-                               
+                                      <div
+                                          class='su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]'
+                                          data-test='component-story-lead'
+                                      >
+                                          &lt;p&gt;Custom summary&lt;/p&gt;
+                                      </div>
                           </div>
                           <button
-                              data-click="open-gallery-modal"
-                              title="Open image gallery"
-                              aria-label="Open image gallery"
-                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                              data-click='open-gallery-modal'
+                              title='Open image gallery'
+                              aria-label='Open image gallery'
+                              class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]'
                           >
                               ImageMosaicHTML
                           </button>
-                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
-                              <p class="su-m-0 su-text-left">Custom caption</p>
-                          </div>
+                              <div
+                                  class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto'
+                              >
+                                  <p class='su-m-0 su-text-left'>Custom caption</p>
+                              </div>
                       </div>
                       ModalHTML
                   </div>
@@ -692,35 +735,42 @@ describe('[Image Gallery Modal]', () => {
             const result = await main(partialArgs, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="image-gallery-modal">
-                  <div class="">
-                      <div class="su-mx-auto su-component-container su-container-wide su-container-px">
-                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
-                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+              "<section data-component='image-gallery-modal'>
+                  <div class=''>
+                      <div class='su-mx-auto su-component-container su-container-wide su-container-px'>
+                          <div
+                              class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto'
+                          >
+                              <div
+                                  class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]'
+                              >
                                   Media gallery
-                                   
-                                  <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
-                                      Custom title
-                                  </h2>
-                                   
+                                          <h2
+                                              class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]'
+                                          >
+                                              Custom title
+                                          </h2>
                               </div>
-                               
-                              <div class="su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
-                                  &lt;p&gt;Custom summary&lt;/p&gt;
-                              </div>
-                               
+                                      <div
+                                          class='su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]'
+                                          data-test='component-story-lead'
+                                      >
+                                          &lt;p&gt;Custom summary&lt;/p&gt;
+                                      </div>
                           </div>
                           <button
-                              data-click="open-gallery-modal"
-                              title="Open image gallery"
-                              aria-label="Open image gallery"
-                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                              data-click='open-gallery-modal'
+                              title='Open image gallery'
+                              aria-label='Open image gallery'
+                              class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]'
                           >
                               ImageMosaicHTML
                           </button>
-                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
-                              <p class="su-m-0 su-text-left">Custom credit</p>
-                          </div>
+                              <div
+                                  class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto'
+                              >
+                                  <p class='su-m-0 su-text-left'>Custom credit</p>
+                              </div>
                       </div>
                       ModalHTML
                   </div>
@@ -740,35 +790,42 @@ describe('[Image Gallery Modal]', () => {
             const result = await main(partialArgs, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="image-gallery-modal">
-                  <div class="">
-                      <div class="su-mx-auto su-component-container su-container-wide su-container-px">
-                          <div class="su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto">
-                              <div class="su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]">
+              "<section data-component='image-gallery-modal'>
+                  <div class=''>
+                      <div class='su-mx-auto su-component-container su-container-wide su-container-px'>
+                          <div
+                              class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto'
+                          >
+                              <div
+                                  class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]'
+                              >
                                   
-                                   
-                                  <h2 class="su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
-                                      Custom title
-                                  </h2>
-                                   
+                                          <h2
+                                              class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]'
+                                          >
+                                              Custom title
+                                          </h2>
                               </div>
-                               
-                              <div class="su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
-                                  &lt;p&gt;Custom summary&lt;/p&gt;
-                              </div>
-                               
+                                      <div
+                                          class='su-text-left su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]'
+                                          data-test='component-story-lead'
+                                      >
+                                          &lt;p&gt;Custom summary&lt;/p&gt;
+                                      </div>
                           </div>
                           <button
-                              data-click="open-gallery-modal"
-                              title="Open image gallery"
-                              aria-label="Open image gallery"
-                              class="su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]"
+                              data-click='open-gallery-modal'
+                              title='Open image gallery'
+                              aria-label='Open image gallery'
+                              class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]'
                           >
                               ImageMosaicHTML
                           </button>
-                          <div class="su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto">
-                              <p class="su-m-0 su-text-left">Custom caption | Custom credit</p>
-                          </div>
+                              <div
+                                  class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto'
+                              >
+                                  <p class='su-m-0 su-text-left'>Custom caption | Custom credit</p>
+                              </div>
                       </div>
                       ModalHTML
                   </div>
