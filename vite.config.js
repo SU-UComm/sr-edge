@@ -24,10 +24,27 @@ function handlebarsPrecompile() {
     const regularFALib = readFileSync(regularFALibDir, 'utf8');
     const solidFALib = readFileSync(solidFALibDir, 'utf8');
 
-
     // Register custom helpers
     Object.keys(helpers).forEach((key) => {
         Handlebars.registerHelper(key, helpers[key]);
+    });
+
+    const icons = {};
+    const globalHbsIconDir = resolve(__dirname, 'global', 'hbs', 'icons');
+    // Load icons from directories
+    const iconDirs = readdirSync(globalHbsIconDir);
+
+    iconDirs.forEach(iconName => {
+        const iconDir = resolve(globalHbsIconDir, iconName);
+        if (statSync(iconDir).isDirectory()) {
+            const iconPath = resolve(iconDir, `${iconName}.hbs`);
+            try {
+                const content = readFileSync(iconPath, 'utf8');
+                icons[iconName] = content;
+            } catch (e) {
+                console.error(`✗ Error loading icon ${iconName}:`, e.message);
+            }
+        }
     });
 
     const partials = {};
@@ -62,6 +79,16 @@ function handlebarsPrecompile() {
                     )
                     .join('\n');
 
+                
+                // Icons registration code
+                const iconsCode = Object.entries(icons)
+                    .map(([key, content]) => {
+                        const compiled = Handlebars.precompile(content);
+                        // Pass the compiled object directly to Handlebars.template
+                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled});`;
+                    })
+                    .join('\n');
+
                 // Partials registration code
                 const partialsCode = Object.entries(partials)
                     .map(([key, content]) => {
@@ -72,7 +99,7 @@ function handlebarsPrecompile() {
                     .join('\n');
 
                 return {
-                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\n${regularFALib}\n${solidFALib}\n${partialsCode}\nexport default Handlebars.template(${templateSpec});`,
+                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\n${regularFALib}\n${solidFALib}\n${iconsCode}\n${partialsCode}\nexport default Handlebars.template(${templateSpec});`,
                     map: null,
                 };
             }

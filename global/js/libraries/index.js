@@ -1,2 +1,2 @@
-export { fas } from './fontawesome/solid';
-export { far } from './fontawesome/regular';
+export { faSolid } from './fontawesome/solid';
+export { faRegular } from './fontawesome/regular';

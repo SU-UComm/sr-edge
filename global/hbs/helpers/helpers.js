@@ -1,4 +1,4 @@
-import { fas, far } from '../../js/libraries';
+import { faSolid, faRegular } from '../../js/libraries';
 
 export const helpers = {
     alignClass: function(align) {
@@ -146,7 +146,7 @@ export const helpers = {
           : "md:su-items-start md:su-content-start " + alignClasses.get(alignment);
     },
     fontawesomePathData: function(arg1, arg2) {
-        const iconSet = arg2 === "regular" ? far : fas;
+        const iconSet = arg2 === "regular" ? faRegular : faSolid;
     
         if (!iconSet) return 'Icon not found';
         
@@ -158,13 +158,13 @@ export const helpers = {
     },
     fontawesomeViewData: function(arg1, arg2) {
         if (arg2 === "regular") {
-            const iconObject = Object.values(far).find(icon => 
+            const iconObject = Object.values(faRegular).find(icon => 
                 icon.iconName === arg1
             );
 
             return `0 0 ${iconObject?.icon[0]} ${iconObject?.icon[1]}`;
         } else if (arg2 === "solid") {
-            const iconObject = Object.values(fas).find(icon => 
+            const iconObject = Object.values(faSolid).find(icon => 
                 icon.iconName === arg1
             );
 
