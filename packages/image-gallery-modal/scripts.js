@@ -16,6 +16,35 @@ export const IMAGE_GALLERY_CLOSE_BTN = 'button[data-dismiss="modal"]';
 export const IMAGE_GALLERY_HIDDEN_CLASS = 'su-hidden';
 export let swiper; 
 
+
+export const focusTrap = (event, dialog) => {
+    const focusableSelectors =
+        'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])';
+    const focusableElements = Array.from(
+        dialog?.querySelectorAll(focusableSelectors),
+    )?.filter(
+        (el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'),
+    );
+
+    if (focusableElements.length === 0 || event?.key !== 'Tab') {
+        return;
+    }
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    // Move to the last focusable element if we are on the first one and Shift + Tab is pressed
+    if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+    }
+    // Move to the first focusable element if we are on the last one and Shift is pressed
+    else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+    }
+};
+
 /**
  * Opens a modal by modifying the iframe's autoplay parameter and removing the hidden class.
  * @param {HTMLElement} modal - The modal element to open.
@@ -23,6 +52,13 @@ export let swiper;
 export function openModal(modal) {
     modal.classList.remove(IMAGE_GALLERY_HIDDEN_CLASS);
     modal.hidden = false;
+
+    //Focus trap for drawers
+    document.addEventListener('keydown', (event) => {
+        if (modal) {
+            focusTrap(event, modal);
+        }
+    });
 }
 
 /**

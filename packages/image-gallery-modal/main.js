@@ -83,27 +83,27 @@ export default {
                     `The "credit" field must be a string. The ${JSON.stringify(credit)} was received.`
                 );
             }
-            if (layout === 'Title & Content' && typeof title !== 'string') {
+            if (layout === 'Title & Content' && title && typeof title !== 'string') {
                 throw new Error(
                     `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
                 );
             }
-            if (layout === 'Title & Content' && typeof summary !== 'string') {
+            if (layout === 'Title & Content' && summary && typeof summary !== 'string') {
                 throw new Error(
                     `The "summary" field must be a string. The ${JSON.stringify(summary)} was received.`
                 );
             }
-            if (typeof displayIconHeading !== 'boolean') {
+            if (displayIconHeading && typeof displayIconHeading !== 'boolean') {
                 throw new Error(
                     `The "displayIconHeading" field must be a boolean. The ${JSON.stringify(displayIconHeading)} was received.`
                 );
             }
-            if (typeof backgroundColor !== 'string' || !['Grey', 'Transparent'].includes(backgroundColor)) {
+            if (!['Grey', 'Transparent'].includes(backgroundColor)) {
                 throw new Error(
                     `The "backgroundColor" field cannot be undefined and must be one of ["Grey", "Transparent"] value. The ${JSON.stringify(backgroundColor)} was received.`
                 );
             }
-            if (typeof width !== 'string' || !['Wide', 'Content'].includes(width)) {
+            if (!['Wide', 'Content'].includes(width)) {
                 throw new Error(
                     `The "width" field cannot be undefined and must be one of ["Wide", "Content"] value. The ${JSON.stringify(width)} was received.`
                 );
