@@ -111,7 +111,7 @@ export default defineConfig(() => {
     let componentToBuild = process.env.COMPONENT;
 
     if (!componentToBuild && process.env.CHANGED_FILE) {
-        const changedFile = process.env.CHANGED_FILE;
+        const changedFile = process.env.CHANGED_FILE;``
         const pathSegments = changedFile.split('/');
         const packagesIndex = pathSegments.indexOf('packages');
         if (packagesIndex !== -1 && packagesIndex + 1 < pathSegments.length) {

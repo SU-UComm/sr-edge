@@ -42,11 +42,11 @@ function injectInlineContent() {
         name: 'inject-inline-content',
         writeBundle() {
             const globalCss = readFileSync(
-                resolve(__dirname, 'dist/global/bundle.css'),
+                resolve(__dirname, 'mysource_files/global/bundle.css'),
                 'utf-8',
             );
             const globalJs = readFileSync(
-                resolve(__dirname, 'dist/global/bundle.js'),
+                resolve(__dirname, 'mysource_files/global/bundle.js'),
                 'utf-8',
             );
 
@@ -134,7 +134,7 @@ export default defineConfig({
                 css: resolve(__dirname, 'temp-entry-scss.scss'),
             },
             output: {
-                dir: resolve(__dirname, 'dist/global'),
+                dir: resolve(__dirname, 'mysource_files/global'),
                 format: 'es',
                 entryFileNames: 'bundle.js',
                 assetFileNames: 'bundle.css',
