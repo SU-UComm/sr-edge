@@ -3,7 +3,7 @@
     "name": "media-feature",
     "type": "edge",
     "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components",
+    "namespace": "pnp-stanford-edge-components-hbs",
     "description": "The media feature component is used to feature a singular podcast or book.",
     "displayName": "Media feature",
     "mainFunction": "main",
