@@ -52,6 +52,7 @@ Svgs
 noopener
 Headshot
 narrowhorizontal
+externalarrow
 
 # Lorem Ipsum 
 ezgif
