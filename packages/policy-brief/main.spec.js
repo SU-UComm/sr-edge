@@ -212,22 +212,24 @@ describe('[Policy Brief Component]', () => {
                                   <a href="https://example.com" class="su-flex su-gap-2 su-group su-text-19 su-font-semibold su-leading-[125%] su-text-digital-red su-no-underline dark:su-text-dark-mode-red hocus:su-underline">
                                       Read more
                                       <span class="su-transition group-hocus:su--translate-y-01em group-hocus:su-translate-x-01em [&>svg]:su-translate-y-1">
-                                          <svg
-                                              xmlns='http://www.w3.org/2000/svg'
-                                              class='su-stroke-digital-red dark:su-stroke-dark-mode-red'
-                                              width='23'
-                                              height='23'
-                                              viewBox='0 0 23 23'
-                                              fill='none'
-                                          >
-                                              <path
-                                                  d='M8.95664 7.42241L15.5563 7.42241M15.5563 7.42241L15.5563 14.0221M15.5563 7.42241L7.07102 15.9077'
-                                                  stroke=''
-                                                  stroke-width='1.5'
-                                                  stroke-linecap='round'
-                                                  stroke-linejoin='round'
-                                              />
-                                          </svg>                        </span>
+                                              <svg
+                                                  data-testid='svg-externalarrow'
+                                                  aria-hidden='true'
+                                                  xmlns='http://www.w3.org/2000/svg'
+                                                  class='su-stroke-digital-red su-fill-transparent dark:su-stroke-dark-mode-red'
+                                                  width='23'
+                                                  height='24'
+                                                  viewBox='0 0 23 24'
+                                                  fill='none'
+                                              >
+                                                  <path
+                                                      d='M8.95664 7.57744L15.5563 7.57744M15.5563 7.57744L15.5563 14.1771M15.5563 7.57744L7.07102 16.0627'
+                                                      stroke-width='1.5'
+                                                      stroke-linecap='round'
+                                                      stroke-linejoin='round'
+                                                  />
+                                              </svg>
+                                      </span>
                                   </a>
                           </div>
                       </div>
@@ -304,22 +306,24 @@ describe('[Policy Brief Component]', () => {
                                   <a href="https://example.com" class="su-flex su-gap-2 su-group su-text-19 su-font-semibold su-leading-[125%] su-text-digital-red su-no-underline dark:su-text-dark-mode-red hocus:su-underline">
                                       Read more
                                       <span class="su-transition group-hocus:su--translate-y-01em group-hocus:su-translate-x-01em [&>svg]:su-translate-y-1">
-                                          <svg
-                                              xmlns='http://www.w3.org/2000/svg'
-                                              class='su-stroke-digital-red dark:su-stroke-dark-mode-red'
-                                              width='23'
-                                              height='23'
-                                              viewBox='0 0 23 23'
-                                              fill='none'
-                                          >
-                                              <path
-                                                  d='M8.95664 7.42241L15.5563 7.42241M15.5563 7.42241L15.5563 14.0221M15.5563 7.42241L7.07102 15.9077'
-                                                  stroke=''
-                                                  stroke-width='1.5'
-                                                  stroke-linecap='round'
-                                                  stroke-linejoin='round'
-                                              />
-                                          </svg>                        </span>
+                                              <svg
+                                                  data-testid='svg-externalarrow'
+                                                  aria-hidden='true'
+                                                  xmlns='http://www.w3.org/2000/svg'
+                                                  class='su-stroke-digital-red su-fill-transparent dark:su-stroke-dark-mode-red'
+                                                  width='23'
+                                                  height='24'
+                                                  viewBox='0 0 23 24'
+                                                  fill='none'
+                                              >
+                                                  <path
+                                                      d='M8.95664 7.57744L15.5563 7.57744M15.5563 7.57744L15.5563 14.1771M15.5563 7.57744L7.07102 16.0627'
+                                                      stroke-width='1.5'
+                                                      stroke-linecap='round'
+                                                      stroke-linejoin='round'
+                                                  />
+                                              </svg>
+                                      </span>
                                   </a>
                           </div>
                       </div>
@@ -388,22 +392,24 @@ describe('[Policy Brief Component]', () => {
                                   <a href="https://example.com" class="su-flex su-gap-2 su-group su-text-19 su-font-semibold su-leading-[125%] su-text-digital-red su-no-underline dark:su-text-dark-mode-red hocus:su-underline">
                                       Read more
                                       <span class="su-transition group-hocus:su--translate-y-01em group-hocus:su-translate-x-01em [&>svg]:su-translate-y-1">
-                                          <svg
-                                              xmlns='http://www.w3.org/2000/svg'
-                                              class='su-stroke-digital-red dark:su-stroke-dark-mode-red'
-                                              width='23'
-                                              height='23'
-                                              viewBox='0 0 23 23'
-                                              fill='none'
-                                          >
-                                              <path
-                                                  d='M8.95664 7.42241L15.5563 7.42241M15.5563 7.42241L15.5563 14.0221M15.5563 7.42241L7.07102 15.9077'
-                                                  stroke=''
-                                                  stroke-width='1.5'
-                                                  stroke-linecap='round'
-                                                  stroke-linejoin='round'
-                                              />
-                                          </svg>                        </span>
+                                              <svg
+                                                  data-testid='svg-externalarrow'
+                                                  aria-hidden='true'
+                                                  xmlns='http://www.w3.org/2000/svg'
+                                                  class='su-stroke-digital-red su-fill-transparent dark:su-stroke-dark-mode-red'
+                                                  width='23'
+                                                  height='24'
+                                                  viewBox='0 0 23 24'
+                                                  fill='none'
+                                              >
+                                                  <path
+                                                      d='M8.95664 7.57744L15.5563 7.57744M15.5563 7.57744L15.5563 14.1771M15.5563 7.57744L7.07102 16.0627'
+                                                      stroke-width='1.5'
+                                                      stroke-linecap='round'
+                                                      stroke-linejoin='round'
+                                                  />
+                                              </svg>
+                                      </span>
                                   </a>
                           </div>
                       </div>

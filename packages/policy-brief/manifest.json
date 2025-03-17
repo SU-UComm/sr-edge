@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "policy-brief",
     "type": "edge",
-    "version": "4.0.3",
+    "version": "4.0.4",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "This component allows a content manager to create a policy brief that can be externally linked to a policy brief or case study.",
     "displayName": "Policy brief",
@@ -86,6 +86,19 @@
                     },
                     "wrapper": {
                         "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
                     }
                 }
             }
