@@ -50,7 +50,7 @@ export default {
         //Processes buttons asynchronously to resolve URLs and prepare template data
         const data = await Promise.all(
             buttons.map(async (button) => {
-                const { buttonText, internalUrl, externalUrl, isNewWindow } = button;
+                const { buttonText = "Button text", internalUrl, externalUrl, isNewWindow } = button;
                 let linkData = null;
                 
                 if (internalUrl) {
@@ -59,6 +59,10 @@ export default {
                 
                 const buttonUrl = linkData?.url || externalUrl;
                 
+                if (buttonUrl === '') {
+                    return '';
+                }
+
                 return {
                     buttonText,
                     isNewWindow,

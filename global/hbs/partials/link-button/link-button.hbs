@@ -1,3 +1,4 @@
+{{#if buttonUrl}}
 <a href="{{buttonUrl}}"{{#if isNewWindow}} target="_blank"{{/if}}{{#if isRealExternalLink}} rel="noopener nofollow"{{/if}} class="{{linkButtonClasses "default" "default"}}">
     {{buttonText}}         
     {{#if isRealExternalLink}}
@@ -25,3 +26,4 @@
         }}
     {{/ifEquals}}
 </a>
+{{/if}}
