@@ -60,7 +60,28 @@ function handlebarsPrecompile() {
                 const content = readFileSync(partialPath, 'utf8');
                 partials[partialName] = content;
             } catch (e) {
+                if( e.path.includes('SVG-library')) {
+                    return 
+                }
+                console.log(e)
                 console.error(`✗ Error loading partial ${partialName}:`, e.message);
+            }
+        }
+    });
+
+    // Load SVG-library/folder_name/svg_name registration code   
+    const svgs = {};
+    const globalSVGHbsDir = resolve(__dirname, 'global', 'hbs', 'partials', 'SVG-library');
+    const svgsDirs = readdirSync(globalSVGHbsDir);
+    svgsDirs.forEach(svgName => {
+        const svglDir = resolve(globalSVGHbsDir, svgName);
+        if (statSync(svglDir).isDirectory()) {
+            const svgPath = resolve(svglDir, `${svgName}.hbs`);
+            try {
+                const content = readFileSync(svgPath, 'utf8');
+                svgs[svgName] = content;
+            } catch (e) {
+                console.error(`✗ Error loading svg ${svgName}:`, e.message);
             }
         }
     });
@@ -98,8 +119,17 @@ function handlebarsPrecompile() {
                     })
                     .join('\n');
 
+                // Custom svg icons in SVG-library/folder_name registration code
+                const svgsCode = Object.entries(svgs)
+                    .map(([key, content]) => {
+                        const compiled = Handlebars.precompile(content);
+                        // Pass the compiled object directly to Handlebars.template
+                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled});`;
+                    })
+                    .join('\n');
+
                 return {
-                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\n${regularFALib}\n${solidFALib}\n${iconsCode}\n${partialsCode}\nexport default Handlebars.template(${templateSpec});`,
+                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\n${regularFALib}\n${solidFALib}\n${svgsCode}\n${iconsCode}\n${partialsCode}\nexport default Handlebars.template(${templateSpec});`,
                     map: null,
                 };
             }

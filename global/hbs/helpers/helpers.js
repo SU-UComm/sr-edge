@@ -252,7 +252,37 @@ export const helpers = {
     },
     gtOne: function(value) {
         return value > 1;
-    }
+    },
+    headingTag: function(tagName) {
+        if (tagName == null) return 'h2';
+        
+        const sanitizedTagName = (tagName || '').toString().trim();
+        
+        if (sanitizedTagName === 'p') return 'p';
+        
+        if (!sanitizedTagName.match(/^h[1-6]$/)) {
+            return 'h2';
+        }
+        
+        return sanitizedTagName;
+    },
+    sidebarHeadingClasses: function(color) {
+        const colorClassMap = new Map();
+        colorClassMap.set(
+            "grey",
+            "su-text-black-90 dark:su-text-white su-font-semibold su-text-18 su-items-end"
+        );
+        colorClassMap.set(
+            "black",
+            "su-text-black dark:su-text-white su-font-bold su-text-20 md:su-text-28 su-items-start"
+        );
+        colorClassMap.set(
+            "media",
+            "su-text-black-90 dark:su-text-black-20 su-font-semibold su-text-18 su-items-center"
+        );
+
+        return colorClassMap.get(color) || colorClassMap.get("grey");
+    },
 }
   
 export default helpers;
