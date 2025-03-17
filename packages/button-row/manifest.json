@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "button-row",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "type": "edge",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Add up to 3 buttons in this row component.",

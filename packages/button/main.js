@@ -28,7 +28,7 @@ export default {
         const fnsCtx = info?.fns || info?.ctx || {};
         
         // Extracting configuration data from arguments
-        const { buttonText, internalUrl, externalUrl, isNewWindow } = args || {};
+        const { buttonText = "Button text", internalUrl, externalUrl, isNewWindow } = args || {};
 
          // Validate required functions
         try {
@@ -78,6 +78,18 @@ export default {
 
         // Getting button URL
         const buttonUrl = linkData?.url || externalUrl;
+
+        // Validate data
+        try {
+            if (buttonUrl === '') {
+                throw new Error(
+                    `The URL of button must be a non-empty string. The ${JSON.stringify(buttonUrl)} was received.`,
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the Button component: ', er);
+            return `<!-- Error occurred in the Button component: ${er.message} -->`;
+        }
 
         // Prepare component data for template rendering
         const componentData = {
