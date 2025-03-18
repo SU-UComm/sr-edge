@@ -1,0 +1,20 @@
+<section data-component="related-story">
+    <div class="{{containerClasses "narrow"}}">
+        <section class="story__related-story su-col-span-full sm:su-col-span-10 sm:su-col-start-2 lg:su-col-span-6 lg:su-col-start-4 su-mx-auto">
+            {{> sidebar-heading title="Related story" icon="bullseyePointer" headingSize="h3" color="black" }}
+            <a class="su-text-black hocus:su-text-black su-no-underline su-group" href={{liveUrl}}>
+                <div class="su-flex su-gap-20 sm:su-gap-40 su-mt-30 lg:su-mt-36 lg:su-mt-38">
+                    <img class="su-object-cover su-h-auto su-max-h-[103px] su-max-w-[103px] md:su-max-h-[168px] md:su-max-w-[168px] lg:su-max-h-[185px] lg:su-max-w-[185px] su-object-center" src="{{imageUrl}}" alt="{{imageAlt}}"/>
+                    <div>
+                        <h4 class="su-transition group-hocus:su-underline group-hocus:su-text-digital-red dark:group-hocus:su-text-dark-mode-red su-text-20 dark:su-text-white sm:su-text-24 su-font-serif !su-font-bold su-leading-display su-mb-9">
+                            {{title}}
+                        </h4>
+                        <div class="su-wysiwyg-content su-text-16 sm:su-text-18 su-leading-[125%] !su-m-0 su-font-normal dark:su-text-white">
+                            {{{description}}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </section>
+    </div>
+</section>
