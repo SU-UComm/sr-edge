@@ -1,5 +1,11 @@
 <section data-component="media-carousel" data-unique-id="{{id}}">
     <div class="{{containerClasses width}}">
-        {{{carousel}}}
+        {{#> carousel-media uniqueID=id}}
+            {{#each slides}}
+            <div class="swiper-slide">
+                {{> card-media sidebarHeading=sidebarHeading title=title imageUrl=imageUrl imageAlt=imageAlt taxonomy=taxonomy liveUrl=liveUrl isRealExternalLink=isRealExternalLink author=author type=type typeIcon=typeIcon description=description}}
+            </div>
+            {{/each}}
+        {{/ carousel-media}}
     </div>
 </section>

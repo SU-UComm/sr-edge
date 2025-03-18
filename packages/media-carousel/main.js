@@ -1,6 +1,6 @@
 import mediaCarouselTemplate from './media-carousel.hbs';
-import {cardDataAdapter, matrixMediaCardService, uuid } from "../../global/js/utils";
-import { Carousel, Card } from "../../global/js/helpers";
+import {cardDataAdapter, matrixMediaCardService, isRealExternalLink, uuid } from "../../global/js/utils";
+import { SidebarHeading } from "../../global/js/helpers";
 
 /**
  * Media carousel component that renderds a list of media cards based on fetched data.
@@ -68,26 +68,44 @@ export default {
         // Get the cards data
         data = await adapter.getCards(cards);
 
-        const cardData = [];
-        let uniqueClass = ""
-        
+        // Setting the icon  
+        const typeOfIcon = {
+            "Book": {
+                typeIcon:"book-open-cover",
+                iconTestId:"svg-book-open-cover",
+                headingIcon: "Featured reading",
+                headingTitle: "Featured book"
+            },
+            "Podcast": {
+                typeIcon:"microphone",
+                iconTestId:"svg-microphone",
+                headingIcon: "Featured audio",
+                headingTitle: "Featured audio"
+            },
+            "Magazine": {
+                typeIcon:"book-open",
+                iconTestId:"svg-book-open",
+                headingIcon: "Featured reading",
+                headingTitle: "Featured reading"
+            }
+        }
+
         if (data !== null && data !== undefined) {
-            uniqueClass = uuid();
-            
-            data.forEach((card) => {
-                cardData.push(
-                    `<div class="swiper-slide">
-                        ${Card({ cardType: "media", data: card, displayDescription: false})}
-                    </div>`
-                );
+            data.map((card) => {
+                card.typeIcon = typeOfIcon[card.type].typeIcon;
+                card.iconTestId = typeOfIcon[card.type].iconTestId;
+                card.isRealExternalLink = isRealExternalLink(card.liveUrl);
+                card.sidebarHeading = SidebarHeading({ icon: typeOfIcon[card.type].headingIcon, title: typeOfIcon[card.type].headingTitle });
+
+                return card;
             });
         }
 
         // Validate fetched card data
         try {
-            if (typeof cardData !== 'object' || cardData.length < 1) {
+            if (typeof data !== 'object' || data.length < 1) {
                 throw new Error(
-                    `The "data" cannot be undefined or null. The ${JSON.stringify(cardData)} was received.`
+                    `The "data" cannot be undefined or null. The ${JSON.stringify(data)} was received.`
                 );
             }
         } catch (er) {
@@ -97,8 +115,8 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            id: uniqueClass,
-            carousel: Carousel({ variant:"media", slides: cardData.join(''), uniqueClass: uniqueClass }),
+            id: uuid(),
+            slides: data,
             width: "large"
         };
 
