@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "related-story",
     "type": "edge",
-    "version": "2.0.3",
-    "namespace": "pnp-stanford-edge-components",
+    "version": "4.0.1",
+    "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Displays a related story on a featured story",
     "displayName": "Related story",
     "mainFunction": "main",
@@ -20,8 +20,8 @@
     "icon": {
         "id": "ads_click",
         "color": {
-          "type": "enum",
-          "value": "pink"
+            "type": "enum",
+            "value": "pink"
         }
     },
     "functions": [
@@ -36,21 +36,19 @@
                         "title": "Related story content",
                         "description": "Select an asset ID to be featured as a related story.",
                         "type": "object",
-                        "required": [
-                          "story"
-                        ],
+                        "required": ["story"],
                         "properties": {
-                          "story": {
-                            "title": "Related story",
-                            "type": "string",
-                            "format": "matrix-asset-uri"
-                          },
-                          "descriptionOverride": {
-                            "title": "Description",
-                            "description": "This field will override the related story description that comes from the selected story asset.",
-                            "type": "string",
-                            "format": "multi-line"
-                          }
+                            "story": {
+                                "title": "Related story",
+                                "type": "string",
+                                "format": "matrix-asset-uri"
+                            },
+                            "descriptionOverride": {
+                                "title": "Description",
+                                "description": "This field will override the related story description that comes from the selected story asset.",
+                                "type": "string",
+                                "format": "multi-line"
+                            }
                         }
                     }
                 }
@@ -64,30 +62,6 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/1": {
-            "type": "file",
-            "path": "mocked-uris/image.json"
-        },
-        "matrix-asset://matrixIdentifier/2": {
-            "type": "file",
-            "path": "mocked-uris/image.json"
-        },
-        "matrix-asset://matrixIdentifier/5": {
-            "type": "file",
-            "path": "mocked-uris/image.json"
-        },
-        "matrix-asset://matrixIdentifier/6": {
-            "type": "file",
-            "path": "mocked-uris/image.json"
-        },
-        "matrix-asset://matrixIdentifier/9": {
-            "type": "file",
-            "path": "mocked-uris/image.json"
-        },
-        "matrix-asset://matrixIdentifier/10": {
-            "type": "file",
-            "path": "mocked-uris/image.json"
-        },
         "matrix-asset://matrixIdentifier/3": {
             "type": "file",
             "path": "mocked-uris/page.json"
@@ -108,9 +82,9 @@
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/63412": {
+        "matrix-asset://api-identifier/163459": {
             "type": "file",
-            "path": "mocked-uris/63412.json"
+            "path": "mocked-uris/163459.json"
         }
     },
     "previews": {

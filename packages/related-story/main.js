@@ -1,4 +1,3 @@
-// import { basicAssetUri } from "../../global/js/utils";
 import relatedStory from './related-story.hbs';
 import { cardDataAdapter, matrixCardService } from '../../global/js/utils';
 
@@ -73,28 +72,28 @@ export default {
             return `<!-- Error occurred in the Related story component: ${er.message} -->`;
         }
 
-        
         // Initialize card adapter and service
         const adapter = new cardDataAdapter();
         let data = null;
+
+        // Set our card service
         const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
         adapter.setCardService(service);
 
         // Fetch story data
         data = await adapter.getCards([{ cardAsset: story }]);
 
-
         // Validate fetched data
         try {
             if (typeof data !== 'object' || data === null) {
-              throw new Error(
-                `The data cannot be undefined or null. The ${JSON.stringify(data)} was received.`
-              );
+                throw new Error(
+                    `The data cannot be undefined or null. The ${JSON.stringify(data)} was received.`
+                );
             }
-          } catch (er) {
+        } catch (er) {
             console.error('Error occurred in the Related story content component: ', er);
             return `<!-- Error occurred in the Related story content component: ${er.message} -->`;
-          }
+        }
         
         let { title, description, liveUrl, imageUrl, imageAlt } = data[0]
 
