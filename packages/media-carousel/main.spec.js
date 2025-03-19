@@ -231,7 +231,7 @@ describe('[Media Carousel]', () => {
                                                   </h3>
                                                   <div data-test="mediacard-author" class="su-mb-15 md:su-mb-19">Susannah Young-ah Gottlieb</div>
                                                   <div class="su-text-18 md:su-text-16 su-mb-15 md:su-mb-19 su-gap-6 su-text-black-70 dark:su-text-black-50 su-flex su-nowrap su-items-center su-leading-none">
-                                                      <svg aria-hidden="true" focusable="false" data-testid=svg-book-open data-prefix="fas" data-icon="book-open" class="svg-inline--fa fa-book-open " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16">
+                                                      <svg aria-hidden="true" focusable="false" data-testid=svg-book-open data-prefix="fas" data-icon="book-open" class="svg-inline--fa fa-book-open " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="20">
                                                           <path fill="currentColor" d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5l0-377.4c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8L0 454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5l0-370.3c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11L304 456c0 11.4 11.7 19.3 22.4 15.5z"></path>
                                                       </svg>            <span class="su-font-semibold">Magazine</span>
                                                   </div>
@@ -268,7 +268,7 @@ describe('[Media Carousel]', () => {
                                                   </h3>
                                                   <div data-test="mediacard-author" class="su-mb-15 md:su-mb-19">Susannah Young-ah Gottlieb</div>
                                                   <div class="su-text-18 md:su-text-16 su-mb-15 md:su-mb-19 su-gap-6 su-text-black-70 dark:su-text-black-50 su-flex su-nowrap su-items-center su-leading-none">
-                                                      <svg aria-hidden="true" focusable="false" data-testid=svg-microphone data-prefix="fas" data-icon="microphone" class="svg-inline--fa fa-microphone " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16">
+                                                      <svg aria-hidden="true" focusable="false" data-testid=svg-microphone data-prefix="fas" data-icon="microphone" class="svg-inline--fa fa-microphone " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20">
                                                           <path fill="currentColor" d="M192 0C139 0 96 43 96 96l0 160c0 53 43 96 96 96s96-43 96-96l0-160c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40c0 89.1 66.2 162.7 152 174.4l0 33.6-48 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l72 0 72 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-48 0 0-33.6c85.8-11.7 152-85.3 152-174.4l0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40c0 70.7-57.3 128-128 128s-128-57.3-128-128l0-40z"></path>
                                                       </svg>            <span class="su-font-semibold">Podcast</span>
                                                   </div>
@@ -387,7 +387,7 @@ describe('[Media Carousel]', () => {
                                                   </h3>
                                                   <div data-test="mediacard-author" class="su-mb-15 md:su-mb-19">Susannah Young-ah Gottlieb</div>
                                                   <div class="su-text-18 md:su-text-16 su-mb-15 md:su-mb-19 su-gap-6 su-text-black-70 dark:su-text-black-50 su-flex su-nowrap su-items-center su-leading-none">
-                                                      <svg aria-hidden="true" focusable="false" data-testid=svg-book-open data-prefix="fas" data-icon="book-open" class="svg-inline--fa fa-book-open " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16">
+                                                      <svg aria-hidden="true" focusable="false" data-testid=svg-book-open data-prefix="fas" data-icon="book-open" class="svg-inline--fa fa-book-open " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="20">
                                                           <path fill="currentColor" d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5l0-377.4c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8L0 454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5l0-370.3c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11L304 456c0 11.4 11.7 19.3 22.4 15.5z"></path>
                                                       </svg>            <span class="su-font-semibold">Magazine</span>
                                                   </div>
@@ -426,7 +426,7 @@ describe('[Media Carousel]', () => {
                                                   </h3>
                                                   <div data-test="mediacard-author" class="su-mb-15 md:su-mb-19">Susannah Young-ah Gottlieb</div>
                                                   <div class="su-text-18 md:su-text-16 su-mb-15 md:su-mb-19 su-gap-6 su-text-black-70 dark:su-text-black-50 su-flex su-nowrap su-items-center su-leading-none">
-                                                      <svg aria-hidden="true" focusable="false" data-testid=svg-microphone data-prefix="fas" data-icon="microphone" class="svg-inline--fa fa-microphone " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16">
+                                                      <svg aria-hidden="true" focusable="false" data-testid=svg-microphone data-prefix="fas" data-icon="microphone" class="svg-inline--fa fa-microphone " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20">
                                                           <path fill="currentColor" d="M192 0C139 0 96 43 96 96l0 160c0 53 43 96 96 96s96-43 96-96l0-160c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40c0 89.1 66.2 162.7 152 174.4l0 33.6-48 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l72 0 72 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-48 0 0-33.6c85.8-11.7 152-85.3 152-174.4l0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40c0 70.7-57.3 128-128 128s-128-57.3-128-128l0-40z"></path>
                                                       </svg>            <span class="su-font-semibold">Podcast</span>
                                                   </div>

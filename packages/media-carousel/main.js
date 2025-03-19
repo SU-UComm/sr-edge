@@ -74,7 +74,7 @@ export default {
                 typeIcon:"book-open-cover",
                 iconTestId:"svg-book-open-cover",
                 headingIcon: "Featured reading",
-                headingTitle: "Featured book"
+                headingTitle: "Featured reading"
             },
             "Podcast": {
                 typeIcon:"microphone",
