@@ -4,6 +4,7 @@ import { SidebarHeading } from "../../global/js/helpers";
 
 /**
  * Media carousel component that renderds a list of media cards based on fetched data.
+ * @module MediaCarousel
  */
 export default {
     /**
