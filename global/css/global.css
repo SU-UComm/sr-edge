@@ -6637,9 +6637,3 @@ svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
 .fa-duotone.fa-inverse {
   color: var(--fa-inverse, #fff);
 }
-
-/* Custom */
-
-/* article .svg-inline--fa {
-  width: 16px;
-} */
