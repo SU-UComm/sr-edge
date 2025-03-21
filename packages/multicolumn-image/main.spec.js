@@ -177,30 +177,13 @@ describe('[Multicolumn Image]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="multicolumn-image">
-                  <div class="su-mx-auto su-component-container su-container-wide su-container-px">
-                      <section class="su-flex su-flex-col su-items-center su-gap-8 md:su-gap-9">
-                          <div class="su-flex su-gap-20 su-items-center lg:su-gap-48">
-                                  <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1">
-                                      <img src="https://example.com" class="su-object-cover" alt="" />
-                                      
-                                          <p class="su-text-14 su-text-black-70 dark:su-text-black-30 su-font-normal su-leading-[119.415%] su-text-center su-m-0 md:su-text-16">
-                                              Test caption 1
-                                          </p>
-                                      
-                                  </div>                    <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1">
-                                      <img src="https://picsum.photos/400/400" class="su-object-cover" alt="" />
-                                      
-                                          <p class="su-text-14 su-text-black-70 dark:su-text-black-30 su-font-normal su-leading-[119.415%] su-text-center su-m-0 md:su-text-16">
-                                              Test caption 2
-                                          </p>
-                                      
-                                  </div>                    <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1">
-                                      <img src="https://picsum.photos/400/400" class="su-object-cover" alt="" />
-                                      
-                                  </div>            </div>
-                          
-                      </section>
-                  </div>
+               <div class="su-mx-auto su-component-container su-container-wide su-container-px">
+               <section class="su-flex su-flex-col su-items-center su-gap-8 md:su-gap-9">
+               <div class="su-flex su-gap-20 su-items-center lg:su-gap-48">
+               <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1"> <img src="https://example.com" class="su-object-cover" alt="" />  <p class="su-text-14 su-text-black-70 dark:su-text-black-30 su-font-normal su-leading-[119.415%] su-text-center su-m-0 md:su-text-16"> Test caption 1 </p>  </div> <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1"> <img src="https://picsum.photos/400/400" class="su-object-cover" alt="" />  <p class="su-text-14 su-text-black-70 dark:su-text-black-30 su-font-normal su-leading-[119.415%] su-text-center su-m-0 md:su-text-16"> Test caption 2 </p>  </div> <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1"> <img src="https://picsum.photos/400/400" class="su-object-cover" alt="" />  </div> </div>
+               
+               </section>
+               </div>
               </section>"
             `);
         });
@@ -234,26 +217,17 @@ describe('[Multicolumn Image]', () => {
 
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="multicolumn-image">
-                  <div class="su-mx-auto su-component-container su-container-wide su-container-px">
-                      <section class="su-flex su-flex-col su-items-center su-gap-8 md:su-gap-9">
-                          <div class="su-flex su-gap-20 su-items-center lg:su-gap-48">
-                                  <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1">
-                                      <img src="https://example.com" class="su-object-cover" alt="" />
-                                      
-                                  </div>                    <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1">
-                                      <img src="https://picsum.photos/400/400" class="su-object-cover" alt="" />
-                                      
-                                  </div>                    <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1">
-                                      <img src="https://picsum.photos/400/400" class="su-object-cover" alt="" />
-                                      
-                                  </div>            </div>
-                          
-                              <p class="su-text-14 su-text-black-70 dark:su-text-black-30 su-font-normal su-max-w-[63.3rem] su-leading-[119.415%] su-text-center md:su-text-16 su-mb-0">
-                                  Test caption 1
-                              </p>
-                           
-                      </section>
-                  </div>
+               <div class="su-mx-auto su-component-container su-container-wide su-container-px">
+               <section class="su-flex su-flex-col su-items-center su-gap-8 md:su-gap-9">
+               <div class="su-flex su-gap-20 su-items-center lg:su-gap-48">
+               <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1"> <img src="https://example.com" class="su-object-cover" alt="" />  </div> <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1"> <img src="https://picsum.photos/400/400" class="su-object-cover" alt="" />  </div> <div class="su-relative su-flex su-flex-col su-gap-8 su-flex-1"> <img src="https://picsum.photos/400/400" class="su-object-cover" alt="" />  </div> </div>
+               
+               <p class="su-text-14 su-text-black-70 dark:su-text-black-30 su-font-normal su-max-w-[63.3rem] su-leading-[119.415%] su-text-center md:su-text-16 su-mb-0">
+               Test caption 1
+               </p>
+               
+               </section>
+               </div>
               </section>"
             `);
         });

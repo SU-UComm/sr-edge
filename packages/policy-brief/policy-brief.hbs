@@ -10,11 +10,11 @@
                 <div class="su-flex su-gap-6 su-items-center su-text-18 su-font-semibold su-pb-20 md:su-pb-27">
                     {{#if type}}
                     {{#ifEquals type "Policy Brief"}}
-                        <span class="dark:su-hidden">{{> icon-policy-brief theme="light"}}</span>
-                        <span class="su-hidden dark:su-block">{{> icon-policy-brief theme="dark"}}</span>
+                        <span class="dark:su-hidden">{{> svg-icons icon="policy brief" theme="light"}}</span>
+                        <span class="su-hidden dark:su-block">{{> svg-icons icon="policy brief" theme="dark"}}</span>
                     {{else}}
-                        <span class="dark:su-hidden">{{> icon-case-study theme="light"}}</span>
-                        <span class="su-hidden dark:su-block">{{> icon-case-study theme="dark"}}</span>
+                        <span class="dark:su-hidden">{{> svg-icons icon="case study" theme="light"}}</span>
+                        <span class="su-hidden dark:su-block">{{> svg-icons icon="case study" theme="dark"}}</span>
                     {{/ifEquals}}
                         <span>{{type}}</span>
                     {{/if}}
@@ -29,7 +29,7 @@
                     <a href="{{linkUrl}}" class="su-flex su-gap-2 su-group su-text-19 su-font-semibold su-leading-[125%] su-text-digital-red su-no-underline dark:su-text-dark-mode-red hocus:su-underline">
                         {{linkText}}
                         <span class="su-transition group-hocus:su--translate-y-01em group-hocus:su-translate-x-01em [&>svg]:su-translate-y-1">
-                            {{> icon-external-arrow}}
+                            {{> svg-icons icon="external arrow"}}
                         </span>
                     </a>
                 {{/if}}

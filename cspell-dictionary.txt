@@ -55,6 +55,7 @@ narrowhorizontal
 externalarrow
 featuredreading
 mediacard
+Endpiont
 
 # Lorem Ipsum 
 ezgif
@@ -68,6 +69,27 @@ picsum
 toreduce
 quotee's
 quotee
+casestudy
+inthenews
+arrowright
+arrowsrotate
+typeannouncement
+trendingup
+tipsandtakeaways
+sharelink
+questionanswer
+piechart
+mobileburgerbar
+featuredaudio
+externalarrowunstyled
+eventscalendar
+chevronright
+chevronleft
+burgerbar
+bullseyepointer
+bookopencover
+bargraph
+
 
 #testing hooks
 testid 

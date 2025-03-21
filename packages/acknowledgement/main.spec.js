@@ -97,13 +97,13 @@ describe('[Acknowledgement]', () => {
             
             expect(result).toMatchInlineSnapshot(`
               "<section data-component="acknowledgement">
-                  <div class="su-mx-auto su-component-container su-container-narrow su-container-px">
-                      <hr aria-hidden="true" class="su-mb-36 su-border-none su-w-100 su-h-6 lg:su-h-9 su-bg-gradient-to-r su-from-digital-red su-to-digital-red-dark dark:su-from-palo-verde dark:su-to-olive">
-                      <h2 class="sr-only">Test Title</h2>
-                      <div data-test="acknowledgement" class="su-wysiwyg-content *:su-basefont-19 su-mb-36 [&>*:last-child]:su-mb-0">
-                          Test Content
-                      </div>
-                  </div>
+               <div class="su-mx-auto su-component-container su-container-narrow su-container-px">
+               <hr aria-hidden="true" class="su-mb-36 su-border-none su-w-100 su-h-6 lg:su-h-9 su-bg-gradient-to-r su-from-digital-red su-to-digital-red-dark dark:su-from-palo-verde dark:su-to-olive">
+               <h2 class="sr-only">Test Title</h2>
+               <div data-test="acknowledgement" class="su-wysiwyg-content *:su-basefont-19 su-mb-36 [&>*:last-child]:su-mb-0">
+               Test Content
+               </div>
+               </div>
               </section>"
             `);
         });
