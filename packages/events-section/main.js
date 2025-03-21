@@ -98,7 +98,12 @@ export default {
         adapter.setCardService(service);
         
         // Get the cards data
-        data = await adapter.getCards();
+        try {
+            data = await adapter.getCards();
+        } catch (er) {
+            console.error('Error occurred in the Events section component: Failed to fetch event data. ', er);
+            return `<!-- Error occurred in the Stories carousel component: Failed to fetch event data. ${er.message} -->`;
+        }
 
         // Resolve the URI for the section heading link
         const headingData = await linkedHeadingService(
@@ -106,17 +111,30 @@ export default {
             args.headingConfiguration
         );
 
+        // Prepare card data
         let cardData = [];
         if (data !== null && data !== undefined) {
             cardData = data.map((card) => {
                 card.isRealExternalLink = isRealExternalLink(card.liveUrl);
-                card.eventStartEndDate = EventStartEndDate({start: card.date, end: card.endDate}).replace(/[\n\r]+/g, '').replace(/\s+/g, ' ');
+                card.eventStartEndDate = EventStartEndDate({start: card.date, end: card.endDate});
                 card.uniqueID = uuid();
                 card.imageAlt = card.videoUrl ? `Open video ${card.imageAlt} in a modal` : card.imageAlt;
                 card.iconType = card.type?.toLowerCase();
 
                 return card;
             }).slice(0, numberOfEvents);
+        }
+
+        // Validate fetched card data
+        try {
+            if (typeof cardData !== 'object' || cardData.length < 1) {
+                throw new Error(
+                    `The "data" cannot be undefined or null. The ${JSON.stringify(cardData)} was received.`
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the Events section component: ', er);
+            return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
         }
 
         // Prepare component data for template rendering

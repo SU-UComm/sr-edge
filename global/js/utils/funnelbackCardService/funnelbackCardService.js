@@ -44,7 +44,7 @@ export class funnelbackCardService {
         return Promise.all(json.response.resultPacket.results)
             .then((data) => data.map((card) => formatCardDataFunnelback(card)))
             .catch((error) => {
-            throw new Error(error);
+                throw new Error(error);
         });
     }
 }
