@@ -40,9 +40,27 @@ function handlebarsPrecompile() {
             const iconPath = resolve(iconDir, `${iconName}.hbs`);
             try {
                 const content = readFileSync(iconPath, 'utf8');
-                icons[iconName] = content;
+                icons[iconName] = content.trim().replace(/\s+/g, " ");
             } catch (e) {
                 console.error(`✗ Error loading icon ${iconName}:`, e.message);
+            }
+        }
+    });
+
+    const letters = {};
+    const globalHbsLettersDir = resolve(__dirname, 'global', 'hbs', 'letters');
+    // Load letters from directories
+    const lettersDirs = readdirSync(globalHbsLettersDir);
+
+    lettersDirs.forEach(letterName => {
+        const letterDir = resolve(globalHbsLettersDir, letterName);
+        if (statSync(letterDir).isDirectory()) {
+            const letterPath = resolve(letterDir, `${letterName}.hbs`);
+            try {
+                const content = readFileSync(letterPath, 'utf8');
+                letters[letterName] = content.trim().replace(/\s+/g, " ");;
+            } catch (e) {
+                console.error(`✗ Error loading letter ${letterName}:`, e.message);
             }
         }
     });
@@ -58,30 +76,13 @@ function handlebarsPrecompile() {
             const partialPath = resolve(partialDir, `${partialName}.hbs`);
             try {
                 const content = readFileSync(partialPath, 'utf8');
-                partials[partialName] = content;
+                partials[partialName] = content.trim().replace(/\s+/g, " ");;
             } catch (e) {
                 if( e.path.includes('SVG-library')) {
                     return 
                 }
                 console.log(e)
                 console.error(`✗ Error loading partial ${partialName}:`, e.message);
-            }
-        }
-    });
-
-    // Load SVG-library/folder_name/svg_name registration code   
-    const svgs = {};
-    const globalSVGHbsDir = resolve(__dirname, 'global', 'hbs', 'partials', 'SVG-library');
-    const svgsDirs = readdirSync(globalSVGHbsDir);
-    svgsDirs.forEach(svgName => {
-        const svglDir = resolve(globalSVGHbsDir, svgName);
-        if (statSync(svglDir).isDirectory()) {
-            const svgPath = resolve(svglDir, `${svgName}.hbs`);
-            try {
-                const content = readFileSync(svgPath, 'utf8');
-                svgs[svgName] = content;
-            } catch (e) {
-                console.error(`✗ Error loading svg ${svgName}:`, e.message);
             }
         }
     });
@@ -106,7 +107,16 @@ function handlebarsPrecompile() {
                     .map(([key, content]) => {
                         const compiled = Handlebars.precompile(content);
                         // Pass the compiled object directly to Handlebars.template
-                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled});`;
+                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled.trim().replace(/\s+/g, ' ')});`;
+                    })
+                    .join('\n');
+
+                // Letters registration code
+                const lettersCode = Object.entries(letters)
+                    .map(([key, content]) => {
+                        const compiled = Handlebars.precompile(content);
+                        // Pass the compiled object directly to Handlebars.template
+                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled.trim().replace(/\s+/g, ' ')});`;
                     })
                     .join('\n');
 
@@ -115,21 +125,12 @@ function handlebarsPrecompile() {
                     .map(([key, content]) => {
                         const compiled = Handlebars.precompile(content);
                         // Pass the compiled object directly to Handlebars.template
-                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled});`;
-                    })
-                    .join('\n');
-
-                // Custom svg icons in SVG-library/folder_name registration code
-                const svgsCode = Object.entries(svgs)
-                    .map(([key, content]) => {
-                        const compiled = Handlebars.precompile(content);
-                        // Pass the compiled object directly to Handlebars.template
-                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled});`;
+                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled.trim().replace(/\s+/g, ' ')});`;
                     })
                     .join('\n');
 
                 return {
-                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\n${regularFALib}\n${solidFALib}\n${svgsCode}\n${iconsCode}\n${partialsCode}\nexport default Handlebars.template(${templateSpec});`,
+                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\n${regularFALib}\n${solidFALib}\n${iconsCode}\n${lettersCode}\n${partialsCode}\nexport default Handlebars.template(${templateSpec.trim().replace(/\s+/g, ' ')});`,
                     map: null,
                 };
             }

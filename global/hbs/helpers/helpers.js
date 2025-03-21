@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { faSolid, faRegular } from '../../js/libraries';
 
 export const helpers = {
@@ -265,6 +266,15 @@ export const helpers = {
         }
         
         return sanitizedTagName;
+    },
+    horizontalCardOrientation: function(orientation) {
+        const orientationClasses = new Map();
+
+        orientationClasses.set("vertical", "su-grid-cols-1 su-gap-36 md:su-gap-27");
+        orientationClasses.set("horizontal", "su-grid-cols-1 md:su-grid-cols-2 lg:su-grid-cols-3 su-gap-34 md:su-gap-36 lg:su-gap-48");
+        orientationClasses.set("topiclisting", "su-grid-cols-1 su-gap-30 md:su-gap-48 lg:su-gap-61");
+        
+        return orientationClasses.get(orientation);
     },
     sidebarHeadingClasses: function(color) {
         const colorClassMap = new Map();

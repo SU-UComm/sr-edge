@@ -9,8 +9,8 @@
                     </div>
                 </div>
                 <div class="su-px-38{{#ifEquals width "wide"}} md:su-px-[12.1rem]{{/ifEquals}} su-py-38 md:su-py-61 su-size-full su-bg-white dark:su-bg-black-true su-flex su-flex-col su-items-center su-justify-center su-gap-10 lg:su-flex-row lg:su-gap-38">
-                <span data-test="icon" class="dark:su-hidden">{{#ifEquals icon "pie chart"}}{{> icon-pie-chart theme="light"}}{{else}}{{> icon-bar-graph theme="light"}}{{/ifEquals}}</span>              
-                <span data-test="icon" class="su-hidden dark:su-block">{{#ifEquals icon "pie chart"}}{{> icon-pie-chart theme="dark"}}{{else}}{{> icon-bar-graph theme="dark"}}{{/ifEquals}}</span>              
+                <span data-test="icon" class="dark:su-hidden">{{#ifEquals icon "pie chart"}}{{> svg-icons icon="pie chart" theme="light"}}{{else}}{{> svg-icons icon="bar graph" theme="light"}}{{/ifEquals}}</span>              
+                <span data-test="icon" class="su-hidden dark:su-block">{{#ifEquals icon "pie chart"}}{{> svg-icons icon="pie chart" theme="dark"}}{{else}}{{> svg-icons icon="bar graph" theme="dark"}}{{/ifEquals}}</span>              
                 {{#if factText}}
                     <p class="su-font-serif su-m-0">{{factText}}</p>
                 {{/if}}

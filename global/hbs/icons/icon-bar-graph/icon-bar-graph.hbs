@@ -5,6 +5,7 @@
         height='66'
         viewBox='0 0 67 66'
         fill='none'
+        class='{{classes}}'
         data-testid='bar-graph-svg'
     >
         <path
@@ -20,14 +21,14 @@
             fill='#B1040E'
         />
     </svg>
-{{/ifEquals}}
-{{#ifEquals theme 'dark'}}
+{{else}}
     <svg
         xmlns='http://www.w3.org/2000/svg'
         width='67'
         height='66'
         viewBox='0 0 67 66'
         fill='none'
+        class='{{classes}}'
         data-testid='bar-graph-svg'
     >
         <path

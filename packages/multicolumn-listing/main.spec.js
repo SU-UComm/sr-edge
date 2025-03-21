@@ -690,24 +690,9 @@ describe('[Multicolumn listing]', () => {
     
                 expect(result).toMatchInlineSnapshot(`
                   "<section data-component="multicolumn-listing">
-                      <div class="component-multicolumn-listing has-title">
-                          <div class="su-mx-auto su-component-container su-container-large su-container-px">    
-                                  <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
-                                      <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
-                                          Sample Heading
-                                      </h2>
-                                      <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-                                          <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red">
-                                              <span class="su-flex su-gap-2 su-items-baseline">
-                                              <span>
-                                                  Learn More<!-- --> <span class="sr-only">Sample Heading</span>
-                                              </span>
-                                              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18">
-                                                  <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
-                                              </svg>                </span>
-                                          </a>
-                                  </div>
-                              <div class="su-w-full su-component-multicolumn">
+                   <div class="component-multicolumn-listing has-title">
+                   <div class="su-mx-auto su-component-container su-container-large su-container-px"> 
+                    <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"> <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black"> Sample Heading </h2> <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>  <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"> <span class="su-flex su-gap-2 su-items-baseline"> <span> Learn More<!-- --> <span class="sr-only">Sample Heading</span> </span> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"> <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path> </svg> </span> </a>  </div>  <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">
@@ -829,9 +814,9 @@ describe('[Multicolumn listing]', () => {
                             
                       </div>
                     </div>
-                          </div>
-                      </div>
-                      
+                   </div>
+                   </div>
+                   
                   </section>"
                 `);
             });
@@ -867,24 +852,9 @@ describe('[Multicolumn listing]', () => {
     
                 expect(result).toMatchInlineSnapshot(`
                   "<section data-component="multicolumn-listing">
-                      <div class="component-multicolumn-listing has-title">
-                          <div class="su-mx-auto su-component-container su-container-large su-container-px">    
-                                  <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
-                                      <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
-                                          Sample Heading
-                                      </h2>
-                                      <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-                                          <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red">
-                                              <span class="su-flex su-gap-2 su-items-baseline">
-                                              <span>
-                                                  Learn More<!-- --> <span class="sr-only">Sample Heading</span>
-                                              </span>
-                                              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18">
-                                                  <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
-                                              </svg>                </span>
-                                          </a>
-                                  </div>
-                              <div class="su-w-full su-component-multicolumn">
+                   <div class="component-multicolumn-listing has-title">
+                   <div class="su-mx-auto su-component-container su-container-large su-container-px"> 
+                    <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"> <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black"> Sample Heading </h2> <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>  <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"> <span class="su-flex su-gap-2 su-items-baseline"> <span> Learn More<!-- --> <span class="sr-only">Sample Heading</span> </span> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"> <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path> </svg> </span> </a>  </div>  <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">
@@ -1006,9 +976,9 @@ describe('[Multicolumn listing]', () => {
                             
                       </div>
                     </div>
-                          </div>
-                      </div>
-                      
+                   </div>
+                   </div>
+                   
                   </section>"
                 `);
             });
@@ -1043,24 +1013,9 @@ describe('[Multicolumn listing]', () => {
     
                 expect(result).toMatchInlineSnapshot(`
                   "<section data-component="multicolumn-listing">
-                      <div class="component-multicolumn-listing has-title">
-                          <div class="su-mx-auto su-component-container su-container-large su-container-px">    
-                                  <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
-                                      <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
-                                          Sample Heading
-                                      </h2>
-                                      <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-                                          <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red">
-                                              <span class="su-flex su-gap-2 su-items-baseline">
-                                              <span>
-                                                  Learn More<!-- --> <span class="sr-only">Sample Heading</span>
-                                              </span>
-                                              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18">
-                                                  <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
-                                              </svg>                </span>
-                                          </a>
-                                  </div>
-                              <div class="su-w-full su-component-multicolumn">
+                   <div class="component-multicolumn-listing has-title">
+                   <div class="su-mx-auto su-component-container su-container-large su-container-px"> 
+                    <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"> <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black"> Sample Heading </h2> <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>  <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"> <span class="su-flex su-gap-2 su-items-baseline"> <span> Learn More<!-- --> <span class="sr-only">Sample Heading</span> </span> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"> <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path> </svg> </span> </a>  </div>  <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">
@@ -1182,9 +1137,9 @@ describe('[Multicolumn listing]', () => {
                             
                       </div>
                     </div>
-                          </div>
-                      </div>
-                      
+                   </div>
+                   </div>
+                   
                   </section>"
                 `);
             });
@@ -1203,24 +1158,9 @@ describe('[Multicolumn listing]', () => {
     
                 expect(result).toMatchInlineSnapshot(`
                   "<section data-component="multicolumn-listing">
-                      <div class="component-multicolumn-listing has-title">
-                          <div class="su-mx-auto su-component-container su-container-large su-container-px">    
-                                  <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
-                                      <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
-                                          Sample Heading
-                                      </h2>
-                                      <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-                                          <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red">
-                                              <span class="su-flex su-gap-2 su-items-baseline">
-                                              <span>
-                                                  Learn More<!-- --> <span class="sr-only">Sample Heading</span>
-                                              </span>
-                                              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18">
-                                                  <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
-                                              </svg>                </span>
-                                          </a>
-                                  </div>
-                              <div class="su-w-full su-component-multicolumn">
+                   <div class="component-multicolumn-listing has-title">
+                   <div class="su-mx-auto su-component-container su-container-large su-container-px"> 
+                    <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"> <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black"> Sample Heading </h2> <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>  <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"> <span class="su-flex su-gap-2 su-items-baseline"> <span> Learn More<!-- --> <span class="sr-only">Sample Heading</span> </span> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"> <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path> </svg> </span> </a>  </div>  <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">
@@ -1342,9 +1282,9 @@ describe('[Multicolumn listing]', () => {
                             
                       </div>
                     </div>
-                          </div>
-                      </div>
-                      
+                   </div>
+                   </div>
+                   
                   </section>"
                 `);
             });
@@ -1358,24 +1298,9 @@ describe('[Multicolumn listing]', () => {
     
                 expect(result).toMatchInlineSnapshot(`
                   "<section data-component="multicolumn-listing">
-                      <div class="component-multicolumn-listing has-title">
-                          <div class="su-mx-auto su-component-container su-container-large su-container-px">    
-                                  <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
-                                      <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
-                                          Sample Heading
-                                      </h2>
-                                      <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-                                          <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red">
-                                              <span class="su-flex su-gap-2 su-items-baseline">
-                                              <span>
-                                                  Learn More<!-- --> <span class="sr-only">Sample Heading</span>
-                                              </span>
-                                              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18">
-                                                  <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path>
-                                              </svg>                </span>
-                                          </a>
-                                  </div>
-                              <div class="su-w-full su-component-multicolumn">
+                   <div class="component-multicolumn-listing has-title">
+                   <div class="su-mx-auto su-component-container su-container-large su-container-px"> 
+                    <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"> <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black"> Sample Heading </h2> <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>  <a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"> <span class="su-flex su-gap-2 su-items-baseline"> <span> Learn More<!-- --> <span class="sr-only">Sample Heading</span> </span> <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"> <path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path> </svg> </span> </a>  </div>  <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">
@@ -1497,9 +1422,9 @@ describe('[Multicolumn listing]', () => {
                             
                       </div>
                     </div>
-                          </div>
-                      </div>
-                      
+                   </div>
+                   </div>
+                   
                   </section>"
                 `);
             });
@@ -1516,9 +1441,9 @@ describe('[Multicolumn listing]', () => {
     
                 expect(result).toMatchInlineSnapshot(`
                   "<section data-component="multicolumn-listing">
-                      <div class="component-multicolumn-listing has-no-title">
-                          <div class="su-mx-auto su-component-container su-container-large su-container-px">    
-                              <div class="su-w-full su-component-multicolumn">
+                   <div class="component-multicolumn-listing has-no-title">
+                   <div class="su-mx-auto su-component-container su-container-large su-container-px"> 
+                   <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">
@@ -1640,9 +1565,9 @@ describe('[Multicolumn listing]', () => {
                             
                       </div>
                     </div>
-                          </div>
-                      </div>
-                      
+                   </div>
+                   </div>
+                   
                   </section>"
                 `);
             });
@@ -1701,9 +1626,9 @@ describe('[Multicolumn listing]', () => {
                 defaultMockData
                 expect(result).toMatchInlineSnapshot(`
                   "<section data-component="multicolumn-listing">
-                      <div class="component-multicolumn-listing has-no-title">
-                          <div class="su-mx-auto su-component-container su-container-large su-container-px">    
-                              <div class="su-w-full su-component-multicolumn">
+                   <div class="component-multicolumn-listing has-no-title">
+                   <div class="su-mx-auto su-component-container su-container-large su-container-px"> 
+                   <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">
@@ -1825,9 +1750,9 @@ describe('[Multicolumn listing]', () => {
                             
                       </div>
                     </div>
-                          </div>
-                      </div>
-                      ModalHTMLModalHTMLModalHTML
+                   </div>
+                   </div>
+                   ModalHTMLModalHTMLModalHTML
                   </section>"
                 `);
             });

@@ -1,0 +1,64 @@
+<article aria-label="{{title}}" class="listing-item su-flex {{#ifEquals cardSize "large"}}su-gap-20 lg:su-gap-48{{else}}su-gap-19{{/ifEquals}} su-relative" data-testid="horizontal-card">
+    {{#if imageUrl}}
+    <div class="su-shrink-0 {{#ifEquals cardSize "large"}}su-w-[103px] su-h-[69px] md:su-w-[169px] md:su-h-[113px] lg:su-w-[292px] lg:su-h-[193px]{{else}}su-w-[73px] su-h-[73px] su-relative{{/ifEquals}}">
+        {{#ifEquals cardSize "large"}}
+        {{> card-thumbnail imageUrl=imageUrl imageAlt=imageAlt videoUrl=videoUrl mediaType="image" aspectRatio="card-large" size=cardSize uniqueID=uniqueID}}
+        {{else}}
+        {{> card-thumbnail imageUrl=imageUrl imageAlt=imageAlt videoUrl=videoUrl mediaType="image" aspectRatio="square" size=cardSize uniqueID=uniqueID}}
+        {{/ifEquals}}
+    </div>
+    {{else}}
+    {{#ifEquals cardSize "large"}}
+    <div className="su-shrink-0 su-w-[103px] su-h-[69px] md:su-w-[169px] md:su-h-[113px] lg:su-w-[292px] lg:su-h-[193px]"></div>
+    {{/ifEquals}}
+    {{/if}}       
+    <div class="su-flex su-flex-col {{#ifEquals cardSize "large"}}su-gap-9 lg:su-gap-12{{else}}su-gap-6{{/ifEquals}}">
+        {{#if taxonomy}}{{#ifEquals cardSize "small"}}
+        <p class="su-mb-0 su-text-16 su-font-semibold su-text-digital-red dark:su-text-dark-mode-red hover:dark:su-text-dark-mode-red" data-testid="horizontal-card-taxonomy">
+            <a href="{{taxonomyUrl}}" class="focus:su-outline-0 focus:su-ring su-text-digital-red su-no-underline hover:su-text-digital-red dark:su-text-dark-mode-red hover:dark:su-text-dark-mode-red su-block su-mt-[-6px]">
+                {{{taxonomy}}}
+            </a>
+        </p>
+        {{/ifEquals}}{{/if}}
+        <h3 class="su-font-sans su-my-0 su-group {{#ifEquals cardSize "large"}}su-text-18 md:su-text-21 lg:su-text-23 su-font-bold su-leading-[21.6px] md:su-leading-[25.2px] lg:su-leading-[27.6px]{{else}}su-text-18 su-font-semibold su-leading-[21.495px]{{/ifEquals}}">
+            <a href="{{liveUrl}}" class="su-group su-stretched-link su-inline-block su-text-black dark:su-text-white hocus:su-underline hocus:su-text-digital-red su-transition dark:hocus:su-text-dark-mode-red focus:su-outline-none focus-visible:su-ring-2 focus-visible:su-rounded focus-visible:su-ring-digital-red dark:focus-visible:su-ring-dark-mode-red focus-visible:su-outline-none focus-visible:after:su-outline focus-visible:after:su-outline-offset-8 focus-visible:after:su-outline-digital-red dark:focus-visible:after:su-outline-dark-mode-red">
+                {{{title}}}
+                {{#if isRealExternalLink}}{{#ifEquals cardSize "large"}}
+                {{> fontawesome-icon
+                    icon="arrow-up-right"
+                    iconTestId="svg-arrow-up-right"
+                    set="regular"
+                    width=15
+                    classes="su-inline-block su-align-middle su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
+                }}
+                {{else}}
+                {{> fontawesome-icon
+                    icon="arrow-up-right"
+                    iconTestId="svg-arrow-up-right"
+                    set="regular"
+                    width=12
+                    classes="su-inline-block su-align-middle su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
+                }}
+                {{/ifEquals}}{{/if}}
+            </a>
+        </h3>
+        {{#ifEquals cardSize "small"}}
+        <div data-testid="horizontal-event-date">
+            {{{eventStartEndDate}}}
+          </div>
+        {{/ifEquals}}
+        {{#if type}}{{#ifEquals cardSize "large"}} 
+        <p data-testid="horizontal-card-type" class="su-text-black-70 dark:su-text-black-30 su-w-full su-text-14 lg:su-text-16 su-mt-9 md:su-mt-12 su-mb-0 su-flex su-gap-6 su-items-center su-justify-start">
+            ${SVGMap.get(type.toLowerCase())}
+            <span class="su-font-semibold su-text-14 md:su-text-16 su-leading-4">{{{type}}}</span>
+        </p>
+        {{/ifEquals}}{{/if}}
+        {{#if description}}{{#ifEquals cardSize "large"}}
+        <div data-testid="horizontal-card-description" class="su-hidden md:su-block su-text-16 lg:su-text-18 su-mt-9 md:su-mt-12 su-mb-0">
+            <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0">
+                {{{description}}}
+            </div>
+        </div>
+        {{/ifEquals}}{{/if}} 
+    </div>
+</article>
