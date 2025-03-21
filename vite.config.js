@@ -40,7 +40,7 @@ function handlebarsPrecompile() {
             const iconPath = resolve(iconDir, `${iconName}.hbs`);
             try {
                 const content = readFileSync(iconPath, 'utf8');
-                icons[iconName] = content.trim().replace(/\s+/g, " ");
+                icons[iconName] = content.trim().replace(/\s+/g, ' ');
             } catch (e) {
                 console.error(`✗ Error loading icon ${iconName}:`, e.message);
             }
@@ -58,7 +58,7 @@ function handlebarsPrecompile() {
             const letterPath = resolve(letterDir, `${letterName}.hbs`);
             try {
                 const content = readFileSync(letterPath, 'utf8');
-                letters[letterName] = content.trim().replace(/\s+/g, " ");;
+                letters[letterName] = content.trim().replace(/\s+/g, ' ');;
             } catch (e) {
                 console.error(`✗ Error loading letter ${letterName}:`, e.message);
             }
@@ -76,7 +76,7 @@ function handlebarsPrecompile() {
             const partialPath = resolve(partialDir, `${partialName}.hbs`);
             try {
                 const content = readFileSync(partialPath, 'utf8');
-                partials[partialName] = content.trim().replace(/\s+/g, " ");;
+                partials[partialName] = content.trim().replace(/\s+/g, ' ');;
             } catch (e) {
                 if( e.path.includes('SVG-library')) {
                     return 
@@ -92,7 +92,7 @@ function handlebarsPrecompile() {
         enforce: 'pre',
         transform(src, id) {
             if (id.endsWith('.hbs')) {
-                const templateSpec = Handlebars.precompile(src);
+                const templateSpec = Handlebars.precompile(src.replace(/[\n\r]+/g, '').replace(/\s+/g, ' '));
                 // Helpers registration code
                 const helpersCode = Object.keys(helpers)
                     .map(
@@ -107,7 +107,7 @@ function handlebarsPrecompile() {
                     .map(([key, content]) => {
                         const compiled = Handlebars.precompile(content);
                         // Pass the compiled object directly to Handlebars.template
-                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled.trim().replace(/\s+/g, ' ')});`;
+                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled});`;
                     })
                     .join('\n');
 
@@ -116,7 +116,7 @@ function handlebarsPrecompile() {
                     .map(([key, content]) => {
                         const compiled = Handlebars.precompile(content);
                         // Pass the compiled object directly to Handlebars.template
-                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled.trim().replace(/\s+/g, ' ')});`;
+                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled});`;
                     })
                     .join('\n');
 
@@ -125,12 +125,12 @@ function handlebarsPrecompile() {
                     .map(([key, content]) => {
                         const compiled = Handlebars.precompile(content);
                         // Pass the compiled object directly to Handlebars.template
-                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled.trim().replace(/\s+/g, ' ')});`;
+                        return `Handlebars.partials['${key}'] = Handlebars.template(${compiled});`;
                     })
                     .join('\n');
 
                 return {
-                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\n${regularFALib}\n${solidFALib}\n${iconsCode}\n${lettersCode}\n${partialsCode}\nexport default Handlebars.template(${templateSpec.trim().replace(/\s+/g, ' ')});`,
+                    code: `import Handlebars from 'handlebars/runtime';\n${helpersCode}\n${regularFALib}\n${solidFALib}\n${iconsCode}\n${lettersCode}\n${partialsCode}\nexport default Handlebars.template(${templateSpec});`,
                     map: null,
                 };
             }

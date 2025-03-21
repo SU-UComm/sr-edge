@@ -1,9 +1,8 @@
 {
     "headingConfiguration": {
         "title": "Upcoming events",
+        "ctaManualUrl": "https://events.stanford.edu",
         "ctaText": "View all",
-        "ctaManualUrl": "https://news.stanford.edu/home-page",
-        "ctaUrl": "matrix-asset://api-identifier/28192",
         "ctaNewWindow": false
     },
     "contentConfiguration": {

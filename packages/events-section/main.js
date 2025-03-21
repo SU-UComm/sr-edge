@@ -110,7 +110,7 @@ export default {
         if (data !== null && data !== undefined) {
             cardData = data.map((card) => {
                 card.isRealExternalLink = isRealExternalLink(card.liveUrl);
-                card.eventStartEndDate = EventStartEndDate({start: card.date, end: card.endDate});
+                card.eventStartEndDate = EventStartEndDate({start: card.date, end: card.endDate}).replace(/[\n\r]+/g, '').replace(/\s+/g, ' ');
                 card.uniqueID = uuid();
                 card.imageAlt = card.videoUrl ? `Open video ${card.imageAlt} in a modal` : card.imageAlt;
                 card.iconType = card.type?.toLowerCase();

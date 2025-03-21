@@ -152,27 +152,7 @@ describe('[Campaign CTA]', () => {
 
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="campaign-cta">
-               <div class="su-mx-auto su-component-container su-container-full">
-               <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col">
-               <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row">
-               <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">
-               <h2 class="su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold">Campaign Title</h2>
-               <div class="su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]">Campaign Description</div>
-               </div>
-               
-               <a href="https://example.com" class="su-text-18 su-mt-50 su-font-normal su-leading-display su-inline-block su-px-30 su-pt-10 su-pb-12 su-bg-digital-red su-mr-auto su-text-white su-no-underline hover:su-bg-black su-transition md:su-px-35 md:su-pt-14 md:su-pb-16 md:su-text-24 md:su-leading-[119.415%] md:su-mt-auto su-shrink-0">
-               Click Here
-               </a>
-               
-               </div>
-               <img class="su-absolute su-object-cover su-size-full su-z-[1]" src="https://picsum.photos/400/400" alt="" />
-               <div class="su-campaign-cta-gradient su-z-[1]"></div>
-               </div>
-               </div>
-              </section>"
-            `);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="campaign-cta"> <div class="su-mx-auto su-component-container su-container-full"> <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col"> <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row"> <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">  <h2 class="su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold">Campaign Title</h2>   <div class="su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]">Campaign Description</div>  </div>  <a href="https://example.com" class="su-text-18 su-mt-50 su-font-normal su-leading-display su-inline-block su-px-30 su-pt-10 su-pb-12 su-bg-digital-red su-mr-auto su-text-white su-no-underline hover:su-bg-black su-transition md:su-px-35 md:su-pt-14 md:su-pb-16 md:su-text-24 md:su-leading-[119.415%] md:su-mt-auto su-shrink-0"> Click Here </a>  </div>  <img class="su-absolute su-object-cover su-size-full su-z-[1]" src="https://picsum.photos/400/400" alt="" />  <div class="su-campaign-cta-gradient su-z-[1]"></div> </div> </div></section>"`);
         });
 
         it('Should return HTML without link when linkUrl is missing', async () => {
@@ -185,22 +165,7 @@ describe('[Campaign CTA]', () => {
 
             const result = await main(mockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="campaign-cta">
-               <div class="su-mx-auto su-component-container su-container-full">
-               <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col">
-               <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row">
-               <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">
-               <h2 class="su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold">Campaign Title</h2>
-               <div class="su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]">Campaign Description</div>
-               </div>
-               
-               </div>
-               <div class="su-campaign-cta-gradient su-z-[1]"></div>
-               </div>
-               </div>
-              </section>"
-            `);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="campaign-cta"> <div class="su-mx-auto su-component-container su-container-full"> <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col"> <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row"> <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">  <h2 class="su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold">Campaign Title</h2>   <div class="su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]">Campaign Description</div>  </div>  </div>  <div class="su-campaign-cta-gradient su-z-[1]"></div> </div> </div></section>"`);
         });
 
         it('Should return HTML without title when title is an empty string', async () => {
@@ -213,21 +178,7 @@ describe('[Campaign CTA]', () => {
 
             const result = await main(mockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="campaign-cta">
-               <div class="su-mx-auto su-component-container su-container-full">
-               <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col">
-               <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row">
-               <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">
-               <div class="su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]">Campaign Description</div>
-               </div>
-               
-               </div>
-               <div class="su-campaign-cta-gradient su-z-[1]"></div>
-               </div>
-               </div>
-              </section>"
-            `);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="campaign-cta"> <div class="su-mx-auto su-component-container su-container-full"> <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col"> <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row"> <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">   <div class="su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]">Campaign Description</div>  </div>  </div>  <div class="su-campaign-cta-gradient su-z-[1]"></div> </div> </div></section>"`);
         });
 
         it('Should return HTML without description when description is an empty string', async () => {
@@ -240,21 +191,7 @@ describe('[Campaign CTA]', () => {
 
             const result = await main(mockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="campaign-cta">
-               <div class="su-mx-auto su-component-container su-container-full">
-               <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col">
-               <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row">
-               <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">
-               <h2 class="su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold">Campaign Title</h2>
-               </div>
-               
-               </div>
-               <div class="su-campaign-cta-gradient su-z-[1]"></div>
-               </div>
-               </div>
-              </section>"
-            `);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="campaign-cta"> <div class="su-mx-auto su-component-container su-container-full"> <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col"> <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row"> <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">  <h2 class="su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold">Campaign Title</h2>   </div>  </div>  <div class="su-campaign-cta-gradient su-z-[1]"></div> </div> </div></section>"`);
         });
 
         it('Should return HTML with empty alt attribute when attributes alt is missing', async () => {
@@ -264,27 +201,7 @@ describe('[Campaign CTA]', () => {
 
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="campaign-cta">
-               <div class="su-mx-auto su-component-container su-container-full">
-               <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col">
-               <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row">
-               <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">
-               <h2 class="su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold">Campaign Title</h2>
-               <div class="su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]">Campaign Description</div>
-               </div>
-               
-               <a href="https://example.com" class="su-text-18 su-mt-50 su-font-normal su-leading-display su-inline-block su-px-30 su-pt-10 su-pb-12 su-bg-digital-red su-mr-auto su-text-white su-no-underline hover:su-bg-black su-transition md:su-px-35 md:su-pt-14 md:su-pb-16 md:su-text-24 md:su-leading-[119.415%] md:su-mt-auto su-shrink-0">
-               Click Here
-               </a>
-               
-               </div>
-               <img class="su-absolute su-object-cover su-size-full su-z-[1]" src="https://picsum.photos/400/400" alt="" />
-               <div class="su-campaign-cta-gradient su-z-[1]"></div>
-               </div>
-               </div>
-              </section>"
-            `);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="campaign-cta"> <div class="su-mx-auto su-component-container su-container-full"> <div class="su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col"> <div class="su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row"> <div class="su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25">  <h2 class="su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold">Campaign Title</h2>   <div class="su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]">Campaign Description</div>  </div>  <a href="https://example.com" class="su-text-18 su-mt-50 su-font-normal su-leading-display su-inline-block su-px-30 su-pt-10 su-pb-12 su-bg-digital-red su-mr-auto su-text-white su-no-underline hover:su-bg-black su-transition md:su-px-35 md:su-pt-14 md:su-pb-16 md:su-text-24 md:su-leading-[119.415%] md:su-mt-auto su-shrink-0"> Click Here </a>  </div>  <img class="su-absolute su-object-cover su-size-full su-z-[1]" src="https://picsum.photos/400/400" alt="" />  <div class="su-campaign-cta-gradient su-z-[1]"></div> </div> </div></section>"`);
         });
 
         it('Should sanitize the description using xss', async () => {
