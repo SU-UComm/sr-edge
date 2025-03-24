@@ -46,7 +46,6 @@ describe("[Text Callout]", () => {
         vi.clearAllMocks();
     });
 
-
     describe("[Error Handling]", () => {
         it("Should return an error when no parameters are provided", async () => {
             const result = await main();
@@ -246,7 +245,6 @@ describe("[Text Callout]", () => {
             expect(result).toBe('<!-- Error occurred in the Text callout component: The "isNewWindow" field must be a boolean. The 123 was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
-
     });
 
     // General HTML elements rendering
@@ -352,7 +350,7 @@ describe("[Text Callout]", () => {
 
     });
 
-    describe("[Image alt]", () => {
+    describe("[Edge cases]", () => {
         it("Should correctly render alt when image data will return empty alt", async () => {
             basicAssetUri.mockResolvedValueOnce({
                 url: "https://google.com/image.jpg",
@@ -371,6 +369,27 @@ describe("[Text Callout]", () => {
 
             expect(result).toContain("<img");
             expect(result).toContain("alt=''");
+        });
+
+        it('Should throw an error when fetch for image will fail', async () => {
+            basicAssetUri.mockRejectedValueOnce(new Error('No image'))
+
+            const result = await main(defaultMockData, defaultMockInfo);
+
+            expect(result).toContain('<!-- Error occurred in the Text callout component: Failed to fetch image data. No image -->');
+            expect(mockedError).toBeCalledTimes(1);
+        });
+
+        it('Should throw an error when fetch for image will fail', async () => {
+            basicAssetUri.mockResolvedValueOnce({
+                url: "https://google.com/image.jpg",
+            });
+            basicAssetUri.mockRejectedValueOnce(new Error('No link'))
+
+            const result = await main(defaultMockData, defaultMockInfo);
+
+            expect(result).toContain('<!-- Error occurred in the Text callout component: Failed to fetch link data. No link -->');
+            expect(mockedError).toBeCalledTimes(1);
         });
     });
 });

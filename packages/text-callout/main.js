@@ -112,30 +112,42 @@ export default {
         // Fetch image data
         let imageData = null;
         if (image) {
-            imageData = await basicAssetUri(fnsCtx, image);
-            imageData.alt = imageData.attributes?.alt || "",
-            imageData.placement = imagePlacement;
-            imageData.captionCredit = caption && credit ? `${caption} | ${credit}` : caption || credit;
+            try {
+                imageData = await basicAssetUri(fnsCtx, image);
+            } catch (er) {
+                console.error('Error occurred in the Text callout component: Failed to fetch image data. ', er);
+                return `<!-- Error occurred in the Text callout component: Failed to fetch image data. ${er.message} -->`;
+            }
         }
-
-        let linkData = null
-        // Resolve internal link
-        if (internalUrl) {
-            linkData = await basicAssetUri(fnsCtx, internalUrl);
+        const figureData = {
+            url: imageData?.url,
+            alt: imageData?.attributes?.alt || "",
+            placement: imagePlacement,
+            captionCredit: caption && credit ? `${caption} | ${credit}` : caption || credit,
         }
         
+        // Resolve internal link
+        let linkData = null
+        if (internalUrl) {
+            try {
+                linkData = await basicAssetUri(fnsCtx, internalUrl);
+            } catch (er) {
+                console.error('Error occurred in the Text callout component: Failed to fetch link data. ', er);
+                return `<!-- Error occurred in the Text callout component: Failed to fetch link data. ${er.message} -->`;
+            }
+        }
         const buttonData = {
             title: buttonText,
             url: linkData?.url || externalUrl,
             isNewWindow: isNewWindow,
             isRealExternalLink: !linkData?.url && externalUrl ? isRealExternalLink(externalUrl) : false,
         }
-        
+
         // Prepare component data for template rendering
         const componentData = {
             title,
             content: xss(content),
-            image: imageData,
+            image: figureData,
             button: buttonData,
             width: "narrow",
         };

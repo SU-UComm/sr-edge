@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "text-callout",
     "type": "edge",
-    "version": "4.0.1",
+    "version": "4.0.3",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "This component is intended for displaying extra text content with a background color applied",
     "displayName": "Text Callout",
@@ -147,13 +147,13 @@
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/99100": {
+        "matrix-asset://api-identifier/9848": {
             "type": "file",
-            "path": "mocked-uris/99100.json"
+            "path": "mocked-uris/9848.json"
         },
-        "matrix-asset://api-identifier/28192": {
+        "matrix-asset://api-identifier/130290": {
             "type": "file",
-            "path": "mocked-uris/28192.json"
+            "path": "mocked-uris/130290.json"
         }
     },
     "previews": {
