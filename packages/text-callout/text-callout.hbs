@@ -1,0 +1,33 @@
+<section data-component="text-callout">
+    <div class="{{containerClasses width}}">
+        <section
+            class="su-flex su-flex-col su-p-20 md:su-p-36 su-bg-fog-light lg:su-mx-auto dark:su-bg-black [&>p]:su-m-0 [&>p]:!su-mb-0 [&>p]:su-text-16 md:[&>p]:!su-text-19 last-of-type:[&>p]:!su-mb-0">
+            <div class="su-relative su-overflow-hidden su-mb-12">
+                <h3 class="su-font-serif su-font-black su-inline !su-text-23 su-pr-10 su-m-0">
+                    {{title}}
+                </h3>
+                <span class="su-w-full su-bg-black-20 su-h-px su-absolute su-bottom-4"></span>
+            </div>
+            {{#ifEquals image.placement 'Above content'}}
+            {{#if image}}
+                {{> figure-image url=image.url alt=image.alt captionCredit=image.captionCredit classes="su-order-1 su-pb-20 md:su-pb-12 lg:su-pb-27 su-w-full"}}
+            {{/if}}
+            {{/ifEquals}}
+            <div class="su-flex su-flex-col su-gap-12 su-order-2">
+                <div class="su-wysiwyg-content *:su-text-16 *:md:su-text-19 *:su-leading last-of-type:[&>p]:!su-mb-0">
+                    {{{content}}}
+                </div>
+            </div>
+            {{#ifEquals image.placement 'Below content'}}
+            {{#if image}}
+                {{> figure-image url=image.url alt=image.alt captionCredit=image.captionCredit classes="su-order-3 su-pt-20 md:su-pt-12 lg:su-pt-27 su-w-full"}}
+            {{/if}}
+            {{/ifEquals}}
+            {{#if button}}
+            <div class="su-order-3 su-rs-mt-1">
+                {{> link-button buttonText=button.title buttonUrl=button.url isNewWindow=button.isNewWindow isRealExternalLink=button.isRealExternalLink }}
+            </div>
+            {{/if}}
+        </section>
+    </div>
+</section>
