@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "media-feature",
     "type": "edge",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "The media feature component is used to feature a singular podcast or book.",
     "displayName": "Media feature",
