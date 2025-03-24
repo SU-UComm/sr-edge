@@ -159,13 +159,14 @@ export default {
         adapter.setCardService(service);
 
         // Getting data
-        const cards = [
-            { cardAsset: featuredTeaser },
-            teaserOne ? { cardAsset: teaserOne } : null,
-            teaserTwo ? { cardAsset: teaserTwo } : null
-          ].filter(card => card !== null);
-          
-        data = await adapter.getCards(cards);
+        const cards = []
+        featuredTeaser && cards.push({ cardAsset: featuredTeaser })
+        teaserOne && cards.push({ cardAsset: teaserOne });
+        teaserTwo && cards.push({ cardAsset: teaserTwo });
+   
+        if (cards && cards.length) {
+            data = await adapter.getCards(cards);
+        }
           
 
         // Resolve the URI for the section heading link
