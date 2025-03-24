@@ -159,11 +159,14 @@ export default {
         adapter.setCardService(service);
 
         // Getting data
-        data = await adapter.getCards([
-            { cardAsset: featuredTeaser }, 
-            { cardAsset: teaserOne }, 
-            { cardAsset: teaserTwo }
-        ]);
+        const cards = [
+            { cardAsset: featuredTeaser },
+            teaserOne ? { cardAsset: teaserOne } : null,
+            teaserTwo ? { cardAsset: teaserTwo } : null
+          ].filter(card => card !== null);
+          
+        data = await adapter.getCards(cards);
+          
 
         // Resolve the URI for the section heading link
         const headingData = await linkedHeadingService(
