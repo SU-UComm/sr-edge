@@ -1,0 +1,72 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "in-brief",
+    "type": "edge",
+    "version": "4.0.1",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "Summary of main points in a bulleted list.",
+    "displayName": "In Brief",
+    "mainFunction": "main",
+    "icon": {
+        "id": "summarize",
+        "color": {
+            "type": "enum",
+            "value": "pink"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "points": {
+                        "title": "Summary Points",
+                        "description": "These points will be displayed as a bullet list.",
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 5,
+                        "items": {
+                            "type": "string",
+                            "title": "Summary Point",
+                            "format": "multi-line"
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
