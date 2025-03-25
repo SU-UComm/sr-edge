@@ -1,6 +1,5 @@
-import hash from "object-hash";
 import multicolumnListingTemplate from './multicolumn-listing.hbs';
-import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid } from "../../global/js/utils";
+import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid, uuid } from "../../global/js/utils";
 import { Card, Modal, EmbedVideo } from '../../global/js/helpers';
 
 /**
@@ -171,18 +170,17 @@ export default {
         // Generate modals for video cards
         data?.forEach((cardData, i) => {
             if (i < maxNumberOfCards) {
+                const uniqueId = uuid();
                 if (source === "Search") {
                     cardsMarkup.push(
-                        Card({data: cardData, displayDescription: displayDescriptions, displayThumbnail: displayThumbnails, cardSize: cardSizeMap.get(searchMaxCards)}))
+                        Card({data: cardData, displayDescription: displayDescriptions, displayThumbnail: displayThumbnails, cardSize: cardSizeMap.get(searchMaxCards), uniqueId}))
                 }
                 else {
                     cardsMarkup.push(
-                        Card({data: cardData, displayDescription: displayDescriptions, displayThumbnail: displayThumbnails, cardSize: cardSizeMap.get(numberOfCards)}))
+                        Card({data: cardData, displayDescription: displayDescriptions, displayThumbnail: displayThumbnails, cardSize: cardSizeMap.get(numberOfCards), uniqueId}))
                 }
-                if (cardData.type === 'Video') {
-                    const uniqueId = hash.MD5(
-                        JSON.stringify(cardData.videoUrl) + hash.MD5(JSON.stringify(cardData.title))
-                    );
+
+                if(cardData.type === 'Video') {
                     cardModal.push(
                         Modal({content: EmbedVideo({ isVertical: cardData.size === "vertical-video", videoId: cardData.videoUrl, title: `Watch ${cardData.title}`, noAutoPlay: true }), uniqueId, describedby: 'card-modal' })
                     );
@@ -199,7 +197,7 @@ export default {
             headingCtaText: headingData?.ctaText,
             multicolumnGrid: multicolumnGrid(cardsMarkup, true),
             cardModal: cardModal.join(''),
-            width: "large"
+            width: "large",
         };
 
         return multicolumnListingTemplate(componentData);

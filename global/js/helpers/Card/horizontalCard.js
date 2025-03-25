@@ -195,8 +195,10 @@ export function HorizontalCard({
               ${FAIcon({
                   icon: "arrow-up-right",
                   set: "regular",
-                  width: cardSize === "small" ? 12 : 15,
-                  class:"su-inline-block su-align-middle su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
+                  attributes: {
+                    width: cardSize === "small" ? 12 : 15,
+                    classes:"su-inline-block su-align-middle su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
+                  }
               })}
             ` : ''}
           </a>
