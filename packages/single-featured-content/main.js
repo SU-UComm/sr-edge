@@ -1,14 +1,14 @@
-import eventSectionTemplate from './event-section.hbs';
-import { cardDataAdapter, eventCardService, linkedHeadingService, isRealExternalLink, uuid } from "../../global/js/utils";
-import { EventStartEndDate } from '../../global/js/helpers';
+import { cardDataAdapter, matrixCardService, linkedHeadingService } from "../../global/js/utils";
+import { Card } from "../../global/js/helpers";
+import singleFeaturedTemplate from "./single-featured-content.hbs";
 
 /**
- * A module for rendering an events section with cards and a linked heading.
- * @module EventsSection
+ * A module for rendering a single feature with a linked heading.
+ * @module SingleFeatured
  */
 export default {
     /**
-     * Fetches event data and renders it as a section with a linked heading and card grid.
+     * Fetches for data and renders it as a section with a linked heading and single feature.
      * @async
      * @param {Object} args - Configuration arguments for the events section.
      * @param {Object} args.headingConfiguration - The header configuration for the component.
@@ -18,44 +18,49 @@ export default {
      * @param {string} [args.headingConfiguration.ctaText] - The text for the CTA link (optional).
      * @param {string} [args.headingConfiguration.ctaNewWindow] - Flag to open CTA link in new window (optional).
      * @param {Object} [args.contentConfiguration] - Configuration for content sources.
-     * @param {string} args.contentConfiguration.eventsUrl - The URL of the events API.
-     * @param {Object} [args.displayConfiguration] - Display settings for the section.
-     * @param {string} [args.displayConfiguration.numberOfEvents] - The maximum number of events to display.
+     * @param {string} args.contentConfiguration.source - The asset id of the feature.
      * @param {Object} info - Contextual information.
-     * @param {Object} info.ctx - Context object for resolving heading data.
+     * @param {Object} info.env - Environment variables in the execution context.
+     * @param {Object} info.fns - Functions available in the execution context.
+     * @param {Function} info.fns.resolveUri - Function to resolve URIs.
      * @returns {Promise<string>} The rendered HTML string for the events section, or 'no cards' if no data is available.
      */
     async main(args, info) {
-        // Extracting environment function from provided info
+        // Extracting environment variables and function from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || {};
 
         // Extracting configuration data from arguments
-        const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
-        const { eventsUrl } = args?.contentConfiguration || {};
-        const { numberOfEvents } = args?.displayConfiguration || {};
+        const { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow } = args?.headingConfiguration || {};
+        const { source } = args?.contentConfiguration || {};
 
-        // Validate required environment variables
-        try {
+         // Validate required environment variables
+         try {
+            if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
+                throw new Error(
+                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
+                );
+            }
+            if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
+                throw new Error(
+                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
+                );
+            }
             if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
                 throw new Error(
                     `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the Events section component: ', er);
-            return `<!-- Error occurred in the Events section component: ${er.message} -->`;
+            console.error('Error occurred in the Single featured content component: ', er);
+            return `<!-- Error occurred in the Single featured content component: ${er.message} -->`;
         }
 
         // Validate required fields and ensure correct data types
         try {
-            if (typeof eventsUrl !== 'string' || eventsUrl.trim() === '') {
+            if (typeof source !== 'string' || source.trim() === '') {
                 throw new Error(
-                    `The "eventsUrl" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(eventsUrl)} was received.`
-                );
-            }
-            if (typeof numberOfEvents !== 'number' || ![3, 6, 9].includes(numberOfEvents)) {
-                throw new Error(
-                    `The "numberOfEvents" field cannot be undefined and must be a number one of [3, 6, 9]. The ${JSON.stringify(numberOfEvents)} was received.`
+                    `The "source" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(source)} was received.`
                 );
             }
             if (title && typeof title !== 'string') {
@@ -84,25 +89,25 @@ export default {
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the Events section component: ', er);
-            return `<!-- Error occurred in the Events section component: ${er.message} -->`;
+            console.error('Error occurred in the Single featured content component: ', er);
+            return `<!-- Error occurred in the Single featured content component: ${er.message} -->`;
         }
 
         const adapter = new cardDataAdapter();
-        let data = [];
+        let data = null;
 
-        // Fetch event data if eventAPI is provided
-        const service = new eventCardService({ api: eventsUrl });
+        // Fetch card data
+        const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
 
         // Set our card service
         adapter.setCardService(service);
-        
+
         // Get the cards data
         try {
-            data = await adapter.getCards();
+            data = await adapter.getCards([{ cardAsset: source }]);
         } catch (er) {
-            console.error('Error occurred in the Events section component: Failed to fetch event data. ', er);
-            return `<!-- Error occurred in the Events section component: Failed to fetch event data. ${er.message} -->`;
+            console.error('Error occurred in the Single featured content: Failed to fetch feature data. ', er);
+            return `<!-- Error occurred in the Single featured content: Failed to fetch feature data. ${er.message} -->`;
         }
 
         // Resolve the URI for the section heading link
@@ -111,30 +116,16 @@ export default {
             args.headingConfiguration
         );
 
-        // Prepare card data
-        let cardData = [];
-        if (data !== null && data !== undefined) {
-            cardData = data.map((card) => {
-                card.isRealExternalLink = isRealExternalLink(card.liveUrl);
-                card.eventStartEndDate = EventStartEndDate({start: card.date, end: card.endDate});
-                card.uniqueID = uuid();
-                card.imageAlt = card.videoUrl ? `Open video ${card.imageAlt} in a modal` : card.imageAlt;
-                card.iconType = card.type?.toLowerCase();
-
-                return card;
-            }).slice(0, numberOfEvents);
-        }
-
         // Validate fetched card data
         try {
-            if (typeof cardData !== 'object' || cardData.length < 1) {
+            if (typeof data !== 'object' || data.length < 1) {
                 throw new Error(
-                    `The "data" cannot be undefined or null. The ${JSON.stringify(cardData)} was received.`
+                    `The "data" cannot be undefined or null. The ${JSON.stringify(data)} was received.`
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the Events section component: ', er);
-            return `<!-- Error occurred in the Events section component: ${er.message} -->`;
+            console.error('Error occurred in the Single featured content component: ', er);
+            return `<!-- Error occurred in the Single featured content component: ${er.message} -->`;
         }
 
         // Prepare component data for template rendering
@@ -145,10 +136,9 @@ export default {
             ctaNewWindow: headingData.ctaNewWindow,
             isAlwaysLight: false,
             width: "large",
-            cardSize: "small",
-            data: cardData
+            card: Card({ data: data[0], cardSize: "featured" })
         };
 
-        return eventSectionTemplate(componentData);
+        return singleFeaturedTemplate(componentData);
     }
 };
