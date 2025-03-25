@@ -25,6 +25,7 @@ export function openModal(modal) {
 
     iframe.setAttribute('src', newSrc);
     modal.classList.remove(MULTICOLUMN_LISTING_HIDDEN_CLASS);
+    modal.hidden = false;
 }
 
 /**
@@ -38,6 +39,7 @@ export function closeModal(modal) {
 
     iframe.setAttribute('src', newSrc);
     modal.classList.add(MULTICOLUMN_LISTING_HIDDEN_CLASS);
+    modal.hidden = true;
 }
 
 /**

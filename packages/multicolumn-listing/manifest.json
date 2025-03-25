@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "multicolumn-listing",
     "type": "edge",
-    "version": "4.0.2",
+    "version": "4.0.3",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "",
     "displayName": "Multicolumn listing",
@@ -229,6 +229,10 @@
         "matrix-asset://api-identifier/162759": {
             "type": "file",
             "path": "mocked-uris/162759.json"
+        },
+        "matrix-asset://api-identifier/166535": {
+            "type": "file",
+            "path": "mocked-uris/166535.json"
         }
     },
     "previews": {

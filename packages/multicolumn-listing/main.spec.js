@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService } from "../../global/js/utils";
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, uuid } from "../../global/js/utils";
 import moduleToTest from './main';
 
 const { main } = moduleToTest;
@@ -8,6 +8,7 @@ const mockedError = vi.fn();
 console.error = mockedError;
 
 vi.mock('../../global/js/utils', () => ({
+    uuid: vi.fn(),
     cardDataAdapter: vi.fn().mockImplementation(() => ({
         setCardService: vi.fn(),
         getCards: vi.fn().mockResolvedValue([
@@ -675,6 +676,10 @@ describe('[Multicolumn listing]', () => {
     });
 
     describe('[Main Function]', () => {
+        beforeAll(() => {
+            uuid.mockReturnValue('36bcda50-8e16-4255-a8aa-d558dd550b8b');
+        });
+
         describe('[Main Function - Source: Select]', () => {
             it('Should return the expected HTML with valid data for Select source', async () => {
                 cardDataAdapter.mockImplementationOnce(() => ({

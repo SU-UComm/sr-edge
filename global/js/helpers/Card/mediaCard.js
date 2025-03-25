@@ -100,8 +100,10 @@ export function MediaCard({
                   ${FAIcon({
                     icon: "arrow-up-right",
                     set: "regular",
-                    width: 24,
-                    class: styles.linkIcon
+                    attributes:{
+                      width: 24,
+                      classes: styles.linkIcon
+                    }
                   })}
                 ` : ''}
               </a>

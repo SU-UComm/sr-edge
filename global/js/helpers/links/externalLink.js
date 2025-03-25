@@ -35,9 +35,11 @@ export function externalLink({
       ${FAIcon({
           icon: "arrow-up-right",
           set: "regular",
-          width: 12,
-          class: "su-inline-block su-ml-5 su-text-18 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-text-black dark:group-hocus:su-text-white group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform",
-          "data-testid": "svg-externalarrow"
+          attributes:{
+            width: 12,
+            classes: "su-inline-block su-ml-5 su-text-18 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-text-black dark:group-hocus:su-text-white group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform",
+            "data-testid": "svg-externalarrow"
+          }
         })}
       
     </a>` : "";
