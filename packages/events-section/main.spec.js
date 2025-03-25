@@ -288,7 +288,7 @@ describe('[Events section]', () => {
 
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toContain('<!-- Error occurred in the Stories carousel component: Failed to fetch event data. No cards -->');
+            expect(result).toContain('<!-- Error occurred in the Events section component: Failed to fetch event data. No cards -->');
             expect(mockedError).toBeCalledTimes(1);
         });
     });
