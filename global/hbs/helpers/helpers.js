@@ -54,7 +54,8 @@ export const helpers = {
         
         return alignClasses.get(alignment) || "";
     },
-    containerClasses: function(width = "large", paddingX = true, paddingY = "none", marginTop = "default", marginBottom = "default", customClasses) {   
+    containerClasses: function (options) {
+        const { width = "large", paddingX = true, paddingY = "none", marginTop = "default", marginBottom = "default", customClasses } = options.hash;
         const outputClasses = ['su-mx-auto', 'su-component-container'];
 
         const widthClasses = new Map();
@@ -204,12 +205,12 @@ export const helpers = {
         
         return backgroundClasses.get(variant) || '';
     },
-    linkButtonClasses: function(variant, size) {
+    linkButtonClasses: function(variant = "default", size = "default", customClasses = "") {
         const baseClasses = ['su-group su-flex su-items-center su-w-fit hocus:su-underline'];
         
         const sizeClasses = new Map(); 
 
-        sizeClasses.set('default','md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1');
+        sizeClasses.set('default','su-px-30 su-pt-12 su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1');
         sizeClasses.set('large','su-rs-py-0 su-rs-px-4 su-font-semibold su-type-1 dark:hocus:su-ring-2');
          
         baseClasses.push(sizeClasses.get(size));
@@ -220,6 +221,8 @@ export const helpers = {
         variantClasses.set('gradient','su-text-white hocus:su-text-white su-no-underline hocus:su-underline su-bg-gradient-to-r su-from-digital-red-light su-to-cardinal-red-dark hocus:su-bg-none hocus:su-bg-black dark:su-from-olive dark:su-to-palo-verde dark:su-text-black-true dark:hocus:su-text-white dark:hocus:su-ring-white');
 
         baseClasses.push(variantClasses.get(variant));
+
+        baseClasses.push(customClasses);
 
         return baseClasses.join(' ').trim();
     },
@@ -292,6 +295,9 @@ export const helpers = {
         );
 
         return colorClassMap.get(color) || colorClassMap.get("grey");
+    },
+    getConditionalString: function(size, type, value1, value2) {
+        return size === type ? value1 : value2;
     },
 }
   
