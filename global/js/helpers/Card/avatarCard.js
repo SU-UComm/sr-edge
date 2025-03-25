@@ -30,9 +30,9 @@ export function AvatarCard({
    * Avatar Card styles
    */
   const styles = {
-    root: "su-component-card su-relative su-w-full md:su-basis-1/3 su-flex su-flex-wrap su-gap-10 lg:su-content-start lg:su-max-w-[293px]",
-    heading: "su-text-21 lg:su-text-24 su-leading-[25.2px] lg:su-leading-[28.8px] su-flex-grow su-my-0 su-font-serif su-w-full",
-    link: "focus:su-outline-0 focus:su-ring su-transition su-text-black dark:su-text-white dark:hover:su-text-dark-mode-red su-font-bold su-no-underline hover:su-text-digital-red dark:su-text-white dark:hover:su-text-dark-mode-red",
+    root: "su-component-card su-relative su-w-full md:su-basis-1/3 su-flex su-flex-wrap su-gap-10 lg:su-content-start lg:su-max-w-[29.3rem]",
+    heading: "su-text-21 lg:su-text-24 su-leading-display su-flex-grow su-my-0 su-font-serif su-w-full",
+    link: "su-transition su-text-black su-font-bold su-no-underline hocus:su-text-digital-red dark:su-text-white dark:hocus:su-text-dark-mode-red hocus:su-underline",
     authorWrapper: "su-flex su-w-full su-min-h-[56px] su-self-end lg:su-self-start su-items-center su-gap-10 su-text-black dark:su-text-white su-text-16 su-leading-[19.106px]"
   };
 
@@ -44,9 +44,9 @@ export function AvatarCard({
   return `
     <article aria-label="${title}" data-test="avatar-card" class="${styles.root}">
       <h3 class="${styles.heading}">
-        ${xss(`<a href="${liveUrl}" class="${styles.link}">
-          ${title}
-        </a>`)}
+        <a href="${liveUrl}" class="${styles.link}">
+          ${xss(title)}
+        </a>
       </h3>
       ${authorDisplayName ? `
         <div class="${styles.authorWrapper} ${avatarClass}">
