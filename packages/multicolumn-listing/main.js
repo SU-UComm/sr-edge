@@ -1,6 +1,6 @@
 import multicolumnListingTemplate from './multicolumn-listing.hbs';
 import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid, uuid } from "../../global/js/utils";
-import { Card, Modal, EmbedVideo } from '../../global/js/helpers';
+import { Card } from '../../global/js/helpers';
 
 /**
  * Multicolumn lisitng component that renderds a list of features cards based on fetched data
@@ -165,7 +165,7 @@ export default {
         cardSizeMap.set(3, "small");
         cardSizeMap.set(2, "medium");
 
-        const cardModal = [];
+        const modalData = [];
 
         // Generate modals for video cards
         data?.forEach((cardData, i) => {
@@ -181,9 +181,14 @@ export default {
                 }
 
                 if(cardData.type === 'Video') {
-                    cardModal.push(
-                        Modal({content: EmbedVideo({ isVertical: cardData.size === "vertical-video", videoId: cardData.videoUrl, title: `Watch ${cardData.title}`, noAutoPlay: true }), uniqueId, describedby: 'card-modal' })
-                    );
+                    modalData.push({
+                        isVertical: cardData.size === "vertical-video",
+                        videoId: cardData.videoUrl,
+                        title: `Watch ${cardData.title}`, 
+                        noAutoPlay: true,
+                        uniqueID: uniqueId,
+                        titleID: 'card-modal'
+                    })
                 }
             }
         });
@@ -196,7 +201,7 @@ export default {
             headingCtaNewWindow: headingData?.ctaNewWindow,
             headingCtaText: headingData?.ctaText,
             multicolumnGrid: multicolumnGrid(cardsMarkup, true),
-            cardModal: cardModal.join(''),
+            modalData,
             width: "large",
         };
 
