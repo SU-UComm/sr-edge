@@ -311,6 +311,9 @@ export const helpers = {
 
         return colorClassMap.get(color) || colorClassMap.get("grey");
     },
+    // getConditionalString: function(size, type, value1, value2) {
+    //     return size === type ? value1 : value2;
+    // },
 }
   
 export default helpers;
