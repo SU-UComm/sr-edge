@@ -60,17 +60,19 @@ export function linkButton({
         ${FAIcon({
           icon,
           set: "regular",
-          width: size === "large" ? 30 : 20,
-          class: cnb(
-            "fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform",
-            variant === "gradient" &&
-              "dark:su-text-black-true dark:group-hocus:su-text-white su-duration-100",
-            icon === "arrow-up" &&
-              "su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em",
-            ctaType === "email" && "group-hocus:su-translate-x-02em",
-            ctaType === "download" && "group-hocus:su-translate-y-02em"
-          ),
-          title: isRealExternalLink && ctaType !== "download" ? "External link" : ""
+          attributes: {
+            width: size === "large" ? 30 : 20,
+            classes: cnb(
+              "fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform",
+              variant === "gradient" &&
+                "dark:su-text-black-true dark:group-hocus:su-text-white su-duration-100",
+              icon === "arrow-up" &&
+                "su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em",
+              ctaType === "email" && "group-hocus:su-translate-x-02em",
+              ctaType === "download" && "group-hocus:su-translate-y-02em"
+            ),
+            title: isRealExternalLink && ctaType !== "download" ? "External link" : ""
+          }
         })}
       ` : ''}
     </a>` : "";

@@ -237,6 +237,24 @@ export const helpers = {
     linkedHeadingHeaderClasses: function(isAlwaysLight) {
         return isAlwaysLight ? "su-text-white" : "su-text-black";
     },
+
+    multicolumnGridClasses: function(columns, separator) {
+        const gapClasses = new Map();
+        gapClasses.set(
+          2,
+          separator
+            ? "su-gap-[68px] md:su-gap-72 lg:su-gap-[160px]"
+            : "su-gap-34 md:su-gap-72 lg:su-gap-[160px]"
+        );
+        gapClasses.set(
+          3,
+          separator
+            ? "su-gap-[68px] md:su-gap-72 lg:su-gap-[102px]"
+            : "su-gap-34 md:su-gap-72 lg:su-gap-[160px]"
+        );
+
+        return gapClasses.get(columns)
+    },
     removeParagraphTags: function(text) {
         return text.replace(/<p>|<\/p>/g, "");
     },

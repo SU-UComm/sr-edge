@@ -32,7 +32,8 @@ export function CardThumbnail({
   videoUrl,
   size = "small",
   title = "",
-  videoIconClasses
+  videoIconClasses,
+  uniqueId
 }) {
   if (videoUrl) {
     const videoMedia = `
@@ -53,8 +54,10 @@ export function CardThumbnail({
             )}">
             ${FAIcon({
               set: "regular",
-              icon: "circle-play",
-              class: "su-text-white dark:su-text-white su-drop-shadow-[0px_10px_20px_rgba(0,0,0,0.30)]",
+              iconName: "circle-play",
+              attributes: {
+                classes: "su-text-white dark:su-text-white su-drop-shadow-[0px_10px_20px_rgba(0,0,0,0.30)]",
+              }
             })}
           </span>
         ` : ""
@@ -66,6 +69,8 @@ export function CardThumbnail({
         class="su-component-card-thumbnail su-group su-block su-relative su-z-10 su-size-full"
         type="button"
         aria-haspopup="dialog"
+        data-click="open-modal"
+        data-modal-id="${uniqueId}"
       >
         ${mediaRatio({
           imageUrl,

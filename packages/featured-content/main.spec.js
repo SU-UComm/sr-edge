@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService } from "../../global/js/utils";
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, uuid } from "../../global/js/utils";
 import moduleToTest from './main';
 
 const { main } = moduleToTest;
@@ -8,6 +8,7 @@ const mockedError = vi.fn();
 console.error = mockedError;
 
 vi.mock('../../global/js/utils', () => ({
+    uuid: vi.fn(),
     cardDataAdapter: vi.fn().mockImplementation(() => ({
         setCardService: vi.fn(),
         getCards: vi.fn().mockResolvedValue([
@@ -457,6 +458,9 @@ describe('[Feature Content]', () => {
     });
 
     describe('[Main Function - Source: Search]', () => {
+        beforeAll(() => {
+            uuid.mockReturnValue('36bcda50-8e16-4255-a8aa-d558dd550b8b');
+        });
         it('Should return the expected HTML with valid data for Search source', async () => {
             cardDataAdapter.mockImplementationOnce(() => ({
                 setCardService: vi.fn(),
@@ -490,6 +494,9 @@ describe('[Feature Content]', () => {
     });
 
     describe('[Main Function - Source: Select]', () => {
+        beforeAll(() => {
+            uuid.mockReturnValue('36bcda50-8e16-4255-a8aa-d558dd550b8b');
+        });
         it('Should return the expected HTML with valid data for Select source', async () => {
             const selectData = {
                 ...defaultMockData,
@@ -541,6 +548,9 @@ describe('[Feature Content]', () => {
     });
 
     describe('[Header Rendering]', () => {
+        beforeAll(() => {
+            uuid.mockReturnValue('36bcda50-8e16-4255-a8aa-d558dd550b8b');
+        });
         it('Should not render LinkedHeading when was not provided', async () => {
             linkedHeadingService.mockImplementationOnce(null);
 
@@ -561,6 +571,9 @@ describe('[Feature Content]', () => {
     })
 
     describe('[Card Rendering]', () => {
+        beforeAll(() => {
+            uuid.mockReturnValue('36bcda50-8e16-4255-a8aa-d558dd550b8b');
+        });
         it('Should handle featuredDescription correctly in Search source', async () => {
             const dataWithFeaturedDescription = {
                 ...defaultMockData,

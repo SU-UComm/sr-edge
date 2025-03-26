@@ -5,5 +5,9 @@
             {{{multicolumnGrid}}}
         </div>
     </div>
-    {{{cardModal}}}
+    {{#each modalData}}
+        {{#> modal-content uniqueID=uniqueID titleID='card-modal'}}
+            {{> embed-video isVertical=isVertical classes=classes videoId=videoId noAutoPlay=noAutoPlay title=title}}
+        {{/ modal-content}}
+    {{/each}}
 </section>

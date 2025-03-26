@@ -1,0 +1,158 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "leadership-messages",
+    "type": "edge",
+    "version": "4.0.1",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "Links to leadership messages displayed in a grid.",
+    "displayName": "Leadership messages",
+    "mainFunction": "main",
+    "environment": [
+        {
+            "name": "FB_JSON_URL",
+            "required": true
+        }
+    ],
+    "icon": {
+        "id": "view_week",
+        "color": {
+            "type": "enum",
+            "value": "red"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "headingConfiguration": {
+                        "title": "Section Heading Configuration",
+                        "description": "The heading for the section, appearing before the grid of cards.",
+                        "type": "object",
+                        "required": [],
+                        "properties": {
+                            "title": {
+                                "title": "Heading",
+                                "type": "string",
+                                "default": "Messages from Leadership"
+                            },
+                            "ctaUrl": {
+                                "title": "Matrix Asset Link",
+                                "type": "string",
+                                "description": "Select an asset to link to. If this field is filled out, it will be used instead of the manual link",
+                                "format": "matrix-asset-uri"
+                            },
+                            "ctaManualUrl": {
+                                "title": "Manual Link",
+                                "type": "string",
+                                "description": "Enter the full URL, including https://"
+                            },
+                            "ctaText": {
+                                "title": "Link text",
+                                "type": "string",
+                                "default": "View all"
+                            },
+                            "ctaNewWindow": {
+                                "title": "Open link in a new window",
+                                "type": "boolean",
+                                "default": false
+                            }
+                        }
+                    },
+                    "contentConfiguration": {
+                        "title": "Grid Content",
+                        "description": "The cards to display in the grid area of the component.",
+                        "type": "object",
+                        "required": ["searchQuery"],
+                        "properties": {
+                            "searchQuery": {
+                                "type": "string",
+                                "title": "The Funnelback search query",
+                                "default": "?profile=stanford-report-push-search&collection=sug~sp-stanford-report-search&meta_taxonomyContentTypeId=28201&sort=date"
+                            }
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/28192": {
+            "type": "file",
+            "path": "mocked-uris/28192.json"
+        },
+        "matrix-asset://api-identifier/28193": {
+            "type": "file",
+            "path": "mocked-uris/28193.json"
+        },
+        "matrix-asset://api-identifier/28205": {
+            "type": "file",
+            "path": "mocked-uris/28205.json"
+        },
+        "matrix-asset://api-identifier/28207": {
+            "type": "file",
+            "path": "mocked-uris/28207.json"
+        },
+        "matrix-asset://api-identifier/28375": {
+            "type": "file",
+            "path": "mocked-uris/28375.json"
+        },
+        "matrix-asset://api-identifier/28397": {
+            "type": "file",
+            "path": "mocked-uris/28397.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/default.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/default.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}

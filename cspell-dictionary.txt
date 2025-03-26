@@ -89,6 +89,8 @@ burgerbar
 bullseyepointer
 bookopencover
 bargraph
+Osifeso
+Goodson
 
 
 #testing hooks

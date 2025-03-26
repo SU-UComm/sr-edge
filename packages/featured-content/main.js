@@ -1,6 +1,5 @@
-import hash from "object-hash";
 import featureContentTemplate from './featured-content.hbs';
-import { cardDataAdapter, funnelbackCardService, linkedHeadingService, matrixCardService } from "../../global/js/utils";
+import { cardDataAdapter, funnelbackCardService, linkedHeadingService, matrixCardService, uuid } from "../../global/js/utils";
 import { Card, Modal, EmbedVideo } from "../../global/js/helpers";
  
 /**
@@ -159,6 +158,11 @@ export default {
         // Generate linked heading data
         const headingData = await linkedHeadingService(fnsCtx, { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow });
 
+        data.map((card) => {
+            card.uniqueId = uuid();
+            return card
+        })
+
         // Extract featured and regular card data
         const featuredCardData = data && data[0];
 
@@ -172,11 +176,8 @@ export default {
         // Generate modals for video cards
         data?.forEach((card) => {
             if (card.type === 'Video') {
-                const uniqueId = hash.MD5(
-                    JSON.stringify(card.videoUrl) + hash.MD5(JSON.stringify(card.title))
-                );
                 cardModal.push(
-                    Modal({content: EmbedVideo({ isVertical: card.size === "vertical-video", videoId: card.videoUrl, title: `Watch ${card.title}`, noAutoPlay: true }), uniqueId, describedby: 'card-modal' })
+                    Modal({content: EmbedVideo({ isVertical: card.size === "vertical-video", videoId: card.videoUrl, title: `Watch ${card.title}`, noAutoPlay: true }), uniqueId: card.uniqueId, describedby: 'card-modal' })
                 );
             }
         });
@@ -201,7 +202,7 @@ export default {
         // Generate card components to render
         const cardsToRender = cardData.map((card, idx) => `
             ${idx === 0 ? `<div class="su-relative su-w-full">`: `<div class="su-relative su-w-full before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px]">`}
-                ${Card({data: card, cardSize: "small", displayThumbnail: displayThumbnails, displayDescription: displayDescriptions, headingLvl: title ? 3 : 2 })}
+                ${Card({data: card, cardSize: "small", displayThumbnail: displayThumbnails, displayDescription: displayDescriptions, headingLvl: title ? 3 : 2, uniqueId: card.uniqueId })}
                 </div>
             `).join('');
 
@@ -213,7 +214,7 @@ export default {
             headingCtaLink: headingData?.ctaLink,
             headingCtaNewWindow: headingData?.ctaNewWindow,
             headingCtaText: headingData?.ctaText,
-            featureCard: Card({ data: featuredCardData, cardSize:"featured", headingLvl: title ? 3 : 2 }),
+            featureCard: Card({ data: featuredCardData, cardSize:"featured", headingLvl: title ? 3 : 2, uniqueId: featuredCardData.uniqueId }),
             cards: cardsToRender,
             cardModal: cardModal.join(''),
             width: "large"

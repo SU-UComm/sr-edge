@@ -102,7 +102,7 @@ export default {
             data = await adapter.getCards();
         } catch (er) {
             console.error('Error occurred in the Events section component: Failed to fetch event data. ', er);
-            return `<!-- Error occurred in the Stories carousel component: Failed to fetch event data. ${er.message} -->`;
+            return `<!-- Error occurred in the Events section component: Failed to fetch event data. ${er.message} -->`;
         }
 
         // Resolve the URI for the section heading link
@@ -134,7 +134,7 @@ export default {
             }
         } catch (er) {
             console.error('Error occurred in the Events section component: ', er);
-            return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
+            return `<!-- Error occurred in the Events section component: ${er.message} -->`;
         }
 
         // Prepare component data for template rendering
