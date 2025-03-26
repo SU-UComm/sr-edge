@@ -1,0 +1,754 @@
+{
+  "id": "125800",
+  "type": "image",
+  "type_name": "Image",
+  "version": "0.1.0",
+  "name": "jenny-martinez.jpg",
+  "short_name": "Jenny Martinez",
+  "status": { "id": 16, "code": "live", "name": "Live" },
+  "created": { "date": "2023-12-10T21:08:41-08:00", "user_id": "32325" },
+  "updated": { "date": "2023-12-10T21:08:50-08:00", "user_id": "32325" },
+  "published": { "date": "2023-12-10T21:08:49-08:00", "user_id": "32325" },
+  "status_changed": { "date": "2023-12-10T21:08:49-08:00", "user_id": "32325" },
+  "urls": [
+    "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/jenny-martinez.jpg"
+  ],
+  "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/jenny-martinez.jpg",
+  "attributes": {
+    "variety_count": 19,
+    "size": 56417,
+    "height": 196,
+    "width": 293,
+    "name": "jenny-martinez.jpg",
+    "alt": "Jenny Martinez",
+    "title": "Jenny Martinez",
+    "allow_unrestricted": true,
+    "caption": ""
+  },
+  "metadata": null,
+  "contents": "\"Jenny",
+  "additional": {
+    "file_info": {
+      "file_name": "jenny-martinez.jpg",
+      "size_readable": "55.1 KB",
+      "size_bytes": 56417,
+      "width": 293,
+      "height": 196,
+      "modified_readable": "Dec 10, 2023 9:08 PM",
+      "modified_unix": 1702271322
+    },
+    "varieties": [
+      {
+        "id": "125800:v1",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "100w",
+        "short_name": "100w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/100w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/100w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "100w.jpg",
+          "name": "100w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 3242,
+          "variety_height": 100,
+          "variety_width": 100,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 100,
+          "height": 0,
+          "width": 0,
+          "constrain": "centre_weighted_square"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v2",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "150w",
+        "short_name": "150w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/150w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/150w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "150w.jpg",
+          "name": "150w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 5143,
+          "variety_height": 150,
+          "variety_width": 150,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 150,
+          "height": 0,
+          "width": 0,
+          "constrain": "centre_weighted_square"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v3",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "200w",
+        "short_name": "200w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/200w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/200w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "200w.jpg",
+          "name": "200w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 5953,
+          "variety_height": 134,
+          "variety_width": 200,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 200,
+          "width": 200,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v4",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "300w",
+        "short_name": "300w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/300w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/300w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "300w.jpg",
+          "name": "300w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 5953,
+          "variety_height": 134,
+          "variety_width": 200,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 300,
+          "width": 200,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v5",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "345w",
+        "short_name": "345w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/345w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/345w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "345w.jpg",
+          "name": "345w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 12296,
+          "variety_height": 231,
+          "variety_width": 345,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 555,
+          "width": 345,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v6",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "375w",
+        "short_name": "375w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/375w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/375w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "375w.jpg",
+          "name": "375w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 13656,
+          "variety_height": 251,
+          "variety_width": 375,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 200,
+          "width": 375,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v7",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "400w",
+        "short_name": "400w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/400w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/400w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "400w.jpg",
+          "name": "400w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 15040,
+          "variety_height": 268,
+          "variety_width": 400,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 100,
+          "width": 400,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v8",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "555w",
+        "short_name": "555w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/555w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/555w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "555w.jpg",
+          "name": "555w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 24024,
+          "variety_height": 371,
+          "variety_width": 555,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 555,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v9",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "600w",
+        "short_name": "600w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/600w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/600w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "600w.jpg",
+          "name": "600w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 27047,
+          "variety_height": 401,
+          "variety_width": 600,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 600,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v10",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "690w",
+        "short_name": "690w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/690w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/690w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "690w.jpg",
+          "name": "690w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 33712,
+          "variety_height": 462,
+          "variety_width": 690,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 690,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v11",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "705w",
+        "short_name": "705w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/705w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/705w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "705w.jpg",
+          "name": "705w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 34757,
+          "variety_height": 472,
+          "variety_width": 705,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 705,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v12",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "750w",
+        "short_name": "750w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/750w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/750w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "750w.jpg",
+          "name": "750w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 38284,
+          "variety_height": 502,
+          "variety_width": 750,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 750,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v13",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "795w",
+        "short_name": "795w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/795w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/795w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "795w.jpg",
+          "name": "795w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 42162,
+          "variety_height": 532,
+          "variety_width": 795,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 795,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v14",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "960w",
+        "short_name": "960w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/960w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/960w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "960w.jpg",
+          "name": "960w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 56671,
+          "variety_height": 642,
+          "variety_width": 960,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 960,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v15",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1024w",
+        "short_name": "1024w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/1024w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/1024w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1024w.jpg",
+          "name": "1024w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 62899,
+          "variety_height": 685,
+          "variety_width": 1024,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1024,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v16",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1110w",
+        "short_name": "1110w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/1110w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/1110w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1110w.jpg",
+          "name": "1110w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 71817,
+          "variety_height": 743,
+          "variety_width": 1110,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1110,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v17",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1410w",
+        "short_name": "1410w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/1410w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/1410w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1410w.jpg",
+          "name": "1410w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 105131,
+          "variety_height": 943,
+          "variety_width": 1410,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1410,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "125800:v18",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1500w",
+        "short_name": "1500w",
+        "status": { "id": 16, "code": "live", "name": "Live" },
+        "created": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "updated": { "date": "1969-12-31T16:00:00-08:00", "user_id": null },
+        "published": { "date": null, "user_id": null },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/1500w.jpg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/varieties/1500w.jpg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1500w.jpg",
+          "name": "1500w",
+          "title": "Jenny Martinez",
+          "caption": "",
+          "variety_size": 116374,
+          "variety_height": 1003,
+          "variety_width": 1500,
+          "alt": "Jenny Martinez",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1500,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      }
+    ],
+    "exif": {
+      "image": {
+        "ImageHeight": 196,
+        "ImageWidth": 293,
+        "ResolutionUnit": 0,
+        "XResolution": 72,
+        "YResolution": 72
+      }
+    }
+  }
+}
