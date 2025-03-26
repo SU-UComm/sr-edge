@@ -12,7 +12,9 @@
             {{#> carousel-content uniqueID=id}}
                 {{#each slides}}
                 <div class="swiper-slide">
-                    {{{content}}}
+                    <div class="su-wysiwyg-content su-w-full *:su-mb-6 *:su-text-16 *:su-leading-[125%] *:md:su-text-19 *:lg:su-text-19 [&amp;>*:last-child]:su-mb-0 *:su-card-paragraph">
+                        {{{content}}}
+                    </div>
                 </div>
                 {{/each}}
             {{/ carousel-content}}
