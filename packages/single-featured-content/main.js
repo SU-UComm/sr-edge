@@ -28,7 +28,7 @@ export default {
     async main(args, info) {
         // Extracting environment variables and function from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
-        const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || {};
+        const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
         // Extracting configuration data from arguments
         const { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow } = args?.headingConfiguration || {};
