@@ -99,6 +99,7 @@ export default {
 
         // Prepare template data
         const componentData = {
+            width: "narrow",
             liveUrl,
             imageUrl,
             imageAlt,

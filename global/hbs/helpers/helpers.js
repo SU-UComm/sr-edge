@@ -189,6 +189,31 @@ export const helpers = {
                 `<span class="sr-only">${firstWord}</span>`
               );
     },
+    getAspectRatio: function(aspectRatio) {
+        const aspectRatioClasses = new Map();
+    
+        aspectRatioClasses.set("card-small", 'su-aspect-[3/2]');
+        aspectRatioClasses.set("card-medium", 'su-aspect-[3/2]');
+        aspectRatioClasses.set("card-large", 'su-aspect-[3/2]');
+        aspectRatioClasses.set("card-featured", 'su-aspect-[3/2]');
+        aspectRatioClasses.set("square", 'su-aspect-[1/1]');
+        aspectRatioClasses.set("video", 'su-aspect-[16/9]');
+        aspectRatioClasses.set("vertical-video", 'su-aspect-[9/16]');
+    
+        
+        return aspectRatioClasses.get(aspectRatio)
+    },
+    getThumbnailIconClass: function(size) {
+        const thumbnailIconClasses = new Map();
+    
+        thumbnailIconClasses.set("small", 'su-left-13 su-bottom-13 [&>svg]:su-text-[4rem]');
+        thumbnailIconClasses.set("medium", 'su-left-13 su-bottom-13 md:su-left-27 md:su-bottom-27 [&>svg]:su-text-[4rem] [&>svg]:md:su-text-[6rem]');
+        thumbnailIconClasses.set("large", 'su-left-13 su-bottom-13 [&>svg]:su-text-[4rem]');
+        thumbnailIconClasses.set("featured", 'su-left-13 su-bottom-13 md:su-left-27 md:su-bottom-27 [&>svg]:su-text-[4rem] [&>svg]:md:su-text-[6rem]');
+        thumbnailIconClasses.set("vertical-video", 'su-z-30 su-left-32 su-bottom-34 sm:su-left-48 sm:su-bottom-61 lg:su-left-32 lg:su-bottom-34 2xl:su-left-48 2xl:su-bottom-61 [&>svg]:su-text-[6rem]');
+        
+        return thumbnailIconClasses.get(size)
+    },
     hasFirstItem: function(items) {
         return Array.isArray(items) && items.length > 0;
     },
@@ -314,9 +339,11 @@ export const helpers = {
 
         return colorClassMap.get(color) || colorClassMap.get("grey");
     },
-    getConditionalString: function(size, type, value1, value2) {
-        return size === type ? value1 : value2;
-    },
+    getStringByCondition: function(options) {
+        const { value, expectedValue, trueResult, falseResult } = options.hash;
+    
+        return value === expectedValue ? trueResult : falseResult;
+    }
 }
   
 export default helpers;
