@@ -42,7 +42,7 @@ export default {
 
         // Validate required fields and ensure correct data types
         try {
-            if (image && typeof image !== 'string') {
+            if (typeof image !== 'string') {
                 throw new Error(
                     `The "image" field must be a string. The ${JSON.stringify(image)} was received.`
                 );
@@ -79,26 +79,24 @@ export default {
 
         // Fetch image data
         let imageData = null;
-        if (image) {
-            try {
-                imageData = await basicAssetUri(fnsCtx, image);
+        try {
+            imageData = await basicAssetUri(fnsCtx, image);
 
-                // Check required properties
-                if (!imageData || typeof imageData !== 'object') {
-                    throw new Error('basicAssetUri did not return an object');
-                }
-                if (typeof imageData.url !== 'string' || imageData.url.trim() === '') {
-                    throw new Error('data.url must be a non-empty string');
-                }
-                if (typeof imageData.attributes !== 'object' || imageData.attributes === null) {
-                    throw new Error('data.attributes must be a non-null object');
-                }
-            } catch (er) {
-                console.error('Error occurred in the Image quote component: Failed to fetch image data. ', er);
-                return `<!-- Error occurred in the Image quote component: Failed to fetch image data. ${er.message} -->`;
+            // Check required properties
+            if (!imageData || typeof imageData !== 'object') {
+                throw new Error('basicAssetUri did not return an object');
             }
+            if (typeof imageData.url !== 'string' || imageData.url.trim() === '') {
+                throw new Error('data.url must be a non-empty string');
+            }
+            if (typeof imageData.attributes !== 'object' || imageData.attributes === null) {
+                throw new Error('data.attributes must be a non-null object');
+            }
+        } catch (er) {
+            console.error('Error occurred in the Image quote component: Failed to fetch image data. ', er);
+            return `<!-- Error occurred in the Image quote component: Failed to fetch image data. ${er.message} -->`;
         }
-
+    
         const imageOrientation = imageData?.attributes?.height > imageData?.attributes?.width ? "portrait" : "landscape";
         const figureData = {
             url: imageData?.url,
@@ -106,7 +104,7 @@ export default {
             captionCredit: imageCaption && imageCredit ? `${imageCaption} | ${imageCredit}` : imageCaption || imageCredit,
         }
         const quoteData = {
-            quote: `${quote}”`,
+            quote: quote ? `${quote}”`: '',
             name,
             title
         }
