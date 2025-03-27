@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "leadership-messages",
     "type": "edge",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Links to leadership messages displayed in a grid.",
     "displayName": "Leadership messages",
@@ -30,7 +30,7 @@
                 "properties": {
                     "headingConfiguration": {
                         "title": "Section Heading Configuration",
-                        "description": "The heading for the section, appearing before the grid of cards.",
+                        "description": "The heading for the section, appearing before the grid of cards. If the title is empty, the heading and call to action link will be hidden.",
                         "type": "object",
                         "required": [],
                         "properties": {
