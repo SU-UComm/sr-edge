@@ -1,0 +1,10 @@
+{
+    "headingConfiguration": {
+        "title": "Welcome to Stanford University!",
+        "ctaText": "View all",
+        "ctaUrl": "matrix-asset://api-identifier/28397"
+    },
+    "contentConfiguration": {
+        "source": "matrix-asset://api-identifier/162618"
+    }
+}

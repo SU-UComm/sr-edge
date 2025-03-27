@@ -1,0 +1,34 @@
+<section data-component="single-cta-block">
+    <div class="{{containerClasses width=containerSize paddingX=false marginTop=marginTop marginBottom=marginBottom}}">
+        <div class="su-flex su-flex-col-reverse xl:su-flex-row-reverse su-items-center su-justify-center su-gap-34 xl:su-gap-60 su-rounded-[8px] su-break-words su-text-black dark:su-text-white{{#if isCard}} su-rs-py-8 su-rs-px-4 su-border dark:su-border-2 su-border-black-30/30 dark:su-border-black su-shadow dark:su-shadow-black/80 su-bg-white dark:su-bg-black-true {{getStringByCondition value=size expectedValue="campaign" trueResult="su-rs-py-8" falseResult="su-rs-py-4"}}{{/if}}">
+            <div class="su-flex su-flex-col">
+                {{#if eyebrow}}
+                    <span aria-hidden="true" class="su-block su-mx-auto su-mb-02em su-text-center su-text-black-60 dark:su-text-black-40 su-font-semibold su-type-1 su-leading-display {{getStringByCondition value=size expectedValue="campaign" trueResult="su-type-1" falseResult="su-type-0"}}">
+                        {{eyebrow}}
+                    </span>
+                {{/if}}
+                {{#if title}}
+                    <div class="su-mx-auto xl:su-max-w-900 su-flex su-flex-col md:su-flex-row su-gap-20 su-items-center {{getStringByCondition value=size expectedValue="campaign" trueResult="su-rs-mb-4" falseResult="su-rs-mb-2"}}">
+                        <div aria-hidden="true" class="su-relative md:su-top-06em su-hidden su-min-w-100 md:su-block su-grow su-shrink-0 su-h-4 su-bg-gradient-to-r su-from-digital-red-light su-to-digital-red-dark dark:su-from-palo-verde dark:su-to-olive su-w-auto"></div>
+                        <h2 class="su-mx-auto su-text-center su-leading-tight dark:su-text-white su-mb-0 {{getStringByCondition value=size expectedValue="campaign" trueResult="su-type-4" falseResult="su-type-3"}}">
+                            {{#if eyebrow}}
+                                <span class="su-sr-only">{{eyebrow}}: </span>
+                            {{/if}}
+                            {{title}}
+                        </h2>
+                        <div aria-hidden="true" class="su-relative md:su-top-06em su-mx-auto su-min-w-100 su-grow su-shrink-0 su-w-180 su-h-4 su-bg-gradient-to-l su-from-digital-red-light su-to-digital-red-dark dark:su-from-palo-verde dark:su-to-olive md:su-w-auto su-mb-20 md:su-mb-0"></div>
+                    </div>
+                {{/if}}
+                <div data-test="single-text-block-content" class="su-mx-auto su-text-center su-max-w-prose-wide *:su-leading-snug last:*:su-mb-0 dark:su-text-white su-text-18{{#if imageUrl}} xl:su-text-left{{/if}}">
+                    {{{description}}}
+                </div>
+                {{#if ctaText}}
+                    {{> link-button buttonText=ctaText isNewWindow=isNewWindow buttonUrl=buttonUrl isRealExternalLink=isRealExternalLink ctaType=ctaType variant="gradient" size=(getStringByCondition value=size expectedValue="campaign" trueResult="large" falseResult="default") customClasses=linkButtonSize}}
+                {{/if}}
+            </div>
+        {{#if imageUrl}}
+            <img src="{{imageUrl}}" alt="{{imageAlt}}" class="su-w-1/2 sm:su-w-1/3 xl:su-w-1/4 su-shrink-0"/>
+        {{/if}}
+        </div>
+    </div>
+</section>

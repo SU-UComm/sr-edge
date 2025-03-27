@@ -1,3 +1,3 @@
-<svg aria-hidden="true" focusable="false"{{#if iconTestId}} data-testid={{iconTestId}}{{/if}} data-prefix="{{#ifEquals set "regular"}}far{{else}}fas{{/ifEquals}}" data-icon="{{icon}}" class="svg-inline--fa fa-{{icon}} {{classes}}" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="{{fontawesomeViewData icon set}}" width="{{width}}">
+<svg aria-hidden="true" focusable="false"{{#if iconTestId}} data-testid={{iconTestId}}{{/if}} data-prefix="{{getStringByCondition value=set expectedValue="regular" trueResult="far" falseResult="fas"}}" data-icon="{{icon}}" class="svg-inline--fa fa-{{icon}} {{classes}}" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="{{fontawesomeViewData icon set}}" width="{{width}}">
     <path fill="currentColor" d="{{fontawesomePathData icon set}}"></path>
 </svg>

@@ -1,0 +1,11 @@
+{
+    "headingConfiguration": {
+        "title": "Messages from Leadership",
+        "ctaText": "View all",
+        "ctaUrl": "matrix-asset://api-identifier/28192",
+        "ctaNewWindow": false
+    },
+    "contentConfiguration": {
+        "searchQuery": "?profile=stanford-report-push-search&collection=sug~sp-stanford-report-search&query=[taxonomyContentMainTopicId:28397 taxonomyContentTopicsId:28397 taxonomyContentSubtopicsId:28397]&meta_taxonomyContentTypeId_not=28210&meta_taxonomyContentTypeId_not=28216&meta_taxonomyContentTypeId_not=28201&sort=date&log=false"
+    }
+}

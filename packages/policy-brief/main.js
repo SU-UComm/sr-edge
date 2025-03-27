@@ -97,6 +97,7 @@ export default {
             linkUrl,
             linkText,
             width: "wide",
+            paddingX: false
         };
 
         return policyBriefTemplate(componentData);
