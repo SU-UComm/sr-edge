@@ -54,11 +54,11 @@ export const helpers = {
         
         return alignClasses.get(alignment) || "";
     },
-    containerClasses: function(width = "large", paddingX = true, paddingY = "none", marginTop = "default", marginBottom = "default", customClasses) {   
+    containerClasses: function (options) {
+        const { width = "large", paddingX = true, paddingY = "none", marginTop = "none", marginBottom = "none", customClasses } = options.hash;
         const outputClasses = ['su-mx-auto', 'su-component-container'];
 
         const widthClasses = new Map();
-        widthClasses.set("none", "");
         widthClasses.set("narrow", "su-container-narrow");
         widthClasses.set("large", "su-container-large");
         widthClasses.set("wide", "su-container-wide");
@@ -70,7 +70,6 @@ export const helpers = {
         paddingX && outputClasses.push('su-container-px');
         
         const paddingYClasses = new Map(); 
-        paddingYClasses.set("none", "");
         paddingYClasses.set("base", "su-rs-py-0");
         paddingYClasses.set("1", "su-rs-py-1");
         paddingYClasses.set("2", "su-rs-py-2");
@@ -86,7 +85,6 @@ export const helpers = {
         outputClasses.push(paddingYClasses.get(paddingY));
 
         const marginTopClasses = new Map();
-        marginTopClasses.set("default", "");
         marginTopClasses.set("base", "su-rs-mt-0");
         marginTopClasses.set("1", "su-rs-mt-1");
         marginTopClasses.set("2", "su-rs-mt-2");
@@ -102,7 +100,6 @@ export const helpers = {
         outputClasses.push(marginTopClasses.get(marginTop));
 
         const marginBottomClasses = new Map();
-        marginBottomClasses.set("default", "");
         marginBottomClasses.set("base", "su-rs-mb-0");
         marginBottomClasses.set("1", "su-rs-mb-1");
         marginBottomClasses.set("2", "su-rs-mb-2");
@@ -119,7 +116,7 @@ export const helpers = {
 
         customClasses && outputClasses.push(customClasses);
 
-        return outputClasses.join(' ').trim();
+        return outputClasses.filter(Boolean).join(' ').trim();
     },
     ctaTarget: function(ctaNewWindow) {
         return ctaNewWindow ? "_blank" : undefined;
@@ -188,6 +185,31 @@ export const helpers = {
                 `<span class="sr-only">${firstWord}</span>`
               );
     },
+    getAspectRatio: function(aspectRatio) {
+        const aspectRatioClasses = new Map();
+    
+        aspectRatioClasses.set("card-small", 'su-aspect-[3/2]');
+        aspectRatioClasses.set("card-medium", 'su-aspect-[3/2]');
+        aspectRatioClasses.set("card-large", 'su-aspect-[3/2]');
+        aspectRatioClasses.set("card-featured", 'su-aspect-[3/2]');
+        aspectRatioClasses.set("square", 'su-aspect-[1/1]');
+        aspectRatioClasses.set("video", 'su-aspect-[16/9]');
+        aspectRatioClasses.set("vertical-video", 'su-aspect-[9/16]');
+    
+        
+        return aspectRatioClasses.get(aspectRatio)
+    },
+    getThumbnailIconClass: function(size) {
+        const thumbnailIconClasses = new Map();
+    
+        thumbnailIconClasses.set("small", 'su-left-13 su-bottom-13 [&>svg]:su-text-[4rem]');
+        thumbnailIconClasses.set("medium", 'su-left-13 su-bottom-13 md:su-left-27 md:su-bottom-27 [&>svg]:su-text-[4rem] [&>svg]:md:su-text-[6rem]');
+        thumbnailIconClasses.set("large", 'su-left-13 su-bottom-13 [&>svg]:su-text-[4rem]');
+        thumbnailIconClasses.set("featured", 'su-left-13 su-bottom-13 md:su-left-27 md:su-bottom-27 [&>svg]:su-text-[4rem] [&>svg]:md:su-text-[6rem]');
+        thumbnailIconClasses.set("vertical-video", 'su-z-30 su-left-32 su-bottom-34 sm:su-left-48 sm:su-bottom-61 lg:su-left-32 lg:su-bottom-34 2xl:su-left-48 2xl:su-bottom-61 [&>svg]:su-text-[6rem]');
+        
+        return thumbnailIconClasses.get(size)
+    },
     hasFirstItem: function(items) {
         return Array.isArray(items) && items.length > 0;
     },
@@ -204,12 +226,12 @@ export const helpers = {
         
         return backgroundClasses.get(variant) || '';
     },
-    linkButtonClasses: function(variant, size) {
+    linkButtonClasses: function(variant = "default", size = "default", customClasses = "") {
         const baseClasses = ['su-group su-flex su-items-center su-w-fit hocus:su-underline'];
         
         const sizeClasses = new Map(); 
 
-        sizeClasses.set('default','md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1');
+        sizeClasses.set('default','su-px-30 su-pt-12 su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1');
         sizeClasses.set('large','su-rs-py-0 su-rs-px-4 su-font-semibold su-type-1 dark:hocus:su-ring-2');
          
         baseClasses.push(sizeClasses.get(size));
@@ -220,6 +242,8 @@ export const helpers = {
         variantClasses.set('gradient','su-text-white hocus:su-text-white su-no-underline hocus:su-underline su-bg-gradient-to-r su-from-digital-red-light su-to-cardinal-red-dark hocus:su-bg-none hocus:su-bg-black dark:su-from-olive dark:su-to-palo-verde dark:su-text-black-true dark:hocus:su-text-white dark:hocus:su-ring-white');
 
         baseClasses.push(variantClasses.get(variant));
+
+        baseClasses.push(customClasses);
 
         return baseClasses.join(' ').trim();
     },
@@ -311,6 +335,11 @@ export const helpers = {
 
         return colorClassMap.get(color) || colorClassMap.get("grey");
     },
+    getStringByCondition: function(options) {
+        const { value, expectedValue, trueResult, falseResult } = options.hash;
+    
+        return value === expectedValue ? trueResult : falseResult;
+    }
 }
   
 export default helpers;
