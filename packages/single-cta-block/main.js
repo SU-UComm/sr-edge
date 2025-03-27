@@ -49,9 +49,9 @@ export default {
 
         // Validating fields
         try {
-            if (size && typeof size !== 'string') {
+            if (size && !['normal', 'campaign'].includes(size) ) {
                 throw new Error(
-                    `The "size" field must be a string type. The ${JSON.stringify(size)} was received.`
+                    `The "size" field must be one of ["normal", "campaign"]. The ${JSON.stringify(size)} was received.`
                 );
             }
             if (title && typeof title !== 'string') {
@@ -79,14 +79,14 @@ export default {
                     `The "isCard" field must be a boolean type. The ${JSON.stringify(isCard)} was received.`
                 );
             }
-            if (marginTop && typeof marginTop !== 'string') {
+            if (marginTop && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginTop) ) {
                 throw new Error(
-                    `The "marginTop" field must be a string type. The ${JSON.stringify(marginTop)} was received.`
+                    `The "marginTop" field must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginTop)} was received.`
                 );
             }
-            if (marginBottom && typeof marginBottom !== 'string') {
+            if (marginBottom && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginBottom) ) {
                 throw new Error(
-                    `The "marginBottom" field must be a string type. The ${JSON.stringify(marginBottom)} was received.`
+                    `The "marginBottom" field must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginBottom)} was received.`
                 );
             }
             if (ctaText && typeof ctaText !== 'string') {
@@ -96,7 +96,7 @@ export default {
             }
             if (ctaType && !["download", "email", "link"].includes(ctaType) ) {
                 throw new Error(
-                    `The "ctaType" field cannot be undefined and must be one of ["download", "email", "link"]. The ${JSON.stringify(ctaType)} was received.`
+                    `The "ctaType" must be one of ["download", "email", "link"]. The ${JSON.stringify(ctaType)} was received.`
                 );
             }
             if (externalUrl && typeof externalUrl !== 'string') {
@@ -155,7 +155,7 @@ export default {
             imageUrl: imageData?.url,
             imageAlt: imageData?.attributes?.alt || "",
             containerSize: size === "campaign" ? "cc" : "large",
-            linkButtonSize: size === "campaign" ? "su-rs-mt-4 su-mx-auto su-rs-mt-4" : "su-rs-mt-4 su-mx-auto su-rs-mt-2"
+            linkButtonSize: size === "campaign" ? "su-mx-auto su-rs-mt-4" : "su-mx-auto su-rs-mt-2"
         };
 
         return singleCtaBlock(componentData);

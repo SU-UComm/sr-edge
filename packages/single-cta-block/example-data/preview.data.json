@@ -1,15 +1,15 @@
 {
-  "size": "campaign",
-  "title": "Updates and resources on federal issues",
-  "eyebrow": "Learn more",
-  "description": "<p>Stanford is committed to a need-blind admission policy for U.S. citizens, undocumented students and permanent residents. Students are admitted without regard to their ability to pay. We encourage you to visit our net price calculator on our website to determine what level of financial aid you can expect.</p>",
-  "image": "matrix-asset://api-identifier/128612",
-  "isCard": false,
-  "marginTop": "8",
-  "marginBottom": "8",
-  "ctaConfiguration": {
-    "ctaText": "Download brochure (PDF)",
-    "ctaType": "download",
-    "externalUrl": "https://google.com"
-  }
+    "size": "normal",
+    "eyebrow": "Residential Education",
+    "title": "‘Design Kids’ leverage their craft to build community on campus",
+    "description": "<p>Stanford design student Tyler Newman has an eye for design and a passion for building and celebrating community.</p><p>And thanks to her work, and the work of the student group known as The Design Kids, the university recently launched <strong><a href='https://resed.stanford.edu/neighborhoods' target='_self'>eight new neighborhood crests</a></strong>, each a reflection of Stanford’s residential communities’ culture and feel.</p><p>“I think it’s such a unique opportunity that our studio has been able to create a system of design that can be used in perpetuity,” Newman said. “Even 100 years from now, I hope they are still relevant and still helping to create and foster community.”</p>",
+    "image": "matrix-asset://api-identifier/128612",
+    "isCard": false,
+    "marginTop": "8",
+    "marginBottom": "8",
+    "ctaConfiguration": {
+        "ctaText": "Sign up",
+        "ctaType": "link",
+        "externalUrl": "https://news.stanford.edu/developreport/server-components/single-cta-block/_nocache"
+    }
 }

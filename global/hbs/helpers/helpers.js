@@ -55,11 +55,10 @@ export const helpers = {
         return alignClasses.get(alignment) || "";
     },
     containerClasses: function (options) {
-        const { width = "large", paddingX = true, paddingY = "none", marginTop = "default", marginBottom = "default", customClasses } = options.hash;
+        const { width = "large", paddingX = true, paddingY = "none", marginTop = "none", marginBottom = "none", customClasses } = options.hash;
         const outputClasses = ['su-mx-auto', 'su-component-container'];
 
         const widthClasses = new Map();
-        widthClasses.set("none", "");
         widthClasses.set("narrow", "su-container-narrow");
         widthClasses.set("large", "su-container-large");
         widthClasses.set("wide", "su-container-wide");
@@ -71,7 +70,6 @@ export const helpers = {
         paddingX && outputClasses.push('su-container-px');
         
         const paddingYClasses = new Map(); 
-        paddingYClasses.set("none", "");
         paddingYClasses.set("base", "su-rs-py-0");
         paddingYClasses.set("1", "su-rs-py-1");
         paddingYClasses.set("2", "su-rs-py-2");
@@ -87,7 +85,6 @@ export const helpers = {
         outputClasses.push(paddingYClasses.get(paddingY));
 
         const marginTopClasses = new Map();
-        marginTopClasses.set("default", "");
         marginTopClasses.set("base", "su-rs-mt-0");
         marginTopClasses.set("1", "su-rs-mt-1");
         marginTopClasses.set("2", "su-rs-mt-2");
@@ -103,7 +100,6 @@ export const helpers = {
         outputClasses.push(marginTopClasses.get(marginTop));
 
         const marginBottomClasses = new Map();
-        marginBottomClasses.set("default", "");
         marginBottomClasses.set("base", "su-rs-mb-0");
         marginBottomClasses.set("1", "su-rs-mb-1");
         marginBottomClasses.set("2", "su-rs-mb-2");
@@ -120,7 +116,7 @@ export const helpers = {
 
         customClasses && outputClasses.push(customClasses);
 
-        return outputClasses.join(' ').trim();
+        return outputClasses.filter(Boolean).join(' ').trim();
     },
     ctaTarget: function(ctaNewWindow) {
         return ctaNewWindow ? "_blank" : undefined;
