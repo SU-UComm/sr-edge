@@ -149,7 +149,8 @@ export default {
             email,
             isNewWindow,
             ctaText,
-            isRealExternalLink: !linkData?.url && externalUrl ?
+            ctaType: ctaType,
+            isRealExternalLink: ctaType === "link" && !linkData?.url && externalUrl ?
                 isRealExternalLink(externalUrl) : false,
             buttonUrl: ctaType === "email" ? `mailto:${email}` : buttonUrl,
             imageUrl: imageData?.url,
