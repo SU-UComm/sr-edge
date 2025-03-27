@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { basicAssetUri } from "../../global/js/utils";
 import moduleToTest from "./main";
-import { height, width } from "@fortawesome/free-regular-svg-icons/faAddressBook";
 
 const { main } = moduleToTest;
 

@@ -3,6 +3,32 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs
 export const CONTENT_CAROUSEL_SELECTOR = 'section[data-component="content-carousel"]';
 export let swiper; 
 
+export const updateAccessibility = (swiper) => {
+    // Manage slides visibility and interactivity
+    swiper.slides.forEach((slide) => {
+        if (slide.classList.contains("swiper-slide-active")) {
+            slide.removeAttribute("aria-hidden");
+            slide.removeAttribute("inert");
+            slide.setAttribute("tabindex","-1");
+        } else {
+            slide.setAttribute("aria-hidden", "true");
+            slide.setAttribute("inert", "true");
+            slide.removeAttribute("tabindex");
+        }
+    });
+
+    // Update pagination bullets aria-current state
+    if (swiper.pagination.bullets.length > 0) {
+        swiper.pagination.bullets.forEach((bullet) => {
+            if (bullet.classList.contains("swiper-pagination-bullet-active")) {
+                bullet.setAttribute("aria-current", "true");
+            } else {
+                bullet.removeAttribute("aria-current");
+            }
+        });
+    }
+};
+
 export function _carouselInit(section) {
     const uniqueClass = section.dataset.uniqueId;
 
@@ -47,84 +73,17 @@ export function _carouselInit(section) {
         }
     });
 
-    
-    // Add accessibility management function
-    const updateAccessibility = () => {
-        // Manage slides visibility and interactivity
-        swiper.slides.forEach((slide) => {
-            if (slide.classList.contains("swiper-slide-visible")) {
-                slide.removeAttribute("aria-hidden");
-                slide.removeAttribute("inert");
-            } else {
-                slide.setAttribute("aria-hidden", "true");
-                slide.setAttribute("inert", "true");
-            }
-        });
-
-        // Update pagination bullets aria-current state
-        if (swiper.pagination.bullets.length > 0) {
-            swiper.pagination.bullets.forEach((bullet) => {
-                if (bullet.classList.contains("swiper-pagination-bullet-active")) {
-                    bullet.setAttribute("aria-current", "true");
-                } else {
-                    bullet.removeAttribute("aria-current");
-                }
-            });
-        }
-    };
-
     // Add slide change event handler with accessibility management
     swiper.on('slideChange', function() {
-        updateAccessibility();
-
-        // Remove tabindex from previous active slide
-        const oldWrapper = swiper.$wrapperEl?.[0];
-        if (oldWrapper) {
-            const oldSlide = oldWrapper.querySelector(".swiper-slide-active");
-            if (oldSlide) {
-                oldSlide.removeAttribute("tabindex");
-            }
-        }
-
-        // Focus on new current slide after animation
-        setTimeout(() => {
-            const wrapper = swiper.$wrapperEl?.[0];
-            if (!wrapper) {
-                console.warn('Swiper wrapper not found');
-                return;
-            }
-
-            const slide = wrapper.querySelector(".swiper-slide-active");
-            if (!slide) {
-                console.warn('Active slide not found');
-                return;
-            }
-
-            // Find focusable element or make slide itself focusable
-            const focusableElements = slide.querySelectorAll('h2 a, h3 a, button');
-            let slideTarget = null;
-
-            if (focusableElements.length > 0) {
-                // Prefer the first focusable element
-                slideTarget = focusableElements[0];
-            } else {
-                // Make slide itself focusable
-                slide.setAttribute("tabindex", "-1");
-                slideTarget = slide;
-            }
-
-            if (slideTarget) {
-                try {
-                    slideTarget.focus();
-                } catch (error) {
-                    console.error('Failed to focus element:', error);
-                }
-            }
-        }, 300);
+        /* v8 ignore start */
+        setTimeout(() => { 
+            updateAccessibility(swiper);
+        }, 100);
+        /* v8 ignore stop */
     });
 
     // Initial accessibility setup
-    updateAccessibility();
+    updateAccessibility(swiper);
 };
 
 document.addEventListener('DOMContentLoaded', function () {

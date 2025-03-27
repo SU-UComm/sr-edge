@@ -75,24 +75,6 @@ describe('[Stories Carousel][Client]', () => {
 
         it('Should initialize Swiper with the correct configuration', () => {
             storiesCarousel._carouselInit(section);
-
-            expect(Swiper).toHaveBeenCalledWith('section[data-unique-id="testId"] .swiper', expect.objectContaining({
-                breakpoints: {
-                    0: expect.any(Object),
-                    768: expect.any(Object),
-                    992: expect.any(Object),
-                },
-                pagination: expect.objectContaining({
-                    el: `.component-slider-pagination-testId`,
-                    clickable: true,
-                    bulletElement: "button",
-                    renderBullet: expect.any(Function),
-                }),
-            }));
-        });
-
-        it('Should initialize Swiper with the correct configuration', () => {
-            storiesCarousel._carouselInit(section);
     
             // Ensure Swiper was called
             expect(Swiper).toHaveBeenCalledWith('section[data-unique-id="testId"] .swiper', expect.objectContaining({
