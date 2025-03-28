@@ -215,7 +215,7 @@ export function HorizontalCard({
 
         ${cardSize === "large" && type ? `
           <p data-testid="horizontal-card-type" class="${styles.type}">
-            ${SVGMap.get(type.toLowerCase())}
+
             <span class="${styles.typeText}">${xss(type)}</span>
           </p>
         ` : ''}

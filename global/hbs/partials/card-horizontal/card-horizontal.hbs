@@ -49,7 +49,7 @@
         {{/ifEquals}}
         {{#if type}}{{#ifEquals cardSize "large"}} 
         <p data-testid="horizontal-card-type" class="su-text-black-70 dark:su-text-black-30 su-w-full su-text-14 lg:su-text-16 su-mt-9 md:su-mt-12 su-mb-0 su-flex su-gap-6 su-items-center su-justify-start">
-            ${SVGMap.get(type.toLowerCase())}
+            {{> svg-icons icon=iconType}}
             <span class="su-font-semibold su-text-14 md:su-text-16 su-leading-4">{{{type}}}</span>
         </p>
         {{/ifEquals}}{{/if}}

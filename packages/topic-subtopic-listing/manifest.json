@@ -1,0 +1,144 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "topic-subtopic-listing",
+    "type": "edge",
+    "version": "4.0.1",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "Listing of stories as cards with pagination.",
+    "displayName": "Topic / subtopic listing",
+    "mainFunction": "main",
+    "environment": [
+        {
+            "name": "FB_JSON_URL",
+            "required": true
+        }
+    ],
+    "icon": {
+        "id": "clear_all",
+        "color": {
+            "type": "enum",
+            "value": "yellow"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "displayConfiguration": {
+                        "properties": {
+                            "searchQuery": {
+                                "title": "Search query",
+                                "type": "string"
+                            },
+                            "displayStyle": {
+                                "title": "Topic list display",
+                                "type": "string",
+                                "default": "Default",
+                                "enum": [
+                                    "Default",
+                                    "News Archive",
+                                    "Press Center",
+                                    "Announcements",
+                                    "In the News",
+                                    "University Updates",
+                                    "Leadership Messages"
+                                ]
+                            }
+                        },
+                        "required": []
+                    }
+                },
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "presscenter": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/presscenter.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "announcements": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/announcements.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "inthenews": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/inthenews.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "leadershipmessages": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/leadershipmessages.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}

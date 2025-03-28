@@ -135,7 +135,7 @@ export function pagination({
               aria-label="Previous page"
               title="Previous page"
             >
-              ${ChevronLeft}
+              ${ChevronLeft()}
             </button>
 
             ${buttons.join("")}
@@ -162,7 +162,7 @@ export function pagination({
               aria-label="Next page"
               title="Next page"
             >
-              ${ChevronRight()}
+              ${ChevronRight("")}
             </button>
           </div>
         `,
