@@ -1,4 +1,4 @@
-import { basicAssetUri, isRealExternalLink } from "../../global/js/utils";
+import { basicAssetUri, isRealExternalLink, useShortId } from "../../global/js/utils";
 import singleCtaBlock from './single-cta-block.hbs';
 
 /**
@@ -156,7 +156,8 @@ export default {
             imageUrl: imageData?.url,
             imageAlt: imageData?.attributes?.alt || "",
             containerSize: size === "campaign" ? "cc" : "large",
-            linkButtonSize: size === "campaign" ? "su-mx-auto su-rs-mt-4" : "su-mx-auto su-rs-mt-2"
+            linkButtonClasses: size === "campaign" ? "su-mx-auto su-rs-mt-4" : "su-mx-auto su-rs-mt-2",
+            uniqueFAId: useShortId()
         };
 
         return singleCtaBlock(componentData);

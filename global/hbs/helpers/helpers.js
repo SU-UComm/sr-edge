@@ -340,14 +340,16 @@ export const helpers = {
     
         return value === expectedValue ? trueResult : falseResult;
     },
-    generateUniqueId: function() {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        while (result.length < 12) {
-            result += chars[Math.floor(Math.random() * chars.length)];
+    concatClasses: function(str1, str2) {
+        console.log('str2')
+        console.log(str2)
+        if (!str2) {
+            return str1
+        } else {
+            console.log('str2 JEST')
+            return (str1 + ' ' + str2)
         }
-        return result;
-    },
+    }
 }
   
 export default helpers;

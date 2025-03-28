@@ -1,0 +1,1 @@
+export { useShortId } from './useShortId';
