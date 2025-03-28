@@ -15,14 +15,14 @@
     <div class="su-flex su-flex-col {{getStringByCondition value=cardSize expectedValue="large" trueResult="su-gap-9 lg:su-gap-12" falseResult="su-gap-6"}}">
         {{#if taxonomy}}{{#ifEquals cardSize "small"}}
         <p class="su-mb-0 su-text-16 su-font-semibold su-text-digital-red dark:su-text-dark-mode-red hover:dark:su-text-dark-mode-red" data-testid="horizontal-card-taxonomy">
-            <a href="{{taxonomyUrl}}" class="focus:su-outline-0 focus:su-ring su-text-digital-red su-no-underline hover:su-text-digital-red dark:su-text-dark-mode-red hover:dark:su-text-dark-mode-red su-block su-mt-[-6px]">
+            <a{{#if taxonomyUrl}} href="{{taxonomyUrl}}"{{/if}} class="focus:su-outline-0 focus:su-ring su-text-digital-red su-no-underline hover:su-text-digital-red dark:su-text-dark-mode-red hover:dark:su-text-dark-mode-red su-block su-mt-[-6px]">
                 {{{taxonomy}}}
             </a>
         </p>
         {{/ifEquals}}{{/if}}
         <h3 class="su-font-sans su-my-0 su-group {{getStringByCondition value=cardSize expectedValue="large" trueResult="su-text-18 md:su-text-21 lg:su-text-23 su-font-bold su-leading-[21.6px] md:su-leading-[25.2px] lg:su-leading-[27.6px]" falseResult="su-text-18 su-font-semibold su-leading-[21.495px]"}}">
             <a href="{{liveUrl}}" class="su-group su-stretched-link su-inline-block su-text-black dark:su-text-white hocus:su-underline hocus:su-text-digital-red su-transition dark:hocus:su-text-dark-mode-red focus:su-outline-none focus-visible:su-ring-2 focus-visible:su-rounded focus-visible:su-ring-digital-red dark:focus-visible:su-ring-dark-mode-red focus-visible:su-outline-none focus-visible:after:su-outline focus-visible:after:su-outline-offset-8 focus-visible:after:su-outline-digital-red dark:focus-visible:after:su-outline-dark-mode-red">
-                {{{title}}}
+                <span>{{{title}}}</span>
                 {{#if isRealExternalLink}}{{#ifEquals cardSize "large"}}
                 {{> fontawesome-icon
                     icon="arrow-up-right"
