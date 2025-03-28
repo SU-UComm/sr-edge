@@ -24,3 +24,4 @@ export { translatePersonalisationProfile } from './translatePersonalisationProfi
 export { useKeypress } from './useKeypress';
 export { useOnClickOutside } from './useOnClickOutside';
 export { uuid } from './uuid';
+export { useShortId } from './useShortId';
