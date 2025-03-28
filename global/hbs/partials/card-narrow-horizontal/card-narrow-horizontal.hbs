@@ -1,0 +1,63 @@
+<article aria-label="{{title}}" class="su-grid su-grid-gap su-grid-cols-6 lg:su-grid-cols-10" data-testid="narrow-horizontal-card">
+    <div class="su-flex su-flex-col su-gap-12 su-col-start-1 su-col-span-full lg:su-col-span-6 lg:su-col-start-3">
+        {{#ifEquals displayConfiguration "In the News"}}{{#if storySource}}
+        <p class="su-text-16 lg:su-text-18 su-leading-[130%] su-font-semibold su-my-0">
+            {{{storySource}}}
+        </p>
+        {{/if}}{{/ifEquals}}
+        {{#ifEquals displayConfiguration "Announcements"}}{{#if taxonomyFeaturedUnitText}}
+        <p data-testid="vertical-card-taxonomy" class="su-relative su-text-16 su-leading-[2.3rem] lg:su-text-18 su-z-10 su-mb-0 su-font-semibold">
+            {{#if taxonomyFeaturedUnitLandingPageUrl}}
+            <a href="{{taxonomyFeaturedUnitLandingPageUrl}}" class="focus:su-outline-0 focus:su-ring su-text-digital-red su-no-underline hover:su-text-digital-red dark:su-text-dark-mode-red hover:dark:su-text-dark-mode-red hocus:su-underline">
+                {{{taxonomyFeaturedUnitText}}}
+            </a>
+            {{else}}
+            <span>{{{taxonomyFeaturedUnitText}}}</span>
+            {{/if}}
+        </p>
+        {{/if}}{{/ifEquals}}
+        <h3 class="su-font-serif su-basefont-23 su-my-0">
+            <a class="su-group hocus:su-text-digital-red hocus:su-underline su-transition su-text-black dark:su-text-white dark:hocus:su-text-dark-mode-red" href="{{liveUrl}}">
+                <span>{{{title}}}</span>
+                {{#if isExternalLink}}
+                <span class="su-text-digital-red dark:su-text-dark-mode-red su-translate-x-0 su-translate-y-0 su-transition group-hocus:su-translate-y-[-.1em] group-hocus:su-translate-x-[.1em] su-inline-block">
+                    <span class="[&>*]:su-inline-block [&>*]:su-stroke-current [&>*]:su-w-24 [&>*]:su-h-23 [&>*]:su-rotate-[-45deg] [&>*]:su-translate-x-[.12em] [&>*]:su-translate-y-[-.08em]">
+                        {{> svg-icons icon="Arrow Right"}}
+                    </span>
+                </span>
+                {{/if}}
+            </a>
+        </h3>
+        {{#if description}}
+        <div data-testid="narrow-horizontal-card-description" class="su-my-0 su-text-16 su-leading-[2.4rem] lg:su-text-18 lg:su-leading-[2.7rem]">
+            <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0">
+                {{{description}}}
+            </div>
+        </div>
+        {{/if}}
+        {{#ifEquals displayConfiguration "Leadership Messages"}}
+        <div class="su-flex su-w-full su-min-h-[56px] su-self-end lg:su-self-start su-items-center su-gap-10 su-text-black dark:su-text-white su-text-16 su-leading-[19.106px]{{#if authorAvatar}} su-ml-[-3px] su-mb-[-3px]{{/if}}">
+            {{#if avatarRef}}
+            {{> avatar avatarURL=avatarRef size=avatarSize alt=avatarAlt}}
+            {{/if}}
+            {{#if authorDisplayName}}
+            <span class="su-my-0">
+                {{authorDisplayName}} 
+                <time class="su-text-black-70 dark:su-text-black-60 su-font-semibold">
+                    <span>&nbsp;|&nbsp;{{date}}</span>
+                </time>
+            </span>
+            {{else}}
+            <time class="su-text-black-70 dark:su-text-black-60 su-font-semibold">
+                {{date}}
+            </time>
+            {{/if}}
+          </div>
+        {{/ifEquals}}
+        {{#if date}}{{#unlessEquals displayConfiguration "Leadership Messages"}}{{#unlessEquals displayConfiguration "In the News"}}
+        <p class="su-text-black-70 dark:su-text-black-60 su-text-16 lg:su-text-18 su-leading-[130%] su-font-semibold su-my-0">
+            {{date}}
+        </p>
+        {{/unlessEquals}}{{/unlessEquals}}{{/if}}
+    </div>
+</article>
