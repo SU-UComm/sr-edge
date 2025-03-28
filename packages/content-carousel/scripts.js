@@ -3,7 +3,21 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs
 export const CONTENT_CAROUSEL_SELECTOR = 'section[data-component="content-carousel"]';
 export let swiper; 
 
-export const updateAccessibility = (swiper) => {
+/**
+ * Updates accessibility attributes for a Swiper instance.
+ *
+ * This function manages slide visibility and interactivity by setting 
+ * `aria-hidden`, `inert`, and `tabindex` attributes appropriately. It also 
+ * ensures that interactive elements within active slides receive focus.
+ * Additionally, it updates the `aria-current` attribute on pagination bullets 
+ * to reflect the current active slide.
+ *
+ * @param {object} swiper - The Swiper instance.
+ * @param {HTMLElement[]} swiper.slides - The array of slide elements.
+ * @param {object} swiper.pagination - The pagination object.
+ * @param {HTMLElement[]} swiper.pagination.bullets - The array of pagination bullet elements.
+ */
+export const updateAccessibility = (swiper, isFocus) => {
     // Manage slides visibility and interactivity
     swiper.slides.forEach((slide) => {
         if (slide.classList.contains("swiper-slide-active")) {
@@ -14,6 +28,13 @@ export const updateAccessibility = (swiper) => {
             slide.setAttribute("aria-hidden", "true");
             slide.setAttribute("inert", "true");
             slide.removeAttribute("tabindex");
+        }
+        const slideTarget = slide.querySelector("h2 a, h3 a, button")
+            ? slide.querySelector("h2 a, h3 a, button")
+            : null;
+
+        if(isFocus) {
+            slideTarget && slideTarget.focus();
         }
     });
 
@@ -77,15 +98,23 @@ export function _carouselInit(section) {
     swiper.on('slideChange', function() {
         /* v8 ignore start */
         setTimeout(() => { 
-            updateAccessibility(swiper);
+            updateAccessibility(swiper, true);
         }, 100);
         /* v8 ignore stop */
     });
 
     // Initial accessibility setup
-    updateAccessibility(swiper);
+    updateAccessibility(swiper, false);
 };
 
+/**
+ * Initializes carousel when the DOM content is fully loaded.
+ *
+ * This function selects all elements matching the `CONTENT_CAROUSEL_SELECTOR` selector
+ * applies the `_carouselInit` function to each of them
+ *
+ * @listens DOMContentLoaded
+ */
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll(CONTENT_CAROUSEL_SELECTOR).forEach(section => {
         _carouselInit(section)
