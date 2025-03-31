@@ -1,13 +1,15 @@
+import { uuid } from "../../global/js/utils/uuid";
 import { formatCardDataFunnelback } from "../../global/js/utils/formatCardDataFunnelback";
 import { pagination } from "../../global/js/helpers/pagination";
 import { HorizontalCard } from "../../global/js/helpers/Card/horizontalCard";
 import { NarrowHorizontalCard } from "../../global/js/helpers/Card/narrowHorizontalCard";
+import { EmbedVideo } from "../../global/js/helpers/EmbedVideo";
 
 export const TOPICS_SUBTOPICS_SELECTOR = 'section[data-component="topic-subtopic-listing"]';
 export const TOPICS_LIST_SELECTOR = '[data-element="topics-list"]';
 export const PAGINATION_SELECTOR = '[data-element="topics-pagination"]';
 export const TOPICS_SUBTOPICS_LISTING_HIDDEN_CLASS = 'su-hidden';
-export const TOPICS_SUBTOPICS_LISTING_MODAL_SELECTOR = 'div[data-modal="modal"]';
+export const TOPICS_SUBTOPICS_LISTING_MODAL_SELECTOR = 'section[data-element="modal-wrapper"]';
 export const TOPICS_SUBTOPICS_LISTING_OPEN_MODAL_BTN = 'button[data-click="open-modal"]';
 export const TOPICS_SUBTOPICS_LISTING_CLOSE_MODAL_BTN = 'button[data-dismiss="modal"]';
 export const TOPICS_SUBTOPICS_LISTING_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
@@ -107,10 +109,12 @@ async function fetchTopicData(args) {
  * @param {string[]} cards - Array of rendered card HTML strings.
  * @param {string} pagination - Rendered pagination HTML string.
  */
-function updateState(section, cards, pagination) {
+function updateState(section, cards, pagination, modal) {
     document.querySelector(TOPICS_LIST_SELECTOR).innerHTML = cards;
     document.querySelector(PAGINATION_SELECTOR).innerHTML = pagination;
+    document.querySelector(TOPICS_SUBTOPICS_LISTING_MODAL_SELECTOR).innerHTML = modal;
     window.scrollTo({ top: 0, behavior: "smooth" });
+    _modalInit(section);
     _topicsInit(section);
 }
 
@@ -141,15 +145,28 @@ async function handleButtonClick(args) {
             : null;
 
     const cards = [];
+    const modalData = [];
 
     fbData?.response?.resultPacket?.results?.forEach((card) => {
+        const uniqueID = uuid();
         const cardData = formatCardDataFunnelback(card);
+        cardData.uniqueID = uniqueID;
         if(["Press Center", "Leadership Messages", "University Updates", "Announcements", "In the News"].includes(display)) {
             cardData.displayConfiguration = display;
             cards.push(NarrowHorizontalCard({ data: cardData, cardType: "narrowhorizontal" }));
         } else {
             // cards.push(JSON.stringify(cardData))
             cards.push(HorizontalCard({ data: cardData, cardType: "horizontal", cardSize: "large" }));
+        }
+        if(cardData.type === 'Video') {
+            modalData.push({
+                isVertical: cardData.size === "vertical-video",
+                videoId: cardData.videoUrl,
+                title: `Watch ${cardData.title}`, 
+                noAutoPlay: true,
+                uniqueID: cardData.uniqueID,
+                titleID: 'card-modal'
+            })
         }
     });
 
@@ -161,7 +178,15 @@ async function handleButtonClick(args) {
         currentPage: Number(offset)
     });
 
-    updateState(section, cards, pager);
+    const modals = modalData.map((item) => {
+        return `
+        <div hidden="true" aria-modal="true" role="dialog" data-overlay-container="true" class="su-modal su-hidden" data-modal="modal" data-modal-id="${item.uniqueID}"><span data-focus-scope-start="true" hidden="true"></span><div aria-describedby="${item.titleID}" role="dialog" tabindex="-1" data-modal="modal-dialog" data-ismodal="true" aria-modal="true"><div class="su-modal-content">
+        ${EmbedVideo({ videoId: item.videoId, title: item.title, noAutoPlay: item.noAutoPlay, isVertical: item.isVertical})}
+        </div></div><button type="button" class="su-component-close su-text-center" data-dismiss="modal"> <svg class="su-fill-currentcolor" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M23.5607 6.43934C22.9749 5.85355 22.0251 5.85355 21.4393 6.43934L15 12.8787L8.56066 6.43934C7.97487 5.85355 7.02513 5.85355 6.43934 6.43934C5.85355 7.02513 5.85355 7.97487 6.43934 8.56066L12.8787 15L6.43934 21.4393C5.85355 22.0251 5.85355 22.9749 6.43934 23.5607C7.02513 24.1464 7.97487 24.1464 8.56066 23.5607L15 17.1213L21.4393 23.5607C22.0251 24.1464 22.9749 24.1464 23.5607 23.5607C24.1464 22.9749 24.1464 22.0251 23.5607 21.4393L17.1213 15L23.5607 8.56066C24.1464 7.97487 24.1464 7.02513 23.5607 6.43934Z"></path></svg><span>Close</span></button><span data-focus-scope-end="true" hidden="true"></span></div>
+        `
+    }).join('')
+
+    updateState(section, cards, pager, modals);
 }
 
 /**

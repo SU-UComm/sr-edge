@@ -96,6 +96,7 @@ export function HorizontalCard({
     date,
     endDate,
     videoUrl,
+    uniqueID,
   },
   cardSize = "small"
 }) {
@@ -148,7 +149,7 @@ export function HorizontalCard({
   SVGMap.set("book", BookOpenCover({ className: "" }));
   
   return `
-    <article aria-label="${title}" class="${styles.root} ${sizeStyles.gap}" data-testid="horizontal-card">
+    <article aria-label="${title}" class="${styles.root} ${sizeStyles.gap}" data-testid="horizontal-card" >
       
     ${cardSize === "large" ? `
         <div class="${styles.imageWrapper} ${sizeStyles.imageWrapper}">
@@ -159,7 +160,8 @@ export function HorizontalCard({
                 videoUrl,
                 mediaType: "image",
                 aspectRatio: "card-large",
-                size: cardSize
+                size: cardSize,
+                uniqueId: uniqueID
             })}
           ` : ''}
         </div>
@@ -173,7 +175,8 @@ export function HorizontalCard({
                 videoUrl,
                 mediaType: "image",
                 aspectRatio: "large",
-                size: cardSize
+                size: cardSize,
+                uniqueId: uniqueID
             })}
         </div>
       ` : ''}
