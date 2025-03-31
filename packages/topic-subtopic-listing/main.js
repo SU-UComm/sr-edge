@@ -79,8 +79,8 @@ export default {
         try {
             data = await adapter.getResultData();
         } catch (er) {
-            console.error('Error occurred in the Text callout component: Error parsing Funnelback JSON response: ', er);
-            return `<!-- Error occurred in the Text callout component: Error parsing Funnelback JSON response: ${er.message} -->`;
+            console.error('Error occurred in the Topic subtopic listing component: Error parsing Funnelback JSON response: ', er);
+            return `<!-- Error occurred in the Topic subtopic listing component: Error parsing Funnelback JSON response: ${er.message} -->`;
         }
 
         const resultsSummary = data?.resultsSummary;
