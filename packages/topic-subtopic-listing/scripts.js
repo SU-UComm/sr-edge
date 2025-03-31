@@ -1,6 +1,7 @@
-// import { formatCardDataFunnelback } from "../../global/js/utils/formatCardDataFunnelback";
-// import { pagination } from "../../global/js/helpers/pagination";
-// import { Card } from "../../global/js/helpers/Card/horizontalCard";
+import { formatCardDataFunnelback } from "../../global/js/utils/formatCardDataFunnelback";
+import { pagination } from "../../global/js/helpers/pagination";
+import { HorizontalCard } from "../../global/js/helpers/Card/horizontalCard";
+import { NarrowHorizontalCard } from "../../global/js/helpers/Card/narrowHorizontalCard";
 
 export const TOPICS_SUBTOPICS_SELECTOR = 'section[data-component="topic-subtopic-listing"]';
 export const TOPICS_LIST_SELECTOR = '[data-element="topics-list"]';
@@ -145,9 +146,9 @@ async function handleButtonClick(args) {
         const cardData = formatCardDataFunnelback(card);
         if(["Press Center", "Leadership Messages", "University Updates", "Announcements", "In the News"].includes(display)) {
             cardData.displayConfiguration = display;
-            // cards.push(Card({ data: cardData, cardType: "narrowhorizontal" }));
+            cards.push(NarrowHorizontalCard({ data: cardData, cardType: "narrowhorizontal" }));
         } else {
-            // cards.push(Card({ data: cardData, cardType: "horizontal", cardSize: "large" }));
+            cards.push(HorizontalCard({ data: cardData, cardType: "horizontal", cardSize: "large" }));
         }
     });
 

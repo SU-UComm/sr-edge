@@ -87,25 +87,32 @@ export default {
         const modalData = [];
 
         const cards = data?.cards?.map((card) => {
-            const cardData = {...card};
-            cardData.uniqueID = uuid();
-            cardData.storySource = xss(card.storySource);
-            cardData.taxonomyFeaturedUnitText = xss(card.taxonomyFeaturedUnitText);
-            cardData.title = xss(card.title);
-            cardData.description = xss(card.description);
-            cardData.title = xss(card.title);
-            cardData.iconType = card.type.toLowerCase();
-            cardData.avatarRef = card.authorAvatar || Array.isArray(card.imageUrl) ? card.imageUrl[0] : card.imageUrl;
-            cardData.avatarSize = "small";
-            cardData.avatarAlt = `Photo of ${card.authorDisplayName ? card.authorDisplayName : card.title}`;
-            cardData.isExternalLink = typeof card.isTeaser === "object" ? card.isTeaser[0] === "true" : card.isTeaser || false;
-            cardData.date = formatNewsDate(card.date);
+            const cardData = {
+                uniqueID: uuid(),
+                type: card.type,
+                iconType: card.type.toLowerCase(),
+                title: xss(card.title),
+                description: xss(card.description),
+                date: formatNewsDate(card.date),
+                liveUrl: card.liveUrl,
+                isExternalLink: typeof card.isTeaser === "object" ? card.isTeaser[0] === "true" : card.isTeaser || false,
+                imageUrl: card.imageUrl,
+                imageAlt: card.imageAlt,
+                avatarSize: "small",
+                avatarRef: card.authorAvatar || Array.isArray(card.imageUrl) ? card.imageUrl[0] : card.imageUrl,
+                avatarAlt: `Photo of ${card.authorDisplayName ? card.authorDisplayName : card.title}`,
+                taxonomy: xss(card.taxonomy),
+                taxonomyUrl: card.taxonomyUrl,
+                taxonomyFeaturedUnitText: xss(card.taxonomyFeaturedUnitText),
+                storySource: xss(card.storySource),
+                videoUrl: card.videoUrl,
+            }
 
             if(card.type === 'Video') {
                 modalData.push({
-                    isVertical: cardData.size === "vertical-video",
-                    videoId: cardData.videoUrl,
-                    title: `Watch ${cardData.title}`, 
+                    isVertical: card.size === "vertical-video",
+                    videoId: card.videoUrl,
+                    title: `Watch ${card.title}`, 
                     noAutoPlay: true,
                     uniqueID: cardData.uniqueID,
                     titleID: 'card-modal'
@@ -147,7 +154,6 @@ export default {
             query: searchQuery,
             endpoint: FB_JSON_URL,
             display: displayStyle,
-            data: JSON.stringify(resultsSummary)
         };
         return topicListingTemplate(componentData);
     }
