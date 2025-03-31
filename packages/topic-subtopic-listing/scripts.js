@@ -148,6 +148,7 @@ async function handleButtonClick(args) {
             cardData.displayConfiguration = display;
             cards.push(NarrowHorizontalCard({ data: cardData, cardType: "narrowhorizontal" }));
         } else {
+            // cards.push(JSON.stringify(cardData))
             cards.push(HorizontalCard({ data: cardData, cardType: "horizontal", cardSize: "large" }));
         }
     });

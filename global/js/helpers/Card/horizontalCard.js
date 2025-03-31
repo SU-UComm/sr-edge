@@ -100,15 +100,15 @@ export function HorizontalCard({
   cardSize = "small"
 }) {
   const sizeStyles = cardSizeStyles[cardSize];
-  const isRealExternalLink = !!liveUrl && !liveUrl?.includes("news.stanford.edu");
+  // const isRealExternalLink = !!liveUrl && !liveUrl?.includes("news.stanford.edu");
   const SVGMap = new Map();
   SVGMap.set("alert", Alert());
   SVGMap.set("analysis & insights", AnalysisAndInsights());
   SVGMap.set("analysis &amp; insights", AnalysisAndInsights());
   SVGMap.set("analysis&nbsp;&amp;&nbsp;insights", AnalysisAndInsights());
-  SVGMap.set("case study", CaseStudy());
-  SVGMap.set("case&nbsp;study", CaseStudy());
-  SVGMap.set("casestudy", CaseStudy());
+  SVGMap.set("case study", CaseStudy({variant: "light"}));
+  SVGMap.set("case&nbsp;study", CaseStudy({variant: "light"}));
+  SVGMap.set("casestudy", CaseStudy({variant: "light"}));
   SVGMap.set("event", Event());
   SVGMap.set("event&nbsp;highlights", EventHighlights());
   SVGMap.set("event highlights", EventHighlights());
@@ -122,8 +122,8 @@ export function HorizontalCard({
   SVGMap.set("obituary", Obituary());
   SVGMap.set("opinion", Opinion());
   SVGMap.set("photo", Photo());
-  SVGMap.set("policy&nbsp;brief", PolicyBrief());
-  SVGMap.set("policy brief", PolicyBrief());
+  SVGMap.set("policy&nbsp;brief", PolicyBrief({variant: "light"}));
+  SVGMap.set("policy brief", PolicyBrief({variant: "light"}));
   SVGMap.set("poll/quiz", PollQuiz());
   SVGMap.set("poll / quiz", PollQuiz());
   SVGMap.set("poll&nbsp;/&nbsp;quiz", PollQuiz());
@@ -144,8 +144,8 @@ export function HorizontalCard({
   SVGMap.set("q & a", QuestionAnswer());
   SVGMap.set("q&nbsp;&amp;&nbsp;a", QuestionAnswer());
   SVGMap.set("video", Video());
-  SVGMap.set("podcast", Podcast());
-  SVGMap.set("book", BookOpenCover());
+  SVGMap.set("podcast", Podcast({variant: "light"}));
+  SVGMap.set("book", BookOpenCover({ className: "" }));
   
   return `
     <article aria-label="${title}" class="${styles.root} ${sizeStyles.gap}" data-testid="horizontal-card">
@@ -205,7 +205,7 @@ export function HorizontalCard({
 
         ${cardSize === "large" && type ? `
           <p data-testid="horizontal-card-type" class="${styles.type}">
-
+            ${SVGMap.get(type.toLowerCase())}
             <span class="${styles.typeText}">${xss(type)}</span>
           </p>
         ` : ''}
