@@ -95,7 +95,7 @@ export default {
                 description: xss(card.description),
                 date: formatNewsDate(card.date),
                 liveUrl: card.liveUrl,
-                isExternalLink: typeof card.isTeaser === "object" ? card.isTeaser[0] === "true" : card.isTeaser || false,
+                isExternalLink: Array.isArray(card.isTeaser) ? card.isTeaser[0] === "true" : card.isTeaser || false,
                 imageUrl: card.imageUrl,
                 imageAlt: card.imageAlt,
                 avatarSize: "small",

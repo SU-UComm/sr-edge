@@ -14,7 +14,6 @@ export const TOPICS_SUBTOPICS_LISTING_OPEN_MODAL_BTN = 'button[data-click="open-
 export const TOPICS_SUBTOPICS_LISTING_CLOSE_MODAL_BTN = 'button[data-dismiss="modal"]';
 export const TOPICS_SUBTOPICS_LISTING_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
 
-
 /**
  * Opens a modal by modifying the iframe's autoplay parameter and removing the hidden class.
  * @param {HTMLElement} modal - The modal element to open.
@@ -86,7 +85,7 @@ export function _modalInit(section) {
  * @returns {Promise<Object>} The JSON response from the Funnelback API.
  * @throws {Error} If the fetch request fails.
  */
-async function fetchTopicData(args) {
+export async function fetchTopicData(args) {
     const {
         offset,
         query,
@@ -109,11 +108,13 @@ async function fetchTopicData(args) {
  * @param {string[]} cards - Array of rendered card HTML strings.
  * @param {string} pagination - Rendered pagination HTML string.
  */
-function updateState(section, cards, pagination, modal) {
+export function updateState(section, cards, pagination, modal) {
     document.querySelector(TOPICS_LIST_SELECTOR).innerHTML = cards;
     document.querySelector(PAGINATION_SELECTOR).innerHTML = pagination;
     document.querySelector(TOPICS_SUBTOPICS_LISTING_MODAL_SELECTOR).innerHTML = modal;
+    /* v8 ignore start */
     window.scrollTo({ top: 0, behavior: "smooth" });
+    /* v8 ignore stop */
     _modalInit(section);
     _topicsInit(section);
 }
@@ -129,7 +130,7 @@ function updateState(section, cards, pagination, modal) {
  * @param {HTMLElement} args.section - The topic-subtopic section element.
  * @returns {Promise<void>}
  */
-async function handleButtonClick(args) {
+export async function handleButtonClick(args) {
     const {
         offset,
         query,
@@ -151,6 +152,7 @@ async function handleButtonClick(args) {
         const uniqueID = uuid();
         const cardData = formatCardDataFunnelback(card);
         cardData.uniqueID = uniqueID;
+        
         if(["Press Center", "Leadership Messages", "University Updates", "Announcements", "In the News"].includes(display)) {
             cardData.displayConfiguration = display;
             cards.push(NarrowHorizontalCard({ data: cardData, cardType: "narrowhorizontal" }));
@@ -193,7 +195,7 @@ async function handleButtonClick(args) {
  * Initializes the topic-subtopic section by attaching event listeners to pagination buttons.
  * @param {HTMLElement} section - The topic-subtopic DOM element.
  */
-function _topicsInit(section) {
+export function _topicsInit(section) {
     const { query, endpoint, display } = section.dataset;
     const paginationContainer = section.querySelector(PAGINATION_SELECTOR);
 
