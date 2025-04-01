@@ -19,6 +19,7 @@ export default {
      * @param {string} [args.headingConfiguration.ctaNewWindow] - Flag to open CTA link in new window (optional).
      * @param {Object} [args.contentConfiguration] - Configuration for content sources.
      * @param {string} args.contentConfiguration.source - The asset id of the feature.
+     * @param {string} args.contentConfiguration.description - The overide description that will replace description form souce asset.
      * @param {Object} info - Contextual information.
      * @param {Object} info.env - Environment variables in the execution context.
      * @param {Object} info.fns - Functions available in the execution context.
@@ -32,7 +33,7 @@ export default {
 
         // Extracting configuration data from arguments
         const { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow } = args?.headingConfiguration || {};
-        const { source } = args?.contentConfiguration || {};
+        const { source, description } = args?.contentConfiguration || {};
 
          // Validate required environment variables
          try {
@@ -61,6 +62,11 @@ export default {
             if (typeof source !== 'string' || source.trim() === '') {
                 throw new Error(
                     `The "source" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(source)} was received.`
+                );
+            }
+            if (description && typeof description !== 'string') {
+                throw new Error(
+                    `The "description" field must be a string. The ${JSON.stringify(description)} was received.`
                 );
             }
             if (title && typeof title !== 'string') {
@@ -110,6 +116,16 @@ export default {
             return `<!-- Error occurred in the Single featured content: Failed to fetch feature data. ${er.message} -->`;
         }
 
+        const cardData = data && data.map((item) => {
+            const itemData = {...item} 
+            
+            if(description && description !== "" && description.replace(/<[^>]+>/g, "").trim().length > 0) {
+                itemData.description = description;
+            }
+
+            return itemData;
+        })[0]
+
         // Resolve the URI for the section heading link
         const headingData = await linkedHeadingService(
             fnsCtx,
@@ -136,7 +152,8 @@ export default {
             ctaNewWindow: headingData.ctaNewWindow,
             isAlwaysLight: false,
             width: "large",
-            card: Card({ data: data[0], cardSize: "featured" })
+            card: Card({ data: cardData, cardSize: "featured" }),
+            data: JSON.stringify(cardData)
         };
 
         return singleFeaturedTemplate(componentData);
