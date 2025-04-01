@@ -140,10 +140,13 @@ export async function handleButtonClick(args) {
     } = args;
     const fbData = await fetchTopicData({ offset, query, endpoint });
 
-    const resultsSummary =
-        fbData.response.resultPacket && fbData.response.resultPacket.resultsSummary
-            ? fbData.response.resultPacket.resultsSummary
-            : null;
+    const resultsSummary = fbData?.response?.resultPacket?.resultsSummary;
+
+    if (!resultsSummary) {
+        console.warn("Missing resultsSummary from API response");
+        return;
+    }
+    
 
     const cards = [];
     const modalData = [];

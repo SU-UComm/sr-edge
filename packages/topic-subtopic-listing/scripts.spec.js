@@ -241,6 +241,52 @@ describe('[Topic Subtopic Listing][Client]', () => {
             beforeEach(() => {
                 vi.resetAllMocks();
             });
+            
+            it("Should handle missing resultsSummary gracefully", async () => {
+                fetch.mockResolvedValueOnce({
+                    json: vi.fn().mockResolvedValueOnce({
+                        response: {
+                            resultPacket: {
+                                results: [],
+                            },
+                        },
+                    }),
+                });
+            
+                const section = document.createElement("section");
+                section.dataset.component = "topic-subtopic-listing";
+                section.dataset.query = "?query=test";
+                section.dataset.endpoint = "https://api.example.com";
+                section.dataset.display = "News Archive";
+            
+                const topicsList = document.createElement("div");
+                topicsList.setAttribute("data-element", "topics-list");
+            
+                const pagination = document.createElement("div");
+                pagination.setAttribute("data-element", "topics-pagination");
+            
+                const modalWrapper = document.createElement("section");
+                modalWrapper.setAttribute("data-element", "modal-wrapper");
+            
+                const button = document.createElement("button");
+                button.setAttribute("data-offset", "1");
+            
+                pagination.appendChild(button);
+                section.appendChild(topicsList);
+                section.appendChild(pagination);
+                section.appendChild(modalWrapper);
+            
+                document.body.appendChild(section);
+            
+                topicSubtopicListing._topicsInit(section);
+                fireEvent.click(button);
+            
+                await new Promise(setImmediate); 
+            
+                expect(fetch).toHaveBeenCalledWith("https://api.example.com?query=test&start_rank=1");
+                expect(topicsList.innerHTML).toBe("");
+            });
+            
           
             it("Should fetch data successfully", async () => {
                 fetch.mockResolvedValueOnce({
@@ -428,25 +474,6 @@ describe('[Topic Subtopic Listing][Client]', () => {
             
                 expect(spy).not.toHaveBeenCalled();
                 spy.mockRestore();
-            });
-        });
-          
-        describe("[_topicsInit]", () => {
-            beforeEach(() => {
-                setupDom();
-            });
-          
-            it("Should attach event listeners to pagination buttons", () => {            
-                const _topicsInitSpy = vi.spyOn(topicSubtopicListing, '_topicsInit');
-                
-                const section = document.querySelector(topicSubtopicListing.TOPICS_LIST_SELECTOR);
-                topicSubtopicListing._topicsInit(section);
-                
-
-                const buttons = section.querySelectorAll("button");
-                fireEvent.click(buttons[0]);
-            
-                expect(_topicsInitSpy).toHaveBeenCalled();
             });
         });
     });
