@@ -23,7 +23,7 @@
                     {{{description}}}
                 </div>
                 {{#if ctaText}}
-                    {{> link-button buttonText=ctaText isNewWindow=isNewWindow buttonUrl=buttonUrl isRealExternalLink=isRealExternalLink ctaType=ctaType variant="gradient" size=(getStringByCondition value=size expectedValue="campaign" trueResult="large" falseResult="default") customClasses=linkButtonClasses uniqueFAId=uniqueFAId iconClasses="dark:su-text-black-true dark:group-hocus:su-text-white su-duration-100"}}
+                    {{> link-button buttonText=ctaText isNewWindow=isNewWindow buttonUrl=buttonUrl isRealExternalLink=isRealExternalLink ctaType=ctaType variant="gradient" size=(getStringByCondition value=size expectedValue="campaign" trueResult="large" falseResult="default") customClasses=linkButtonClasses iconUniqueID=iconUniqueID iconClasses="dark:su-text-black-true dark:group-hocus:su-text-white su-duration-100"}}
                 {{/if}}
             </div>
         {{#if imageUrl}}

@@ -12,7 +12,7 @@ console.error = mockedError;
 vi.mock('../../global/js/utils', () => ({
     basicAssetUri: vi.fn().mockResolvedValue({ url: 'https://example.com/image.jpg' }),
     isRealExternalLink: vi.fn(),
-    useShortId: vi.fn().mockReturnValue('ATSCGsPjB1xo')
+    uuid: vi.fn().mockReturnValue('ATSCGsPjB1xo')
 }));
 
 describe('[Single CTA Block]', () => {
