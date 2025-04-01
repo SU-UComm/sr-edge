@@ -281,6 +281,7 @@ describe('[Topic Subtopic Listing][Client]', () => {
         });
           
         describe("[handleButtonClick]", () => {
+            
             beforeEach(() => {
                 setupDom();
 
@@ -370,6 +371,63 @@ describe('[Topic Subtopic Listing][Client]', () => {
                     </div><div data-element="topics-pagination">undefined</div></div><section data-element="modal-wrapper"></section></section>
                           "
                 `);
+            });
+
+            it("Should add modal data if card is of type 'Video'", async () => {
+                
+                global.fetch = vi.fn().mockResolvedValueOnce({
+                    json: vi.fn().mockResolvedValueOnce(mockResponse),
+                });
+            
+                // test non-video and video cards
+                formatCardDataFunnelback
+                    .mockReturnValueOnce(mockResponse.response.resultPacket.results[0])
+                    .mockReturnValueOnce(mockResponse.response.resultPacket.results[1]); 
+            
+                section = document.querySelector(topicSubtopicListing.TOPICS_SUBTOPICS_SELECTOR);
+            
+                await topicSubtopicListing.handleButtonClick({
+                    offset: "0",
+                    query: "?query=test",
+                    endpoint: "https://api.example.com",
+                    display: "Press Center", 
+                    section,
+                });
+            
+                const modalWrapper = document.querySelector(topicSubtopicListing.TOPICS_SUBTOPICS_LISTING_MODAL_SELECTOR);
+                
+                // Check if iframe with proper ID and content was added in the modal 
+                expect(modalWrapper.innerHTML).toContain('gIeGdtig_WA');
+                expect(modalWrapper.innerHTML).toContain('Watch New Stanford basketball coaches Kate Paye and Kyle Smith talk hoops');
+            });
+
+            it('Should not call handleButtonClick when button is disabled', () => {
+                
+                const section = document.createElement('section');
+                section.setAttribute('data-component', 'topic-subtopic-listing');
+                section.setAttribute('data-query', '?query=test');
+                section.setAttribute('data-endpoint', 'https://api.example.com');
+                section.setAttribute('data-display', 'Press Center');
+            
+                const paginationContainer = document.createElement('div');
+                paginationContainer.setAttribute('data-element', 'topics-pagination');
+            
+                const disabledButton = document.createElement('button');
+                disabledButton.setAttribute('data-offset', '0');
+                disabledButton.disabled = true; 
+            
+                paginationContainer.appendChild(disabledButton);
+                section.appendChild(paginationContainer);
+                document.body.appendChild(section);
+            
+                const spy = vi.spyOn(topicSubtopicListing, 'handleButtonClick');
+            
+                topicSubtopicListing._topicsInit(section);
+            
+                fireEvent.click(disabledButton);
+            
+                expect(spy).not.toHaveBeenCalled();
+                spy.mockRestore();
             });
         });
           
