@@ -1,15 +1,11 @@
 <section data-component="vertical-video-panel">
-    <div class="{{containerClasses width="full"}}">
+    <div class="{{containerClasses width=width paddingY=paddingY paddingX=paddingX marginTop=marginTop marginBottom=marginBottom customClasses=customClasses}}">
         <div class="su-relative su-z-30">
-        {{#if sectionTitle}}
-          <div class="su-cc">
-            {{!-- <LinkedHeading
-              class={styles.sectionHeading}
-            /> --}}
-            {{> linked-heading title=sectionTitle ctaText=sectionCtaText ctaLink=sectionCtaLink isAlwaysLight=sectionBgImageUrl }}
-            {{!-- classes="2xl:su-px-[17rem] su-rs-mb-5" --}}
-          </div>
-        {{/if}}
+        {{~#if sectionTitle~}}
+            <div class="su-cc">
+                {{> linked-heading title=sectionTitle ctaLink=sectionCtaLink ctaText=sectionCtaText isAlwaysLight=true customClasses=sectionCustomClasses}}
+            </div>
+        {{~/if~}}
         {{#if (gtOne cardDataSize)}}
             {{!-- Only render carousel if there are more than 1 videos --}}
             {{#if (gtOne videos)}}
