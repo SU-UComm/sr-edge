@@ -78,6 +78,7 @@ export default {
 
         // Prepare template data
         const componentData = {
+            width: "wide",
             images: imageData,
             sectionCaption,
             numberOfCaptions

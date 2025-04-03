@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "single-featured-content",
     "type": "edge",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Stanford university single featured content component",
     "displayName": "Single featured content",
@@ -75,6 +75,11 @@
                                 "description": "The source of the featured content",
                                 "format": "matrix-asset-uri",
                                 "type": "string"
+                            },
+                            "description": {
+                                "title": "Override the featured description",
+                                "type": "FormattedText",
+                                "description": "Add an override description to replace the Featured content description"
                             }
                         }
                     }
@@ -112,6 +117,10 @@
         "matrix-asset://api-identifier/162618": {
             "type": "file",
             "path": "mocked-uris/162618.json"
+        },
+        "matrix-asset://api-identifier/167215": {
+            "type": "file",
+            "path": "mocked-uris/167215.json"
         }
     },
     "previews": {

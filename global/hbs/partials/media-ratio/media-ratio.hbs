@@ -1,12 +1,12 @@
-<span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block {{#ifEquals aspectRatio "card-small"}}su-aspect-[3/2]{{/ifEquals}}{{#ifEquals aspectRatio "card-medium"}}su-aspect-[3/2]{{/ifEquals}}{{#ifEquals aspectRatio "card-large"}}su-aspect-[3/2]{{/ifEquals}}{{#ifEquals aspectRatio "card-featured"}}su-aspect-[3/2]{{/ifEquals}}{{#ifEquals aspectRatio "square"}}su-aspect-[1/1]{{/ifEquals}}{{#ifEquals aspectRatio "video"}}su-aspect-[16/9]{{/ifEquals}}{{#ifEquals aspectRatio "vertical-video"}}su-aspect-[9/16]{{/ifEquals}}">
-    {{#if videoUrl}}
+<span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block {{getAspectRatio aspectRatio}}">
+    {{~#if videoUrl~}}
     <video class="su-absolute su-object-cover su-object-center su-size-full">
         <source src="{{videoUrl}}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    {{/if}}
-    {{#if imageUrl}}
+    {{~/if~}}
+    {{~#if imageUrl~}}
     <img class="su-absolute su-object-cover su-object-center su-size-full" src="{{imageUrl}}" alt="{{imageAlt}}"/>
-    {{/if}}
+    {{~/if~}}
     {{> @partial-block }}
 </span>
