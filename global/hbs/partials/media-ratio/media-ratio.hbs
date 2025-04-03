@@ -1,12 +1,12 @@
 <span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block {{getAspectRatio aspectRatio}}">
-    {{#if videoUrl}}
+    {{~#if videoUrl~}}
     <video class="su-absolute su-object-cover su-object-center su-size-full">
         <source src="{{videoUrl}}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
-    {{/if}}
-    {{#if imageUrl}}
+    {{~/if~}}
+    {{~#if imageUrl~}}
     <img class="su-absolute su-object-cover su-object-center su-size-full" src="{{imageUrl}}" alt="{{imageAlt}}"/>
-    {{/if}}
+    {{~/if~}}
     {{> @partial-block }}
 </span>
