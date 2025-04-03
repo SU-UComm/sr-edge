@@ -118,7 +118,7 @@ export function infoBox({
             internalUrl: internalLinkUrl,
             externalUrl: externalUrl,
             isNewWindow: isNewWindow,
-            class: "su-rs-mt-1 su-order-3"
+            className: "su-rs-mt-1 su-order-3"
         }) : ``}
       </div>
   `;
