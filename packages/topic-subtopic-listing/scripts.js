@@ -163,7 +163,7 @@ export async function handleButtonClick(args) {
             // cards.push(JSON.stringify(cardData))
             cards.push(HorizontalCard({ data: cardData, cardType: "horizontal", cardSize: "large" }));
         }
-        if(cardData.type === 'Video') {
+        if(cardData.type === 'Video' || cardData.videoUrl) {
             modalData.push({
                 isVertical: cardData.size === "vertical-video",
                 videoId: cardData.videoUrl,

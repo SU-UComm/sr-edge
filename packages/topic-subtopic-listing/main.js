@@ -108,7 +108,7 @@ export default {
                 videoUrl: card.videoUrl,
             }
 
-            if(card.type === 'Video') {
+            if(card.type === 'Video' || card.videoUrl) {
                 modalData.push({
                     isVertical: card.size === "vertical-video",
                     videoId: card.videoUrl,
