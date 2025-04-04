@@ -1,0 +1,31 @@
+<section data-component='in-brief'>
+    <div class='{{containerClasses width=width}}'>
+        {{#if points.length}}
+            <div data-test='in-brief' class='su-border-b su-border-black-20'>
+                <div class='su-relative su-overflow-hidden'>
+                    <h2
+                        class='su-font-serif su-font-black su-inline su-bg-white dark:su-bg-black-true !su-text-23 su-pr-10 su-m-0'
+                    >
+                        In brief
+                    </h2>
+                    <span
+                        class='su-w-full su-bg-black-20 su-h-px su-absolute su-bottom-4'
+                    />
+                </div>
+                <div class='su-wysiwyg-content'>
+                    <ul
+                        class='su-basefont-19 su-flex su-flex-col su-mb-0 su-gap-18 su-pt-34 su-pb-27 [&>li]:su-m-0'
+                    >
+                        {{#each points}}
+                            <li
+                                class='su-basefont-19 su-leading-[125%] su-text-16 md:su-text-19 lg:su-text-19 *:su-text-16 md:*:su-text-19 *:su-leading-[125%]'
+                            >
+                                {{{this}}}
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        {{/if}}
+    </div>
+</section>

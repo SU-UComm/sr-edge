@@ -1,28 +1,29 @@
 {{#if buttonUrl}}
-<a href="{{buttonUrl}}"{{#if isNewWindow}} target="_blank"{{/if}}{{#if isRealExternalLink}} rel="noopener nofollow"{{/if}} class="{{linkButtonClasses "default" "default"}}">
+<a href="{{buttonUrl}}"{{#if isNewWindow}} target="_blank"{{/if}}{{#if isRealExternalLink}} rel="noopener nofollow"{{/if}} class="{{linkButtonClasses variant size customClasses }}">
     {{buttonText}}         
     {{#if isRealExternalLink}}
         {{> fontawesome-icon
             icon="arrow-up"
             set="regular"
-            width=20
-            classes="fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em"
+            width=20 
+            classes=(concatClasses "fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em" iconClasses)
+            iconUniqueID=iconUniqueID
         }}
     {{/if}}
     {{#ifEquals ctaType "email"}}
         {{> fontawesome-icon
-            icon="arrow-up"
+            icon="envelope"
             set="regular"
             width=20
-            classes="group-hocus:su-translate-x-02em fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform"
+            classes=(concatClasses "group-hocus:su-translate-x-02em fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform" iconClasses)
         }}
     {{/ifEquals}}
     {{#ifEquals ctaType "download"}}
         {{> fontawesome-icon
-            icon="envelope"
+            icon="arrow-down-to-line"
             set="regular"
             width=20
-            classes="group-hocus:su-translate-y-02em fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform"
+            classes=(concatClasses "group-hocus:su-translate-y-02em fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform" iconClasses)
         }}
     {{/ifEquals}}
 </a>

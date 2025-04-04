@@ -50,8 +50,10 @@ export function LinkedHeading({
           ${FAIcon({
             icon: "chevron-right",
             set: "solid",
-            width: 18,
-            class: "fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform"
+            attributes: {
+              width: 18,
+              classes: "fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform"
+            }
           })}
         </span>
       </a>`

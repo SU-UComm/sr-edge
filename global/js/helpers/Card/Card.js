@@ -25,6 +25,7 @@ export function Card({
   displayDescription = true,
   displayThumbnail = true,
   headingLvl = 2,
+  uniqueId
 }) {
   if (!data) return '';
 
@@ -48,7 +49,8 @@ export function Card({
         cardSize,
         displayDescription,
         displayThumbnail,
-        headingLvl
+        headingLvl,
+        uniqueId
       });
   }
 }

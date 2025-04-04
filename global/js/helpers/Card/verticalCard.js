@@ -84,6 +84,7 @@ export function VerticalCard({
   displayDescription = true,
   displayThumbnail = true,
   headingLvl = 2,
+  uniqueId,
 }) {
   let cardThumb = imageUrl;
 
@@ -107,8 +108,10 @@ export function VerticalCard({
       ${FAIcon({
         icon: "arrow-up-right",
         set: "regular",
-        width: cardSize === "featured" ? 20 : 15,
-        class: "su-inline-block su-h-auto su-align-middle su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
+        attributes: {
+          width: cardSize === "featured" ? 20 : 15,
+          classes: "su-inline-block su-h-auto su-align-middle su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
+        }
       })}
       ` : ''}
     </a>
@@ -124,7 +127,8 @@ export function VerticalCard({
             aspectRatio: `card-${cardSize}`,
             videoUrl: type === "Video" ? videoUrl : "",
             size: cardSize,
-            title: title
+            title: title,
+            uniqueId
         })}
         </div>
       ` : ''}

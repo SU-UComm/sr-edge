@@ -52,8 +52,10 @@ export function TeaserCard({ credit, data }) {
           ${FAIcon({
             icon: "arrow-up-right",
             set: "regular",
-            width: 12,
-            class: styles.linkIcon
+            attributes:{
+              width: 12,
+              classes: styles.linkIcon
+            }
           })}
         </a>
       </h3>

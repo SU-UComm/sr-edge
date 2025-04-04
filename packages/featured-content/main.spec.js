@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService } from "../../global/js/utils";
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, uuid } from "../../global/js/utils";
 import moduleToTest from './main';
 
 const { main } = moduleToTest;
@@ -8,6 +8,7 @@ const mockedError = vi.fn();
 console.error = mockedError;
 
 vi.mock('../../global/js/utils', () => ({
+    uuid: vi.fn(),
     cardDataAdapter: vi.fn().mockImplementation(() => ({
         setCardService: vi.fn(),
         getCards: vi.fn().mockResolvedValue([
@@ -457,6 +458,9 @@ describe('[Feature Content]', () => {
     });
 
     describe('[Main Function - Source: Search]', () => {
+        beforeAll(() => {
+            uuid.mockReturnValue('36bcda50-8e16-4255-a8aa-d558dd550b8b');
+        });
         it('Should return the expected HTML with valid data for Search source', async () => {
             cardDataAdapter.mockImplementationOnce(() => ({
                 setCardService: vi.fn(),
@@ -470,21 +474,7 @@ describe('[Feature Content]', () => {
             const result = await main(defaultMockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content">
-                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
-                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
-                                  Sample Heading
-                              </h2>
-                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-                          </div>
-                      <div class="su-w-full su-component-featured-grid">
-                          <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
-                              <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow ">
-                                  <div class="card"><h2>Featured Card</h2><span>Feature Description</span></div>
-                              </div>
-                              <div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
-                                  
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Featured Card</h2><span>Feature Description</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Card 1</h2></div>
                               </div>
@@ -492,13 +482,7 @@ describe('[Feature Content]', () => {
                           <div class="su-relative su-w-full before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px]">
                               <div class="card"><h2>Card 2</h2></div>
                               </div>
-                          
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  
-              </section>"
+                          </div></div></div></div></section>"
             `);
         });
 
@@ -510,6 +494,9 @@ describe('[Feature Content]', () => {
     });
 
     describe('[Main Function - Source: Select]', () => {
+        beforeAll(() => {
+            uuid.mockReturnValue('36bcda50-8e16-4255-a8aa-d558dd550b8b');
+        });
         it('Should return the expected HTML with valid data for Select source', async () => {
             const selectData = {
                 ...defaultMockData,
@@ -532,21 +519,7 @@ describe('[Feature Content]', () => {
             const result = await main(selectData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content">
-                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
-                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
-                                  Sample Heading
-                              </h2>
-                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-                          </div>
-                      <div class="su-w-full su-component-featured-grid">
-                          <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
-                              <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow ">
-                                  <div class="card"><h2>Featured Card - Select</h2></div>
-                              </div>
-                              <div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
-                                  
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Featured Card - Select</h2></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Card 1 - Select</h2></div>
                               </div>
@@ -554,13 +527,7 @@ describe('[Feature Content]', () => {
                           <div class="su-relative su-w-full before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px]">
                               <div class="card"><h2>Card 2 - Select</h2></div>
                               </div>
-                          
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  
-              </section>"
+                          </div></div></div></div></section>"
             `);
         });
 
@@ -581,27 +548,16 @@ describe('[Feature Content]', () => {
     });
 
     describe('[Header Rendering]', () => {
+        beforeAll(() => {
+            uuid.mockReturnValue('36bcda50-8e16-4255-a8aa-d558dd550b8b');
+        });
         it('Should not render LinkedHeading when was not provided', async () => {
             linkedHeadingService.mockImplementationOnce(null);
 
             const result = await main(defaultMockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content">
-                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
-                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
-                                  Sample Heading
-                              </h2>
-                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-                          </div>
-                      <div class="su-w-full su-component-featured-grid">
-                          <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
-                              <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow ">
-                                  <div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div>
-                              </div>
-                              <div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
-                                  
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Bass Fellows in Undergraduate Education announced</h2><span>The Bass University Fellows in Undergraduate Education Program recognizes faculty for extraordinary contributions to undergraduate education.</span></div>
                               </div>
@@ -609,18 +565,15 @@ describe('[Feature Content]', () => {
                           <div class="su-relative su-w-full before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px]">
                               <div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div>
                               </div>
-                          
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  ModalHTMLModalHTML
-              </section>"
+                          </div></div></div></div>ModalHTMLModalHTML</section>"
             `);
         });
     })
 
     describe('[Card Rendering]', () => {
+        beforeAll(() => {
+            uuid.mockReturnValue('36bcda50-8e16-4255-a8aa-d558dd550b8b');
+        });
         it('Should handle featuredDescription correctly in Search source', async () => {
             const dataWithFeaturedDescription = {
                 ...defaultMockData,
@@ -642,21 +595,7 @@ describe('[Feature Content]', () => {
             const result = await main(dataWithFeaturedDescription, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content">
-                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
-                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
-                                  Sample Heading
-                              </h2>
-                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-                          </div>
-                      <div class="su-w-full su-component-featured-grid">
-                          <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
-                              <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow ">
-                                  <div class="card"><h2>Featured Card</h2><span>Custom Featured Description</span></div>
-                              </div>
-                              <div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
-                                  
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Featured Card</h2><span>Custom Featured Description</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Card 1</h2></div>
                               </div>
@@ -664,13 +603,7 @@ describe('[Feature Content]', () => {
                           <div class="su-relative su-w-full before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px]">
                               <div class="card"><h2>Card 2</h2></div>
                               </div>
-                          
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  
-              </section>"
+                          </div></div></div></div></section>"
             `);
         });
 
@@ -686,21 +619,7 @@ describe('[Feature Content]', () => {
             const result = await main(rightAlignedData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content">
-                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
-                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
-                                  Sample Heading
-                              </h2>
-                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-                          </div>
-                      <div class="su-w-full su-component-featured-grid">
-                          <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
-                              <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow md:su-order-2">
-                                  <div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div>
-                              </div>
-                              <div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-right-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-right-[-36px] before:lg:su-right-[-80px]">
-                                  
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow md:su-order-2"><div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-right-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-right-[-36px] before:lg:su-right-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Bass Fellows in Undergraduate Education announced</h2><span>The Bass University Fellows in Undergraduate Education Program recognizes faculty for extraordinary contributions to undergraduate education.</span></div>
                               </div>
@@ -708,13 +627,7 @@ describe('[Feature Content]', () => {
                           <div class="su-relative su-w-full before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px]">
                               <div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div>
                               </div>
-                          
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  ModalHTMLModalHTML
-              </section>"
+                          </div></div></div></div>ModalHTMLModalHTML</section>"
             `);
         });
 
@@ -730,21 +643,7 @@ describe('[Feature Content]', () => {
             const result = await main(mockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content">
-                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                          <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13">
-                              <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">
-                                  Sample Heading
-                              </h2>
-                              <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-                          </div>
-                      <div class="su-w-full su-component-featured-grid">
-                          <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
-                              <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow ">
-                                  <div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div>
-                              </div>
-                              <div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
-                                  
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Bass Fellows in Undergraduate Education announced</h2><span>The Bass University Fellows in Undergraduate Education Program recognizes faculty for extraordinary contributions to undergraduate education.</span></div>
                               </div>
@@ -752,13 +651,7 @@ describe('[Feature Content]', () => {
                           <div class="su-relative su-w-full before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px]">
                               <div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div>
                               </div>
-                          
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  ModalHTMLModalHTML
-              </section>"
+                          </div></div></div></div>ModalHTMLModalHTML</section>"
             `);
         });
     });

@@ -95,19 +95,7 @@ describe('[ButtonRow]', () => {
             }];
             const result = await main({ buttons: mockButtons }, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="button-row">
-                  <div class="su-mx-auto su-component-container  su-container-px">
-                      <div class="su-flex su-flex-wrap su-justify-center su-gap-x-18 md:su-gap-x-27 su-gap-y-12 su-mx-auto su-w-fit">
-                              <a href="https://example.com/internal-link" class="su-group su-flex su-items-center su-w-fit hocus:su-underline md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">
-                                  Internal Link         
-                              </a>
-                      </div>
-                  </div>
-              </section>
-
-              "
-            `);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="button-row"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-flex su-flex-wrap su-justify-center su-gap-x-18 md:su-gap-x-27 su-gap-y-12 su-mx-auto su-w-fit"> <a href="https://example.com/internal-link" class="su-group su-flex su-items-center su-w-fit hocus:su-underline su-px-30 su-pt-12 su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">Internal Link   </a> </div></div></section>"`);
         });
 
         it('Should handle external links correctly', async () => {
@@ -118,44 +106,13 @@ describe('[ButtonRow]', () => {
             }];
             const result = await main({ buttons: mockButtons }, defaultMockInfo);
             
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="button-row">
-                  <div class="su-mx-auto su-component-container  su-container-px">
-                      <div class="su-flex su-flex-wrap su-justify-center su-gap-x-18 md:su-gap-x-27 su-gap-y-12 su-mx-auto su-w-fit">
-                              <a href="https://external.com" target="_blank" rel="noopener nofollow" class="su-group su-flex su-items-center su-w-fit hocus:su-underline md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">
-                                  External Link         
-                                      <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-up" class="svg-inline--fa fa-arrow-up fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20">
-                                          <path fill="currentColor" d="M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9 168 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-340.1L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z"></path>
-                                      </svg></a>
-                      </div>
-                  </div>
-              </section>
-
-              "
-            `);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="button-row"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-flex su-flex-wrap su-justify-center su-gap-x-18 md:su-gap-x-27 su-gap-y-12 su-mx-auto su-w-fit"> <a href="https://external.com" target="_blank" rel="noopener nofollow" class="su-group su-flex su-items-center su-w-fit hocus:su-underline su-px-30 su-pt-12 su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">External Link  <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-up" class="svg-inline--fa fa-arrow-up fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20"><path fill="currentColor" d="M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9 168 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-340.1L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z"></path></svg>   </a> </div></div></section>"`);
         });
 
         it('Should handle multiple buttons correctly', async () => {
             const result = await main({ buttons: defaultButtons }, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="button-row">
-                  <div class="su-mx-auto su-component-container  su-container-px">
-                      <div class="su-flex su-flex-wrap su-justify-center su-gap-x-18 md:su-gap-x-27 su-gap-y-12 su-mx-auto su-w-fit">
-                              <a href="https://example.com/internal-link" class="su-group su-flex su-items-center su-w-fit hocus:su-underline md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">
-                                  Primary Button         
-                              </a>
-                              <a href="https://external.com" target="_blank" rel="noopener nofollow" class="su-group su-flex su-items-center su-w-fit hocus:su-underline md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">
-                                  External Link         
-                                      <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-up" class="svg-inline--fa fa-arrow-up fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20">
-                                          <path fill="currentColor" d="M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9 168 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-340.1L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z"></path>
-                                      </svg></a>
-                      </div>
-                  </div>
-              </section>
-
-              "
-            `);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="button-row"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-flex su-flex-wrap su-justify-center su-gap-x-18 md:su-gap-x-27 su-gap-y-12 su-mx-auto su-w-fit"> <a href="https://example.com/internal-link" class="su-group su-flex su-items-center su-w-fit hocus:su-underline su-px-30 su-pt-12 su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">Primary Button   </a>  <a href="https://external.com" target="_blank" rel="noopener nofollow" class="su-group su-flex su-items-center su-w-fit hocus:su-underline su-px-30 su-pt-12 su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">External Link  <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-up" class="svg-inline--fa fa-arrow-up fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20"><path fill="currentColor" d="M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9 168 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-340.1L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z"></path></svg>   </a> </div></div></section>"`);
         });
 
         it('Should handle no URL buttons correctly', async () => {
@@ -171,24 +128,7 @@ describe('[ButtonRow]', () => {
 
             const result = await main({ buttons: mockButtons }, defaultMockInfo);
             
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="button-row">
-                  <div class="su-mx-auto su-component-container  su-container-px">
-                      <div class="su-flex su-flex-wrap su-justify-center su-gap-x-18 md:su-gap-x-27 su-gap-y-12 su-mx-auto su-w-fit">
-                              <a href="https://example.com/internal-link" class="su-group su-flex su-items-center su-w-fit hocus:su-underline md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">
-                                  Primary Button         
-                              </a>
-                              <a href="https://external.com" target="_blank" rel="noopener nofollow" class="su-group su-flex su-items-center su-w-fit hocus:su-underline md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">
-                                  External Link         
-                                      <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-up" class="svg-inline--fa fa-arrow-up fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20">
-                                          <path fill="currentColor" d="M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9 168 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-340.1L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z"></path>
-                                      </svg></a>
-                      </div>
-                  </div>
-              </section>
-
-              "
-            `);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="button-row"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-flex su-flex-wrap su-justify-center su-gap-x-18 md:su-gap-x-27 su-gap-y-12 su-mx-auto su-w-fit"> <a href="https://example.com/internal-link" class="su-group su-flex su-items-center su-w-fit hocus:su-underline su-px-30 su-pt-12 su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">Primary Button   </a>  <a href="https://external.com" target="_blank" rel="noopener nofollow" class="su-group su-flex su-items-center su-w-fit hocus:su-underline su-px-30 su-pt-12 su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white">External Link  <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-up" class="svg-inline--fa fa-arrow-up fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20"><path fill="currentColor" d="M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9 168 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-340.1L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z"></path></svg>   </a>   </div></div></section>"`);
         });
     });
 });

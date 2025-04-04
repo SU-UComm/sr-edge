@@ -1,5 +1,5 @@
 <section data-component='content-carousel' data-unique-id='{{id}}'>
-    <div class='{{containerClasses width}}'>
+    <div class='{{containerClasses width=width}}'>
         <div class='su-bg-fog-light dark:su-bg-black su-p-20 md:su-pt-36 md:su-px-36 md:su-pb-26'>
             <div class='su-relative su-mb-38 su-overflow-hidden'>
                 {{#if title}}
@@ -12,7 +12,9 @@
             {{#> carousel-content uniqueID=id}}
                 {{#each slides}}
                 <div class="swiper-slide">
-                    {{{content}}}
+                    <div class="su-wysiwyg-content su-w-full *:su-mb-6 *:su-text-16 *:su-leading-[125%] *:md:su-text-19 *:lg:su-text-19 [&amp;>*:last-child]:su-mb-0 *:su-card-paragraph">
+                        {{{content}}}
+                    </div>
                 </div>
                 {{/each}}
             {{/ carousel-content}}

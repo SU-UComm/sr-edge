@@ -1,0 +1,28 @@
+{
+    "heading": "Operating principles",
+    "showTopBorder": true,
+    "callouts": [
+        {
+            "title": "Freedom of expression",
+            "content": "<p><a href='https://freespeech.stanford.edu/'>Freedom of Expression and Academic Freedom</a>: Stanford is committed to freedom of expression, free inquiry, and the open exchange of ideas as fundamental values for the university’s academic mission. This website provides guidance on the application of freedom of expression principles in different contexts around campus.</p>",
+            "imageConfiguration": {},
+            "buttonConfiguration": {}
+        },
+        {
+            "title": "Institutional statements",
+            "content": "<p><a href='https://adminguide.stanford.edu/chapters/guiding-policies-and-principles/conflict-interest/institutional-statements'>Institutional statements</a>: This policy statement adopted by the Faculty Senate and <a href='https://news.stanford.edu/stories/2024/09/stanford-board-of-trustees-commends-actions-fostering-academic-freedom'>endorsed</a> by the Board of Trustees provides that “when speaking for the institution, Stanford University leaders and administrators should not express an opinion on political and social controversies, unless these matters directly affect the mission of the university or implicate its legal obligations.”</p>",
+            "imageConfiguration": {
+                "image": "matrix-asset://api-identifier/99100",
+                "caption": "This is the image's title",
+                "credit": "Isaac Astley",
+                "imagePlacement": "Below content"
+            },
+            "buttonConfiguration": {
+                "buttonText": "Optional link button",
+                "externalUrl": "",
+                "internalUrl": "matrix-asset://api-identifier/28192",
+                "isNewWindow": true
+            }
+        }
+    ]
+}

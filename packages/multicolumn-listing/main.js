@@ -1,7 +1,6 @@
-import hash from "object-hash";
 import multicolumnListingTemplate from './multicolumn-listing.hbs';
-import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid } from "../../global/js/utils";
-import { Card, Modal, EmbedVideo } from '../../global/js/helpers';
+import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid, uuid } from "../../global/js/utils";
+import { Card } from '../../global/js/helpers';
 
 /**
  * Multicolumn lisitng component that renderds a list of features cards based on fetched data
@@ -166,26 +165,30 @@ export default {
         cardSizeMap.set(3, "small");
         cardSizeMap.set(2, "medium");
 
-        const cardModal = [];
+        const modalData = [];
 
         // Generate modals for video cards
         data?.forEach((cardData, i) => {
             if (i < maxNumberOfCards) {
+                const uniqueId = uuid();
                 if (source === "Search") {
                     cardsMarkup.push(
-                        Card({data: cardData, displayDescription: displayDescriptions, displayThumbnail: displayThumbnails, cardSize: cardSizeMap.get(searchMaxCards)}))
+                        Card({data: cardData, displayDescription: displayDescriptions, displayThumbnail: displayThumbnails, cardSize: cardSizeMap.get(searchMaxCards), uniqueId}))
                 }
                 else {
                     cardsMarkup.push(
-                        Card({data: cardData, displayDescription: displayDescriptions, displayThumbnail: displayThumbnails, cardSize: cardSizeMap.get(numberOfCards)}))
+                        Card({data: cardData, displayDescription: displayDescriptions, displayThumbnail: displayThumbnails, cardSize: cardSizeMap.get(numberOfCards), uniqueId}))
                 }
-                if (cardData.type === 'Video') {
-                    const uniqueId = hash.MD5(
-                        JSON.stringify(cardData.videoUrl) + hash.MD5(JSON.stringify(cardData.title))
-                    );
-                    cardModal.push(
-                        Modal({content: EmbedVideo({ isVertical: cardData.size === "vertical-video", videoId: cardData.videoUrl, title: `Watch ${cardData.title}`, noAutoPlay: true }), uniqueId, describedby: 'card-modal' })
-                    );
+
+                if(cardData.type === 'Video') {
+                    modalData.push({
+                        isVertical: cardData.size === "vertical-video",
+                        videoId: cardData.videoUrl,
+                        title: `Watch ${cardData.title}`, 
+                        noAutoPlay: true,
+                        uniqueID: uniqueId,
+                        titleID: 'card-modal'
+                    })
                 }
             }
         });
@@ -198,8 +201,8 @@ export default {
             headingCtaNewWindow: headingData?.ctaNewWindow,
             headingCtaText: headingData?.ctaText,
             multicolumnGrid: multicolumnGrid(cardsMarkup, true),
-            cardModal: cardModal.join(''),
-            width: "large"
+            modalData,
+            width: "large",
         };
 
         return multicolumnListingTemplate(componentData);

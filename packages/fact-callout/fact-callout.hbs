@@ -1,6 +1,6 @@
 <section data-component="fact-callout">
     <div class="{{#ifEquals indicatorPosition "top"}}decoration-top{{else}}decoration-bottom{{/ifEquals}}">
-        <div class="{{containerClasses width}}">
+        <div class="{{containerClasses width=width}}">
             <section class="fact-wrapper su-col-span-full su-w-full su-relative su-h-auto su-p-3 su-bg-gradient-light-red-h-reverse">
                 <div class="{{#ifEquals indicatorPosition "top"}}fact-wrapper__decoration-top{{else}}fact-wrapper__decoration-bottom{{/ifEquals}} su-absolute su-left-1/2 su-right-1/2 su-flex su-items-center su-justify-start su-w-24 su-h-90">
                     <div class="su-w-3 su-h-72 lg:su-h-60 su-bg-gradient-light-red-h-reverse"></div>
@@ -9,8 +9,8 @@
                     </div>
                 </div>
                 <div class="su-px-38{{#ifEquals width "wide"}} md:su-px-[12.1rem]{{/ifEquals}} su-py-38 md:su-py-61 su-size-full su-bg-white dark:su-bg-black-true su-flex su-flex-col su-items-center su-justify-center su-gap-10 lg:su-flex-row lg:su-gap-38">
-                <span data-test="icon" class="dark:su-hidden">{{#ifEquals icon "pie chart"}}{{> icon-pie-chart theme="light"}}{{else}}{{> icon-bar-graph theme="light"}}{{/ifEquals}}</span>              
-                <span data-test="icon" class="su-hidden dark:su-block">{{#ifEquals icon "pie chart"}}{{> icon-pie-chart theme="dark"}}{{else}}{{> icon-bar-graph theme="dark"}}{{/ifEquals}}</span>              
+                <span data-test="icon" class="dark:su-hidden">{{#ifEquals icon "pie chart"}}{{> svg-icons icon="pie chart" theme="light"}}{{else}}{{> svg-icons icon="bar graph" theme="light"}}{{/ifEquals}}</span>              
+                <span data-test="icon" class="su-hidden dark:su-block">{{#ifEquals icon "pie chart"}}{{> svg-icons icon="pie chart" theme="dark"}}{{else}}{{> svg-icons icon="bar graph" theme="dark"}}{{/ifEquals}}</span>              
                 {{#if factText}}
                     <p class="su-font-serif su-m-0">{{factText}}</p>
                 {{/if}}

@@ -173,26 +173,7 @@ describe('[Pull Quote]', () => {
 
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="pullquote">
-                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="su-component-pullquote su-mx-auto su-relative su-mt-0 su-flex su-flex-wrap su-gap-27 su-justify-center su-pr-0 su-py-0">
-                          <div data-test="size-large" class="su-component-avatar su-relative su-block su-rounded-full su-bg-gradient-light-red-h su-overflow-hidden su-min-w-[218px] su-w-[218px] su-h-[218px] su-p-9">
-                              <img class="su-absolute su-rounded-full su-object-cover su-object-center su-size-200 su-top-9 su-left-9" src="https://picsum.photos/400/400" alt="" />
-                          </div>    <blockquote class="su-w-full su-pl-39 dark:su-text-white dark:before:su-text-white su-font-serif su-text-black lg:su-pl-[5.2rem]">
-                              <div class="su-font-semibold su-font-serif-0 su-text-[2.4rem] md:su-text-[3.6rem] su-leading md:su-leading-[130.245%] [&>*:last-child]:su-mb-0 [&>*:last-child]:after:su-content-['”'] su-relative before:su-text-[73px] before:su-leading-[109.5px] lg:before:su-leading-[139.5px] lg:before:su-text-[93px] before:su-font-semibold before:su--mt-25 lg:before:su--mt-38 before:su-content-['“'] before:su-text-serif before:su-text-black dark:su-text-white before:su-absolute before:su-right-full lg:before:su-right-full before:su-mr-6 lg:before:su-mr-13 dark:before:su-text-white su-leading-[33.6px] md:su-leading-[46.89px]">
-                                  Test quote”
-                              </div>
-                                  <cite class="su-mt-15 md:su-mt-26 lg:su-mt-29 su-font-sans su-text-21 su-leading-[25.2px] su-flex su-flex-col">
-                                      <span class="su-font-bold su-block su-leading-[25.2px]">
-                                      Test name
-                                      </span>
-                                      <span class="su-block su-leading-[25.2px]">Test title</span>
-                                  </cite>
-                          </blockquote>
-                      </div>    </div>
-              </section>"
-            `);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="pullquote"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-pullquote su-mx-auto su-relative su-mt-0 su-flex su-flex-wrap su-gap-27 su-justify-center su-pr-0 su-py-0"><div data-test="size-large" class="su-component-avatar su-relative su-block su-rounded-full su-bg-gradient-light-red-h su-overflow-hidden su-min-w-[218px] su-w-[218px] su-h-[218px] su-p-9"><img class="su-absolute su-rounded-full su-object-cover su-object-center su-size-200 su-top-9 su-left-9" src="https://picsum.photos/400/400" alt="" /></div><blockquote class="su-w-full su-pl-39 dark:su-text-white dark:before:su-text-white su-font-serif su-text-black lg:su-pl-[5.2rem]"><div class="su-font-semibold su-font-serif-0 su-text-[2.4rem] md:su-text-[3.6rem] su-leading md:su-leading-[130.245%] [&>*:last-child]:su-mb-0 [&>*:last-child]:after:su-content-['”'] su-relative before:su-text-[73px] before:su-leading-[109.5px] lg:before:su-leading-[139.5px] lg:before:su-text-[93px] before:su-font-semibold before:su--mt-25 lg:before:su--mt-38 before:su-content-['“'] before:su-text-serif before:su-text-black dark:su-text-white before:su-absolute before:su-right-full lg:before:su-right-full before:su-mr-6 lg:before:su-mr-13 dark:before:su-text-white su-leading-[33.6px] md:su-leading-[46.89px]">Test quote”</div><cite class="su-mt-15 md:su-mt-26 lg:su-mt-29 su-font-sans su-text-21 su-leading-[25.2px] su-flex su-flex-col"><span class="su-font-bold su-block su-leading-[25.2px]">Test name</span><span class="su-block su-leading-[25.2px]">Test title</span></cite></blockquote></div></div></section>"`);
         });
 
         it('Should return the expected HTML with no image data when not provided', async () => {
@@ -200,26 +181,7 @@ describe('[Pull Quote]', () => {
 
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="pullquote">
-                  <div class="su-mx-auto su-component-container su-container-large su-container-px">
-                      <div class="su-component-pullquote su-mx-auto su-relative su-mt-0 su-flex su-flex-wrap su-gap-27 su-justify-center su-pr-0 su-py-0">
-                          <div data-test="size-large" class="su-component-avatar su-relative su-block su-rounded-full su-bg-gradient-light-red-h su-overflow-hidden su-min-w-[218px] su-w-[218px] su-h-[218px] su-p-9">
-                              <img class="su-absolute su-rounded-full su-object-cover su-object-center su-size-200 su-top-9 su-left-9" src="" alt="" />
-                          </div>    <blockquote class="su-w-full su-pl-39 dark:su-text-white dark:before:su-text-white su-font-serif su-text-black lg:su-pl-[5.2rem]">
-                              <div class="su-font-semibold su-font-serif-0 su-text-[2.4rem] md:su-text-[3.6rem] su-leading md:su-leading-[130.245%] [&>*:last-child]:su-mb-0 [&>*:last-child]:after:su-content-['”'] su-relative before:su-text-[73px] before:su-leading-[109.5px] lg:before:su-leading-[139.5px] lg:before:su-text-[93px] before:su-font-semibold before:su--mt-25 lg:before:su--mt-38 before:su-content-['“'] before:su-text-serif before:su-text-black dark:su-text-white before:su-absolute before:su-right-full lg:before:su-right-full before:su-mr-6 lg:before:su-mr-13 dark:before:su-text-white su-leading-[33.6px] md:su-leading-[46.89px]">
-                                  Test quote”
-                              </div>
-                                  <cite class="su-mt-15 md:su-mt-26 lg:su-mt-29 su-font-sans su-text-21 su-leading-[25.2px] su-flex su-flex-col">
-                                      <span class="su-font-bold su-block su-leading-[25.2px]">
-                                      Test name
-                                      </span>
-                                      <span class="su-block su-leading-[25.2px]">Test title</span>
-                                  </cite>
-                          </blockquote>
-                      </div>    </div>
-              </section>"
-            `);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="pullquote"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-pullquote su-mx-auto su-relative su-mt-0 su-flex su-flex-wrap su-gap-27 su-justify-center su-pr-0 su-py-0"><blockquote class="su-w-full su-pl-39 dark:su-text-white dark:before:su-text-white su-font-serif su-text-black lg:su-pl-[5.2rem]"><div class="su-font-semibold su-font-serif-0 su-text-[2.4rem] md:su-text-[3.6rem] su-leading md:su-leading-[130.245%] [&>*:last-child]:su-mb-0 [&>*:last-child]:after:su-content-['”'] su-relative before:su-text-[73px] before:su-leading-[109.5px] lg:before:su-leading-[139.5px] lg:before:su-text-[93px] before:su-font-semibold before:su--mt-25 lg:before:su--mt-38 before:su-content-['“'] before:su-text-serif before:su-text-black dark:su-text-white before:su-absolute before:su-right-full lg:before:su-right-full before:su-mr-6 lg:before:su-mr-13 dark:before:su-text-white su-leading-[33.6px] md:su-leading-[46.89px]">Test quote”</div><cite class="su-mt-15 md:su-mt-26 lg:su-mt-29 su-font-sans su-text-21 su-leading-[25.2px] su-flex su-flex-col"><span class="su-font-bold su-block su-leading-[25.2px]">Test name</span><span class="su-block su-leading-[25.2px]">Test title</span></cite></blockquote></div></div></section>"`);
         });
     });
 

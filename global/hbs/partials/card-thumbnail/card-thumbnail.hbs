@@ -1,0 +1,23 @@
+{{~#if videoUrl~}}
+<button class="su-component-card-thumbnail su-group su-block su-relative su-z-10 su-size-full" type="button" aria-haspopup="dialog" data-click="open-modal" data-modal-id="{{uniqueID}}">
+    {{#> media-ratio imageUrl=imageUrl imageAlt=imageAlt aspectRatio=aspectRatio}}
+        {{~#ifEquals size  "vertical-video"~}}
+            <div aria-hidden="true" class="su-absolute su-inset-0 su-bg-gradient-to-t su-from-black-true/80 su-via-80% su-via-black-true/10 su-pointer-events-none su-z-20"
+            ></div>
+        {{~/ifEquals~}}
+        <span class="su-absolute su-leading-none {{getThumbnailIconClass size}} {{videoIconClasses}}">
+            {{> fontawesome-icon
+                icon="circle-play"
+                iconTestId="svg-circle-play"
+                set="regular"
+                classes="su-text-white dark:su-text-white su-drop-shadow-[0px_10px_20px_rgba(0,0,0,0.30)]"
+            }}
+        </span>
+    {{/ media-ratio}}
+</button>
+{{~else~}}
+<div class="su-component-card-thumbnail su-w-full su-h-full">
+    {{#> media-ratio imageUrl=imageUrl imageAlt=imageAlt aspectRatio=aspectRatio}}
+    {{/ media-ratio}}
+</div>
+{{~/if~}}

@@ -1,5 +1,5 @@
 <section data-component="policy-brief">
-    <div class="{{containerClasses width false}}">
+    <div class="{{containerClasses width=width paddingX=paddingX}}">
         <div class="su-relative su-flex su-flex-col su-gap-20 su-py-30 su-px-20 su-bg-fog-light md:su-mx-50 md:su-flex-row md:su-gap-18 lg:su-gap-48 md:su-p-36 lg:su-py-61 lg:su-px-65 dark:su-bg-transparent dark:before:su-bg-black dark:before:su-opacity-[0.5] dark:before:su-content-[''] dark:before:su-absolute dark:before:su-w-full dark:before:su-h-full dark:before:su-top-0 dark:before:su-left-0 dark:before:su-z-1">
             <div class="su-relative su-w-full su-h-[233px] md:su-h-auto md:su-min-w-[257px] lg:su-h-[378.331px] lg:su-flex-1 su-z-2">
                 {{#if imageUrl.url}}
@@ -10,11 +10,11 @@
                 <div class="su-flex su-gap-6 su-items-center su-text-18 su-font-semibold su-pb-20 md:su-pb-27">
                     {{#if type}}
                     {{#ifEquals type "Policy Brief"}}
-                        <span class="dark:su-hidden">{{> icon-policy-brief theme="light"}}</span>
-                        <span class="su-hidden dark:su-block">{{> icon-policy-brief theme="dark"}}</span>
+                        <span class="dark:su-hidden">{{> svg-icons icon="policy brief" theme="light"}}</span>
+                        <span class="su-hidden dark:su-block">{{> svg-icons icon="policy brief" theme="dark"}}</span>
                     {{else}}
-                        <span class="dark:su-hidden">{{> icon-case-study theme="light"}}</span>
-                        <span class="su-hidden dark:su-block">{{> icon-case-study theme="dark"}}</span>
+                        <span class="dark:su-hidden">{{> svg-icons icon="case study" theme="light"}}</span>
+                        <span class="su-hidden dark:su-block">{{> svg-icons icon="case study" theme="dark"}}</span>
                     {{/ifEquals}}
                         <span>{{type}}</span>
                     {{/if}}
@@ -29,7 +29,7 @@
                     <a href="{{linkUrl}}" class="su-flex su-gap-2 su-group su-text-19 su-font-semibold su-leading-[125%] su-text-digital-red su-no-underline dark:su-text-dark-mode-red hocus:su-underline">
                         {{linkText}}
                         <span class="su-transition group-hocus:su--translate-y-01em group-hocus:su-translate-x-01em [&>svg]:su-translate-y-1">
-                            {{> icon-external-arrow}}
+                            {{> svg-icons icon="external arrow"}}
                         </span>
                     </a>
                 {{/if}}

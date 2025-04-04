@@ -44,8 +44,47 @@ export class funnelbackCardService {
         return Promise.all(json.response.resultPacket.results)
             .then((data) => data.map((card) => formatCardDataFunnelback(card)))
             .catch((error) => {
-            throw new Error(error);
+                throw new Error(`Error in getCards: ${error.message}`);
         });
+    }
+
+    /**
+     * will be injected into the adapter's instance
+     * to get resultsSummary data
+     *
+     * @returns {array}
+     */
+    async getResultsSummary() {
+        try {
+        const query = this.validateQuery();
+
+            const res = await fetch(query).catch((error) => {
+                throw new Error(error);
+            });
+
+            const json = await res.json();
+
+            return json?.response?.resultPacket?.resultsSummary ?? null;
+        } catch (error) {
+            throw new Error(`Error in getResultsSummary: ${error.message}`);
+        }
+    }
+
+    /**
+     * will be injected into the adapter's instance
+     * to fetch both cards and resultsSummary data.
+     */
+    async getResultData() {
+        try {
+            const [cards, resultsSummary] = await Promise.all([
+                this.getCards(),
+                this.getResultsSummary(),
+            ]);
+
+            return { cards, resultsSummary };
+        } catch (error) {
+            throw new Error(`Error in getResultData: ${error.message}`);
+        }
     }
 }
 

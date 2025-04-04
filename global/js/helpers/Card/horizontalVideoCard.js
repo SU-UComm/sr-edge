@@ -55,8 +55,10 @@ export function HorizontalVideoCard({
                     icon:"arrow-up-right",
                     set: "regular",
                     title: "(link is external)",
-                    width: 24,
-                    class: styles.linkIcon
+                    attributes:{
+                      width: 24,
+                      classes: styles.linkIcon
+                    }
                   })}
                 </span>
               ` : ''}
