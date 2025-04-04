@@ -1,0 +1,35 @@
+<section data-component='two-column-text-callout'>
+    <div
+        class='{{containerClasses
+                width=width
+                marginTop=marginTop
+                marginBottom=marginBottom
+            }}'
+    >
+        {{~#if showTopBorder~}}
+            <hr
+                class='su-border-black-30 dark:su-border-black su-rs-mb-3 su-h-1'
+            />
+        {{~/if~}}
+        {{~#if heading~}}
+            <h2
+                class='su-type-2 su-font-serif su-text-center su-w-auto su-rs-mb-2 su-text-black dark:su-text-white'
+            >
+                {{heading}}
+            </h2>
+        {{~/if~}}
+        <div
+            class='{{containerClasses
+                    paddingX=flexContainerPaddingX
+                    customClasses=(getStringByCondition
+                        value=flexContainerLength
+                        expectedValue='2'
+                        trueResult='su-flex su-grid-gap su-flex-col md:su-max-w-800 su-w-full lg:su-flex-row lg:su-items-stretch lg:*:su-basis-1/2 lg:su-max-w-[118.6rem] xl:su-px-50'
+                        falseResult='su-flex su-grid-gap su-flex-col md:su-max-w-800 su-w-full'
+                    )
+                }}'
+        >
+            {{{flexContainer}}}
+        </div>
+    </div>
+</section>

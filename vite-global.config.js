@@ -92,14 +92,8 @@ function injectInlineContent() {
                         let htmlContent = readFileSync(htmlFilePath, 'utf-8');
 
                         // Replace placeholders with global styles and scripts
-                        htmlContent = htmlContent.replace(
-                            '<!-- [[inline-styles]] -->',
-                            `<style>${globalCss}</style>`,
-                        );
-                        htmlContent = htmlContent.replace(
-                            '<!-- [[inline-scripts]] -->',
-                            `<script type="module">${globalJs}</script>`,
-                        );
+                        htmlContent = htmlContent.split('<!-- [[inline-styles]] -->').join(`<style>${globalCss}</style>`);
+                        htmlContent = htmlContent.split('<!-- [[inline-scripts]] -->').join(`<script type="module">${globalJs}</script>`);
 
                         // Write the modified content back to the file
                         writeFileSync(htmlFilePath, htmlContent);
