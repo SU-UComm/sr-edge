@@ -1,6 +1,5 @@
 import { mediaRatio } from "../media/MediaRatio";
 import { cnb } from "cnbuilder";
-import { FAIcon } from "../icons/FAIcon";
 /**
  * Video play button position classes based on card size
  */
@@ -52,13 +51,7 @@ export function CardThumbnail({
               videoPlayClasses[size],
               videoIconClasses
             )}">
-            ${FAIcon({
-              set: "regular",
-              iconName: "circle-play",
-              attributes: {
-                classes: "su-text-white dark:su-text-white su-drop-shadow-[0px_10px_20px_rgba(0,0,0,0.30)]",
-              }
-            })}
+            <svg aria-hidden="true" focusable="false" data-testid="svg-circle-play" data-prefix="far" data-icon="circle-play" class="svg-inline--fa fa-circle-play su-text-white dark:su-text-white su-drop-shadow-[0px_10px_20px_rgba(0,0,0,0.30)]" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z"></path></svg>
           </span>
         ` : ""
       }
