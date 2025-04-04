@@ -1,0 +1,28 @@
+{
+  "id": "99100",
+  "type": "image",
+  "type_name": "Image",
+  "version": "0.1.1",
+  "name": "RDE-Sustainability-Waste-Specialist-Haley-Todd-with-a-Recycle-for-Change-Bin-scaled-1.jpg",
+  "short_name": "RDE-Sustainability-Waste-Specialist-Haley-Todd-with-a-Recycle-for-Change-Bin-scaled-1.jpg",
+  "status": { "id": 16, "code": "live", "name": "Live" },
+  "created": { "date": "2023-12-04T20:04:03-08:00", "user_id": "32242" },
+  "updated": { "date": "2023-12-04T20:05:06-08:00", "user_id": "32242" },
+  "published": { "date": "2023-12-04T20:04:13-08:00", "user_id": "32242" },
+  "status_changed": { "date": "2023-12-04T20:04:13-08:00", "user_id": "32242" },
+  "urls": [
+    "https://sug-web.matrix.squiz.cloud/__data/assets/image/0019/99100/RDE-Sustainability-Waste-Specialist-Haley-Todd-with-a-Recycle-for-Change-Bin-scaled-1.jpg"
+  ],
+  "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0019/99100/RDE-Sustainability-Waste-Specialist-Haley-Todd-with-a-Recycle-for-Change-Bin-scaled-1.jpg",
+  "attributes": {
+    "variety_count": 19,
+    "size": 411964,
+    "height": 998,
+    "width": 1500,
+    "title": "RDE-Sustainability-Waste-Specialist-Haley-Todd-with-a-Recycle-for-Change-Bin-scaled-1.jpg",
+    "name": "RDE-Sustainability-Waste-Specialist-Haley-Todd-with-a-Recycle-for-Change-Bin-scaled-1.jpg",
+    "allow_unrestricted": true,
+    "caption": "",
+    "alt": ""
+  }
+}

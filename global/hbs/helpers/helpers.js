@@ -347,6 +347,13 @@ export const helpers = {
         const { value, expectedValue, trueResult, falseResult } = options.hash;
     
         return value === expectedValue ? trueResult : falseResult;
+    },
+    concatClasses: function(str1, str2) {
+        if (!str2) {
+            return str1
+        } else {
+            return (str1 + ' ' + str2)
+        }
     }
 }
   
