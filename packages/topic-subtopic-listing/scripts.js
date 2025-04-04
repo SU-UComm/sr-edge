@@ -191,7 +191,7 @@ export async function handleButtonClick(args) {
         `
     }).join('')
 
-    updateState(section, cards, pager, modals);
+    updateState(section, cards.join(''), pager, modals);
 }
 
 /**
