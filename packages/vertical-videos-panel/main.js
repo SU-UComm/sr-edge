@@ -1,4 +1,4 @@
-import { basicAssetUri, linkedHeadingService } from "../../global/js/utils";
+import { basicAssetUri, linkedHeadingService, uuid } from "../../global/js/utils";
 import verticalVideosPanelTemplate from "./vertical-videos-panel.hbs";
 
 /**
@@ -107,17 +107,28 @@ export default {
             return `<!-- Error occurred in the Vertical video panel component: ${er.message} -->`;
         }
 
-
-
+        const videoModal = [];
         const videosData = await Promise.all(
             videos.map(async (video) => {
                 const { heading, subheading, videoImage, youtubeId } = video;
+                const uniqueID = uuid();
 
                 // Get video image data
                 let imageData = null;
                 if (videoImage) {
                     imageData = await basicAssetUri(fnsCtx, videoImage);
                 }
+
+                videoModal.push(
+                    {
+                        isVertical: true, 
+                        videoId: video.youtubeId, 
+                        title: `Watch ${video.heading}`, 
+                        noAutoPlay: true,
+                        uniqueID, 
+                        titleID: 'video-modal' 
+                    }
+                );
                 
                 return {
                     heading,
@@ -125,10 +136,10 @@ export default {
                     youtubeId,
                     imageUrl: imageData?.url,
                     imageAlt: imageData?.attributes?.alt || "",
+                    uniqueID
                 }
             })
         );
-
 
         // Resolve the URI for the section link
         const sectionData = await linkedHeadingService(
@@ -142,7 +153,6 @@ export default {
             bgImageData = await basicAssetUri(fnsCtx, bgImage);
         }
 
-
         const componentData = {
             sectionTitle: sectionData?.title,
             sectionCtaText: sectionData?.ctaText,
@@ -150,6 +160,7 @@ export default {
             sectionBgImageUrl: bgImageData?.url,
             sectionBgImageAlt: bgImageData?.alt,
             sectionCustomClasses: "2xl:su-px-[17rem] su-rs-mb-5",
+            carouselID: uuid(),
             videosData,
             videosDataLength: `${videosData.length}`,
             width: "full",
@@ -157,10 +168,10 @@ export default {
             paddingX: false,
             marginTop: marginTop,
             marginBottom: marginBottom,
-            customClasses: "su-relative su-break-words"
+            customClasses: "su-relative su-break-words",
+            videoModal: videoModal
         };
 
         return verticalVideosPanelTemplate(componentData);
-
     }
 };

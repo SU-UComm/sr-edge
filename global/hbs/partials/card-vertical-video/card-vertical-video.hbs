@@ -4,11 +4,6 @@
         <p class="su-text-21 su-mb-0 su-leading-display xl:su-leading-snug">{{subheading}}</p>
     </div>
     <div class="su-relative su-w-full">
-        {{!-- {{> card-thumbnail mediaType="image" uniqueID=uniqueID}} --}}
-        {{> card-thumbnail imageUrl=videoImageUrl imageAlt=videoImageAlt videoUrl=youtubeId aspectRatio="vertical-video" size="vertical-video" }}
-        {{!-- <CardThumbnail
-            title={heading}
-            videoIconClasses={styles.videoIcon}
-        /> --}}
+        {{> card-thumbnail imageUrl=imageUrl imageAlt=imageAlt videoUrl=youtubeId aspectRatio="vertical-video" size="vertical-video" videoIconClasses="group-hocus:su-scale-110 su-transition-transform"}}
     </div>
 </article>
