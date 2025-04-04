@@ -80,21 +80,19 @@ export function _modalInit(section) {
 };
 
 
-/**
- * Ensure that the Swiper instance meets the necessary conditions for looping. This function checks if there are enough
- * slides for looping and adds duplicates if needed.
- *
- * @param {Swiper} swiper - The Swiper instance.
- * @param {Function} [callback=() => {}] - Optional callback function to execute after duplicating slides. Default is
- *   `() => {}`
- */
 export function ensureLoopConditions(swiper, callback = () => {}) {
+    const currentParams = swiper.params;
+    const { slidesPerView, slidesPerGroup } = currentParams;
     const totalSlides = swiper.slides.length;
+  
+    const minSlides = Math.ceil(slidesPerView + slidesPerGroup);
   
     if (totalSlides === 1 ) {
         document.querySelector('.component-slider-controls').remove();
-    } else {
-        duplicateSlides(swiper, totalSlides, callback);
+    }
+
+    if (totalSlides - 1 < minSlides || totalSlides % slidesPerGroup !== 0) {
+        duplicateSlides(swiper, minSlides, slidesPerGroup, callback);
     }
 }
   
@@ -107,31 +105,28 @@ export function ensureLoopConditions(swiper, callback = () => {}) {
  * @param {Function} [callback=() => {}] - Optional callback function to execute after duplicating slides. Default is
  *   `() => {}`
  */
-export function duplicateSlides(swiper, totalSlides, callback = () => {}) {
-    let prependHtml = [];
-    let slideHtml = [];
-    let appendHtml = [];
-    swiper.slides.forEach((slide, idx) => {
-        if (idx < 2 && !slide.classList.contains('swiper-slide-duplicate')) {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = slide.outerHTML;
-            tempDiv.firstChild.classList.add("swiper-slide-duplicate");
-            prependHtml.push(tempDiv.firstChild.outerHTML);
-        } else if ((idx === totalSlides - 1 || idx === totalSlides - 2 ) && !slide.classList.contains('swiper-slide-duplicate')) {
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = slide.outerHTML;
-            tempDiv.firstChild.classList.add("swiper-slide-duplicate");
-            appendHtml.push(tempDiv.firstChild.outerHTML);
-        } 
-        slideHtml.push(slide.outerHTML);
-    });
+export function duplicateSlides(swiper, minSlides, slidesPerGroup, callback = () => {}) {
+    const totalSlides = swiper.slides.length;
+    let slidesToAdd = minSlides - totalSlides + 1;
 
-    const allSlides = [...slideHtml, ...appendHtml];
+    if (totalSlides % slidesPerGroup !== 0) {
+        slidesToAdd += slidesPerGroup - (totalSlides % slidesPerGroup);
+    }
 
+    const fragment = document.createDocumentFragment();
+    const slidesHTML = swiper.slides.map(slide => slide.outerHTML).join('');
     
-    console.log(allSlides)
+    for (let i = 0; i < slidesToAdd; i++) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = slidesHTML;
 
-    swiper.wrapperEl.innerHTML=allSlides.join('');
+        while (tempDiv.firstChild) {
+            tempDiv.firstChild.classList.add("swiper-slide-duplicate");
+            fragment.appendChild(tempDiv.firstChild);
+        }
+    }
+  
+    swiper.wrapperEl.appendChild(fragment);
     swiper.update();
     callback();
 }
@@ -155,6 +150,46 @@ export function paginationUpdater(swiper) {
         }
     }
 }
+
+/**
+ * Updates accessibility attributes for a Swiper instance.
+ *
+ * This function manages slide visibility and interactivity by setting 
+ * `aria-hidden`, `inert`, and `tabindex` attributes appropriately. It also 
+ * ensures that interactive elements within active slides receive focus.
+ * Additionally, it updates the `aria-current` attribute on pagination bullets 
+ * to reflect the current active slide.
+ *
+ * @param {object} swiper - The Swiper instance.
+ * @param {HTMLElement[]} swiper.slides - The array of slide elements.
+ * @param {object} swiper.pagination - The pagination object.
+ * @param {HTMLElement[]} swiper.pagination.bullets - The array of pagination bullet elements.
+ */
+export const updateAccessibility = (swiper) => {
+    // Manage slides visibility and interactivity
+    swiper.slides.forEach((slide) => {
+        if (slide.classList.contains("swiper-slide-active")) {
+            slide.removeAttribute("aria-hidden");
+            slide.removeAttribute("inert");
+            slide.setAttribute("tabindex","-1");
+        } else {
+            slide.setAttribute("aria-hidden", "true");
+            slide.setAttribute("inert", "true");
+            slide.removeAttribute("tabindex");
+        }  
+    });
+
+    // Update pagination bullets aria-current state
+    if (swiper.pagination.bullets.length > 0) {
+        swiper.pagination.bullets.forEach((bullet) => {
+            if (bullet.classList.contains("swiper-pagination-bullet-active")) {
+                bullet.setAttribute("aria-current", "true");
+            } else {
+                bullet.removeAttribute("aria-current");
+            }
+        });
+    }
+};
 
 
 /**
@@ -189,7 +224,6 @@ export function _carouselInit(section) {
         watchSlidesProgress: true,
         loop: true,
         loopAdditionalSlides: 0,
-        slidesPerGroup: 1,
         keyboard: {
             enabled: true,
             onlyInViewport: true,
@@ -213,9 +247,7 @@ export function _carouselInit(section) {
         on: {
             init: swiper => {
                 ensureLoopConditions(swiper);
-                // if(swiper.activeIndex === 1) {
-                //     swiper.slidePrev();
-                // }
+                swiper.slidePrev();
             },
             resize: swiper => {
                 ensureLoopConditions(swiper);
@@ -225,6 +257,18 @@ export function _carouselInit(section) {
             }
         }
     });
+
+      // Add slide change event handler with accessibility management
+      swiper.on('slideChange', function() {
+        /* v8 ignore start */
+        setTimeout(() => { 
+            updateAccessibility(swiper);
+        }, 100);
+        /* v8 ignore stop */
+    });
+
+    // Initial accessibility setup
+    updateAccessibility(swiper);
 };
 
 /**
