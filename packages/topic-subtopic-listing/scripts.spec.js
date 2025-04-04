@@ -393,7 +393,7 @@ describe('[Topic Subtopic Listing][Client]', () => {
                           
                         </div>
                       </article>
-                    ,
+                    
                       <article aria-label="undefined" class="su-grid su-grid-gap su-grid-cols-6 lg:su-grid-cols-10" data-testid="narrow-horizontal-card">
                         <div class="su-flex su-flex-col su-gap-12 su-col-start-1 su-col-span-full lg:su-col-span-6 lg:su-col-start-3">
                           
