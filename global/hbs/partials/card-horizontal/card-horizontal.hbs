@@ -15,7 +15,7 @@
     <div class="su-flex su-flex-col {{getStringByCondition value=cardSize expectedValue="large" trueResult="su-gap-9 lg:su-gap-12" falseResult="su-gap-6"}}">
         {{~#if taxonomy~}}{{~#ifEquals cardSize "small"~}}
         <p class="su-mb-0 su-text-16 su-font-semibold su-text-digital-red dark:su-text-dark-mode-red hover:dark:su-text-dark-mode-red" data-testid="horizontal-card-taxonomy">
-            <a{{~#if taxonomyUrl~}} href="{{taxonomyUrl}}"{{~/if~}} class="focus:su-outline-0 focus:su-ring su-text-digital-red su-no-underline hover:su-text-digital-red dark:su-text-dark-mode-red hover:dark:su-text-dark-mode-red su-block su-mt-[-6px]">
+            <a {{~#if taxonomyUrl}}href="{{taxonomyUrl}}"{{~/if}} class="focus:su-outline-0 focus:su-ring su-text-digital-red su-no-underline hover:su-text-digital-red dark:su-text-dark-mode-red hover:dark:su-text-dark-mode-red su-block su-mt-[-6px]">
                 {{{taxonomy}}}
             </a>
         </p>

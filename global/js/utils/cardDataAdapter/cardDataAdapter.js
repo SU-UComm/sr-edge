@@ -13,8 +13,8 @@ export class cardDataAdapter {
     setCardService(cardService) {
         this.cardService = cardService;
         this.getCards = cardService.getCards.bind(cardService);
-        this.getResultsSummary = cardService.getResultsSummary.bind(cardService);
-        this.getResultData = cardService.getResultData.bind(cardService);
+        this.getResultsSummary = cardService?.getResultsSummary?.bind(cardService);
+        this.getResultData = cardService?.getResultData?.bind(cardService);
     }
 }
 
