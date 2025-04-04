@@ -1,47 +1,26 @@
+            {{videosDataLength}}
 <section data-component="vertical-video-panel">
     <div class="{{containerClasses width=width paddingY=paddingY paddingX=paddingX marginTop=marginTop marginBottom=marginBottom customClasses=customClasses}}">
         <div class="su-relative su-z-30">
-        {{~#if sectionTitle~}}
+            {{~#if sectionTitle~}}
             <div class="su-cc">
                 {{> linked-heading title=sectionTitle ctaLink=sectionCtaLink ctaText=sectionCtaText isAlwaysLight=true customClasses=sectionCustomClasses}}
             </div>
-        {{~/if~}}
-        {{#if (gtOne cardDataSize)}}
-            {{!-- Only render carousel if there are more than 1 videos --}}
-            {{#if (gtOne videos)}}
-                <div class="lg:su-hidden">
-                  {{!-- KARUZELA Carousel --}}
-                  {{!-- <Carousel
-                    variant="vertical-videos"
-                    slides={cards}
-                    isDark={!!bgImageUrl}
-                    uniqueClass={uniqueClass}
-                  /> --}}
-                </div>
-            {{/if}}
+            {{~/if~}}
 
-              {{!-- isSingleVideo --}}
-              <div class="su-cc{{#if isSingleVideo}} su-block{{else}} su-hidden lg:su-block{{/if}}">
-                <div class="su-relative su-mx-auto su-flex  su-justify-center su-gap-20 xl:su-gap-40 su-z-30 {{#if isSingleVideo}} *:su-basis-4/5 *:su-max-w-[45rem] *:lg:su-max-w-none *:lg:su-basis-1/3{{else}} *:lg:su-basis-1/3{{/if}}">
-                {{!-- {cardData} --}}
-                {{#each cardData}}
-                    {{!-- <VerticalVideoCard key={`${youtubeId}-${heading}`}    ToDo helper generateCardVerticalVideoKey   key={`${youtubeId}-${heading}`}     --}}    
+            {{~#if videosDataLength~}}
+            <div class="su-cc {{getStringByCondition value=isSingleVideo expectedValue="1" trueResult="su-block" falseResult="su-hidden lg:su-block"}}">
+                <div class="su-relative su-mx-auto su-flex su-justify-center su-gap-20 xl:su-gap-40 su-z-30 {{getStringByCondition value=isSingleVideo expectedValue="1" trueResult="*:su-basis-4/5 *:su-max-w-[45rem] *:lg:su-max-w-none *:lg:su-basis-1/3" falseResult="*:lg:su-basis-1/3"}}">
+                {{~#each videosData~}}
                     {{> card-vertical-video heading=heading subheading=subheading youtubeId=youtubeId videoImageUrl=videoImageUrl videoImageAlt=videoImageAlt }}
-                {{/each}}
-
-
-
-
+                {{~/each~}}
                 </div>
-              </div>
             </div>
-        {{/if}}
+            {{~/if~}}
         </div>
-
-        {{#if sectionBgImageUrl}}
-            <img src="{{sectionBgImageUrl}}" alt="{{sectionBgImageAlt}}" class="su-absolute su-size-full su-inset-0 su-object-cover su-inset-0"></img>
+        {{~#if sectionBgImageUrl~}}
+            <img src="{{sectionBgImageUrl}}" alt="{{sectionBgImageAlt}}" class="su-absolute su-size-full su-inset-0 su-object-cover su-inset-0" />
             <div aria-hidden="true" class="su-absolute su-size-full su-inset-0 su-z-10 su-bg-black-true/75"></div>
-        {{/if}}
+        {{~/if~}}
     </div>
-
 </section>

@@ -151,6 +151,8 @@ export default {
             sectionBgImageAlt: bgImageData?.alt,
             sectionCustomClasses: "2xl:su-px-[17rem] su-rs-mb-5",
             videosData,
+            videosDataLength: videosData.length,
+            isSingleVideo: videosData.length === 1,
             width: "full",
             paddingY: bgImageData?.url ? "10" : "",
             paddingX: false,
