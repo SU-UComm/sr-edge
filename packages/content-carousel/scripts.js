@@ -4,6 +4,85 @@ export const CONTENT_CAROUSEL_SELECTOR = 'section[data-component="content-carous
 export let swiper; 
 
 /**
+ * Ensure that the Swiper instance meets the necessary conditions for looping. This function checks if there are enough
+ * slides for looping and adds duplicates if needed.
+ *
+ * @param {Swiper} swiper - The Swiper instance.
+ * @param {Function} [callback=() => {}] - Optional callback function to execute after duplicating slides. Default is
+ *   `() => {}`
+ */
+export function ensureLoopConditions(swiper, callback = () => {}) {
+    const currentParams = swiper.params;
+    const { slidesPerView, slidesPerGroup } = currentParams;
+    const totalSlides = swiper.slides.length;
+  
+    const minSlides = Math.ceil(slidesPerView + slidesPerGroup);
+  
+    if (totalSlides === 1 ) {
+        document.querySelector('.component-slider-controls').remove();
+    }
+
+    if (totalSlides < minSlides || totalSlides % slidesPerGroup !== 0) {
+        duplicateSlides(swiper, minSlides, slidesPerGroup, callback);
+    }
+}
+  
+/**
+ * Duplicate slides in the Swiper instance to meet the minimum slide requirements.
+ *
+ * @param {Swiper} swiper - The Swiper instance.
+ * @param {number} minSlides - The minimum number of slides required.
+ * @param {number} slidesPerGroup - The number of slides per group.
+ * @param {Function} [callback=() => {}] - Optional callback function to execute after duplicating slides. Default is
+ *   `() => {}`
+ */
+export function duplicateSlides(swiper, minSlides, slidesPerGroup, callback = () => {}) {
+    const totalSlides = swiper.slides.length;
+    let slidesToAdd = minSlides - totalSlides;
+
+    if (totalSlides % slidesPerGroup !== 0) {
+        slidesToAdd += slidesPerGroup - (totalSlides % slidesPerGroup);
+    }
+
+    const fragment = document.createDocumentFragment();
+    const slidesHTML = swiper.slides.map(slide => slide.outerHTML).join('');
+    
+    for (let i = 0; i < slidesToAdd; i++) {
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = slidesHTML;
+
+        while (tempDiv.firstChild) {
+            tempDiv.firstChild.classList.add("swiper-slide-duplicate");
+            fragment.appendChild(tempDiv.firstChild);
+        }
+    }
+  
+    swiper.wrapperEl.appendChild(fragment);
+    swiper.update();
+    callback();
+}
+
+/**
+ * Updates the pagination to ensure it matches the number of non-duplicate slides.
+ * Removes excess pagination bullets if duplicate slides affect the count.
+ *
+ * @param {Swiper} swiper - The Swiper instance.
+ */
+export function paginationUpdater(swiper) {
+    const duplicateSlidesCount = swiper.slides.filter(slide => slide.classList.contains('swiper-slide-duplicate')).length;
+    
+    if (duplicateSlidesCount) {
+        let bulletsDiff = swiper.pagination.bullets.length - swiper.slides.length + duplicateSlidesCount;
+        
+        while (bulletsDiff > 0) {
+            const lastBullet = swiper.pagination.bullets.pop();
+            if (lastBullet) lastBullet.remove();
+            bulletsDiff--;
+        }
+    }
+}
+
+/**
  * Updates accessibility attributes for a Swiper instance.
  *
  * This function manages slide visibility and interactivity by setting 
@@ -29,11 +108,14 @@ export const updateAccessibility = (swiper, isFocus) => {
             slide.setAttribute("inert", "true");
             slide.removeAttribute("tabindex");
         }
-        const slideTarget = slide.querySelector("h2 a, h3 a, button")
-            ? slide.querySelector("h2 a, h3 a, button")
-            : null;
+
+        const slideTarget = slide.querySelector("a, button")
+        ? slide.querySelector("a, button")
+        : null;
+
 
         if(isFocus) {
+            console.log('isFocus',isFocus);
             slideTarget && slideTarget.focus();
         }
     });
@@ -91,6 +173,17 @@ export function _carouselInit(section) {
             renderBullet: function (index, className) {
                 return `<button ${index === 0 ? 'aria-current="true"' : ""} class="${className}"><span class="sr-only">Slide ${index + 1}</span></button>`;
             },
+        },
+        on: {
+            init: swiper => {
+                ensureLoopConditions(swiper);
+            },
+            resize: swiper => {
+                ensureLoopConditions(swiper);
+            },
+            paginationUpdate: swiper => {
+                paginationUpdater(swiper);
+            },
         }
     });
 
@@ -99,7 +192,7 @@ export function _carouselInit(section) {
         /* v8 ignore start */
         setTimeout(() => { 
             updateAccessibility(swiper, true);
-        }, 100);
+        }, 300);
         /* v8 ignore stop */
     });
 
