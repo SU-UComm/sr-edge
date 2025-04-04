@@ -3,6 +3,7 @@
         <div data-element='topics-list'>
             {{#> horizontal-card-grid orientation=orientation}}
                 {{#each cards}}
+                <div class="su-relative su-grow">
                     {{#ifEquals cardType "horizontal"}}
                     {{> card-horizontal
                         cardSize=cardSize
@@ -38,6 +39,7 @@
                         storySource=data.storySource
                      }}
                     {{/ifEquals}}
+                </div>
                 {{/each}}
             {{/ horizontal-card-grid}}
         </div>

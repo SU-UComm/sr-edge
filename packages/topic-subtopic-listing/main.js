@@ -141,7 +141,7 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            width: null,
+            width: "large",
             orientation: "topiclisting",
             cards,
             pages: pagination({
