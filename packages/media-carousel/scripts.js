@@ -60,20 +60,23 @@ export function _carouselInit(section) {
             clickable: true,
             bulletElement: "button",
             renderBullet: function (index, className) {
-                return `<button ${index === 0 ? 'aria-current="true"' : ""} class="${className}"><span class="sr-only">Slide ${index + 1}</span></button>`;
+                return `<button ${index === 0 ? 'aria-current="true"' : ""} class="${className} ${index === 0 ? "swiper-pagination-bullet-active" : ""}"><span class="sr-only">Slide ${index + 1}</span></button>`;
             },
         },
         on: {
             init: swiper => {
                 ensureLoopConditions(swiper);
+                if(swiper.activeIndex === 1) {
+                    swiper.slidePrev();
+                }
             },
             resize: swiper => {
                 ensureLoopConditions(swiper);
             },
             paginationUpdate: swiper => {
                 paginationUpdater(swiper);
-            },
-        }
+            }
+        },
     });
     
     const totalSlides = swiper.slides.length;

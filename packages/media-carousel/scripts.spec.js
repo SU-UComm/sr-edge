@@ -111,8 +111,8 @@ describe('[Media Carousel][Client]', () => {
             const bulletFirst = renderBullet(0, 'swiper-pagination-bullet');
             const bulletSecond = renderBullet(1, 'swiper-pagination-bullet');
     
-            expect(bulletFirst).toBe('<button aria-current="true" class="swiper-pagination-bullet"><span class="sr-only">Slide 1</span></button>');
-            expect(bulletSecond).toBe('<button  class="swiper-pagination-bullet"><span class="sr-only">Slide 2</span></button>');
+            expect(bulletFirst).toBe('<button aria-current="true" class="swiper-pagination-bullet swiper-pagination-bullet-active"><span class="sr-only">Slide 1</span></button>');
+            expect(bulletSecond).toBe('<button  class="swiper-pagination-bullet "><span class="sr-only">Slide 2</span></button>');
         });
 
         it("Should call updateAccessibility after slideChange event", async () => {
@@ -187,6 +187,7 @@ describe('[Media Carousel][Client]', () => {
                 wrapperEl: document.createElement('div'),
                 update: vi.fn(),
                 activeIndex: 1,
+                slidePrev: vi.fn(),
                 on: mockOn,
                 pagination: { bullets: [] },
             };
@@ -209,6 +210,7 @@ describe('[Media Carousel][Client]', () => {
                 wrapperEl: document.createElement('div'),
                 update: vi.fn(),
                 activeIndex: 1,
+                slidePrev: vi.fn(),
                 on: mockOn,
                 pagination: { bullets: [] },
             };
