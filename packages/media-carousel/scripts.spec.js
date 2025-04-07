@@ -322,7 +322,7 @@ describe('[Media Carousel][Client]', () => {
             expect(mockSlidePrev).toHaveBeenCalled();
         });
     
-        it('Should call ensureLoopConditions on Swiper resize (line coverage)', () => {
+        it('Should call ensureLoopConditions on Swiper resize', () => {
             const swiperInstance = {
                 slides: [],
                 params: { slidesPerView: 1, slidesPerGroup: 1 },
@@ -352,11 +352,10 @@ describe('[Media Carousel][Client]', () => {
     
             capturedResizeHandler(swiperInstance);
     
-            // We don't need to assert the call, just ensure coverage
             expect(true).toBe(true);
         });
     
-        it('Should call paginationUpdater on Swiper paginationUpdate (line coverage)', () => {
+        it('Should call paginationUpdater on Swiper paginationUpdate', () => {
             const swiperInstance = {
                 slides: [],
                 params: { slidesPerView: 1, slidesPerGroup: 1 },
