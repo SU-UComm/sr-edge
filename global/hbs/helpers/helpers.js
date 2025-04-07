@@ -301,9 +301,6 @@ export const helpers = {
         
         return variantClasses.get(variant);
     },
-    gtOne: function(value) {
-        return value > 1;
-    },
     headingTag: function(tagName) {
         if (tagName == null) return 'h2';
         

@@ -55,3 +55,6 @@ export * from './story-hero-variations';
 
 // SVG Components
 export * from './SVG-library';
+
+// Swiper Helpers
+export { duplicateSlides, ensureLoopConditions, paginationUpdater, updateAccessibility } from './swiperHelpers';

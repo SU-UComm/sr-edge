@@ -81,7 +81,7 @@ export default {
             width: "wide",
             images: imageData,
             sectionCaption,
-            numberOfCaptions
+            showIndividualCaptions: numberOfCaptions > 1,
         };
         return multicolumnImage(componentData);
     }
