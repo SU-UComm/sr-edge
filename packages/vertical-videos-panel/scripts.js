@@ -1,5 +1,5 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
-import { ensureLoopConditions, paginationUpdater } from './loop-helpers';
+import { ensureLoopConditions, paginationUpdater, updateAccessibility } from '../../global/js/helpers';
 /**
  * Globals variables 
  * @constant {string} VERTICAL_VIDEO_PANEL_SELECTOR - Selector for vertical video panel elements.
@@ -78,47 +78,6 @@ export function _modalInit(section) {
         }
     });
 };
-
-/**
- * Updates accessibility attributes for a Swiper instance.
- *
- * This function manages slide visibility and interactivity by setting 
- * `aria-hidden`, `inert`, and `tabindex` attributes appropriately. It also 
- * ensures that interactive elements within active slides receive focus.
- * Additionally, it updates the `aria-current` attribute on pagination bullets 
- * to reflect the current active slide.
- *
- * @param {object} swiper - The Swiper instance.
- * @param {HTMLElement[]} swiper.slides - The array of slide elements.
- * @param {object} swiper.pagination - The pagination object.
- * @param {HTMLElement[]} swiper.pagination.bullets - The array of pagination bullet elements.
- */
-export const updateAccessibility = (swiper) => {
-    // Manage slides visibility and interactivity
-    swiper.slides.forEach((slide) => {
-        if (slide.classList.contains("swiper-slide-active")) {
-            slide.removeAttribute("aria-hidden");
-            slide.removeAttribute("inert");
-            slide.setAttribute("tabindex","-1");
-        } else {
-            slide.setAttribute("aria-hidden", "true");
-            slide.setAttribute("inert", "true");
-            slide.removeAttribute("tabindex");
-        }  
-    });
-
-    // Update pagination bullets aria-current state
-    if (swiper.pagination.bullets.length > 0) {
-        swiper.pagination.bullets.forEach((bullet) => {
-            if (bullet.classList.contains("swiper-pagination-bullet-active")) {
-                bullet.setAttribute("aria-current", "true");
-            } else {
-                bullet.removeAttribute("aria-current");
-            }
-        });
-    }
-};
-
 
 /**
  * Carousel Init function for card
