@@ -4,7 +4,6 @@ export { cdpSetConsent } from './cdpSetConsent';
 export { cdpSetPersona } from './cdpSetPersona';
 export { containerClasses } from './containerClasses';
 export { eventCardService } from './eventCardService';
-export * from './fa-icons';
 export { FetchAdapter } from './fetchAdapter';
 export { formatCardDataEvents } from './formatCardDataEvents';
 export { formatCardDataFunnelback } from './formatCardDataFunnelback';

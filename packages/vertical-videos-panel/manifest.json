@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "vertical-videos-panel",
     "type": "edge",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "A section that displays up to 3 vertical YouTube videos, with a section title and link to watch more. On smaller devices, the videos will be displayed in a carousel if there are more than 1.",
     "displayName": "Vertical Videos Panel",
