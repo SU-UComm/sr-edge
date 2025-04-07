@@ -145,17 +145,22 @@ export function _carouselInit(section) {
         }
     });
 
-      // Add slide change event handler with accessibility management
-      swiper.on('slideChange', function() {
-        /* v8 ignore start */
-        setTimeout(() => { 
-            updateAccessibility(swiper);
-        }, 100);
-        /* v8 ignore stop */
-    });
+    const totalSlides = swiper.slides.length;
+    const duplicateSlidesCount = swiper.slides.filter(slide => slide.classList.contains('swiper-slide-duplicate')).length;
+    const originalSlides = Math.floor(totalSlides - duplicateSlidesCount);
 
-    // Initial accessibility setup
-    updateAccessibility(swiper);
+    if (originalSlides > 1) {
+        // Add slide change event handler with accessibility management
+        swiper.on('slideChange', function() {
+            /* v8 ignore start */
+            setTimeout(() => { 
+                updateAccessibility(swiper, 'h2 a, h3 a, button', true);
+            }, 100);
+            /* v8 ignore stop */
+        });
+        // Initial accessibility setup
+        updateAccessibility(swiper, '', false);
+    }
 };
 
 /**
