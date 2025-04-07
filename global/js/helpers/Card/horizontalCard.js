@@ -1,6 +1,5 @@
 import xss from "xss";
 import { CardThumbnail } from "./cardThumbnail";
-import { FAIcon } from "../icons/FAIcon";
 import { EventStartEndDate } from "./eventStartEndDate";
 import {
   Alert,
@@ -97,19 +96,20 @@ export function HorizontalCard({
     date,
     endDate,
     videoUrl,
+    uniqueID,
   },
   cardSize = "small"
 }) {
   const sizeStyles = cardSizeStyles[cardSize];
-  const isRealExternalLink = !!liveUrl && !liveUrl?.includes("news.stanford.edu");
+  // const isRealExternalLink = !!liveUrl && !liveUrl?.includes("news.stanford.edu");
   const SVGMap = new Map();
   SVGMap.set("alert", Alert());
   SVGMap.set("analysis & insights", AnalysisAndInsights());
   SVGMap.set("analysis &amp; insights", AnalysisAndInsights());
   SVGMap.set("analysis&nbsp;&amp;&nbsp;insights", AnalysisAndInsights());
-  SVGMap.set("case study", CaseStudy());
-  SVGMap.set("case&nbsp;study", CaseStudy());
-  SVGMap.set("casestudy", CaseStudy());
+  SVGMap.set("case study", CaseStudy({variant: "light"}));
+  SVGMap.set("case&nbsp;study", CaseStudy({variant: "light"}));
+  SVGMap.set("casestudy", CaseStudy({variant: "light"}));
   SVGMap.set("event", Event());
   SVGMap.set("event&nbsp;highlights", EventHighlights());
   SVGMap.set("event highlights", EventHighlights());
@@ -123,8 +123,8 @@ export function HorizontalCard({
   SVGMap.set("obituary", Obituary());
   SVGMap.set("opinion", Opinion());
   SVGMap.set("photo", Photo());
-  SVGMap.set("policy&nbsp;brief", PolicyBrief());
-  SVGMap.set("policy brief", PolicyBrief());
+  SVGMap.set("policy&nbsp;brief", PolicyBrief({variant: "light"}));
+  SVGMap.set("policy brief", PolicyBrief({variant: "light"}));
   SVGMap.set("poll/quiz", PollQuiz());
   SVGMap.set("poll / quiz", PollQuiz());
   SVGMap.set("poll&nbsp;/&nbsp;quiz", PollQuiz());
@@ -145,11 +145,11 @@ export function HorizontalCard({
   SVGMap.set("q & a", QuestionAnswer());
   SVGMap.set("q&nbsp;&amp;&nbsp;a", QuestionAnswer());
   SVGMap.set("video", Video());
-  SVGMap.set("podcast", Podcast());
-  SVGMap.set("book", BookOpenCover());
+  SVGMap.set("podcast", Podcast({variant: "light"}));
+  SVGMap.set("book", BookOpenCover({ className: "" }));
   
   return `
-    <article aria-label="${title}" class="${styles.root} ${sizeStyles.gap}" data-testid="horizontal-card">
+    <article aria-label="${title}" class="${styles.root} ${sizeStyles.gap}" data-testid="horizontal-card" >
       
     ${cardSize === "large" ? `
         <div class="${styles.imageWrapper} ${sizeStyles.imageWrapper}">
@@ -160,7 +160,8 @@ export function HorizontalCard({
                 videoUrl,
                 mediaType: "image",
                 aspectRatio: "card-large",
-                size: cardSize
+                size: cardSize,
+                uniqueId: uniqueID
             })}
           ` : ''}
         </div>
@@ -174,7 +175,8 @@ export function HorizontalCard({
                 videoUrl,
                 mediaType: "image",
                 aspectRatio: "large",
-                size: cardSize
+                size: cardSize,
+                uniqueId: uniqueID
             })}
         </div>
       ` : ''}
@@ -191,16 +193,7 @@ export function HorizontalCard({
         <h3 class="${styles.heading} ${sizeStyles.title}">
           <a href="${liveUrl}" class="${styles.link}">
             ${xss(title)}
-            ${isRealExternalLink ? `
-              ${FAIcon({
-                  icon: "arrow-up-right",
-                  set: "regular",
-                  attributes: {
-                    width: cardSize === "small" ? 12 : 15,
-                    classes:"su-inline-block su-align-middle su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
-                  }
-              })}
-            ` : ''}
+              <svg width="${cardSize === "small" ? 12 : 15}" aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-up-right" class="svg-inline--fa fa-arrow-up-right su-inline-block su-align-middle su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M328 96c13.3 0 24 10.7 24 24l0 240c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-182.1L73 409c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l231-231L88 144c-13.3 0-24-10.7-24-24s10.7-24 24-24l240 0z"></path></svg>
           </a>
         </h3>
 

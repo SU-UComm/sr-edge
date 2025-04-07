@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "events-section",
     "type": "edge",
-    "version": "4.0.4",
+    "version": "4.0.6",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Stanford Events Section is a grid featuring 3, 6, or 9 events",
     "displayName": "Events Section",
