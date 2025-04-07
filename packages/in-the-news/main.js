@@ -206,7 +206,7 @@ export default {
             ...data[0],
             quote: featuredQuote,
             description: featuredTeaserDescription ? featuredTeaserDescription : '',
-            ctaText: featuredCtaText,
+            ctaText: featuredCtaText || "Read the story",
             imageURL: imageData?.url,
             imageAlt: imageData?.alt
         });
