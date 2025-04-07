@@ -1,10 +1,10 @@
-{{#if videoUrl}}
+{{~#if videoUrl~}}
 <button class="su-component-card-thumbnail su-group su-block su-relative su-z-10 su-size-full" type="button" aria-haspopup="dialog" data-click="open-modal" data-modal-id="{{uniqueID}}">
     {{#> media-ratio imageUrl=imageUrl imageAlt=imageAlt aspectRatio=aspectRatio}}
-        {{#ifEquals size  "vertical-video"}}
+        {{~#ifEquals size  "vertical-video"~}}
             <div aria-hidden="true" class="su-absolute su-inset-0 su-bg-gradient-to-t su-from-black-true/80 su-via-80% su-via-black-true/10 su-pointer-events-none su-z-20"
             ></div>
-        {{/ifEquals}}
+        {{~/ifEquals~}}
         <span class="su-absolute su-leading-none {{getThumbnailIconClass size}} {{videoIconClasses}}">
             {{> fontawesome-icon
                 icon="circle-play"
@@ -15,9 +15,9 @@
         </span>
     {{/ media-ratio}}
 </button>
-{{else}}
+{{~else~}}
 <div class="su-component-card-thumbnail su-w-full su-h-full">
     {{#> media-ratio imageUrl=imageUrl imageAlt=imageAlt aspectRatio=aspectRatio}}
     {{/ media-ratio}}
 </div>
-{{/if}}
+{{~/if~}}

@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "text-callout",
     "type": "edge",
-    "version": "4.0.3",
+    "version": "4.0.5",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "This component is intended for displaying extra text content with a background color applied",
     "displayName": "Text Callout",

@@ -226,6 +226,14 @@ export const helpers = {
         
         return backgroundClasses.get(variant) || '';
     },
+    isValidUrl: function(value, options) {
+        const urlPattern = /^(https?:\/\/)([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d{1,5})?(\/.*)?$/;
+    
+        if (typeof value === "string" && urlPattern.test(value)) {
+            return options.fn ? options.fn(this) : true;
+        }
+        return options.inverse ? options.inverse(this) : false;
+    },
     linkButtonClasses: function(variant = "default", size = "default", customClasses = "") {
         const baseClasses = ['su-group su-flex su-items-center su-w-fit hocus:su-underline'];
         
@@ -292,9 +300,6 @@ export const helpers = {
         variantClasses.set('Basic Story', 'su-story-first-letter *:su-text-18 md:*:su-text-23');
         
         return variantClasses.get(variant);
-    },
-    gtOne: function(value) {
-        return value > 1;
     },
     headingTag: function(tagName) {
         if (tagName == null) return 'h2';

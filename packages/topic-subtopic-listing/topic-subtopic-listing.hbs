@@ -1,0 +1,57 @@
+<section data-component='topic-subtopic-listing' data-query='{{query}}' data-endpoint='{{endpoint}}' data-display='{{display}}'>
+    <div class='{{containerClasses width=width}}'>
+        <div data-element='topics-list'>
+            {{#> horizontal-card-grid orientation=orientation}}
+                {{#each cards}}
+                <div class="su-relative su-grow">
+                    {{#ifEquals cardType "horizontal"}}
+                    {{> card-horizontal
+                        cardSize=cardSize
+                        title=data.title
+                        description=data.description
+                        liveUrl=data.liveUrl
+                        imageUrl=data.imageUrl
+                        imageAlt=data.imageAlt
+                        taxonomy=data.taxonomy
+                        taxonomyUrl=data.taxonomyUrl
+                        type=data.type
+                        date=data.date
+                        endDate=data.endDate
+                        videoUrl=data.videoUrl
+                        uniqueID=data.uniqueID
+                        iconType=data.iconType
+                    }}
+                    {{else}}
+                    {{> card-narrow-horizontal
+                        title=data.title
+                        description=data.description
+                        liveUrl=data.liveUrl
+                        isExternalLink=data.isExternalLink
+                        date=data.date
+                        authorAvatar=data.authorAvatar
+                        avatarRef=data.avatarRef
+                        avatarSize=data.avatarSize
+                        avatarAlt=data.avatarAlt
+                        authorDisplayName=data.authorDisplayName
+                        displayConfiguration=data.displayConfiguration
+                        taxonomyFeaturedUnitLandingPageUrl=data.taxonomyFeaturedUnitLandingPageUrl
+                        taxonomyFeaturedUnitText=data.taxonomyFeaturedUnitText
+                        storySource=data.storySource
+                     }}
+                    {{/ifEquals}}
+                </div>
+                {{/each}}
+            {{/ horizontal-card-grid}}
+        </div>
+        <div data-element='topics-pagination'>
+            {{{pages}}}
+        </div>
+    </div>
+    <section data-element="modal-wrapper">
+    {{#each modalData}}
+        {{#> modal-content uniqueID=uniqueID titleID='card-modal'}}
+            {{> embed-video isVertical=isVertical classes=classes videoId=videoId noAutoPlay=noAutoPlay title=title}}
+        {{/ modal-content}}
+    {{/each}}
+    </section>
+</section>

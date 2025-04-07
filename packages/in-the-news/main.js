@@ -165,9 +165,13 @@ export default {
         teaserTwo && cards.push({ cardAsset: teaserTwo });
    
         if (cards && cards.length) {
-            data = await adapter.getCards(cards);
+            try {
+                data = await adapter.getCards(cards);
+            } catch (er) {
+                console.error('Error occurred in the In the news component: Failed to fetch event data. ', er);
+                return `<!-- Error occurred in the In the news component: Failed to fetch event data. ${er.message} -->`;
+            }
         }
-          
 
         // Resolve the URI for the section heading link
         const headingData = await linkedHeadingService(
@@ -176,7 +180,24 @@ export default {
         );
 
         let imageData = null;
-        imageData = await basicAssetUri(fnsCtx, personHeadshot);
+        if (personHeadshot) {
+            try {
+                imageData = await basicAssetUri(fnsCtx, personHeadshot);
+                // Check required properties
+                if (!imageData || typeof imageData !== 'object') {
+                    throw new Error('basicAssetUri did not return an object');
+                }
+                if (typeof imageData.url !== 'string' || imageData.url.trim() === '') {
+                    throw new Error('data.url must be a non-empty string');
+                }
+                if (typeof imageData.attributes !== 'object' || imageData.attributes === null) {
+                    throw new Error('data.attributes must be a non-null object');
+                }
+            } catch (er) {
+                console.error('Error occurred in the In the news component: Failed to fetch image data. ', er);
+                return `<!-- Error occurred in the In the news component: Failed to fetch image data. ${er.message} -->`;
+            }
+        }
 
         const cardData = [];
 
@@ -185,7 +206,7 @@ export default {
             ...data[0],
             quote: featuredQuote,
             description: featuredTeaserDescription ? featuredTeaserDescription : '',
-            ctaText: featuredCtaText,
+            ctaText: featuredCtaText || "Read the story",
             imageURL: imageData?.url,
             imageAlt: imageData?.alt
         });

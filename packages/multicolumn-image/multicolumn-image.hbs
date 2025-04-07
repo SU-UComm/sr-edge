@@ -2,15 +2,15 @@
     <div class="{{containerClasses width=width}}">
         <section class="su-flex su-flex-col su-items-center su-gap-8 md:su-gap-9">
             <div class="su-flex su-gap-20 su-items-center lg:su-gap-48">
-                {{#each images}}
-                    {{> image src=this.url caption=this.caption numberOfCaptions=@root.numberOfCaptions}}
-                {{/each}}
+                {{~#each images~}}
+                    {{> image src=this.url caption=this.caption showIndividualCaptions=@root.showIndividualCaptions}}
+                {{~/each~}}
             </div>
-            {{#ifEquals numberOfCaptions 1}}{{#if sectionCaption}}
+            {{~#if showIndividualCaptions}}{{~else~}}{{~#if sectionCaption~}}
                 <p class="su-text-14 su-text-black-70 dark:su-text-black-30 su-font-normal su-max-w-[63.3rem] su-leading-[119.415%] su-text-center md:su-text-16 su-mb-0">
                     {{sectionCaption}}
                 </p>
-             {{/if}}{{/ifEquals}}
+             {{~/if~}}{{~/if~}}
         </section>
     </div>
 </section>
