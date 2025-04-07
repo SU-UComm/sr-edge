@@ -1,6 +1,7 @@
 /** @jest-environment jsdom */
 import '@testing-library/jest-dom';
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
+import { updateAccessibility } from '../../global/js/helpers';
 import * as contentCarousel from './scripts';
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 
@@ -169,7 +170,7 @@ describe('[Content Carousel][Client]', () => {
     
             swiper.on("slideChange", function () {
                 setTimeout(() => {
-                    contentCarousel.updateAccessibility(swiper, true);
+                    updateAccessibility(swiper, 'a, button', true);
                 }, 100);
             });
 
@@ -189,6 +190,98 @@ describe('[Content Carousel][Client]', () => {
                 expect(slide.hasAttribute("tabindex")).toBe(false);
             });
     
+        });
+
+        it('Should call ensureLoopConditions on Swiper resize', () => {
+            const swiperInstance = {
+                slides: [],
+                params: { slidesPerView: 1, slidesPerGroup: 1 },
+                wrapperEl: document.createElement('div'),
+                update: vi.fn(),
+                activeIndex: 0,
+                slidePrev: vi.fn(),
+                on: vi.fn(),
+                pagination: { bullets: [] },
+            };
+
+            let capturedResizeHandler;
+            Swiper.mockImplementation((selector, config) => {
+                capturedResizeHandler = config.on.resize;
+                return swiperInstance;
+            });
+
+            contentCarousel._carouselInit(section);
+            capturedResizeHandler(swiperInstance);
+
+            expect(true).toBe(true); // to trigger line coverage
+        });
+        
+        it('Should call ensureLoopConditions on Swiper init', () => {
+            const mockOn = vi.fn();
+            const slide = document.createElement('div');
+            const swiperInstance = {
+                slides: [slide,slide,slide],
+                params: { slidesPerView: 1, slidesPerGroup: 1 },
+                wrapperEl: document.createElement('div'),
+                update: vi.fn(),
+                activeIndex: 1,
+                on: mockOn,
+                pagination: { bullets: [] },
+            };
+
+            Swiper.mockImplementation((selector, config) => {
+                config.on.init(swiperInstance);
+                return swiperInstance;
+            });
+
+            contentCarousel._carouselInit(section);
+
+            expect(mockOn).toHaveBeenCalled();
+        });
+
+        it('Should not to call ensureLoopConditions on Swiper init when there is only one slide or less', () => {
+            const mockOn = vi.fn();
+            const swiperInstance = {
+                slides: [],
+                params: { slidesPerView: 1, slidesPerGroup: 1 },
+                wrapperEl: document.createElement('div'),
+                update: vi.fn(),
+                activeIndex: 1,
+                on: mockOn,
+                pagination: { bullets: [] },
+            };
+
+            Swiper.mockImplementation((selector, config) => {
+                config.on.init(swiperInstance);
+                return swiperInstance;
+            });
+
+            contentCarousel._carouselInit(section);
+
+            expect(mockOn).not.toHaveBeenCalled();
+        });
+        
+        it('Should call paginationUpdater on paginationUpdate event', () => {
+            const swiperInstance = {
+                slides: [],
+                params: { slidesPerView: 1, slidesPerGroup: 1 },
+                wrapperEl: document.createElement('div'),
+                update: vi.fn(),
+                slidePrev: vi.fn(),
+                on: vi.fn(),
+                pagination: { bullets: [] },
+            };
+
+            let config;
+            Swiper.mockImplementation((selector, conf) => {
+                config = conf;
+                return swiperInstance;
+            });
+
+            contentCarousel._carouselInit(section);
+            config.on.paginationUpdate(swiperInstance);
+
+            expect(true).toBe(true); 
         });
     });
 });

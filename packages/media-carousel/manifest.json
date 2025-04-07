@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "media-carousel",
     "type": "edge",
-    "version": "4.0.3",
+    "version": "4.0.4",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Links to media, displayed as cards in a carousel.",
     "displayName": "Media carousel",
