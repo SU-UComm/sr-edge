@@ -28,53 +28,53 @@
  * @returns {object}
  */
 export function formatCardDataEvents({
-  event: {
-    title,
-    description,
-    // eslint-disable-next-line camelcase
-    event_instances,
-    // eslint-disable-next-line camelcase
-    localist_url,
-    // eslint-disable-next-line camelcase
-    photo_url,
-    filters,
-  },
+    event: {
+        title,
+        description,
+        // eslint-disable-next-line camelcase
+        event_instances,
+        // eslint-disable-next-line camelcase
+        localist_url,
+        // eslint-disable-next-line camelcase
+        photo_url,
+        filters,
+    },
 }) {
-  // start date (date) and end date
-  // eslint-disable-next-line camelcase
-  const [instance] = event_instances;
-  const endDate = instance.event_instance.end;
-  const date = instance.event_instance.start;
+    // start date (date) and end date
+    // eslint-disable-next-line camelcase
+    const [instance] = event_instances;
+    const endDate = instance.event_instance.end;
+    const date = instance.event_instance.start;
 
-  // liveUrl
-  // eslint-disable-next-line camelcase
-  const liveUrl = localist_url;
+    // liveUrl
+    // eslint-disable-next-line camelcase
+    const liveUrl = localist_url;
 
-  // image
-  const imageAlt = title;
-  // eslint-disable-next-line camelcase
-  const imageUrl = photo_url;
+    // image
+    const imageAlt = title;
+    // eslint-disable-next-line camelcase
+    const imageUrl = photo_url;
 
-  // taxonomy
-  const taxonomy = filters.event_types ? filters.event_types[0].name : "";
-  const taxonomyUrl = null;
+    // taxonomy
+    const taxonomy = filters.event_types ? filters.event_types[0].name : "";
+    const taxonomyUrl = null;
 
-  // type
-  const type = null;
+    // type
+    const type = null;
 
-  const videoUrl = null;
+    const videoUrl = null;
 
-  return {
-    title,
-    description,
-    liveUrl,
-    imageUrl,
-    imageAlt,
-    taxonomy,
-    taxonomyUrl,
-    type,
-    videoUrl,
-    date,
-    endDate,
-  };
+    return {
+        title,
+        description,
+        liveUrl,
+        imageUrl,
+        imageAlt,
+        taxonomy,
+        taxonomyUrl,
+        type,
+        videoUrl,
+        date,
+        endDate,
+    };
 }

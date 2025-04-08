@@ -1,5 +1,5 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
-import { ensureLoopConditions, paginationUpdater, updateAccessibility } from '../../global/js/helpers';
+import { ensureLoopConditions, paginationUpdater, updateAccessibility } from '../../global/js/helpers/swiperHelpers';
 
 /**
  * Globals variables 

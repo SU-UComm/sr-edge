@@ -6,7 +6,7 @@
         "ctaNewWindow": false
     },
     "contentConfiguration": {
-        "eventsUrl": "https://news.stanford.edu/_api/events/query?days=365&sponsored=true"
+        "eventsUrl": "https://events.stanford.edu/api/2/events?days=365&sponsored=true"
     },
     "displayConfiguration": {
         "numberOfEvents": 6
