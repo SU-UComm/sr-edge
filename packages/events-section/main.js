@@ -146,7 +146,6 @@ export default {
             isAlwaysLight: false,
             width: "large",
             cardSize: "small",
-            test: JSON.stringify(data),
             data: cardData,
         };
 
