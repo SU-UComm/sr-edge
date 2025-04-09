@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "content-carousel",
     "type": "edge",
-    "version": "4.0.5",
+    "version": "4.0.6",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "A carousel of slides that contain WYSIWYG content.",
     "displayName": "Content Carousel",

@@ -25,6 +25,7 @@ export function _carouselInit(section) {
         slidesPerView: 1,
         variantClassName: "component-slider-single",
         loop: true,
+        watchSlidesProgress: true,
         spaceBetween: 40,
         keyboard: {
             enabled: true,
@@ -67,8 +68,19 @@ export function _carouselInit(section) {
         // Add slide change event handler with accessibility management
         swiper.on('slideChange', function() {
             /* v8 ignore start */
-            setTimeout(() => { 
-                updateAccessibility(swiper, 'a, button', true);
+            setTimeout(() => {
+                updateAccessibility(swiper, '', false); 
+        
+                const activeSlide = swiper.slides.find(slide => slide.classList.contains("swiper-slide-active"));
+                if (activeSlide) {
+                    const focusTarget = activeSlide.querySelector('.su-wysiwyg-content');
+                    if (focusTarget) {
+                        focusTarget.setAttribute('tabindex', '-1'); 
+                        focusTarget.focus();
+                    } else {
+                        activeSlide.focus(); 
+                    }
+                }
             }, 300);
             /* v8 ignore stop */
         });
