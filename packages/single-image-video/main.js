@@ -1,7 +1,5 @@
-import { basicAssetUri } from '../../global/js/utils';
-import { Play, VideoPlay } from '../../global/js/helpers/SVG-library';
-import { Modal, EmbedVideo } from '../../global/js/helpers';
-import { cnb } from 'cnbuilder';
+import xss from "xss";
+import { basicAssetUri, uuid } from '../../global/js/utils';
 
 import singleImageVideoTemplate from './single-image-video.hbs';
 
@@ -96,6 +94,11 @@ export default {
                     `The "caption" field must be a string. The ${JSON.stringify(caption)} was received.`
                 );
             }
+            if (credit && typeof credit !== 'string') {
+                throw new Error(
+                    `The "credit" field must be a string. The ${JSON.stringify(credit)} was received.`
+                );
+            }
             if (width && !['Wide', 'Narrow'].includes(width) ) {
                 throw new Error(
                     `The "width" field must be one of ["Wide", "Narrow"]. The ${JSON.stringify(width)} was received.`
@@ -153,67 +156,46 @@ export default {
             }
         }
 
+        // Prepare checks and unique id
+        const headerSection = !!(title || summary);  
+        const showComponent = !!(vimeoid || youtubeid || image);
+        const uniqueID = uuid();
+        
         // Prepare caption-credit data
         const captionCredit = [caption, credit].filter(Boolean).join(' | ');
+        
+        // Prepare modal data 
+        let modalData = null
 
-
-        const isVideo = !!(vimeoid || youtubeid);
-        const videoID = vimeoid || youtubeid;
-
-        const videoWrapperClass = isVideo ? 'su-w-full su-aspect-[16/9] su-relative' : 'su-w-full su-relative';
-
-        const summaryClass = cnb(
-        section.summaryAlign === "center" ? "su-text-center" : "su-text-left",
-        "su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem]",
-        "md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem]",
-        "lg:su-text-[2.1rem] lg:su-leading-[2.625rem]"
-        );
-
-        const videoTitle = video?.heading || "";
-
-        const playButtonIconClass = cnb(
-        width === "Wide"
-            ? "*:su-w-[40px] *:su-h-[40px] *:md:su-w-[60px] *:md:su-h-[60px] *:lg:su-w-[100px] *:lg:su-h-[100px] *:lg:su-size-100 lg:su-bottom-38 lg:su-left-38"
-            : "*:su-w-[40px] *:md:su-w-[60px]",
-        "su-play-button-icon su-play-btn su-transition-all su-absolute su-bottom-20 su-left-20 md:su-left-27 md:su-bottom-27 md:su-block"
-        );
-
-        const modal = isVideo
-        ? Modal({
-            titleId: "image-gallery-modal",
-            title: "Modal",
-            children: EmbedVideo({
-            videoId,
-            title: `Watch ${videoTitle}`,
-            }),
-        })
-        : '';
+        if (youtubeid) {
+            modalData = {
+                isVertical: true, 
+                videoId:  youtubeid, 
+                title:  `Watch ${heading}`, 
+                noAutoPlay:  true,
+                uniqueID: uniqueID, 
+                titleID:  'video-modal'
+            }
+        }
 
         // Prepare component data for template rendering
         const componentData = {
             width: width || "Wide",
             marginTop: marginTop || "default",
             marginBottom: marginBottom || "default",
+            showComponent,
+            headerSection,
             title,
-            summary,
-            
-            videoWrapperClass,
+            summary: xss(summary),
             imageData,
-            isVideo,
-            captionCredit,
-            videoEmbedData: {
-                isVimeo: Boolean(video?.vimeoid),
-                videoId: video?.vimeoid,
-                videoTitle,
-                imageUrl: imageData?.url,
-                imageAlt: imageData?.attributes?.alt,
-            },
-            videoPlayIcon: VideoPlay(),
-            playButtonIconClass,
-            hasControlButton: video?.youtubeid && video?.vimeoid,
-            playIcon: Play(),
-            modal,
+            vimeoid,
+            youtubeid,
+            videoTitle: heading ? `Watch ${heading}` : "",
+            captionCredit: xss(captionCredit),
+            modalData,
+            uniqueID
         };
+
         return singleImageVideoTemplate(componentData);
     }
 };

@@ -1,56 +1,75 @@
+{{~#if showComponent~}}
 <section data-component="single-image-video">
     <div class="{{containerClasses width=width marginTop=marginTop marginBottom=marginBottom}}">
         <section class="su-flex su-flex-col su-items-center">
-            {{~#if title~}}
+            {{~#if headerSection~}}
             <div class="su-w-full md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto su-rs-mb-3">
+                {{~#if title~}}
                 <h2 class="su-text-center su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
                     {{title}}
                 </h2>
+                {{~/if~}}
                 {{~#if summary~}}
-                <div class="{{getStringByCondition value=summaryAlign expectedValue="center" trueResult="su-text-center" falseResult="su-text-left"}} su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
+                <div data-test="component-story-lead" class="{{getStringByCondition value=summaryAlign expectedValue="center" trueResult="su-text-center" falseResult="su-text-left"}} su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
                     {{{summary}}}
                 </div>
                 {{~/if~}}
             </div>
             {{~/if~}}
-            <div class="{{getStringByCondition value=isVideo expectedValue="true" trueResult="su-w-full su-aspect-[16/9] su-relative" falseResult="su-w-full su-relative"}}">
-                {{~#if isVideo~}}
+            <div class="{{getStringByCondition value=youtubeid expectedValue="" trueResult="su-w-full" falseResult="su-w-full su-aspect-[16/9]"}} su-relative">
+                {{~#if youtubeid~}}
                 <button data-click="open-modal" class="su-cursor-pointer su-absolute su-top-0 su-left-0 su-size-full su-play-scale" aria-haspopup="dialog" aria-label="Watch video" title="Watch video" data-modal-id="{{uniqueID}}" >
-                    <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-size-full" />
+                {{~/if~}}
+                    {{~#if vimeoid~}}
+                    <iframe
+                        src="https://player.vimeo.com/video/{{vimeoid}}?autoplay=0&loop=1&autopause=0&background=1"
+                        class="su-size-full su-absolute su-top-0 su-left-0 su-pointer-events-none"
+                        allow="autoplay; fullscreen"
+                        data-role="video-player"
+                        title="{{videoTitle}}"
+                    ></iframe>
+                    {{~else~}}
+                        {{~#if imageData.url~}}
+                        <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-size-full" />
+                        {{~/if~}}
+                    {{~/if~}}
+                    {{~#if youtubeid~}}
                     <span class="{{getStringByCondition value=width expectedValue="Wide" trueResult="*:su-w-[40px] *:su-h-[40px] *:md:su-w-[60px] *:md:su-h-[60px] *:lg:su-w-[100px] *:lg:su-h-[100px] *:lg:su-size-100 lg:su-bottom-38 lg:su-left-38" falseResult="*:su-w-[40px] *:md:su-w-[60px]"}} su-play-button-icon su-play-btn su-transition-all su-absolute su-bottom-20 su-left-20 md:su-left-27 md:su-bottom-27 md:su-block">
-                         {{> fontawesome-icon
-                            icon="circle-play"
-                            iconTestId="svg-circle-play"
-                            set="regular"
-                            classes="su-text-white dark:su-text-white su-drop-shadow-[0px_10px_20px_rgba(0,0,0,0.30)]"
-                        }}
+                         {{> svg-icons icon="video play"}}
                     </span>
+                    {{~/if~}}
+                {{~#if youtubeid~}}
                 </button>
                 {{~else~}}
-                <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-w-full su-object-cover" />
+                    {{~#if imageData.url~}}
+                    <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-w-full su-object-cover" />
+                    {{~/if~}}
                 {{~/if~}}
-
             </div>
-
-            <div
-                class="su-flex su-gap-8 md:su-gap-22 su-w-full su-relative su-flex-col su-items-center lg:su-flex-row lg:su-items-start su-mt-8 md:su-mt-9 lg:su-mt-15">
+            <div class="su-flex su-gap-8 md:su-gap-22 su-w-full su-relative su-flex-col su-items-center lg:su-flex-row lg:su-items-start su-mt-8 md:su-mt-9 lg:su-mt-15">
                 <div class="su-mx-auto su-flex su-justify-center su-w-full">
-                    <p
-                        class="dark:su-text-white su-m-0 su-text-14 su-max-w-[633px] su-leading-[16.72px] su-font-normal su-text-black-70 md:su-text-16 md:su-leading-[19.11px] md:su-text-left">
+                    <p class="dark:su-text-white su-m-0 su-text-14 su-max-w-[633px] su-leading-[16.72px] su-font-normal su-text-black-70 md:su-text-16 md:su-leading-[19.11px] md:su-text-left">
                         {{{captionCredit}}}
                     </p>
                 </div>
-                {{#if hasControlButton}}
-                <button data-role="video-control" type="button"
-                    class="su-text-black-70 su-relative su-shrink-0 dark:su-text-white hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red hocus:su-underline">
+                {{~#if vimeoid~}}
+                <button data-role="video-control" data-label-play="Play looping video" data-label-pause="Pause looping video" type="button" class="su-text-black-70 su-relative su-shrink-0 dark:su-text-white hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red hocus:su-underline">
                     <span class="*:su-size-14 su-flex su-gap-6 su-items-center su-text-14 lg:su-top-0 lg:su-right-0">
-                        {{{playIcon}}}
+                        {{> svg-icons icon="play" }}
+                        {{> svg-icons icon="pause" classes="su-hidden"}}
                         Play looping video
                     </span>
                 </button>
-                {{/if}}
+                {{~/if~}}
             </div>
-            {{{modal}}}
         </section>
     </div>
+    {{~#if youtubeid~}}
+    <section data-modal="modal-wrapper">
+            {{#> modal-content uniqueID=modalData.uniqueID titleID=modalData.titleID}}
+                {{> embed-video isVertical=modalData.isVertical classes=modalData.classes videoId=modalData.videoId noAutoPlay=modalData.noAutoPlay title=modalData.title}}
+            {{/ modal-content}}
+    </section>
+    {{~/if~}}
 </section>
+{{~/if~}}
