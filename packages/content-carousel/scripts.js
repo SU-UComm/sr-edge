@@ -2,12 +2,11 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs
 import { ensureLoopConditions, paginationUpdater, updateAccessibility } from '../../global/js/helpers/swiperHelpers';
 
 export const CONTENT_CAROUSEL_SELECTOR = 'section[data-component="content-carousel"]';
-export let swiper; 
 
 export function _carouselInit(section) {
     const uniqueClass = section.dataset.uniqueId;
 
-    swiper = new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
+    const swiper = new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
         breakpoints: {
             0: { 
                 slidesPerView: 1, 
@@ -69,19 +68,8 @@ export function _carouselInit(section) {
         swiper.on('slideChange', function() {
             /* v8 ignore start */
             setTimeout(() => {
-                updateAccessibility(swiper, '', false); 
-        
-                const activeSlide = swiper.slides.find(slide => slide.classList.contains("swiper-slide-active"));
-                if (activeSlide) {
-                    const focusTarget = activeSlide.querySelector('.su-wysiwyg-content');
-                    if (focusTarget) {
-                        focusTarget.setAttribute('tabindex', '-1'); 
-                        focusTarget.focus();
-                    } else {
-                        activeSlide.focus(); 
-                    }
-                }
-            }, 300);
+                updateAccessibility(swiper, 'slide', true);
+            }, 100);
             /* v8 ignore stop */
         });
 

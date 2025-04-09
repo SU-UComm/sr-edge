@@ -12,6 +12,12 @@ import * as topicSubtopicListing from './scripts';
 global.fetch = vi.fn();
 global.scrollTo = vi.fn();
 
+const mockedError = vi.fn();
+console.error = mockedError;
+
+const mockedWarn = vi.fn();
+console.warn = mockedWarn;
+
 vi.mock('../../global/js/utils/formatCardDataFunnelback', () => ({
     formatCardDataFunnelback: vi.fn().mockReturnValue({
         title: "Statement on disruption of class",
