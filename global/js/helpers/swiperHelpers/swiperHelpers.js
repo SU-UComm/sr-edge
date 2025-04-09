@@ -87,10 +87,8 @@ export function paginationUpdater(swiper) {
  */
 export const updateAccessibility = (swiper, focusItems, isFocus) => {
 
-    console.log('swiper', swiper);
     // Manage slides visibility and interactivity
     swiper.slides.forEach((slide) => {
-        console.log('slide', slide);
         if (slide.classList.contains("swiper-slide-active")) {
             slide.removeAttribute("aria-hidden");
             slide.removeAttribute("inert");
@@ -105,7 +103,6 @@ export const updateAccessibility = (swiper, focusItems, isFocus) => {
                 }
                             
                 slideTarget && slideTarget.focus();
-                console.log('slideTarget', slideTarget);
             }
         } else {
             slide.setAttribute("aria-hidden", "true");
