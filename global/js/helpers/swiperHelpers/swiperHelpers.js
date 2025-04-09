@@ -85,28 +85,33 @@ export function paginationUpdater(swiper) {
  * @param {object} swiper.pagination - The pagination object.
  * @param {HTMLElement[]} swiper.pagination.bullets - The array of pagination bullet elements.
  */
-export const updateAccessibility = (swiper, focusItems = "a, button", isFocus) => {
+export const updateAccessibility = (swiper, focusItems, isFocus) => {
+
+    console.log('swiper', swiper);
     // Manage slides visibility and interactivity
     swiper.slides.forEach((slide) => {
+        console.log('slide', slide);
         if (slide.classList.contains("swiper-slide-active")) {
             slide.removeAttribute("aria-hidden");
             slide.removeAttribute("inert");
             slide.setAttribute("tabindex","-1");
+            if (focusItems && isFocus) {
+                let slideTarget = null;
+
+                if (focusItems === 'slide') {
+                    slideTarget = slide
+                } else {
+                    slideTarget = slide.querySelector(focusItems);
+                }
+                            
+                slideTarget && slideTarget.focus();
+                console.log('slideTarget', slideTarget);
+            }
         } else {
             slide.setAttribute("aria-hidden", "true");
             slide.setAttribute("inert", "true");
             slide.removeAttribute("tabindex");
         }  
-
-        if (focusItems) {
-            const slideTarget = slide.querySelector(focusItems)
-            ? slide.querySelector(focusItems)
-            : null;
-
-            if(isFocus) {
-                slideTarget && slideTarget.focus();
-            }
-        }
     });
 
     // Update pagination bullets aria-current state
