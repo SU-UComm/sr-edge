@@ -95,6 +95,7 @@ export default {
                 description: xss(card.description),
                 date: formatNewsDate(card.date),
                 liveUrl: card.liveUrl,
+                isRealExternalLink: isRealExternalLink(card?.liveUrl),
                 isExternalLink: isRealExternalLink(card?.liveUrl) && (Array.isArray(card?.isTeaser) ? card.isTeaser[0] === "true" : card?.isTeaser === "true"),
                 imageUrl: card.imageUrl,
                 imageAlt: card.imageAlt,
