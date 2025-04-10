@@ -1,3 +1,5 @@
+import { postMessageToVimeo, setControlLabel } from '../../global/js/helpers/VideoUtils';
+
 /**
  * Globals variables 
  * @constant {string} SINGLE_IMAGE_VIDEO_SELECTOR - Selector for vertical video panel elements.
@@ -77,42 +79,14 @@ export function _modalInit(section) {
             currentModal && closeModal(currentModal);
         }
     });
-};
-
-// Play/pause helpers
-export function postMessageToVimeo(player, command) {
-    player.contentWindow.postMessage(JSON.stringify({method: command}), '*');
-}
-
-export function setControlLabel(btn, state) {    
-    const playIcon = btn.querySelector('svg[data-control="play"]');
-    const pauseIcon = btn.querySelector('svg[data-control="pause"]');
-    const newState = !state;
-
-    btn.setAttribute('aria-pressed', String(newState));
-    
-    playIcon.classList.toggle('su-hidden', newState);
-    playIcon.hidden = newState;
-
-    pauseIcon.classList.toggle('su-hidden', !newState);
-    pauseIcon.hidden = !newState;
-
-    btn.innerHTML = `
-    <span class="*:su-size-14 su-flex su-gap-6 su-items-center su-text-14 lg:su-top-0 lg:su-right-0">
-        ${playIcon.outerHTML}
-        ${pauseIcon.outerHTML}
-        ${newState ? btn.getAttribute('data-label-pause') : btn.getAttribute('data-label-play')}
-    </span>
-  `
-}
-
+  }
+  
 /**
  * Video Init function
  * @param {HTMLElement} section - The section DOM Element
  */
 
 export function _videoInit(section) {
-    console.log('_videoInit')
     const videoPlayer = section.querySelector(SINGLE_IMAGE_VIDEO_VIDEO_PLAYER_FRAME);
     const videoPlayerControl = section.querySelector(SINGLE_IMAGE_VIDEO_VIDEO_CONTROL_BTN);
     let isManuallyPaused = false;

@@ -58,3 +58,6 @@ export * from './SVG-library';
 
 // Swiper Helpers
 export { duplicateSlides, ensureLoopConditions, paginationUpdater, updateAccessibility } from './swiperHelpers';
+
+// videoUtils helpers
+export * from './VideoUtils';
