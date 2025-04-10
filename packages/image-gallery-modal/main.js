@@ -20,6 +20,7 @@ export default {
      * @param {string} [args.contentConfiguration.credit] - The text for credit of whole gallery (optional).
      * @param {string} [args.contentConfiguration.title] - The text of gallery title (optional).
      * @param {string} [args.contentConfiguration.summary] - The text of gallery summary (optional).
+     * @param {string} [args.contentConfiguration.summaryAlign] - The flag to align summary (optional).
      * @param {Object} args.displayConfiguration - The display configuration for the component.
      * @param {string} args.displayConfiguration.backgroundColor - The flag specifying the background color.
      * @param {string} args.displayConfiguration.width - The flag specifying the width of the gallery.
@@ -36,7 +37,7 @@ export default {
         const fnsCtx = info?.fns || info?.ctx || {};
 
         // Extracting configuration data from arguments
-        const { layout, images, caption, credit, title, summary } = args?.contentConfiguration || {};
+        const { layout, images, caption, credit, title, summary, summaryAlign } = args?.contentConfiguration || {};
         const { displayIconHeading, backgroundColor, width } = args?.displayConfiguration || {};
 
         // Validate required environment variables
@@ -91,6 +92,11 @@ export default {
             if (layout === 'Title & Content' && summary && typeof summary !== 'string') {
                 throw new Error(
                     `The "summary" field must be a string. The ${JSON.stringify(summary)} was received.`
+                );
+            }
+            if (layout === 'Title & Content' && summaryAlign && !['left', 'center'].includes(summaryAlign)) {
+                throw new Error(
+                    `The "summaryAlign" field must be one of ["left", "center"]. The ${JSON.stringify(summaryAlign)} was received.`
                 );
             }
             if (displayIconHeading && typeof displayIconHeading !== 'boolean') {
@@ -173,10 +179,11 @@ export default {
         // Prepare component data for template rendering
         const componentData = {
             backgroundColor,
-            layout: layout,
+            layout,
             sidebarHeading: displayIconHeading ? SidebarHeading({ color: "media",  icon: "mediagallery", title: "Media gallery" }) : '',
-            title: title,
-            summary: summary,
+            title,
+            summary,
+            summaryAlign,
             images: ImageMosaic({ data: previewData, remainingImageCount: leftOverImages}),
             captionCredit,
             modal: Modal({uniqueId, content: modalCarousel, titleId: 'image-gallery-modal' }),
