@@ -2,6 +2,7 @@ import xss from "xss";
 import { formatNewsDate } from "../../utils/formatNewsDate";
 import { avatar } from "../quotes/avatar";
 import { ArrowRight } from "../SVG-library";
+import { isRealExternalLink } from "../../utils";
 /**
  * Narrow Horizontal Card styles
  */
@@ -59,10 +60,7 @@ export function NarrowHorizontalCard({
   const avatarRef = authorAvatar || imgUrl;
   const avatarClass = authorAvatar ? "su-ml-[-3px] su-mb-[-3px]" : "";
 
-  let isExternalLink = isTeaser || false;
-  if (typeof isTeaser === "object") {
-    isExternalLink = isTeaser[0] === "true";
-  }
+  let isExternalLink = isRealExternalLink(liveUrl) && (Array.isArray(isTeaser) ? isTeaser[0] === "true" : isTeaser === "true");
 
   const authorDate = `
     <time class="su-text-black-70 dark:su-text-black-60 su-font-semibold">
