@@ -109,11 +109,15 @@ export async function fetchTopicData(args) {
  * @param {string} pagination - Rendered pagination HTML string.
  */
 export function updateState(section, cards, pagination, modal) {
-    document.querySelector(TOPICS_LIST_SELECTOR).innerHTML = cards;
-    document.querySelector(PAGINATION_SELECTOR).innerHTML = pagination;
-    document.querySelector(TOPICS_SUBTOPICS_LISTING_MODAL_SELECTOR).innerHTML = modal;
+    section.querySelector(TOPICS_LIST_SELECTOR).innerHTML = `<div class="su-w-full su-component-horizontal-card-grid" data-test="orientation-topiclisting"><div class="su-relative su-grid su-grid-cols-1 su-gap-30 md:su-gap-48 lg:su-gap-61">${cards}</div></div>`;
+    section.querySelector(PAGINATION_SELECTOR).innerHTML = pagination;
+    section.querySelector(TOPICS_SUBTOPICS_LISTING_MODAL_SELECTOR).innerHTML = modal;
     /* v8 ignore start */
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const yOffset = -100 - 60; // the header height with extra the gap
+    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  
+    window.scrollTo({ top: y, behavior: "smooth" });
+    // section?.scrollIntoView({ behavior: "smooth" });
     /* v8 ignore stop */
     _modalInit(section);
     _topicsInit(section);
@@ -158,10 +162,9 @@ export async function handleButtonClick(args) {
         
         if(["Press Center", "Leadership Messages", "University Updates", "Announcements", "In the News"].includes(display)) {
             cardData.displayConfiguration = display;
-            cards.push(NarrowHorizontalCard({ data: cardData, cardType: "narrowhorizontal" }));
+            cards.push(`<div class="su-relative su-grow">${NarrowHorizontalCard({ data: cardData, cardType: "narrowhorizontal" })}</div>`);
         } else {
-            // cards.push(JSON.stringify(cardData))
-            cards.push(HorizontalCard({ data: cardData, cardType: "horizontal", cardSize: "large" }));
+            cards.push(`<div class="su-relative su-grow">${HorizontalCard({ data: cardData, cardType: "horizontal", cardSize: "large" })}</div>`);
         }
         if(cardData.type === 'Video' || cardData.videoUrl) {
             modalData.push({

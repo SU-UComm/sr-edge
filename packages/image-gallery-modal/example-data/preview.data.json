@@ -1,8 +1,9 @@
 {
     "contentConfiguration": {
+        "layout": "Title & Content",
         "title": "NIH’s cap on indirect costs could threaten research at Stanford and across the country",
         "summary": "A Massachusetts court has blocked the National Institutes of Health cap on indirect costs, which university leaders say would sharply cut back U.S. biomedical research.",
-        "layout": "Title & Content",
+        "summaryAlign": "center",
         "images": [
             {
                 "image": "matrix-asset://api-identifier/163904",

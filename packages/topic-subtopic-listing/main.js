@@ -1,5 +1,5 @@
 import xss from "xss";
-import { cardDataAdapter, funnelbackCardService, uuid, formatNewsDate } from "../../global/js/utils";
+import { cardDataAdapter, funnelbackCardService, uuid, formatNewsDate, isRealExternalLink } from "../../global/js/utils";
 import { pagination } from "../../global/js/helpers";
 import topicListingTemplate from "./topic-subtopic-listing.hbs";
 
@@ -95,7 +95,7 @@ export default {
                 description: xss(card.description),
                 date: formatNewsDate(card.date),
                 liveUrl: card.liveUrl,
-                isExternalLink: Array.isArray(card.isTeaser) ? card.isTeaser[0] === "true" : card.isTeaser || false,
+                isExternalLink: isRealExternalLink(card?.liveUrl) && (Array.isArray(card?.isTeaser) ? card.isTeaser[0] === "true" : card?.isTeaser === "true"),
                 imageUrl: card.imageUrl,
                 imageAlt: card.imageAlt,
                 avatarSize: "small",
@@ -104,10 +104,12 @@ export default {
                 taxonomy: xss(card.taxonomy),
                 taxonomyUrl: card.taxonomyUrl,
                 taxonomyFeaturedUnitText: xss(card.taxonomyFeaturedUnitText),
+                taxonomyFeaturedUnitLandingPageUrl: card.taxonomyFeaturedUnitLandingPageUrl,
                 storySource: xss(card.storySource),
-                videoUrl: card.videoUrl,
+                videoUrl: card.videoUrl
             }
 
+            
             if(card.type === 'Video' || card.videoUrl) {
                 modalData.push({
                     isVertical: card.size === "vertical-video",

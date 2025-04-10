@@ -7,7 +7,6 @@ import { ensureLoopConditions, paginationUpdater, updateAccessibility } from '..
  * @type {import('swiper').Swiper | undefined} swiper - Instance of Swiper for handling gallery interactions.
  */
 export const MEDIA_CAROUSEL_SELECTOR = 'section[data-component="media-carousel"]';
-export let swiper; 
 
 /**
  * Carousel Init function for card
@@ -16,7 +15,7 @@ export let swiper;
 export function _carouselInit(section) {
     const uniqueClass = section.dataset.uniqueId;
     
-    swiper = new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
+    const swiper = new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
         breakpoints: {
             0: {
                 slidesPerView: 1.4,

@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "topic-subtopic-listing",
     "type": "edge",
-    "version": "4.0.6",
+    "version": "4.0.8",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Listing of stories as cards with pagination.",
     "displayName": "Topic / subtopic listing",
