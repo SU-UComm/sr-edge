@@ -104,8 +104,9 @@ export default {
                 taxonomy: xss(card.taxonomy),
                 taxonomyUrl: card.taxonomyUrl,
                 taxonomyFeaturedUnitText: xss(card.taxonomyFeaturedUnitText),
+                taxonomyFeaturedUnitLandingPageUrl: card.taxonomyFeaturedUnitLandingPageUrl,
                 storySource: xss(card.storySource),
-                videoUrl: card.videoUrl,
+                videoUrl: card.videoUrl
             }
 
             if(card.type === 'Video' || card.videoUrl) {
