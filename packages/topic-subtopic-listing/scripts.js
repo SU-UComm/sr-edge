@@ -113,7 +113,11 @@ export function updateState(section, cards, pagination, modal) {
     section.querySelector(PAGINATION_SELECTOR).innerHTML = pagination;
     section.querySelector(TOPICS_SUBTOPICS_LISTING_MODAL_SELECTOR).innerHTML = modal;
     /* v8 ignore start */
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const yOffset = -100 - 60; // the header height with extra the gap
+    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  
+    window.scrollTo({ top: y, behavior: "smooth" });
+    // section?.scrollIntoView({ behavior: "smooth" });
     /* v8 ignore stop */
     _modalInit(section);
     _topicsInit(section);
