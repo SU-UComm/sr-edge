@@ -58,6 +58,8 @@ mediacard
 Endpiont
 topiclisting
 leadershipmessages
+vimeoid
+youtubeid
 
 # Lorem Ipsum 
 ezgif
