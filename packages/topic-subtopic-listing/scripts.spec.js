@@ -378,7 +378,7 @@ describe('[Topic Subtopic Listing][Client]', () => {
                 expect(handleButtonClickSpy).toHaveBeenCalled();
                 expect(document.body.innerHTML).toMatchInlineSnapshot(`
                   "
-                          <section data-component="topic-subtopic-listing" data-query="?profile=stanford-report-push-search&amp;collection=sug~sp-stanford-report-search&amp;query=[meta_taxonomyContentTypeId:28201 taxonomyContentMainTopicId:28408 taxonomyContentTopicsId:28408 taxonomyContentSubtopicsId:28408]&amp;meta_taxonomyContentTypeId_not=28210&amp;meta_taxonomyContentTypeId_not=28216&amp;sort=date&amp;log=false" data-endpoint="https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford/_api/fb/query" data-display="News Archive"><div class="su-mx-auto su-component-container su-container-px"><div data-element="topics-list">
+                          <section data-component="topic-subtopic-listing" data-query="?profile=stanford-report-push-search&amp;collection=sug~sp-stanford-report-search&amp;query=[meta_taxonomyContentTypeId:28201 taxonomyContentMainTopicId:28408 taxonomyContentTopicsId:28408 taxonomyContentSubtopicsId:28408]&amp;meta_taxonomyContentTypeId_not=28210&amp;meta_taxonomyContentTypeId_not=28216&amp;sort=date&amp;log=false" data-endpoint="https://canary-us.uat.matrix.squiz.cloud/_pnp-stanford/_api/fb/query" data-display="News Archive"><div class="su-mx-auto su-component-container su-container-px"><div data-element="topics-list"><div class="su-w-full su-component-horizontal-card-grid" data-test="orientation-topiclisting"><div class="su-relative su-grid su-grid-cols-1 su-gap-30 md:su-gap-48 lg:su-gap-61"><div class="su-relative su-grow">
                       <article aria-label="undefined" class="su-grid su-grid-gap su-grid-cols-6 lg:su-grid-cols-10" data-testid="narrow-horizontal-card">
                         <div class="su-flex su-flex-col su-gap-12 su-col-start-1 su-col-span-full lg:su-col-span-6 lg:su-col-start-3">
                           
@@ -399,7 +399,7 @@ describe('[Topic Subtopic Listing][Client]', () => {
                           
                         </div>
                       </article>
-                    
+                    </div><div class="su-relative su-grow">
                       <article aria-label="undefined" class="su-grid su-grid-gap su-grid-cols-6 lg:su-grid-cols-10" data-testid="narrow-horizontal-card">
                         <div class="su-flex su-flex-col su-gap-12 su-col-start-1 su-col-span-full lg:su-col-span-6 lg:su-col-start-3">
                           
@@ -420,7 +420,7 @@ describe('[Topic Subtopic Listing][Client]', () => {
                           
                         </div>
                       </article>
-                    </div><div data-element="topics-pagination">undefined</div></div><section data-element="modal-wrapper"></section></section>
+                    </div></div></div></div><div data-element="topics-pagination">undefined</div></div><section data-element="modal-wrapper"></section></section>
                           "
                 `);
             });
