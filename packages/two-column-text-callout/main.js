@@ -1,4 +1,5 @@
-import { basicAssetUri } from '../../global/js/utils';
+import xss from "xss";
+import { basicAssetUri, isRealExternalLink } from '../../global/js/utils';
 import { infoBox } from '../../global/js/helpers';
 import twoColumnTemplate from './two-column-text-callout.hbs';
 
@@ -81,6 +82,8 @@ export default {
             return `<!-- Error occurred in the Two Column Text Callout component: ${er.message} -->`;
         }
 
+        const calloutsData = [];
+
         // Process callouts
         const processedCallouts = await Promise.all(
             callouts.map(async (callout) => {
@@ -104,25 +107,22 @@ export default {
                 // Check for empty element 
                 const notEmpty = !!(title || content || image || (buttonText && (externalUrl || internalLinkUrl)))
 
-                if (!notEmpty) {
-                    return;
+                if (notEmpty) {
+                    // Using data to get infoBox for each callout
+                    calloutsData.push({
+                        containerClasses: "su-flex",
+                        innerClasses: "su-p-20 md:su-p-36 su-w-full",
+                        title,
+                        content: xss(content),
+                        captionCredit: caption && credit ? `${caption} | ${credit}` : caption || credit,
+                        imagePlacement,
+                        imageData,
+                        buttonText,
+                        buttonUrl: internalLinkUrl || externalUrl,
+                        isRealExternalLink: !internalLinkUrl && externalUrl ? isRealExternalLink(externalUrl) : false,
+                        isNewWindow,
+                    });
                 }
-
-                // Using data to get infoBox for each callout
-                return infoBox({
-                    containerClassName: "su-flex",
-                    innerClassName: "su-p-20 md:su-p-36 su-w-full",
-                    title,
-                    content,
-                    caption,
-                    credit,
-                    imagePlacement,
-                    imageData,
-                    buttonText,
-                    externalUrl,
-                    internalLinkUrl,
-                    isNewWindow,
-                });
             })
         );
 
@@ -130,7 +130,7 @@ export default {
         const componentData = {
             heading,
             showTopBorder,
-            flexContainer: processedCallouts.join(''),
+            calloutsData,
             flexContainerLength: `${processedCallouts.length}`,
             flexContainerPaddingX: false,
             width: "wide",
