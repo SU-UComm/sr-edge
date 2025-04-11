@@ -132,8 +132,74 @@ describe('[Two Column Text Callout]', () => {
         it('Should return the expected HTML with valid data', async () => {        
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='two-column-text-callout'><div class='su-mx-auto su-component-container su-container-wide su-container-px' ><hr class='su-border-black-30 dark:su-border-black su-rs-mb-3 su-h-1' /><h2 class='su-type-2 su-font-serif su-text-center su-w-auto su-rs-mb-2 su-text-black dark:su-text-white' >Test Heading</h2><div class='su-mx-auto su-component-container su-container-large su-flex su-grid-gap su-flex-col md:su-max-w-800 su-w-full' ><div class="info-box">Mocked Info Box</div></div></div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component='two-column-text-callout'><div class='su-mx-auto su-component-container su-container-wide su-container-px su-rs-mt-3 su-rs-mb-5' ><hr class='su-border-black-30 dark:su-border-black su-rs-mb-3 su-h-1' /><h2 class='su-type-2 su-font-serif su-text-center su-w-auto su-rs-mb-2 su-text-black dark:su-text-white' >Test Heading</h2><div class='su-mx-auto su-component-container su-container-large su-flex su-grid-gap su-flex-col md:su-max-w-800' ><div class="info-box">Mocked Info Box</div></div></div></section>"`);
         });
+
+
+        it('Should return the expected HTML with empty callouts', async () => {
+            const mockData = {
+                heading: "Section heading",
+                showTopBorder: true,
+                callouts: [
+                    {
+                        imageConfiguration: {
+                            imagePlacement: "Below content"
+                        },
+                        buttonConfiguration: {
+                            isNewWindow: false
+                        }
+                    }
+                ]
+            }
+            const result = await main(mockData, defaultMockInfo);
+
+            expect(result).toMatchInlineSnapshot(`"<section data-component='two-column-text-callout'><div class='su-mx-auto su-component-container su-container-wide su-container-px su-rs-mt-3 su-rs-mb-5' ><hr class='su-border-black-30 dark:su-border-black su-rs-mb-3 su-h-1' /><h2 class='su-type-2 su-font-serif su-text-center su-w-auto su-rs-mb-2 su-text-black dark:su-text-white' >Section heading</h2><div class='su-mx-auto su-component-container su-container-large su-flex su-grid-gap su-flex-col md:su-max-w-800' ></div></div></section>"`);
+        });
+
+        it('Should return the expected HTML with empty callouts with external button', async () => {
+            const mockData = {
+                heading: "Section heading",
+                showTopBorder: true,
+                callouts: [
+                    {
+                        imageConfiguration: {
+                            imagePlacement: "Below content"
+                        },
+                        buttonConfiguration: {
+                            isNewWindow: false,
+                            buttonText: "Button",
+                            externalUrl: "https://squiz.net"
+                        }
+                    }
+                ]
+            }
+            const result = await main(mockData, defaultMockInfo);
+
+            expect(result).toMatchInlineSnapshot(`"<section data-component='two-column-text-callout'><div class='su-mx-auto su-component-container su-container-wide su-container-px su-rs-mt-3 su-rs-mb-5' ><hr class='su-border-black-30 dark:su-border-black su-rs-mb-3 su-h-1' /><h2 class='su-type-2 su-font-serif su-text-center su-w-auto su-rs-mb-2 su-text-black dark:su-text-white' >Section heading</h2><div class='su-mx-auto su-component-container su-container-large su-flex su-grid-gap su-flex-col md:su-max-w-800' ><div class="info-box">Mocked Info Box</div></div></div></section>"`);
+        });
+
+        it('Should return the expected HTML with empty callouts with internal button', async () => {
+            const mockData = {
+                heading: "Section heading",
+                showTopBorder: true,
+                callouts: [
+                    {
+                        imageConfiguration: {
+                            imagePlacement: "Below content"
+                        },
+                        buttonConfiguration: {
+                            isNewWindow: false,
+                            buttonText: "Button",
+                            internalUrl: "matrix-asset://api-identifier/28192",
+                        }
+                    }
+                ]
+            }
+            const result = await main(mockData, defaultMockInfo);
+
+            expect(result).toMatchInlineSnapshot(`"<section data-component='two-column-text-callout'><div class='su-mx-auto su-component-container su-container-wide su-container-px su-rs-mt-3 su-rs-mb-5' ><hr class='su-border-black-30 dark:su-border-black su-rs-mb-3 su-h-1' /><h2 class='su-type-2 su-font-serif su-text-center su-w-auto su-rs-mb-2 su-text-black dark:su-text-white' >Section heading</h2><div class='su-mx-auto su-component-container su-container-large su-flex su-grid-gap su-flex-col md:su-max-w-800' ><div class="info-box">Mocked Info Box</div></div></div></section>"`);
+        });
+
 
         it('Should render heading when provided', async () => {
             const result = await main(defaultMockData, defaultMockInfo);
@@ -170,7 +236,7 @@ describe('[Two Column Text Callout]', () => {
             };
             const result = await main(mockData, defaultMockInfo);
             
-            expect(result).toMatchInlineSnapshot(`"<section data-component='two-column-text-callout'><div class='su-mx-auto su-component-container su-container-wide su-container-px' ><hr class='su-border-black-30 dark:su-border-black su-rs-mb-3 su-h-1' /><h2 class='su-type-2 su-font-serif su-text-center su-w-auto su-rs-mb-2 su-text-black dark:su-text-white' >Test Heading</h2><div class='su-mx-auto su-component-container su-container-large su-flex su-grid-gap su-flex-col md:su-max-w-800 su-w-full lg:su-flex-row lg:su-items-stretch lg:*:su-basis-1/2 lg:su-max-w-[118.6rem] xl:su-px-50' ><div class="info-box">Mocked Info Box</div><div class="info-box">Mocked Info Box</div></div></div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component='two-column-text-callout'><div class='su-mx-auto su-component-container su-container-wide su-container-px su-rs-mt-3 su-rs-mb-5' ><hr class='su-border-black-30 dark:su-border-black su-rs-mb-3 su-h-1' /><h2 class='su-type-2 su-font-serif su-text-center su-w-auto su-rs-mb-2 su-text-black dark:su-text-white' >Test Heading</h2><div class='su-mx-auto su-component-container su-container-large su-flex su-grid-gap su-flex-col md:su-max-w-800 lg:su-flex-row lg:su-items-stretch lg:*:su-basis-1/2 lg:su-max-w-[118.6rem] xl:su-px-50' ><div class="info-box">Mocked Info Box</div><div class="info-box">Mocked Info Box</div></div></div></section>"`);
 
         });
     });

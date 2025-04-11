@@ -101,6 +101,13 @@ export default {
                 }
                 const internalLinkUrl = linkUrl?.url;
 
+                // Check for empty element 
+                const notEmpty = !!(title || content || image || (buttonText && (externalUrl || internalLinkUrl)))
+
+                if (!notEmpty) {
+                    return;
+                }
+
                 // Using data to get infoBox for each callout
                 return infoBox({
                     containerClassName: "su-flex",
@@ -127,8 +134,8 @@ export default {
             flexContainerLength: `${processedCallouts.length}`,
             flexContainerPaddingX: false,
             width: "wide",
-            marginTop: 3,
-            marginBottom: 5,
+            marginTop: '3',
+            marginBottom: '5',
         };
 
         return twoColumnTemplate(componentData);
