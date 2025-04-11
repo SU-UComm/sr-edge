@@ -1,7 +1,7 @@
 {{#if title}}
     <{{headingTag headingSize}} class="su-component-sidebar-heading su-w-full su-flex su-flex-wrap su-gap-6 su-my-0 su-font-sans {{sidebarHeadingClasses color}}">
-        <span data-test="icon" class="dark:su-hidden">{{> svg-icons icon="bullseye pointer" theme="light"}}</span>
-        <span data-test="icon" class="su-hidden dark:su-block">{{> svg-icons icon="bullseye pointer" theme="dark"}}</span>
+        <span data-test="icon" class="dark:su-hidden">{{> svg-icons icon=icon theme="light"}}</span>
+        <span data-test="icon" class="su-hidden dark:su-block">{{> svg-icons icon=icon theme="dark"}}</span>
         <span>{{title}}</span>
     </{{headingTag headingSize}}>
 {{/if}}
