@@ -19,7 +19,6 @@
             <div class="{{getStringByCondition value=youtubeid expectedValue="" trueResult="su-w-full" falseResult="su-w-full su-aspect-[16/9]"}} su-relative">
                 {{~#if youtubeid~}}
                 <button data-click="open-modal" class="su-cursor-pointer su-absolute su-top-0 su-left-0 su-size-full su-play-scale" aria-haspopup="dialog" aria-label="Watch video" title="Watch video" data-modal-id="{{uniqueID}}" >
-                {{~/if~}}
                     {{~#if vimeoid~}}
                     <iframe
                         src="https://player.vimeo.com/video/{{vimeoid}}?autoplay=0&loop=1&autopause=0&background=1"
@@ -33,16 +32,23 @@
                         <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-size-full" />
                         {{~/if~}}
                     {{~/if~}}
-                    {{~#if youtubeid~}}
                     <span class="{{getStringByCondition value=width expectedValue="Wide" trueResult="*:su-w-[40px] *:su-h-[40px] *:md:su-w-[60px] *:md:su-h-[60px] *:lg:su-w-[100px] *:lg:su-h-[100px] *:lg:su-size-100 lg:su-bottom-38 lg:su-left-38" falseResult="*:su-w-[40px] *:md:su-w-[60px]"}} su-play-button-icon su-play-btn su-transition-all su-absolute su-bottom-20 su-left-20 md:su-left-27 md:su-bottom-27 md:su-block">
                          {{> svg-icons icon="video play"}}
                     </span>
-                    {{~/if~}}
-                {{~#if youtubeid~}}
                 </button>
                 {{~else~}}
-                    {{~#if imageData.url~}}
-                    <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-w-full su-object-cover" />
+                    {{~#if vimeoid~}}
+                    <iframe
+                        src="https://player.vimeo.com/video/{{vimeoid}}?autoplay=0&loop=1&autopause=0&background=1"
+                        class="su-size-full su-absolute su-top-0 su-left-0 su-pointer-events-none"
+                        allow="autoplay; fullscreen"
+                        data-role="video-player"
+                        title="{{videoTitle}}"
+                    ></iframe>
+                    {{~else~}}
+                        {{~#if imageData.url~}}
+                        <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-w-full su-object-cover" />
+                        {{~/if~}}
                     {{~/if~}}
                 {{~/if~}}
             </div>
