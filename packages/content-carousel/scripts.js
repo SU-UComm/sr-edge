@@ -5,76 +5,79 @@ export const CONTENT_CAROUSEL_SELECTOR = 'section[data-component="content-carous
 
 export function _carouselInit(section) {
     const uniqueClass = section.dataset.uniqueId;
+    const slidesLength = section.querySelectorAll('.swiper-slide').length;
 
-    const swiper = new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
-        breakpoints: {
-            0: { 
-                slidesPerView: 1, 
-                centeredSlides: false 
+    if (slidesLength > 1 ) {
+        let isFocusable = false;
+        const swiper = new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
+            breakpoints: {
+                0: { 
+                    slidesPerView: 1, 
+                    centeredSlides: false 
+                },
+                768: { 
+                    slidesPerView: 1, 
+                    centeredSlides: false 
+                },
+                992: { 
+                    slidesPerView: 1, 
+                    centeredSlides: false 
+                },
             },
-            768: { 
-                slidesPerView: 1, 
-                centeredSlides: false 
+            slidesPerView: 1,
+            variantClassName: "component-slider-single",
+            loop: true,
+            watchSlidesProgress: true,
+            spaceBetween: 40,
+            keyboard: {
+                enabled: true,
+                onlyInViewport: true,
             },
-            992: { 
-                slidesPerView: 1, 
-                centeredSlides: false 
+            a11y: {
+                prevSlideMessage: 'Previous slide',
+                nextSlideMessage: 'Next slide',
             },
-        },
-        slidesPerView: 1,
-        variantClassName: "component-slider-single",
-        loop: true,
-        watchSlidesProgress: true,
-        spaceBetween: 40,
-        keyboard: {
-            enabled: true,
-            onlyInViewport: true,
-        },
-        a11y: {
-            prevSlideMessage: 'Previous slide',
-            nextSlideMessage: 'Next slide',
-        },
-        navigation: {
-            nextEl: `section[data-unique-id="${uniqueClass}"] .component-slider-next`,
-            prevEl: `section[data-unique-id="${uniqueClass}"] .component-slider-prev`,
-        },
-        pagination: {
-            el: `.component-slider-pagination-${uniqueClass}`,
-            clickable: true,
-            bulletElement: "button",
-            renderBullet: function (index, className) {
-                return `<button ${index === 0 ? 'aria-current="true"' : ""} class="${className}"><span class="sr-only">Slide ${index + 1}</span></button>`;
+            navigation: {
+                nextEl: `section[data-unique-id="${uniqueClass}"] .component-slider-next`,
+                prevEl: `section[data-unique-id="${uniqueClass}"] .component-slider-prev`,
             },
-        },
-        on: {
-            init: swiper => {
-                ensureLoopConditions(swiper);
+            pagination: {
+                el: `.component-slider-pagination-${uniqueClass}`,
+                clickable: true,
+                bulletElement: "button",
+                renderBullet: function (index, className) {
+                    return `<button ${index === 0 ? 'aria-current="true"' : ""} class="${className}"><span class="sr-only">Slide ${index + 1}</span></button>`;
+                },
             },
-            resize: swiper => {
-                ensureLoopConditions(swiper);
-            },
-            paginationUpdate: swiper => {
-                paginationUpdater(swiper);
-            },
-        }
-    });
-
-    const totalSlides = swiper.slides.length;
-    const duplicateSlidesCount = swiper.slides.filter(slide => slide.classList.contains('swiper-slide-duplicate')).length;
-    const originalSlides = Math.floor(totalSlides - duplicateSlidesCount);
-    
-    if (originalSlides > 1) {
-        // Add slide change event handler with accessibility management
-        swiper.on('slideChange', function() {
-            /* v8 ignore start */
-            setTimeout(() => {
-                updateAccessibility(swiper, 'slide', true);
-            }, 100);
-            /* v8 ignore stop */
+            on: {
+                init: swiper => {
+                    ensureLoopConditions(swiper);
+                    /* v8 ignore start */
+                    setTimeout(() => {
+                        isFocusable = true
+                    }, 100)
+                    /* v8 ignore stop */
+                },
+                resize: swiper => {
+                    ensureLoopConditions(swiper);
+                },
+                paginationUpdate: swiper => {
+                    paginationUpdater(swiper);
+                }
+            }
         });
 
-        // Initial accessibility setup
-        updateAccessibility(swiper, '', false);
+        swiper.on('slideChange', function() {
+            /* v8 ignore start */
+            if (isFocusable) {
+                setTimeout(() => {
+                    updateAccessibility(swiper, 'slide', true);
+                }, 100)
+            }
+            /* v8 ignore stop */
+        });
+    } else {
+        section.querySelector('.component-slider-controls')?.remove();
     }
 };
 

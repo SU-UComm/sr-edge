@@ -28,10 +28,18 @@ describe('[Vertical Video Panel][Loop helpers]', () => {
                 slides: [slide],
                 wrapperEl: document.createElement('div'),
                 update: vi.fn(),
+                navigation: {
+                    nextEl: {remove: vi.fn()},
+                    prevEl: {remove: vi.fn()},
+                },
+                pagination: {
+                    bullets: vi.fn()
+                }
             };
 
             ensureLoopConditions(swiper);
-            expect(document.querySelector('.component-slider-controls')).toBeNull();
+            expect(swiper.navigation.nextEl.remove).toHaveBeenCalled();
+            expect(swiper.navigation.prevEl.remove).toHaveBeenCalled();
         });
 
         it('Should add extra slides if totalSlides is not divisible by slidesPerGroup', () => {
@@ -44,6 +52,9 @@ describe('[Vertical Video Panel][Loop helpers]', () => {
                 slides: [slide1, slide2],
                 wrapperEl: document.createElement('div'),
                 update: vi.fn(),
+                pagination: {
+                    bullets: vi.fn()
+                }
             };
 
             const callback = vi.fn();
@@ -70,6 +81,9 @@ describe('[Vertical Video Panel][Loop helpers]', () => {
                 params: { slidesPerView: 3, slidesPerGroup: 3 },
                 wrapperEl: wrapper,
                 update: vi.fn(),
+                pagination: {
+                    bullets: vi.fn()
+                }
             };
 
             ensureLoopConditions(swiper);
@@ -91,6 +105,9 @@ describe('[Vertical Video Panel][Loop helpers]', () => {
                 params: { slidesPerView: 1, slidesPerGroup: 2 },
                 wrapperEl: wrapper,
                 update: vi.fn(),
+                pagination: {
+                    bullets: vi.fn()
+                }
             };
 
             ensureLoopConditions(swiper);
@@ -112,6 +129,9 @@ describe('[Vertical Video Panel][Loop helpers]', () => {
                 params: { slidesPerView: 2, slidesPerGroup: 2 },
                 wrapperEl: wrapper,
                 update: vi.fn(),
+                pagination: {
+                    bullets: vi.fn()
+                }
             };
 
             ensureLoopConditions(swiper);

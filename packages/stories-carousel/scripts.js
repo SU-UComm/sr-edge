@@ -83,7 +83,7 @@ export function _modalInit(section) {
 export function _carouselInit(section) {
     const uniqueClass = section.dataset.uniqueId;
 
-    const swiper = new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
+    new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
         breakpoints: {
             0: {
                 slidesPerView: 1.5,
