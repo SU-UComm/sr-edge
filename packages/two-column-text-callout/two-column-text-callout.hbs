@@ -29,7 +29,9 @@
                     )
                 }}'
         >
-            {{{flexContainer}}}
+        {{~#each calloutsData~}}
+            {{> info-box width="full" paddingX=false containerClasses=containerClasses innerClasses=innerClasses title=title imagePlacement=imagePlacement content=content imageData=imageData captionCredit=captionCredit buttonText=buttonText buttonUrl=buttonUrl isNewWindow=isNewWindow isRealExternalLink=isRealExternalLink}}
+        {{~/each~}}
         </div>
     </div>
 </section>
