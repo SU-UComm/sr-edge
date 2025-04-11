@@ -20,9 +20,9 @@
         "build": "npm-run-all build:*",
         "build:component": "vite build --config vite.config.js",
         "build:global": "vite build --config vite-global.config.js",
-        "watch": "npm run build && chokidar \"./packages/**/*.{js,scss,json,html,hbs}\" --silent -c \"CHANGED_FILE={path} vite build --config vite.config.js && CHANGED_FILE={path} vite build --config vite-global.config.js\"",
+        "watch": "chokidar \"./packages/**/*.{js,scss,json,html,hbs}\" --silent -c \"CHANGED_FILE={path} vite build --config vite.config.js && CHANGED_FILE={path} vite build --config vite-global.config.js\"",
         "dxp": "dxp-next cmp dev-ui ./dist",
-        "dev": "concurrently \"npm run watch\" \"npm run dxp\"",
+        "dev": "npm run build && concurrently \"npm run watch\" \"npm run dxp\"",
         "vermgmt": "vermgmt"
     },
     "dependencies": {

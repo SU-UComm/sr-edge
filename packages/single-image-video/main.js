@@ -180,13 +180,14 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            width: width || "Wide",
+            width: width?.toLocaleLowerCase() || "wide",
             marginTop: marginTop || "default",
             marginBottom: marginBottom || "default",
             showComponent,
             headerSection,
             title,
             summary: xss(summary),
+            summaryAlign,
             imageData,
             vimeoid,
             youtubeid,
