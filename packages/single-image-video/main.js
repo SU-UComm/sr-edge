@@ -171,7 +171,7 @@ export default {
             modalData = {
                 isVertical: true, 
                 videoId:  youtubeid, 
-                title:  `Watch ${heading}`, 
+                title:  `Watch ${heading ? heading : ""}`, 
                 noAutoPlay:  true,
                 uniqueID: uniqueID, 
                 titleID:  'video-modal'
