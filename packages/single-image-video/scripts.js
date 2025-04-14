@@ -21,6 +21,43 @@ export const SINGLE_IMAGE_VIDEO_CLOSE_MODAL_BTN = 'button[data-dismiss="modal"]'
 export const SINGLE_IMAGE_VIDEO_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
 
 /**
+ * Traps focus within a given dialog element when the Tab key is pressed.
+ * Prevents focus from moving outside the dialog by looping it from the last
+ * to the first focusable element and vice versa when Shift + Tab is used.
+ *
+ * @param {KeyboardEvent} event - The keyboard event triggered by user input.
+ * @param {HTMLElement} dialog - The dialog element within which focus should be trapped.
+ */
+export const focusTrap = (event, dialog) => {
+    const focusableSelectors =
+        'a, button, input, textarea, select, details, iframe,  [tabindex]:not([tabindex="-1"])';
+    const focusableElements = Array.from(
+        dialog?.querySelectorAll(focusableSelectors),
+    )?.filter(
+        (el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'),
+    );
+
+    if (focusableElements.length === 0 || event?.key !== 'Tab') {
+        return;
+    }
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    // Move to the last focusable element if we are on the first one and Shift + Tab is pressed
+    if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+    }
+    // Move to the first focusable element if we are on the last one and Shift is pressed
+    else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+    }
+};
+
+
+/**
  * Opens a modal by modifying the iframe's autoplay parameter and removing the hidden class.
  * @param {HTMLElement} modal - The modal element to open.
  */
@@ -32,6 +69,14 @@ export function openModal(modal) {
     iframe.setAttribute('src', newSrc);
     modal.classList.remove(SINGLE_IMAGE_VIDEO_HIDDEN_CLASS);
     modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+
+    ///Focus trap for modal
+    document.addEventListener('keydown', (event) => {
+        if (modal) {
+            focusTrap(event, modal);
+        }
+    });
 }
 
 /**
@@ -46,6 +91,7 @@ export function closeModal(modal) {
     iframe.setAttribute('src', newSrc);
     modal.classList.add(SINGLE_IMAGE_VIDEO_HIDDEN_CLASS);
     modal.hidden = true;
+    document.body.style.overflow = '';
 }
 
 /**

@@ -281,4 +281,87 @@ describe('[Single Image or Video][Client]', () => {
           expect(labelSpy).toHaveBeenCalledWith(button, true);
         });
     });
+
+    describe('focusTrap', () => {
+        let section, modal, firstButton, secondButton, lastButton;
+
+    
+        beforeEach(() => {
+            vi.clearAllMocks();
+
+            document.body.innerHTML = `
+                <section class="" data-component="single-image-video">
+                    <div data-overlay-container="true" class="su-modal su-hidden" data-modal="modal" data-modal-id="7f6b9262253c138ddbb3dff687a3ca13">
+                        <button class="first-button">First</button>
+                        <button class="second-button">Second</button>
+                        <button class="last-button">Last</button>
+                    </div>
+                </section>
+            `;
+
+            section = document.querySelector(singleImageVideo.SINGLE_IMAGE_VIDEO_SELECTOR);
+            modal = section.querySelector(singleImageVideo.SINGLE_IMAGE_VIDEO_MODAL_SELECTOR);
+            firstButton = modal.querySelector('.first-button');
+            secondButton = modal.querySelector('.second-button');
+            lastButton = modal.querySelector('.last-button');
+        });
+
+        it('should focus the next focusable element when Tab is pressed', () => {
+            firstButton.focus();
+            expect(document.activeElement).toBe(firstButton);
+            fireEvent.keyDown(document, { key: 'Tab' });
+            singleImageVideo.focusTrap(
+                new KeyboardEvent('keydown', { key: 'Tab' }),
+                section,
+            );
+            secondButton.focus();
+            expect(document.activeElement).toBe(secondButton);
+        });
+
+        it('should loop focus to first element when Tab is pressed on the last element', () => {
+            lastButton.focus();
+            expect(document.activeElement).toBe(lastButton);
+            fireEvent.keyDown(document, { key: 'Tab' });
+            singleImageVideo.focusTrap(
+                new KeyboardEvent('keydown', { key: 'Tab' }),
+                section,
+            );
+            firstButton.focus();
+            expect(document.activeElement).toBe(firstButton);
+        });
+
+        it('should focus the previous focusable element when Shift + Tab is pressed', () => {
+            secondButton.focus();
+            expect(document.activeElement).toBe(secondButton);
+            fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
+            singleImageVideo.focusTrap(
+                new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true }),
+                section,
+            );
+            firstButton.focus();
+            expect(document.activeElement).toBe(firstButton);
+        });
+
+        it('should loop focus to last element when Shift + Tab is pressed on the first element', () => {
+            firstButton.focus();
+            expect(document.activeElement).toBe(firstButton);
+            fireEvent.keyDown(document, { key: 'Tab', shiftKey: true });
+            singleImageVideo.focusTrap(
+                new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true }),
+                section,
+            );
+            lastButton.focus();
+            expect(document.activeElement).toBe(lastButton);
+        });
+
+        it('should do nothing if no focusable elements are found', () => {
+            modal.innerHTML = '<div>No focusable elements here</div>';
+            fireEvent.keyDown(document, { key: 'Tab' });
+            singleImageVideo.focusTrap(
+                new KeyboardEvent('keydown', { key: 'Tab' }),
+                section,
+            );
+            expect(document.activeElement).toBe(document.body);
+        });
+    });
 });
