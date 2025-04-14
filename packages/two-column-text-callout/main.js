@@ -110,7 +110,7 @@ export default {
                 if (notEmpty) {
                     // Using data to get infoBox for each callout
                     calloutsData.push({
-                        containerClasses: "su-flex",
+                        customClasses: "su-flex",
                         innerClasses: "su-p-20 md:su-p-36 su-w-full",
                         title,
                         content: xss(content),
