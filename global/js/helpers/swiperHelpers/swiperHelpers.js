@@ -28,6 +28,7 @@ export function duplicateSlides(swiper, minSlides, slidesPerGroup, callback = ()
 
     swiper.wrapperEl.appendChild(fragment);
     swiper.update();
+    updateAccessibility(swiper, '', false);
     callback();
 }
 
@@ -43,11 +44,15 @@ export function ensureLoopConditions(swiper, callback = () => {}) {
     const minSlides = Math.ceil(slidesPerView + slidesPerGroup);
 
     if (totalSlides === 1) {
-        document.querySelector('.component-slider-controls')?.remove();
+        swiper.navigation.nextEl.remove();
+        swiper.navigation.prevEl.remove();
     }
 
     if (totalSlides - 1 < minSlides || totalSlides % slidesPerGroup !== 0) {
         duplicateSlides(swiper, minSlides, slidesPerGroup, callback);
+    } else {
+        updateAccessibility(swiper, '', false);
+        callback();
     }
 }
 
@@ -86,7 +91,6 @@ export function paginationUpdater(swiper) {
  * @param {HTMLElement[]} swiper.pagination.bullets - The array of pagination bullet elements.
  */
 export const updateAccessibility = (swiper, focusItems, isFocus) => {
-
     // Manage slides visibility and interactivity
     swiper.slides.forEach((slide) => {
         if (slide.classList.contains("swiper-slide-active")) {
@@ -98,10 +102,11 @@ export const updateAccessibility = (swiper, focusItems, isFocus) => {
 
                 if (focusItems === 'slide') {
                     slideTarget = slide
+                    
                 } else {
                     slideTarget = slide.querySelector(focusItems);
                 }
-                            
+                 
                 slideTarget && slideTarget.focus();
             }
         } else {

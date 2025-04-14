@@ -1,5 +1,5 @@
-import { basicAssetUri } from '../../global/js/utils';
-import { infoBox } from '../../global/js/helpers';
+import xss from "xss";
+import { basicAssetUri, isRealExternalLink } from '../../global/js/utils';
 import twoColumnTemplate from './two-column-text-callout.hbs';
 
 /**
@@ -81,54 +81,53 @@ export default {
             return `<!-- Error occurred in the Two Column Text Callout component: ${er.message} -->`;
         }
 
-        // Process callouts
-        const processedCallouts = await Promise.all(
-            callouts.map(async (callout) => {
-                const { title, content, imageConfiguration, buttonConfiguration } = callout;
-                const { caption, credit, imagePlacement, image } = imageConfiguration || {};
-                const { buttonText, externalUrl, internalUrl, isNewWindow } = buttonConfiguration || {};
+        const calloutsData = [];
 
-                // Fetch image data
-                let imageData = null;
-                if (image) {
-                    imageData = await basicAssetUri(fnsCtx, image);
-                }
+        for (const callout of callouts) { 
+            const { title, content, imageConfiguration, buttonConfiguration } = callout;
+            const { caption, credit, imagePlacement, image } = imageConfiguration || {};
+            const { buttonText, externalUrl, internalUrl, isNewWindow } = buttonConfiguration || {};
 
-                // Resolve internal link
-                let linkUrl = null;
-                if (internalUrl) {
-                    linkUrl = await basicAssetUri(fnsCtx, internalUrl);
-                }
-                const internalLinkUrl = linkUrl?.url;
+            // Fetch image data
+            let imageData = null;
+            if (image) {
+                imageData = await basicAssetUri(fnsCtx, image);
+            }
 
+            // Resolve internal link
+            let linkUrl = null;
+            if (internalUrl) {
+                linkUrl = await basicAssetUri(fnsCtx, internalUrl);
+            }
+            const internalLinkUrl = linkUrl?.url;
+
+            // Check for empty element 
+            const notEmpty = !!(title || content || image || (buttonText && (externalUrl || internalLinkUrl)))
+
+            if (notEmpty) {
                 // Using data to get infoBox for each callout
-                return infoBox({
-                    containerClassName: "su-flex",
-                    innerClassName: "su-p-20 md:su-p-36 su-w-full",
+                calloutsData.push({
                     title,
-                    content,
-                    caption,
-                    credit,
+                    content: xss(content),
+                    captionCredit: caption && credit ? `${caption} | ${credit}` : caption || credit,
                     imagePlacement,
                     imageData,
                     buttonText,
-                    externalUrl,
-                    internalLinkUrl,
+                    buttonUrl: internalLinkUrl || externalUrl,
+                    isRealExternalLink: !internalLinkUrl && externalUrl ? isRealExternalLink(externalUrl) : false,
                     isNewWindow,
                 });
-            })
-        );
+            }
+        };
+
+
 
         // Prepare component data for template rendering
         const componentData = {
             heading,
             showTopBorder,
-            flexContainer: processedCallouts.join(''),
-            flexContainerLength: `${processedCallouts.length}`,
-            flexContainerPaddingX: false,
-            width: "wide",
-            marginTop: 3,
-            marginBottom: 5,
+            calloutsData,
+            flexContainerLength: `${calloutsData.length}`,
         };
 
         return twoColumnTemplate(componentData);

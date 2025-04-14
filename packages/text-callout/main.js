@@ -149,7 +149,6 @@ export default {
             content: xss(content),
             image: figureData,
             button: buttonData,
-            width: "narrow",
         };
 
         return textCalloutTemplate(componentData);

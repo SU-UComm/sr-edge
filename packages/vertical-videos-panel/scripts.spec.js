@@ -62,8 +62,6 @@ describe('[Vertical Video Panel][Client]', () => {
     });
 
     describe('[Carousel functionality]', () => {
-
-
         it('Should initialize Swiper with the correct configuration', () => {
             verticalVideoPanel._carouselInit(section);
 
