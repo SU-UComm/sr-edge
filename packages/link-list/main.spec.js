@@ -76,7 +76,7 @@ describe('[Link List]', () => {
             expect(mockedError).toBeCalledTimes(1);
         });
 
-        it('Should tuhrow an error when title is not an empty string', async () => {
+        it('Should throw an error when title is not an empty string', async () => {
             const mockData = { ...defaultMockData, title: '' };
             const result = await main(mockData);
 

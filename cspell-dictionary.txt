@@ -60,6 +60,7 @@ topiclisting
 leadershipmessages
 vimeoid
 youtubeid
+linklist
 
 # Lorem Ipsum 
 ezgif
@@ -112,6 +113,7 @@ Mrbh
 Cortez
 Doerr
 Kcgtgp
+Salleo
 
 
 #testing hooks

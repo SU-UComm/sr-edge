@@ -145,6 +145,21 @@ describe("link list functions", () => {
             linkList.renderContent([], wrapper, drawer);
             expect(wrapper.classList.contains("su-link-list-no-stories")).toBe(true);
         });
+
+        it("Should render only first item when second and third are missing", () => {
+        const items = ['<a href="/1">First</a>'];
+        linkList.renderContent(items, wrapper, drawer);
+        
+        const articles = drawer.querySelectorAll("article");
+        expect(articles.length).toBe(1);
+        expect(articles[0].innerHTML).toContain("First");
+        });
+    
+        it("Should not render first article when first is falsy", () => {
+            linkList.renderContent([undefined], wrapper, drawer);
+            const article = drawer.querySelector("article");
+            expect(article).toBeNull();
+        });
     });
 
     describe('[fetchAndRenderLinks]', () => {
@@ -163,37 +178,78 @@ describe("link list functions", () => {
         });
     });
 
-    describe.skip('[attachEventListeners]', () => {
-        it("attach click event for toggle", async () => {
-            // spy for toggleDrawer
-            const toggleDrawerSpy = vi.spyOn(linkList, 'toggleDrawer');
-
-            // run attachEventListeners function
+    describe('[attachEventListeners]', () => {
+        it('Should toggle classes on button click', () => {
             linkList.attachEventListeners(wrapper, toggle, drawer);
-
-            console.log(toggle.outerHTML)
-
+    
             // Simulate click on button
             fireEvent.click(toggle);
-            
-            // Check if the spy was called
-            expect(toggleDrawerSpy).toHaveBeenCalledWith(toggle, drawer);
-
-        });
-
-        it("should call handleScroll on scroll", () => {
-            // spy for toggleDrawer
-            const scrollSpy = vi.spyOn(linkList, "handleScroll");
-            
-            // run attachEventListeners function
+    
+            // Expect styles indicating an "open" state
+            expect(toggle.dataset.active).toBe("true");
+            expect(toggle.classList.contains("su-rotate-90")).toBe(true);
+            expect(drawer.classList.contains("su-h-auto")).toBe(true);
+        }); 
+        
+        it('Should apply classes on scroll', () => {
             linkList.attachEventListeners(wrapper, toggle, drawer);
-
+    
             // Simulate scroll
             fireEvent.scroll(window);
-        
-            // Check if the spy was called
-            expect(scrollSpy).toHaveBeenCalledWith(wrapper);
-          });
+    
+            // Expect wrapper to have any visibility-related class added or removed
+            const hasClass =
+                wrapper.classList.contains('su-opacity-[1]') ||
+                wrapper.classList.contains('su-bottom-0') ||
+                wrapper.classList.contains('su-opacity-[0]') ||
+                wrapper.classList.contains('su-bottom-[-100px]');
+    
+            expect(hasClass).toBe(true); 
+        });
+    });
+     
+
+    describe('[_initialize]', () => {
+        it('Should render links in the drawer based on window.pageController', async () => {
+            window.pageController = { topicsQuery: () => null };
+    
+            // Mock API response from fbFetcher
+            const mockData = [
+                { title: "Item A", indexUrl: "/a" },
+                { title: "Item B", indexUrl: "/b" }
+            ];
+            fbFetcher.mockResolvedValue(mockData); 
+    
+            // Create mock DOM elements
+            const wrapper = document.createElement('div');
+            const toggle = document.createElement('button');
+            const drawer = document.createElement('div');
+    
+            // Run initialization
+            await linkList._initialize(wrapper, toggle, drawer, 'cookie-value');
+    
+            // Expect rendered content to include mocked data
+            expect(drawer.innerHTML).toContain('Item A');
+            expect(drawer.innerHTML).toContain('Item B');
+        }); 
+    
+        it("Should handle missing topicsQuery gracefully", async () => {
+            window.pageController = {};
+    
+            // Create mock DOM elements
+            const wrapper = document.createElement("div");
+            const toggle = document.createElement("button");
+            const drawer = document.createElement("div");
+    
+            // Mock empty fetch result
+            fbFetcher.mockResolvedValue([]);
+    
+            // Run initialization
+            await linkList._initialize(wrapper, toggle, drawer, "cookie");
+    
+            // Expect fetch to have been called regardless of missing topicsQuery
+            expect(fbFetcher).toHaveBeenCalled(); 
+        });
     });
 });
 
