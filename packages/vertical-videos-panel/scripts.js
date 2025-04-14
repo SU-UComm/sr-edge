@@ -85,81 +85,85 @@ export function _modalInit(section) {
  */
 export function _carouselInit(section) {
     const uniqueClass = section.dataset.uniqueId;
-
-    const swiper = new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
-        breakpoints: {
-            0: {
-                slidesPerView: 1.4,
-                spaceBetween: 20,
-                centeredSlides: true,
-                initialSlide: 0,
+    const slidesLength = section.querySelectorAll('.swiper-slide').length;
+    
+    if (slidesLength > 1 ) {
+        let isFocusable = false;
+        const swiper = new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
+            breakpoints: {
+                0: {
+                    slidesPerView: 1.4,
+                    spaceBetween: 20,
+                    centeredSlides: true,
+                    initialSlide: 0,
+                },
+                576: {
+                    slidesPerView: 1.6,
+                    spaceBetween: 20,
+                    centeredSlides: true,
+                    initialSlide: 0,
+                },
+                768: {
+                    slidesPerView: 1.9,
+                    spaceBetween: 50,
+                    centeredSlides: true,
+                    initialSlide: 0,
+                },
             },
-            576: {
-                slidesPerView: 1.6,
-                spaceBetween: 20,
-                centeredSlides: true,
-                initialSlide: 0,
+            slidesPerView: 1,
+            watchSlidesProgress: true,
+            loop: true,
+            loopAdditionalSlides: 0,
+            keyboard: {
+                enabled: true,
+                onlyInViewport: true,
             },
-            768: {
-                slidesPerView: 1.9,
-                spaceBetween: 50,
-                centeredSlides: true,
-                initialSlide: 0,
+            a11y: {
+                prevSlideMessage: 'Previous slide',
+                nextSlideMessage: 'Next slide',
             },
-        },
-        slidesPerView: 1,
-        watchSlidesProgress: true,
-        loop: true,
-        loopAdditionalSlides: 0,
-        keyboard: {
-            enabled: true,
-            onlyInViewport: true,
-        },
-        a11y: {
-            prevSlideMessage: 'Previous slide',
-            nextSlideMessage: 'Next slide',
-        },
-        navigation: {
-            nextEl: `section[data-unique-id="${uniqueClass}"] .component-slider-next`,
-            prevEl: `section[data-unique-id="${uniqueClass}"] .component-slider-prev`,
-        },
-        pagination: {
-            el: `.component-slider-pagination-${uniqueClass}`,
-            clickable: true,
-            bulletElement: "button",
-            renderBullet: function (index, className) {
-                return `<button ${index === 0 ? 'aria-current="true"' : ""} class="${className}"><span class="sr-only">Slide ${index + 1}</span></button>`;
+            navigation: {
+                nextEl: `section[data-unique-id="${uniqueClass}"] .component-slider-next`,
+                prevEl: `section[data-unique-id="${uniqueClass}"] .component-slider-prev`,
             },
-        },
-        on: {
-            init: swiper => {
-                ensureLoopConditions(swiper);
-                swiper.slidePrev();
+            pagination: {
+                el: `.component-slider-pagination-${uniqueClass}`,
+                clickable: true,
+                bulletElement: "button",
+                renderBullet: function (index, className) {
+                    return `<button ${index === 0 ? 'aria-current="true"' : ""} class="${className}"><span class="sr-only">Slide ${index + 1}</span></button>`;
+                },
             },
-            resize: swiper => {
-                ensureLoopConditions(swiper);
-            },
-            paginationUpdate: swiper => {
-                paginationUpdater(swiper);
+            on: {
+                init: swiper => {
+                    ensureLoopConditions(swiper);
+                      /* v8 ignore start */
+                      setTimeout(() => {
+                        isFocusable = true
+                    }, 100)
+                    /* v8 ignore stop */
+                },
+                resize: swiper => {
+                    ensureLoopConditions(swiper);
+                },
+                paginationUpdate: swiper => {
+                    paginationUpdater(swiper);
+                }
             }
-        }
-    });
+        });
 
-    const totalSlides = swiper.slides.length;
-    const duplicateSlidesCount = swiper.slides.filter(slide => slide.classList.contains('swiper-slide-duplicate')).length;
-    const originalSlides = Math.floor(totalSlides - duplicateSlidesCount);
-
-    if (originalSlides > 1) {
         // Add slide change event handler with accessibility management
         swiper.on('slideChange', function() {
             /* v8 ignore start */
-            setTimeout(() => { 
-                updateAccessibility(swiper, 'h2 a, h3 a, button', true);
-            }, 100);
+            if (isFocusable) {
+                setTimeout(() => { 
+                    updateAccessibility(swiper, 'h2 a, h3 a, button', true);
+                }, 100);
+            }
             /* v8 ignore stop */
         });
-        // Initial accessibility setup
-        updateAccessibility(swiper, '', false);
+    } else {
+        section.querySelector('.component-slider-controls')?.remove();
     }
 };
 

@@ -161,6 +161,7 @@ export default {
             sectionBgImageAlt: bgImageData?.alt,
             sectionCustomClasses: "2xl:su-px-[17rem] su-rs-mb-5",
             carouselID: uuid(),
+            isDarkCarousel: bgImageData?.url ? true : false,
             videosData,
             videosDataLength: `${videosData.length}`,
             width: "full",

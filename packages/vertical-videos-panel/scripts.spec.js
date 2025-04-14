@@ -25,7 +25,7 @@ describe('[Vertical Video Panel][Client]', () => {
         section = document.createElement('section');
         section.setAttribute('data-component', 'vertical-video-panel');
         section.setAttribute('data-unique-id', 'cf9b8795-bc62-4ab0-96df-951382b3964e');
-        section.innerHTML = `<div class="swiper"></div>`;
+        section.innerHTML = `<div class="swiper component-slider-single component-slider-vertical-videos component-slider-peek"><div class="swiper-wrapper"><div class="swiper-slide"><article class="su-relative su-flex su-flex-col su-text-white su-bg-black-true"><div class="su-absolute su-inset su-z-40 su-px-32 2xl:su-px-48 su-bottom-100 sm:su-bottom-120 lg:su-bottom-80 2xl:su-bottom-120 su-pointer-events-none su-text-center su-flex su-flex-col su-items-center su-w-full su-rs-mb-3"><h3 class="su-text-[3.6rem] sm:su-text-[4.8rem] lg:su-text-[3.6rem] 2xl:su-text-[4.8rem] su-leading-display su-mb-6">The future of transparent tissue</h3><p class="su-text-21 su-mb-0 su-leading-display xl:su-leading-snug"></p></div><div class="su-relative su-w-full"><button class="su-component-card-thumbnail su-group su-block su-relative su-z-10 su-size-full" type="button" aria-haspopup="dialog" data-click="open-modal" data-modal-id="52149f10-3754-4220-8d0d-0db95e51e81b"><span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block su-aspect-[9/16]"><img class="su-absolute su-object-cover su-object-center su-size-full" src="https://news.stanford.edu/__data/assets/image/0025/9862/20221130Elizabeth_Miller_N6A8009.jpeg" alt=""><div aria-hidden="true" class="su-absolute su-inset-0 su-bg-gradient-to-t su-from-black-true/80 su-via-80% su-via-black-true/10 su-pointer-events-none su-z-20"></div><span class="su-absolute su-leading-none su-z-30 su-left-32 su-bottom-34 sm:su-left-48 sm:su-bottom-61 lg:su-left-32 lg:su-bottom-34 2xl:su-left-48 2xl:su-bottom-61 [&amp;>svg]:su-text-[6rem] group-hocus:su-scale-110 su-transition-transform"><svg aria-hidden="true" focusable="false" data-testid="svg-circle-play" data-prefix="far" data-icon="circle-play" class="svg-inline--fa fa-circle-play su-text-white dark:su-text-white su-drop-shadow-[0px_10px_20px_rgba(0,0,0,0.30)]" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" "=""><path fill="currentColor" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z"></path></svg></span></span></button></div></article></div><div class="swiper-slide"><article class="su-relative su-flex su-flex-col su-text-white su-bg-black-true"><div class="su-absolute su-inset su-z-40 su-px-32 2xl:su-px-48 su-bottom-100 sm:su-bottom-120 lg:su-bottom-80 2xl:su-bottom-120 su-pointer-events-none su-text-center su-flex su-flex-col su-items-center su-w-full su-rs-mb-3"><h3 class="su-text-[3.6rem] sm:su-text-[4.8rem] lg:su-text-[3.6rem] 2xl:su-text-[4.8rem] su-leading-display su-mb-6">Aboard the Western Flyer, Stanford students study science and literature</h3><p class="su-text-21 su-mb-0 su-leading-display xl:su-leading-snug">The Western Flyer, the same fishing vessel that novelist John Steinbeck chartered to the Sea of Cortez, is restored and used as part of a three-week course for Stanford’s Sophomore College program.</p></div><div class="su-relative su-w-full"><button class="su-component-card-thumbnail su-group su-block su-relative su-z-10 su-size-full" type="button" aria-haspopup="dialog" data-click="open-modal" data-modal-id="e332d78c-01fc-4f7a-b3ec-3fc5fff41220"><span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block su-aspect-[9/16]"><img class="su-absolute su-object-cover su-object-center su-size-full" src="https://news.stanford.edu/__data/assets/image/0024/9861/20221130Elizabeth_Miller_N6A8013.jpeg" alt="This is a cover of a book"><div aria-hidden="true" class="su-absolute su-inset-0 su-bg-gradient-to-t su-from-black-true/80 su-via-80% su-via-black-true/10 su-pointer-events-none su-z-20"></div><span class="su-absolute su-leading-none su-z-30 su-left-32 su-bottom-34 sm:su-left-48 sm:su-bottom-61 lg:su-left-32 lg:su-bottom-34 2xl:su-left-48 2xl:su-bottom-61 [&amp;>svg]:su-text-[6rem] group-hocus:su-scale-110 su-transition-transform"><svg aria-hidden="true" focusable="false" data-testid="svg-circle-play" data-prefix="far" data-icon="circle-play" class="svg-inline--fa fa-circle-play su-text-white dark:su-text-white su-drop-shadow-[0px_10px_20px_rgba(0,0,0,0.30)]" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" "=""><path fill="currentColor" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z"></path></svg></span></span></button></div></article></div><div class="swiper-slide"><article class="su-relative su-flex su-flex-col su-text-white su-bg-black-true"><div class="su-absolute su-inset su-z-40 su-px-32 2xl:su-px-48 su-bottom-100 sm:su-bottom-120 lg:su-bottom-80 2xl:su-bottom-120 su-pointer-events-none su-text-center su-flex su-flex-col su-items-center su-w-full su-rs-mb-3"><h3 class="su-text-[3.6rem] sm:su-text-[4.8rem] lg:su-text-[3.6rem] 2xl:su-text-[4.8rem] su-leading-display su-mb-6">Highlights from Big Ideas in Sustainability with Jeanne Gang</h3><p class="su-text-21 su-mb-0 su-leading-display xl:su-leading-snug">Jeanne Gang, architect and founding partner of Studio Gang, joined the Stanford Doerr School of Sustainability for a discussion on Jan. 16 about shaping healthy and livable communities through design.</p></div><div class="su-relative su-w-full"><button class="su-component-card-thumbnail su-group su-block su-relative su-z-10 su-size-full" type="button" aria-haspopup="dialog" data-click="open-modal" data-modal-id="6658bf63-a564-4c77-b888-b093b25aa81e"><span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block su-aspect-[9/16]"><img class="su-absolute su-object-cover su-object-center su-size-full" src="https://news.stanford.edu/__data/assets/image/0010/10270/1980.06-stanford-field-camp_1686674232652_.jpeg" alt="Jenny Martinez"><div aria-hidden="true" class="su-absolute su-inset-0 su-bg-gradient-to-t su-from-black-true/80 su-via-80% su-via-black-true/10 su-pointer-events-none su-z-20"></div><span class="su-absolute su-leading-none su-z-30 su-left-32 su-bottom-34 sm:su-left-48 sm:su-bottom-61 lg:su-left-32 lg:su-bottom-34 2xl:su-left-48 2xl:su-bottom-61 [&amp;>svg]:su-text-[6rem] group-hocus:su-scale-110 su-transition-transform"><svg aria-hidden="true" focusable="false" data-testid="svg-circle-play" data-prefix="far" data-icon="circle-play" class="svg-inline--fa fa-circle-play su-text-white dark:su-text-white su-drop-shadow-[0px_10px_20px_rgba(0,0,0,0.30)]" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" "=""><path fill="currentColor" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z"></path></svg></span></span></button></div></article></div></div><div class="swiper-pagination component-slider-pagination-cf9b8795-bc62-4ab0-96df-951382b3964e"></div></div><div class="component-slider-controls su-flex su-mt-45 lg:su-mt-48 su-items-center su-content-center"><nav aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination-ac845bf3-d7be-49dd-b089-d7c8b78d5798 su-mr-full swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><button aria-current="true" class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"><span class="sr-only">Slide 1</span></button><button class="swiper-pagination-bullet" tabindex="0"><span class="sr-only">Slide 2</span></button><button class="swiper-pagination-bullet" tabindex="0"><span class="sr-only">Slide 3</span></button></nav><button class="component-slider-btn component-slider-prev" type="button" tabindex="0" aria-label="Previous slide" aria-controls="swiper-wrapper-73cd10921a2eb328c"><span class="sr-only">Previous</span><span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block"><svg class="su-fill-transparent su-stroke-current " data-testid="svg-chevron-right" xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none" aria-hidden="true"><path d="M6.75 4.25L12 9.5L6.75 14.75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><button class="component-slider-btn component-slider-next" type="button" tabindex="0" aria-label="Next slide" aria-controls="swiper-wrapper-73cd10921a2eb328c"><span class="sr-only">Next</span><span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block"><svg class="su-fill-transparent su-stroke-current " data-testid="svg-chevron-right" xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none" aria-hidden="true"><path d="M6.75 4.25L12 9.5L6.75 14.75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button></div>`;
         document.body.appendChild(section);
         vi.useFakeTimers();
     });
@@ -76,6 +76,16 @@ describe('[Vertical Video Panel][Client]', () => {
                     }),
                 })
             );
+        });
+
+        it('Should not initialize Swiper when there is only one slide', () => { 
+            
+            section.innerHTML = `<div class="swiper component-slider-single component-slider-vertical-videos component-slider-peek"><div class="swiper-wrapper"><div class="swiper-slide"><article class="su-relative su-flex su-flex-col su-text-white su-bg-black-true"><div class="su-absolute su-inset su-z-40 su-px-32 2xl:su-px-48 su-bottom-100 sm:su-bottom-120 lg:su-bottom-80 2xl:su-bottom-120 su-pointer-events-none su-text-center su-flex su-flex-col su-items-center su-w-full su-rs-mb-3"><h3 class="su-text-[3.6rem] sm:su-text-[4.8rem] lg:su-text-[3.6rem] 2xl:su-text-[4.8rem] su-leading-display su-mb-6">The future of transparent tissue</h3><p class="su-text-21 su-mb-0 su-leading-display xl:su-leading-snug"></p></div><div class="su-relative su-w-full"><button class="su-component-card-thumbnail su-group su-block su-relative su-z-10 su-size-full" type="button" aria-haspopup="dialog" data-click="open-modal" data-modal-id="52149f10-3754-4220-8d0d-0db95e51e81b"><span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block su-aspect-[9/16]"><img class="su-absolute su-object-cover su-object-center su-size-full" src="https://news.stanford.edu/__data/assets/image/0025/9862/20221130Elizabeth_Miller_N6A8009.jpeg" alt=""><div aria-hidden="true" class="su-absolute su-inset-0 su-bg-gradient-to-t su-from-black-true/80 su-via-80% su-via-black-true/10 su-pointer-events-none su-z-20"></div><span class="su-absolute su-leading-none su-z-30 su-left-32 su-bottom-34 sm:su-left-48 sm:su-bottom-61 lg:su-left-32 lg:su-bottom-34 2xl:su-left-48 2xl:su-bottom-61 [&amp;>svg]:su-text-[6rem] group-hocus:su-scale-110 su-transition-transform"><svg aria-hidden="true" focusable="false" data-testid="svg-circle-play" data-prefix="far" data-icon="circle-play" class="svg-inline--fa fa-circle-play su-text-white dark:su-text-white su-drop-shadow-[0px_10px_20px_rgba(0,0,0,0.30)]" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" "=""><path fill="currentColor" d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM188.3 147.1c7.6-4.2 16.8-4.1 24.3 .5l144 88c7.1 4.4 11.5 12.1 11.5 20.5s-4.4 16.1-11.5 20.5l-144 88c-7.4 4.5-16.7 4.7-24.3 .5s-12.3-12.2-12.3-20.9l0-176c0-8.7 4.7-16.7 12.3-20.9z"></path></svg></span></span></button></div></article></div></div><div class="swiper-pagination component-slider-pagination-cf9b8795-bc62-4ab0-96df-951382b3964e"></div></div><div class="component-slider-controls su-flex su-mt-45 lg:su-mt-48 su-items-center su-content-center"><nav aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination-ac845bf3-d7be-49dd-b089-d7c8b78d5798 su-mr-full swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><button aria-current="true" class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"><span class="sr-only">Slide 1</span></button><button class="swiper-pagination-bullet" tabindex="0"><span class="sr-only">Slide 2</span></button><button class="swiper-pagination-bullet" tabindex="0"><span class="sr-only">Slide 3</span></button></nav><button class="component-slider-btn component-slider-prev" type="button" tabindex="0" aria-label="Previous slide" aria-controls="swiper-wrapper-73cd10921a2eb328c"><span class="sr-only">Previous</span><span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block"><svg class="su-fill-transparent su-stroke-current " data-testid="svg-chevron-right" xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none" aria-hidden="true"><path d="M6.75 4.25L12 9.5L6.75 14.75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button><button class="component-slider-btn component-slider-next" type="button" tabindex="0" aria-label="Next slide" aria-controls="swiper-wrapper-73cd10921a2eb328c"><span class="sr-only">Next</span><span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block"><svg class="su-fill-transparent su-stroke-current " data-testid="svg-chevron-right" xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none" aria-hidden="true"><path d="M6.75 4.25L12 9.5L6.75 14.75" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></button></div>`;
+            verticalVideoPanel._carouselInit(section);
+
+            // Ensure Swiper was called
+            expect(Swiper).not.toHaveBeenCalled();
+            expect(document.body.innerHTML).not.toContain('<div class="component-slider-controls'); 
         });
 
         it('Should render bullets correctly using renderBullet function', () => {
@@ -156,29 +166,6 @@ describe('[Vertical Video Panel][Client]', () => {
             expect(true).toBe(true); // to trigger line coverage
         });
 
-        it('Should call ensureLoopConditions and slidePrev on Swiper init', () => {
-            const mockSlidePrev = vi.fn();
-            const swiperInstance = {
-                slides: [],
-                params: { slidesPerView: 1, slidesPerGroup: 1 },
-                wrapperEl: document.createElement('div'),
-                update: vi.fn(),
-                activeIndex: 1,
-                slidePrev: mockSlidePrev,
-                on: vi.fn(),
-                pagination: { bullets: [] },
-            };
-
-            Swiper.mockImplementation((selector, config) => {
-                config.on.init(swiperInstance);
-                return swiperInstance;
-            });
-
-            verticalVideoPanel._carouselInit(section);
-
-            expect(mockSlidePrev).toHaveBeenCalled();
-        });
-
         it('Should call paginationUpdater on paginationUpdate event', () => {
             const swiperInstance = {
                 slides: [],
@@ -204,6 +191,8 @@ describe('[Vertical Video Panel][Client]', () => {
     });
 
     describe('[Modal functionality]', () => {
+        let config;
+
         it('Should open the modal and enable iframe autoplay', () => {
             const modal = document.createElement('div');
             const iframe = document.createElement('iframe');
@@ -391,33 +380,8 @@ describe('[Vertical Video Panel][Client]', () => {
             verticalVideoPanel._carouselInit(section);
 
             expect(mockOn).toHaveBeenCalled();
-            expect(mockSlidePrev).toHaveBeenCalled();
         });
 
-        it('Should not to call ensureLoopConditions on Swiper init when there is only one slide or less', () => {
-            const mockSlidePrev = vi.fn();
-            const mockOn = vi.fn();
-            const swiperInstance = {
-                slides: [],
-                params: { slidesPerView: 1, slidesPerGroup: 1 },
-                wrapperEl: document.createElement('div'),
-                update: vi.fn(),
-                activeIndex: 1,
-                slidePrev: mockSlidePrev,
-                on: mockOn,
-                pagination: { bullets: [] },
-            };
-
-            Swiper.mockImplementation((selector, config) => {
-                config.on.init(swiperInstance);
-                return swiperInstance;
-            });
-
-            verticalVideoPanel._carouselInit(section);
-
-            expect(mockOn).not.toHaveBeenCalled();
-        });
-        
         it('Should call paginationUpdater on paginationUpdate event', () => {
             const swiperInstance = {
                 slides: [],
@@ -429,7 +393,6 @@ describe('[Vertical Video Panel][Client]', () => {
                 pagination: { bullets: [] },
             };
 
-            let config;
             Swiper.mockImplementation((selector, conf) => {
                 config = conf;
                 return swiperInstance;
