@@ -1,0 +1,206 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "single-image-video",
+    "type": "edge",
+    "version": "4.0.2",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "Use this to display a large image or video with a caption and credit. Title and summary are optional.",
+    "displayName": "Single image or video",
+    "mainFunction": "main",
+    "icon": {
+        "id": "perm_media",
+        "color": {
+            "type": "enum",
+            "value": "purple"
+        }
+    },
+    "environment": [
+        {
+            "name": "API_IDENTIFIER",
+            "required": true
+        },
+        {
+            "name": "BASE_DOMAIN",
+            "required": true
+        }
+    ],
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "section": {
+                        "title": "Title & Summary",
+                        "description": "The title and summary are optional and most often only used on Section pages.",
+                        "required": [],
+                        "properties": {
+                            "title": {
+                                "title": "Heading",
+                                "type": "string"
+                            },
+                            "summary": {
+                                "title": "Summary",
+                                "type": "string",
+                                "format": "multi-line"
+                            },
+                            "summaryAlign": {
+                                "title": "Summary alignment",
+                                "type": "string",
+                                "enum": ["left", "center"],
+                                "default": "left"
+                            }
+                        }
+                    },
+                    "image": {
+                        "title": "Image",
+                        "description": "If a video is selected, the video will override the selected image.",
+                        "type": "string",
+                        "format": "matrix-asset-uri"
+                    },
+                    "caption": {
+                        "title": "Caption",
+                        "type": "string"
+                    },
+                    "credit": {
+                        "title": "Credit",
+                        "type": "string"
+                    },
+                    "width": {
+                        "title": "Width",
+                        "enum": ["Wide", "Narrow"],
+                        "default": "Wide",
+                        "type": "string"
+                    },
+                    "video": {
+                        "title": "Video",
+                        "required": [],
+                        "properties": {
+                            "heading": {
+                                "title": "Accessible video heading",
+                                "description": "This is not displayed visually, but is used for accessibility in the format: 'Watch [heading]'",
+                                "type": "string"
+                            },
+                            "vimeoid": {
+                                "title": "Vimeo video ID",
+                                "description": "Provide the Vimeo autoplay video id here, this is the muted looped video that appears in the component.",
+                                "type": "string"
+                            },
+                            "youtubeid": {
+                                "title": "Youtube video ID",
+                                "description": "Provide the YouTube video ID for the modal video",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "marginTop": {
+                        "title": "Spacing above (top margin)",
+                        "description": "Adjust spacing above the component - 'base' is the smallest, '10' is largest. Stories should most often use 'default' which adds site-wide default vertical spacing between components.",
+                        "type": "string",
+                        "default": "default",
+                        "enum": [
+                            "default",
+                            "base",
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            "8",
+                            "9",
+                            "10"
+                        ]
+                    },
+                    "marginBottom": {
+                        "title": "Spacing below (bottom margin)",
+                        "description": "Adjust spacing below the component - 'base' is the smallest, '10' is largest. Stories should most often use 'default' which adds site-wide default vertical spacing between components.",
+                        "type": "string",
+                        "default": "default",
+                        "enum": [
+                            "default",
+                            "base",
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            "8",
+                            "9",
+                            "10"
+                        ]
+                    }
+                },
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/99100": {
+            "type": "file",
+            "path": "mocked-uris/99100.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}

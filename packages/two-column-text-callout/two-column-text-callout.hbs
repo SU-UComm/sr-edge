@@ -24,12 +24,14 @@
                     customClasses=(getStringByCondition
                         value=flexContainerLength
                         expectedValue='2'
-                        trueResult='su-flex su-grid-gap su-flex-col md:su-max-w-800 su-w-full lg:su-flex-row lg:su-items-stretch lg:*:su-basis-1/2 lg:su-max-w-[118.6rem] xl:su-px-50'
-                        falseResult='su-flex su-grid-gap su-flex-col md:su-max-w-800 su-w-full'
+                        trueResult='su-flex su-grid-gap su-flex-col md:su-max-w-800 lg:su-flex-row lg:su-items-stretch lg:*:su-basis-1/2 lg:su-max-w-[118.6rem] xl:su-px-50'
+                        falseResult='su-flex su-grid-gap su-flex-col md:su-max-w-800'
                     )
                 }}'
         >
-            {{{flexContainer}}}
+        {{~#each calloutsData~}}
+            {{> info-box width="full" paddingX=false containerClasses=containerClasses innerClasses=innerClasses title=title imagePlacement=imagePlacement content=content imageData=imageData captionCredit=captionCredit buttonText=buttonText buttonUrl=buttonUrl isNewWindow=isNewWindow isRealExternalLink=isRealExternalLink}}
+        {{~/each~}}
         </div>
     </div>
 </section>

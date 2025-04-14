@@ -1,4 +1,4 @@
-import { faIcon } from "../../utils";
+import { FAIcon } from "../../helpers/icons";
 
 /**
  * Renders out the linked heading, as seen here: https://www.figma.com/file/Fxe0NRKM09lCA3oCkHXHwB/FINAL----Landing-Pages----Home?type=design&node-id=1440-21954&mode=dev
@@ -35,7 +35,7 @@ export function LinkedHeading({
                     <span>
                         ${ctaText} <span class="sr-only">${title}</span>
                     </span>
-                    ${faIcon["ChevronRight"][0].replace(/class=".*?"/, 'class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform"')}
+                    ${FAIcon["ChevronRight"][0].replace(/class=".*?"/, 'class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform"')}
                 </span>
             </a>
             ` : '' }

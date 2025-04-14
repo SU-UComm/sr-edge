@@ -1,0 +1,238 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "vertical-videos-panel",
+    "type": "edge",
+    "version": "4.0.2",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "A section that displays up to 3 vertical YouTube videos, with a section title and link to watch more. On smaller devices, the videos will be displayed in a carousel if there are more than 1.",
+    "displayName": "Vertical Videos Panel",
+    "mainFunction": "main",
+    "icon": {
+        "id": "video_library",
+        "color": {
+            "type": "enum",
+            "value": "blue"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "sectionConfiguration": {
+                        "title": "Section Configuration",
+                        "description": "The heading for the section, appearing above the video cards. If the title is empty, the heading and call to action link will be hidden.",
+                        "type": "object",
+                        "required": [],
+                        "properties": {
+                            "title": {
+                                "title": "Section heading",
+                                "type": "string",
+                                "default": "Meet more students"
+                            },
+                            "ctaText": {
+                                "title": "Heading CTA link text",
+                                "type": "string",
+                                "default": "Watch all"
+                            },
+                            "ctaUrl": {
+                                "title": "Matrix asset link",
+                                "type": "string",
+                                "description": "Select an Matrix asset/page to link to.",
+                                "format": "matrix-asset-uri"
+                            },
+                            "ctaManualUrl": {
+                                "title": "External/Manual link",
+                                "type": "string",
+                                "description": "Enter the full URL, including https://. If this field is filled out, it will be used instead of the Matrix asset link.",
+                                "default": "https://news.stanford.edu/video"
+                            },
+                            "bgImage": {
+                                "title": "Background image",
+                                "description": "Select a background image for the section. A dark overlay will be applied over the image.",
+                                "type": "string",
+                                "format": "matrix-asset-uri"
+                            },
+                            "marginTop": {
+                                "title": "Spacing above (top margin)",
+                                "description": "Add spacing above the section. 'Base' is the smallest with '10' (default) being the largest option. Selecting 'default' will use the default site-wide vertical spacing between components.",
+                                "type": "string",
+                                "default": "10",
+                                "enum": [
+                                    "default",
+                                    "base",
+                                    "1",
+                                    "2",
+                                    "3",
+                                    "4",
+                                    "5",
+                                    "6",
+                                    "7",
+                                    "8",
+                                    "9",
+                                    "10"
+                                ]
+                            },
+                            "marginBottom": {
+                                "title": "Spacing below (bottom margin)",
+                                "description": "Add spacing below the section. 'Base' is the smallest with '10' (default) being the largest option. Selecting 'default' will use the default site-wide vertical spacing between components.",
+                                "type": "string",
+                                "default": "10",
+                                "enum": [
+                                    "default",
+                                    "base",
+                                    "1",
+                                    "2",
+                                    "3",
+                                    "4",
+                                    "5",
+                                    "6",
+                                    "7",
+                                    "8",
+                                    "9",
+                                    "10"
+                                ]
+                            }
+                        }
+                    },
+                    "videos": {
+                        "title": "Vertical video cards",
+                        "description": "Enter the details for each vertical video card.",
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 3,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "heading": {
+                                    "title": "Card heading",
+                                    "type": "string"
+                                },
+                                "subheading": {
+                                    "title": "Subheading",
+                                    "description": "Smaller text below the card heading.",
+                                    "type": "string"
+                                },
+                                "videoImage": {
+                                    "title": "Video preview image",
+                                    "description": "Select an image to use as the video preview. The aspect ratio of the image displayed will be the same as the YouTube shorts which is 9x16.",
+                                    "type": "string",
+                                    "format": "matrix-asset-uri"
+                                },
+                                "youtubeId": {
+                                    "title": "YouTube video ID",
+                                    "description": "Enter the video ID from YouTube.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": []
+                        }
+                    }
+                },
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/14": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/9861": {
+            "type": "file",
+            "path": "mocked-uris/9861.json"
+        },
+        "matrix-asset://api-identifier/99100": {
+            "type": "file",
+            "path": "mocked-uris/99100.json"
+        },
+        "matrix-asset://api-identifier/28192": {
+            "type": "file",
+            "path": "mocked-uris/28192.json"
+        },
+        "matrix-asset://api-identifier/128610": {
+            "type": "file",
+            "path": "mocked-uris/128610.json"
+        },
+        "matrix-asset://api-identifier/125800": {
+            "type": "file",
+            "path": "mocked-uris/125800.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}

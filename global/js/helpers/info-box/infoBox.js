@@ -56,21 +56,24 @@ export function infoBox({
   externalUrl,
   internalLinkUrl,
   isNewWindow,
+  innerClassName,
 }) {
   const captionCredit =
     caption && credit ? `${caption} | ${credit}` : caption || credit;
   const hasImage = imageData?.url;
 
   const containerContent = `
-    <div class="su-flex su-flex-col su-p-20 md:su-p-36 su-justify-start su-items-start su-bg-fog-light lg:su-mx-auto dark:su-bg-black [&>p]:su-m-0 [&>p]:!su-mb-0 [&>p]:su-text-16 md:[&>p]:!su-text-19 last-of-type:[&>p]:!su-mb-0">
-        <div class="su-relative su-justify-start su-items-center su-w-full su-gap-3 su-flex su-overflow-hidden su-rs-mb-0">
-          <div>
-            <h3 class="su-font-serif su-text-21 md:su-text-23 su-inline su-pr-10 su-m-0">
-              ${title}
-            </h3>
-            <span class="su-w-full su-bg-black-40 dark:su-bg-black-70 su-h-px su-absolute su-bottom-4" />
+    <div class="su-flex su-flex-col su-justify-start su-items-start su-bg-fog-light lg:su-mx-auto dark:su-bg-black [&>p]:su-m-0 [&>p]:!su-mb-0 [&>p]:su-text-16 md:[&>p]:!su-text-19 last-of-type:[&>p]:!su-mb-0 ${innerClassName}">
+        ${title ? `
+          <div class="su-relative su-justify-start su-items-center su-w-full su-gap-3 su-flex su-overflow-hidden su-rs-mb-0">
+            <div>
+              <h3 class="su-font-serif su-text-21 md:su-text-23 su-inline su-pr-10 su-m-0">
+                ${title}
+              </h3>
+              <span class="su-w-full su-bg-black-40 dark:su-bg-black-70 su-h-px su-absolute su-bottom-4" />
+            </div>
           </div>
-        </div>
+        `: ''}
         ${content ? `
           <div
             class="${cnb(
@@ -92,7 +95,6 @@ export function infoBox({
             </div>
           </div>
         ` : ''}
-
         ${hasImage ? `
           <figure
             class="${cnb(
@@ -107,7 +109,6 @@ export function infoBox({
               alt="${imageData.attributes?.alt || ""}"
               class="su-w-full"
             />
-
             <figcaption class="su-m-0 su-text-14 su-leading-[1.672rem] md:su-leading-[1.911rem] md:su-text-16 su-mt-8 md:su-mt-12">
               ${captionCredit}
             </figcaption>

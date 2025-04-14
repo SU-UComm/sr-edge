@@ -30,6 +30,7 @@ import {
   Podcast,
   BookOpenCover,
 } from "../SVG-library";
+import { isRealExternalLink } from '../../utils/isRealExternalLink';
 /**
  * Horizontal Card styles
  */
@@ -193,8 +194,10 @@ export function HorizontalCard({
         <h3 class="${styles.heading} ${sizeStyles.title}">
           <a href="${liveUrl}" class="${styles.link}">
             ${xss(title)}
+            ${isRealExternalLink(liveUrl) ? `
               <svg width="${cardSize === "small" ? 12 : 15}" aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-up-right" class="svg-inline--fa fa-arrow-up-right su-inline-block su-align-middle su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M328 96c13.3 0 24 10.7 24 24l0 240c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-182.1L73 409c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l231-231L88 144c-13.3 0-24-10.7-24-24s10.7-24 24-24l240 0z"></path></svg>
-          </a>
+            `: ''}
+            </a>
         </h3>
 
         ${cardSize === "small" ? `

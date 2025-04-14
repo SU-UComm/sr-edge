@@ -146,7 +146,7 @@ export default {
             isAlwaysLight: false,
             width: "large",
             cardSize: "small",
-            data: cardData
+            data: cardData,
         };
 
         return eventSectionTemplate(componentData);

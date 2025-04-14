@@ -16,7 +16,6 @@ export const STORIES_CAROUSEL_MODAL_SELECTOR = 'div[data-modal="modal"]';
 export const STORIES_CAROUSEL_OPEN_MODAL_BTN = 'button[data-click="open-modal"]';
 export const STORIES_CAROUSEL_CLOSE_MODAL_BTN = 'button[data-dismiss="modal"]';
 export const STORIES_CAROUSEL_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
-export let swiper; 
 
 /**
  * Opens a modal by modifying the iframe's autoplay parameter and removing the hidden class.
@@ -84,7 +83,7 @@ export function _modalInit(section) {
 export function _carouselInit(section) {
     const uniqueClass = section.dataset.uniqueId;
 
-    swiper = new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
+    new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
         breakpoints: {
             0: {
                 slidesPerView: 1.5,

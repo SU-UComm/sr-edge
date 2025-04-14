@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "two-column-text-callout",
     "type": "edge",
-    "version": "4.0.1",
+    "version": "4.0.3",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "This component displays up to 2 text callouts boxes in a two-column layout.",
     "displayName": "Two Column Text Callout",
