@@ -21,18 +21,18 @@ export const SINGLE_IMAGE_VIDEO_CLOSE_MODAL_BTN = 'button[data-dismiss="modal"]'
 export const SINGLE_IMAGE_VIDEO_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
 
 /**
- * Traps focus within a given dialog element when the Tab key is pressed.
- * Prevents focus from moving outside the dialog by looping it from the last
+ * Traps focus within a given modal element when the Tab key is pressed.
+ * Prevents focus from moving outside the modal by looping it from the last
  * to the first focusable element and vice versa when Shift + Tab is used.
  *
  * @param {KeyboardEvent} event - The keyboard event triggered by user input.
- * @param {HTMLElement} dialog - The dialog element within which focus should be trapped.
+ * @param {HTMLElement} modal - The modal element within which focus should be trapped.
  */
-export const focusTrap = (event, dialog) => {
+export const focusTrap = (event, modal) => {
     const focusableSelectors =
-        'a, button, input, textarea, select, details, iframe,  [tabindex]:not([tabindex="-1"])';
+        '[data-focus-scope-start="true"], [data-focus-scope-end="true"], a, button, input, textarea, select, details, iframe, [tabindex]:not([tabindex="-1"])';
     const focusableElements = Array.from(
-        dialog?.querySelectorAll(focusableSelectors),
+        modal?.querySelectorAll(focusableSelectors),
     )?.filter(
         (el) => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'),
     );
@@ -56,7 +56,6 @@ export const focusTrap = (event, dialog) => {
     }
 };
 
-
 /**
  * Opens a modal by modifying the iframe's autoplay parameter and removing the hidden class.
  * @param {HTMLElement} modal - The modal element to open.
@@ -70,6 +69,7 @@ export function openModal(modal) {
     modal.classList.remove(SINGLE_IMAGE_VIDEO_HIDDEN_CLASS);
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
+    iframe.focus();
 
     ///Focus trap for modal
     document.addEventListener('keydown', (event) => {
