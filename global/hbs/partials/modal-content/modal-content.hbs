@@ -1,6 +1,6 @@
 <div hidden="true" data-overlay-container="true" class="su-modal su-hidden" data-modal="modal" data-modal-id="{{uniqueID}}">
     {{#if modalTitle}}<h2>{{modalTitle}}</h2>{{/if}}
-    <span data-focus-scope-start="true" hidden="true"></span>
+    <span tabindex="0" data-focus-scope-start="true"></span>
     <div aria-describedby="{{titleID}}" role="dialog" tabindex="-1" data-modal="modal-dialog" data-ismodal="true" aria-modal="true">
         <div class="su-modal-content">
         {{> @partial-block }}
@@ -10,5 +10,5 @@
         {{> svg-icons icon="close"}}
         <span>Close</span>
     </button>
-    <span data-focus-scope-end="true" hidden="true"></span>
+    <span tabindex="0" data-focus-scope-end="true"></span>
 </div>

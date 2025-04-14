@@ -285,7 +285,6 @@ describe('[Single Image or Video][Client]', () => {
     describe('focusTrap', () => {
         let section, modal, firstButton, secondButton, lastButton;
 
-    
         beforeEach(() => {
             vi.clearAllMocks();
 
@@ -306,16 +305,12 @@ describe('[Single Image or Video][Client]', () => {
             lastButton = modal.querySelector('.last-button');
         });
 
-        it('should focus the next focusable element when Tab is pressed', () => {
+        it('Should close the dialog when Escape key is pressed', () => {
             firstButton.focus();
-            expect(document.activeElement).toBe(firstButton);
-            fireEvent.keyDown(document, { key: 'Tab' });
-            singleImageVideo.focusTrap(
-                new KeyboardEvent('keydown', { key: 'Tab' }),
-                section,
-            );
-            secondButton.focus();
-            expect(document.activeElement).toBe(secondButton);
+            fireEvent.keyDown(document, { key: 'Escape' });
+
+            // Check if close function was called
+            expect(modal).toHaveClass('su-hidden');
         });
 
         it('should loop focus to first element when Tab is pressed on the last element', () => {
