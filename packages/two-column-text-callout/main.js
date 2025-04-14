@@ -1,6 +1,5 @@
 import xss from "xss";
 import { basicAssetUri, isRealExternalLink } from '../../global/js/utils';
-import { infoBox } from '../../global/js/helpers';
 import twoColumnTemplate from './two-column-text-callout.hbs';
 
 /**
