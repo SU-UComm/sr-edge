@@ -38,6 +38,7 @@ export function pagination({
     allResults,
     resultsPerPage,
     paginationRange,
+    currentPage = 1,
 }) {
     const pages = Math.ceil(allResults / resultsPerPage);
     const initialRange = paginationRange;
@@ -48,8 +49,6 @@ export function pagination({
     const buttons = [];
     const offsets = [];
 
-    // Initialize current page state
-    let currentPage = 1;
 
     for (let i = 0; i < pages; i++) {
         const offsetNum = i * resultsPerPage + 1;
@@ -95,6 +94,7 @@ export function pagination({
         offset: item,
         index: offsets.indexOf(item) + 1,
     }));
+
 
     buttonItems.forEach(({ offset, index }) => {
         buttons.push(

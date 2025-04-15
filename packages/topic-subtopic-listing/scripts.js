@@ -185,7 +185,7 @@ export async function handleButtonClick(args) {
         paginationRange: 5,
         currentPage: Number(offset)
     });
-
+    
     const modals = modalData.map((item) => {
         return `
         <div hidden="true" aria-modal="true" role="dialog" data-overlay-container="true" class="su-modal su-hidden" data-modal="modal" data-modal-id="${item.uniqueID}"><span data-focus-scope-start="true" hidden="true"></span><div aria-describedby="${item.titleID}" role="dialog" tabindex="-1" data-modal="modal-dialog" data-ismodal="true" aria-modal="true"><div class="su-modal-content">
