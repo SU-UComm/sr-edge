@@ -19,14 +19,6 @@
         {
             "name": "CF_ANALYTICS_API",
             "required": true
-        },
-        {
-            "name": "BASE_DOMAIN",
-            "required": true
-        },
-        {
-            "name": "BASE_PATH",
-            "required": true
         }
     ],
     "icon": {

@@ -153,45 +153,78 @@ export default {
      * @throws {Error} If required APIs are missing or fetches fail.
      */
     async main(args, info) {
-        const adapter = new FetchAdapter();
+        // Extracting environment variables from provided info
         const { FB_JSON_URL, MGT_API, CF_ANALYTICS_API } = info?.env || info?.set?.environment || {};
-        
-        // Validate info properties
-        if (typeof FB_JSON_URL !== 'string' || !FB_JSON_URL) {
-            throw new Error('FB_JSON_URL must be a non-empty string');
-        }
-        if (typeof MGT_API !== 'string' || !MGT_API) {
-            throw new Error('MGT_API must be a non-empty string');
-        }
-        if (typeof CF_ANALYTICS_API !== 'string' || !CF_ANALYTICS_API) {
-            throw new Error('CF_ANALYTICS_API must be a non-empty string');
+
+        // Extracting configuration data from arguments 
+        const { storiesCount, assetExclusions, contentTypeExclusions, sourcePath, APIrespCount, APIdateRange, publishedDateMax } = args || {};
+
+        try {
+            if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
+                throw new Error(
+                    `The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(FB_JSON_URL)} was received.`
+                );
+            }
+            if (typeof MGT_API !== 'string' || MGT_API === '') {
+                throw new Error(
+                    `The "MGT_API" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(MGT_API)} was received.`
+                );
+            }
+            if (typeof CF_ANALYTICS_API !== 'string' || CF_ANALYTICS_API === '') {
+                throw new Error(
+                    `The "CF_ANALYTICS_API" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(CF_ANALYTICS_API)} was received.`
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the Popular Stories CF component: ', er);
+            return `<!-- Error occurred in the Popular Stories CF component: ${er.message} -->`;
         }
 
-        // Type check and destructure args
-        if (typeof args !== 'object' || args === null) {
-            throw new Error('args must be an object');
+        // Validate required fields and ensure correct data types
+        try {
+            if (storiesCount && typeof storiesCount !== 'number' || ![5, 10, 15, 20].includes(storiesCount)) {
+                throw new Error(
+                    `The "storiesCount" field must be a number one of [5, 10, 15, 20]. The ${JSON.stringify(storiesCount)} was received.`
+                );
+            }
+            if (assetExclusions && typeof assetExclusions !== 'string') {
+                throw new Error(
+                    `The "assetExclusions" field must be a string. The ${JSON.stringify(assetExclusions)} was received.`
+                );
+            }
+            if (contentTypeExclusions && typeof contentTypeExclusions !== 'string') {
+                throw new Error(
+                    `The "contentTypeExclusions" field must be a string. The ${JSON.stringify(contentTypeExclusions)} was received.`
+                );
+            }
+            if (sourcePath && typeof sourcePath !== 'string') {
+                throw new Error(
+                    `The "sourcePath" field must be a string. The ${JSON.stringify(sourcePath)} was received.`
+                );
+            }
+            if (APIrespCount && typeof APIrespCount !== 'number' || ![30, 60].includes(APIrespCount)) {
+                throw new Error(
+                    `The "APIrespCount" field must be a number one of [30, 60]. The ${JSON.stringify(APIrespCount)} was received.`
+                );
+            }
+            if (APIdateRange && !["1 week", "2 weeks", "1 month"].includes(APIdateRange) ) {
+                throw new Error(
+                    `The "APIdateRange" field must be one of ["1 week", "2 weeks", "1 month"]. The ${JSON.stringify(APIdateRange)} was received.`
+                );
+            }
+            if (publishedDateMax && !["Past 6 months", "Past 1 year", "Past 2 years"].includes(publishedDateMax) ) {
+                throw new Error(
+                    `The "publishedDateMax" field must be one of ["Past 6 months", "Past 1 year", "Past 2 years"]. The ${JSON.stringify(publishedDateMax)} was received.`
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the Popular Stories CF component: ', er);
+            return `<!-- Error occurred in the Popular Stories CF component: ${er.message} -->`;
         }
 
-        const {
-            storiesCount,
-            APIrespCount,
-            sourcePath,
-            assetExclusions = "",
-            contentTypeExclusions = "",
-            APIdateRange,
-            publishedDateMax,
-        } = args;
 
-        // Validate args properties
-        if (typeof storiesCount !== 'number' || isNaN(storiesCount) || storiesCount < 0) {
-            throw new Error('storiesCount must be a non-negative number');
-        }
-        if (typeof APIrespCount !== 'number' || isNaN(APIrespCount) || APIrespCount < 0) {
-            throw new Error('APIrespCount must be a non-negative number');
-        }
-        if (typeof sourcePath !== 'string' || !sourcePath) {
-            throw new Error('sourcePath must be a non-empty string');
-        }
+        const adapter = new FetchAdapter();
+
 
         try {
             const dateRangeNumeric = getAPIDateRange(APIdateRange);
