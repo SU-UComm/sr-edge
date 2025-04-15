@@ -199,7 +199,7 @@ export default {
                     if (item.liveUrl.includes(url)) sortedData.push(item);
                 });
             });
-            // data = sortedData.slice(0, storiesCount);
+            data = sortedData.slice(0, storiesCount);
         } catch (er) {
             console.error('Error occurred in the Popular Stories CF component: Popular stories fetch failed: ', er);
             return `<!-- Error occurred in the Popular Stories CF component: Popular stories fetch failed: ${er.message} -->`;
