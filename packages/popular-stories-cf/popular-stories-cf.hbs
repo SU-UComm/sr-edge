@@ -1,0 +1,23 @@
+<section data-component='popular-stories'>
+    <div id='popular-stories' class='su-flex su-gap-[1.8rem] su-flex-col'>
+        <span class='[&>*]:su-font-bold'>
+            {{> sidebar-heading title=title icon="trendingup" headingSize="h2" color="grey" }}
+        </span>
+        <div>
+            <ol
+                class='su-text-[2.0rem] su-font-normal su-leading-[2.4rem] su-flex su-flex-col su-gap-[1.5rem]'
+            >
+                {{~#each links~}}
+                <li>
+                    <a
+                        href="{{url}}"
+                        class="su-no-underline su-font-normal dark:su-text-[white] hocus:su-underline hocus:su-text-digital-red hocus:dark:su-text-dark-mode-red"
+                    >
+                        {{title}}
+                    </a>
+                </li>
+                {{~/each~}}
+            </ol>
+        </div>
+    </div>
+</section>
