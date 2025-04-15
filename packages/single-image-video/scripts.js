@@ -69,7 +69,7 @@ export function openModal(modal) {
     modal.classList.remove(SINGLE_IMAGE_VIDEO_HIDDEN_CLASS);
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
-    iframe.focus();
+    modal.querySelector('[data-focus-scope-start="true"]').focus();
 
     ///Focus trap for modal
     document.addEventListener('keydown', (event) => {
