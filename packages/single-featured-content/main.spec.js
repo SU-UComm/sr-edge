@@ -359,7 +359,6 @@ describe('[Single Featured Content Component]', () => {
                       
                         <p data-testid="vertical-card-type"
                            class="su-flex su-font-semibold su-text-black-70 dark:su-text-black-60 su-my-0 su-gap-6 su-flex-nowrap su-items-center su-order-3 su-text-18 su-leading-[23.4px] md:su-text-20 md:su-leading-[26px] lg:su-text-20 lg:su-leading-[26px]">
-                          <span class="type-icon" data-type="research"></span>
                             
                   <svg
                       aria-hidden="true"
@@ -458,7 +457,6 @@ describe('[Single Featured Content Component]', () => {
                       
                         <p data-testid="vertical-card-type"
                            class="su-flex su-font-semibold su-text-black-70 dark:su-text-black-60 su-my-0 su-gap-6 su-flex-nowrap su-items-center su-order-3 su-text-18 su-leading-[23.4px] md:su-text-20 md:su-leading-[26px] lg:su-text-20 lg:su-leading-[26px]">
-                          <span class="type-icon" data-type="research"></span>
                             
                   <svg
                       aria-hidden="true"
@@ -553,7 +551,6 @@ describe('[Single Featured Content Component]', () => {
                       
                         <p data-testid="vertical-card-type"
                            class="su-flex su-font-semibold su-text-black-70 dark:su-text-black-60 su-my-0 su-gap-6 su-flex-nowrap su-items-center su-order-3 su-text-18 su-leading-[23.4px] md:su-text-20 md:su-leading-[26px] lg:su-text-20 lg:su-leading-[26px]">
-                          <span class="type-icon" data-type="research"></span>
                             
                   <svg
                       aria-hidden="true"

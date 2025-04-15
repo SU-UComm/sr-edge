@@ -157,7 +157,6 @@ export function VerticalCard({
         ${type ? `
           <p data-testid="vertical-card-type"
              class="su-flex su-font-semibold su-text-black-70 dark:su-text-black-60 su-my-0 su-gap-6 su-flex-nowrap su-items-center su-order-3 ${typeSize(cardSize)}">
-            <span class="type-icon" data-type="${type.toLowerCase()}"></span>
               ${svgIcons[type.toLowerCase()]()}
             <span>${xss(type)}</span>
           </p>
