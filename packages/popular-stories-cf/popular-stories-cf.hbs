@@ -1,13 +1,14 @@
 <section data-component='popular-stories'>
     <div id='popular-stories' class='su-flex su-gap-[1.8rem] su-flex-col'>
         <span class='[&>*]:su-font-bold'>
-            {{> sidebar-heading title=title icon="trendingup" headingSize="h2" color="grey" }}
+            {{> sidebar-heading title="Popular stories" icon="trendingup" headingSize="h2" color="grey" }}
         </span>
         <div>
             <ol
                 class='su-text-[2.0rem] su-font-normal su-leading-[2.4rem] su-flex su-flex-col su-gap-[1.5rem]'
             >
                 {{~#each links~}}
+                {{~#if url~}}{{~#if title~}}
                 <li>
                     <a
                         href="{{url}}"
@@ -16,6 +17,7 @@
                         {{title}}
                     </a>
                 </li>
+                {{~/if~}}{{~/if~}}
                 {{~/each~}}
             </ol>
         </div>
