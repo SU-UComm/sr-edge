@@ -1,9 +1,9 @@
 <section data-component='two-column-text-callout'>
     <div
         class='{{containerClasses
-                width=width
-                marginTop=marginTop
-                marginBottom=marginBottom
+                width="wide"
+                marginTop="3"
+                marginBottom="5"
             }}'
     >
         {{~#if showTopBorder~}}
@@ -20,7 +20,7 @@
         {{~/if~}}
         <div
             class='{{containerClasses
-                    paddingX=flexContainerPaddingX
+                    paddingX=false
                     customClasses=(getStringByCondition
                         value=flexContainerLength
                         expectedValue='2'
@@ -29,7 +29,9 @@
                     )
                 }}'
         >
-            {{{flexContainer}}}
+        {{~#each calloutsData~}}
+            {{> info-box width="full" paddingX=false containerClasses="su-flex" innerClasses="su-p-20 md:su-p-36 su-w-full" title=title imagePlacement=imagePlacement content=content imageData=imageData captionCredit=captionCredit buttonText=buttonText buttonUrl=buttonUrl isNewWindow=isNewWindow isRealExternalLink=isRealExternalLink}}
+        {{~/each~}}
         </div>
     </div>
 </section>
