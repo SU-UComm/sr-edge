@@ -1,0 +1,31 @@
+<section data-component="subscribe-to-stanford-report">
+   <form
+      class="su-flex su-flex-col su-gap-10 su-items-left"
+      action="{{actionLink}}"
+      method="POST">
+      <h2 class="su-m-0 su-font-bold su-text-18 su-leading-display dark:su-text-white su-font-sans">
+        {{{title}}}
+      </h2>
+
+      <p class="su-m-0 su-text-16 su-leading-[125%] dark:su-text-white">
+        {{{summary}}}
+      </p>
+
+      <input
+        type="email"
+        name="subscription-email"
+        placeholder="Email address"
+        title="Subscription Email"
+        aria-label="Subscription Email"
+        aria-describedby=""
+        class="su-rounded su-p-12 su-text-16 su-leading-[125%] su-text-black placeholder:su-text-black su-font-normal su-border su-border-b-2 su-border-black-20 su-border-b-black-70 dark:su-border-black-60 dark:su-border-b-black-30 hocus:su-border-digital-blue-vivid hocus:su-border-b-digital-blue dark:hocus:su-border-digital-blue-light/80 dark:hocus:su-border-b-digital-blue-light focus:su-ring-4 focus:su-ring-digital-blue-vivid/20 dark:focus:su-ring-digital-blue-vivid/60 dark:su-bg-black-true dark:su-text-white dark:placeholder:su-text-white"
+      />
+
+      <button
+        type="submit"
+        class="su-mr-auto su-text-white su-bg-digital-red su-text-16 su-font-normal su-px-22 su-pt-9 su-pb-11 hocus:su-bg-black dark:hocus:su-ring-1 dark:hocus:su-ring-white hocus:su-underline su-transition"
+      >Sign up</button>
+
+      <div id="error-container"></div>
+    </form>
+</section>
