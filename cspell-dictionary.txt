@@ -114,7 +114,22 @@ Cortez
 Doerr
 Kcgtgp
 Salleo
-
+notlike
+gscopes
+pushnews
+Skylar
+Marijane
+allnews
+Zaki
+topicinstitutional
+subtopicchemistry
+topicscienceengineering
+topichealthmedicine
+topicsocialsciences
+subtopiccommunication
+subtopicpsychology
+humsci
+ndash
 
 #testing hooks
 testid 

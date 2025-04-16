@@ -90,7 +90,7 @@ vi.mock('./scripts/popularStoriesHelpers.js', () => ({
             "component": 5,
             "collapsed": null,
             "liveUrl": "https://news.stanford.edu/stories/2025/03/menopause-earnings-economics-study",
-            "summary": "According to a new study from Stanford economist Petra Persson, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later.",
+            "summary": "According to a new study from Stanford economist Petra Person, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later.",
             "allSummaryText": null,
             "cacheUrl": "/s/cache?collection=sug~ds-stanford-report-push&url=https%3A%2F%2Fnews.stanford.edu%2Fstories%2F2025%2F03%2Fmenopause-earnings-economics-study&profile=stanford-report-push-search",
             "date": 1742774400000,
@@ -123,10 +123,10 @@ vi.mock('./scripts/popularStoriesHelpers.js', () => ({
                     "null"
                 ],
                 "descriptionPlain": [
-                    "According to a new study from Stanford economist Petra Persson, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later."
+                    "According to a new study from Stanford economist Petra Person, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later."
                 ],
                 "imageAlt": [
-                    "Headshot of Petra Persson"
+                    "Headshot of Petra Person"
                 ],
                 "taxonomyContentMainTopicId": [
                     "28404"
@@ -162,10 +162,10 @@ vi.mock('./scripts/popularStoriesHelpers.js', () => ({
                     "28193"
                 ],
                 "image": [
-                    "https://news.stanford.edu/__data/assets/image/0026/167345/Petra-Persson.jpg"
+                    "https://news.stanford.edu/__data/assets/image/0026/167345/Petra-Person.jpg"
                 ],
                 "c": [
-                    "<p>According to a new study from Stanford economist Petra Persson, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later.</p>"
+                    "<p>According to a new study from Stanford economist Petra Person, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later.</p>"
                 ],
                 "taxonomyFeaturedUnitLandingPageUrl": [
                     "https://news.stanford.edu/featured-unit/stanford-institute-for-economic-policy-research"
@@ -174,7 +174,7 @@ vi.mock('./scripts/popularStoriesHelpers.js', () => ({
                     "2025-03-24T00:00:00-07:00"
                 ],
                 "seoDescription": [
-                    "According to a new study from Stanford economist Petra Persson, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later.."
+                    "According to a new study from Stanford economist Petra Person, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later.."
                 ],
                 "taxonomyFeaturedUnitId": [
                     "28352"
@@ -210,13 +210,13 @@ vi.mock('./scripts/popularStoriesHelpers.js', () => ({
                     "Research & Scholarship"
                 ],
                 "teaserPlain": [
-                    "According to a new study from Stanford economist Petra Persson, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later."
+                    "According to a new study from Stanford economist Petra Person, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later."
                 ],
                 "taxonomyContentCategoryText": [
                     "Research &amp; Scholarship"
                 ],
                 "teaser": [
-                    "<p>According to a new study from Stanford economist Petra Persson, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later.</p>"
+                    "<p>According to a new study from Stanford economist Petra Person, women who visit a health care provider with menopause-related symptoms are earning 10% less four years later.</p>"
                 ],
                 "longTitle": [
                     "Research reveals women take ‘substantial’ earnings hit during menopause"
