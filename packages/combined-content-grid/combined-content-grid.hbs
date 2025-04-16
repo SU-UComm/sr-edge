@@ -1,0 +1,49 @@
+<section data-component="combined-content-grid">
+    <div class="{{containerClasses width="large"}}">
+        {{> linked-heading title=headingData.title isAlwaysLight=headingData.isAlwaysLight ctaLink=headingData.ctaLink ctaNewWindow=headingData.ctaNewWindow ctaText=headingData.ctaText}}
+        <div class="su-w-full su-component-featured-grid">
+            <div class="su-flex su-flex-wrap lg:su-flex-nowrap su-gap-[68px] md:su-gap-72 lg:su-gap-[160px]">
+                <div className="su-relative su-flex su-flex-wrap md:su-flex-nowrap lg:su-flex-wrap lg:su-order-2 md:su-items-start md:su-content-start su-gap-80 md:su-gap-72 lg:su-gap-[76px] md:su-basis-[39.5%] lg:su-basis-[30%] su-grow before:su-w-full before:md:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:lg:su-h-full before:su-left-0 before:su--bottom-35 before:lg:su-bottom-auto before:lg:su-top-0 before:md:su-left-0 lg:before:su-w-px before:lg:su--left-80">
+                    <div className="su-relative su-w-full md:su-h-full lg:su-h-auto">
+                        [SidebarList] - events
+                        {{!-- <SidebarList
+                            title={eventsConfiguration.heading}
+                            icon="eventscalendar"
+                            ctaText="See all events"
+                            ctaUrl={eventsConfiguration.linkUrl}
+                            ctaIcon="externalarrow"
+                            headingLvl={headingData.title ? "h3" : "h2"}
+                        >
+                            <HorizontalCardGrid
+                            items={eventCards}
+                            orientation="vertical"
+                            maximumItems={Number(eventsConfiguration.numberOfItems)}
+                            />
+                        </SidebarList> --}}
+                    </div>
+                    <div className="su-relative su-w-full md:su-h-full lg:su-h-auto before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px md:before:su-h-full md:before:su-w-px before:su-left-0 md:before:su--left-38 before:su--top-40 md:before:su-top-0 lg:before:su--top-38 lg:before:su-left-0 lg:before:su-w-full lg:before:su-h-px">
+                         [SidebarList] - announcements
+                        {{!-- <SidebarList
+                            title={announcementsConfiguration.heading}
+                            icon="announcement"
+                            ctaText="See all announcements"
+                            ctaUrl={announcementLink}
+                            headingLvl={headingData.title ? "h3" : "h2"}
+                        >
+                            <HorizontalCardGrid
+                            items={announcementCards}
+                            orientation="vertical"
+                            maximumItems={Number(
+                                announcementsConfiguration.numberOfItems
+                            )}
+                            />
+                        </SidebarList> --}}
+                    </div>
+                </div>
+                <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow">
+                    {{> featured-grid items=featuredGridItems alignment="left" isNested=true hasNestedGrid=false gridType="stories" includeVerticalVideo=false}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

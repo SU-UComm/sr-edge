@@ -9,6 +9,9 @@ export const helpers = {
         
         return alignClasses.get(align) || "";
     },
+    aspectRatioSize: function(cardSize) {
+        return `card-${cardSize}`;
+    },
     aspectRatioClass: function(aspectRatio) {
         const aspectRatios = new Map();
 
@@ -351,7 +354,38 @@ export const helpers = {
         } else {
             return (str1 + ' ' + str2)
         }
+    },
+    cardTitleSizeClasses: function(cardSize) {
+        const titleSize = new Map();
+
+        titleSize.set("featured", "su-text-[35px] md:su-text-[40px] lg:su-text-[43px] su-leading-[42px] md:su-leading-[48px] lg:su-leading-[51.6px]");
+        titleSize.set("medium", "su-text-21 lg:su-text-[33px] su-leading-[25.2px] lg:su-leading-[39.6px]");
+        titleSize.set("default", "su-text-21 lg:su-text-24 su-leading-[25.2px] lg:su-leading-[28.8px]");
+        
+        const size = cardSize === "featured" || cardSize === "medium" ? cardSize : "default";
+        return titleSize.get(size);
+    },
+    cardTaxonomySizeClasses: function (cardSize) {
+        const taxonomySize = new Map();
+        
+        taxonomySize.set("featured", "su-text-20 md:su-text-20 su-leading-[26px]")
+        taxonomySize.set("medium", "su-text-16 md:su-text-16 md:su-text-20 su-leading-[20.8px] md:su-leading-[26px]");
+        taxonomySize.set("default", "su-text-18 su-leading-[23.4px]");
+
+        const size = cardSize === "featured" || cardSize === "medium" ? cardSize : "default";
+        return taxonomySize.get(size);
+    },
+    cardTypeSizeClasses: function(cardSize) {
+        const typeSize = new Map();
+        
+        typeSize.set("featured", "su-text-18 su-leading-[23.4px] md:su-text-20 md:su-leading-[26px] lg:su-text-20 lg:su-leading-[26px]")
+        typeSize.set("medium", "su-text-16 su-leading-[20.8px] lg:su-text-18 lg:su-leading-[23.4px]");
+        typeSize.set("default", "su-text-16 su-leading-[20.8px]");
+
+        const size = cardSize === "featured" || cardSize === "medium" ? cardSize : "default";
+        return typeSize.get(size);
     }
+      
 }
   
 export default helpers;
