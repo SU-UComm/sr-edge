@@ -18,7 +18,7 @@
                 "cardAsset": "matrix-asset://api-identifier/168624"
             }
         ],
-        "featuredDescription": "<p>More than half a trillion dollars in tax revenue goes uncollected every year. In the latest episode of the GSB’s <em>Quick Study</em> video series, Associate Professor Rebecca Lester shares how her team may have found some of it.</p>"
+        "featuredDescription": ""
     },
     "displayConfiguration": {
         "alignment": "right",
@@ -27,13 +27,13 @@
     },
     "eventsConfiguration": {
         "heading": "Upcoming Events",
-        "endPoint": "https://events.stanford.edu/api/2/events?type=37006980803119,37006980805168,37006980807217,37006980808242&days=365",
+        "endPoint": "https://events.stanford.edu/api/2/events?days=365&sponsored=true",
         "numberOfItems": 3,
-        "linkUrl": "https://events.stanford.edu/calendar/upcoming?order=date&experience=&event_types%5B%5D=37006980803119&event_types%5B%5D=37006980807217&event_types%5B%5D=37006980805168"
+        "linkUrl": "https://events.stanford.edu"
     },
     "announcementsConfiguration": {
         "heading": "Announcements",
-        "endPoint": "?profile=stanford-report-push-search&num_ranks=3&collection=sug~sp-stanford-report-search&sort=date&meta_taxonomyContentTypeText=Announcement&meta_taxonomyAudienceText=Student",
+        "endPoint": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&&sort=date&meta_taxonomyAudienceText=External&meta_taxonomyContentTypeText=Announcement&num_ranks=6",
         "numberOfItems": 3,
         "linkUrl": "matrix-asset://api-identifier/128705"
     }

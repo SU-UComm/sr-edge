@@ -258,14 +258,6 @@ export const helpers = {
 
         return baseClasses.join(' ').trim();
     },
-    linkedHeadingAClasses: function(isAlwaysLight) {
-        const headingClasses = new Map();
-
-        headingClasses.set(true, 'su-text-white hocus:su-text-white/95 dark:hocus:su-text-white/95');
-        headingClasses.set(false, 'su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red');
-        
-        return headingClasses.get(isAlwaysLight)
-    },
     linkedHeadingHeaderClasses: function(isAlwaysLight) {
         return isAlwaysLight ? "su-text-white" : "su-text-black";
     },

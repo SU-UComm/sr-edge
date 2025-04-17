@@ -1,4 +1,13 @@
-// Globals
+/**
+ * Globals variables 
+ * @constant {string} COMBINED_CONTENT_GRID_SELECTOR - Selector for combined content grid panel elements.
+ * @constant {string} COMBINED_CONTENT_GRID_HIDDEN_CLASS - CSS class to hide elements.
+ * @constant {string} COMBINED_CONTENT_GRID_MODAL_SELECTOR - Selector for modal container.
+ * @constant {string} COMBINED_CONTENT_GRID_OPEN_MODAL_BTN - Selector for the button that opens the modal.
+ * @constant {string} COMBINED_CONTENT_GRID_CLOSE_MODAL_BTN - Selector for the button that closes the modal.
+ * @constant {string} COMBINED_CONTENT_GRID_MODAL_IFRAME - Selector for iframe container.
+ * @type {import('swiper').Swiper | undefined} swiper - Instance of Swiper for handling gallery interactions.
+ */
 export const COMBINED_CONTENT_GRID_SELECTOR = 'section[data-component="combined-content-grid"]';
 export const COMBINED_CONTENT_GRID_HIDDEN_CLASS = 'su-hidden';
 export const COMBINED_CONTENT_GRID_MODAL_SELECTOR = 'div[data-modal="modal"]';
@@ -14,6 +23,7 @@ export function openModal(modal) {
 
     iframe.setAttribute('src', newSrc);
     modal.classList.remove(COMBINED_CONTENT_GRID_HIDDEN_CLASS);
+    modal.hidden = false;
 }
 
 // close currently open modal
@@ -24,6 +34,7 @@ export function closeModal(modal) {
 
     iframe.setAttribute('src', newSrc);
     modal.classList.add(COMBINED_CONTENT_GRID_HIDDEN_CLASS);
+    modal.hidden = true;
 }
 
 /**
@@ -59,6 +70,14 @@ export function _modalInit(section) {
     });
 }
 
+/**
+ * Initializes carousel and modal when the DOM content is fully loaded.
+ *
+ * This function selects all elements matching the `COMBINED_CONTENT_GRID_SELECTOR` selector
+ * applies the `_modalInit` function to each of them
+ *
+ * @listens DOMContentLoaded
+ */
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll(COMBINED_CONTENT_GRID_SELECTOR).forEach(section => {
         _modalInit(section);

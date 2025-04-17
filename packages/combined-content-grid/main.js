@@ -1,4 +1,5 @@
-import { cardDataAdapter, funnelbackCardService, matrixCardService, eventCardService, linkedHeadingService, basicAssetUri, uuid } from "../../global/js/utils";
+import { cardDataAdapter, funnelbackCardService, matrixCardService, eventCardService, linkedHeadingService, basicAssetUri, uuid, isRealExternalLink } from "../../global/js/utils";
+import { EventStartEndDate } from '../../global/js/helpers';
 import combinedContentGridTemplate from './combined-content-grid.hbs';
 
 /**
@@ -73,31 +74,6 @@ export default {
 
         // Validate required fields and ensure correct data types
         try {
-            if (headingConfiguration?.title && typeof headingConfiguration.title !== 'string') {
-                throw new Error(
-                    `The "headingConfiguration.title" field must be a string. The ${JSON.stringify(headingConfiguration.title)} was received.`
-                );
-            }
-            if (headingConfiguration?.ctaUrl && typeof headingConfiguration.ctaUrl !== 'string') {
-                throw new Error(
-                    `The "headingConfiguration.ctaUrl" field must be a string. The ${JSON.stringify(headingConfiguration.ctaUrl)} was received.`
-                );
-            }
-            if (headingConfiguration?.ctaManualUrl && typeof headingConfiguration.ctaManualUrl !== 'string') {
-                throw new Error(
-                    `The "headingConfiguration.ctaManualUrl" field must be a string. The ${JSON.stringify(headingConfiguration.ctaManualUrl)} was received.`
-                );
-            }
-            if (headingConfiguration?.ctaText && typeof headingConfiguration.ctaText !== 'string') {
-                throw new Error(
-                    `The "headingConfiguration.ctaText" field must be a string. The ${JSON.stringify(headingConfiguration.ctaText)} was received.`
-                );
-            }
-            if (headingConfiguration?.ctaNewWindow && typeof headingConfiguration.ctaNewWindow !== 'boolean') {
-                throw new Error(
-                    `The "headingConfiguration.ctaNewWindow" field must be a boolean. The ${JSON.stringify(headingConfiguration.ctaNewWindow)} was received.`
-                );
-            }
             if (!['Search', 'Select'].includes(source) ) {
                 throw new Error(
                     `The "source" field cannot be undefined and must be one of ["Search", "Select"]. The ${JSON.stringify(source)} was received.`
@@ -126,6 +102,31 @@ export default {
             if (displayDescriptions && typeof displayDescriptions !== 'boolean') {
                 throw new Error(
                     `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
+                );
+            }
+            if (headingConfiguration?.title && typeof headingConfiguration.title !== 'string') {
+                throw new Error(
+                    `The "headingConfiguration.title" field must be a string. The ${JSON.stringify(headingConfiguration.title)} was received.`
+                );
+            }
+            if (headingConfiguration?.ctaUrl && typeof headingConfiguration.ctaUrl !== 'string') {
+                throw new Error(
+                    `The "headingConfiguration.ctaUrl" field must be a string. The ${JSON.stringify(headingConfiguration.ctaUrl)} was received.`
+                );
+            }
+            if (headingConfiguration?.ctaManualUrl && typeof headingConfiguration.ctaManualUrl !== 'string') {
+                throw new Error(
+                    `The "headingConfiguration.ctaManualUrl" field must be a string. The ${JSON.stringify(headingConfiguration.ctaManualUrl)} was received.`
+                );
+            }
+            if (headingConfiguration?.ctaText && typeof headingConfiguration.ctaText !== 'string') {
+                throw new Error(
+                    `The "headingConfiguration.ctaText" field must be a string. The ${JSON.stringify(headingConfiguration.ctaText)} was received.`
+                );
+            }
+            if (headingConfiguration?.ctaNewWindow && typeof headingConfiguration.ctaNewWindow !== 'boolean') {
+                throw new Error(
+                    `The "headingConfiguration.ctaNewWindow" field must be a boolean. The ${JSON.stringify(headingConfiguration.ctaNewWindow)} was received.`
                 );
             }
             if (eventsConfiguration?.heading && typeof eventsConfiguration.heading !== 'string') {
@@ -178,7 +179,7 @@ export default {
         let data = null;
         let eventData = null;
         let announcementData = null;
-        let announcementLink = null;
+        const modalData = [];
 
         // Determine data source: "Search" (fetching from Funnelback) or "Select" (Matrix API)
         if (source.toLowerCase() === "search") {
@@ -218,6 +219,8 @@ export default {
         );
 
         if (eventsConfiguration?.endPoint) {
+            let events = null
+
             // Create our service
             const service = new eventCardService({ api: eventsConfiguration.endPoint });
 
@@ -226,14 +229,54 @@ export default {
 
             // Get the event cards data
             try {
-                eventData = await adapter.getCards();
+                events = await adapter.getCards();
             } catch (er) {
                 console.error('Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ', er);
                 return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ${er.message} -->`;
             }
+
+            const eventsCards = events.map((item) => {
+                const uniqueID = uuid();
+
+                item.isRealExternalLink = isRealExternalLink(item.liveUrl);
+                item.eventStartEndDate = EventStartEndDate({start: item.date, end: item.endDate});
+                item.uniqueID = uniqueID;
+                item.imageAlt = item.videoUrl ? `Open video ${item.imageAlt} in a modal` : item.imageAlt;
+                item.iconType = item.type?.toLowerCase();
+
+
+                if (item.type === 'Video' || item.videoUrl) {
+                    modalData.push(
+                        {
+                            isVertical: item.size === "vertical-video",
+                            videoId: item.videoUrl,
+                            title: `Watch ${item.title}`, 
+                            noAutoPlay: true,
+                            classes: '',
+                            uniqueID: uniqueID,
+                            titleID: 'card-modal'
+                        }
+                    );
+                }
+
+                return item;
+            }).slice(0, eventsConfiguration.numberOfItems);
+
+            eventData = {
+                title: eventsConfiguration.heading, 
+                headingLvl: headingData?.title ? 'h3' : 'h2',
+                ctaText: "See all events",
+                ctaUrl: eventsConfiguration.linkUrl,
+                ctaIcon: isRealExternalLink(eventsConfiguration.linkUrl) ? "external arrow" : "chevron right",
+                icon: "eventscalendar",
+                data: eventsCards,
+                
+            }  
+
         }
 
         if (announcementsConfiguration?.endPoint) {
+            let announcements = null;
             // Create our service
             const service = new funnelbackCardService({ FB_JSON_URL, query: announcementsConfiguration.endPoint });
 
@@ -242,64 +285,73 @@ export default {
 
              // Get the announcements cards data
              try {
-                announcementData = await adapter.getCards();
+                announcements = await adapter.getCards();
             } catch (er) {
                 console.error('Error occurred in the Combined Content Grid component: Failed to fetch announcements cards data. ', er);
                 return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch announcements cards data. ${er.message} -->`;
             }
-        }
 
-        if (announcementsConfiguration?.linkUrl !== "") {
-            const announcementPageData = await basicAssetUri(
-                fnsCtx,
-                announcementsConfiguration.linkUrl
-            );
+            const announcementsCards = announcements.map((item) => {
+                item.isRealExternalLink = isRealExternalLink(item.liveUrl);
+                return item;
+            }).slice(0, announcementsConfiguration.numberOfItems);
 
-            announcementLink = announcementPageData.url;
+            announcementData = {
+                title: announcementsConfiguration.heading,
+                ctaText: "See all announcements",
+                headingLvl: headingData?.title ? 'h3' : 'h2',
+                icon: "announcements",
+                data: announcementsCards,
+            }
+
+            if (announcementsConfiguration.linkUrl && announcementsConfiguration.linkUrl !== "") {
+                const announcementPageData = await basicAssetUri(
+                    fnsCtx,
+                    announcementsConfiguration.linkUrl
+                );
+    
+                announcementData.ctaUrl = announcementPageData.url;
+                announcementData.ctaIcon = isRealExternalLink(announcementPageData.url) ? "external arrow" : "chevron right";
+            }
         }
 
         // Prepare supplementary cards
-        const cardModal = [];
         const cardData = data.map((card, idx) => {
-            const uniqueId = uuid();
+            const uniqueID = uuid();
             // Prepare common card data
-            card.uniqueId = uniqueId;
+            card.uniqueID = uniqueID;
             card.cardSize = idx === 0 ? "featured" : "small";
             card.iconType = card.type.toLowerCase();
             card.displayThumbnail = displayThumbnails;
             card.displayDescription = displayDescriptions;
-            card.description = idx === 0 ? featuredDescription ? featuredDescription : '' : card.description;
-            card.headingLvl = headingData.title ? 3 : 2;
+            card.description = idx === 0 ? featuredDescription ? featuredDescription : card.description : card.description;
+            card.headingLvl = headingData?.title ? 'h3' : 'h2';
 
             // Generate modals for video cards
             if (card.type === 'Video' || card.videoUrl) {
-                cardModal.push(
+                modalData.push(
                     {
                         isVertical: card.size === "vertical-video",
                         videoId: card.videoUrl,
                         title: `Watch ${card.title}`, 
                         noAutoPlay: true,
-                        uniqueID: uniqueId,
+                        classes: '',
+                        uniqueID: uniqueID,
                         titleID: 'card-modal'
                     }
                 );
             }
 
             return card
-        })
-
+        }).slice(0, 3);
 
         // Prepare component data for template rendering
         const componentData = {
             headingData,
-            featuredGridItems: cardData,
-            data: JSON.stringify(cardData),
-            cardModal,
+            cardData,
+            modalData,
             eventData,
             announcementData,
-            announcementLink,
-            eventsConfiguration: args.eventsConfiguration,
-            announcementsConfiguration: args.announcementsConfiguration
         };
 
         return combinedContentGridTemplate(componentData);
