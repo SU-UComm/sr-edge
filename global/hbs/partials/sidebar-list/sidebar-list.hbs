@@ -1,0 +1,18 @@
+<div class="su-component-sidebar-list su-flex su-flex-wrap su-gap-27">
+    {{~#if title~}}
+        {{> sidebar-heading title=title icon=icon headingSize=headingLvl color="grey" }}
+    {{~/if~}}
+    {{> @partial-block }}
+    {{~#if ctaUrl~}}
+    <a data-test="cta" href="{{ctaUrl}}" class="su-items-center su-group su-transition su-justify-center md:su-justify-start su-w-full su-flex su-text-digital-red dark:su-text-dark-mode-red su-flex-nowrap su-gap-2 su-leading-[125%] su-text-21 su-font-semibold su-no-underline hocus:su-underline *:su-transition">
+        <span>{{ctaText}}</span>
+        <span class="su-transition {{getStringByCondition value=ctaIcon expectedValue="external arrow" trueResult="group-hocus:su--translate-y-01em group-hocus:su-translate-x-01em [&>svg]:su-translate-y-1" falseResult="group-hocus:su-translate-x-01em"}}">
+            {{~#ifEquals ctaIcon "external arrow"~}}
+                {{> svg-icons strokeWidth=3 icon="external arrow"}}
+            {{~else~}}
+                {{> svg-icons icon="chevron right"}}
+            {{~/ifEquals~}}
+        </span>
+    </a>
+    {{~/if~}}
+</div>
