@@ -65,6 +65,7 @@ export function _carouselInit(section) {
         on: {
             init: swiper => {
                 ensureLoopConditions(swiper);
+                updateAccessibility(swiper, '', false);
                 if(swiper.activeIndex === 1) {
                     swiper.slidePrev();
                 }
@@ -84,15 +85,37 @@ export function _carouselInit(section) {
 
     if (originalSlides > 1) {
         // Add slide change event handler with accessibility management
-        swiper.on('slideChange', function() {
-            /* v8 ignore start */
-            setTimeout(() => { 
-                updateAccessibility(swiper, 'h2 a, h3 a, button', true);
-            }, 100);
-            /* v8 ignore stop */
+        let isFocusable = false;
+
+        /* v8 ignore start */
+        document.addEventListener('keydown', function() {
+            isFocusable = true
         });
-        // Initial accessibility setup
-        updateAccessibility(swiper, '', false);
+
+        // Detect non-keyboard interaction
+        document.addEventListener('mousedown', () => {
+            isFocusable = false;
+        });
+
+        document.addEventListener('touchstart', () => {
+            isFocusable = false;
+        });
+
+        // Optional: handle pointer events if you're in a modern environment
+        document.addEventListener('pointerdown', () => {
+            isFocusable = false;
+        });
+
+        swiper.on('slideChange', function() {
+            setTimeout(() => { 
+            if (isFocusable) {
+                    updateAccessibility(swiper, 'h2 a, h3 a, button', true);
+                } else {
+                    updateAccessibility(swiper, '', false);
+                }
+            }, 100);
+        });
+        /* v8 ignore stop */
     }
 };
 
