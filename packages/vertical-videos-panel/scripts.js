@@ -137,11 +137,7 @@ export function _carouselInit(section) {
             on: {
                 init: swiper => {
                     ensureLoopConditions(swiper);
-                      /* v8 ignore start */
-                      setTimeout(() => {
-                        isFocusable = true
-                    }, 100)
-                    /* v8 ignore stop */
+                    updateAccessibility(swiper, '', false);
                 },
                 resize: swiper => {
                     ensureLoopConditions(swiper);
@@ -150,6 +146,10 @@ export function _carouselInit(section) {
                     paginationUpdater(swiper);
                 }
             }
+        });
+
+        document.addEventListener('keydown', function() {
+            isFocusable = true
         });
 
         // Add slide change event handler with accessibility management
