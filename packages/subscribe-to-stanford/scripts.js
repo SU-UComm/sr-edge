@@ -1,6 +1,17 @@
 // Globals 
+/**
+ * CSS selector for the subscription component section.
+ * Used to find all instances of the component on the page.
+ * @constant {string}
+ */
 export const CONTENT_SELECTOR = 'section[data-component="subscribe-to-stanford-report"]';
 
+/**
+ * Initializes subscription form functionality within a given section.
+ * Handles validation and submission behavior for email input.
+ * 
+ * @param {HTMLElement} section - The section element containing the subscription form.
+ */
 export function _subscribeInit(section) {
     const subscribeForm = section.querySelector('form');
     const emailInput = subscribeForm.querySelector('input[type="email"]');
@@ -33,6 +44,9 @@ export function _subscribeInit(section) {
 
 };
 
+/**
+ * Finds and initializes all subscribe-to-stanford-report components on the page.
+ */
 export function initSubscribeScripts() {
     document.querySelectorAll(CONTENT_SELECTOR).forEach(elem => {
         _subscribeInit(elem);

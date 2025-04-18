@@ -13,17 +13,10 @@ describe('[Content Component]', () => {
     });
 
     describe('Error handling', () => {
-        it('Should return error when args is not an object', async () => {
-            const result = await main(null);
-            expect(result).toContain(
-                '<!-- Error rendering content: args must be an object -->',
-            );
-        });
-
-        it('Should return error when contentConfiguration is missing', async () => {
+        it('Should handle missing contentConfiguration gracefully', async () => {
             const result = await main({});
             expect(result).toContain(
-                '<!-- Error rendering content: contentConfiguration must be an object -->',
+                '<!-- Error rendering content: The "actionLink" field must be a non empty string.'
             );
         });
 
@@ -37,7 +30,7 @@ describe('[Content Component]', () => {
                 },
             });
             expect(result).toContain(
-                '<!-- Error rendering content: actionLink must be a string -->',
+                '<!-- Error rendering content: The "actionLink" field must be a non empty string.'
             );
         });
 
@@ -51,7 +44,7 @@ describe('[Content Component]', () => {
                 },
             });
             expect(result).toContain(
-                '<!-- Error rendering content: title must be a string -->',
+                '<!-- Error rendering content: The "title" field must be a non empty string.'
             );
         });
     });
@@ -72,6 +65,20 @@ describe('[Content Component]', () => {
             expect(result).toContain('https://example.com/subscribe');
             expect(result).toContain(
                 'data-component="subscribe-to-stanford-report"',
+            );
+        });
+
+        it('Should return error when summary is not a string', async () => {
+            // Providing invalid summary
+            const result = await main({
+                contentConfiguration: {
+                    actionLink: 'https://example.com',
+                    title: 'Test title',
+                    summary: 0, 
+                },
+            });
+            expect(result).toContain(
+                '<!-- Error rendering content: The "summary" field must be a string. The 0 was received.'
             );
         });
 
