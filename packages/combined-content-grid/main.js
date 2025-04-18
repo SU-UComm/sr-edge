@@ -322,7 +322,7 @@ export default {
             card.uniqueID = uniqueID;
             card.cardSize = idx === 0 ? "featured" : "small";
             card.iconType = card.type.toLowerCase();
-            card.displayThumbnail = displayThumbnails;
+            card.displayThumbnail = idx === 0 ? true : displayThumbnails;
             card.displayDescription = displayDescriptions;
             card.description = idx === 0 ? featuredDescription ? featuredDescription : card.description : card.description;
             card.headingLvl = headingData?.title ? 'h3' : 'h2';
