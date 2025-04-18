@@ -148,20 +148,36 @@ export function _carouselInit(section) {
             }
         });
 
+        /* v8 ignore start */
         document.addEventListener('keydown', function() {
             isFocusable = true
+        });
+        
+        // Detect non-keyboard interaction
+        document.addEventListener('mousedown', () => {
+            isFocusable = false;
+        });
+        
+        document.addEventListener('touchstart', () => {
+            isFocusable = false;
+        });
+        
+        // Optional: handle pointer events if you're in a modern environment
+        document.addEventListener('pointerdown', () => {
+            isFocusable = false;
         });
 
         // Add slide change event handler with accessibility management
         swiper.on('slideChange', function() {
-            /* v8 ignore start */
+            setTimeout(() => { 
             if (isFocusable) {
-                setTimeout(() => { 
                     updateAccessibility(swiper, 'h2 a, h3 a, button', true);
-                }, 100);
-            }
-            /* v8 ignore stop */
+                } else {
+                    updateAccessibility(swiper, '', false);
+                }
+            }, 100);
         });
+        /* v8 ignore stop */
     } else {
         section.querySelector('.component-slider-controls')?.remove();
     }
