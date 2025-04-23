@@ -1,0 +1,28 @@
+<section data-component="basic-story-hero" data-unique-id="{{uniqueId}}">
+    <div class="{{classes}}">
+        <div class="su-grid su-gap su-grid-cols-6 md:su-grid-cols-12">
+            <div class="su-col-span-6 su-col-start-1 md:su-col-span-10 md:su-col-start-2">
+                <div class="su-flex su-gap-y-8 su-gap-x-16 su-justify-between su-flex-wrap su-text-16 md:su-basefont-23">
+                    <span class="su-flex su-items-center su-justify-center">
+                    <time class="su-m-0 su-mr-4 su-font-semibold">
+                        {{pubDateFormatted}}
+                    </time>
+                    <span class="su-reading-time su-reading-time-separator"></span>
+                    </span>
+
+                    {{{topicLink}}}
+                </div>
+
+                <h1 class="su-font-bold su-rs-mt-4 su-font-serif su-mb-0 xl:su-text-[6.4rem]">
+                    {{{title}}}
+                </h1>
+                <p class="su-font-serif su-intro-text su-mb-0 su-rs-mt-2 su-text-21 su-leading-[27.35px] md:su-text-28 md:su-leading-[36.47px]">
+                    {{{unescapeHtml summary}}}
+                </p>
+            </div>
+
+            {{{mediaFeature}}}
+        </div>
+    </div>
+    {{{heroModal}}}
+</section>
