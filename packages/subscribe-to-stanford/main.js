@@ -38,8 +38,9 @@ export default {
                     `The "summary" field must be a string. The ${JSON.stringify(summary)} was received.`
                 );
             }
-        } catch (err) {
-            return `<!-- Error rendering content: ${err.message} -->`;
+        } catch (er) {
+            console.error('Error occurred in the Subscribe to Stanford component: ', er);
+            return `<!-- Error occurred in the Subscribe to Stanford component: ${er.message} -->`;
         }
 
         const componentData = {

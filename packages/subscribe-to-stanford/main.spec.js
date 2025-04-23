@@ -16,8 +16,7 @@ describe('[Content Component]', () => {
         it('Should handle missing contentConfiguration gracefully', async () => {
             const result = await main({});
             expect(result).toContain(
-                '<!-- Error rendering content: The "actionLink" field must be a non empty string.'
-            );
+                '<!-- Error occurred in the Subscribe to Stanford component: The "actionLink" field must be a non empty string.'            );
         });
 
         it('Should return error when actionLink is not a string or empty', async () => {
@@ -30,7 +29,7 @@ describe('[Content Component]', () => {
                 },
             });
             expect(result).toContain(
-                '<!-- Error rendering content: The "actionLink" field must be a non empty string.'
+                '<!-- Error occurred in the Subscribe to Stanford component: The "actionLink" field must be a non empty string.'
             );
         });
 
@@ -44,7 +43,7 @@ describe('[Content Component]', () => {
                 },
             });
             expect(result).toContain(
-                '<!-- Error rendering content: The "title" field must be a non empty string.'
+                '<!-- Error occurred in the Subscribe to Stanford component: The "title" field must be a non empty string.'
             );
         });
     });
@@ -78,7 +77,7 @@ describe('[Content Component]', () => {
                 },
             });
             expect(result).toContain(
-                '<!-- Error rendering content: The "summary" field must be a string. The 0 was received.'
+                '<!-- Error occurred in the Subscribe to Stanford component: The "summary" field must be a string. The 0 was received.'
             );
         });
 
