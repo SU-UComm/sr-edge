@@ -68,8 +68,8 @@ export function Subnav({ navigation }) {
       "su-text-inherit su-text-black su-font-semi-bold su-text-16 lg:su-text-18 lg:su-leading-[21.6px] su-no-underline hover:su-underline dark:su-text-white hover:su-text-digital-red dark:hover:su-text-dark-mode-red";
     
     return `
-        <div className="scrollable-list su-w-full md:su-justify-center su-flex su-nowrap su-mt-15 md:su-mt-26 lg:su-mt-19">
-            <ul className="scrollable-list__items su-w-[calc(100%+40px)] md:su-w-auto su-flex md:su-justify-center su-mb-0 su-whitespace-nowrap su-flex-nowrap md:su-flex-wrap su-overflow-x-scroll md:su-overflow-visible su-list-none su-mx-[-20px] md:su-mr-0 su-px-20 su-mb-0 su-pb-12 lg:su-pb-0">
+        <div class="scrollable-list su-w-full md:su-justify-center su-flex su-nowrap su-mt-15 md:su-mt-26 lg:su-mt-19">
+            <ul class="scrollable-list__items su-w-[calc(100%+40px)] md:su-w-auto su-flex md:su-justify-center su-mb-0 su-whitespace-nowrap su-flex-nowrap md:su-flex-wrap su-overflow-x-scroll md:su-overflow-visible su-list-none su-mx-[-20px] md:su-mr-0 su-px-20 su-mb-0 su-pb-12 lg:su-pb-0">
             ${navigation.map((item, i, row) => {
                 const title = item.asset_name;
     
