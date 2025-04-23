@@ -1,0 +1,90 @@
+import { FetchAdapter } from '../../global/js/utils/fetchAdapter';
+import basicHero from './basic-hero.hbs';
+
+/**
+ * @module BasicHero
+ * @description A module for rendering a Basic hero form cotexto of the page,
+ */
+export default {
+    /**
+     * Fetches and processes current page data, rendering them as Basic hero.
+     * 
+     * @async
+     * @function main
+     * @param {Object} args - Configuration arguments for the listing.
+     * @param {Object} info - Contextual information including environment variables.
+     * @param {Object} info.fns - Functions available in the execution context.
+     * @param {string} info.fns.assetId - Function to resolve URIs.
+     * @param {Object} [info.env] - Environment variables (preferred source).
+     * @param {string} [info.env.BASE_DOMAIN] - The base URL for the Matrix API.
+     * @param {Object} [info.set] - Alternative source for environment variables.
+     * @param {Object} [info.set.environment] - Nested environment variables.
+     * @param {string} [info.set.environment.BASE_DOMAIN] - Alternative base URL for the Matrix API.
+     * @returns {Promise<string>} The rendered HTML string from the topicListingTemplate, or an error comment if processing fails.
+     * @throws {Error} If FB_JSON_URL or query is invalid or if the fetch operation fails.
+     */
+    async main( args, info ) {
+        // Extracting functions from provided info
+        const fnsCtx = info?.fns || info?.ctx || {};
+        
+        // Extracting environment variables from provided info
+        const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
+       
+        const currentAssetId = fnsCtx?.assetId
+        // const currentAssetId = '168661';
+
+        // Validate required environment variables
+        try {
+            if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
+                throw new Error(
+                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
+                );
+            }
+            if (typeof fnsCtx !== 'object' || typeof currentAssetId !== 'string' || currentAssetId.trim() === '') {
+                throw new Error(
+                    `The "info.fns.assetId" must be a non-empty string. The ${JSON.stringify(currentAssetId)} was received.`
+                );
+            }
+
+        } catch (er) {
+            console.error('Error occurred in the Basic Hero component: ', er);
+            return `<!-- Error occurred in the Basic Hero component: ${er.message} -->`;
+        }
+
+        const adapter = new FetchAdapter();
+        let heroData = null
+
+        adapter.url = `${BASE_DOMAIN}_api/mx/storyhero?story=${currentAssetId}`;
+
+
+        // Get the result data
+        try {
+            heroData = await adapter.fetch();
+
+            if (!heroData || typeof heroData !== 'object') {
+                throw new Error("Invalid API response: heroData is missing or not an object.");
+            }
+        } catch (er) {
+            console.error('Error occurred in the Basic Hero component: Error parsing hero data JSON response: ', er);
+            return `<!-- Error occurred in the Basic Hero component: Error parsing hero data JSON response: ${er.message} -->`;
+        }
+
+        // Validate fetched card data
+        try {
+            if (typeof heroData?.title !== 'string' || heroData?.title.trim() === '') {
+                throw new Error("Title cannot be empty");
+            }
+        } catch (er) {
+            console.error('Error occurred in the Basic Hero component: ', er);
+            return `<!-- Error occurred in the Basic Hero component: ${er.message} -->`;
+        }
+
+        // Prepare component data for template rendering
+        const componentData = {
+            titleAlignment: heroData.titleAlignment?.toLowerCase() || "left",
+            title: heroData.title,
+        };
+
+        return basicHero(componentData);
+    }
+};

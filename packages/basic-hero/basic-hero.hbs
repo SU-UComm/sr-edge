@@ -1,0 +1,17 @@
+<section data-component='basic-hero'>
+    <div class='{{containerClasses}}'>
+        <div class='su-flex su-justify-between su-flex-wrap su-rs-mb-5'>
+            <h1
+                class='su-font-serif su-mb-0
+                    {{getStringByCondition
+                        value=titleAlignment
+                        expectedValue='center'
+                        trueResult='su-text-center su-mx-auto'
+                        falseResult=''
+                    }}'
+            >
+                {{title}}
+            </h1>
+        </div>
+    </div>
+</section>
