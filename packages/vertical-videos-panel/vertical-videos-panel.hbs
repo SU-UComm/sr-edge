@@ -34,7 +34,7 @@
     </div>
     <section data-modal="modal-wrapper">
     {{~#each videoModal~}}
-        {{#> modal-content titleID=titleID uniqueID=uniqueID}}
+        {{#> modal-content titleID=titleID uniqueID=uniqueID ariaTitle=title}}
             {{> embed-video isVertical=isVertical videoId=videoId title=title noAutoPlay=noAutoPlay}}
         {{/ modal-content}}
     {{~/each~}}
