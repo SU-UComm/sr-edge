@@ -36,7 +36,7 @@ export default {
                     `The "parent" field must be an object. The ${JSON.stringify(parent)} was received.`
                 );
             }
-            if (isTopLevel && typeof isTopLevel !== 'boolean') {
+            if (typeof isTopLevel !== 'undefined' && typeof isTopLevel !== 'boolean') {
                 throw new Error(
                     `The "isTopLevel" field must be a boolean. The ${JSON.stringify(isTopLevel)} was received.`
                 );
