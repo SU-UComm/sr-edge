@@ -71,7 +71,7 @@
         }
       }
     },
-    "basicstory": {
+    "sidebar": {
       "functionData": {
         "main": {
           "inputData": {
@@ -79,7 +79,7 @@
             "path": "example-data/preview.data.json"
           },
           "wrapper": {
-            "path": "previews/basicstory.html"
+            "path": "previews/sidebar.html"
           }
         }
       }
