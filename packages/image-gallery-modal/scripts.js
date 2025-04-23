@@ -131,6 +131,19 @@ export function _modalInit(section) {
     const closeBtn = section.querySelector(IMAGE_GALLERY_CLOSE_BTN);
     
     toggleBtn && toggleBtn.addEventListener('click', function() {
+        
+        const modalContent = modal.querySelector('.su-modal-content');
+        
+        if (!modal.dataset.listenerAdded) {
+            modalContent && modal.addEventListener('click', (event) => {
+                if (!modalContent.contains(event.target)) {
+                    closeModal(modal);
+                }
+            });
+            
+            modal.dataset.listenerAdded = 'true';
+        }
+        
         openModal(modal)
         initSlider(modal)
     });

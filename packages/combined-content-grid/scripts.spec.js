@@ -7,7 +7,7 @@ import { fireEvent } from '@testing-library/dom';
 import * as combinedContentGrid from './scripts';
 
 describe('[Combined Content Grid][Client]', () => {
-    let section, modal, openBtn, closeBtn, iframe;
+    let section, modal, openBtn, closeBtn, iframe, content, focusStart;
 
     beforeEach(() => {
         // Setup DOM structure
@@ -67,11 +67,21 @@ describe('[Combined Content Grid][Client]', () => {
             modal.setAttribute('data-modal-id', 'test-modal');
             modal.classList.add(combinedContentGrid.COMBINED_CONTENT_GRID_HIDDEN_CLASS);
             
+            content = document.createElement('div');
+            content.setAttribute('class', 'su-modal-content');
+            
+            focusStart = document.createElement('span');
+            focusStart.setAttribute('data-focus-scope-start', 'true');
+            
+            content.appendChild(focusStart)
+
             iframe = document.createElement('iframe');
             iframe.setAttribute('data-modal', 'iframe');
             iframe.setAttribute('src', 'https://example.com?autoplay=0');
             
-            modal.appendChild(iframe);
+            content.appendChild(iframe);
+            modal.appendChild(focusStart);
+            modal.appendChild(content);
             section.appendChild(openBtn);
             section.appendChild(modal);
             section.appendChild(closeBtn);
@@ -156,6 +166,33 @@ describe('[Combined Content Grid][Client]', () => {
 
             // check if iframe's autoplay was changed to 0 
             expect(iframe.getAttribute('src')).toBe('https://example.com?autoplay=0');
+        });
+
+        it('Should hide the modal and set autoplay=0 in the iframe src when clicking outside the content', () => {
+            // Simulate click on open button
+            fireEvent.click(openBtn);
+
+            // check if modal was open
+            expect(modal.classList.contains(combinedContentGrid.COMBINED_CONTENT_GRID_HIDDEN_CLASS)).toBe(false);
+
+            // Simulate click outside the content
+            fireEvent.click(focusStart);
+
+            // check if modal was closed
+            expect(modal.classList.contains(combinedContentGrid.COMBINED_CONTENT_GRID_HIDDEN_CLASS)).toBe(true);
+
+            // check if iframe's autoplay was changed to 0 
+            expect(iframe.getAttribute('src')).toBe('https://example.com?autoplay=0');
+        });
+
+        it('Should not open the modal when current modal is not defined', () => {
+            // Set current modal to null
+            document.querySelector('[data-modal="modal"]').setAttribute('data-modal-id', 'not-a-modal');
+            // Simulate click on open button
+            fireEvent.click(openBtn);
+
+            // check if modal was open
+            expect(modal.classList.contains(combinedContentGrid.COMBINED_CONTENT_GRID_HIDDEN_CLASS)).toBe(true);
         });
     });
 });

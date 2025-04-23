@@ -320,5 +320,15 @@ describe('[Multicolumn Listing][Client]', () => {
             // check if iframe's autoplay was changed to 0 
             expect(iframe.getAttribute('src')).toBe('https://example.com?autoplay=0&controls=1&rel=0');
         });
+
+        it('Should not open the modal when current modal is not defined', () => {
+            // Set current modal to null
+            document.querySelector('[data-modal="modal"]').setAttribute('data-modal-id', 'not-a-modal');
+            // Simulate click on open button
+            fireEvent.click(openBtn);
+
+            // check if modal was open
+            expect(modal.classList.contains(multicolumnListing.MULTICOLUMN_LISTING_HIDDEN_CLASS)).toBe(true);
+        });
     });
 });
