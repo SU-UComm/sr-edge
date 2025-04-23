@@ -26,6 +26,7 @@ export function openModal(modal) {
     iframe.setAttribute('src', newSrc);
     modal.classList.remove(TOPICS_SUBTOPICS_LISTING_HIDDEN_CLASS);
     modal.hidden = false;
+    document.body.style.overflow = 'hidden';
 }
 
 /**
@@ -40,6 +41,7 @@ export function closeModal(modal) {
     iframe.setAttribute('src', newSrc);
     modal.classList.add(TOPICS_SUBTOPICS_LISTING_HIDDEN_CLASS);
     modal.hidden = true;
+    document.body.style.overflow = 'hidden';
 }
 
 /**

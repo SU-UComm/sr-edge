@@ -52,6 +52,7 @@ export const focusTrap = (event, dialog) => {
 export function openModal(modal) {
     modal.classList.remove(IMAGE_GALLERY_HIDDEN_CLASS);
     modal.hidden = false;
+    document.body.style.overflow = 'hidden';
 
     //Focus trap for drawers
     document.addEventListener('keydown', (event) => {
@@ -68,6 +69,7 @@ export function openModal(modal) {
 export function closeModal(modal) {
     modal.classList.add(IMAGE_GALLERY_HIDDEN_CLASS);
     modal.hidden = true;
+    document.body.style.overflow = '';
 }
 
 /**
