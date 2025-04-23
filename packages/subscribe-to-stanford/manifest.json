@@ -1,0 +1,88 @@
+{
+  "$schema": "http://localhost:3000/schemas/v1.json#",
+  "name": "subscribe-to-stanford-report",
+  "version": "4.0.1",
+  "type": "edge",
+  "namespace": "pnp-stanford-edge-components-hbs",
+  "description": "Allows users to be able to subscribe to Stanford Report newsletters",
+  "displayName": "Subscribe to Stanford Report",
+  "mainFunction": "main",
+  "icon": {
+    "id": "mail",
+    "color": {
+      "type": "enum",
+      "value": "pink"
+    }
+  },
+  "functions": [
+    {
+      "name": "main",
+      "entry": "main.js",
+      "input": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "contentConfiguration": {
+            "title": "Subscribe to Stanford Report component configuration",
+            "required": [
+              "title",
+              "actionLink"
+            ],
+            "properties": {
+              "title": {
+                "title": "Title",
+                "description": "The subscription form title",
+                "type": "string"
+              },
+              "summary": {
+                "title": "Summary",
+                "description": "The summary that presents on the subscription form",
+                "type": "string",
+                "format": "multi-line"
+              },
+              "actionLink": {
+                "title": "Form action",
+                "description": "Subscription service endpoint",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "responseType": "html"
+      }
+    }
+  ],
+  "staticFiles": {
+    "locationRoot": "./"
+  },
+  "previews": {
+    "default": {
+      "functionData": {
+        "main": {
+          "inputData": {
+            "type": "file",
+            "path": "example-data/preview.data.json"
+          },
+          "wrapper": {
+            "path": "previews/preview.html"
+          }
+        }
+      }
+    },
+    "sidebar": {
+      "functionData": {
+        "main": {
+          "inputData": {
+            "type": "file",
+            "path": "example-data/preview.data.json"
+          },
+          "wrapper": {
+            "path": "previews/sidebar.html"
+          }
+        }
+      }
+    }
+  }
+}
