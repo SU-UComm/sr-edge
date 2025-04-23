@@ -96,7 +96,12 @@ export default {
                 card.typeIcon = typeOfIcon[card.type].typeIcon;
                 card.iconTestId = typeOfIcon[card.type].iconTestId;
                 card.isRealExternalLink = isRealExternalLink(card.liveUrl);
-                card.sidebarHeading = SidebarHeading({ icon: typeOfIcon[card.type].headingIcon, title: typeOfIcon[card.type].headingTitle });
+                card.sidebarHeading = SidebarHeading({ 
+                    headingSize: "p",
+                    icon: typeOfIcon[card.type].headingIcon, 
+                    title: typeOfIcon[card.type].headingTitle,
+                    color: "media" 
+                });
 
                 return card;
             });

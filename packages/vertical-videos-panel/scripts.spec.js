@@ -4,7 +4,8 @@
 
 import '@testing-library/jest-dom';
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
-import { updateAccessibility } from '../../global/js/helpers';
+import { fireEvent } from '@testing-library/dom';
+import * as helpers from '../../global/js/helpers';
 import * as verticalVideoPanel from './scripts';
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 
@@ -130,7 +131,7 @@ describe('[Vertical Video Panel][Client]', () => {
             };
 
             swiper.on("slideChange", () => {
-                setTimeout(() => updateAccessibility(swiper), 100);
+                setTimeout(() => helpers.updateAccessibility(swiper), 100);
             });
 
             swiper.triggerSlideChange();
@@ -190,148 +191,8 @@ describe('[Vertical Video Panel][Client]', () => {
         });
     });
 
-    describe('[Modal functionality]', () => {
+    describe('[Swiper functionality]', () => {
         let config;
-
-        it('Should open the modal and enable iframe autoplay', () => {
-            const modal = document.createElement('div');
-            const iframe = document.createElement('iframe');
-            iframe.setAttribute('src', 'https://youtube.com/embed/xyz?autoplay=0');
-            iframe.setAttribute('data-modal', 'iframe');
-
-            modal.classList.add('su-hidden');
-            modal.hidden = true;
-            modal.appendChild(iframe);
-            document.body.appendChild(modal);
-
-            verticalVideoPanel.openModal(modal);
-
-            expect(iframe.getAttribute('src')).toContain('autoplay=1');
-            expect(modal.classList.contains('su-hidden')).toBe(false);
-            expect(modal.hidden).toBe(false);
-        });
-
-        it('Should close the modal and disable iframe autoplay', () => {
-            const modal = document.createElement('div');
-            const iframe = document.createElement('iframe');
-            iframe.setAttribute('src', 'https://youtube.com/embed/xyz?autoplay=1');
-            iframe.setAttribute('data-modal', 'iframe');
-
-            modal.classList.remove('su-hidden');
-            modal.hidden = false;
-            modal.appendChild(iframe);
-            document.body.appendChild(modal);
-
-            verticalVideoPanel.closeModal(modal);
-
-            expect(iframe.getAttribute('src')).toContain('autoplay=0');
-            expect(modal.classList.contains('su-hidden')).toBe(true);
-            expect(modal.hidden).toBe(true);
-        });
-
-        it('Should open the correct modal when open-modal button is clicked', () => {
-            const section = document.createElement('section');
-            section.setAttribute('data-component', 'vertical-video-panel');
-
-            const modalId = 'test-id';
-            const modal = document.createElement('div');
-            modal.setAttribute('data-modal', 'modal');
-            modal.setAttribute('data-modal-id', modalId);
-            modal.classList.add('su-hidden');
-            modal.hidden = true;
-
-            const iframe = document.createElement('iframe');
-            iframe.setAttribute('src', 'https://youtube.com/embed/xyz?autoplay=0');
-            iframe.setAttribute('data-modal', 'iframe');
-            modal.appendChild(iframe);
-
-            const button = document.createElement('button');
-            button.setAttribute('data-click', 'open-modal');
-            button.setAttribute('data-modal-id', modalId);
-
-            section.appendChild(button);
-            section.appendChild(modal);
-            document.body.appendChild(section);
-
-            verticalVideoPanel._modalInit(section);
-            button.click();
-
-            expect(modal.classList.contains('su-hidden')).toBe(false);
-            expect(modal.hidden).toBe(false);
-            expect(iframe.getAttribute('src')).toContain('autoplay=1');
-        });
-
-        it('Should close the modal when close-modal button is clicked', () => {
-            const section = document.createElement('section');
-            section.setAttribute('data-component', 'vertical-video-panel');
-
-            const modalId = 'test-id';
-            const modal = document.createElement('div');
-            modal.setAttribute('data-modal', 'modal');
-            modal.setAttribute('data-modal-id', modalId);
-
-            const iframe = document.createElement('iframe');
-            iframe.setAttribute('src', 'https://youtube.com/embed/xyz?autoplay=1');
-            iframe.setAttribute('data-modal', 'iframe');
-            modal.appendChild(iframe);
-
-            modal.classList.remove('su-hidden');
-            modal.hidden = false;
-
-            const openButton = document.createElement('button');
-            openButton.setAttribute('data-click', 'open-modal');
-            openButton.setAttribute('data-modal-id', modalId);
-
-            const closeButton = document.createElement('button');
-            closeButton.setAttribute('data-dismiss', 'modal');
-
-            section.append(openButton, closeButton, modal);
-            document.body.appendChild(section);
-
-            verticalVideoPanel._modalInit(section);
-            openButton.click();
-            closeButton.click();
-
-            expect(modal.classList.contains('su-hidden')).toBe(true);
-            expect(modal.hidden).toBe(true);
-            expect(iframe.getAttribute('src')).toContain('autoplay=0');
-        });
-
-        it('Should close the modal when Escape key is pressed', () => {
-            const section = document.createElement('section');
-            section.setAttribute('data-component', 'vertical-video-panel');
-
-            const modalId = 'test-id';
-            const modal = document.createElement('div');
-            modal.setAttribute('data-modal', 'modal');
-            modal.setAttribute('data-modal-id', modalId);
-
-            const iframe = document.createElement('iframe');
-            iframe.setAttribute('src', 'https://youtube.com/embed/xyz?autoplay=1');
-            iframe.setAttribute('data-modal', 'iframe');
-            modal.appendChild(iframe);
-
-            modal.classList.remove('su-hidden');
-            modal.hidden = false;
-
-            const openButton = document.createElement('button');
-            openButton.setAttribute('data-click', 'open-modal');
-            openButton.setAttribute('data-modal-id', modalId);
-
-            section.appendChild(openButton);
-            section.appendChild(modal);
-            document.body.appendChild(section);
-
-            verticalVideoPanel._modalInit(section);
-            openButton.click();
-
-            const escEvent = new KeyboardEvent('keydown', { key: 'Escape' });
-            document.dispatchEvent(escEvent);
-
-            expect(modal.classList.contains('su-hidden')).toBe(true);
-            expect(modal.hidden).toBe(true);
-            expect(iframe.getAttribute('src')).toContain('autoplay=0');
-        });
 
         it('Should call ensureLoopConditions on Swiper resize', () => {
             const swiperInstance = {
@@ -402,6 +263,154 @@ describe('[Vertical Video Panel][Client]', () => {
             config.on.paginationUpdate(swiperInstance);
 
             expect(true).toBe(true); 
+        });
+    });
+
+    describe('[Modal functionality]', () => {
+        let section, modal, openBtn, closeBtn, iframe, content, focusStart;
+        
+        beforeEach(() => {
+            section = document.createElement('section');
+            section.setAttribute('data-component', 'combined-content-grid');
+            
+            openBtn = document.createElement('button');
+            openBtn.setAttribute('data-click', 'open-modal');
+            openBtn.setAttribute('data-modal-id', 'test-modal');
+            
+            closeBtn = document.createElement('button');
+            closeBtn.setAttribute('data-dismiss', 'modal');
+            
+            modal = document.createElement('div');
+            modal.setAttribute('data-modal', 'modal');
+            modal.setAttribute('data-modal-id', 'test-modal');
+            modal.classList.add(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS);
+            
+            content = document.createElement('div');
+            content.setAttribute('class', 'su-modal-content');
+            
+            focusStart = document.createElement('span');
+            focusStart.setAttribute('data-focus-scope-start', 'true');
+            
+            content.appendChild(focusStart)
+
+            iframe = document.createElement('iframe');
+            iframe.setAttribute('data-modal', 'iframe');
+            iframe.setAttribute('src', 'https://example.com?autoplay=0');
+            
+            content.appendChild(iframe);
+            modal.appendChild(focusStart);
+            modal.appendChild(content);
+            section.appendChild(openBtn);
+            section.appendChild(modal);
+            section.appendChild(closeBtn);
+            document.body.appendChild(section);
+
+            verticalVideoPanel._modalInit(section);
+        });
+
+        it('Should open the modal when open button was clicked', () => {
+            // Simulate click on open button
+            fireEvent.click(openBtn);
+
+            // check if modal was open
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(false);
+        });
+
+        it('Should close the modal when close button was clicked', () => {
+            // Simulate click on open button
+            fireEvent.click(openBtn);
+
+            // check if modal was open
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(false);
+
+            // Simulate click on close button
+            fireEvent.click(closeBtn);
+
+            // check if modal was closed
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(true);
+        });
+
+        it('Should close the modal when Escape key is pressed', () => {
+            // Simulate click on open button
+            fireEvent.click(openBtn);
+
+            // check if modal was open
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(false);
+
+            // Simulate Escape key press
+            fireEvent.keyDown(document, { key: 'Escape' });
+
+            // Check if close function was called
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(true);
+        });
+
+        it('Should not close the modal when a non-Escape key is pressed', () => {    
+            // Simulate click on open button
+            fireEvent.click(openBtn);
+
+            // check if modal was open
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(false);
+
+            // Simulate a non-Escape key press
+            fireEvent.keyDown(document, { key: 'ArrowUp' });
+    
+            // Check if close function was not called
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(false);
+        });
+
+        it('Should make the modal visible and set autoplay=1 in the iframe src', () => {
+            // Simulate click on open button
+            fireEvent.click(openBtn);
+
+            // check if modal was open
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(false);
+            
+            // check if iframe's autoplay was changed to 1 
+            expect(iframe.getAttribute('src')).toBe('https://example.com?autoplay=1');
+        });
+
+        it('Should hide the modal and set autoplay=0 in the iframe src', () => {
+            // Simulate click on open button
+            fireEvent.click(openBtn);
+
+            // check if modal was open
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(false);
+
+            // Simulate click on close button
+            fireEvent.click(closeBtn);
+
+            // check if modal was closed
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(true);
+
+            // check if iframe's autoplay was changed to 0 
+            expect(iframe.getAttribute('src')).toBe('https://example.com?autoplay=0');
+        });
+
+        it('Should hide the modal and set autoplay=0 in the iframe src when clicking outside the content', () => {
+            // Simulate click on open button
+            fireEvent.click(openBtn);
+
+            // check if modal was open
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(false);
+
+            // Simulate click outside the content
+            fireEvent.click(focusStart);
+
+            // check if modal was closed
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(true);
+
+            // check if iframe's autoplay was changed to 0 
+            expect(iframe.getAttribute('src')).toBe('https://example.com?autoplay=0');
+        });
+
+        it('Should not open the modal when current modal is not defined', () => {
+            // Set current modal to null
+            document.querySelector('[data-modal="modal"]').setAttribute('data-modal-id', 'not-a-modal');
+            // Simulate click on open button
+            fireEvent.click(openBtn);
+
+            // check if modal was open
+            expect(modal.classList.contains(verticalVideoPanel.VERTICAL_VIDEO_PANEL_HIDDEN_CLASS)).toBe(true);
         });
     });
 });

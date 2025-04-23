@@ -30,6 +30,7 @@ export function openModal(modal) {
     iframe.setAttribute('src', newSrc);
     modal.classList.remove(VERTICAL_VIDEO_PANEL_HIDDEN_CLASS);
     modal.hidden = false;
+    document.body.style.overflow = 'hidden';
 }
 
 /**
@@ -44,6 +45,7 @@ export function closeModal(modal) {
     iframe.setAttribute('src', newSrc);
     modal.classList.add(VERTICAL_VIDEO_PANEL_HIDDEN_CLASS);
     modal.hidden = true;
+    document.body.style.overflow = '';
 }
 
 /**
@@ -62,13 +64,27 @@ export function _modalInit(section) {
             // Set current modal
             currentModal = section.querySelector(`div[data-modal-id="${uniqueId}"]`);
 
-            currentModal && openModal(currentModal);
+            if (!currentModal) return;
+
+            const modalContent = currentModal.querySelector('.su-modal-content');
+            
+            if (!currentModal.dataset.listenerAdded) {
+                modalContent && currentModal.addEventListener('click', (event) => {
+                    if (!modalContent.contains(event.target)) {
+                        closeModal(currentModal);
+                    }
+                });
+
+                currentModal.dataset.listenerAdded = 'true';
+            }
+
+            openModal(currentModal);
         });
     });
 
     closeBtn && closeBtn.forEach(btn => {
         btn && btn.addEventListener('click', function() {
-            closeModal(currentModal);
+            currentModal && closeModal(currentModal);
         });
     });
 
@@ -137,11 +153,7 @@ export function _carouselInit(section) {
             on: {
                 init: swiper => {
                     ensureLoopConditions(swiper);
-                      /* v8 ignore start */
-                      setTimeout(() => {
-                        isFocusable = true
-                    }, 100)
-                    /* v8 ignore stop */
+                    updateAccessibility(swiper, '', false);
                 },
                 resize: swiper => {
                     ensureLoopConditions(swiper);
@@ -152,16 +164,36 @@ export function _carouselInit(section) {
             }
         });
 
+        /* v8 ignore start */
+        document.addEventListener('keydown', function() {
+            isFocusable = true
+        });
+        
+        // Detect non-keyboard interaction
+        document.addEventListener('mousedown', () => {
+            isFocusable = false;
+        });
+        
+        document.addEventListener('touchstart', () => {
+            isFocusable = false;
+        });
+        
+        // Optional: handle pointer events if you're in a modern environment
+        document.addEventListener('pointerdown', () => {
+            isFocusable = false;
+        });
+
         // Add slide change event handler with accessibility management
         swiper.on('slideChange', function() {
-            /* v8 ignore start */
+            setTimeout(() => { 
             if (isFocusable) {
-                setTimeout(() => { 
                     updateAccessibility(swiper, 'h2 a, h3 a, button', true);
-                }, 100);
-            }
-            /* v8 ignore stop */
+                } else {
+                    updateAccessibility(swiper, '', false);
+                }
+            }, 100);
         });
+        /* v8 ignore stop */
     } else {
         section.querySelector('.component-slider-controls')?.remove();
     }

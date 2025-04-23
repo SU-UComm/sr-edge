@@ -1,0 +1,44 @@
+<article aria-label="{{title}}" class="su-component-card su-relative su-w-full" data-testid="vertical-card">
+    {{~#if displayThumbnail~}}
+    <div class="{{getStringByCondition value=cardSize expectedValue="featured" trueResult="su-mb-15 md:su-mb-26 lg:su-mb-38" falseResult="su-mb-15 md:su-mb-18 lg:su-mb-19"}}">
+        {{> card-thumbnail imageUrl=imageUrl imageAlt=imageAlt videoUrl=videoUrl mediaType="image" aspectRatio=(aspectRatioSize cardSize) size=cardSize uniqueID=uniqueID}}
+    </div>
+    {{~/if~}}       
+    <div class="su-flex su-flex-wrap {{getStringByCondition value=cardSize expectedValue="featured" trueResult="su-gap-11 md:su-gap-13 lg:su-gap-13" falseResult="su-gap-11 md:su-gap-12 lg:su-gap-9"}}">
+        <{{headingTag headingLvl}} class="su-w-full {{cardTitleSizeClasses cardSize}} su-font-serif su-my-0 su-order-2">
+            <a 
+                href="{{liveUrl}}"
+                class="su-group su-stretched-link su-inline-block su-text-black dark:su-text-white hocus:su-underline hocus:su-text-digital-red su-transition dark:hocus:su-text-dark-mode-red focus:su-outline-none focus-visible:su-ring-2 focus-visible:su-rounded focus-visible:su-ring-digital-red dark:focus-visible:su-ring-dark-mode-red focus-visible:su-outline-none focus-visible:after:su-outline focus-visible:after:su-outline-offset-8 focus-visible:after:su-outline-digital-red dark:focus-visible:after:su-outline-dark-mode-red"
+            >
+                <span>{{{title}}}</span>
+                {{~#if isRealExternalLink~}}
+                {{> fontawesome-icon
+                    icon="arrow-up-right"
+                    iconTestId="svg-arrow-up-right"
+                    set="regular"
+                    width=(getStringByCondition value=cardSize expectedValue="featured" trueResult=20 falseResult=15)
+                    classes="su-inline-block su-h-auto su-align-middle su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
+                }}
+                {{~/if~}}
+            </a>
+        </{{headingTag headingLvl}}>
+        {{~#if taxonomy~}}
+        <span data-testid="vertical-card-taxonomy" class="su-relative su-inline-block su-z-10 su-font-semibold su-order-1 {{cardTaxonomySizeClasses cardSize}}">
+            <a {{#if taxonomyUrl}}href="{{taxonomyUrl}}"{{/if}} class="su-text-digital-red dark:su-text-dark-mode-red su-no-underline hocus:su-underline hocus:su-text-black hocus:dark:su-text-white focus:su-outline-none focus-visible:su-ring-2 focus-visible:su-rounded focus-visible:su-ring-black dark:focus-visible:su-ring-white focus-visible:su-outline-none">
+                {{{taxonomy}}}
+            </a>
+        </span>
+        {{~/if~}}
+        {{~#if type~}}
+        <p data-testid="vertical-card-type" class="su-flex su-font-semibold su-text-black-70 dark:su-text-black-60 su-my-0 su-gap-6 su-flex-nowrap su-items-center su-order-3 {{cardTypeSizeClasses cardSize}}">
+            {{> svg-icons icon=iconType}}
+            <span>{{{type}}}</span>
+        </p>
+        {{~/if~}}
+        {{~#if displayDescription~}}{{~#if description~}}
+        <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0 su-order-4 {{getStringByCondition value=cardSize expectedValue="featured" trueResult="*:su-text-18 su-text-18 *:md:su-text-19 md:su-text-19 *:su-leading-[22.5px] su-leading-[22.5px] *:md:su-leading-[23.75px] md:su-leading-[23.75px] *:su-mt-4 *:md:su-mt-14" falseResult="*:su-text-19 *:su-leading-[23.75px] su-text-19 su-leading-[23.75px]"}}">
+            {{{description}}}
+        </div>
+        {{~/if~}} {{~/if~}} 
+    </div>
+</article>

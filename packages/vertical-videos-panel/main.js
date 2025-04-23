@@ -157,6 +157,7 @@ export default {
             sectionTitle: sectionData?.title,
             sectionCtaText: sectionData?.ctaText,
             sectionCtaLink: sectionData?.ctaLink,
+            sectionIsAlwaysLight: bgImageData?.url ? true : false,
             sectionBgImageUrl: bgImageData?.url,
             sectionBgImageAlt: bgImageData?.alt,
             sectionCustomClasses: "2xl:su-px-[17rem] su-rs-mb-5",

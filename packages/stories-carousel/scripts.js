@@ -28,6 +28,8 @@ export function openModal(modal) {
 
     iframe.setAttribute('src', newSrc);
     modal.classList.remove(STORIES_CAROUSEL_HIDDEN_CLASS);
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
 }
 
 /**
@@ -41,6 +43,8 @@ export function closeModal(modal) {
 
     iframe.setAttribute('src', newSrc);
     modal.classList.add(STORIES_CAROUSEL_HIDDEN_CLASS);
+    modal.hidden = true;
+    document.body.style.overflow = '';
 }
 
 /**
@@ -59,13 +63,27 @@ export function _modalInit(section) {
             // Set current modal
             currentModal = section.querySelector(`div[data-modal-id="${uniqueId}"]`);
 
-            currentModal && openModal(currentModal);
+            if (!currentModal) return;
+
+            const modalContent = currentModal.querySelector('.su-modal-content');
+            
+            if (!currentModal.dataset.listenerAdded) {
+                modalContent && currentModal.addEventListener('click', (event) => {
+                    if (!modalContent.contains(event.target)) {
+                        closeModal(currentModal);
+                    }
+                });
+
+                currentModal.dataset.listenerAdded = 'true';
+            }
+
+            openModal(currentModal);
         });
     });
 
     closeBtn && closeBtn.forEach(btn => {
         btn && btn.addEventListener('click', function() {
-            closeModal(currentModal);
+            currentModal && closeModal(currentModal);
         });
     });
 
