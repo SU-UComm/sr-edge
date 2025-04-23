@@ -113,11 +113,7 @@ export function updateState(section, cards, pagination, modal) {
     section.querySelector(PAGINATION_SELECTOR).innerHTML = pagination;
     section.querySelector(TOPICS_SUBTOPICS_LISTING_MODAL_SELECTOR).innerHTML = modal;
     /* v8 ignore start */
-    const yOffset = -100 - 60; // the header height with extra the gap
-    const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-  
-    window.scrollTo({ top: y, behavior: "smooth" });
-    // section?.scrollIntoView({ behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
     /* v8 ignore stop */
     _modalInit(section);
     _topicsInit(section);
@@ -185,7 +181,7 @@ export async function handleButtonClick(args) {
         paginationRange: 5,
         currentPage: Number(offset)
     });
-
+    
     const modals = modalData.map((item) => {
         return `
         <div hidden="true" aria-modal="true" role="dialog" data-overlay-container="true" class="su-modal su-hidden" data-modal="modal" data-modal-id="${item.uniqueID}"><span data-focus-scope-start="true" hidden="true"></span><div aria-describedby="${item.titleID}" role="dialog" tabindex="-1" data-modal="modal-dialog" data-ismodal="true" aria-modal="true"><div class="su-modal-content">

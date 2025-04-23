@@ -1,0 +1,71 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "link-list",
+    "type": "edge",
+    "version": "4.0.2",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "Recommended stories are shown in this component as a vertical list.",
+    "displayName": "Link List",
+    "mainFunction": "main",
+    "icon": {
+        "id": "list_alt",
+        "color": {
+            "type": "enum",
+            "value": "green"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "dataUrl": {
+                        "title": "dataUrl",
+                        "type": "string"
+                    },
+                    "title": {
+                        "title": "Stories for you",
+                        "type": "string"
+                    }
+                },
+                "required": ["dataUrl", "title"]
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "sidebar": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/sidebar.html"
+                    }
+                }
+            }
+        }
+    }
+}

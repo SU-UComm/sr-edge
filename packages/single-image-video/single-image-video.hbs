@@ -72,7 +72,7 @@
     </div>
     {{~#if youtubeid~}}
     <section data-modal="modal-wrapper">
-            {{#> modal-content uniqueID=modalData.uniqueID titleID=modalData.titleID}}
+            {{#> modal-content uniqueID=modalData.uniqueID titleID=modalData.titleID ariaTitle=modalData.title}}
                 {{> embed-video isVertical=modalData.isVertical classes=modalData.classes videoId=modalData.videoId noAutoPlay=modalData.noAutoPlay title=modalData.title}}
             {{/ modal-content}}
     </section>

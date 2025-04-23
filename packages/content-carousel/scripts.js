@@ -52,11 +52,7 @@ export function _carouselInit(section) {
             on: {
                 init: swiper => {
                     ensureLoopConditions(swiper);
-                    /* v8 ignore start */
-                    setTimeout(() => {
-                        isFocusable = true
-                    }, 100)
-                    /* v8 ignore stop */
+                    updateAccessibility(swiper, '', false);
                 },
                 resize: swiper => {
                     ensureLoopConditions(swiper);
@@ -67,15 +63,35 @@ export function _carouselInit(section) {
             }
         });
 
-        swiper.on('slideChange', function() {
-            /* v8 ignore start */
-            if (isFocusable) {
-                setTimeout(() => {
-                    updateAccessibility(swiper, 'slide', true);
-                }, 100)
-            }
-            /* v8 ignore stop */
+        /* v8 ignore start */
+        document.addEventListener('keydown', function() {
+            isFocusable = true
         });
+        
+        // Detect non-keyboard interaction
+        document.addEventListener('mousedown', () => {
+            isFocusable = false;
+        });
+        
+        document.addEventListener('touchstart', () => {
+            isFocusable = false;
+        });
+        
+        // Optional: handle pointer events if you're in a modern environment
+        document.addEventListener('pointerdown', () => {
+            isFocusable = false;
+        });
+
+        swiper.on('slideChange', function() {
+            setTimeout(() => { 
+                if (isFocusable) {
+                    updateAccessibility(swiper, 'slide', true);
+                } else {
+                    updateAccessibility(swiper, '', false);
+                }
+            }, 100);
+        });
+        /* v8 ignore stop */
     } else {
         section.querySelector('.component-slider-controls')?.remove();
     }

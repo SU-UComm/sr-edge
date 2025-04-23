@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "single-featured-content",
     "type": "edge",
-    "version": "4.0.2",
+    "version": "4.0.3",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Stanford university single featured content component",
     "displayName": "Single featured content",

@@ -4,7 +4,7 @@
 
 import '@testing-library/jest-dom';
 import { beforeEach, afterEach, describe, expect, it, vi } from 'vitest';
-import { updateAccessibility } from '../../global/js/helpers';
+import * as helpers from '../../global/js/helpers';
 import * as verticalVideoPanel from './scripts';
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
 
@@ -130,7 +130,7 @@ describe('[Vertical Video Panel][Client]', () => {
             };
 
             swiper.on("slideChange", () => {
-                setTimeout(() => updateAccessibility(swiper), 100);
+                setTimeout(() => helpers.updateAccessibility(swiper), 100);
             });
 
             swiper.triggerSlideChange();
