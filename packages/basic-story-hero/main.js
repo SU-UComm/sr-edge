@@ -1,24 +1,42 @@
 import xss from 'xss';
-import hash from "object-hash";
-import { FetchAdapter, containerClasses } from '../../global/js/utils';
-import { EmbedVideo, Carousel, Modal } from "../../global/js/helpers";
-import VideoPlay from "../../global/js/helpers/SVG-library/VideoPlay";
+import { FetchAdapter, containerClasses, uuid } from '../../global/js/utils';
 import basicStoryHeroTemplate from './basic-story-hero.hbs';
 
+import hash from "object-hash";
+import { EmbedVideo, Carousel, Modal } from "../../global/js/helpers";
+import VideoPlay from "../../global/js/helpers/SVG-library/VideoPlay";
+/**
+ * Basic Story Hero component that renders hero banner for stories
+ * @module basicStoryHero
+ */
 export default {
+    /**
+     * Renders the Basic Story Hero component.
+     * 
+     * @async
+     * @function
+     * @param {Object} args - Configuration options for the section.
+     * @param {Object} info.fns - Functions available in the execution context.
+     * @param {string} [info.fns.assetId] - The current asset id based on the context.
+     * @param {Object} info.env - Environment variables in the execution context.
+     * @param {string} [info.env.BASE_DOMAIN] - Base domain.
+     * @returns {Promise<string>} The rendered Basic Story Hero HTML or an error message.
+    */
     async main(args, info) {
-        const fnsCtx = info?.ctx || {};
-        const { BASE_DOMAIN } = info.env;
+        // Extracting environment variables from provided info
+        const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
+        const fnsCtx = info?.fns || info?.ctx || {};
 
-         try {
-            if (typeof fnsCtx !== 'object') {
-                throw new Error(
-                    `"info.ctx" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
+        // Validate required environment variables
+        try {
             if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
                 throw new Error(
                     `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
+                );
+            }
+            if (typeof fnsCtx !== 'object') {
+                throw new Error(
+                    `"info.ctx" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
                 );
             }
             if (typeof fnsCtx?.assetId !== 'string' || fnsCtx?.assetId === '') {
@@ -30,11 +48,12 @@ export default {
             console.error('Error occurred in the Basic Hero component: ', er);
             return `<!-- Error occurred in the Basic Story Hero component: ${er.message} -->`;
         }
-        //
+        
         // VIDEO story ID: 167010
         // Basic story ID: 165577
         // carousel story ID: 157287
         // const currentAssetId = fnsCtx?.assetId || "167010";
+        
         const currentAssetId = fnsCtx?.assetId;
         const adapter = new FetchAdapter();
         adapter.url = `${BASE_DOMAIN}/_api/mx/storyhero?story=${currentAssetId}`;
