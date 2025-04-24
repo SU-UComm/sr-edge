@@ -384,7 +384,6 @@ export const helpers = {
                    .replace(/&quot;/g, '"')
                    .replace(/&#039;/g, "'");
     }
-      
 }
   
 export default helpers;
