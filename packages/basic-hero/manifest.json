@@ -38,9 +38,9 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://api-identifier/63492": {
+        "matrix-asset://api-identifier/162603": {
             "type": "file",
-            "path": "mocked-uris/63492.json"
+            "path": "mocked-uris/162603.json"
         }
     },
     "previews": {
