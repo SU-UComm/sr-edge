@@ -1,0 +1,74 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "leadership-hero",
+    "type": "edge",
+    "version": "4.0.0",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "Leadership hero and title area.",
+    "displayName": "Leadership Messages Hero",
+    "mainFunction": "main",
+    "environment": [
+        {
+            "name": "BASE_DOMAIN",
+            "required": true
+        }
+    ],
+    "icon": {
+        "id": "foundation",
+        "color": {
+            "type": "enum",
+            "value": "gray"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://api-identifier/162603": {
+            "type": "file",
+            "path": "mocked-uris/162603.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
