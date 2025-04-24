@@ -17,7 +17,7 @@ export default {
      * @returns {Promise<string>} Rendered HTML from the Handlebars template.
      */
     async main(_args, info) {
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const fnsCtx = info?.ctx || {};
         const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
         const currentAssetId = fnsCtx?.assetId;

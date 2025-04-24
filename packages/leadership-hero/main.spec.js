@@ -30,7 +30,7 @@ describe('[Leadership Hero]', () => {
         env: {
             BASE_DOMAIN: 'https://example.com/api',
         },
-        fns: {
+        ctx: {
             assetId: '162603',
         },
     };
@@ -60,8 +60,7 @@ describe('[Leadership Hero]', () => {
         });
 
         it('Should error if assetId is missing', async () => {
-            const result = await main(defaultMockData, { env: defaultMockInfo.env, fns: { assetId: '' } });
-            expect(result).toContain('assetId');
+            const result = await main(defaultMockData, { env: defaultMockInfo.env, ctx: { assetId: '' } });            expect(result).toContain('assetId');
             expect(mockedError).toBeCalledTimes(1);
         });
     });
