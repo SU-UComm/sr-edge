@@ -1,0 +1,1 @@
+export { basicHeroDataAdapter } from './basicHeroDataAdapter';
