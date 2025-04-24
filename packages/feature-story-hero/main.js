@@ -1,15 +1,15 @@
 import xss from 'xss';
-import { basicHeroDataAdapter, matrixBasicHeroService } from '../../global/js/utils';
+import { basicHeroDataAdapter, matrixBasicHeroService, readingTime } from '../../global/js/utils';
 
-import basicHeroTemplate from './basic-hero.hbs';
+import featureStoryHeroTemplate from './feature-story-hero.hbs';
 
 /**
- * @module BasicHero
- * @description A module for rendering a Basic hero form cotexto of the page,
+ * @module FeatureStoryHero
+ * @description A module for rendering a Feature Story Hero form cotexto of the page,
  */
 export default {
     /**
-     * Fetches and processes current page data, rendering them as Basic hero.
+     * Fetches and processes current page data, rendering them as Feature Story Hero.
      * 
      * @async
      * @function main
@@ -32,8 +32,12 @@ export default {
         // Extracting environment variables from provided info
         const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
        
+        // Full story ID: 163377
+        // Vertical story ID: ??
+        // Horizontal story ID: 157163
+
+        // const currentAssetId = '163377';
         const currentAssetId = fnsCtx?.assetId
-        // const currentAssetId = '162603';
 
         // Validate required environment variables
         try {
@@ -44,13 +48,13 @@ export default {
             }
             if (typeof fnsCtx !== 'object' || typeof currentAssetId !== 'string' || currentAssetId.trim() === '') {
                 throw new Error(
-                    `The "info.fns.assetId" must be a non-empty string. The ${JSON.stringify(currentAssetId)} was received.`
+                    `The "info.fns.assetId" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(currentAssetId)} was received.`
                 );
             }
 
         } catch (er) {
-            console.error('Error occurred in the Basic Hero component: ', er);
-            return `<!-- Error occurred in the Basic Hero component: ${er.message} -->`;
+            console.error('Error occurred in the Feature Story Hero component: ', er);
+            return `<!-- Error occurred in the Feature Story Hero component: ${er.message} -->`;
         }
         
         const adapter = new basicHeroDataAdapter();
@@ -70,11 +74,11 @@ export default {
                 throw new Error("Invalid API response: heroData is missing or not an object.");
             }
         } catch (er) {
-            console.error('Error occurred in the Basic Hero component: Error parsing hero data JSON response: ', er);
-            return `<!-- Error occurred in the Basic Hero component: Error parsing hero data JSON response: ${er.message} -->`;
+            console.error('Error occurred in the Feature Story Hero component: Error parsing hero data JSON response: ', er);
+            return `<!-- Error occurred in the Feature Story Hero component: Error parsing hero data JSON response: ${er.message} -->`;
         }
 
-        const { title, titleAlignment, summary, updatesPage, backgroundColor, relation, parentData } = heroData;
+        const { orientation, title, summary, media, pubDateFormatted } = heroData;
 
         // Validate fetched data
         try {
@@ -83,9 +87,9 @@ export default {
                     `The "title" must be non-empty string. The ${JSON.stringify(title)} was received.`
                 );
             }
-            if (titleAlignment && !['center', 'left' ].includes(titleAlignment)) {
+            if (orientation && !['vertical', 'full', 'horizontal'].includes(orientation)) {
                 throw new Error(
-                    `The "titleAlignment" must be one of ["center", "left"]. The ${JSON.stringify(titleAlignment)} was received.`
+                    `The "orientation" must be one of ["vertical", "full", "horizontal"]. The ${JSON.stringify(orientation)} was received.`
                 );
             }
             if (summary && typeof summary !== 'string') {
@@ -93,54 +97,37 @@ export default {
                     `The "summary" must be a string. The ${JSON.stringify(summary)} was received.`
                 );
             }
-            if (updatesPage && typeof updatesPage !== 'string') {
+            if (media && typeof media !== 'object') {
                 throw new Error(
-                    `The "updatesPage" must be a string. The ${JSON.stringify(updatesPage)} was received.`
+                    `The "media" must be an object. The ${JSON.stringify(media)} was received.`
                 );
             }
-            if (backgroundColor && typeof backgroundColor !== 'string') {
+            if (pubDateFormatted && typeof pubDateFormatted !== 'string') {
                 throw new Error(
-                    `The "backgroundColor" must be a string. The ${JSON.stringify(backgroundColor)} was received.`
-                );
-            }
-            if (relation && typeof relation !== 'string') {
-                throw new Error(
-                    `The "relation" must be a string. The ${JSON.stringify(relation)} was received.`
-                );
-            }
-            if (parentData && typeof parentData !== 'object') {
-                throw new Error(
-                    `The "parentData" must be an object. The ${JSON.stringify(parentData)} was received.`
+                    `The "pubDateFormatted" must be a string. The ${JSON.stringify(pubDateFormatted)} was received.`
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the Basic Hero component: ', er);
-            return `<!-- Error occurred in the Basic Hero component: ${er.message} -->`;
+            console.error('Error occurred in the Feature Story Hero component: ', er);
+            return `<!-- Error occurred in the Feature Story Hero component: ${er.message} -->`;
         }
 
-        let heroSummary = "";
-
-        if (parentData && parentData.parentSummary && summary && relation === "child") {
-            heroSummary = parentData.parentSummary;
-        } else {
-            heroSummary = summary;
-        }
+        // Prepare data
+        const titleWordsCount = title.split(" ").length;
+        const captionCredit = [media?.caption, media?.credit].filter(Boolean).join(' | ');
 
         // Prepare component data for template rendering
         const componentData = {
+            orientation,
             title: xss(title),
-            titleAlignment: titleAlignment?.toLowerCase(),
-            summary: xss(heroSummary),
-            updatesPage,
-            backgroundColor,
-            relation,
-            parentData: {
-                ...parentData,
-                parentTitle: xss(parentData?.parentTitle),
-                parentSummary: xss(parentData?.parentSummary),
-            }
+            titleWordsCount,
+            summary: xss(summary),
+            media,
+            captionCredit,
+            pubDateFormatted,
+            readingTimeValue: readingTime(summary),
         };
 
-        return basicHeroTemplate(componentData);
+        return featureStoryHeroTemplate(componentData);
     }
 };
