@@ -21,6 +21,7 @@ export { matrixCardService } from './matrixCardService';
 export { matrixImageCardService } from './matrixImageCardService';
 export { matrixMediaCardService } from './matrixMediaCardService';
 export { multicolumnGrid } from './multicolumnGrid'
+export { readingTime } from './readingTime'
 export { translatePersonalisationProfile } from './translatePersonalisationProfile';
 export { useKeypress } from './useKeypress';
 export { useOnClickOutside } from './useOnClickOutside';

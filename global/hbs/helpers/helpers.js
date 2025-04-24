@@ -376,8 +376,14 @@ export const helpers = {
 
         const size = cardSize === "featured" || cardSize === "medium" ? cardSize : "default";
         return typeSize.get(size);
+    },
+    unescapeHtml: function (text) {
+        return text.replace(/&lt;/g, '<')
+                   .replace(/&gt;/g, '>')
+                   .replace(/&amp;/g, '&')
+                   .replace(/&quot;/g, '"')
+                   .replace(/&#039;/g, "'");
     }
-      
 }
   
 export default helpers;

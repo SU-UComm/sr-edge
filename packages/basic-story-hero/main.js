@@ -1,10 +1,7 @@
 import xss from 'xss';
-import { FetchAdapter, containerClasses, uuid } from '../../global/js/utils';
+import { basicHeroDataAdapter, matrixBasicHeroService, readingTime, uuid } from '../../global/js/utils';
 import basicStoryHeroTemplate from './basic-story-hero.hbs';
 
-import hash from "object-hash";
-import { EmbedVideo, Carousel, Modal } from "../../global/js/helpers";
-import VideoPlay from "../../global/js/helpers/SVG-library/VideoPlay";
 /**
  * Basic Story Hero component that renders hero banner for stories
  * @module basicStoryHero
@@ -20,12 +17,26 @@ export default {
      * @param {string} [info.fns.assetId] - The current asset id based on the context.
      * @param {Object} info.env - Environment variables in the execution context.
      * @param {string} [info.env.BASE_DOMAIN] - Base domain.
+     * @param {Object} [info.set] - Alternative source for environment variables.
+     * @param {Object} [info.set.environment] - Nested environment variables.
+     * @param {string} [info.set.environment.BASE_DOMAIN] - Alternative base URL for the Matrix API.
      * @returns {Promise<string>} The rendered Basic Story Hero HTML or an error message.
+     * @throws {Error} If basic hero data fetch operation fails.
     */
     async main(args, info) {
+        // Extracting functions from provided info
+        const fnsCtx = info?.fns || info?.ctx || {};
+
         // Extracting environment variables from provided info
         const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
-        const fnsCtx = info?.fns || info?.ctx || {};
+
+        // VIDEO story ID: 167010
+        // Basic story ID: 165577
+        // carousel story ID: 157287
+
+        // const currentAssetId = '157287';
+        const currentAssetId = fnsCtx?.assetId
+
 
         // Validate required environment variables
         try {
@@ -34,14 +45,9 @@ export default {
                     `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
                 );
             }
-            if (typeof fnsCtx !== 'object') {
+            if (typeof fnsCtx !== 'object' || typeof currentAssetId !== 'string' || currentAssetId.trim() === '') {
                 throw new Error(
-                    `"info.ctx" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-            if (typeof fnsCtx?.assetId !== 'string' || fnsCtx?.assetId === '') {
-                throw new Error(
-                    `The "currentAssetId" field cannot be undefined and must be a non-empty string. The "${JSON.stringify(fnsCtx?.assetId)}" was received.`,
+                    `The "info.fns.assetId" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(currentAssetId)} was received.`,
                 );
             }
         } catch (er) {
@@ -49,181 +55,117 @@ export default {
             return `<!-- Error occurred in the Basic Story Hero component: ${er.message} -->`;
         }
         
-        // VIDEO story ID: 167010
-        // Basic story ID: 165577
-        // carousel story ID: 157287
-        // const currentAssetId = fnsCtx?.assetId || "167010";
-        
-        const currentAssetId = fnsCtx?.assetId;
-        const adapter = new FetchAdapter();
-        adapter.url = `${BASE_DOMAIN}/_api/mx/storyhero?story=${currentAssetId}`;
+        const adapter = new basicHeroDataAdapter();
+        let heroData = null
 
-        let heroData;
+        // Create our service
+        const service = new matrixBasicHeroService({ BASE_DOMAIN });
+
+        // Set our card service
+        adapter.setBasicHeroService(service);
+
+        // Get the result data
         try {
-            heroData = await adapter.fetch();
+            heroData = await adapter.getBasicHeroData(currentAssetId);
 
             if (!heroData || typeof heroData !== 'object') {
                 throw new Error("Invalid API response: heroData is missing or not an object.");
             }
-        } catch (error) {
-            return `<!-- An error occured in the basic hero component: ${error.message} -->`;
+        } catch (er) {
+            console.error('Error occurred in the Basic Story Hero component: Error parsing hero data JSON response: ', er);
+            return `<!-- Error occurred in the Basic Story Hero component: Error parsing hero data JSON response: ${er.message} -->`;
         }
 
         const { title, media, summary, pubDateFormatted, topic, mediaType } = heroData;
-        const hasTopicLink = !!(
-            topic &&
-            topic.asset_url !== null &&
-            topic.asset_url !== undefined &&
-            topic.asset_url !== ""
-        );
-        const hasTopicText = !!(
-            topic &&
-            topic.asset_name !== null &&
-            topic.asset_name !== undefined &&
-            topic.asset_name !== ""
-        );
-        const TopicTag = hasTopicLink ? "a" : "span";
-        const topicLink = hasTopicText ? `
-          <${TopicTag}
-              class="${[
-                "su-font-semibold su-text-digital-red dark:su-text-dark-mode-red su-no-underline ",
-                hasTopicLink ? "hocus:su-underline" : "",
-            ].join(" ")}" 
-              ${hasTopicLink ? `href="${topic.asset_url}"` : ''}"
-          >
-              ${topic.asset_name}
-          </${TopicTag}>
-          `: "";
+        
+        // Validate fetched data
+        try {
+            if (typeof title !== 'string' || title.trim() === '') {
+                throw new Error(
+                    `The "title" must be non-empty string. The ${JSON.stringify(title)} was received.`
+                );
+            }
+            if (media && typeof media !== 'object') {
+                throw new Error(
+                    `The "media" must be an object. The ${JSON.stringify(media)} was received.`
+                );
+            }
+            if (summary && typeof summary !== 'string') {
+                throw new Error(
+                    `The "summary" must be a string. The ${JSON.stringify(summary)} was received.`
+                );
+            }
+            if (pubDateFormatted && typeof pubDateFormatted !== 'string') {
+                throw new Error(
+                    `The "pubDateFormatted" must be a string. The ${JSON.stringify(pubDateFormatted)} was received.`
+                );
+            }
+            if (topic && typeof topic !== 'object') {
+                throw new Error(
+                    `The "topic" must be an object. The ${JSON.stringify(topic)} was received.`
+                );
+            }
+            if (mediaType && !['image', 'video', 'carousel'].includes(mediaType)) {
+                throw new Error(
+                    `The "mediaType" must be one of ["image", "video", "carousel"]. The ${JSON.stringify(mediaType)} was received.`
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the Basic Story Hero component: ', er);
+            return `<!-- Error occurred in the Basic Story Hero component: ${er.message} -->`;
+        }
+        
+        // Prepare data
+        const uniqueID = uuid();
+        const mediaFeature = media.featureImage?.id || media.featureVideo?.id || media.carousel;
+        const captionCredit = [media?.caption, media?.credit].filter(Boolean).join(' | ');
+        const imageData = {
+            url: media.featureImage?.url,
+            alt: media.featureImage?.alt,
+        };
+        let videoData = {
+            imageUrl: media.featureImage?.url,
+            imageAlt: media.featureImage?.alt,
+            videoID: media.featureVideo?.id,
+            isVertical: false,
+            noAutoPlay: true,
+            title: `Watch ${title}`,
+            class: "su-absolute su-top-0 su-left-0 su-w-full su-h-full",
+            uniqueID,
+            
+        };
+        let modalData =  null;
+        modalData = mediaType === "video" && {
+            title: `Watch ${title}`,
+            titleID: "video-modal",
+        };
+        const carouselData = [];
+        media.carousel?.forEach((slide, i) => {
+            const captionCredit = [media.captions[i].caption, media.captions[i].credit].filter(Boolean).join(' | ');
 
-        const uniqueId = hash.MD5(
-            JSON.stringify('basic-story-hero') + hash.MD5(JSON.stringify(title))
-        )
-        const mediaFeature = `${media.featureImage.id ||
-            media.featureVideo.id ||
-            media.carousel !== null ? `
-            <div class="su-col-span-6 su-col-start-1 md:su-col-span-12 md:su-col-start-1 su-w-full basic-story__header-slider su-overflow-visible su-rs-mt-4">
-                <figure class="basic-story__header-image su-col-span-full su-relative su-z-0">
-                    <div class="su-relative su-w-full">
-                        ${HeroFeature({
-                            url: media.featureImage.url,
-                            alt: media.featureImage.alt,
-                            video: media.featureVideo.id,
-                            type: mediaType,
-                            carousel: media.carousel,
-                            captions: media.captions,
-                            name: title,
-                            uniqueId
-                        })}
-                    </div>
-                    ${(media.caption || media.credit) && `
-                        <figcaption class="su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white">
-                        ${media.caption} ${media.caption && media.credit && ` | `}
-                        ${media.credit}
-                        </figcaption>
-                    `}
-                </figure>
-            </div>
-        ` : ""}`;
+            carouselData.push({
+                imageUrl: slide.asset_url,
+                imageAlt: slide.asset_attribute_alt,
+                captionCredit,
+            });
+        });
 
+        // Prepare component data for template rendering
         const componentData = {
-            classes: containerClasses({ width: "wide" }),
             pubDateFormatted,
-            topicLink,
-            title,
+            topic,
+            title: xss(title),
             summary: xss(summary),
+            readingTimeValue: readingTime(summary),
             mediaFeature,
-            uniqueId
+            mediaType,
+            imageData,
+            videoData,
+            modalData,
+            carouselData,
+            captionCredit,
+            uniqueID,
         };
         return basicStoryHeroTemplate(componentData);
     }
 };
-
-
-function HeroFeature({ url, alt, video, type, carousel, captions, name = "", uniqueId = "" }) {
-    if (type === "image") {
-        return `
-        <img
-          src="${url}"
-          alt="${alt}"
-          class="su-relative su-w-full su-max-w-full"
-        />
-      `;
-    }
-
-    if (type === "carousel") {
-        const slides = [];
-        carousel.forEach((slide, i) => {
-            const captionCredit =
-                captions[i].caption && captions[i].credit
-                    ? `${captions[i].caption} | ${captions[i].credit}`
-                    : captions[i].caption || captions[i].credit;
-
-            slides.push(`
-                <div class="swiper-slide">
-                    <div class="su-aspect-[3/2] su-relative">
-                        <img
-                            src="${slide.asset_url}"
-                            alt="${slide.asset_attribute_alt}"
-                            class="su-absolute su-top-0 su-left-0 su-w-full su-h-full su-object-scale-down su-object-center"
-                        />
-                    </div>
-                    ${captionCredit && `
-                    <figcaption class="su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white">
-                        ${captionCredit}
-                    </figcaption>`}
-                </div>
-            `);
-        });
-
-        return Carousel({
-            slides: slides.join(''),
-            variant: "basicstory",
-            uniqueClass: uniqueId
-        });
-    }
-
-    if (type === "video") {
-
-        if (!url) {
-            return `<div class="su-relative su-max-w-full su-h-0 su-pb-[56.25%] su-overflow-hidden">
-              ${EmbedVideo({
-                class: "su-absolute su-top-0 su-left-0 su-w-full su-h-full",
-                videoId: video,
-                title: `Watch ${name}`,
-                noAutoPlay: true
-            })}
-          </div>`
-        }
-        const uniqueId = 'cm_' + hash.MD5(
-            JSON.stringify(video) + hash.MD5(JSON.stringify(name))
-        )
-        return `
-          <button
-            type="button"
-            aria-haspopup="dialog"
-            class="su-w-full su-aspect-[16/9] su-video-trigger"
-            data-click="open-modal"
-            data-modal-id="${uniqueId}"
-          >
-            <img
-              src="${url}"
-              alt="${alt}"
-              class="su-w-full su-h-full su-absolute su-top-0 su-left-0 su-object-cover su-object-center"
-            />
-            <span class="su-play-button-icon-hero su-transition-all su-absolute su-bottom-20 su-left-20 *:su-w-[40px] *:su-h-[40px] *:md:su-w-[60px] *:md:su-h-[60px] *:lg:su-w-[100px] *:lg:su-h-[100px]">
-              ${VideoPlay()}
-            </span>
-          </button>
-          ${Modal({
-            content: EmbedVideo({
-                videoId: video,
-                title: `Watch ${name}`,
-                noAutoPlay: true
-            }),
-            title: `Watch ${name}`,
-            titleId: "video-modal",
-            modalId: uniqueId
-        })}
-        `;
-    }
-}
