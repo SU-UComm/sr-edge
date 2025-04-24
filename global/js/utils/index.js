@@ -1,4 +1,5 @@
 export { basicAssetUri } from './basicAssetUri';
+export { basicHeroDataAdapter } from './basicHeroDataAdapter';
 export { cardDataAdapter } from './cardDataAdapter';
 export { cdpSetConsent } from './cdpSetConsent';
 export { cdpSetPersona } from './cdpSetPersona';
@@ -15,6 +16,7 @@ export { getCookie } from './getCookie';
 export { getFirstWord } from './getFirstWord';
 export { isRealExternalLink } from './isRealExternalLink';
 export { linkedHeadingService } from './linkedHeadingService';
+export { matrixBasicHeroService } from './matrixBasicHeroService';
 export { matrixCardService } from './matrixCardService';
 export { matrixImageCardService } from './matrixImageCardService';
 export { matrixMediaCardService } from './matrixMediaCardService';

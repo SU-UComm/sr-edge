@@ -1,0 +1,1 @@
+export { matrixBasicHeroService } from './matrixBasicHeroService';
