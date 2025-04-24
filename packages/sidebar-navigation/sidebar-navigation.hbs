@@ -1,0 +1,56 @@
+<section data-component='sidebar-navigation'>
+    <div class="lg:su-hidden su-rs-mb-2">
+        <NavButton
+          ariaControls="sidebar-navigation"
+          ariaLabel="Toggle visibility of section menu"
+          ariaExpanded={navOpen}
+          onClick={() => setNavOpen(!navOpen)}
+          class={cnb(
+            "lg:su-hidden su-transition-all su-flex su-items-center su-w-full su-h-[5.6rem] su-p-15 su-text-left su-font-semibold su-shadow-[inset_0_0_0_2px_rgba(177,4,14,1)] su-text-digital-red",
+            "hocus:su-shadow-[inset_0_0_0_3px_rgba(177,4,14,1)]",
+            "dark:su-shadow-[inset_0_0_0_2px_rgba(236,9,9,1)] dark:su-text-dark-mode-red",
+            "dark:hocus:su-shadow-[inset_0_0_0_3px_rgba(236,9,9,1)]",
+            navOpen &&
+              "su-bg-digital-red su-text-white dark:su-bg-dark-mode-red dark:aria-expanded:su-text-black-true"
+          )}
+          buttonText={navOpen ? "Close" : "Section menu"}
+          icon={
+            navOpen ? (
+              <FAIcon
+                icon="xmark"
+                set="solid"
+                // Add a width to prevent getting a flash of huge icon before the CSS fully loads
+                width={24}
+                class="su-text-[3rem]"
+              />
+            ) : (
+              <FAIcon
+                icon="bars"
+                set="solid"
+                // Add a width to prevent getting a flash of huge icon before the CSS fully loads
+                width={24}
+                class="su-text-[3rem]"
+              />
+            )
+          }
+        />
+        {navOpen && (
+          <NavContent
+            id={id}
+            asset_url={navData.asset_url}
+            asset_short_name={navData.asset_short_name}
+            menu={navData.menu}
+            asset_assetid={navData.asset_assetid}
+          />
+        )}
+      </div>
+      <div class="su-hidden lg:su-block">
+        <NavContent
+          id={id}
+          asset_url={navData.asset_url}
+          asset_short_name={navData.asset_short_name}
+          menu={navData.menu}
+          asset_assetid={navData.asset_assetid}
+        />
+      </div>
+</section>

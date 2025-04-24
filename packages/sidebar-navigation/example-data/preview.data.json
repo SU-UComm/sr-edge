@@ -1,0 +1,36 @@
+{
+    "title": "Title here",
+    "asset_assetid": "156984",
+    "asset_url": "https://news.stanford.edu/squizdevreport/development/sidenav",
+    "asset_short_name": "Sidenav",
+    "active": false,
+    "menu": [
+        {
+            "asset_assetid": "156985",
+            "asset_url": "https://news.stanford.edu/squizdevreport/development/sidenav/lvl-1-page-01",
+            "asset_short_name": "Lvl 1 page 01",
+            "active": false,
+            "asset_children": [
+                {
+                    "asset_short_name": "Sub page",
+                    "asset_assetid": "156987",
+                    "asset_url": "https://news.stanford.edu/squizdevreport/development/sidenav/lvl-1-page-01/sub-page",
+                    "active": true
+                },
+                {
+                    "asset_short_name": "Sub page 02",
+                    "asset_assetid": "156988",
+                    "asset_url": "https://news.stanford.edu/squizdevreport/development/sidenav/lvl-1-page-01/sub-page-02",
+                    "active": false
+                }
+            ]
+        },
+        {
+            "asset_assetid": "156986",
+            "asset_url": "https://news.stanford.edu/squizdevreport/development/sidenav/lvl-1-page-02",
+            "asset_short_name": "Lvl 1 page 02",
+            "active": false,
+            "asset_children": null
+        }
+    ]
+}
