@@ -1,5 +1,4 @@
 import xss from 'xss';
-import { containerClasses } from '../../global/js/utils';
 import singleTextBlockTemplate from './single-text-block.hbs';
 
 /**
@@ -61,7 +60,7 @@ export default {
         }
 
         const componentData = {
-            containerClass: containerClasses({ width: 'cc', paddingY }),
+            paddingY,
             eyebrow,
             title,
             description: xss(description),
