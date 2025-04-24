@@ -38,7 +38,7 @@ describe('[Basic Hero]', () => {
         env: {
             BASE_DOMAIN: 'https://example.com/json',
         },
-        fns: {
+        ctx: {
             assetId: '63492'
         }
     };
@@ -100,7 +100,7 @@ describe('[Basic Hero]', () => {
         it('Should throw error when fns.assetId is an empty string', async () => {
             const mockInfo = { 
                 env: defaultMockInfo.env,
-                fns: {
+                ctx: {
                     assetId: ''
                 }, 
             };

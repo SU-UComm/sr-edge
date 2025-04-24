@@ -15,8 +15,8 @@ export default {
      * @function main
      * @param {Object} args - Configuration arguments for the listing.
      * @param {Object} info - Contextual information including environment variables.
-     * @param {Object} info.fns - Functions available in the execution context.
-     * @param {string} info.fns.assetId - Function to resolve URIs.
+     * @param {Object} info.ctx - Functions available in the execution context.
+     * @param {string} [info.ctx.assetId] - The current asset id based on context.
      * @param {Object} [info.env] - Environment variables (preferred source).
      * @param {string} [info.env.BASE_DOMAIN] - The base URL for the Matrix API.
      * @param {Object} [info.set] - Alternative source for environment variables.
@@ -27,7 +27,7 @@ export default {
      */
     async main( args, info ) {
         // Extracting functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const fnsCtx = info?.ctx || {};
         
         // Extracting environment variables from provided info
         const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
