@@ -1,0 +1,10 @@
+/* stylelint-disable at-rule-no-deprecated */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+
+.scrollable-list__item::after {
+  @apply su-inline-block su-align-middle;
+}

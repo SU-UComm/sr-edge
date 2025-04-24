@@ -1,0 +1,49 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "subtopic-subnav-component",
+    "type": "edge",
+    "version": "4.0.0",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "Stanford university Subtopic Subnav component.",
+    "displayName": "Subtopic Subnav",
+    "mainFunction": "main",
+    "icon": {
+        "id": "category",
+        "color": {
+            "type": "enum",
+            "value": "gray"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        }
+    }
+}
