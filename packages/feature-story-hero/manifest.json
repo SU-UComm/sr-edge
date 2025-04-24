@@ -1,25 +1,25 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
-    "name": "basic-hero",
+    "name": "feature-story-hero",
     "type": "edge",
-    "version": "4.0.1",
+    "version": "4.0.0",
     "namespace": "pnp-stanford-edge-components-hbs",
-    "description": "Basic hero and title area.",
-    "displayName": "Basic Hero",
+    "description": "Hero that appears at the top of Featured Stories.",
+    "displayName": "Feature story hero",
     "mainFunction": "main",
+    "icon": {
+        "id": "flag",
+        "color": {
+            "type": "enum",
+            "value": "purple"
+        }
+    },
     "environment": [
         {
             "name": "BASE_DOMAIN",
             "required": true
         }
     ],
-    "icon": {
-        "id": "foundation",
-        "color": {
-            "type": "enum",
-            "value": "gray"
-        }
-    },
     "functions": [
         {
             "name": "main",
@@ -36,12 +36,6 @@
     ],
     "staticFiles": {
         "locationRoot": "./"
-    },
-    "mockedUris": {
-        "matrix-asset://api-identifier/162603": {
-            "type": "file",
-            "path": "mocked-uris/162603.json"
-        }
     },
     "previews": {
         "default": {

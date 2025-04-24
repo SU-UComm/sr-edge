@@ -13,8 +13,8 @@ export default {
      * @async
      * @function
      * @param {Object} args - Configuration options for the section.
-     * @param {Object} info.fns - Functions available in the execution context.
-     * @param {string} [info.fns.assetId] - The current asset id based on the context.
+     * @param {Object} info.ctx - Functions available in the execution context.
+     * @param {string} [info.ctx.assetId] - The current asset id based on the context.
      * @param {Object} info.env - Environment variables in the execution context.
      * @param {string} [info.env.BASE_DOMAIN] - Base domain.
      * @param {Object} [info.set] - Alternative source for environment variables.
@@ -25,7 +25,7 @@ export default {
     */
     async main(args, info) {
         // Extracting functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const fnsCtx = info?.ctx || {};
 
         // Extracting environment variables from provided info
         const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
