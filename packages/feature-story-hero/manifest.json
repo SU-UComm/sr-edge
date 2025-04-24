@@ -1,0 +1,68 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "feature-story-hero",
+    "type": "edge",
+    "version": "4.0.0",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "Hero that appears at the top of Featured Stories.",
+    "displayName": "Feature story hero",
+    "mainFunction": "main",
+    "icon": {
+        "id": "flag",
+        "color": {
+            "type": "enum",
+            "value": "purple"
+        }
+    },
+    "environment": [
+        {
+            "name": "BASE_DOMAIN",
+            "required": true
+        }
+    ],
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
