@@ -139,6 +139,18 @@ topicsocialsciences
 gscopes
 allnews
 humsci
+Nusa
+Lemongan
+Imbens
+Kehoe
+Kehoe
+makerspaces
+Nusa
+seeweed
+Aaaaand
+woodshop
+potenti
+
 
 #testing hooks
 testid 

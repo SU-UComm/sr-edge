@@ -51,7 +51,7 @@ export default {
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the Basic Hero component: ', er);
+            console.error('Error occurred in the Basic Story Hero component: ', er);
             return `<!-- Error occurred in the Basic Story Hero component: ${er.message} -->`;
         }
         

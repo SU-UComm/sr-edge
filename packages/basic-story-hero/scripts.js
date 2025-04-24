@@ -5,7 +5,7 @@ import { ensureLoopConditions, paginationUpdater, updateAccessibility } from '..
 /**
  * Globals variables 
  * @constant {string} BASIC_STORY_HERO_SELECTOR - Selector for basic story hero elements.
- * @constant {string} BASIC_STORY_HERO_SELECTOR - Selector for basic story hero reading time element.
+ * @constant {string} BASIC_STORY_HERO_READING_TIME_SELECTOR - Selector for basic story hero reading time element.
  * @constant {string} BASIC_STORY_HERO_HIDDEN_CLASS - CSS class to hide elements.
  * @constant {string} BASIC_STORY_HERO_MODAL_SELECTOR - Selector for modal container.
  * @constant {string} BASIC_STORY_HERO_OPEN_MODAL_BTN - Selector for the button that opens the modal.
@@ -27,11 +27,14 @@ export const BASIC_STORY_HERO_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
  * @param {HTMLElement} modal - The modal element to open.
  */
 export function openModal(modal) {
-    const iframe =  modal.querySelector(BASIC_STORY_HERO_MODAL_IFRAME);
-    const currentSrc = iframe.getAttribute('src');
-    const newSrc = currentSrc.replace('autoplay=0','autoplay=1');
+    const iframe = modal.querySelector(BASIC_STORY_HERO_MODAL_IFRAME);
+    if (iframe) {
+        const currentSrc = iframe.getAttribute('src');
+        const newSrc = currentSrc.replace('autoplay=0','autoplay=1');
+    
+        iframe.setAttribute('src', newSrc);
+    }
 
-    iframe.setAttribute('src', newSrc);
     modal.classList.remove(BASIC_STORY_HERO_HIDDEN_CLASS);
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -43,10 +46,13 @@ export function openModal(modal) {
  */
 export function closeModal(modal) {
     const iframe =  modal.querySelector(BASIC_STORY_HERO_MODAL_IFRAME);
-    const currentSrc = iframe.getAttribute('src');
-    const newSrc = currentSrc.replace('autoplay=1','autoplay=0');
+    if (iframe) {
+        const currentSrc = iframe.getAttribute('src');
+        const newSrc = currentSrc.replace('autoplay=1','autoplay=0');
 
-    iframe.setAttribute('src', newSrc);
+        iframe.setAttribute('src', newSrc);
+    }
+    
     modal.classList.add(BASIC_STORY_HERO_HIDDEN_CLASS);
     modal.hidden = true;
     document.body.style.overflow = '';
