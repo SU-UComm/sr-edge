@@ -1,7 +1,7 @@
 import xss from 'xss';
 import { basicHeroDataAdapter, matrixBasicHeroService } from '../../global/js/utils';
 
-import basicHero from './basic-hero.hbs';
+import basicHeroTemplate from './basic-hero.hbs';
 
 /**
  * @module BasicHero
@@ -76,7 +76,7 @@ export default {
 
         const { title, titleAlignment, summary, updatesPage, backgroundColor, relation, parentData } = heroData;
 
-        // Validate fetched card data
+        // Validate fetched data
         try {
             if (typeof title !== 'string' || title.trim() === '') {
                 throw new Error(
@@ -128,15 +128,19 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            title,
+            title: xss(title),
             titleAlignment: titleAlignment?.toLowerCase(),
             summary: xss(heroSummary),
             updatesPage,
             backgroundColor,
             relation,
-            parentData
+            parentData: {
+                ...parentData,
+                parentTitle: xss(parentData?.parentTitle),
+                parentSummary: xss(parentData?.parentSummary),
+            }
         };
 
-        return basicHero(componentData);
+        return basicHeroTemplate(componentData);
     }
 };

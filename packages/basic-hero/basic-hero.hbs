@@ -4,14 +4,14 @@
         <div class='{{containerClasses width="wide" customClasses="su-grid su-grid-cols-6 su-grid-gap su-gap-y-0 md:su-grid-cols-12 su-text-white"}}'>
             <h1 class="su-font-serif su-drop-shadow-md su-mb-0 su-col-span-full lg:su-col-span-10 lg:su-col-start-2 {{getStringByCondition value=titleAlignment expectedValue="center" trueResult="su-text-center su-mx-auto" falseResult=""}} {{getStringByCondition value=relation expectedValue="child" trueResult="su-type-3" falseResult=""}} {{#ifEquals relation "child"}} {{getStringByCondition value=parentData.parentTitleAlignment expectedValue="center" trueResult="su-text-center su-mx-auto" falseResult=""}}{{/ifEquals}}">
                 {{~#if parentData~}}
-                {{parentData.parentTitle}} 
+                {{{unescapeHtml parentData.parentTitle}}} 
                 {{~else~}}
-                {{title}}
+                {{{unescapeHtml title}}}
                 {{~/if~}}
             </h1>
             {{~#if summary}}
             <div class="su-col-span-full lg:su-col-span-10 lg:su-col-start-2 xl:su-col-span-8 xl:su-col-start-3 su-font-serif su-mb-0 su-rs-mt-2 {{getStringByCondition value=relation expectedValue="child" trueResult="su-text-18" falseResult="su-text-[1.125em]"}}">
-                {{{summary}}}
+                {{{unescapeHtml summary}}}
             </div>
             {{~/if~}}
         </div>
@@ -23,18 +23,18 @@
                 <ul class="su-p-0 su-text-18 su-font-semibold">
                     <li class="su-inline after:su-content-['>'] after:su-mx-6">
                         <a href="{{parentData.parentUrl}}" class="!su-text-black dark:!su-text-white">
-                            {{parentData.parentTitle}}
+                            {{{unescapeHtml parentData.parentTitle}}}
                         </a>
                     </li>
                     <li aria-current="page" class="su-inline su-text-cardinal-red dark:su-text-dark-mode-red">
-                        {{title}}
+                        {{{unescapeHtml title}}}
                     </li>
                 </ul>
             </nav>
             <h2>{{title}}</h2>
             {{~#if summary~}}
             <div class="su-text-[1.125em]" >
-                {{{summary}}}
+                {{{unescapeHtml summary}}}
             </div>
             {{~/if~}}
         </div>
@@ -52,7 +52,7 @@
                         falseResult=''
                     }}'
             >
-                {{title}}
+                {{{unescapeHtml title}}}
             </h1>
         </div>
     </div>
