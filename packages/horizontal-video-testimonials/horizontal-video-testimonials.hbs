@@ -1,0 +1,44 @@
+<section data-component='horizontal-video-testimonials'>
+    <div
+        class='{{containerClasses
+                width='full'
+                paddingY='10'
+                paddingX=false
+                marginTop=marginTop
+                marginBottom=marginBottom
+                customClasses='su-relative su-overflow-hidden su-bg-black'
+            }}'
+    >
+        <div
+            class='{{containerClasses
+                    width='cc'
+                    paddingX=false
+                    customClasses='su-relative su-z-30'
+                }}'
+        >
+            {{~#if title~}}
+                {{> linked-heading title=title isAlwaysLight=true ctaLink=ctaUrl ctaText=ctaText customClasses="2xl:su-px-[17rem] su-rs-mb-5"}}
+            {{~/if~}}
+            {{~#if testimonialsArrayLength~}}
+                <ul class="su-relative su-grid su-gap-20 su-z-30 su-list-unstyled *:su-mb-0">
+                    {{~#each testimonialsArray~}}
+                        <li>
+                            {{> card-horizontal-video storyLink=storyLink youtubeId=youtubeId heading=heading description=description videoImageUrl=videoImageUrl videoImageAlt=videoImageAlt isRealExternalLink=isRealExternalLink uniqueID=uniqueID}}
+                        </li>
+                    {{~/each~}}
+                </ul>
+            {{~/if~}}
+        </div>
+        {{~#if bgImageData.url~}}
+             <img src="{{bgImageData.url}}" alt="" class="su-absolute su-size-full su-inset-0 su-object-cover su-inset-0" />
+             <div aria-hidden class="su-absolute su-size-full su-inset-0 su-z-10 su-bg-gradient-to-b su-from-black-true/75 su-to-black-true/60"></div>
+        {{~/if~}}
+    </div>
+    <section data-modal="modal-wrapper">
+    {{~#each modalData~}}
+        {{#> modal-content titleID=titleID uniqueID=uniqueID ariaTitle=title}}
+            {{> embed-video isVertical=isVertical videoId=videoId title=title noAutoPlay=noAutoPlay}}
+        {{/ modal-content}}
+    {{~/each~}}
+    </section>
+</section>
