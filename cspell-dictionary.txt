@@ -4,6 +4,7 @@ funnelback
 dxp
 xaccel
 vermgmt
+xmark
 
 # Technical terms or properties of existing modules we need to allow
 nomatch

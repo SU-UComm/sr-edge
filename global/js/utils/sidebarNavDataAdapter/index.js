@@ -1,0 +1,1 @@
+export { sidebarNavDataAdapter } from './sidebarNavDataAdapter';

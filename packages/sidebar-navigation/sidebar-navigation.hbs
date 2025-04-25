@@ -1,0 +1,32 @@
+<section data-component='sidebar-navigation'>
+    <div class="lg:su-hidden su-rs-mb-2">
+        <button
+            aria-controls="sidebar-navigation"
+            aria-label="Toggle visibility of section menu"
+            aria-expanded="false"
+            type="button"
+            class="lg:su-hidden su-transition-all su-flex su-items-center su-w-full su-h-[5.6rem] su-p-15 su-text-left su-font-semibold su-shadow-[inset_0_0_0_2px_rgba(177,4,14,1)] su-text-digital-red hocus:su-shadow-[inset_0_0_0_3px_rgba(177,4,14,1)] dark:su-shadow-[inset_0_0_0_2px_rgba(236,9,9,1)] dark:su-text-dark-mode-red dark:hocus:su-shadow-[inset_0_0_0_3px_rgba(236,9,9,1)]"
+            data-click="toggle-nav"
+        >
+            <span class="su-flex-auto su-leading-[0]" data-label="button" data-label-open="Section menu" data-label-close="Close">Section menu</span>
+            {{> fontawesome-icon
+                icon='bars'
+                iconTestId="svg-bras"
+                set="solid"
+                width=24
+                classes="su-text-[3rem]"
+            }}
+            {{> fontawesome-icon
+                icon="xmark"
+                iconTestId="svg-xmark"
+                set="solid"
+                width=24
+                classes="su-text-[3rem] !su-hidden"
+            }}
+        </button>
+        {{> nav-content is_mobile=true id=id asset_url=menuData.asset_url asset_short_name=menuData.asset_short_name menu=menuData.menu asset_assetid=menuData.asset_assetid}}
+    </div>
+    <div class="su-hidden lg:su-block">
+        {{> nav-content is_mobile=false id=id asset_url=menuData.asset_url asset_short_name=menuData.asset_short_name menu=menuData.menu asset_assetid=menuData.asset_assetid}}
+    </div>
+</section>
