@@ -14,7 +14,7 @@ export default {
      * @param {Object} args - Configuration arguments for the listing.
      * @param {string} [args.eyebrow] - The text for the superheading above the title.
      * @param {string} [args.title] - The text for the title.
-     * @param {string} [args.facts] - The array of facts to display.
+     * @param {Array} [args.facts] - The array of facts to display.
      * @param {string} [args.paddingY] - The value of padding abouve and below the component.
      * @returns {Promise<string>} The rendered HTML string from the topicListingTemplate, or an error comment if processing fails.
      * @throws {Error} If FB_JSON_URL or query is invalid or if the fetch operation fails.
