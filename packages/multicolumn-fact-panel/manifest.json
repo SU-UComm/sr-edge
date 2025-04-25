@@ -1,0 +1,109 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "multicolumn-fact-panel",
+    "type": "edge",
+    "version": "4.0.0",
+    "namespace": "pnp-stanford-edge-components-hbs",
+    "description": "This component displays up to 3 facts with FontAwesome icons in a multi-column layout.",
+    "displayName": "Multicolumn Fact Panel",
+    "mainFunction": "main",
+    "icon": {
+        "id": "view_column",
+        "color": {
+            "type": "enum",
+            "value": "green"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "./main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "eyebrow": {
+                        "title": "Eyebrow",
+                        "description": "This is the superheading above the title.",
+                        "type": "string",
+                        "default": "Eyebrow"
+                    },
+                    "title": {
+                        "title": "Title",
+                        "description": "The title text.",
+                        "type": "string",
+                        "default": "Lorem ipsum dolor"
+                    },
+                    "facts": {
+                        "title": "Facts",
+                        "description": "Enter the content and icon for each fact.",
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 3,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "icon": {
+                                    "title": "Icon",
+                                    "description": "Enter the icon name from the FontAwesome library, e.g., envelope, circle-info. We are using version 6. You can find them at https://fontawesome.com/search?o=r&m=free",
+                                    "type": "string"
+                                },
+                                "iconSet": {
+                                    "title": "FontAwesome icon set",
+                                    "description": "Select the icon set - solid or regular.",
+                                    "type": "string",
+                                    "enum": ["solid", "regular"],
+                                    "default": "solid"
+                                },
+                                "content": {
+                                    "title": "Content",
+                                    "description": "The text content for the fact.",
+                                    "type": "FormattedText"
+                                }
+                            },
+                            "required": []
+                        }
+                    },
+                    "paddingY": {
+                        "title": "Vertical padding",
+                        "description": "Add padding to the top and bottom of the block. 'Base' is the smallest with '10' (default) being the largest option.",
+                        "type": "string",
+                        "default": "10",
+                        "enum": [
+                            "none",
+                            "base",
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            "8",
+                            "9",
+                            "10"
+                        ]
+                    }
+                },
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/campaign.html"
+                    }
+                }
+            }
+        }
+    }
+}
