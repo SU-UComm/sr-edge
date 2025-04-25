@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="su-page-campaign">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+        <!-- [[inline-styles]] -->
+    </head>
+    <body class="dark:su-bg-black-true dark:su-text-white">
+        <a id="skiplinks" href="#main-content" class="skiplink"
+            >Skip to content</a
+        >
+        <header
+            class="report-header--story report-header su-bg-white su-text-black dark:su-bg-black-true dark:su-text-white su-h-100 md:su-h-160 lg:su-h-200 su-z-[50]"
+        >
+            <div class="su-fixed su-top-0 su-left-0 su-right-0">
+                <div class="su-bg-digital-red su-h-35 su-w-full"></div>
+                <div
+                    class="su-w-full su-h-75 md:su-h-100 su-bg-white dark:su-bg-black-true"
+                >
+                    <button
+                        id="toggle"
+                        class="su-p-7 su-border-2 su-text-black-true su-border-black-true dark:su-border-white dark:su-text-white"
+                    >
+                        Dark/Light Mode Toggle
+                    </button>
+                </div>
+            </div>
+        </header>
+        <main
+            role="main"
+            class="su-page su-page-wrap su-page--hero su-page--top-margin su-page--bottom-margin"
+        >
+            <div class="su-page-content">
+                [component://output]
+                <div
+                    class="su-h-[200rem] !su-w-full !su-max-w-full su-bg-campaign-fog dark:su-bg-black-true !su-mx-0"
+                ></div>
+                <div class="su-lower-content" id="component_130052"></div>
+                <div class="su-lower-content"></div>
+            </div>
+            <div class="su-above-footer"></div>
+        </main>
+        <script>
+            function _init() {
+                const b = document.getElementById('toggle');
+                const e = document.querySelector('html');
+                b &&
+                    b.addEventListener('click', () => {
+                        if (e.classList.contains('su-dark')) {
+                            e.classList.remove('su-dark');
+                        } else {
+                            e.classList.add('su-dark');
+                        }
+                    });
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                _init();
+            });
+        </script>
+        <!-- [[inline-scripts]] -->
+    </body>
+</html>
