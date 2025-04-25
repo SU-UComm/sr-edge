@@ -1,0 +1,53 @@
+<nav {{#if is_mobile}}id="sidebar-navigation" data-nav="nav" class="su-hidden"{{/if}} aria-label="Sidebar menu">
+    <ul class="su-list-none su-p-0">
+        <li class="su-m-0">
+            {{> nav-link-item 
+                level="one"
+                url=asset_url
+                shortName=asset_short_name
+                active=(getStringByCondition
+                    value=id
+                    expectedValue=asset_assetid
+                    trueResult='page'
+                    falseResult=''
+                )
+            }}
+        </li>
+        {{~#if menu~}}
+            {{~#each menu~}}
+                <li class="su-m-0">
+                    {{> nav-link-item 
+                        level="one"
+                        url=asset_url
+                        shortName=asset_short_name
+                        active=(getStringByCondition
+                            value=id
+                            expectedValue=asset_assetid
+                            trueResult='page'
+                            falseResult=''
+                        )
+                    }}
+                    {{~#if asset_children~}}
+                        <ul class="su-list-none su-p-0">
+                        {{~#each asset_children~}}
+                            <li class="su-m-0">
+                                {{> nav-link-item 
+                                    level="two"
+                                    url=asset_url
+                                    shortName=asset_short_name
+                                    active=(getStringByCondition
+                                        value=id
+                                        expectedValue=asset_assetid
+                                        trueResult='page'
+                                        falseResult=''
+                                    )
+                                }}
+                            </li>
+                        {{~/each~}}
+                        </ul>
+                    {{~/if~}}
+                </li>
+            {{~/each~}}
+        {{~/if~}}
+      </ul>
+</nav>
