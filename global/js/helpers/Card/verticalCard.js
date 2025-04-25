@@ -86,13 +86,8 @@ export function VerticalCard({
   headingLvl = 2,
   uniqueId,
 }) {
-  let cardThumb = imageUrl;
-
-  if (!cardThumb && liveUrl && !(liveUrl instanceof Array)) {
-    cardThumb = `${
-      liveUrl.match(/https:\/\/.*?\//)[0]
-    }__data/assets/image/0015/130443/Quad-Arch-Close.png`;
-  }
+  
+  const cardThumb = imageUrl && typeof imageUrl === "string" ? imageUrl : null;
 
   const isRealExternalLink = !!liveUrl && !liveUrl?.includes("news.stanford.edu");
 
@@ -119,7 +114,7 @@ export function VerticalCard({
 
   return `
     <article aria-label="${title}" class="su-component-card su-relative su-w-full" data-testid="vertical-card">
-      ${displayThumbnail ? `
+      ${displayThumbnail && cardThumb ? `
         <div class="${imageMargin(cardSize)}">
         ${CardThumbnail({
             imageUrl: cardThumb,
