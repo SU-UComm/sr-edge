@@ -20,7 +20,7 @@ export function openModal(modal) {
 
     if(iframe) {
         const currentSrc = iframe.getAttribute('src');
-        const newSrc = currentSrc.replace('autoplay=0','autoplay=1');
+        const newSrc = currentSrc && currentSrc.replace('autoplay=0','autoplay=1');
     
         iframe.setAttribute('src', newSrc);
     }
@@ -36,7 +36,7 @@ export function closeModal(modal) {
     
     if(iframe) {
         const currentSrc = iframe.getAttribute('src');
-        const newSrc = currentSrc.replace('autoplay=1','autoplay=0');
+        const newSrc = currentSrc && currentSrc.replace('autoplay=1','autoplay=0');
     
         iframe.setAttribute('src', newSrc);
     }
