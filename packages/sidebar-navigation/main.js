@@ -1,5 +1,4 @@
-import xss from 'xss';
-import { basicHeroDataAdapter, matrixBasicHeroService } from '../../global/js/utils';
+import { sidebarNavDataAdapter, matrixSidebarNavService } from '../../global/js/utils';
 import sidebarNavigationTemplate from './sidebar-navigation.hbs';
 
 /**
@@ -30,7 +29,7 @@ export default {
         // Extracting environment variables from provided info
         const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
-        // const currentAssetId = '157300';
+        // const currentAssetId = '165914';
         const currentAssetId = fnsCtx?.assetId
 
         // Validate required environment variables
@@ -50,59 +49,81 @@ export default {
             return `<!-- Error occurred in the Sidebar Navigation component: ${er.message} -->`;
         }
         
-        const adapter = new basicHeroDataAdapter();
-        let heroData = null
+        const adapter = new sidebarNavDataAdapter();
+        let parentData = null
+        let menuData = null
 
         // Create our service
-        const service = new matrixBasicHeroService({ BASE_DOMAIN });
+        const service = new matrixSidebarNavService({ BASE_DOMAIN });
 
-        // Set our card service
-        adapter.setBasicHeroService(service);
+        // Set our sidebar service
+        adapter.setSidebarNavService(service);
 
-        // Get the result data
+        // Get the parent data
         try {
-            heroData = await adapter.getBasicHeroData(currentAssetId);
+            parentData = await adapter.getSidebarNavParentData(currentAssetId);
 
-            if (!heroData || typeof heroData !== 'object') {
-                throw new Error("Invalid API response: heroData is missing or not an object.");
+            if (!parentData || typeof parentData !== 'object') {
+                throw new Error('Invalid API response: "parentData" is missing or not an object.');
             }
         } catch (er) {
-            console.error('Error occurred in the Sidebar Navigation component: Error parsing hero data JSON response: ', er);
-            return `<!-- Error occurred in the Sidebar Navigation component: Error parsing hero data JSON response: ${er.message} -->`;
+            console.error('Error occurred in the Sidebar Navigation component: Error parsing parent data JSON response: ', er);
+            return `<!-- Error occurred in the Sidebar Navigation component: Error parsing parent data JSON response: ${er.message} -->`;
         }
 
-        const { title, media, summary, pubDateFormatted, topic, mediaType } = heroData;
+        const { id, root } = parentData;
+
+        // Validate fetched data
+        try {
+            if (typeof id !== 'string' || id.trim() === '') {
+                throw new Error(
+                    `The "id" must be non-empty string. The ${JSON.stringify(id)} was received.`
+                );
+            }
+            if (typeof root !== 'string' || root.trim() === '') {
+                throw new Error(
+                    `The "root" must be non-empty string. The ${JSON.stringify(root)} was received.`
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the Sidebar Navigation component: ', er);
+            return `<!-- Error occurred in the Sidebar Navigation component: ${er.message} -->`;
+        }
+
+        // Get the menu data
+        try {
+            menuData = await adapter.getSidebarNavMenuData(root);
+
+            if (!menuData || typeof menuData !== 'object') {
+                throw new Error('Invalid API response: "menuData" is missing or not an object.');
+            }
+        } catch (er) {
+            console.error('Error occurred in the Sidebar Navigation component: Error parsing menu data JSON response: ', er);
+            return `<!-- Error occurred in the Sidebar Navigation component: Error parsing menu data JSON response: ${er.message} -->`;
+        }
+        
+        const { asset_assetid, asset_url, asset_short_name, menu } = menuData;
         
         // Validate fetched data
         try {
-            if (typeof title !== 'string' || title.trim() === '') {
+            if (typeof asset_assetid !== 'string' || asset_assetid.trim() === '') {
                 throw new Error(
-                    `The "title" must be non-empty string. The ${JSON.stringify(title)} was received.`
+                    `The "asset_assetid" must be non-empty string. The ${JSON.stringify(asset_assetid)} was received.`
                 );
             }
-            if (media && typeof media !== 'object') {
+            if (typeof asset_url !== 'string' || asset_url.trim() === '') {
                 throw new Error(
-                    `The "media" must be an object. The ${JSON.stringify(media)} was received.`
+                    `The "asset_url" must be non-empty string. The ${JSON.stringify(asset_url)} was received.`
                 );
             }
-            if (summary && typeof summary !== 'string') {
+            if (typeof asset_short_name !== 'string' || asset_short_name.trim() === '') {
                 throw new Error(
-                    `The "summary" must be a string. The ${JSON.stringify(summary)} was received.`
+                    `The "asset_short_name" must be non-empty string. The ${JSON.stringify(asset_short_name)} was received.`
                 );
             }
-            if (pubDateFormatted && typeof pubDateFormatted !== 'string') {
+            if (!Array.isArray(menu)) {
                 throw new Error(
-                    `The "pubDateFormatted" must be a string. The ${JSON.stringify(pubDateFormatted)} was received.`
-                );
-            }
-            if (topic && typeof topic !== 'object') {
-                throw new Error(
-                    `The "topic" must be an object. The ${JSON.stringify(topic)} was received.`
-                );
-            }
-            if (mediaType && !['image', 'video', 'carousel'].includes(mediaType)) {
-                throw new Error(
-                    `The "mediaType" must be one of ["image", "video", "carousel"]. The ${JSON.stringify(mediaType)} was received.`
+                    `The "menu" must be an array. The ${JSON.stringify(menu)} was received.`
                 );
             }
         } catch (er) {
@@ -110,52 +131,10 @@ export default {
             return `<!-- Error occurred in the Sidebar Navigation component: ${er.message} -->`;
         }
         
-        // Prepare data
-        const mediaFeature = media.featureImage?.id || media.featureVideo?.id || media.carousel;
-        const captionCredit = [media?.caption, media?.credit].filter(Boolean).join(' | ');
-        const imageData = {
-            url: media.featureImage?.url,
-            alt: media.featureImage?.alt,
-        };
-        let videoData = {
-            imageUrl: media.featureImage?.url,
-            imageAlt: media.featureImage?.alt,
-            videoID: media.featureVideo?.id,
-            isVertical: false,
-            noAutoPlay: true,
-            title: `Watch ${title}`,
-            class: "su-absolute su-top-0 su-left-0 su-w-full su-h-full",
-            
-        };
-        let modalData =  null;
-        modalData = mediaType === "video" && {
-            title: `Watch ${title}`,
-            titleID: "video-modal",
-        };
-        const carouselData = [];
-        media.carousel?.forEach((slide, i) => {
-            const captionCredit = [media.captions[i].caption, media.captions[i].credit].filter(Boolean).join(' | ');
-
-            carouselData.push({
-                imageUrl: slide.asset_url,
-                imageAlt: slide.asset_attribute_alt,
-                captionCredit,
-            });
-        });
-
         // Prepare component data for template rendering
         const componentData = {
-            pubDateFormatted,
-            topic,
-            title: xss(title),
-            summary: xss(summary),
-            mediaFeature,
-            mediaType,
-            imageData,
-            videoData,
-            modalData,
-            carouselData,
-            captionCredit,
+            id,
+            menuData,
         };
         return sidebarNavigationTemplate(componentData);
     }

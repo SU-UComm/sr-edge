@@ -23,7 +23,7 @@
     "functions": [
         {
             "name": "main",
-            "entry": "./dist/server.cjs",
+            "entry": "main.js",
             "input": {
                 "type": "object",
                 "properties": {},
