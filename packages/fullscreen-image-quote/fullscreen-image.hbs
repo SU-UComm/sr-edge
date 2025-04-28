@@ -53,6 +53,6 @@
         {{~/if~}}
         <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}"
             class="su-object-cover su-w-full su-h-full su-p-20 {{#if mobileImageData.url}}su-hidden lg:su-block{{/if}} {{#if imageVPosition}}su-object-{{imageVPosition}}{{/if}}" />
-        <div aria-hidden class="su-absolute su-inset-0 su-z-10 su-border-[2rem] su-border-black-true su-bg-gradient-to-t su-from-black-true {{getStringByCondition value=quoteHAlign expectedValue="left" trueResult="lg:su-bg-gradient-to-r" falseResult="lg:su-bg-gradient-to-l"}}"></div>
+        <div aria-hidden="true" class="su-absolute su-inset-0 su-z-10 su-border-[2rem] su-border-black-true su-bg-gradient-to-t su-from-black-true {{getStringByCondition value=quoteHAlign expectedValue="left" trueResult="lg:su-bg-gradient-to-r" falseResult="lg:su-bg-gradient-to-l"}}"></div>
     </div>
 </section>
