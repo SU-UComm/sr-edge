@@ -4,7 +4,7 @@
     aria-hidden='true'
     class='report-header__menu-tray su-hidden su-shadow su-z-50 su-fixed su-left-0 su-top-0 su-size-full'
 >
-    <span tabIndex='0' data-tp-to='close' />
+    <span tabIndex='0' data-tp-to='close'></span>
     <div
         class='report-header__overlay su-bg-black su-opacity-25 su-size-full'
     ></div>
@@ -70,48 +70,171 @@
                     class='su-block su-mt-32 su-border-none su-grow su-bg-black-10 dark:su-bg-black su-w-full su-h-2 md:su-h-3'
                 />
             </form>
-
-            <MajorLinks items='{major}' />
-
+            <ul
+                class='su-mobile-nav-major su-w-full su-order-2 su-list-none su-flex su-flex-wrap su-gap-11 md:su-gap-19 su-pl-0 su-ml-0'
+                data-location='main-nav:a:0'
+            >
+                {{~#each major~}}
+                    <li class='su-mb-0 su-w-full'>
+                        <a
+                            class='su-text-black hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-20 md:su-text-26 su-leading-[3.1rem] hocus:su-text-digital-red su-font-bold su-no-underline su-transition'
+                            href='{{asset_url}}'
+                        >
+                            {{{unescapeHtml asset_name}}}
+                        </a>
+                    </li>
+                {{~/each~}}
+            </ul>
             <hr
                 aria-hidden='true'
                 class='su-block su-order-2 su-my-20 md:su-my-27 su-w-full su-bg-gradient-light-red-h su-h-4 su-border-none md:su-h-3'
             />
-
-            <MinorLinks items='{minor}' />
-
+            {{~#if minor~}}
+                <ul class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'>
+                    {{~#each minor~}}
+                        <li
+                            class='{{getStringForLastIndex
+                                    array=contacts
+                                    index=@index
+                                    trueResult='su-mb-0'
+                                    falseResult='su-mb-6'
+                                }}
+                                su-w-full su-leading-[21px]'
+                        >
+                            <a
+                                class='su-text-black hocus:su-underline dark:su-text-white dark:hover:su-text-dark-mode-red su-text-16 md:su-text-18 focus:su-text-digital-red hover:su-text-digital-red su-font-semibold su-no-underline su-transition'
+                                href='{{asset_url}}'
+                            >
+                                {{{unescapeHtml asset_name}}}
+                            </a>
+                        </li>
+                    {{~/each~}}
+                </ul>
+            {{~/if~}}
             <hr
                 aria-hidden='true'
                 class='su-block su-order-2 su-my-20 md:su-my-27 su-w-[9.1rem] su-bg-black-10 dark:su-bg-black su-border-none su-h-2'
             />
-
             {{~#ifEquals audience 'external'~}}
-                <ContactLinks items='{contacts}' />
-
+                <ul class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'>
+                    {{~#each contacts~}}
+                        <li
+                            class='{{getStringForLastIndex
+                                    array=contacts
+                                    index=@index
+                                    trueResult='su-mb-0'
+                                    falseResult='su-mb-6'
+                                }}
+                                su-w-full su-leading-[1.6rem]'
+                        >
+                            <a
+                                class='su-text-black hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
+                                href='{{asset_url}}'
+                            >
+                                {{{unescapeHtml asset_name}}}
+                            </a>
+                        </li>
+                    {{~/each~}}
+                </ul>
                 <hr
                     aria-hidden='true'
                     class='su-block su-order-2 su-my-20 md:su-my-27 su-w-[9.1rem] su-bg-black-10 dark:su-bg-black su-border-none su-h-2'
                 />
             {{~/ifEquals~}}
             {{~#ifEquals audience 'student'~}}
-                <ContactLinks items='{contactsStudent}' />
-
+                <ul class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'>
+                    {{~#each contactsStudent~}}
+                        <li
+                            class='{{getStringForLastIndex
+                                    array=contactsStudent
+                                    index=@index
+                                    trueResult='su-mb-0'
+                                    falseResult='su-mb-6'
+                                }}
+                                su-w-full su-leading-[1.6rem]'
+                        >
+                            <a
+                                class='su-text-black hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
+                                href='{{asset_url}}'
+                            >
+                                {{{unescapeHtml asset_name}}}
+                            </a>
+                        </li>
+                    {{~/each~}}
+                </ul>
                 <hr
                     aria-hidden='true'
                     class='su-block su-order-2 su-my-20 md:su-my-27 su-w-[9.1rem] su-bg-black-10 dark:su-bg-black su-border-none su-h-2'
                 />
             {{~/ifEquals~}}
             {{#ifEquals audience 'faculty'~}}
-                <ContactLinks items='{contactsStaff}' />
-
+                <ul class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'>
+                    {{~#each contactsStaff~}}
+                        <li
+                            class='{{getStringForLastIndex
+                                    array=contactsStaff
+                                    index=@index
+                                    trueResult='su-mb-0'
+                                    falseResult='su-mb-6'
+                                }}
+                                su-w-full su-leading-[1.6rem]'
+                        >
+                            <a
+                                class='su-text-black hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
+                                href='{{asset_url}}'
+                            >
+                                {{{unescapeHtml asset_name}}}
+                            </a>
+                        </li>
+                    {{~/each~}}
+                </ul>
                 <hr
                     aria-hidden='true'
                     class='su-block su-order-2 su-my-20 md:su-my-27 su-w-[9.1rem] su-bg-black-10 dark:su-bg-black su-border-none su-h-2'
                 />
             {{~/ifEquals~}}
-
-            <ExternalLinks items='{externalData}' audience='{audience}' />
-
+            {{~#if externalData~}}
+                <ul class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'>
+                    {{~#each externalData~}}
+                        <li
+                            class='{{getStringForLastIndex
+                                    array=externalData
+                                    index=@index
+                                    trueResult='su-mb-0'
+                                    falseResult='su-mb-3'
+                                }}
+                                su-w-full su-leading-[16px]'
+                        >
+                            <a
+                                target='_blank'
+                                class='su-group su-flex hocus:su-underline su-items-center su-text-black dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
+                                href='{{asset_attribute_redirect_url}}'
+                                rel='noreferrer'
+                            >
+                                <span class='su-mr-2'>{{{unescapeHtml
+                                        asset_name
+                                    }}}</span>
+                                <svg
+                                    class='su-stroke-digital-red dark:su-stroke-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform'
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='23'
+                                    height='23'
+                                    viewBox='0 0 23 23'
+                                    fill='none'
+                                    aria-hidden='true'
+                                >
+                                    <path
+                                        d='M8.95664 7.07109L15.5563 7.07109M15.5563 7.07109L15.5563 13.6708M15.5563 7.07109L7.07102 15.5564'
+                                        strokeWidth='1.5'
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                    />
+                                </svg>
+                            </a>
+                        </li>
+                    {{~/each~}}
+                </ul>
+            {{~/if~}}
             <button
                 type='button'
                 class='report-header__menu-close su-absolute su-right-20 md:su-right-48 su-top-43 md:su-top-75 su-w-32 su-flex su-flex-wrap su-gap-3 su-justify-center hocus-visible:su-text-digital-red dark:hocus-visible:su-text-dark-mode-red'
@@ -136,7 +259,7 @@
                         />
                     </svg>
                 </span>
-                <span id='close-menu' hidden>
+                <span id='close-menu' hidden='true'>
                     Close menu
                 </span>
                 <span
