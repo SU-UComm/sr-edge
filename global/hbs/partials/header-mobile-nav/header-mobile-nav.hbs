@@ -82,7 +82,7 @@
                 class='su-mobile-nav-major su-w-full su-order-2 su-list-none su-flex su-flex-wrap su-gap-11 md:su-gap-19 su-pl-0 su-ml-0'
                 data-location='main-nav:a:0'
             >
-                {{~#each major~}}
+                {{~#each navigation.major~}}
                     <li class='su-mb-0 su-w-full'>
                         <a
                             class='su-text-black hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-20 md:su-text-26 su-leading-[3.1rem] hocus:su-text-digital-red su-font-bold su-no-underline su-transition'
@@ -97,9 +97,9 @@
                 aria-hidden='true'
                 class='su-block su-order-2 su-my-20 md:su-my-27 su-w-full su-bg-gradient-light-red-h su-h-4 su-border-none md:su-h-3'
             />
-            {{~#if minor~}}
+            {{~#if navigation.minor~}}
                 <ul class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'>
-                    {{~#each minor~}}
+                    {{~#each navigation.minor~}}
                         <li
                             class='{{getStringForLastIndex
                                     array=contacts
@@ -123,90 +123,178 @@
                 aria-hidden='true'
                 class='su-block su-order-2 su-my-20 md:su-my-27 su-w-[9.1rem] su-bg-black-10 dark:su-bg-black su-border-none su-h-2'
             />
-            {{~#ifEquals audience 'external'~}}
-                <ul class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'>
-                    {{~#each contacts~}}
+            <ul
+                class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'
+                data-audience='external'
+            >
+                {{~#each navigation.contacts~}}
+                    <li
+                        class='{{getStringForLastIndex
+                                array=navigation.contacts
+                                index=@index
+                                trueResult='su-mb-0'
+                                falseResult='su-mb-6'
+                            }}
+                            su-w-full su-leading-[1.6rem]'
+                    >
+                        <a
+                            class='su-text-black hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
+                            href='{{asset_url}}'
+                        >
+                            {{{unescapeHtml asset_name}}}
+                        </a>
+                    </li>
+                {{~/each~}}
+            </ul>
+            <ul
+                class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0 su-hidden'
+                data-audience='student'
+            >
+                {{~#each navigation.contactsStudent~}}
+                    <li
+                        class='{{getStringForLastIndex
+                                array=navigation.contactsStudent
+                                index=@index
+                                trueResult='su-mb-0'
+                                falseResult='su-mb-6'
+                            }}
+                            su-w-full su-leading-[1.6rem]'
+                    >
+                        <a
+                            class='su-text-black hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
+                            href='{{asset_url}}'
+                        >
+                            {{{unescapeHtml asset_name}}}
+                        </a>
+                    </li>
+                {{~/each~}}
+            </ul>
+            <ul
+                class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0 su-hidden'
+                data-audience='faculty'
+            >
+                {{~#each navigation.contactsStaff~}}
+                    <li
+                        class='{{getStringForLastIndex
+                                array=navigation.contactsStaff
+                                index=@index
+                                trueResult='su-mb-0'
+                                falseResult='su-mb-6'
+                            }}
+                            su-w-full su-leading-[1.6rem]'
+                    >
+                        <a
+                            class='su-text-black hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
+                            href='{{asset_url}}'
+                        >
+                            {{{unescapeHtml asset_name}}}
+                        </a>
+                    </li>
+                {{~/each~}}
+            </ul>
+            <hr
+                aria-hidden='true'
+                class='su-block su-order-2 su-my-20 md:su-my-27 su-w-[9.1rem] su-bg-black-10 dark:su-bg-black su-border-none su-h-2'
+            />
+            {{~#if navigation.external.anonymous~}}
+                <ul
+                    class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'
+                    data-audience='external'
+                >
+                    {{~#each navigation.external.anonymous~}}
                         <li
                             class='{{getStringForLastIndex
-                                    array=contacts
+                                    array=navigation.external.anonymous
                                     index=@index
                                     trueResult='su-mb-0'
-                                    falseResult='su-mb-6'
+                                    falseResult='su-mb-3'
                                 }}
-                                su-w-full su-leading-[1.6rem]'
+                                su-w-full su-leading-[16px]'
                         >
                             <a
-                                class='su-text-black hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
-                                href='{{asset_url}}'
+                                target='_blank'
+                                class='su-group su-flex hocus:su-underline su-items-center su-text-black dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
+                                href='{{asset_attribute_redirect_url}}'
+                                rel='noreferrer'
                             >
-                                {{{unescapeHtml asset_name}}}
+                                <span class='su-mr-2'>{{{unescapeHtml
+                                        asset_name
+                                    }}}</span>
+                                <svg
+                                    class='su-stroke-digital-red dark:su-stroke-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform'
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='23'
+                                    height='23'
+                                    viewBox='0 0 23 23'
+                                    fill='none'
+                                    aria-hidden='true'
+                                >
+                                    <path
+                                        d='M8.95664 7.07109L15.5563 7.07109M15.5563 7.07109L15.5563 13.6708M15.5563 7.07109L7.07102 15.5564'
+                                        strokeWidth='1.5'
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                    />
+                                </svg>
                             </a>
                         </li>
                     {{~/each~}}
                 </ul>
-                <hr
-                    aria-hidden='true'
-                    class='su-block su-order-2 su-my-20 md:su-my-27 su-w-[9.1rem] su-bg-black-10 dark:su-bg-black su-border-none su-h-2'
-                />
-            {{~/ifEquals~}}
-            {{~#ifEquals audience 'student'~}}
-                <ul class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'>
-                    {{~#each contactsStudent~}}
+            {{~/if~}}
+            {{~#if navigation.external.student~}}
+                <ul
+                    class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0 su-hidden'
+                    data-audience='student'
+                >
+                    {{~#each navigation.external.student~}}
                         <li
                             class='{{getStringForLastIndex
-                                    array=contactsStudent
+                                    array=navigation.external.student
                                     index=@index
                                     trueResult='su-mb-0'
-                                    falseResult='su-mb-6'
+                                    falseResult='su-mb-3'
                                 }}
-                                su-w-full su-leading-[1.6rem]'
+                                su-w-full su-leading-[16px]'
                         >
                             <a
-                                class='su-text-black hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
-                                href='{{asset_url}}'
+                                target='_blank'
+                                class='su-group su-flex hocus:su-underline su-items-center su-text-black dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
+                                href='{{asset_attribute_redirect_url}}'
+                                rel='noreferrer'
                             >
-                                {{{unescapeHtml asset_name}}}
+                                <span class='su-mr-2'>{{{unescapeHtml
+                                        asset_name
+                                    }}}</span>
+                                <svg
+                                    class='su-stroke-digital-red dark:su-stroke-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform'
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    width='23'
+                                    height='23'
+                                    viewBox='0 0 23 23'
+                                    fill='none'
+                                    aria-hidden='true'
+                                >
+                                    <path
+                                        d='M8.95664 7.07109L15.5563 7.07109M15.5563 7.07109L15.5563 13.6708M15.5563 7.07109L7.07102 15.5564'
+                                        strokeWidth='1.5'
+                                        strokeLinecap='round'
+                                        strokeLinejoin='round'
+                                    />
+                                </svg>
                             </a>
                         </li>
                     {{~/each~}}
                 </ul>
-                <hr
-                    aria-hidden='true'
-                    class='su-block su-order-2 su-my-20 md:su-my-27 su-w-[9.1rem] su-bg-black-10 dark:su-bg-black su-border-none su-h-2'
-                />
-            {{~/ifEquals~}}
-            {{#ifEquals audience 'faculty'~}}
-                <ul class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'>
-                    {{~#each contactsStaff~}}
+            {{~/if~}}
+            {{~#if navigation.external.staff~}}
+                <ul
+                    class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0 su-hidden'
+                    data-audience='faculty'
+                >
+                    {{~#each navigation.external.staff~}}
                         <li
                             class='{{getStringForLastIndex
-                                    array=contactsStaff
-                                    index=@index
-                                    trueResult='su-mb-0'
-                                    falseResult='su-mb-6'
-                                }}
-                                su-w-full su-leading-[1.6rem]'
-                        >
-                            <a
-                                class='su-text-black hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 hocus:su-text-digital-red su-font-semibold su-no-underline su-transition'
-                                href='{{asset_url}}'
-                            >
-                                {{{unescapeHtml asset_name}}}
-                            </a>
-                        </li>
-                    {{~/each~}}
-                </ul>
-                <hr
-                    aria-hidden='true'
-                    class='su-block su-order-2 su-my-20 md:su-my-27 su-w-[9.1rem] su-bg-black-10 dark:su-bg-black su-border-none su-h-2'
-                />
-            {{~/ifEquals~}}
-            {{~#if externalData~}}
-                <ul class='su-w-full su-order-2 su-list-none su-pl-0 su-ml-0'>
-                    {{~#each externalData~}}
-                        <li
-                            class='{{getStringForLastIndex
-                                    array=externalData
+                                    array=navigation.external.staff
                                     index=@index
                                     trueResult='su-mb-0'
                                     falseResult='su-mb-3'

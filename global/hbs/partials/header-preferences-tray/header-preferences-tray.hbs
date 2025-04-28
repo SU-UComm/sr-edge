@@ -1,250 +1,229 @@
-<div class="su-flex su-items-center su-justify-end su-w-32 md:su-w-[85px] lg:su-w-[91px]">
-    <button
-        type="button"
-        class="su-w-58 su-flex su-flex-wrap su-gap-3 su-justify-center hover:su-text-digital-red dark:hover:su-text-dark-mode-red"
-        aria-controls="preferences"
-        aria-expanded="false"
-        aria-labelledby="toggle-preferences"
-        data-click="toggle-preferences"
-    >
-        {{~#ifEquals audience null~}}
-        <span class="icon-preferences">
-            <span class="su-relative su-size-32 su-block su-mx-auto">
-                {{> svg-icons icon="preferences" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
-            </span>
-            <span id="toggle-preferences" hidden="true">
-                Preferences
-            </span>
-            <span
-                class="su-text-12 su-hidden md:su-block"
-                aria-hidden="true"
-            >
-                Show me...
-            </span>
-        </span>
-        {{~/ifEquals~}}
-        {{~#ifEquals audience "external"~}}
-        <span class="icon-preferences">
-            <span class="su-relative su-size-32 su-block su-mx-auto">
-                {{> svg-icons icon="preferences" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
-            </span>
-            <span id="toggle-preferences" hidden="true">
-                Preferences
-            </span>
-            <span
-                class="su-text-12 su-hidden md:su-block"
-                aria-hidden="true"
-            >
-                Show me...
-            </span>
-        </span>
-        {{~/ifEquals~}}
-        {{~#ifEquals audience "faculty"~}}
-        <span class="icon-faculty">
-            <span class="su-relative su-size-32 su-block su-mx-auto">
-                {{> svg-icons icon="faculty" theme="light" classes="dark:su-hidden su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}                        
-                {{> svg-icons icon="faculty" theme="dark" classes="su-hidden dark:su-block su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}                        
-            </span>
-            <span
-              class="su-text-12 su-hidden md:su-block su-text-digital-red dark:su-text-palo-verde"
-              id="toggle-preferences-faculty"
-            >
-                Faculty/Staff
-            </span>
-        </span>
-        {{~/ifEquals~}}
-        {{~#ifEquals audience "student"~}}
-        <span class="icon-student">
-            <span class="su-relative su-size-32 su-block su-mx-auto">
-                {{> svg-icons icon="student" theme="light" classes="dark:su-hidden su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}                        
-                {{> svg-icons icon="student" theme="dark" classes="su-hidden dark:su-block su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
-            </span>
-            <span
-                class="su-text-12 su-hidden md:su-block su-text-digital-red dark:su-text-palo-verde"
-                id="toggle-preferences-student"
-            >
-                Student
-            </span>
-        </span>
-        {{~/ifEquals~}}
-    </button>
-    <div
-        id="preferences"
-        aria-hidden="true"
-        class="su-hidden report-header__preferences-tray su-shadow su-z-50 su-fixed su-right-0 su-top-0 su-size-full"
-    >
-        <div class="report-header__overlay su-bg-black su-opacity-25 su-size-full"></div>
-        <div class="report-header__preferences su-overflow-hidden su-h-screen su-bg-white dark:su-bg-black-true su-absolute su-top-0 su-right-0 su-w-full md:su-w-[398px] su-flex su-flex-wrap su-overflow-y-auto su-pb-32 md:su-pb-[64px] su-pt-[115px] md:su-pt-[167px] su-px-38">
-            <div class="report-header__preference-content su-transition su-text-black dark:su-text-white">
-                <div class="su-gap-27 su-flex su-flex-wrap">
-                    <h2
-                        class="su-text-18 su-font-semibold su-mb-0 su-font-sans su-leading-[2.25rem]"
-                        id="tray-group-label"
-                    >
-                        Along with Stanford news and stories, show me:
-                    </h2>
-                    <ul
-                        class="su-flex su-list-none su-pl-0 su-gap-18 su-w-full"
-                        aria-labelledby="tray-group-label"
-                    >
-                        <li class="su-mb-0 su-w-1/2">
-                            <span tabIndex="0" data-tp-to="close-prefs"></span>
-                            <button
-                                type="button"
-                                id="preference-student"
-                                aria-pressed={audience === "student" ? "true" : "false"}
-                                class="report-header__pref-toggle hover:su-text-white su-w-full su-h-full aria-pressed:su-text-white group su-bg-white dark:aria-pressed:su-text-black-true dark:aria-pressed:su-bg-transparent dark:hover:su-bg-transparent aria-pressed:su-bg-transparent hover:su-bg-transparent dark:su-bg-black-true &[aria-pressed=“true”]:dark:su-bg-transparent before:su-rounded-inherit after:su-rounded-inherit before:su-bg-gradient-light-red after:su-transition-none su-transition before:su-transition after:su-bg-gradient-light-red dark:after:su-rotate-180 before:su-absolute before:-su-z-10 before:-su-m-2 after:su-absolute after:-su-z-10 before:su-top-0 before:su-bottom-0 before:su-right-0 before:su-left-0 after:su-top-0 after:su-bottom-0 after:su-right-0 after:su-left-0 su-relative su-bg-transparent su-text-center"
-                                data-location="student-info"
-                                data-click="student-persona"
-                            >
-                                <span class="icon-add su-block su-mx-auto su-relative su-w-44 su-h-44 su-text-digital-red dark:su-text-dark-mode-red">
-                                    {{> svg-icons icon="add" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2 su-w-44 su-h-44 su-fill-none"}}
-                                </span>
-                                <span class="icon-remove su-block su-mx-auto su-relative su-w-44 su-h-44">
-                                    {{> svg-icons icon="remove" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2 su-w-44 su-h-44 su-fill-none"}}
-                                </span>
-                                <span class="icon-detail su-block su-mb-6 su-mt-18 su-mx-auto su-relative su-w-[1.838rem] su-h-21">
-                                    {{> svg-icons icon="student info" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
-                                </span>
-                                <span class="su-block su-text-18 su-leading-[2.25rem] su-w-full">
-                                    Student information
-                                </span>
-                            </button>
-                        </li>
-                        <li class="su-mb-0 su-w-1/2">
-                            <button
-                                type="button"
-                                id="preference-faculty"
-                                aria-pressed={audience === "faculty" ? "true" : "false"}
-                                data-click="faculty-persona"
-                                class="report-header__pref-toggle hover:su-text-white su-w-full su-h-full aria-pressed:su-text-white group su-bg-white dark:aria-pressed:su-text-white dark:aria-pressed:su-bg-transparent dark:hover:su-bg-transparent aria-pressed:su-bg-transparent hover:su-bg-transparent dark:su-bg-black-true &[aria-pressed=“true”]:dark:su-bg-transparent before:su-rounded-inherit after:su-rounded-inherit before:su-bg-gradient-light-red after:su-transition-none su-transition before:su-transition after:su-bg-gradient-light-red dark:after:su-rotate-180 before:su-absolute before:-su-z-10 before:-su-m-2 after:su-absolute after:-su-z-10 before:su-top-0 before:su-bottom-0 before:su-right-0 before:su-left-0 after:su-top-0 after:su-bottom-0 after:su-right-0 after:su-left-0 su-relative su-bg-transparent su-text-center"
-                            >
-                                <span class="icon-add su-block su-mx-auto su-relative su-w-44 su-h-44 su-text-digital-red dark:su-text-dark-mode-red">
-                                    {{> svg-icons icon="add" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2 su-w-44 su-h-44 su-fill-none"}}
-                                </span>
-                                <span class="icon-remove su-block su-mx-auto su-relative su-w-44 su-h-44">
-                                    {{> svg-icons icon="remove" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2 su-w-44 su-h-44 su-fill-none"}}
-                                </span>
-                                <span class="icon-detail su-block su-mb-6 su-mt-18 su-mx-auto su-relative su-w-[1.838rem] su-h-21">
-                                     {{> svg-icons icon="staff info" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
-                                </span>
-                                <span class="su-block su-text-18 su-leading-[2.25rem] su-w-full">
-                                    Faculty/Staff information
-                                </span>
-                            </button>
-                        </li>
-                    </ul>
-                    <div class="su-flex su-flex-wrap su-gap-9">
-                        <p class="su-mb-0 su-text-16 su-font-normal su-leading-[2rem]">
-                            We want to provide announcements, events, leadership messages
-                            and resources that are relevant to you. Your selection is
-                            stored in a browser cookie which you can remove at any time
-                            using “Clear all personalization” below.
-                        </p>
-                        <button
-                            type="button"
-                            id="preference-reset"
-                            class="report-header__preferences-clear su-text-black-40 su-underline su-text-18 su-leading-[2.715rem] {{getStringByCondition value=consent expectedValue=true trueResult="su-text-digital-blue dark:su-text-digital-blue-vivid" falseResult=""}}"
-                            aria-pressed={{getStringByCondition value=consent expectedValue=false trueResult="true" falseResult="false"}}
-                            disabled={{getStringByCondition value=consent expectedValue=true trueResult="" falseResult="disabled"}}
-                            data-click="clear-preferences"
-                        >
-                            Clear all personalization
-                        </button>
-                    </div>
-                </div>
-                <hr class="su-h-2 su-bg-black-10 dark:su-bg-black su-w-full su-border-none su-my-38" />
-                <form class="su-gap-27 su-flex su-flex-wrap su-pt-38 su-cursor-pointer">
-                    <fieldset
-                        class="su-border-none su-p-0 su-whitespace-nowrap"
-                        role="radiogroup"
-                    >
-                        <legend class="su-text-18 su-font-semibold su-mb-27 su-leading-[2.25rem] su-text-black dark:su-text-white su-border-none">
-                            Appearance preference:
-                        </legend>
-                        <input
-                            class="su-opacity-0 su-absolute su-peer/light"
-                            checked="checked"
-                            type="radio"
-                            name="ui-theme"
-                            id="light-theme"
-                        />
-                        <label
-                            class="su-inline-block su-leading-2 su-relative su-pr-50 su-z-20 after:su-border-palo-verde peer-checked/light:after:su-border-digital-red peer-checked/light:su-text-digital-red su-text-black-50 peer-checked/light:su-z-10 before:su-w-42 before:su-h-15 su-bg-gradient-before before:su-bg-gradient-light-red-h peer-checked/light:before:su-rotate-180 before:su-rounded-[12px] before:su-absolute before:su-right-0 before:su-top-6 after:su-transition after:su-top-2 after:su-shadow-sm after:su-bg-white after:su-border-2 after:su-bg-digital-red after:su-rounded-full after:su-size-24 after:su-translate-x-0 after:su-absolute after:su-right-0 peer-checked/light:after:su-translate-x-[-2rem]"
-                            htmlFor="light-theme"
-                            data-theme="light-theme"
-                            aria-label="Light mode enabled"
-                        >
-                            <span class="su-inline-block su-align-middle su-mr-6 su-text-18 su-leading-[2.25rem]">
-                                Light
-                            </span>
-                            <span
-                                aria-hidden="true"
-                                class="su-inline-block su-align-middle su-relative su-w-28 su-h-28 peer-checked/light:su-hidden"
-                            >
-                                {{> svg-icons icon="light theme" theme="light" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
-                            </span>
-                            <span
-                                aria-hidden="true"
-                                class="su-hidden su-align-middle su-relative su-w-28 su-h-28 peer-checked/light:su-inline-block"
-                            >
-                                {{> svg-icons icon="light theme" theme="dark" classes="su-fill-transparent"}}
-                            </span>
-                        </label>
-                        <input
-                            class="dark-theme su-opacity-0 su-absolute su-peer/dark"
-                            type="radio"
-                            name="ui-theme"
-                            id="dark-theme"
-                        />
-                        <label
-                            class="su-inline-block su-leading-2 su-relative su-align-middle su-z-20 peer-checked/dark:su-z-10 su-pl-50 su--ml-44 peer-checked/dark:su-text-digital-red dark:peer-checked/dark:su-text-palo-verde su-text-black-70"
-                            htmlFor="dark-theme"
-                            data-theme="dark-theme"
-                            aria-label="Dark mode enabled"
-                        >
-                            <span
-                                aria-hidden="true"
-                                class="su-inline-block su-align-middle su-relative su-w-28 su-h-28"
-                                data-role="su-darkmode-icon-nonactive"
-                            >
-                                {{> svg-icons icon="dark mode" theme="light" classes="su-absolute su-fill-transparent su-stroke-current su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/"}}
-                            </span>
-                            <span
-                                class="su-hidden su-inline-block su-align-middle su-relative su-w-28 su-h-28"
-                                data-role="su-darkmode-icon-active"
-                            >
-                                {{> svg-icons icon="dark mode" theme="dark" }}
-                            </span>
-                            <span class="su-inline-block su-align-middle su-text-18 su-leading-[2.25rem]">
-                                Dark
-                            </span>
-                        </label>
-                    </fieldset>
-                </form>
-            </div>
-            <button
-                type="button"
-                class="report-header__preferences-close su-absolute su-right-38 su-top-43 md:su-top-72 su-w-32 su-flex su-flex-wrap su-gap-3 su-justify-center dark:hover:su-text-dark-mode-red hover:su-text-digital-red"
-                aria-expanded="true"
-                aria-controls="menu"
-                aria-labelledby="close-preferences"
-                data-location="close-prefs"
-            >
-                <span class="su-relative su-size-32">
-                    {{> svg-icons icon="close"}}     
+<section data-subcomponent="header-preferences-tray">
+    <div class="su-flex su-items-center su-justify-end su-w-32 md:su-w-[85px] lg:su-w-[91px]">
+        <button
+            type="button"
+            class="su-w-58 su-flex su-flex-wrap su-gap-3 su-justify-center hover:su-text-digital-red dark:hover:su-text-dark-mode-red"
+            aria-controls="preferences"
+            aria-expanded="false"
+            aria-labelledby="toggle-preferences"
+            data-click="toggle-preferences"
+        >
+            <span class="icon-preferences" data-audience="external">
+                <span class="su-relative su-size-32 su-block su-mx-auto">
+                    {{> svg-icons icon="preferences" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
                 </span>
-                <span id="close-preferences" hidden="true">
-                    Close preferences
+                <span id="toggle-preferences" hidden="true">
+                    Preferences
                 </span>
                 <span
-                    class="su-text-12 su-block su-font-semibold"
+                    class="su-text-12 su-hidden md:su-block"
                     aria-hidden="true"
                 >
-                Close
+                    Show me...
                 </span>
-            </button>
-            <span tabIndex="0" data-tp-to="student-info" />
+            </span>
+            <span class="icon-faculty su-hidden" data-audience="faculty">
+                <span class="su-relative su-size-32 su-block su-mx-auto">
+                    {{> svg-icons icon="faculty" theme="light" classes="dark:su-hidden su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}                        
+                    {{> svg-icons icon="faculty" theme="dark" classes="su-hidden dark:su-block su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}                        
+                </span>
+                <span
+                class="su-text-12 su-hidden md:su-block su-text-digital-red dark:su-text-palo-verde"
+                id="toggle-preferences-faculty"
+                >
+                    Faculty/Staff
+                </span>
+            </span>
+            <span class="icon-student su-hidden" data-audience="student">
+                <span class="su-relative su-size-32 su-block su-mx-auto">
+                    {{> svg-icons icon="student" theme="light" classes="dark:su-hidden su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}                        
+                    {{> svg-icons icon="student" theme="dark" classes="su-hidden dark:su-block su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
+                </span>
+                <span
+                    class="su-text-12 su-hidden md:su-block su-text-digital-red dark:su-text-palo-verde"
+                    id="toggle-preferences-student"
+                >
+                    Student
+                </span>
+            </span>
+        </button>
+        <div
+            id="preferences"
+            aria-hidden="true"
+            class="su-hidden report-header__preferences-tray su-shadow su-z-50 su-fixed su-right-0 su-top-0 su-size-full"
+        >
+            <div class="report-header__overlay su-bg-black su-opacity-25 su-size-full"></div>
+            <div class="report-header__preferences su-overflow-hidden su-h-screen su-bg-white dark:su-bg-black-true su-absolute su-top-0 su-right-0 su-w-full md:su-w-[398px] su-flex su-flex-wrap su-overflow-y-auto su-pb-32 md:su-pb-[64px] su-pt-[115px] md:su-pt-[167px] su-px-38">
+                <div class="report-header__preference-content su-transition su-text-black dark:su-text-white">
+                    <div class="su-gap-27 su-flex su-flex-wrap">
+                        <h2
+                            class="su-text-18 su-font-semibold su-mb-0 su-font-sans su-leading-[2.25rem]"
+                            id="tray-group-label"
+                        >
+                            Along with Stanford news and stories, show me:
+                        </h2>
+                        <ul
+                            class="su-flex su-list-none su-pl-0 su-gap-18 su-w-full"
+                            aria-labelledby="tray-group-label"
+                        >
+                            <li class="su-mb-0 su-w-1/2">
+                                <span tabIndex="0" data-tp-to="close-prefs"></span>
+                                <button
+                                    type="button"
+                                    id="preference-student"
+                                    aria-pressed="false"
+                                    class="report-header__pref-toggle hover:su-text-white su-w-full su-h-full aria-pressed:su-text-white group su-bg-white dark:aria-pressed:su-text-black-true dark:aria-pressed:su-bg-transparent dark:hover:su-bg-transparent aria-pressed:su-bg-transparent hover:su-bg-transparent dark:su-bg-black-true &[aria-pressed=“true”]:dark:su-bg-transparent before:su-rounded-inherit after:su-rounded-inherit before:su-bg-gradient-light-red after:su-transition-none su-transition before:su-transition after:su-bg-gradient-light-red dark:after:su-rotate-180 before:su-absolute before:-su-z-10 before:-su-m-2 after:su-absolute after:-su-z-10 before:su-top-0 before:su-bottom-0 before:su-right-0 before:su-left-0 after:su-top-0 after:su-bottom-0 after:su-right-0 after:su-left-0 su-relative su-bg-transparent su-text-center"
+                                    data-location="student-info"
+                                    data-click="student-persona"
+                                >
+                                    <span class="icon-add su-block su-mx-auto su-relative su-w-44 su-h-44 su-text-digital-red dark:su-text-dark-mode-red">
+                                        {{> svg-icons icon="add" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2 su-w-44 su-h-44 su-fill-none"}}
+                                    </span>
+                                    <span class="icon-remove su-block su-mx-auto su-relative su-w-44 su-h-44">
+                                        {{> svg-icons icon="remove" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2 su-w-44 su-h-44 su-fill-none"}}
+                                    </span>
+                                    <span class="icon-detail su-block su-mb-6 su-mt-18 su-mx-auto su-relative su-w-[1.838rem] su-h-21">
+                                        {{> svg-icons icon="student info" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
+                                    </span>
+                                    <span class="su-block su-text-18 su-leading-[2.25rem] su-w-full">
+                                        Student information
+                                    </span>
+                                </button>
+                            </li>
+                            <li class="su-mb-0 su-w-1/2">
+                                <button
+                                    type="button"
+                                    id="preference-faculty"
+                                    aria-pressed="false"
+                                    data-click="faculty-persona"
+                                    class="report-header__pref-toggle hover:su-text-white su-w-full su-h-full aria-pressed:su-text-white group su-bg-white dark:aria-pressed:su-text-white dark:aria-pressed:su-bg-transparent dark:hover:su-bg-transparent aria-pressed:su-bg-transparent hover:su-bg-transparent dark:su-bg-black-true &[aria-pressed=“true”]:dark:su-bg-transparent before:su-rounded-inherit after:su-rounded-inherit before:su-bg-gradient-light-red after:su-transition-none su-transition before:su-transition after:su-bg-gradient-light-red dark:after:su-rotate-180 before:su-absolute before:-su-z-10 before:-su-m-2 after:su-absolute after:-su-z-10 before:su-top-0 before:su-bottom-0 before:su-right-0 before:su-left-0 after:su-top-0 after:su-bottom-0 after:su-right-0 after:su-left-0 su-relative su-bg-transparent su-text-center"
+                                >
+                                    <span class="icon-add su-block su-mx-auto su-relative su-w-44 su-h-44 su-text-digital-red dark:su-text-dark-mode-red">
+                                        {{> svg-icons icon="add" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2 su-w-44 su-h-44 su-fill-none"}}
+                                    </span>
+                                    <span class="icon-remove su-block su-mx-auto su-relative su-w-44 su-h-44">
+                                        {{> svg-icons icon="remove" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2 su-w-44 su-h-44 su-fill-none"}}
+                                    </span>
+                                    <span class="icon-detail su-block su-mb-6 su-mt-18 su-mx-auto su-relative su-w-[1.838rem] su-h-21">
+                                        {{> svg-icons icon="staff info" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
+                                    </span>
+                                    <span class="su-block su-text-18 su-leading-[2.25rem] su-w-full">
+                                        Faculty/Staff information
+                                    </span>
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="su-flex su-flex-wrap su-gap-9">
+                            <p class="su-mb-0 su-text-16 su-font-normal su-leading-[2rem]">
+                                We want to provide announcements, events, leadership messages
+                                and resources that are relevant to you. Your selection is
+                                stored in a browser cookie which you can remove at any time
+                                using “Clear all personalization” below.
+                            </p>
+                            <button
+                                type="button"
+                                id="preference-reset"
+                                class="report-header__preferences-clear su-text-black-40 su-underline su-text-18 su-leading-[2.715rem] {{getStringByCondition value=consent expectedValue=true trueResult="su-text-digital-blue dark:su-text-digital-blue-vivid" falseResult=""}}"
+                                aria-pressed="true"
+                                disabled="disabled"
+                                data-click="clear-preferences"
+                            >
+                                Clear all personalization
+                            </button>
+                        </div>
+                    </div>
+                    <hr class="su-h-2 su-bg-black-10 dark:su-bg-black su-w-full su-border-none su-my-38" />
+                    <form class="su-gap-27 su-flex su-flex-wrap su-pt-38 su-cursor-pointer">
+                        <fieldset
+                            class="su-border-none su-p-0 su-whitespace-nowrap"
+                            role="radiogroup"
+                        >
+                            <legend class="su-text-18 su-font-semibold su-mb-27 su-leading-[2.25rem] su-text-black dark:su-text-white su-border-none">
+                                Appearance preference:
+                            </legend>
+                            <input
+                                class="su-opacity-0 su-absolute su-peer/light"
+                                type="radio"
+                                name="ui-theme"
+                                id="light-theme"
+                            />
+                            <label
+                                class="su-inline-block su-leading-2 su-relative su-pr-50 su-z-20 after:su-border-palo-verde peer-checked/light:after:su-border-digital-red peer-checked/light:su-text-digital-red su-text-black-50 peer-checked/light:su-z-10 before:su-w-42 before:su-h-15 su-bg-gradient-before before:su-bg-gradient-light-red-h peer-checked/light:before:su-rotate-180 before:su-rounded-[12px] before:su-absolute before:su-right-0 before:su-top-6 after:su-transition after:su-top-2 after:su-shadow-sm after:su-bg-white after:su-border-2 after:su-bg-digital-red after:su-rounded-full after:su-size-24 after:su-translate-x-0 after:su-absolute after:su-right-0 peer-checked/light:after:su-translate-x-[-2rem]"
+                                for="light-theme"
+                                data-theme="light-theme"
+                                aria-label="Light mode enabled"
+                            >
+                                <span class="su-inline-block su-align-middle su-mr-6 su-text-18 su-leading-[2.25rem]">
+                                    Light
+                                </span>
+                                <span
+                                    aria-hidden="true"
+                                    class="su-inline-block su-align-middle su-relative su-w-28 su-h-28 peer-checked/light:su-hidden"
+                                >
+                                    {{> svg-icons icon="light mode" theme="light" classes="su-absolute su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
+                                </span>
+                                <span
+                                    aria-hidden="true"
+                                    class="su-hidden su-align-middle su-relative su-w-28 su-h-28 peer-checked/light:su-inline-block"
+                                >
+                                    {{> svg-icons icon="light mode" theme="dark" classes="su-fill-transparent"}}
+                                </span>
+                            </label>
+                            <input
+                                class="dark-theme su-opacity-0 su-absolute su-peer/dark"
+                                type="radio"
+                                name="ui-theme"
+                                id="dark-theme"
+                            />
+                            <label
+                                class="su-inline-block su-leading-2 su-relative su-align-middle su-z-20 peer-checked/dark:su-z-10 su-pl-50 su--ml-44 peer-checked/dark:su-text-digital-red dark:peer-checked/dark:su-text-palo-verde su-text-black-70"
+                                for="dark-theme"
+                                data-theme="dark-theme"
+                                aria-label="Dark mode enabled"
+                            >
+                                <span
+                                    aria-hidden="true"
+                                    class="su-inline-block su-align-middle su-relative su-w-28 su-h-28"
+                                    data-role="su-darkmode-icon-nonactive"
+                                >
+                                    {{> svg-icons icon="dark mode" theme="light" classes="su-absolute su-fill-transparent su-stroke-current su-top-1/2 su-left-1/2 -su-translate-x-1/2 -su-translate-y-1/2"}}
+                                </span>
+                                <span
+                                    class="su-hidden su-inline-block su-align-middle su-relative su-w-28 su-h-28"
+                                    data-role="su-darkmode-icon-active"
+                                >
+                                    {{> svg-icons icon="dark mode" theme="dark" }}
+                                </span>
+                                <span class="su-inline-block su-align-middle su-text-18 su-leading-[2.25rem]">
+                                    Dark
+                                </span>
+                            </label>
+                        </fieldset>
+                    </form>
+                </div>
+                <button
+                    type="button"
+                    class="report-header__preferences-close su-absolute su-right-38 su-top-43 md:su-top-72 su-w-32 su-flex su-flex-wrap su-gap-3 su-justify-center dark:hover:su-text-dark-mode-red hover:su-text-digital-red"
+                    aria-expanded="true"
+                    aria-controls="menu"
+                    aria-labelledby="close-preferences"
+                    data-location="close-prefs"
+                >
+                    <span class="su-relative su-size-32">
+                        {{> svg-icons icon="close"}}     
+                    </span>
+                    <span id="close-preferences" hidden="true">
+                        Close preferences
+                    </span>
+                    <span
+                        class="su-text-12 su-block su-font-semibold"
+                        aria-hidden="true"
+                    >
+                    Close
+                    </span>
+                </button>
+                <span tabIndex="0" data-tp-to="student-info" />
+            </div>
         </div>
     </div>
-</div>
+</section>

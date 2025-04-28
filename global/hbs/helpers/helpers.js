@@ -340,7 +340,7 @@ export const helpers = {
     
         return value === expectedValue ? trueResult : falseResult;
     },
-    isLast:  function (options) {
+    getStringForLastIndex:  function (options) {
         const {array, index, trueResult, falseResult } = options.hash;
 
         return Array.isArray(array) && index === array.length - 1 ? trueResult : falseResult;

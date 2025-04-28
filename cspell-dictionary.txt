@@ -63,8 +63,13 @@ vimeoid
 youtubeid
 linklist
 Subnav
+darkmode
+DARKMODE
 
 # Lorem Ipsum 
+VPSA
+VPUE
+VPGE
 ezgif
 Asimo
 rsquo
