@@ -30,19 +30,16 @@
                 </p>
                 {{/if}}
             </div>
-
             {{#if mediaType}}
             <div class="su-col-span-6 su-col-start-1 md:su-col-span-12 md:su-col-start-1 su-w-full su-rs-mt-4">
                 <figure class="su-col-span-full su-relative su-z-0">
                     <div class="su-relative su-w-full">
-
                         {{#ifEquals mediaType "image"}}
                         {{#if imageData.url}}
                         <img src="{{imageData.url}}" alt="{{imageData.alt}}"
                             class="su-relative su-w-full su-max-w-full" />
                         {{/if}}
                         {{/ifEquals}}
-
                         {{#ifEquals mediaType "video"}}
                         {{#if videoData.imageUrl}}
                         <button type="button" aria-haspopup="dialog" class="su-w-full su-aspect-[16/9] su-video-trigger"
@@ -63,9 +60,7 @@
                         {{/if}}
                         {{/if}}
                         {{/ifEquals}}
-
                     </div>
-
                     {{#if captionCredit}}
                     <figcaption class="su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white">
                         {{captionCredit}}
@@ -76,7 +71,6 @@
             {{/if}}
         </div>
     </div>
-
     {{#if modalData}}
     {{#if videoData.videoID}}
     <section data-modal="modal-wrapper">
@@ -87,5 +81,4 @@
     </section>
     {{/if}}
     {{/if}}
-
 </section>
