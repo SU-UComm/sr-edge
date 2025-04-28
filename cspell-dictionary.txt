@@ -4,6 +4,7 @@ funnelback
 dxp
 xaccel
 vermgmt
+xmark
 
 # Technical terms or properties of existing modules we need to allow
 nomatch
@@ -151,7 +152,8 @@ Aaaaand
 woodshop
 potenti
 valida
-
+HIVOU
+Nayak
 
 #testing hooks
 testid 
