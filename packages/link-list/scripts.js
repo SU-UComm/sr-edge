@@ -6,7 +6,7 @@ import { getCookie } from "../../global/js/utils/getCookie";
  * @constant {Object} SELECTORS
  */
 const SELECTORS = {
-    WRAPPER: '[data-role="link-list-wrapper"]',
+    WRAPPER: '[data-role="link-list-wrap"]',
     TOGGLE: '[data-role="link-drawer-toggle"]',
     DRAWER: '[data-role="link-drawer"]',
 };
