@@ -22,7 +22,7 @@ describe("link list functions", () => {
         // Setup DOM structure
         document.body.innerHTML = `
             <section data-component="link-list">
-                <div id="link-list" data-role="link-list-wrapper" class="su-fixed su-opacity-0 su--bottom-[100 su-left-0 su-left-1/2 su-right-1/2 su-translate-x-[-50%] su-max-w-[482px] su-p-20 su-bg-foggy-light lg:dark:su-bg-black-true dark:su-bg-black su-linklist-mob-width su-rounded-tl-[8px] su-rounded-tr-[8px] su-transition su-z-[49] su-px-30 lg:su-z-[1] lg:su-bg-white lg:su-relative lg:su-bottom-0 lg:su-opacity-100 lg:su-p-0 lg:su-w-full">
+                <div id="link-list" data-role="link-list-wrap" class="su-fixed su-opacity-0 su--bottom-[100 su-left-0 su-left-1/2 su-right-1/2 su-translate-x-[-50%] su-max-w-[482px] su-p-20 su-bg-foggy-light lg:dark:su-bg-black-true dark:su-bg-black su-linklist-mob-width su-rounded-tl-[8px] su-rounded-tr-[8px] su-transition su-z-[49] su-px-30 lg:su-z-[1] lg:su-bg-white lg:su-relative lg:su-bottom-0 lg:su-opacity-100 lg:su-p-0 lg:su-w-full">
                     <div class="su-flex">
                         <h2 class="su-component-sidebar-heading su-w-full su-flex su-flex-wrap su-gap-6 su-my-0 su-font-sans su-text-black-90 dark:su-text-white su-font-semibold su-text-18 su-items-end">
                             <span data-test="icon" class="dark:su-hidden">
@@ -60,7 +60,7 @@ describe("link list functions", () => {
                 </div>
             </section>`;
 
-        wrapper = document.querySelector('[data-role="link-list-wrapper"]');
+        wrapper = document.querySelector('[data-role="link-list-wrap"]');
         toggle = document.querySelector('[data-role="link-drawer-toggle"]');
         drawer = document.querySelector('[data-role="link-drawer"]');
     });
