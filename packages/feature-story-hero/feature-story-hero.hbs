@@ -1,9 +1,0 @@
-<section data-component='feature-story-hero'>
-    {{#ifEquals orientation 'vertical'}}
-        {{> hero-vertical title=title titleWordsCount=titleWordsCount summary=summary media=media captionCredit=captionCredit pubDateFormatted=pubDateFormatted readingTimeValue=readingTimeValue}}
-    {{else ifEquals orientation 'full'}}
-        {{> hero-full title=title titleWordsCount=titleWordsCount summary=summary media=media captionCredit=captionCredit pubDateFormatted=pubDateFormatted readingTimeValue=readingTimeValue}}
-    {{else}}
-        {{> hero-horizontal title=title titleWordsCount=titleWordsCount summary=summary media=media captionCredit=captionCredit pubDateFormatted=pubDateFormatted readingTimeValue=readingTimeValue}}
-    {{/ifEquals}}
-</section>

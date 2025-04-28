@@ -1,9 +1,0 @@
-/* stylelint-disable at-rule-no-deprecated */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
-
-.su-play-scale:is(:hover, :focus) .su-play-btn {
-  @apply su-scale-110;
-}
