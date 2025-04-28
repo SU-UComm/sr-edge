@@ -13,22 +13,30 @@
     >
         <div class='su-flex su-flex-wrap'>
             <form
-                action='{{resultPage}}'
+                action='{{search.endpoint}}'
                 method='get'
                 role='search'
                 class='su-mb-32 su--mx-18 md:su-hidden su-grow su-flex su-flex-wrap su-order-1 su-relative'
                 data-location='mobile-search:input:3'
             >
-                <label class='sr-only' htmlFor='mobile_search_query'>
+                <label class='sr-only' for='mobile_search_query'>
                     Search query
                 </label>
-                <input type='hidden' value='{{collection}}' name='collection' />
-                <input type='hidden' value='{{profile}}' name='profile' />
+                <input
+                    type='hidden'
+                    value='{{search.collection}}'
+                    name='collection'
+                />
+                <input
+                    type='hidden'
+                    value='{{search.profile}}'
+                    name='profile'
+                />
                 <input
                     type='search'
                     class='su-w-full su-h-50 su-rounded-full su-mb-[3.2rem] dark:su-text-black su-text-20 su-leading-[2.6rem] su-py-10 su-pl-15 su-pr-120 su-border-2 su-border-black-60 dark:su-border-black-20 hover:su-border-black-70 dark:focus:su-border-digital-blue-vivid focus:su-border-digital-blue'
                     name='query'
-                    defaultValue=''
+                    value=''
                     placeholder='Search'
                     id='mobile_search_query'
                     data-role='search-query'

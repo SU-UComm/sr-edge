@@ -36,7 +36,6 @@ export default {
         // Extracting configuration data from arguments
         const { dataUrl } = args || {};
 
-
         // Validate required environment variables
         try {
             if (typeof CONTENT_API !== 'string' || CONTENT_API === '') {
@@ -76,7 +75,6 @@ export default {
             console.error('Error occurred in the Header component: ', er);
             return `<!-- Error occurred in the Header component: ${er.message} -->`;
         }
-
 
         const adapter = new FetchAdapter();
         let siteData = null
@@ -145,15 +143,8 @@ export default {
         const urlTopBar = "https://www.stanford.edu/";
     
         // Test data 
-        const pageControls = {
-            id: '134201', 
-            title:'test title',
-            contentType: 'story'
-        }
-        const relatedStory = {
-            displayUrl: 'https://squiz.net',
-            title: 'Squiz site'
-        }
+        const pageControls = null
+        const relatedStory = null
 
         // Prepare component data for template rendering
         const componentData = {
@@ -169,10 +160,7 @@ export default {
             pageControls,
             relatedStory,
             audience: "external",
-            consent: true,
-            
-            data: JSON.stringify(siteData)
-
+            consent: false,
         };
         return headerTemplate(componentData);
     }

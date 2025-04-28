@@ -50,7 +50,7 @@
                             Close
                         </span>
                     </button>
-                    {{> header-search collection=search?.collection profile=search?.profile resultPage=search?.resultPage}}
+                    {{> header-search collection=search.collection profile=search.profile resultPage=search.endpoint}}
                 </div>
                 {{> header-site-logo url=url logo=logo logoLight=logoLight}}
                 {{> header-current-story-headline title=pageControls.title story=relatedStory contentType=pageControls.contentType}}
@@ -61,6 +61,3 @@
     </div>
 </header>
 {{> header-cookie-consent-banner statement=cookieStatement}}
-<br><hr>
-{{data}}
-<br><hr>
