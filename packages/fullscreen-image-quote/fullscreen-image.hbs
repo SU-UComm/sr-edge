@@ -1,0 +1,58 @@
+<section data-component="fullscreen-image-quote">
+    <div class="su-aspect-w-1 su-aspect-h-2 sm:su-aspect-w-3 sm:su-aspect-h-4 lg:su-aspect-h-2 2xl:su-aspect-w-2 2xl:su-aspect-h-1 su-bg-black-true su-text-white {{#if removeTopSpacing}}su--mt-50 md:su--mt-56 2xl:su--mt-58{{/if}}">
+        <div class="su-absolute su-z-20 su-h-full su-inset-0 su-flex su-items-end su-p-20 {{#if quoteVAlign}}lg:su-items-{{quoteVAlign}}{{/if}}">
+            <blockquote class="su-py-17 sm:su-py-[6.8rem] xl:su-py-100 2xl:su-py-140 su-cc lg:su-max-w-[50%] {{getStringByCondition value=quoteHAlign expectedValue="right" trueResult="su-ml-0 su-mr-auto lg:su-mr-0 lg:su-ml-auto lg:su-pl-0" falseResult="su-ml-0 su-mr-auto lg:su-pr-0"}}">
+                {{~#if quote~}}
+                <p class="su-font-serif su-text-22 md:su-text-[3.3rem] lg:su-text-24 xl:su-text-[2.8rem] 2xl:su-text-[3.3rem] su-leading-display su-max-w-[55rem] xl:su-max-w-600 su-mb-0 su-whitespace-pre-line">
+                    {{quote}}
+                </p>
+                {{~/if~}}
+                {{~#if ctaText~}}
+                <div class="su-rs-mt-1 su-max-w-[55rem] xl:su-max-w-600">
+                    <span class="su-inline su-text-22 md:su-text-[2.9rem] lg:su-text-24 2xl:su-text-[2.9rem] su-font-bold su-leading-display su-mr-02em">
+                        {{ctaPreText}}
+                    </span>
+                    <a href="{{link}}" 
+                       {{#if isNewWindow}}target="_blank"{{/if}} 
+                       {{#if isRealExternal}}rel="noopener nofollow"{{/if}}
+                       class="su-group su-inline su-text-22 md:su-text-[2.9rem] lg:su-text-24 2xl:su-text-[2.9rem] su-font-bold su-leading-display su-text-white dark:su-text-white su-underline su-decoration-dark-mode-red su-underline-offset-4 su-decoration-[3px] hocus:su-decoration-white hocus:su-text-white dark:hocus:su-text-white su-transition-all">
+                        {{ctaText}}
+                        <span class="su-whitespace-nowrap">
+                            {{~#if isRealExternal~}}
+                            {{> fontawesome-icon
+                                icon="arrow-up"
+                                iconTestId="svg-arrow-up"
+                                set="solid"
+                                title="link is external"
+                                iconUniqueID=iconUniqueID
+                                width=18
+                                classes='su-ml-04em su-text-[0.75em] su-transition-transform su-text-dark-mode-red group-hocus:su-text-white su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em'
+                            }}
+                            {{~else~}}
+                            {{> fontawesome-icon
+                                icon="chevron-right"
+                                iconTestId="svg-chevron-right"
+                                set="solid"
+                                width=18
+                                classes='su-ml-04em su-text-[0.75em] su-transition-transform su-text-dark-mode-red group-hocus:su-text-white group-hocus:su-translate-x-02em'
+                            }}
+                            {{~/if~}}
+                        </span>
+                    </a>
+                    {{~#if ctaSubtext~}}
+                    <div class="su-card-paragraph su-leading-display su-mt-9">
+                        {{ctaSubtext}}
+                    </div>
+                    {{~/if~}}
+                </div>
+                {{~/if~}}
+            </blockquote>
+        </div>
+        {{~#if mobileImageData.url~}}
+        <img src="{{mobileImageData.url}}" alt="{{mobileImageData.attributes.alt}}" class="su-object-cover su-w-full su-h-full su-p-20 lg:su-hidden" />
+        {{~/if~}}
+        <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}"
+            class="su-object-cover su-w-full su-h-full su-p-20 {{#if mobileImageData.url}}su-hidden lg:su-block{{/if}} {{#if imageVPosition}}su-object-{{imageVPosition}}{{/if}}" />
+        <div aria-hidden="true" class="su-absolute su-inset-0 su-z-10 su-border-[2rem] su-border-black-true su-bg-gradient-to-t su-from-black-true {{getStringByCondition value=quoteHAlign expectedValue="left" trueResult="lg:su-bg-gradient-to-r" falseResult="lg:su-bg-gradient-to-l"}}"></div>
+    </div>
+</section>
