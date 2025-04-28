@@ -1,0 +1,21 @@
+<div
+    class='report-header__utility su-w-full su-bg-cardinal-red su-relative su-z-40'
+>
+    <div class='su-max-w-[141.2rem] su-px-20 md:su-px-49 su-w-full su-mx-auto'>
+        <a
+            href='{{url}}'
+            data-ga-action='logo'
+            class='su--ml-5 su-inline-block'
+        >
+            {{~#if logo.url~}}
+                <img
+                    alt='{{logo.alt}}'
+                    class='su-inline-block img-responsive'
+                    width='161'
+                    height='35'
+                    src='{{logo.url}}'
+                />
+            {{~/if~}}
+        </a>
+    </div>
+</div>
