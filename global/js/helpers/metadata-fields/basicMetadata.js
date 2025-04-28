@@ -175,7 +175,6 @@ export function basicMetadata({ data }) {
           title: "Share this story",
           children: `
             <button
-              onclick="copyLink()"
               data-role="copy-link"
               type="button"
               class="su-text-digital-blue dark:su-text-digital-blue-vivid su-text-21 su-font-semibold su-mr-auto hocus:su-underline su-leading-snug"
@@ -189,17 +188,5 @@ export function basicMetadata({ data }) {
         })}
       </div>
     </section>
-
-    <script>
-      function copyLink() {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          const copyText = document.querySelector('[data-copy-text]');
-          copyText.textContent = 'Copied';
-          setTimeout(() => {
-            copyText.textContent = 'Copy link';
-          }, 3000);
-        });
-      }
-    </script>
   `;
 }
