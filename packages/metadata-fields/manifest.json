@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "metadata-fields",
     "type": "edge",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "This is a global element that is designed to render client side based on page information.",
     "displayName": "Metadata fields",
