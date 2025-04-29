@@ -191,6 +191,27 @@ describe('[Metadata Fields]', () => {
                     
 
                     
+                      <div class="su-border-t border-t-black-20">
+                        
+                  <div class="su-flex su-flex-col su-gap-27 su-pt-32 su-pb-22 md:su-pt-45 md:su-pt-36 su-justify-left">
+                    <h3 class="su-text-23 su-font-bold su-leading-[27.6px] su-font-sans !su-m-0">
+                      Campus unit
+                    </h3>
+                    <div class="su-flex su-flex-col su-gap-6 su-text-21 ">
+                      
+
+                          
+                            <div class="" key="28349">
+                              <a href="https://news.stanford.edu/featured-unit/stanford-graduate-school-of-education" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-18">
+                                Stanford Graduate School of Education
+                              </a>
+                            </div>
+                          
+                    </div>
+                  </div>
+                
+                      </div>
+                    
 
                     
                       <div class="su-border-t border-t-black-20">
