@@ -177,9 +177,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // do we have consent data
     const consentData = cdpConsentCookie?.CDPConsent;
+    const clearPreferences = document.querySelector('button[data-click="clear-preferences"]');
 
-    if (consentData === 1) {
+    if (consentData) {
         _hideConsentBanner();
+        
+        if (clearPreferences) { 
+            clearPreferences.removeAttribute('disabled');
+            clearPreferences.setAttribute("aria-pressed", "false");
+            clearPreferences.classList.add('su-text-digital-blue');
+            clearPreferences.classList.add('dark:su-text-digital-blue-vivid');
+            clearPreferences.addEventListener('click', function() {
+                handlePersona(null, null, true);
+            }); 
+        }
     } 
 
     const acceptCookieConsent = document.querySelector('button[data-click="accept-consent"]');
