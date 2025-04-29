@@ -15,7 +15,7 @@ export default {
      * @param {string} args.dataUrl - The data url form the fetch should be. 
      * @param {Object} info.ctx - Functions available in the execution context.
      * @returns {Promise<string>} The rendered Footer HTML or an error message.
-     * @throws {Error} If basic hero data fetch operation fails.
+     * @throws {Error} If footer data fetch operation fails.
     */
     async main(args, info) {
         // Extracting functions from provided info
