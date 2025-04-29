@@ -106,7 +106,7 @@ export default {
         } : null;
 
         // Generate InfoBox if needed
-        const infoBoxData = callout ? {
+        const infoBoxData = callout && (colThree.title  || colThree.content || imageData) ? {
             title: colThree.title,
             content: xss(colThree.content),
             imageData,

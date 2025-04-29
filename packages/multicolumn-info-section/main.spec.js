@@ -214,6 +214,22 @@ describe('[Multicolumn Info Section]', () => {
             expect(result).not.toContain('<div class="info-box">Info Box</div>');
         });
 
+        it('Should render without callout section when callout is false', async () => {
+            const mockData = {
+                ...defaultMockData,
+                callout: true,
+                colThree: {
+                    ...defaultMockData.colThree,
+                    title: undefined,
+                    content: undefined
+                }
+            }
+
+            const result = await main(mockData, defaultMockInfo);
+
+            expect(result).not.toContain('<div class="info-box">Info Box</div>');
+        });
+
         it('Should render without button when addButton is false', async () => {
             const mockData = {
                 ...defaultMockData,
