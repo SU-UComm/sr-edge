@@ -64,7 +64,7 @@ describe('[Standalone Visual Hero]', () => {
     describe('Error handling', () => {
         it('Should throw error when BASE_DOMAIN is missing', async () => {
             const result = await main({}, { env: {} });
-            expect(result).toContain('<!-- Error in Standalone Visual Hero: BASE_DOMAIN is required');
+            expect(result).toContain('<!-- Failed to fetch Standalone Visual Hero data: BASE_DOMAIN is required. Received: undefined -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -95,27 +95,24 @@ describe('[Standalone Visual Hero]', () => {
 
         it('Should throw error when heroData is invalid (null)', async () => {
             const { basicHeroDataAdapter } = await import('../../global/js/utils');
-
             basicHeroDataAdapter.mockImplementation(() => ({
                 setBasicHeroService: vi.fn(),
                 getBasicHeroData: vi.fn().mockResolvedValue(null),
             }));
-
             const result = await main({}, defaultInfo);
-            expect(result).toContain('<!-- Error fetching Standalone Visual Hero data: Invalid hero data. -->');
+            expect(result).toContain('<!-- Error occurred in the Standalone Visual Hero component: The "heroData" must be a non-null object. The null was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should throw error when getBasicHeroData rejects', async () => {
             const { basicHeroDataAdapter } = await import('../../global/js/utils');
-
+        
             basicHeroDataAdapter.mockImplementation(() => ({
                 setBasicHeroService: vi.fn(),
                 getBasicHeroData: vi.fn().mockRejectedValue(new Error('Network error')),
             }));
-
             const result = await main({}, defaultInfo);
-            expect(result).toContain('<!-- Error fetching Standalone Visual Hero data: Network error -->');
+            expect(result).toContain('<!-- Error occurred in the Standalone Visual Hero component: Network error -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -124,8 +121,7 @@ describe('[Standalone Visual Hero]', () => {
                 env: { BASE_DOMAIN: 'https://example.com' },
                 ctx: { assetId: '' },
             });
-
-            expect(result).toContain('<!-- Error in Standalone Visual Hero: AssetId is required');
+            expect(result).toContain('<!-- Failed to fetch Standalone Visual Hero data: AssetId is required. Received: "" -->');
             expect(mockedError).toBeCalledTimes(1);
         });
     });

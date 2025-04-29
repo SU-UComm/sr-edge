@@ -46,11 +46,8 @@ export default {
                 );
             }
         } catch (error) {
-            console.error(
-                'Validation error in Standalone Visual Hero::',
-                error,
-            );
-            return `<!-- Error in Standalone Visual Hero: ${error.message} -->`;
+            console.error('Failed to fetch Standalone Visual Hero data:', error);
+            return `<!-- Failed to fetch Standalone Visual Hero data: ${error.message} -->`;
         }
 
         const adapter = new basicHeroDataAdapter();
@@ -61,14 +58,13 @@ export default {
         try {
             heroData = await adapter.getBasicHeroData(currentAssetId);
             if (!heroData || typeof heroData !== 'object') {
-                throw new Error('Invalid hero data.');
+                throw new Error(
+                    `The "heroData" must be a non-null object. The ${JSON.stringify(heroData)} was received.`
+                );
             }
         } catch (error) {
-            console.error(
-                'Error occurred while fetching Standalone Visual Hero data:',
-                error,
-            );
-            return `<!-- Error fetching Standalone Visual Hero data: ${error.message} -->`;
+            console.error('Error occurred in the Standalone Visual Hero component: ', error);
+            return `<!-- Error occurred in the Standalone Visual Hero component: ${error.message} -->`;
         }
 
         const { title, pubDateFormatted, summary, topic, media } = heroData;
