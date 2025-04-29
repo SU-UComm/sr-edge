@@ -63,6 +63,8 @@ vimeoid
 youtubeid
 linklist
 Subnav
+nocallout
+infobutton
 
 # Lorem Ipsum 
 ezgif
@@ -155,6 +157,7 @@ valida
 HIVOU
 Nayak
 Peterkin
+consectetuer
 
 #testing hooks
 testid 

@@ -1,0 +1,30 @@
+{
+    "border": true,
+    "callout": true,
+    "colOne": {
+        "title": "Updates"
+    },
+    "colTwo": {
+        "addButton": true,
+        "buttonConfiguration": {
+            "isNewWindow": false,
+            "buttonText": "Read more",
+            "infoInternalUrl": "matrix-asset://api-identifier/28192"
+        },
+        "infoText": "<p><a href=\"https://news.stanford.edu/stories/2025/02/senate-hears-update-on-federal-policy-matters-approves-research-policy-changes\" target=\"_self\">Faculty Senate hears update on federal issues</a> (Feb. 20, 2025)</p><p><a href=\"https://news.stanford.edu/stories/2025/02/nih-s-cap-on-indirect-costs-could-threaten-stanford-university-research\" target=\"_self\">NIH's cap on indirect costs could threaten research at Stanford and across the country</a> (Feb. 12, 2025)</p><p><a href=\"https://news.stanford.edu/stories/2025/02/update-on-nih-announcement\" target=\"_self\">Update on NIH announcement</a> (Feb. 8, 2025)</p><p><a href=\"https://news.stanford.edu/stories/2025/02/university-leadership-discusses-executive-orders-at-faculty-senate\" target=\"_self\">University leadership discusses executive orders</a> (Feb. 6, 2025)</p><p><a href=\"https://news.stanford.edu/stories/2025/01/federal-government-directives-on-grants\" target=\"_self\">Message to faculty following rescinding of federal funding freeze</a> (Jan. 29, 2025)</p><p><a href=\"https://news.stanford.edu/stories/2025/01/yesterdays-omb-memo\" target=\"_self\">University message regarding federal funding freeze</a> (Jan. 28, 2025)</p><p><a href=\"https://news.stanford.edu/stories/2025/01/student-needs-impacts-of-new-administration-discussed-at-faculty-senate\" target=\"_self\">Remarks of President Levin at the Faculty Senate</a> (Jan. 23, 2025)</p>"
+    },
+    "colThree": {
+        "imageConfiguration": {
+            "imagePlacement": "Below content"
+        },
+        "buttonConfiguration": {
+            "isNewWindow": false,
+            "buttonText": "Clique me now",
+            "externalUrl": "https://squiz.net"
+        },
+        "title": "More info",
+        "content": "<p>Lorem ipsum odor amet, consectetuer adipiscing elit. Quisque habitasse a vitae lorem luctus in. Fringilla amet senectus justo consectetur gravida at. Adipiscing elementum nulla est pharetra arcu nisi magna tortor. Tortor condimentum taciti porta adipiscing sit fusce! Senectus praesent feugiat lectus laoreet magna integer. Natoque per potenti vitae sagittis consectetur. Natoque praesent ac felis dui gravida nostra cursus tempus.</p>"
+    },
+    "imageData": null,
+    "internalLinkUrl": "https://news.stanford.edu/university-news"
+}
