@@ -19,7 +19,7 @@ export default {
     */
     async main(args, info) {
         // Extracting functions from provided info
-        const fnsCtx = info?.ctx || {};
+        const fnsCtx = info?.fns || info?.ctx || {};
 
         // Extracting configuration data from arguments
         const { dataUrl } = args || {};
