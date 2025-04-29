@@ -5,6 +5,7 @@ import { cdpSetConsent } from "../../global/js/utils/cdpSetConsent";
 import { _preferencesSettings } from './scripts/preferenceSettings';
 import { ReportHeader } from './scripts/reportHeader';
 import relatedStoryData from './scripts/relatedStory';
+import { updateStoryHeadline } from './scripts/updateStoryHeadline.js';
 
 /**
  * Globals variables 
@@ -153,25 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     })
     
-    if (relatedStory && pageController && storyHeadline) {
-
-        const storyHeadlineAnnouncement = storyHeadline.querySelector('h2[data-story="announcement"]');
-        const storyHeadlineTitle = storyHeadline.querySelector('h1[data-story="title"]');
-        const storyHeadlineLink = storyHeadline.querySelector('a[data-story="link"]');
-
-        pageController?.contentType && storyHeadlineAnnouncement && storyHeadlineAnnouncement.textContent(pageController.contentType === "Video" ? "Watch next:" : "Read next:");
-        pageController?.title && storyHeadlineTitle && storyHeadlineTitle.textContent(pageController.title);
-        
-        if (relatedStory?.displayUrl && relatedStory?.title && storyHeadlineLink) {
-            storyHeadlineLink.textContent(relatedStory.title);
-            storyHeadlineLink.href = relatedStory.displayUrl;
-        }
-
-        if (pageController?.title || relatedStory?.displayUrl) {
-            storyHeadline.classList.remove(HEADER_HIDDEN_CLASS);
-        }
-    }
-
+    updateStoryHeadline(relatedStory, pageController, storyHeadline, HEADER_HIDDEN_CLASS);
 
     const cdpConsentCookie = JSON.parse(getCookie("squiz.cdp.consent"));
 
@@ -187,9 +170,9 @@ document.addEventListener('DOMContentLoaded', function () {
             clearPreferences.setAttribute("aria-pressed", "false");
             clearPreferences.classList.add('su-text-digital-blue');
             clearPreferences.classList.add('dark:su-text-digital-blue-vivid');
-            clearPreferences.addEventListener('click', function() {
-                handlePersona(null, null, true);
-            }); 
+            clearPreferences.addEventListener('click', async function() {
+                await handlePersona(null, null, true);
+            });
         }
     } 
 

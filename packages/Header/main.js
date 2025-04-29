@@ -93,9 +93,18 @@ export default {
             return `<!-- Error occurred in the Header component: Error parsing hero data JSON response: ${er.message} -->`;
         }
 
-        const { site, navigation, search } = siteData || {};
-        const { url, logo, logoLight, logoTopBar, cookieStatement } = site || {};
+        const { site, navigation, search } = siteData;
+
+        try {
+            if (!site || typeof site !== 'object') {
+                throw new Error('The "site" must be an object.');
+            }
+        } catch (er) {
+            console.error('Error occurred in the Header component: ', er);
+            return `<!-- Error occurred in the Header component: ${er.message} -->`;
+        }
         
+        const { url, logo, logoLight, logoTopBar, cookieStatement } = site;
         // Validate fetched data
         try {
             if (url && typeof url !== 'string') {
