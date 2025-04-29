@@ -63,6 +63,8 @@ vimeoid
 youtubeid
 linklist
 Subnav
+nocallout
+infobutton
 
 # Lorem Ipsum 
 ezgif
@@ -151,8 +153,11 @@ seeweed
 Aaaaand
 woodshop
 potenti
+valida
 HIVOU
 Nayak
+Peterkin
+consectetuer
 
 #testing hooks
 testid 

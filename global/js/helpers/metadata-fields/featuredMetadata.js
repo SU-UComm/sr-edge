@@ -217,7 +217,6 @@ export function featuredMetadata({ data }) {
       <div class="su-text-center su-rs-mt-4 su-flex su-flex-col su-gap-20 md:su-gap-26">
         <h3 class="su-text-18 su-font-bold su-leading-snug !su-m-0 su-font-sans">Share this story</h3>
         <button
-          onclick="copyLink()"
           type="button"
           data-role="copy-link"
           class="su-text-digital-blue dark:su-text-digital-blue-vivid su-text-21 su-font-semibold su-mx-auto hocus:su-underline"
@@ -228,18 +227,5 @@ export function featuredMetadata({ data }) {
           </span>
         </button>
       </div>
-
-      <script>
-        function copyLink() {
-          navigator.clipboard.writeText(window.location.href).then(() => {
-            const copyText = document.querySelector('[data-copy-text]');
-            copyText.textContent = 'Copied';
-            setTimeout(() => {
-              copyText.textContent = 'Copy link';
-            }, 3000);
-          });
-        }
-      </script>
-    </section>
   `;
 }

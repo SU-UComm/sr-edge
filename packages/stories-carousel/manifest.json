@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "stories-carousel",
     "type": "edge",
-    "version": "4.0.4",
+    "version": "4.0.5",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Links to stories displayed as cards in a carousel.",
     "displayName": "Stories carousel",
@@ -81,7 +81,9 @@
                         "title": "Grid Content",
                         "description": "The cards to display in the carousel area of the component.",
                         "type": "object",
-                        "required": ["searchQuery"],
+                        "required": [
+                            "searchQuery"
+                        ],
                         "properties": {
                             "searchQuery": {
                                 "type": "string",

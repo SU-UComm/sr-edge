@@ -20,7 +20,9 @@ export { matrixBasicHeroService } from './matrixBasicHeroService';
 export { matrixCardService } from './matrixCardService';
 export { matrixImageCardService } from './matrixImageCardService';
 export { matrixMediaCardService } from './matrixMediaCardService';
+export { matrixMetadataService } from './matrixMetadataService';
 export { matrixSidebarNavService } from './matrixSidebarNavService';
+export { metadataDataAdapter } from './metadataDataAdapter';
 export { multicolumnGrid } from './multicolumnGrid'
 export { readingTime } from './readingTime'
 export { sidebarNavDataAdapter } from './sidebarNavDataAdapter';

@@ -1,7 +1,8 @@
 import hash from "object-hash";
 import storiesCarouselTemplate from './stories-carousel.hbs';
-import { cardDataAdapter, funnelbackCardService, linkedHeadingService, uuid } from "../../global/js/utils";
+import { linkedHeadingService, uuid } from "../../global/js/utils";
 import { Carousel, Card, Modal, EmbedVideo } from "../../global/js/helpers";
+import { fetchUserStories } from "../../global/js/utils/fetchUserStories";
 
 /**
  * Stories carousel component that renderds a list of cards based on fetched data.
@@ -35,6 +36,8 @@ export default {
         // Extracting configuration data from arguments
         const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
         const { searchQuery } = args?.contentConfiguration || {};
+
+        const MAX_CARDS = 6;
 
         // Validate required environment variables
         try {
@@ -110,19 +113,24 @@ export default {
             console.error('Error occurred in the Stories carousel component: ', er);
             return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
         }
+        
+        let data = [];
 
-        const adapter = new cardDataAdapter();
-        let data = null;
-
-        // Compose and fetch the FB search results
-        const query = searchQuery;
-        const service = new funnelbackCardService({ FB_JSON_URL, query });
-
-        // Set our card service
-        adapter.setCardService(service);
-
-        // Get the cards data
-        data = await adapter.getCards();
+        try {
+            data = await fetchUserStories({
+                FB_JSON_URL,
+                searchQuery,
+                currentPageAssetId: fnsCtx.assetId,
+                baseDomain: BASE_DOMAIN,
+            });
+        
+            if (Array.isArray(data) && data.length > MAX_CARDS) {
+                data = data.slice(0, MAX_CARDS);
+            }
+        } catch (er) {
+            console.error('Error occurred in the Stories carousel component while fetching user stories:', er);
+            return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
+        }
 
         // Resolve the URI for the section heading link
         const headingData = await linkedHeadingService(
@@ -183,7 +191,7 @@ export default {
             cardModal: cardModal.join(''),
             width: "large"
         };
-
+        
         return storiesCarouselTemplate(componentData);
     }
 };
