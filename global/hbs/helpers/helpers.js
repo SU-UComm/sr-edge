@@ -340,6 +340,11 @@ export const helpers = {
     
         return value === expectedValue ? trueResult : falseResult;
     },
+    getStringForLastIndex:  function (options) {
+        const {array, index, trueResult, falseResult } = options.hash;
+
+        return Array.isArray(array) && index === array.length - 1 ? trueResult : falseResult;
+    },
     concatClasses: function(str1, str2) {
         if (!str2) {
             return str1
