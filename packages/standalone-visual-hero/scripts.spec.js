@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { closeModal, openModal, STANDALONE_VISUAL_HERO_HIDDEN_CLASS, _modalInit } from './scripts';
 
 describe('[Standalone Visual Hero Modal Functions]', () => {
