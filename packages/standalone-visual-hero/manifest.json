@@ -1,17 +1,17 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
-    "name": "metadata-fields",
+    "name": "standalone-visual-hero",
     "type": "edge",
-    "version": "4.0.1",
+    "version": "4.0.0",
     "namespace": "pnp-stanford-edge-components-hbs",
-    "description": "This is a global element that is designed to render client side based on page information.",
-    "displayName": "Metadata fields",
+    "description": "Standalone Visual story hero",
+    "displayName": "Standalone Visual Hero",
     "mainFunction": "main",
     "icon": {
-        "id": "auto_awesome_mosaic",
+        "id": "foundation",
         "color": {
             "type": "enum",
-            "value": "blue"
+            "value": "gray"
         }
     },
     "environment": [
@@ -26,8 +26,8 @@
             "entry": "main.js",
             "input": {
                 "type": "object",
-                "required": [],
-                "properties": {}
+                "properties": {},
+                "required": []
             },
             "output": {
                 "responseType": "html"
@@ -43,10 +43,23 @@
                 "main": {
                     "inputData": {
                         "type": "file",
-                        "path": "example-data/select.data.json"
+                        "path": "example-data/preview.data.json"
                     },
                     "wrapper": {
                         "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
                     }
                 }
             }

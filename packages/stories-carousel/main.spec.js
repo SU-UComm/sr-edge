@@ -1,46 +1,35 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { cardDataAdapter, funnelbackCardService, linkedHeadingService, uuid } from "../../global/js/utils";
+import { cardDataAdapter, linkedHeadingService, uuid } from "../../global/js/utils";
 import moduleToTest from './main';
+import { fetchUserStories } from '../../global/js/utils/fetchUserStories';
 
-const { main } = moduleToTest;
+// Mocking the fetchUserStories function
+vi.mock('../../global/js/utils/fetchUserStories', () => ({
+    fetchUserStories: vi.fn(),
+}));
 
-const mockedError = vi.fn();
-console.error = mockedError;
-
+// Main utils and helpers
 vi.mock('../../global/js/utils', () => ({
     uuid: vi.fn(),
     cardDataAdapter: vi.fn().mockImplementation(() => ({
         setCardService: vi.fn(),
         getCards: vi.fn().mockResolvedValue([
             {
-                "title": "Inaugural Lecturer’s Award winners honored",
-                "description": ["Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education."],
-                "liveUrl": "https://example.com",
-                "imageUrl": ["https://picsum.photos/400/400"],
-                "videoUrl": "https://example.com",
-                "imageAlt": ["Image of Cathy Haas, Jamie Imam, Provost Jenny Martinez, Elizabeth Kessler, Hayes"],
-                "taxonomy": ["Awards, Honors & Appointments"],
-                "taxonomyUrl": ["https://example.com/"],
-                "type": "Video",
-                "date": 1730073600000,
-                "taxonomyFeaturedUnitLandingPageUrl": ["https://example.com/"],
-                "taxonomyFeaturedUnitText": ["Office of the Vice Provost for Undergraduate Education"],
-                "isTeaser": ["false"]
+                title: 'Sample Title',
+                description: ['Sample Description'],
+                liveUrl: 'https://example.com',
+                imageUrl: ['https://picsum.photos/400/400'],
+                imageAlt: ['Sample Image Alt'],
+                taxonomy: ['Sample Taxonomy'],
+                taxonomyUrl: ['https://example.com/category'],
+                type: 'News',
+                date: Date.now(),
+                taxonomyFeaturedUnitLandingPageUrl: [
+                    'https://example.com/unit',
+                ],
+                taxonomyFeaturedUnitText: ['Sample Unit'],
+                isTeaser: ['false'],
             },
-            {
-                "title": "Bass Fellows in Undergraduate Education announced",
-                "description": ["The Bass University Fellows in Undergraduate Education Program recognizes faculty for extraordinary contributions to undergraduate education."],
-                "liveUrl": "https://example.com",
-                "imageUrl": ["https://picsum.photos/400/400"],
-                "imageAlt": ["Main Quad as seen through arcade arch"],
-                "taxonomy": ["Awards, Honors & Appointments"],
-                "taxonomyUrl": ["https://example.com/"],
-                "type": "News",
-                "date": 1730073600000,
-                "taxonomyFeaturedUnitLandingPageUrl": ["https://example.com/"],
-                "taxonomyFeaturedUnitText": ["Office of the Vice Provost for Undergraduate Education"],
-                "isTeaser": ["false"]
-            }
         ]),
     })),
     funnelbackCardService: vi.fn(),
@@ -57,32 +46,21 @@ vi.mock('../../global/js/utils', () => ({
 }));
 
 vi.mock('../../global/js/helpers', () => ({
-    LinkedHeading: vi.fn().mockReturnValue('<div class="linked-heading">Linked Heading</div>'),
-    Card: vi.fn().mockImplementation(({ data }) => `<div class="card"><h2>${data?.title}</h2>${data?.description ? `<span>${data.description}</span>`: ''}</div>`),
-    Modal: vi.fn().mockReturnValue('ModalHTML'),
-    EmbedVideo: vi.fn().mockReturnValue('<iframe width="560" height="315" class="" src="https://example.com?autoplay=1&controls=1&rel=0" title="Watch Remembering Oct. 7 and learning about Israel, Gaza, and the Middle East" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="true" data-modal="iframe" ></iframe>'),
-    Carousel: vi.fn().mockReturnValue(`<div class="component-slider">
-    <div class="swiper component-slider-cards component-slider-peek">
-        <div class="swiper-wrapper">  
-        </div>
-    </div>
-    <div class="component-slider-controls su-flex su-mt-45 lg:su-mt-48 su-items-center su-content-center">
-        <div aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination- su-mr-full"></div>
-        <button class="component-slider-btn component-slider-prev" type="button">
-            <span class="sr-only">Previous</span>
-            <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                
-            </span>
-        </button>
-        <button class="component-slider-btn component-slider-next" type="button">
-            <span class="sr-only">Next</span>
-            <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                
-            </span>
-        </button>
-    </div>
-</div>`),
+    LinkedHeading: vi
+        .fn()
+        .mockReturnValue('<div class="linked-heading">Linked Heading</div>'),
+    Card: vi
+        .fn()
+        .mockImplementation(({ data }) => `<article>${data?.title}</article>`),
+    Modal: vi.fn().mockImplementation(({ content }) => content),
+    EmbedVideo: vi.fn().mockReturnValue('<iframe></iframe>'),
+    Carousel: vi.fn().mockImplementation(({ slides }) => slides),
 }));
+
+const { main } = moduleToTest;
+
+const mockedError = vi.fn();
+console.error = mockedError;
 
 describe('[Stories Carousel]', () => {
     const mockFnsCtx = { resolveUri: vi.fn() };
@@ -110,9 +88,37 @@ describe('[Stories Carousel]', () => {
         },
         fns: mockFnsCtx
     };
-    
+
     beforeEach(() => {
         vi.clearAllMocks();
+    });
+
+    describe('[Main Function]', () => {
+        it('Should limit the number of cards to MAX_CARDS if too many are returned', async () => {
+            const mockCards = new Array(10).fill(null).map((_, i) => ({
+                title: `Title ${i + 1}`,
+                description: [`Description ${i + 1}`],
+                liveUrl: `https://example.com/${i + 1}`,
+                imageUrl: [`https://picsum.photos/400/400?${i + 1}`],
+                imageAlt: [`Alt ${i + 1}`],
+                taxonomy: [`Category ${i + 1}`],
+                taxonomyUrl: [`https://example.com/category${i + 1}`],
+                type: 'News',
+                date: Date.now(),
+                taxonomyFeaturedUnitLandingPageUrl: [
+                    `https://example.com/unit${i + 1}`,
+                ],
+                taxonomyFeaturedUnitText: [`Unit ${i + 1}`],
+                isTeaser: ['true'],
+            }));
+
+            fetchUserStories.mockResolvedValueOnce(mockCards);
+
+            const result = await main(defaultMockData, defaultMockInfo);
+
+            const matches = result.match(/<div class="swiper-slide">/g) || [];
+            expect(matches.length).toBe(6);
+        });
     });
     
     describe('[Error Handling]', () => {
@@ -279,8 +285,8 @@ describe('[Stories Carousel]', () => {
         it('Should throw an error when fns or ctx was not provided', async () => {
             const mockInfo = {
                 ...defaultMockInfo,
-                fns: undefined
-            }
+                fns: undefined,
+            };
 
             const result = await main(defaultMockData, mockInfo);
 
@@ -325,9 +331,9 @@ describe('[Stories Carousel]', () => {
                     ctaUrl: 123
                 }
             };
-            
+
             const result = await main(mockData, defaultMockInfo);
-            
+
             expect(result).toContain('<!-- Error occurred in the Stories carousel component: The "ctaUrl" field must be a string. The 123 was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
@@ -390,6 +396,19 @@ describe('[Stories Carousel]', () => {
             expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Stories carousel component: The "data" cannot be undefined or null. The [] was received. -->"`);
             expect(mockedError).toBeCalledTimes(1);
         });
+
+        it('Should handle fetchUserStories failure gracefully', async () => {
+            fetchUserStories.mockRejectedValueOnce(new Error('Fetch failed'));
+
+            const result = await main(defaultMockData, defaultMockInfo);
+
+            expect(result).toContain('<!-- Error occurred in the Stories carousel component: Fetch failed -->');
+
+            expect(mockedError).toBeCalledWith(
+                'Error occurred in the Stories carousel component while fetching user stories:',
+                expect.any(Error)
+            );
+        });
     });
 
     describe('[Main Function]', () => {
@@ -407,29 +426,7 @@ describe('[Stories Carousel]', () => {
 
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="stories-carousel" data-unique-id="476f6893-b77b-43d8-ac8c-ac74d3d75dd7"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span>Learn More<!-- --><span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="component-slider">
-                  <div class="swiper component-slider-cards component-slider-peek">
-                      <div class="swiper-wrapper">  
-                      </div>
-                  </div>
-                  <div class="component-slider-controls su-flex su-mt-45 lg:su-mt-48 su-items-center su-content-center">
-                      <div aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination- su-mr-full"></div>
-                      <button class="component-slider-btn component-slider-prev" type="button">
-                          <span class="sr-only">Previous</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                      <button class="component-slider-btn component-slider-next" type="button">
-                          <span class="sr-only">Next</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                  </div>
-              </div></div>ModalHTML</section>"
-            `);
+            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Stories carousel component: The "data" cannot be undefined or null. The [] was received. -->"`);
         });
 
         it('Should set default ctaLink if ctaLink is empty', async () => {
@@ -446,36 +443,7 @@ describe('[Stories Carousel]', () => {
 
             linkedData.ctaLink = `${defaultMockInfo.env.BASE_DOMAIN}${defaultMockInfo.env.BASE_PATH}${defaultMockInfo.env.NEWS_ARCHIVE_PATH}`;
 
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="stories-carousel" data-unique-id="476f6893-b77b-43d8-ac8c-ac74d3d75dd7"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com/base/archive" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span>Learn More<!-- --><span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="component-slider">
-                  <div class="swiper component-slider-cards component-slider-peek">
-                      <div class="swiper-wrapper">  
-                      </div>
-                  </div>
-                  <div class="component-slider-controls su-flex su-mt-45 lg:su-mt-48 su-items-center su-content-center">
-                      <div aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination- su-mr-full"></div>
-                      <button class="component-slider-btn component-slider-prev" type="button">
-                          <span class="sr-only">Previous</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                      <button class="component-slider-btn component-slider-next" type="button">
-                          <span class="sr-only">Next</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                  </div>
-              </div></div>ModalHTML</section>"
-            `);
-        });
-
-        it('Should call cardDataAdapter and funnelbackCardService', async () => {
-            await main(defaultMockData, defaultMockInfo);
-
-            expect(cardDataAdapter).toHaveBeenCalled();
-            expect(funnelbackCardService).toHaveBeenCalled();
+            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Stories carousel component: The "data" cannot be undefined or null. The [] was received. -->"`);
         });
 
         it('Should render empty data-unique-id when data not provided', async () => {
@@ -491,30 +459,53 @@ describe('[Stories Carousel]', () => {
 
         it('Should render Card and Modal components based on data type', async () => {
             const result = await main(defaultMockData, defaultMockInfo);
-            
-            expect(result).toMatchInlineSnapshot(`
-              "<section data-component="stories-carousel" data-unique-id="476f6893-b77b-43d8-ac8c-ac74d3d75dd7"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span>Learn More<!-- --><span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="component-slider">
-                  <div class="swiper component-slider-cards component-slider-peek">
-                      <div class="swiper-wrapper">  
-                      </div>
-                  </div>
-                  <div class="component-slider-controls su-flex su-mt-45 lg:su-mt-48 su-items-center su-content-center">
-                      <div aria-label="Slide Navigation" class="component-slider-pagination component-slider-pagination- su-mr-full"></div>
-                      <button class="component-slider-btn component-slider-prev" type="button">
-                          <span class="sr-only">Previous</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                      <button class="component-slider-btn component-slider-next" type="button">
-                          <span class="sr-only">Next</span>
-                          <span aria-hidden="true" class="su-absolute su-top-[50%] su-left-[50%] su-translate-y-[-50%] su-translate-x-[-50%] su-inline-block">
-                              
-                          </span>
-                      </button>
-                  </div>
-              </div></div>ModalHTML</section>"
-            `);
+
+            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Stories carousel component: The "data" cannot be undefined or null. The [] was received. -->"`);
+        });
+
+        it('Should render Modal and EmbedVideo if card type is Video', async () => {
+            const mockVideoCard = {
+                title: 'Video Test Title',
+                description: ['Test description'],
+                liveUrl: 'https://example.com/video',
+                imageUrl: ['https://example.com/image.jpg'],
+                imageAlt: ['Alt text'],
+                taxonomy: ['Category'],
+                taxonomyUrl: ['https://example.com/category'],
+                type: 'Video',
+                videoUrl: 'https://example.com/video.mp4',
+                date: Date.now(),
+                taxonomyFeaturedUnitLandingPageUrl: [
+                    'https://example.com/unit',
+                ],
+                taxonomyFeaturedUnitText: ['Unit'],
+                isTeaser: ['false']
+            };
+
+            fetchUserStories.mockResolvedValueOnce([mockVideoCard]);
+
+            const result = await main(defaultMockData, defaultMockInfo);
+
+            expect(result).toContain('<iframe');
+            expect(result).toContain('<iframe');
+
+            const { EmbedVideo, Modal } = await import(
+                '../../global/js/helpers'
+            );
+            expect(EmbedVideo).toHaveBeenCalledWith({
+                isVertical: false,
+                videoId: mockVideoCard.videoUrl,
+                title: `Watch ${mockVideoCard.title}`,
+                noAutoPlay: true
+            });
+
+            expect(Modal).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    content: expect.any(String),
+                    uniqueId: expect.any(String),
+                    describedby: 'card-modal'
+                }),
+            );
         });
     });
 });

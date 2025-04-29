@@ -65,6 +65,8 @@ linklist
 Subnav
 darkmode
 DARKMODE
+nocallout
+infobutton
 
 # Lorem Ipsum 
 VPSA
@@ -160,6 +162,7 @@ valida
 HIVOU
 Nayak
 Peterkin
+consectetuer
 
 #testing hooks
 testid 

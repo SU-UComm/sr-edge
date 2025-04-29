@@ -1,0 +1,44 @@
+<div
+    class='pre-footer-links-wrapper su-px-0 su-flex su-flex-col lg:su-flex-row su-mt-32 lg:su-mt-61'
+>
+    <div
+        class='su-w-full su-grid su-mb-45 md:su-mb-60 lg:su-mb-58 su-gap-y-45 su-grid-cols-1 md:su-grid-cols-2 lg:su-grid-cols-4 su-justify-evenly'
+    >
+        {{~#each navigation~}}
+            <div class='pre-footer-links su-relative'>
+                <div
+                    class='pre-footer-links-inner su-relative before:su-bg-gradient-footer before:su-w-2 before:su-absolute before:su-top-0 before:su-left-0 before:su-h-full'
+                >
+                    <h2
+                        class='su-text-black su-font-sans dark:su-text-white su-mb-11 su-rs-pl-2 su-rs-pr-1'
+                    >
+                        <a
+                            class='su-text-black dark:su-text-white hover:su-underline hover:su-text-digital-red dark:hover:su-text-dark-mode-red su-transition su-text-16 md:su-text-18 su-font-semibold'
+                            href='{{asset_url}}'
+                        >
+                            {{unescapeHtml asset_name}}
+                        </a>
+                    </h2>
+                    {{~#if children~}}
+                        <ul
+                            class='su-flex su-flex-col su-flex-wrap su-gap-px su-list-none su-rs-pl-2 su-rs-pr-1'
+                        >
+                            {{~#each children~}}
+                                <li
+                                    class='su-mb-0 su-leading-display lg:su-leading-[118.75%]'
+                                >
+                                    <a
+                                        href='{{asset_url}}'
+                                        class='su-text-black dark:su-text-white su-font-normal dark:hover:su-text-dark-mode-red su-text-14 md:su-text-16 hocus:su-text-digital-red su-no-underline hover:su-underline su-transition'
+                                    >
+                                        {{unescapeHtml asset_name}}
+                                    </a>
+                                </li>
+                            {{~/each~}}
+                        </ul>
+                    {{~/if~}}
+                </div>
+            </div>
+        {{~/each~}}
+    </div>
+</div>

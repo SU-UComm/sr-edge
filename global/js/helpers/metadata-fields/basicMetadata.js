@@ -141,15 +141,19 @@ export function basicMetadata({ data }) {
         </div>
       ` : ''}
 
-      ${campus && !["undefined", undefined, null, ""].includes(campus.asset_assetid) ? `
+      ${campus && campus.length ? `
         <div class="su-border-t border-t-black-20">
           ${basicField({
-            title: "Campus unit",
-            children: `
-              <a href="${campus.asset_url}" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-18">
-                ${campus.asset_name}
-              </a>
-            `
+            title: `Campus unit${campus.length > 1 ? "s" : ""}`,
+            children: campus.map((item) => `
+
+            ${!["undefined", undefined, null, ""].includes(item.asset_assetid) ? `
+              <div class="" key="${item.asset_assetid}">
+                <a href="${item.asset_url}" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-18">
+                  ${item.asset_name}
+                </a>
+              </div>` : ``}
+            `).join('')
           })}
         </div>
       ` : ''}
