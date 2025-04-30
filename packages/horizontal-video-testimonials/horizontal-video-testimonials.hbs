@@ -17,7 +17,7 @@
                 }}'
         >
             {{~#if title~}}
-                {{> linked-heading title=title isAlwaysLight=true ctaLink=ctaUrl ctaText=ctaText customClasses="2xl:su-px-[17rem] su-rs-mb-5"}}
+                {{> linked-heading title=title isAlwaysLight=true ctaLink=ctaLink ctaText=ctaText customClasses="2xl:su-px-[17rem] su-rs-mb-5"}}
             {{~/if~}}
             {{~#if testimonialsArrayLength~}}
                 <ul class="su-relative su-grid su-gap-20 su-z-30 su-list-unstyled *:su-mb-0">
@@ -30,7 +30,7 @@
             {{~/if~}}
         </div>
         {{~#if bgImageData.url~}}
-             <img src="{{bgImageData.url}}" alt="" class="su-absolute su-size-full su-inset-0 su-object-cover su-inset-0" />
+             <img src="{{bgImageData.url}}" alt="" class="su-absolute su-size-full su-object-cover su-inset-0" />
              <div aria-hidden="true" class="su-absolute su-size-full su-inset-0 su-z-10 su-bg-gradient-to-b su-from-black-true/75 su-to-black-true/60"></div>
         {{~/if~}}
     </div>

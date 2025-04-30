@@ -163,8 +163,7 @@ export default {
         const componentData = {
             title,
             ctaText,
-            ctaUrl,
-            ctaManualUrl,
+            ctaLink: linkData?.url || ctaManualUrl,
             marginTop,
             marginBottom,
             bgImageData,
