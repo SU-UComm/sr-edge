@@ -53,21 +53,21 @@ export default {
 
         // Validate required fields and ensure correct data types
         try {
-            if (!image || typeof image !== 'string') {
-                throw new Error(
-                    `The "image" field cannot be undefined and must be a string. The ${JSON.stringify(image)} was received.`
-                );
-            }
-            if (imageVPosition && !['top', 'center', 'bottom'].includes(imageVPosition)) {
-                throw new Error(
-                    `The "imageVPosition" field must be one of ["top", "center", "bottom"]. The ${JSON.stringify(imageVPosition)} was received.`
-                );
-            }
-            if (mobileImage && typeof mobileImage !== 'string') {
-                throw new Error(
-                    `The "mobileImage" field must be a string. The ${JSON.stringify(mobileImage)} was received.`
-                );
-            }
+            // if (!image || typeof image !== 'string') {
+            //     throw new Error(
+            //         `The "image" field cannot be undefined and must be a string. The ${JSON.stringify(image)} was received.`
+            //     );
+            // }
+            // if (imageVPosition && !['top', 'center', 'bottom'].includes(imageVPosition)) {
+            //     throw new Error(
+            //         `The "imageVPosition" field must be one of ["top", "center", "bottom"]. The ${JSON.stringify(imageVPosition)} was received.`
+            //     );
+            // }
+            // if (mobileImage && typeof mobileImage !== 'string') {
+            //     throw new Error(
+            //         `The "mobileImage" field must be a string. The ${JSON.stringify(mobileImage)} was received.`
+            //     );
+            // }
             if (!quote || typeof quote !== 'string') {
                 throw new Error(
                     `The "quote" field cannot be undefined and must be a string. The ${JSON.stringify(quote)} was received.`
@@ -145,11 +145,19 @@ export default {
         
         const isRealExternal = externalUrl ? isRealExternalLink(externalUrl) : false;
 
+        
+        const quoteVAligns = {
+            top: "start",
+            center: "center",
+            bottom: "",
+        };
+        const convertedQuoteVAlign = quoteVAligns[quoteVAlign] || quoteVAlign;
+
         // Prepare component data for template rendering
         const componentData = {
             quote,
             quoteHAlign,
-            quoteVAlign,
+            quoteVAlign: convertedQuoteVAlign,
             imageVPosition,
             removeTopSpacing,
             ctaPreText,
