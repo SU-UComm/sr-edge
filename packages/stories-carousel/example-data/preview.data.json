@@ -6,6 +6,6 @@
         "ctaNewWindow": false
     },
     "contentConfiguration": {
-        "searchQuery": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search_preview&log=false&query=!nullquery"
+        "searchQuery": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!nullquery&global=true&meta_taxonomyAudienceText="
     }
 }

@@ -38,6 +38,11 @@ export default {
         const { searchQuery } = args?.contentConfiguration || {};
 
         const MAX_CARDS = 6;
+        let dataSource = "content";
+
+        const assetCtx = info?.ctx ||  {};
+        // const currentAssetId = assetCtx?.assetId || 165409;
+        const currentAssetId = assetCtx?.assetId;
 
         // Validate required environment variables
         try {
@@ -116,17 +121,79 @@ export default {
         
         let data = [];
 
+        let query = searchQuery;
+        let fallbackFbUrl = "";
+        // handle the input querystring
+        // remove the ?
+        const cleanedQuery = query.startsWith('?') ? query.slice(1) : query;
+        // Parse query string into an object
+        const params = cleanedQuery.split('&').reduce((acc, pair) => {
+            const [key, value] = pair.split('=');
+            if (key && value !== undefined) { // Ensure key exists and value is defined
+              acc[key] = decodeURIComponent(value); // Decode URL-encoded values
+            }
+            return acc;
+          }, {});
+        // Extract specific values
+        const isGlobal = params.global === 'true'; // Check if global=true
+        const audience = params.meta_taxonomyAudienceText || ""; // Get audience value or null if not present
+        
+        if(isGlobal){
+            dataSource = "global";
+            const apiData = `${BASE_DOMAIN}_api/mx/storycarousel?story=${currentAssetId}`;
+            const res = await fetch(apiData);
+            const props = await res.json();
+
+            // Construct the FB URL
+            if (props.search) {
+                query = `?profile=${props.search.profile}&collection=${props.search.collection}${
+                    props.search.maintopic?.asset_name !== ""
+                    ? `&query=[taxonomyContentMainTopicId:${props.search.maintopic?.asset_assetid} taxonomyContentTopicsId:${props.search.maintopic?.asset_assetid} taxonomyContentSubtopicsId:${props.search.maintopic?.asset_assetid}]`
+                    : ""
+                }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 id:${
+                    props.search.currentPage
+                }]&num_ranks=${MAX_CARDS}&sort=date&meta_taxonomyAudienceText=${audience}`;
+
+                fallbackFbUrl = `?profile=${props.search.profile}&collection=${
+                    props.search.collection
+                }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 id:${
+                    props.search.currentPage
+                }]&num_ranks=12&sort=date`;
+
+                if (props.search.contentType === "Video") {
+                    fallbackFbUrl += "&meta_taxonomyContentTypeId=28207";
+                    query += "&meta_taxonomyContentTypeId=28207";
+                }
+            }
+        }
+
         try {
+            
             data = await fetchUserStories({
                 FB_JSON_URL,
-                searchQuery,
-                currentPageAssetId: fnsCtx.assetId,
+                searchQuery: query,
+                currentPageAssetId: currentAssetId,
                 baseDomain: BASE_DOMAIN,
             });
         
+            // fallback when no data is found
+            if(isGlobal && Array.isArray(data) && data.length < MAX_CARDS){
+                // fallbackFbUrl
+                query = fallbackFbUrl;
+                dataSource = "global-fallback";
+                const fallbackData = await fetchUserStories({
+                    FB_JSON_URL,
+                    searchQuery: fallbackFbUrl,
+                    currentPageAssetId: currentAssetId,
+                    baseDomain: BASE_DOMAIN,
+                });
+                data.push(fallbackData);
+            }
+
             if (Array.isArray(data) && data.length > MAX_CARDS) {
                 data = data.slice(0, MAX_CARDS);
             }
+            
         } catch (er) {
             console.error('Error occurred in the Stories carousel component while fetching user stories:', er);
             return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
@@ -189,7 +256,9 @@ export default {
             ctaText: headingData.ctaText,
             carousel: Carousel({ variant:"cards", slides: cardData.join(''), uniqueClass: uniqueClass }),
             cardModal: cardModal.join(''),
-            width: "large"
+            width: "large",
+            dataSource,
+            query
         };
         
         return storiesCarouselTemplate(componentData);
