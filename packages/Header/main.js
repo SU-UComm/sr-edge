@@ -28,7 +28,9 @@ export default {
     */
     async main(args, info) {
         // Extracting functions from provided info
+        // const fnsCtx = info?.ctx || {};
         const fnsCtx = info?.ctx || {};
+        const currentAssetId = fnsCtx?.assetId;
 
         // Extracting environment variables from provided info
         const { CONTENT_API, CONTENT_API_KEY, FB_JSON_URL } = info?.env || info?.set?.environment || {};
@@ -51,11 +53,6 @@ export default {
             if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
                 throw new Error(
                     `The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(FB_JSON_URL)} was received.`
-                );
-            }
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.ctx" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
                 );
             }
         } catch (er) {
@@ -165,7 +162,7 @@ export default {
             navigation,
             search,
             cookieStatement, 
-            
+
             pageControls,
             relatedStory,
             audience: "external",
