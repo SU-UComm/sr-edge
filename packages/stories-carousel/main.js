@@ -38,6 +38,11 @@ export default {
         const { searchQuery } = args?.contentConfiguration || {};
 
         const MAX_CARDS = 6;
+        let dataSource = "content";
+
+        const assetCtx = info?.ctx ||  {};
+        const currentAssetId = assetCtx?.assetId || 165409;
+        //const currentAssetId = assetCtx?.assetId;
 
         // Validate required environment variables
         try {
@@ -118,7 +123,8 @@ export default {
 
         let query = searchQuery;
         let fallbackFbUrl = "";
-        // Remove leading '?' if present
+        // handle the input querystring
+        // remove the ?
         const cleanedQuery = query.startsWith('?') ? query.slice(1) : query;
         // Parse query string into an object
         const params = cleanedQuery.split('&').reduce((acc, pair) => {
@@ -132,23 +138,13 @@ export default {
         const isGlobal = params.global === 'true'; // Check if global=true
         const audience = params.meta_taxonomyAudienceText || ""; // Get audience value or null if not present
         
-        // Optionally, convert all parameters to an object for further use
-        // const allParams = Object.fromEntries(params);
-        const assetCtx = info?.ctx ||  {};
-        // const currentAssetId = assetCtx?.assetId || 165409;
-        const currentAssetId = assetCtx?.assetId;
         if(isGlobal){
-            
-            
+            dataSource = "global";
             const apiData = `${BASE_DOMAIN}_api/mx/storycarousel?story=${currentAssetId}`;
             const res = await fetch(apiData);
             const props = await res.json();
 
             // Construct the FB URL
-            // ${props.search.endpoint?.replace(
-            //     "search.html",
-            //     "search.json"
-            // )}
             if (props.search) {
                 query = `?profile=${props.search.profile}&collection=${props.search.collection}${
                     props.search.maintopic?.asset_name !== ""
@@ -180,14 +176,18 @@ export default {
                 baseDomain: BASE_DOMAIN,
             });
         
+            // fallback when no data is found
             if(isGlobal && Array.isArray(data) && data.length < MAX_CARDS){
-                // fallbackFbUrl 
-                data = await fetchUserStories({
+                // fallbackFbUrl
+                query = fallbackFbUrl;
+                dataSource = "global-fallback";
+                const fallbackData = await fetchUserStories({
                     FB_JSON_URL,
                     searchQuery: fallbackFbUrl,
                     currentPageAssetId: currentAssetId,
                     baseDomain: BASE_DOMAIN,
                 });
+                data.push(fallbackData);
             }
 
             if (Array.isArray(data) && data.length > MAX_CARDS) {
@@ -256,7 +256,9 @@ export default {
             ctaText: headingData.ctaText,
             carousel: Carousel({ variant:"cards", slides: cardData.join(''), uniqueClass: uniqueClass }),
             cardModal: cardModal.join(''),
-            width: "large"
+            width: "large",
+            dataSource,
+            query
         };
         
         return storiesCarouselTemplate(componentData);
