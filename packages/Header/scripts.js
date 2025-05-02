@@ -25,6 +25,12 @@ export function _hideConsentBanner() {
     const content = document.querySelector(HEADER_COOKIE_CONSENT_BANNER_SELECTOR);
     
     content && content.classList.add(HEADER_HIDDEN_CLASS);
+    content && content.classList.remove('active');
+}
+export function _showConsentBanner() {
+    const content = document.querySelector(HEADER_COOKIE_CONSENT_BANNER_SELECTOR);
+    content && content.classList.remove(HEADER_HIDDEN_CLASS);
+    content && content.classList.add('active');
 }
 
 export function _manageAudience(audience) {
@@ -45,7 +51,9 @@ export function _manageAudience(audience) {
         });
     });
     Object.values(preferenceInfo).forEach((element) => {
-        element.setAttribute('aria-pressed', 'false');
+        if(element){
+            element.setAttribute('aria-pressed', 'false');
+        }
     });
   
     // Show or set atrybut to true the element corresponding to the selected audience
@@ -56,7 +64,7 @@ export function _manageAudience(audience) {
     }
     if (preferenceInfo[audience]) {
         preferenceInfo[audience].setAttribute('aria-pressed', 'true');
-    }  
+    }
 }
 
 export const handlePersona = async (personaVal, audienceData, removeConsent = false) => {
@@ -122,6 +130,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const studentPersona = document.querySelector(`button[data-click="student-persona"]`)
     const facultyPersona = document.querySelector(`button[data-click="faculty-persona"]`)
 
+    const pageController = typeof window.pageController !== "undefined" ? window.pageController : null;
+    const links = document.querySelectorAll('a[data-menu="main-nav"]');
+    const storyHeadline = document.querySelector('[data-current-story="headline"]');
+
     // This is legacy code, however, it works
     const headerDom = document.querySelector(HEADER_SELECTOR);
     // eslint-disable-next-line no-unused-vars
@@ -129,43 +141,52 @@ document.addEventListener('DOMContentLoaded', function () {
     
     let relatedStory = null;
 
+    const cdpConsentCookie = JSON.parse(getCookie("squiz.cdp.consent"));
+    // do we have consent data
+    const consentData = cdpConsentCookie?.CDPConsent;
+    const clearPreferences = document.querySelector('button[data-click="clear-preferences"]');
+
+    const props = {};
+    props.pageData = pageController;
+    // do we have consent data
+    props.consentData = cdpConsentCookie?.CDPConsent;
+
+    props.audienceData = getCookie("preferences_personalisation");;
+    if (props.audienceData === "null" || !props.audienceData) {
+        props.audienceData = "external";
+    }
+    // set the props we need, to a window variable
+    window.suHeaderProps = props;
+
     _preferencesSettings();
 
-
-    if (window.suHeaderProps?.pageData?.isStory) {
-    const fetchRelatedStoryData = async () => {
-            const fbStoryData = await relatedStoryData(
-                window.suHeaderProps.pageData,
-                window.suHeaderProps.audienceData
-            );
-            relatedStory = fbStoryData;
-        };
-        fetchRelatedStoryData();
-    }
-
-    const pageController = typeof window.pageController !== "undefined" ? window.pageController : null;
-    const links = document.querySelectorAll('a[data-menu="main-nav"]');
-    const storyHeadline = document.querySelector('section[data-subcomponent="header-current-story-headline"]');
-    
+   
     pageController && links && links.forEach((link) => {
         if (pageController?.id === link.dataset.id) {
             link.classList.remove('su-border-transparent');
             link.classList.add('!su-text-digital-red su-border-digital-red dark:su-border-dark-mode-red dark:!su-text-dark-mode-red')
         }
     })
+    if (pageController?.isStory) {
+        headerDom.classList.add('report-header--story');
+        const fetchRelatedStoryData = async () => {
+            const fbStoryData = await relatedStoryData(
+                props.pageData,
+                props.audienceData
+            );
+            relatedStory = fbStoryData;
+            updateStoryHeadline(relatedStory, pageController, storyHeadline, HEADER_HIDDEN_CLASS);
+        };
+        fetchRelatedStoryData();
+    }
     
-    updateStoryHeadline(relatedStory, pageController, storyHeadline, HEADER_HIDDEN_CLASS);
-
-    const cdpConsentCookie = JSON.parse(getCookie("squiz.cdp.consent"));
-
-    // do we have consent data
-    const consentData = cdpConsentCookie?.CDPConsent;
-    const clearPreferences = document.querySelector('button[data-click="clear-preferences"]');
-
+    if(!consentData){
+        _showConsentBanner();
+    }
     if (consentData) {
         _hideConsentBanner();
         
-        if (clearPreferences) { 
+        if (clearPreferences) {
             clearPreferences.removeAttribute('disabled');
             clearPreferences.setAttribute("aria-pressed", "false");
             clearPreferences.classList.add('su-text-digital-blue');

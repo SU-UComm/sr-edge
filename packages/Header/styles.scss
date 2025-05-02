@@ -348,7 +348,11 @@
   .report-header--story .report-header__logo {
     transform: translateY(0);
   }
-  
+
+  .report-header__story {
+    position: absolute;
+  }
+
   .report-header--story .report-header__story {
     position: absolute;
     top: 0;
@@ -485,10 +489,19 @@
   }
   
   #cookie-consent-banner {
-    box-shadow: 0 -10px 35px -25px rgb(0 0 0 / 30%);
+    box-shadow: none;
+    transform: translateY(100%);
+    transition: all 1s ease;
+    visibility: hidden;
+    opacity: 0;
+
+    &.active {
+      transform: translateY(0%);
+      visibility: visible;
+      opacity: 1;
+    }
   }
   
   :is(.su-dark #cookie-consent-banner) {
     box-shadow: 0 -10px 35px -25px rgb(255 255 255 / 30%);
   }
-   
