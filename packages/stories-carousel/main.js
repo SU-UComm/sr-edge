@@ -36,12 +36,12 @@ export default {
         // Extracting configuration data from arguments
         const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
         const { searchQuery } = args?.contentConfiguration || {};
-
+        
         const MAX_CARDS = 6;
         let dataSource = "content";
 
         const assetCtx = info?.ctx ||  {};
-        // const currentAssetId = assetCtx?.assetId || 165409;
+        // const currentAssetId = assetCtx?.assetId || 168567;
         const currentAssetId = assetCtx?.assetId;
 
         // Validate required environment variables
@@ -187,7 +187,7 @@ export default {
                     currentPageAssetId: currentAssetId,
                     baseDomain: BASE_DOMAIN,
                 });
-                data.push(fallbackData);
+                fallbackData.forEach(item => data.push(item));
             }
 
             if (Array.isArray(data) && data.length > MAX_CARDS) {
