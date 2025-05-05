@@ -13,7 +13,7 @@
                 {{> footer-contact-nav navigation=navigation.contactsStaff audience="faculty" customClasses="su-hidden"}}
             </div>
             {{~#if navigation.external.anonymous~}}
-                <div data-audience="external" class="su-pb-60 lg:su-pb-[95px]">
+                <div data-audience="external" class="su-pb-60 lg:su-pb-95">
                     <ul class="su-list-none su-flex su-flex-wrap su-pl-0 su-gap-y-6 su-gap-x-20 lg:su-gap-x-27 pre-footer-bottom-third">
                         {{~#each navigation.external.anonymous~}}
                         <li>
@@ -27,7 +27,7 @@
                 </div>
             {{~/if~}}
             {{~#if navigation.external.student~}}
-                <div data-audience="student" class="su-pb-60 lg:su-pb-[95px] su-hidden">
+                <div data-audience="student" class="su-pb-60 lg:su-pb-95 su-hidden">
                     <ul class="su-list-none su-flex su-flex-wrap su-pl-0 su-gap-y-6 su-gap-x-20 lg:su-gap-x-27 pre-footer-bottom-third">
                         {{~#each navigation.external.student~}}
                         <li>
@@ -41,7 +41,7 @@
                 </div>
             {{~/if~}}
             {{~#if navigation.external.staff~}}
-                <div data-audience="faculty" class="su-pb-60 lg:su-pb-[95px] su-hidden">
+                <div data-audience="faculty" class="su-pb-60 lg:su-pb-95 su-hidden">
                     <ul class="su-list-none su-flex su-flex-wrap su-pl-0 su-gap-y-6 su-gap-x-20 lg:su-gap-x-27 pre-footer-bottom-third">
                         {{~#each navigation.external.staff~}}
                         <li>
