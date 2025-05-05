@@ -1,5 +1,5 @@
 <section data-component="standalone-visual-hero" data-unique-id="{{uniqueID}}">
-    <div class="su-rs-pt-6 su-rs-mb-3 lg:su-rs-mb-5 su-container su-container-wide">
+    <div class="su-mx-auto su-container su-container-wide su-container-px su-rs-pt-6 su-rs-mb-3 lg:su-rs-mb-5">
         <div class="su-grid su-gap su-grid-cols-6 md:su-grid-cols-12">
             <div class="su-col-span-6 su-col-start-1 md:su-col-span-10 md:su-col-start-2">
                 <div class="su-flex su-justify-between su-flex-wrap su-text-16 md:su-basefont-23">
@@ -25,22 +25,15 @@
                     {{{unescapeHtml title}}}
                 </h1>
                 {{#if summary}}
-                <p class="su-font-serif su-text-21 md:su-text-28 su-rs-mt-2 su-mb-0">
+                <div class="su-font-serif su-text-21 md:su-text-28 su-rs-mt-2 *:last:su-mb-0">
                     {{{unescapeHtml summary}}}
-                </p>
+                </div>
                 {{/if}}
             </div>
-            {{#if mediaType}}
+            {{#if videoData.videoID}}
             <div class="su-col-span-6 su-col-start-1 md:su-col-span-12 md:su-col-start-1 su-w-full su-rs-mt-4">
                 <figure class="su-col-span-full su-relative su-z-0">
                     <div class="su-relative su-w-full">
-                        {{#ifEquals mediaType "image"}}
-                        {{#if imageData.url}}
-                        <img src="{{imageData.url}}" alt="{{imageData.alt}}"
-                            class="su-relative su-w-full su-max-w-full" />
-                        {{/if}}
-                        {{/ifEquals}}
-                        {{#ifEquals mediaType "video"}}
                         {{#if videoData.imageUrl}}
                         <button type="button" aria-haspopup="dialog" class="su-w-full su-aspect-[16/9] su-video-trigger"
                             data-click="open-modal" data-modal-id="{{uniqueID}}">
@@ -52,14 +45,25 @@
                             </span>
                         </button>
                         {{else}}
-                        {{#if videoData.videoID}}
                         <div class="su-relative su-max-w-full su-h-0 su-pb-[56.25%] su-overflow-hidden">
                             {{> embed-video isVertical=videoData.isVertical classes=videoData.class
                             videoId=videoData.videoID noAutoPlay=videoData.noAutoPlay title=videoData.title}}
                         </div>
                         {{/if}}
-                        {{/if}}
-                        {{/ifEquals}}
+                    </div>
+                    {{#if captionCredit}}
+                    <figcaption class="su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white">
+                        {{captionCredit}}
+                    </figcaption>
+                    {{/if}}
+                </figure>
+            </div>
+            {{else if imageData.url}}
+            <div class="su-col-span-6 su-col-start-1 md:su-col-span-12 md:su-col-start-1 su-w-full su-rs-mt-4">
+                <figure class="su-col-span-full su-relative su-z-0">
+                    <div class="su-relative su-w-full">
+                        <img src="{{imageData.url}}" alt="{{imageData.alt}}"
+                            class="su-relative su-w-full su-max-w-full" />
                     </div>
                     {{#if captionCredit}}
                     <figcaption class="su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white">
