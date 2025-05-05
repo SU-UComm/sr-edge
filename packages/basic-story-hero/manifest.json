@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "basic-story-hero",
     "type": "edge",
-    "version": "4.0.2",
+    "version": "4.0.3",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "The basic story hero appears on basic story pages",
     "displayName": "Basic story hero",
