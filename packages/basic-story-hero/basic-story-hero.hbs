@@ -40,11 +40,9 @@
                 >
                     {{{unescapeHtml title}}}
                 </h1>
-                <p
-                    class='su-font-serif su-intro-text su-mb-0 su-rs-mt-2 su-text-21 su-leading-[27.35px] md:su-text-28 md:su-leading-[36.47px]'
-                >
+                <div class="su-font-serif su-text-21 md:su-text-28 su-rs-mt-2 *:last:su-mb-0">
                     {{{unescapeHtml summary}}}
-                </p>
+                </div>
             </div>
             {{~#if mediaFeature~}}
             <div
@@ -108,7 +106,7 @@
                         <figcaption
                             class='su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white'
                         >
-                            {{captionCredit}}
+                            {{{unescapeHtml captionCredit}}}
                         </figcaption>
                     {{~/if~}}
                 </figure>
