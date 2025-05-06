@@ -1,7 +1,6 @@
-import hash from "object-hash";
 import storiesCarouselTemplate from './stories-carousel.hbs';
 import { linkedHeadingService, uuid } from "../../global/js/utils";
-import { Carousel, Card, Modal, EmbedVideo } from "../../global/js/helpers";
+import { Carousel, Card } from "../../global/js/helpers";
 import { fetchUserStories } from "../../global/js/utils/fetchUserStories";
 
 /**
@@ -210,26 +209,29 @@ export default {
         }
 
         const cardData = [];
-        const cardModal = [];
+        const modalData = [];
         let uniqueClass = ""
         
         if (data !== null && data !== undefined) {
             uniqueClass = uuid();
             
             data.forEach((card) => {
+                const uniqueID = uuid();
                 cardData.push(
                     `<div class="swiper-slide">
-                        ${Card({data: card, displayDescription: false})}
+                        ${Card({data: card, displayDescription: false, uniqueId: uniqueID})}
                     </div>`
                 );
 
-                if (card.type === 'Video') {
-                    const uniqueId = hash.MD5(
-                        JSON.stringify(card.videoUrl) + hash.MD5(JSON.stringify(card.title))
-                    );
-                    cardModal.push(
-                        Modal({content: EmbedVideo({ isVertical: card.size === "vertical-video", videoId: card.videoUrl, title: `Watch ${card.title}`, noAutoPlay: true }), uniqueId, describedby: 'card-modal' })
-                    );
+                if (card.type === 'Video' || card.videoUrl) {
+                    modalData.push({
+                        isVertical: card.size === "vertical-video",
+                        videoId: card.videoUrl,
+                        title: `Watch ${card.title}`, 
+                        noAutoPlay: true,
+                        uniqueID: uniqueID,
+                        titleID: 'card-modal'
+                    })
                 }
             });
         }
@@ -255,7 +257,7 @@ export default {
             ctaNewWindow: headingData.ctaNewWindow,
             ctaText: headingData.ctaText,
             carousel: Carousel({ variant:"cards", slides: cardData.join(''), uniqueClass: uniqueClass }),
-            cardModal: cardModal.join(''),
+            modalData,
             width: "large",
             dataSource,
             query
