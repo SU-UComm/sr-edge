@@ -71,8 +71,8 @@ export default {
         // Extracting environment variables from provided info
         const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
-        const currentAssetId = fnsCtx?.assetId || "169719";
-        // const currentAssetId = fnsCtx?.assetId;
+        //const currentAssetId = fnsCtx?.assetId || "169719";
+        const currentAssetId = fnsCtx?.assetId;
 
         // Validate required fields and ensure correct data types
         try {
