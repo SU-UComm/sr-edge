@@ -36,12 +36,12 @@ export default {
         // Extracting configuration data from arguments
         const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
         const { searchQuery } = args?.contentConfiguration || {};
-
+        
         const MAX_CARDS = 6;
         let dataSource = "content";
 
         const assetCtx = info?.ctx ||  {};
-        // const currentAssetId = assetCtx?.assetId || 165409;
+        // const currentAssetId = assetCtx?.assetId || 168567;
         const currentAssetId = assetCtx?.assetId;
 
         // Validate required environment variables
@@ -134,6 +134,7 @@ export default {
             }
             return acc;
           }, {});
+        let headingInfo = args.headingConfiguration;
         // Extract specific values
         const isGlobal = params.global === 'true'; // Check if global=true
         const audience = params.meta_taxonomyAudienceText || ""; // Get audience value or null if not present
@@ -165,6 +166,7 @@ export default {
                     query += "&meta_taxonomyContentTypeId=28207";
                 }
             }
+            headingInfo = props.headingConfiguration;
         }
 
         try {
@@ -187,7 +189,7 @@ export default {
                     currentPageAssetId: currentAssetId,
                     baseDomain: BASE_DOMAIN,
                 });
-                data.push(fallbackData);
+                fallbackData.forEach(item => data.push(item));
             }
 
             if (Array.isArray(data) && data.length > MAX_CARDS) {
@@ -202,7 +204,7 @@ export default {
         // Resolve the URI for the section heading link
         const headingData = await linkedHeadingService(
             fnsCtx,
-            args.headingConfiguration
+            headingInfo
         );
         
         if (headingData && !headingData.ctaLink) {
@@ -217,16 +219,15 @@ export default {
             uniqueClass = uuid();
             
             data.forEach((card) => {
+                const uniqueId = hash.MD5(
+                    JSON.stringify(card) + hash.MD5(JSON.stringify(card.title))
+                );
                 cardData.push(
                     `<div class="swiper-slide">
-                        ${Card({data: card, displayDescription: false})}
+                        ${Card({data: card, displayDescription: false, uniqueId})}
                     </div>`
                 );
-
                 if (card.type === 'Video') {
-                    const uniqueId = hash.MD5(
-                        JSON.stringify(card.videoUrl) + hash.MD5(JSON.stringify(card.title))
-                    );
                     cardModal.push(
                         Modal({content: EmbedVideo({ isVertical: card.size === "vertical-video", videoId: card.videoUrl, title: `Watch ${card.title}`, noAutoPlay: true }), uniqueId, describedby: 'card-modal' })
                     );
