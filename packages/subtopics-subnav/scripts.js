@@ -98,24 +98,24 @@ export function Subnav({ navigation }) {
  * @param {HTMLElement} section - The section element containing the subnav list wrapper.
  */
 export function _init(section) {
-    const listWrapper = section.querySelector(SUBTOPIC_SUBNAV_LIST_SELECTOR);
+    // const listWrapper = section.querySelector(SUBTOPIC_SUBNAV_LIST_SELECTOR);
 
-    if (!listWrapper) {
-        return;
-    }
+    // if (!listWrapper) {
+    //     return;
+    // }
 
-    document.addEventListener(
-        "topicLoader",
-        async (evt) => {
-            // set topic state
-            if (evt.detail) {
-                const newTopics = await topicFormatter(evt.detail.cards);    
+    // document.addEventListener(
+    //     "topicLoader",
+    //     async (evt) => {
+    //         // set topic state
+    //         if (evt.detail) {
+    //             const newTopics = await topicFormatter(evt.detail.cards);    
 
-                listWrapper.innerHTML = Subnav({ navigation: newTopics });
-            }
-        },
-        false
-    );
+    //             listWrapper.innerHTML = Subnav({ navigation: newTopics });
+    //         }
+    //     },
+    //     false
+    // );
 }
 
 
@@ -126,7 +126,7 @@ export function _init(section) {
  * @listens DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll(SUBTOPIC_SUBNAV_SELECTOR).forEach(section => {
-        _init(section);
-    });
+    // document.querySelectorAll(SUBTOPIC_SUBNAV_SELECTOR).forEach(section => {
+    //     _init(section);
+    // });
 });

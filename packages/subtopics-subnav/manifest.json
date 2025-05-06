@@ -14,6 +14,12 @@
             "value": "gray"
         }
     },
+    "environment": [
+        {
+            "name": "BASE_DOMAIN",
+            "required": true
+        }
+    ],
     "functions": [
         {
             "name": "main",
