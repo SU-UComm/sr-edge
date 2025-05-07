@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
         fetchRelatedStoryData();
     }
     
-    if(!consentData){
+    if(!consentData && consentData != 0){
         _showConsentBanner();
     }
     if (consentData) {
