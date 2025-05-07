@@ -751,6 +751,7 @@ table caption:is(.su-dark *){--tw-text-opacity:1;color:rgb(255 255 255 / var(--t
 @media (width >= 768px){
 .component-slider-cards{margin-left:0;margin-right:0}}
 .component-slider .swiper-slide > *{transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:250ms}
+.component-slider .swiper-slide > *{pointer-events:auto;opacity:1}
 
 .component-slider-peek .swiper-slide-prev > *,
 .component-slider-peek .swiper-slide-next > *{pointer-events:none;opacity:0.25}
