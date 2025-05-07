@@ -36,7 +36,7 @@ export default {
         // ##
         // REMOVE BEFORE DEPLOYMEMENT `|| "{asset_id}"`
         // ##
-        // const currentAssetId = fnsCtx?.assetId || "156489";
+        // const currentAssetId = fnsCtx?.assetId || "165409";
         const currentAssetId = fnsCtx?.assetId;
 
         // Validate required environment variables
