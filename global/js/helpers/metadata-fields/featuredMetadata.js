@@ -169,7 +169,7 @@ export function featuredMetadata({ data }) {
         </div>
       ` : ''}
 
-      ${campus && campus.length > 1 ? `
+      ${campus && campus.length > 0 ? `
           <div class="su-text-center su-rs-mt-4 su-flex su-flex-col su-gap-20 md:su-gap-26">
               <h3 class="su-text-18 su-font-bold su-leading-snug su-font-sans !su-m-0">
                 ${campus.length > 1 ? "Campus units" : "Campus unit"}
