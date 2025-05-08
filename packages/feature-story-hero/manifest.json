@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "feature-story-hero",
     "type": "edge",
-    "version": "4.0.0",
+    "version": "4.0.4",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Hero that appears at the top of Featured Stories.",
     "displayName": "Feature story hero",
