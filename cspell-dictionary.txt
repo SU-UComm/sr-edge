@@ -67,6 +67,8 @@ darkmode
 DARKMODE
 nocallout
 infobutton
+universityupdate
+universityupdates
 
 # Lorem Ipsum 
 VPSA

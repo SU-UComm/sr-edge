@@ -169,6 +169,9 @@ export const svgIcons = {
     "university update":UniversityUpdate,
     "university&nbsp;update":UniversityUpdate,
     "universityupdate":UniversityUpdate,
+    "university updates":UniversityUpdate,
+    "university&nbsp;updates":UniversityUpdate,
+    "universityupdates":UniversityUpdate,
     "video": Video,
     "videoPlay": ({variant}={})=>VideoPlay({variant})
 };
