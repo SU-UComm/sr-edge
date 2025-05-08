@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "footer",
-    "version": "4.0.2",
+    "version": "4.0.3",
     "type": "edge",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "Stanford university Footer component.",
