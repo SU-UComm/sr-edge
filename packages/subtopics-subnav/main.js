@@ -22,7 +22,6 @@ function Subnav({ navigation }) {
             <ul class="scrollable-list__items su-w-[calc(100%+40px)] md:su-w-auto su-flex md:su-justify-center su-mb-0 su-whitespace-nowrap su-flex-nowrap md:su-flex-wrap su-overflow-x-scroll md:su-overflow-visible su-list-none su-mx-[-20px] md:su-mr-0 su-px-20 su-pb-12 lg:su-pb-0">
             ${cleanedNavigation.map((item, i, row) => {
                 const title = item.asset_name;
-    
                 if (i + 1 === row.length) {
                     // Last one.
                     liClass = "su-relative su-mb-0";
@@ -30,11 +29,7 @@ function Subnav({ navigation }) {
                 if(item.asset_url === ""){
                     return "";
                 }
-                return `
-                <li class="${liClass}">
-                    <a class="${aClass}" href="${item.asset_url}">${title}</a>
-                </li>
-                `;
+                return `<li class="${liClass}"><a class="${aClass}" href="${item.asset_url}">${title}</a></li>`;
             }).join("")}
             </ul>
         </div>
