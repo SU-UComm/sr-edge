@@ -36,7 +36,7 @@ export default {
         // Vertical story ID: ??
         // Horizontal story ID: 157163
 
-        // const currentAssetId = '163377';
+        // const currentAssetId = '143665';
         const currentAssetId = fnsCtx?.assetId
 
         // Validate required environment variables
