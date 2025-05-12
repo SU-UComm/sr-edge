@@ -155,6 +155,12 @@ export function _carouselInit(section) {
         },
         watchSlidesProgress: true,
         on: {
+            init: function () {
+                setTimeout(() => {
+                    sliderInit = true;
+                    useFocus = true;
+                }, 500);
+            },
             slideChange: function(swiper){
                 const thisSwiper = document.querySelector(swiperSelector);
                 /*
@@ -184,8 +190,8 @@ export function _carouselInit(section) {
                         }
                     }, 300);
                 }
-                sliderInit = true;
-                useFocus = true;
+                // sliderInit = true;
+                // useFocus = true;
                 // Prevent tab focus on out of view slides
                 swiper.slides.forEach((slide) => {
                     if (slide.classList.contains("swiper-slide-visible")) {
