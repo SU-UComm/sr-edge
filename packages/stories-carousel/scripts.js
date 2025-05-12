@@ -93,7 +93,7 @@ export function _modalInit(section) {
         }
     });
 };
-let useFocus = false;
+let useFocus = true;
 // const handleClick = (e) => {
 //     e.preventDefault();
 //     if (e.detail) {
@@ -180,7 +180,7 @@ export function _carouselInit(section) {
                                 return slide;
                             })();
                         if (useFocus) {
-                        //     slideTarget.focus();
+                            slideTarget.focus();
                         }
                     }, 300);
                 }
