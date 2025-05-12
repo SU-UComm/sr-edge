@@ -1,0 +1,41 @@
+<section
+    data-subcomponent='header-cookie-consent-banner'
+    id='cookie-consent-banner'
+    aria-labelledby='cookie-label'
+    class='su-fixed su-z-50 su-bottom-0 su-left-0 su-right-0 su-top-auto su-bg-white dark:su-bg-black-true'
+>
+    <div
+        class='su-mx-auto su-component-container su-container-large su-container-px md:su-flex md:su-gap-45 su-my-20'
+    >
+        <div
+            class='su-text-[14px] md:su-text-[16px] su-leading-[17.5px] md:su-leading-[20px] su-mb-20 md:su-mb-0'
+        >
+            <h2 id='cookie-label' class='sr-only'>
+                Stanford Report cookie usage information
+            </h2>
+            <p class='su-mb-0'>
+                {{{unescapeHtml statement}}}
+            </p>
+        </div>
+        <div
+            class='su-text-[14px] md:su-text-[16px] su-flex su-items-center su-justify-center su-gap-15'
+        >
+            <button
+                type='button'
+                id='accept-cdp-cookie'
+                class='su-text-white su-shadow-[0px_3px_6px_0px_rgba(0,0,0,0.1)] su-transition su-border su-border-digital-green-dark su-bg-digital-green-dark hocus:su-bg-digital-green-bright hocus:su-border-digital-green-bright su-py-10 md:su-py-15 su-px-30 su-leading-[20px]'
+                data-click='accept-consent'
+            >
+                Accept
+            </button>
+            <button
+                type='button'
+                id='reject-cdp-cookie'
+                class='su-transition su-border su-border-digital-red su-bg-transparent su-text-digital-red hocus:su-text-white hocus:su-border-digital-red hocus:su-bg-digital-red su-py-10 md:su-py-15 su-px-30 su-leading-[20px] dark:su-text-dark-mode-red dark:su-border-dark-mode-red dark:hocus:su-bg-dark-mode-red dark:hocus:su-text-white'
+                data-click='reject-consent'
+            >
+                Decline
+            </button>
+        </div>
+    </div>
+</section>

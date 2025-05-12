@@ -63,8 +63,17 @@ vimeoid
 youtubeid
 linklist
 Subnav
+darkmode
+DARKMODE
+nocallout
+infobutton
+universityupdate
+universityupdates
 
 # Lorem Ipsum 
+VPSA
+VPUE
+VPGE
 ezgif
 Asimo
 rsquo
@@ -151,8 +160,11 @@ seeweed
 Aaaaand
 woodshop
 potenti
+valida
 HIVOU
 Nayak
+Peterkin
+consectetuer
 
 #testing hooks
 testid 

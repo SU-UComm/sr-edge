@@ -141,15 +141,19 @@ export function basicMetadata({ data }) {
         </div>
       ` : ''}
 
-      ${campus && !["undefined", undefined, null, ""].includes(campus.asset_assetid) ? `
+      ${campus && campus.length ? `
         <div class="su-border-t border-t-black-20">
           ${basicField({
-            title: "Campus unit",
-            children: `
-              <a href="${campus.asset_url}" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-18">
-                ${campus.asset_name}
-              </a>
-            `
+            title: `Campus unit${campus.length > 1 ? "s" : ""}`,
+            children: campus.map((item) => `
+
+            ${!["undefined", undefined, null, ""].includes(item.asset_assetid) ? `
+              <div class="" key="${item.asset_assetid}">
+                <a href="${item.asset_url}" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-18">
+                  ${item.asset_name}
+                </a>
+              </div>` : ``}
+            `).join('')
           })}
         </div>
       ` : ''}
@@ -175,7 +179,6 @@ export function basicMetadata({ data }) {
           title: "Share this story",
           children: `
             <button
-              onclick="copyLink()"
               data-role="copy-link"
               type="button"
               class="su-text-digital-blue dark:su-text-digital-blue-vivid su-text-21 su-font-semibold su-mr-auto hocus:su-underline su-leading-snug"
@@ -189,17 +192,5 @@ export function basicMetadata({ data }) {
         })}
       </div>
     </section>
-
-    <script>
-      function copyLink() {
-        navigator.clipboard.writeText(window.location.href).then(() => {
-          const copyText = document.querySelector('[data-copy-text]');
-          copyText.textContent = 'Copied';
-          setTimeout(() => {
-            copyText.textContent = 'Copy link';
-          }, 3000);
-        });
-      }
-    </script>
   `;
 }

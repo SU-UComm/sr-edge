@@ -96,17 +96,10 @@ export function featuredMetadata({ data }) {
                 ${featuredField({
                   title: meta.name,
                   alignment: "center",
-                  children: meta.name !== "Campus unit" 
-                    ? meta.items.map((item) => `
-                        <p class="!su-m-0 su-text-16 su-leading-snug su-font-normal md:su-text-21" key="${item.asset_assetid}">
+                  children: meta.items.map((item) => `
+                      <p class="!su-m-0 su-text-16 su-leading-snug su-font-normal md:su-text-21" key="${item.asset_assetid}">
                           ${item.asset_name}
-                        </p>
-                      `).join('')
-                    : `
-                      <a href="${meta.items.asset_url}" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-dark-mode-red hover:su-text-digital-red su-text-18">
-                        ${meta.items.asset_name}
-                      </a>
-                    `
+                      </p>`).join("")
                 })}
               </div>
             `).join('')}
@@ -126,17 +119,11 @@ export function featuredMetadata({ data }) {
                 ${featuredField({
                   title: meta.name,
                   alignment: "center",
-                  children: meta.name !== "Campus unit"
-                    ? meta.items.map((item) => `
-                        <p class="!su-m-0 su-text-16 su-leading-snug su-font-normal md:su-text-21" key="${item.asset_assetid}">
-                          ${item.asset_name}
-                        </p>
-                      `).join('')
-                    : `
-                      <a href="${meta.items.asset_url}" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-dark-mode-red hover:su-text-digital-red su-text-18">
-                        ${meta.items.asset_name}
-                      </a>
-                    `
+                  children: meta.items.map((item) => `
+                      <p class="!su-m-0 su-text-16 su-leading-snug su-font-normal md:su-text-21" key="${item.asset_assetid}">
+                        ${item.asset_name}
+                      </p>
+                  `).join("")
                 })}
               </div>
             `).join('')}
@@ -182,22 +169,31 @@ export function featuredMetadata({ data }) {
         </div>
       ` : ''}
 
-      ${campus && !["null", "undefined", "", null, undefined].includes(campus.asset_assetid) ? `
-        <div class="su-text-center su-rs-mt-4 su-flex su-flex-col su-gap-20 md:su-gap-26">
-          <h3 class="su-text-18 su-font-bold su-leading-snug su-font-sans !su-m-0">Campus unit</h3>
-          ${!campus.asset_url ? `
-            <div class="su-flex su-gap-20 su-max-w-[71.9rem] su-flex-col md:su-gap-x-27 md:su-gap-y-12 md:su-flex-row md:su-flex-wrap md:su-justify-center">
-              ${campus.asset_name}
-            </div>
-          ` : `
-            <a href="${campus.asset_url}" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-19 su-font-semibold">
+      ${campus && campus.length > 0 ? `
+          <div class="su-text-center su-rs-mt-4 su-flex su-flex-col su-gap-20 md:su-gap-26">
+              <h3 class="su-text-18 su-font-bold su-leading-snug su-font-sans !su-m-0">
+                ${campus.length > 1 ? "Campus units" : "Campus unit"}
+              </h3>
               <div class="su-flex su-gap-20 su-max-w-[71.9rem] su-flex-col md:su-gap-x-27 md:su-gap-y-12 md:su-flex-row md:su-flex-wrap md:su-justify-center">
-                ${campus.asset_name}
+                ${campus.map((item) => item.asset_url === "" ? `
+                    <div>
+                      ${item.asset_name}
+                    </div>
+                  ` : `
+                      <div>
+                        <a
+                          href=${item.asset_url}
+                          class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-19 su-font-semibold"
+                        >
+                          ${item.asset_name}
+                        </a>
+                      </div>
+                  `
+                ).join("")}
               </div>
-            </a>
-          `}
-        </div>
+          </div>
       ` : ''}
+
 
       ${relatedFiltered && relatedFiltered.length ? `
         <div class="su-text-center su-rs-mt-4 su-flex su-flex-col su-gap-20 md:su-gap-26">
@@ -217,7 +213,6 @@ export function featuredMetadata({ data }) {
       <div class="su-text-center su-rs-mt-4 su-flex su-flex-col su-gap-20 md:su-gap-26">
         <h3 class="su-text-18 su-font-bold su-leading-snug !su-m-0 su-font-sans">Share this story</h3>
         <button
-          onclick="copyLink()"
           type="button"
           data-role="copy-link"
           class="su-text-digital-blue dark:su-text-digital-blue-vivid su-text-21 su-font-semibold su-mx-auto hocus:su-underline"
@@ -228,18 +223,5 @@ export function featuredMetadata({ data }) {
           </span>
         </button>
       </div>
-
-      <script>
-        function copyLink() {
-          navigator.clipboard.writeText(window.location.href).then(() => {
-            const copyText = document.querySelector('[data-copy-text]');
-            copyText.textContent = 'Copied';
-            setTimeout(() => {
-              copyText.textContent = 'Copy link';
-            }, 3000);
-          });
-        }
-      </script>
-    </section>
   `;
 }

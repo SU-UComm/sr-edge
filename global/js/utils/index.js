@@ -3,6 +3,7 @@ export { basicHeroDataAdapter } from './basicHeroDataAdapter';
 export { cardDataAdapter } from './cardDataAdapter';
 export { cdpSetConsent } from './cdpSetConsent';
 export { cdpSetPersona } from './cdpSetPersona';
+export { clearCookie } from './clearCookie';
 export { containerClasses } from './containerClasses';
 export { eventCardService } from './eventCardService';
 export { FetchAdapter } from './fetchAdapter';
@@ -20,10 +21,13 @@ export { matrixBasicHeroService } from './matrixBasicHeroService';
 export { matrixCardService } from './matrixCardService';
 export { matrixImageCardService } from './matrixImageCardService';
 export { matrixMediaCardService } from './matrixMediaCardService';
+export { matrixMetadataService } from './matrixMetadataService';
 export { matrixSidebarNavService } from './matrixSidebarNavService';
+export { metadataDataAdapter } from './metadataDataAdapter';
 export { multicolumnGrid } from './multicolumnGrid'
 export { readingTime } from './readingTime'
 export { sidebarNavDataAdapter } from './sidebarNavDataAdapter';
+export { setCookie } from './setCookie';
 export { translatePersonalisationProfile } from './translatePersonalisationProfile';
 export { useKeypress } from './useKeypress';
 export { useOnClickOutside } from './useOnClickOutside';

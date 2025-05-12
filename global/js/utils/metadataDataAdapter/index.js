@@ -1,0 +1,1 @@
+export { metadataDataAdapter } from './metadataDataAdapter';

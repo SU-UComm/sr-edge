@@ -1,0 +1,21 @@
+{{~#if navigation~}}
+    <div
+        data-audience='{{audience}}'
+        class='lg:su-mb-27 su-mb-32 md:su-mb-30 lg:su-ml-auto {{customClasses}}'
+    >
+        <ul
+            class='su-list-none su-flex lg:su-justify-end su-pl-0 su-gap-y-11 su-gap-x-20 lg:su-gap-x-27'
+        >
+            {{~#each navigation~}}
+                <li class='su-leading-[17px]'>
+                    <a
+                        class='su-font-semibold su-text-black dark:su-text-white dark:hover:su-text-dark-mode-red su-text-14 md:su-text-16 focus:su-text-digital-red hover:su-text-digital-red su-no-underline hover:su-underline su-transition'
+                        href='{{asset_url}}'
+                    >
+                        {{unescapeHtml asset_name}}
+                    </a>
+                </li>
+            {{~/each~}}
+        </ul>
+    </div>
+{{~/if~}}
