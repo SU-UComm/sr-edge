@@ -155,6 +155,13 @@ export function _carouselInit(section) {
         },
         watchSlidesProgress: true,
         on: {
+            init: function () {
+                console.log('Swiper has fully initialized.');
+                setTimeout(() => {
+                    sliderInit = true;
+                    useFocus = true;
+                }, 500);
+            },
             slideChange: function(swiper){
                 const thisSwiper = document.querySelector(swiperSelector);
                 /*
@@ -167,8 +174,10 @@ export function _carouselInit(section) {
                 if (oldSlide) {
                     oldSlide.removeAttribute("tabindex");
                 }
+                console.log('run1', useFocus);
                 // Set focus on new current
                 if (sliderInit) {
+                    console.log('focused', useFocus);
                     setTimeout(() => {
                         const slide = thisSwiper.querySelector(
                             ".swiper-slide-active"
@@ -179,13 +188,15 @@ export function _carouselInit(section) {
                                 slide.setAttribute("tabindex", "-1");
                                 return slide;
                             })();
+                            console.log('focused', useFocus);
                         if (useFocus) {
                             slideTarget.focus();
+                            console.log('focused');
                         }
                     }, 300);
                 }
-                sliderInit = true;
-                useFocus = true;
+                // sliderInit = true;
+                // useFocus = true;
                 // Prevent tab focus on out of view slides
                 swiper.slides.forEach((slide) => {
                     if (slide.classList.contains("swiper-slide-visible")) {
