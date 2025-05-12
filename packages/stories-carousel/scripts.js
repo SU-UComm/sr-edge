@@ -156,7 +156,6 @@ export function _carouselInit(section) {
         watchSlidesProgress: true,
         on: {
             init: function () {
-                console.log('Swiper has fully initialized.');
                 setTimeout(() => {
                     sliderInit = true;
                     useFocus = true;
@@ -174,10 +173,8 @@ export function _carouselInit(section) {
                 if (oldSlide) {
                     oldSlide.removeAttribute("tabindex");
                 }
-                console.log('run1', useFocus);
                 // Set focus on new current
                 if (sliderInit) {
-                    console.log('focused', useFocus);
                     setTimeout(() => {
                         const slide = thisSwiper.querySelector(
                             ".swiper-slide-active"
@@ -188,10 +185,8 @@ export function _carouselInit(section) {
                                 slide.setAttribute("tabindex", "-1");
                                 return slide;
                             })();
-                            console.log('focused', useFocus);
                         if (useFocus) {
                             slideTarget.focus();
-                            console.log('focused');
                         }
                     }, 300);
                 }
