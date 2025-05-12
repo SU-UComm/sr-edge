@@ -1,0 +1,93 @@
+{
+    "assetid": "164977",
+    "type_code": "image",
+    "version": "0.1.0",
+    "name": "GettyImages-1312139041.jpg",
+    "short_name": "Web Standards",
+    "external_id": false,
+    "status": "16",
+    "languages": "en",
+    "charset": "utf-8",
+    "created": "2024-10-09 19:03:34",
+    "created_userid": "48904",
+    "updated": "2024-10-10 00:55:17",
+    "updated_userid": "48904",
+    "published": "2024-10-10 00:55:17",
+    "published_userid": "48904",
+    "status_changed": "2024-10-10 00:55:17",
+    "status_changed_userid": "48904",
+    "url": "https://news.stanford.edu/__data/assets/image/0034/164977/GettyImages-1312139041.jpg",
+    "thumbnail": "",
+    "attributes": {
+        "allow_unrestricted": {
+            "attrid": "857",
+            "type": "boolean",
+            "value": true,
+            "is_contextable": false,
+            "use_default": true
+        },
+        "name": {
+            "attrid": "858",
+            "type": "text",
+            "value": "GettyImages-1312139041.jpg",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "variety_count": {
+            "attrid": "866",
+            "type": "int",
+            "value": "1",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "varieties": {
+            "attrid": "865",
+            "type": "serialise",
+            "value": [],
+            "is_contextable": false,
+            "use_default": true
+        },
+        "size": {
+            "attrid": "864",
+            "type": "int",
+            "value": "123939",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "height": {
+            "attrid": "863",
+            "type": "int",
+            "value": "580",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "width": {
+            "attrid": "862",
+            "type": "int",
+            "value": "869",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "caption": {
+            "attrid": "861",
+            "type": "text",
+            "value": "",
+            "is_contextable": true,
+            "use_default": true
+        },
+        "alt": {
+            "attrid": "860",
+            "type": "text",
+            "value": "Lady teaching others.",
+            "is_contextable": true,
+            "use_default": true
+        },
+        "title": {
+            "attrid": "859",
+            "type": "text",
+            "value": "Web Standards",
+            "is_contextable": true,
+            "use_default": true
+        }
+    }
+}

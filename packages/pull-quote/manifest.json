@@ -1,0 +1,158 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "pullquote",
+    "type": "edge",
+    "version": "3.0.0",
+    "namespace": "stanford-components",
+    "description": "Displays a quote for a story page along with details of the quote",
+    "displayName": "Pull quote",
+    "mainFunction": "main",
+    "environment": [
+        {
+            "name": "API_IDENTIFIER",
+            "required": true
+        }
+    ],
+    "icon": {
+        "id": "format_quote",
+        "color": {
+            "type": "enum",
+            "value": "red"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "displayConfiguration": {
+                        "required": [],
+                        "title": "Pullquote display configuration",
+                        "description": "Inputs user-defined settings for the pullquote component",
+                        "properties": {
+                            "asset": {
+                                "format": "matrix-asset-uri",
+                                "type": "string",
+                                "title": "Asset",
+                                "description": "Select an image asset as the quotee's image"
+                            },
+                            "quote": {
+                                "title": "Quote",
+                                "description": "The quote text",
+                                "type": "string",
+                                "format": "multi-line"
+                            },
+                            "name": {
+                                "title": "Name",
+                                "description": "The name of the quotee",
+                                "type": "string"
+                            },
+                            "title": {
+                                "title": "Title",
+                                "description": "The quotee's role or title",
+                                "type": "string"
+                            },
+                            "width": {
+                                "title": "Width",
+                                "description": "The width of the pullquote, this option will only take effect on featured story pages, not basic story pages.",
+                                "enum": [
+                                    "Narrow",
+                                    "Large"
+                                ],
+                                "type": "string",
+                                "default": "Narrow"
+                            }
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/14": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/164977": {
+            "type": "file",
+            "path": "mocked-uris/164977.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
