@@ -40,8 +40,8 @@ export default {
         let dataSource = "content";
 
         const assetCtx = info?.ctx ||  {};
-        const currentAssetId = assetCtx?.assetId || 169707;
-        // const currentAssetId = assetCtx?.assetId;
+        // const currentAssetId = assetCtx?.assetId || 169707;
+        const currentAssetId = assetCtx?.assetId;
 
         // Validate required environment variables
         try {
