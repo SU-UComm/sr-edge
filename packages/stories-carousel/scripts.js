@@ -93,7 +93,7 @@ export function _modalInit(section) {
         }
     });
 };
-let useFocus = true;
+let useFocus = false;
 // const handleClick = (e) => {
 //     e.preventDefault();
 //     if (e.detail) {
@@ -185,7 +185,7 @@ export function _carouselInit(section) {
                     }, 300);
                 }
                 sliderInit = true;
-
+                useFocus = true;
                 // Prevent tab focus on out of view slides
                 swiper.slides.forEach((slide) => {
                     if (slide.classList.contains("swiper-slide-visible")) {
