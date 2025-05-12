@@ -93,15 +93,25 @@ export function _modalInit(section) {
         }
     });
 };
+let useFocus = false;
+// const handleClick = (e) => {
+//     e.preventDefault();
+//     if (e.detail) {
+//         useFocus = false;
+//     } else {
+//         useFocus = true;
+//     }
+//   };
 
 /**
  * Modal Init function for card
  * @param {HTMLElement} section - The card carousel section DOM Element
  */
+let sliderInit = false;
 export function _carouselInit(section) {
     const uniqueClass = section.dataset.uniqueId;
-
-    new Swiper(`section[data-unique-id="${uniqueClass}"] .swiper`, {
+    const swiperSelector = `section[data-unique-id="${uniqueClass}"] .swiper`;
+    new Swiper(swiperSelector, {
         breakpoints: {
             0: {
                 slidesPerView: 1.5,
@@ -142,8 +152,66 @@ export function _carouselInit(section) {
             renderBullet: function (index, className) {
                 return `<button ${index === 0 ? 'aria-current="true"' : ""} class="${className}"><span class="sr-only">Slide ${index + 1}</span></button>`;
             },
+        },
+        watchSlidesProgress: true,
+        on: {
+            slideChange: function(swiper){
+                const thisSwiper = document.querySelector(swiperSelector);
+                /*
+                * Focus on first active slide
+                */
+                // Remove tabindex from old current
+                const oldSlide = thisSwiper.querySelector(
+                    ".swiper-slide-active"
+                );
+                if (oldSlide) {
+                    oldSlide.removeAttribute("tabindex");
+                }
+                // Set focus on new current
+                if (sliderInit) {
+                    setTimeout(() => {
+                        const slide = thisSwiper.querySelector(
+                            ".swiper-slide-active"
+                        );
+                        const slideTarget = slide.querySelector("h2 a, h3 a, button")
+                            ? slide.querySelector("h2 a, h3 a, button")
+                            : (() => {
+                                slide.setAttribute("tabindex", "-1");
+                                return slide;
+                            })();
+                        if (useFocus) {
+                        //     slideTarget.focus();
+                        }
+                    }, 300);
+                }
+                sliderInit = true;
+
+                // Prevent tab focus on out of view slides
+                swiper.slides.forEach((slide) => {
+                    if (slide.classList.contains("swiper-slide-visible")) {
+                    slide.removeAttribute("aria-hidden");
+                    slide.removeAttribute("inert");
+                    } else {
+                    slide.setAttribute("aria-hidden", "true");
+                    slide.setAttribute("inert", "true");
+                    }
+                });
+
+                if (swiper.pagination.bullets.length > 0) {
+                    swiper.pagination.bullets.forEach((bullet) => {
+                    if (
+                        bullet.classList.contains("swiper-pagination-bullet-active")
+                    ) {
+                        bullet.setAttribute("aria-current", "true");
+                    } else {
+                        bullet.removeAttribute("aria-current");
+                    }
+                    });
+                }
+            }
         }
     });
+    
 };
 
 /**
@@ -160,3 +228,5 @@ document.addEventListener('DOMContentLoaded', function () {
         _modalInit(section);
     });    
 });
+
+

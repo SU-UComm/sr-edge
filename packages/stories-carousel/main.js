@@ -40,7 +40,7 @@ export default {
         let dataSource = "content";
 
         const assetCtx = info?.ctx ||  {};
-        // const currentAssetId = assetCtx?.assetId || 168567;
+        // const currentAssetId = assetCtx?.assetId || 169707;
         const currentAssetId = assetCtx?.assetId;
 
         // Validate required environment variables
@@ -145,7 +145,7 @@ export default {
             const props = await res.json();
 
             // Construct the FB URL
-            if (props.search) {
+            if (props?.search) {
                 query = `?profile=${props.search.profile}&collection=${props.search.collection}${
                     props.search.maintopic?.asset_name !== ""
                     ? `&query=[taxonomyContentMainTopicId:${props.search.maintopic?.asset_assetid} taxonomyContentTopicsId:${props.search.maintopic?.asset_assetid} taxonomyContentSubtopicsId:${props.search.maintopic?.asset_assetid}]`
