@@ -1,0 +1,190 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "text-callout",
+    "type": "edge",
+    "version": "3.0.0",
+    "namespace": "stanford-components",
+    "description": "This component is intended for displaying extra text content with a background color applied",
+    "displayName": "Text Callout",
+    "mainFunction": "main",
+    "icon": {
+        "id": "campaign",
+        "color": {
+            "type": "enum",
+            "value": "orange"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "displayConfiguration": {
+                        "title": "Text callout display configuration",
+                        "description": "These fields will make up the content displayed on the front-end.",
+                        "required": [],
+                        "properties": {
+                            "title": {
+                                "title": "Heading",
+                                "description": "The heading text",
+                                "type": "string"
+                            },
+                            "content": {
+                                "title": "Content",
+                                "description": "The text content for this component",
+                                "type": "FormattedText"
+                            }
+                        }
+                    },
+                    "imageConfiguration": {
+                        "title": "Image configuration",
+                        "required": [],
+                        "properties": {
+                            "image": {
+                                "title": "Image asset",
+                                "type": "string",
+                                "format": "matrix-asset-uri"
+                            },
+                            "caption": {
+                                "title": "Caption",
+                                "type": "string",
+                                "format": "multi-line"
+                            },
+                            "credit": {
+                                "title": "Credit",
+                                "type": "string"
+                            },
+                            "imagePlacement": {
+                                "title": "Image position",
+                                "enum": [
+                                    "Below content",
+                                    "Above content"
+                                ],
+                                "type": "string",
+                                "default": "Below content"
+                            }
+                        }
+                    },
+                    "buttonConfiguration": {
+                        "title": "Button configuration",
+                        "description": "Optionally add a link button at the bottom by filling out these fields.",
+                        "required": [],
+                        "properties": {
+                            "buttonText": {
+                                "title": "Button text",
+                                "type": "string"
+                            },
+                            "internalUrl": {
+                                "title": "Internal link (Matrix asset link)",
+                                "type": "string",
+                                "description": "Select a page/asset to link to. If this field is filled out, it will be used instead of the external link field below.",
+                                "format": "matrix-asset-uri"
+                            },
+                            "externalUrl": {
+                                "title": "External (manual) link",
+                                "type": "string",
+                                "description": "Enter the full URL, including https://. A diagonal arrow icon will be automatically added after the button text if the URL does not contain news.stanford.edu."
+                            },
+                            "isNewWindow": {
+                                "title": "Open link in a new window",
+                                "type": "boolean",
+                                "default": false
+                            }
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/14": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/9848": {
+            "type": "file",
+            "path": "mocked-uris/9848.json"
+        },
+        "matrix-asset://api-identifier/130290": {
+            "type": "file",
+            "path": "mocked-uris/130290.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}

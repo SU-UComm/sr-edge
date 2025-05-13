@@ -4,20 +4,20 @@
             {{~#if storyLink}}
             <a
             href="{{storyLink}}"
-            class="su-group su-stretched-link su-no-underline hocus:su-underline su-text-black hocus:su-text-digital-red dark:su-text-white dark:hocus:su-text-dark-mode-red focus:su-outline-none"
+            class="su-group su-text-black su-transition dark:su-text-white hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red hocus:su-underline"
             rel={{getStringByCondition value=isRealExternalLink expectedValue=true trueResult="noopener noreferrer" falseResult=undefined}}
             >
                 {{heading}}
                 {{~#if isRealExternalLink}}
                 {{!-- Use this whitespace-nowrap trick so icon won't get pushed to the next line on its own --}}
-                <span class="su-whitespace-nowrap">
+                <span class="su-group su-whitespace-nowrap">
                     &#65279;
                     {{> fontawesome-icon
                         icon="arrow-up-right"
                         set="regular"
                         title="(link is external)"
                         width=24
-                        customClasses="fa-fw su-inline-block su-align-middle su-text-[0.8em] su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
+                        classes="su-h-auto su-align-middle su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
                     }}
                 </span>
                 {{~/if~}}
@@ -33,6 +33,6 @@
         {{~/if~}}
     </div>
     <div class="su-w-full lg:su-basis-[50%] xl:su-basis-[60%] 2xl:su-basis-[70%] su-relative focus-within:su-ring-4">
-        {{> card-thumbnail imageUrl=videoImageUrl imageAlt=videoImageAlt videoUrl=youtubeId title=heading mediaType="video" aspectRatio=(aspectRatioSize "featured") size="featured" videoIconClasses="group-hocus:su-scale-110 su-transition-transform" uniqueID=uniqueID}}
+        {{> card-thumbnail imageUrl=videoImageUrl imageAlt=videoImageAlt videoUrl=youtubeId title=heading mediaType="video" aspectRatio="video" size="featured" videoIconClasses="group-hocus:su-scale-110 su-transition-transform" uniqueID=uniqueID}}
     </div>
 </article>

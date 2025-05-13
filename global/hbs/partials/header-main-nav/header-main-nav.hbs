@@ -1,0 +1,23 @@
+<nav
+    aria-label='Secondary'
+    class='report-header__nav su-hidden md:su-block su-w-full before:su-h-2 before:su-block before:su-w-full before:su-bg-black-10 before:su-mx-auto before:su-w-full dark:before:su-bg-black lg:before:su-max-w-[858px]'
+>
+    <ul
+        data-role='header-main-nav'
+        class='su-list-none su-pl-0 su-ml-0 su-flex su-justify-center su-gap-60 su-mb-0 su-opacity-1 su-transition'
+    >
+        {{~#each items~}}
+            <li class='su-mb-0'>
+                <a href='{{asset_url}}' data-menu="main-nav" data-id="{{asset_assetid}}" class='{{getStringByCondition
+                        value=asset_assetid
+                        expectedValue=../currentPage
+                        trueResult='su-block su-pt-13 su-pb-9 su-border-b-4 su-no-underline su-text-black dark:su-text-white dark:hover:su-text-dark-mode-red dark:hover:su-border-dark-mode-red su-transition su-ease-in-out hover:su-border-digital-red hover:su-text-digital-red su-text-16 lg:su-text-18 su-leading-[21.5px] !su-text-digital-red su-border-digital-red dark:su-border-dark-mode-red dark:!su-text-dark-mode-red'
+                        falseResult='su-block su-pt-13 su-pb-9 su-border-b-4 su-no-underline su-text-black dark:su-text-white dark:hover:su-text-dark-mode-red dark:hover:su-border-dark-mode-red su-transition su-ease-in-out hover:su-border-digital-red hover:su-text-digital-red su-text-16 lg:su-text-18 su-leading-[21.5px] su-border-transparent'
+                    }}'
+                >
+                    {{{unescapeHtml asset_name}}}
+                </a>
+            </li>
+        {{~/each~}}
+    </ul>
+</nav>

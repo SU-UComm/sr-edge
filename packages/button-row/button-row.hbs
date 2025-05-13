@@ -1,0 +1,10 @@
+<section data-component="button-row">
+    <div class="{{containerClasses}}">
+        <div class="su-flex su-flex-wrap su-justify-center su-gap-x-18 md:su-gap-x-27 su-gap-y-12 su-mx-auto su-w-fit">
+            {{#each buttons}}
+                {{> link-button buttonText=buttonText isNewWindow=isNewWindow buttonUrl=buttonUrl isRealExternalLink=isRealExternalLink ctaType="link" }}
+            {{/each}}
+        </div>
+    </div>
+</section>
+

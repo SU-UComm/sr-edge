@@ -1,0 +1,29 @@
+{
+    "id": "130290",
+    "type": "page_standard",
+    "type_name": "Standard Page",
+    "version": "0.0.1",
+    "name": "Home",
+    "short_name": "Home",
+    "status": {
+        "id": 2,
+        "code": "under_construction",
+        "name": "Under Construction"
+    },
+    "created": { "date": "2023-08-25T06:08:06-07:00", "user_id": "57" },
+    "updated": { "date": "2023-08-25T06:08:07-07:00", "user_id": "57" },
+    "published": { "date": null, "user_id": null },
+    "status_changed": { "date": "2023-08-25T06:08:06-07:00", "user_id": "57" },
+    "urls": ["https://news.stanford.edu/home-page"],
+    "url": "https://news.stanford.edu/home-page",
+    "attributes": { "name": "News" },
+    "metadata": {
+        "slug": [],
+        "description": [],
+        "itemId": [],
+        "parentSection": [],
+        "featured": []
+    },
+    "contents": "",
+    "additional": {}
+}

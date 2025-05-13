@@ -36,15 +36,10 @@ export function formatCardDataFunnelback({
   }) {
     const authorDisplayName = authorName !== undefined ? authorName : author;
     const authorAvatar = authorImage !== "" ? authorImage : undefined;
-  
-    const imageUrl = image;
-     
-    imageAlt = image && imageAlt ? imageAlt : "";
-  
-    if (!imageAlt && !imageUrl) {
-        imageAlt = "a close up image of an intricate stone arch";
-    }
-  
+
+    const imageUrl = image && image !== "" ? image : null;
+    const finalImageAlt = imageAlt && imageAlt !== "" ? imageAlt : "";
+
     const videoUrl = featuredVideo;
   
     const description = teaserPlain || summary;
@@ -78,7 +73,7 @@ export function formatCardDataFunnelback({
         description: Array.isArray(description) ? description[0] : description,
         liveUrl: Array.isArray(liveUrl) ? liveUrl[0] : liveUrl,
         imageUrl: Array.isArray(imageUrl) ? imageUrl[0] : imageUrl,
-        imageAlt: Array.isArray(imageAlt) ? imageAlt[0] : imageAlt,
+        imageAlt: Array.isArray(finalImageAlt) ? finalImageAlt[0] : finalImageAlt,
         taxonomy: Array.isArray(taxonomy) ? taxonomy[0] : taxonomy,
         taxonomyUrl: Array.isArray(taxonomyUrl) ? taxonomyUrl[0] : taxonomyUrl,
         type: Array.isArray(type) ? type[0] : type,
