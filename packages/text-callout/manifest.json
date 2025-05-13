@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "text-callout",
     "type": "edge",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "namespace": "stanford-components",
     "description": "This component is intended for displaying extra text content with a background color applied",
     "displayName": "Text Callout",
@@ -59,10 +59,7 @@
                             },
                             "imagePlacement": {
                                 "title": "Image position",
-                                "enum": [
-                                    "Below content",
-                                    "Above content"
-                                ],
+                                "enum": ["Below content", "Above content"],
                                 "type": "string",
                                 "default": "Below content"
                             }
