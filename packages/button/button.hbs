@@ -1,5 +1,5 @@
 <section data-component="button">
-    <div class="{{containerClasses width=width}}">
-        {{> link-button buttonText=buttonText isNewWindow=isNewWindow buttonUrl=buttonUrl isRealExternalLink=isRealExternalLink ctaType="link" }}
+    <div class="{{containerClasses width=width}}" data-sq-field="internalUrl" data-test="{{editMode}}">
+        {{> link-button buttonText=buttonText isNewWindow=isNewWindow buttonUrl=buttonUrl isRealExternalLink=isRealExternalLink ctaType="link" editMode=editMode }}
     </div>
 </section>

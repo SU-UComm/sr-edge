@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "button",
-    "version": "4.0.2",
+    "version": "4.0.7",
     "namespace": "stanford-apb",
     "description": "A button that can be linked to internal or external pages.",
     "displayName": "Button",
@@ -24,23 +24,35 @@
                     "buttonText": {
                         "title": "Button text",
                         "type": "string",
-                        "default": "Button text"
+                        "default": "Button text",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "internalUrl": {
                         "title": "Internal link (Matrix asset link)",
                         "type": "string",
                         "description": "Select a page/asset to link to. If this field is filled out, it will be used instead of the external link field below.",
-                        "format": "matrix-asset-uri"
+                        "format": "matrix-asset-uri",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "externalUrl": {
                         "title": "External (manual) link",
                         "type": "string",
-                        "description": "Enter the full URL, including https://. A diagonal arrow icon will be automatically added after the button text if the URL does not contain news.stanford.edu."
+                        "description": "Enter the full URL, including https://. A diagonal arrow icon will be automatically added after the button text if the URL does not contain news.stanford.edu.",
+                        "ui:metadata": {
+                            "inlineEditable": false
+                        }
                     },
                     "isNewWindow": {
                         "title": "Open link in a new window",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     }
                 },
                 "required": []

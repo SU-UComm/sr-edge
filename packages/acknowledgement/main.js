@@ -36,7 +36,6 @@ export default {
                     );
                 }
             }
-            
         } catch (er) {
             console.error('Error occurred in the Acknowledgement component: ', er);
             return `<!-- Error occurred in the Acknowledgement component: ${er.message} -->`;
