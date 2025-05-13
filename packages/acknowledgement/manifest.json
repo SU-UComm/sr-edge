@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "acknowledgement",
     "type": "edge",
-    "version": "4.0.2",
+    "version": "4.0.3",
     "namespace": "stanford-apb",
     "description": "Acknowledgement and title area.",
     "displayName": "Acknowledgement",
@@ -29,7 +29,23 @@
                     },
                     "content": {
                         "title": "Acknowledgement",
-                        "type": "FormattedText"
+                        "type": "FormattedText",
+                        "default": [
+                            {
+                                "type": "tag",
+                                "tag": "p",
+                                "children": [
+                                    {
+                                        "type": "text",
+                                        "value": "Add WYSIWYG content for this component."
+                                    }
+                                ]
+                            }
+                        ],
+                        "ui:metadata": {
+                            "inlineEditable": true,
+                            "quickOption": false
+                        }
                     }
                 },
                 "required": [

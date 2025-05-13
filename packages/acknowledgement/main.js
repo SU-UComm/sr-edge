@@ -1,3 +1,4 @@
+import { isEditor } from "../../global/js/utils/isEditor";
 import acknowledgement from './acknowledgement.hbs';
 
 /**
@@ -14,22 +15,28 @@ export default {
      * @param {string} args.content - The content of the acknowledgment.
      * @returns {Promise<string>} The rendered acknowledgment HTML or an error message.
      */
-    async main( args ) {
+    async main( args, info ) {
+        const { ctx } = info;
+        const editMode = isEditor(ctx);
+
         // Extracting configuration data from arguments
         const { title, content } = args || {};
 
         // Validate required fields and ensure correct data types
         try {
-            if (typeof title !== 'string' || title === '') {
-                throw new Error(
-                    `The "title" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(title)} was received.`,
-                );
+            if(!editMode){
+                if (typeof title !== 'string' || title === '') {
+                    throw new Error(
+                        `The "title" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(title)} was received.`,
+                    );
+                }
+                if (typeof content !== 'string' || content === '') {
+                    throw new Error(
+                        `The "content" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(content)} was received.`,
+                    );
+                }
             }
-            if (typeof content !== 'string' || content === '') {
-                throw new Error(
-                    `The "content" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(content)} was received.`,
-                );
-            }
+            
         } catch (er) {
             console.error('Error occurred in the Acknowledgement component: ', er);
             return `<!-- Error occurred in the Acknowledgement component: ${er.message} -->`;
