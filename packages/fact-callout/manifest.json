@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "fact-callout",
     "type": "edge",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "namespace": "stanford-components",
     "description": "Display a fact on featured story pages",
     "displayName": "Fact callout",
@@ -54,11 +54,11 @@
                                 "title": "Fact width",
                                 "description": "This option sets the width of the component, please note that this option will only work on featured story pages, not basic story pages.",
                                 "enum": [
-                                    "wide",
-                                    "narrow"
+                                    "Wide",
+                                    "Narrow"
                                 ],
                                 "type": "string",
-                                "default": "wide"
+                                "default": "Wide"
                             }
                         }
                     }
