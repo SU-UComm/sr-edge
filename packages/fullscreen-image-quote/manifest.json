@@ -3,7 +3,7 @@
     "name": "fullscreen-image-quote",
     "type": "edge",
     "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "This component displays a full width image with a quote and CTA.",
     "displayName": "Fullscreen Image Quote",
     "mainFunction": "main",

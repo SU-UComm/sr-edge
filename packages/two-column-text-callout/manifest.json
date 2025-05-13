@@ -3,7 +3,7 @@
     "name": "two-column-text-callout",
     "type": "edge",
     "version": "4.0.5",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "This component displays up to 2 text callouts boxes in a two-column layout.",
     "displayName": "Two Column Text Callout",
     "mainFunction": "main",

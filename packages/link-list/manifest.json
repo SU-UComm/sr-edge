@@ -3,7 +3,7 @@
     "name": "link-list",
     "type": "edge",
     "version": "4.0.3",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Recommended stories are shown in this component as a vertical list.",
     "displayName": "Link List",
     "mainFunction": "main",
@@ -30,7 +30,10 @@
                         "type": "string"
                     }
                 },
-                "required": ["dataUrl", "title"]
+                "required": [
+                    "dataUrl",
+                    "title"
+                ]
             },
             "output": {
                 "responseType": "html"

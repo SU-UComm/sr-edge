@@ -3,7 +3,7 @@
     "name": "single-cta-block",
     "type": "edge",
     "version": "4.0.6",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "A block of text content with a CTA and optional image.",
     "displayName": "Single CTA Block",
     "mainFunction": "main",
@@ -25,7 +25,10 @@
                     "size": {
                         "title": "Component size",
                         "description": "If you are creating a campaign page, choose 'campaign'otherwise leave as 'normal'.",
-                        "enum": ["normal", "campaign"],
+                        "enum": [
+                            "normal",
+                            "campaign"
+                        ],
                         "default": "normal"
                     },
                     "eyebrow": {
@@ -110,7 +113,11 @@
                                 "description": "Select the type of CTA - link, download, or email. The appropriate icon will be added after the CTA text depending on your selection. No icon will be displayed for internal links.",
                                 "type": "string",
                                 "default": "link",
-                                "enum": ["download", "email", "link"]
+                                "enum": [
+                                    "download",
+                                    "email",
+                                    "link"
+                                ]
                             }
                         },
                         "allOf": [
@@ -130,7 +137,9 @@
                                             "type": "string"
                                         }
                                     },
-                                    "required": ["email"]
+                                    "required": [
+                                        "email"
+                                    ]
                                 },
                                 "else": {
                                     "properties": {

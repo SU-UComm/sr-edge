@@ -3,7 +3,7 @@
     "name": "basic-story-hero",
     "type": "edge",
     "version": "4.0.7",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "The basic story hero appears on basic story pages",
     "displayName": "Basic story hero",
     "mainFunction": "main",

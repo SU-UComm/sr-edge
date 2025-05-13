@@ -3,7 +3,7 @@
     "name": "story-lead",
     "type": "edge",
     "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Introduction to a story, with a decorative first letter.",
     "displayName": "Story Lead",
     "mainFunction": "main",
@@ -30,7 +30,10 @@
                         "title": "Variant",
                         "type": "string",
                         "default": "Basic Story",
-                        "enum": ["Basic Story", "Featured Story"]
+                        "enum": [
+                            "Basic Story",
+                            "Featured Story"
+                        ]
                     }
                 }
             },

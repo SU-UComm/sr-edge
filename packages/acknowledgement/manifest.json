@@ -3,7 +3,7 @@
     "name": "acknowledgement",
     "type": "edge",
     "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Acknowledgement and title area.",
     "displayName": "Acknowledgement",
     "mainFunction": "main",
@@ -32,7 +32,10 @@
                         "type": "FormattedText"
                     }
                 },
-                "required": ["content", "title"]
+                "required": [
+                    "content",
+                    "title"
+                ]
             },
             "output": {
                 "responseType": "html"

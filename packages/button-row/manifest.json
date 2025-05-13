@@ -3,7 +3,7 @@
     "name": "button-row",
     "version": "4.0.2",
     "type": "edge",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Add up to 3 buttons in this row component.",
     "displayName": "Button row",
     "mainFunction": "main",

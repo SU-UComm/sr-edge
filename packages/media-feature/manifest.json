@@ -3,7 +3,7 @@
     "name": "media-feature",
     "type": "edge",
     "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "The media feature component is used to feature a singular podcast or book.",
     "displayName": "Media feature",
     "mainFunction": "main",
@@ -42,7 +42,11 @@
                             },
                             "mediaType": {
                                 "title": "Media type",
-                                "enum": ["Podcast", "Book", "Magazine"],
+                                "enum": [
+                                    "Podcast",
+                                    "Book",
+                                    "Magazine"
+                                ],
                                 "type": "string",
                                 "default": "Podcast"
                             },

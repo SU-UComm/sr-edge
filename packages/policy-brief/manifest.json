@@ -3,7 +3,7 @@
     "name": "policy-brief",
     "type": "edge",
     "version": "4.0.4",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "This component allows a content manager to create a policy brief that can be externally linked to a policy brief or case study.",
     "displayName": "Policy brief",
     "mainFunction": "main",
@@ -34,7 +34,10 @@
                             },
                             "type": {
                                 "title": "Type",
-                                "enum": ["Policy Brief", "Case Study"],
+                                "enum": [
+                                    "Policy Brief",
+                                    "Case Study"
+                                ],
                                 "default": "Policy Brief",
                                 "type": "string"
                             },

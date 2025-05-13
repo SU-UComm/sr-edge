@@ -3,7 +3,7 @@
     "name": "multicolumn-info-section",
     "type": "edge",
     "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "The multicolumn info section displays a title in column 1, WYSIWYG content in column 2, and an optional text callout in column 3",
     "displayName": "Multicolumn Info Section",
     "mainFunction": "main",
@@ -40,7 +40,9 @@
                         "type": "boolean"
                     },
                     "colOne": {
-                        "required": ["title"],
+                        "required": [
+                            "title"
+                        ],
                         "title": "Column One",
                         "description": "The title of the section. This is required and displays in the first column.",
                         "properties": {
@@ -53,7 +55,9 @@
                         }
                     },
                     "colTwo": {
-                        "required": ["infoText"],
+                        "required": [
+                            "infoText"
+                        ],
                         "title": "Column Two",
                         "description": "Info text is required and displays in the second column.",
                         "properties": {
@@ -122,7 +126,9 @@
                                     "const": true
                                 }
                             },
-                            "required": ["callout"]
+                            "required": [
+                                "callout"
+                            ]
                         },
                         "then": {
                             "properties": {

@@ -3,7 +3,7 @@
     "name": "interactive-photo-card",
     "type": "edge",
     "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "2 side by side cards with 1 being a photo and 1 being a fact with the ability to flip the card over for additional information.",
     "displayName": "Interactive Photo Card",
     "mainFunction": "main",
@@ -46,10 +46,17 @@
                         "title": "Image Alignment",
                         "type": "string",
                         "default": "right",
-                        "enum": ["left", "right"]
+                        "enum": [
+                            "left",
+                            "right"
+                        ]
                     }
                 },
-                "required": ["title", "content", "image"]
+                "required": [
+                    "title",
+                    "content",
+                    "image"
+                ]
             },
             "output": {
                 "responseType": "html"

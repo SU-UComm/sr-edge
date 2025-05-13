@@ -3,7 +3,7 @@
     "name": "pullquote",
     "type": "edge",
     "version": "4.0.4",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Displays a quote for a story page along with details of the quote",
     "displayName": "Pull quote",
     "mainFunction": "main",
@@ -58,7 +58,10 @@
                             "width": {
                                 "title": "Width",
                                 "description": "The width of the pullquote, this option will only take effect on featured story pages, not basic story pages.",
-                                "enum": ["Narrow", "Large"],
+                                "enum": [
+                                    "Narrow",
+                                    "Large"
+                                ],
                                 "type": "string",
                                 "default": "Narrow"
                             }

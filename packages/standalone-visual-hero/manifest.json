@@ -3,7 +3,7 @@
     "name": "standalone-visual-hero",
     "type": "edge",
     "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Standalone Visual story hero",
     "displayName": "Standalone Visual Hero",
     "mainFunction": "main",

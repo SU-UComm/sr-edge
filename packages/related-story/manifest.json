@@ -3,7 +3,7 @@
     "name": "related-story",
     "type": "edge",
     "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Displays a related story on a featured story",
     "displayName": "Related story",
     "mainFunction": "main",
@@ -36,7 +36,9 @@
                         "title": "Related story content",
                         "description": "Select an asset ID to be featured as a related story.",
                         "type": "object",
-                        "required": ["story"],
+                        "required": [
+                            "story"
+                        ],
                         "properties": {
                             "story": {
                                 "title": "Related story",

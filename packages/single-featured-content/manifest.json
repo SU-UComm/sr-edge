@@ -3,7 +3,7 @@
     "name": "single-featured-content",
     "type": "edge",
     "version": "4.0.3",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Stanford university single featured content component",
     "displayName": "Single featured content",
     "mainFunction": "main",
@@ -68,7 +68,9 @@
                     "contentConfiguration": {
                         "title": "Single featured content inner content",
                         "description": "The featured content to display in the component",
-                        "required": ["source"],
+                        "required": [
+                            "source"
+                        ],
                         "properties": {
                             "source": {
                                 "title": "Featured content",

@@ -3,7 +3,7 @@
     "name": "campaign-cta",
     "type": "edge",
     "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "This component serves as a preview & to promote campaign pages.",
     "displayName": "Campaign CTA",
     "mainFunction": "main",
@@ -25,7 +25,9 @@
                     "displayConfiguration": {
                         "title": "Campaign CTA configuration",
                         "description": "These options will output to the frontend of the Campaign CTA component",
-                        "required": ["image"],
+                        "required": [
+                            "image"
+                        ],
                         "properties": {
                             "image": {
                                 "title": "Background image",

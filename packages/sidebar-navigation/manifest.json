@@ -3,7 +3,7 @@
     "name": "sidebar-navigation",
     "type": "edge",
     "version": "4.0.0",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "A navigation element used for a collection of basic informational pages.",
     "displayName": "Sidebar Navigation",
     "mainFunction": "main",

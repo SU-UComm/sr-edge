@@ -3,7 +3,7 @@
     "name": "image-gallery-modal",
     "type": "edge",
     "version": "4.0.6",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "An image gallery that opens in a modal.",
     "displayName": "Image gallery with modal",
     "mainFunction": "main",
@@ -38,7 +38,10 @@
                             "layout": {
                                 "title": "Layout",
                                 "type": "string",
-                                "enum": ["Title & Content", "Content Only"],
+                                "enum": [
+                                    "Title & Content",
+                                    "Content Only"
+                                ],
                                 "default": "Title & Content"
                             },
                             "caption": {
@@ -59,7 +62,9 @@
                                 "maxItems": 20,
                                 "items": {
                                     "type": "object",
-                                    "required": ["image"],
+                                    "required": [
+                                        "image"
+                                    ],
                                     "properties": {
                                         "image": {
                                             "title": "Image asset",
@@ -100,7 +105,10 @@
                                         "summaryAlign": {
                                             "title": "Summary alignment",
                                             "type": "string",
-                                            "enum": ["left", "center"],
+                                            "enum": [
+                                                "left",
+                                                "center"
+                                            ],
                                             "default": "left"
                                         }
                                     }
@@ -118,14 +126,20 @@
                             },
                             "backgroundColor": {
                                 "title": "Background Color",
-                                "enum": ["Grey", "Transparent"],
+                                "enum": [
+                                    "Grey",
+                                    "Transparent"
+                                ],
                                 "type": "string",
                                 "default": "Grey"
                             },
                             "width": {
                                 "title": "Width",
                                 "type": "string",
-                                "enum": ["Wide", "Content"],
+                                "enum": [
+                                    "Wide",
+                                    "Content"
+                                ],
                                 "default": "Wide"
                             }
                         }

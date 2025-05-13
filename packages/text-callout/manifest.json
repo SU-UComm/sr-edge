@@ -3,7 +3,7 @@
     "name": "text-callout",
     "type": "edge",
     "version": "4.0.6",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "This component is intended for displaying extra text content with a background color applied",
     "displayName": "Text Callout",
     "mainFunction": "main",
@@ -59,7 +59,10 @@
                             },
                             "imagePlacement": {
                                 "title": "Image position",
-                                "enum": ["Below content", "Above content"],
+                                "enum": [
+                                    "Below content",
+                                    "Above content"
+                                ],
                                 "type": "string",
                                 "default": "Below content"
                             }
