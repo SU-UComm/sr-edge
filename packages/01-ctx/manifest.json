@@ -1,0 +1,85 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "ctx-editor",
+    "version": "0.0.24",
+    "namespace": "stanford-apb",
+    "description": "APB context editor example",
+    "type": "edge",
+    "displayName": "APB context editor",
+    "mainFunction": "main",
+    "icon": {
+        "id": "foundation",
+        "color": {
+            "type": "enum",
+            "value": "gray"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "title": "Title of the element",
+                        "default": "Add a title",
+                        "ui:metadata": {
+                            "inlineEditable": true,
+                            "quickOption": false
+                        }
+                    },
+                    "settings": {
+                        "type": "object",
+                        "title": "Wrapper Settings",
+                        "required": [],
+                        "properties": {
+                            "tag": {
+                                "type": "string",
+                                "title": "Wrapper type",
+                                "description": "Define wrapper type that should be used",
+                                "enum": [
+                                    "section",
+                                    "div",
+                                    "article",
+                                    "span"
+                                ],
+                                "default": "section",
+                                "ui:metadata": {
+                                    "quickOption": true,
+                                    "enumWidget": "radio"
+                                }
+                            }
+                        },
+                        "ui:metadata": {
+                            "collapsedByDefault": true
+                        }
+                    }
+                },
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        }
+    }
+}

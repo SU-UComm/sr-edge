@@ -28,7 +28,7 @@ export default {
         // Extracting functions from provided info
         const { ctx } = info || {};
         const { fns } = info || {};
-        const editMode = isEditor(ctx);
+        const editMode = isEditor(ctx.url);
         // Extracting configuration data from arguments
         const { buttonText = "Button text", internalUrl, externalUrl, isNewWindow } = args || {};
 
@@ -97,7 +97,7 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            buttonText: ctx.url,
+            buttonText,
             isNewWindow,
             buttonUrl,
             isRealExternalLink: !linkData?.url && externalUrl ? isRealExternalLink(externalUrl) : false,

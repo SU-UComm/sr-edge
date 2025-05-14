@@ -31,16 +31,19 @@ export default {
     async main( args, info ) {
         try {
             const { ctx } = info;
-            const editMode = isEditor(ctx);
-
+            const { title, settings } = args;
+            const editMode = isEditor(ctx.url);
+            // 
+            // 
             const output = `
-                <div>
+                ${settings.tag ? `<${settings.tag} data-sq-field="settings.tag">` : '<section data-sq-field="settings.tag">'}
+                    ${editMode ? `<h2 data-sq-field="title">${title}</h2>` : `${title ? `<h2>${title}</h2>` : ""}`}
                     <ul>
-                        <li>AssetId: ${ctx.assetId}</li>
-                        <li>URL: ${ctx.url}</li>
-                        <li>Edit Mode: ${editMode}</li>
+                        <li>Asset id: ${ctx.assetId}</li>
+                        <li>Asset URL: ${ctx.url}</li>
+                        <li>Editing : ${editMode}</li>
                     </ul>
-                </div>
+                ${settings.tag ? `</${settings.tag}>` : '</section>'}
             `;
 
             return output
