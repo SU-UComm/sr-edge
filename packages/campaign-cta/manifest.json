@@ -1,0 +1,150 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "campaign-cta",
+    "type": "edge",
+    "version": "3.0.0",
+    "namespace": "stanford-components",
+    "description": "This component serves as a preview & to promote campaign pages.",
+    "displayName": "Campaign CTA",
+    "mainFunction": "main",
+    "icon": {
+        "id": "star",
+        "color": {
+            "type": "enum",
+            "value": "gray"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "displayConfiguration": {
+                        "title": "Campaign CTA configuration",
+                        "description": "These options will output to the frontend of the Campaign CTA component",
+                        "required": ["image"],
+                        "properties": {
+                            "image": {
+                                "title": "Background image",
+                                "description": "This image will be displayed in the background of the component",
+                                "type": "string",
+                                "format": "matrix-asset-uri"
+                            },
+                            "title": {
+                                "title": "Title",
+                                "description": "The campaign title",
+                                "type": "string",
+                                "default": ""
+                            },
+                            "description": {
+                                "title": "Description",
+                                "description": "The campaign text content",
+                                "type": "string",
+                                "format": "multi-line"
+                            },
+                            "linkUrl": {
+                                "title": "CTA Destination",
+                                "description": "The CTA link destination",
+                                "type": "string",
+                                "format": "matrix-asset-uri"
+                            },
+                            "linkText": {
+                                "title": "CTA text",
+                                "description": "The CTA title",
+                                "type": "string",
+                                "default": "Learn more"
+                            }
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/163293": {
+            "type": "file",
+            "path": "mocked-uris/163293.json"
+        },
+        "matrix-asset://api-identifier/141464": {
+            "type": "file",
+            "path": "mocked-uris/141464.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
