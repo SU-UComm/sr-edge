@@ -37,20 +37,20 @@ export default {
                     `The "indicatorPosition" field must be one of ["top", "bottom"]. The ${JSON.stringify(indicatorPosition)} was received.`
                 );
             }
-            if (!['wide', 'narrow'].includes(width) ) {
+            if (!['Wide', 'Narrow'].includes(width) ) {
                 throw new Error(
-                    `The "width" field must be one of ["wide", "narrow"]. The ${JSON.stringify(width)} was received.`
+                    `The "width" field must be one of ["Wide", "Narrow"]. The ${JSON.stringify(width)} was received.`
                 );
             }
         } catch (err) {
             console.error('Error occurred in the Fact callout component:', err);
             return `<!-- Error occurred in the Fact callout component: ${err.message} -->`;
         }
-
+        
         // Prepare component data for template rendering
         const props = {
             indicatorPosition,
-            width,
+            width: width.toLowerCase(),
             factText,
             icon,
         };

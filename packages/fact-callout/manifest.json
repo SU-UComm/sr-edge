@@ -29,7 +29,10 @@
                         "properties": {
                             "icon": {
                                 "title": "Fact icon",
-                                "enum": ["pie chart", "bar graph"],
+                                "enum": [
+                                    "pie chart",
+                                    "bar graph"
+                                ],
                                 "type": "string",
                                 "default": "pie chart"
                             },
@@ -40,16 +43,22 @@
                             },
                             "indicatorPosition": {
                                 "title": "Indicator position",
-                                "enum": ["top", "bottom"],
+                                "enum": [
+                                    "top",
+                                    "bottom"
+                                ],
                                 "type": "string",
                                 "default": "top"
                             },
                             "width": {
                                 "title": "Fact width",
                                 "description": "This option sets the width of the component, please note that this option will only work on featured story pages, not basic story pages.",
-                                "enum": ["wide", "narrow"],
+                                "enum": [
+                                    "Wide",
+                                    "Narrow"
+                                ],
                                 "type": "string",
-                                "default": "wide"
+                                "default": "Wide"
                             }
                         }
                     }
