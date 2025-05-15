@@ -1,0 +1,55 @@
+/* stylelint-disable at-rule-no-deprecated */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+/* 
+  single featured content
+  these styles will only target single featured content components
+*/
+.su-single-featured-content h2 {
+    @apply su-text-25 su-leading-[125%];
+}
+
+.su-single-featured-content div > p {
+    @apply su-text-18 su-leading-[125%];
+}
+
+.su-single-featured-content [data-testid='vertical-card-taxonomy'] {
+    @apply su-text-18;
+}
+
+@media (width >= 768px) {
+    .su-single-featured-content {
+        text-align: center;
+    }
+
+    .su-single-featured-content * {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .su-single-featured-content h2 {
+        @apply su-text-[40px] su-leading-display;
+    }
+
+    .su-single-featured-content [data-testid='vertical-card-taxonomy'] {
+        @apply su-text-20;
+    }
+
+    .su-single-featured-content div > p {
+        @apply su-text-19 su-leading-[125%];
+    }
+}
+
+@media (width >= 992px) {
+    .su-single-featured-content h2 {
+        @apply su-text-[49px] su-leading-[125%];
+    }
+
+    .su-single-featured-content div > p {
+        @apply su-text-21 su-leading-[125%];
+    }
+}

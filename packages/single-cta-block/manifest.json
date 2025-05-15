@@ -1,0 +1,255 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "single-cta-block",
+    "type": "edge",
+    "version": "1.0.0",
+    "namespace": "stanford-components",
+    "description": "A block of text content with a CTA and optional image.",
+    "displayName": "Single CTA Block",
+    "mainFunction": "main",
+    "icon": {
+        "id": "arrow_circle_right",
+        "color": {
+            "type": "enum",
+            "value": "red"
+        }
+    },
+    "environment": [],
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "size": {
+                        "title": "Component size",
+                        "description": "If you are creating a campaign page, choose 'campaign'otherwise leave as 'normal'.",
+                        "enum": ["normal", "campaign"],
+                        "default": "normal"
+                    },
+                    "eyebrow": {
+                        "title": "Eyebrow",
+                        "description": "This is the superheading above the title.",
+                        "type": "string",
+                        "default": "Eyebrow"
+                    },
+                    "title": {
+                        "title": "Heading",
+                        "type": "string",
+                        "default": "Title Lorem ipsum dolor"
+                    },
+                    "description": {
+                        "title": "Description",
+                        "description": "Body content/description",
+                        "type": "FormattedText"
+                    },
+                    "image": {
+                        "title": "Optional image",
+                        "description": "If an image is selected. It will be displayed to the left of the content.",
+                        "type": "string",
+                        "format": "matrix-asset-uri"
+                    },
+                    "isCard": {
+                        "title": "Render content inside a card. If true, the content will be wrapped in a card with padding and background color.",
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "marginTop": {
+                        "title": "Spacing above (top margin)",
+                        "description": "Add spacing above the component. 'Base' is the smallest with '10' (default) being the largest option. Selecting 'default' will use the default site-wide vertical spacing between components.",
+                        "type": "string",
+                        "default": "8",
+                        "enum": [
+                            "default",
+                            "base",
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            "8",
+                            "9",
+                            "10"
+                        ]
+                    },
+                    "marginBottom": {
+                        "title": "Spacing below (bottom margin)",
+                        "description": "Add spacing below the component. 'Base' is the smallest with '10' (default) being the largest option. Selecting 'default' will use the default site-wide vertical spacing between components.",
+                        "type": "string",
+                        "default": "8",
+                        "enum": [
+                            "default",
+                            "base",
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            "8",
+                            "9",
+                            "10"
+                        ]
+                    },
+                    "ctaConfiguration": {
+                        "required": [],
+                        "type": "object",
+                        "title": "CTA configuration",
+                        "description": "Fields for the CTA at the bottom of the content.",
+                        "properties": {
+                            "ctaText": {
+                                "title": "CTA text",
+                                "type": "string"
+                            },
+                            "ctaType": {
+                                "title": "CTA type",
+                                "description": "Select the type of CTA - link, download, or email. The appropriate icon will be added after the CTA text depending on your selection. No icon will be displayed for internal links.",
+                                "type": "string",
+                                "default": "link",
+                                "enum": ["download", "email", "link"]
+                            }
+                        },
+                        "allOf": [
+                            {
+                                "if": {
+                                    "required": [],
+                                    "properties": {
+                                        "ctaType": {
+                                            "const": "email"
+                                        }
+                                    }
+                                },
+                                "then": {
+                                    "properties": {
+                                        "email": {
+                                            "title": "Email address",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": ["email"]
+                                },
+                                "else": {
+                                    "properties": {
+                                        "internalUrl": {
+                                            "title": "Internal link (Matrix asset link)",
+                                            "type": "string",
+                                            "description": "Select a page/asset for internal linking. If this field is filled out, it will be used instead of the external link field below.",
+                                            "format": "matrix-asset-uri"
+                                        },
+                                        "externalUrl": {
+                                            "title": "External (manual) link",
+                                            "type": "string",
+                                            "description": "Enter the full URL, including https://. A diagonal arrow icon will be automatically added after the button text if the URL does not contain news.stanford.edu and if the CTA type is link."
+                                        },
+                                        "isNewWindow": {
+                                            "title": "Open link in a new window",
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    },
+                                    "required": []
+                                }
+                            },
+                            {
+                                "required": []
+                            }
+                        ]
+                    }
+                },
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/14": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/28192": {
+            "type": "file",
+            "path": "mocked-uris/28192.json"
+        },
+        "matrix-asset://api-identifier/128612": {
+            "type": "file",
+            "path": "mocked-uris/128612.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
