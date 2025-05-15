@@ -1,4 +1,5 @@
 import { basicAssetUri, isRealExternalLink, uuid } from "../../global/js/utils";
+import { isEditor } from "../../global/js/utils/isEditor";
 import singleCtaBlock from './single-cta-block.hbs';
 
 /**
@@ -33,6 +34,8 @@ import singleCtaBlock from './single-cta-block.hbs';
 export default {
     async main(args, info) {
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
         const { size, title, eyebrow, description, image, isCard, marginTop,  marginBottom } = args || {};
         const { ctaText, ctaType, externalUrl, internalUrl, email, isNewWindow } = (args && args.ctaConfiguration) || {};
 
@@ -157,7 +160,8 @@ export default {
             imageAlt: imageData?.attributes?.alt || "",
             containerSize: size === "campaign" ? "cc" : "large",
             linkButtonClasses: size === "campaign" ? "su-mx-auto su-rs-mt-4" : "su-mx-auto su-rs-mt-2",
-            iconUniqueID: uuid()
+            iconUniqueID: uuid(),
+            editMode
         };
 
         return singleCtaBlock(componentData);

@@ -1,5 +1,6 @@
 import { basicAssetUri, linkedHeadingService, uuid } from "../../global/js/utils";
 import verticalVideosPanelTemplate from "./vertical-videos-panel.hbs";
+import { isEditor } from "../../global/js/utils/isEditor";
 
 /**
  * Vertical Video Panel component that renders video blocks with images and description
@@ -37,6 +38,8 @@ export default {
         // Extract configuration data
         const { videos } = args || {};
         const { title, ctaText, ctaUrl, ctaManualUrl, bgImage, marginTop, marginBottom } = args?.sectionConfiguration || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
 
         // Validate required environment variables
         try {
@@ -171,7 +174,8 @@ export default {
             marginTop: marginTop,
             marginBottom: marginBottom,
             customClasses: "su-relative su-break-words",
-            videoModal: videoModal
+            videoModal: videoModal,
+            editMode
         };
 
         return verticalVideosPanelTemplate(componentData);

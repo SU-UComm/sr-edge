@@ -1,4 +1,5 @@
 import { basicAssetUri } from "../../global/js/utils";
+import { isEditor } from "../../global/js/utils/isEditor";
 import multicolumnImage from './multicolumn-image.hbs';
 
 /**
@@ -28,6 +29,8 @@ export default {
         // Extracting environment variables from provided info
         const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
 
         // Extract configuration data from arguments
         const { images } = args?.contentConfiguration || {};
@@ -82,6 +85,7 @@ export default {
             images: imageData,
             sectionCaption,
             showIndividualCaptions: numberOfCaptions > 1,
+            editMode,
         };
         return multicolumnImage(componentData);
     }

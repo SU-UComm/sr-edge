@@ -1,4 +1,5 @@
 import { basicAssetUri } from '../../global/js/utils';
+import { isEditor } from "../../global/js/utils/isEditor";
 import policyBriefTemplate from './policy-brief.hbs';
 
 /**
@@ -28,6 +29,8 @@ export default {
     async main(args, info) {
         // Extracting environment functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
 
         // Extract configuration data from arguments
         const { image, type, title, summary, linkUrl, linkText } = args?.contentConfiguration || {};
@@ -97,7 +100,8 @@ export default {
             linkUrl,
             linkText,
             width: "wide",
-            paddingX: false
+            paddingX: false,
+            editMode
         };
 
         return policyBriefTemplate(componentData);

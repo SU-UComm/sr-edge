@@ -2,6 +2,7 @@ import storiesCarouselTemplate from './stories-carousel.hbs';
 import { linkedHeadingService, uuid } from "../../global/js/utils";
 import { Carousel, Card } from "../../global/js/helpers";
 import { fetchUserStories } from "../../global/js/utils/fetchUserStories";
+import { isEditor } from "../../global/js/utils/isEditor";
 
 /**
  * Stories carousel component that renderds a list of cards based on fetched data.
@@ -31,10 +32,12 @@ export default {
         // Extracting environment variables from provided info
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN, BASE_PATH, NEWS_ARCHIVE_PATH } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
         
         // Extracting configuration data from arguments
         const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
         const { searchQuery } = args?.contentConfiguration || {};
+        const editMode = isEditor(ctx.url);
         
         const MAX_CARDS = 6;
         let dataSource = "content";
@@ -252,7 +255,7 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            id: uniqueClass,
+            id: uuid(),
             title: headingData.title,
             isAlwaysLight: false,
             ctaLink: headingData.ctaLink,
@@ -262,7 +265,8 @@ export default {
             modalData,
             width: "large",
             dataSource,
-            query
+            query,
+            editMode
         };
         
         return storiesCarouselTemplate(componentData);

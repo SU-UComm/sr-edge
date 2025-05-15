@@ -1,4 +1,5 @@
 import xss from 'xss';
+import { isEditor } from "../../global/js/utils/isEditor";
 import contentTemplate from './subscribe-to-stanford.hbs';
 
 /**
@@ -19,6 +20,8 @@ export default {
      */
     async main(args) {
         const { actionLink, title, summary } = args?.contentConfiguration || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
 
         try {
             if (typeof actionLink !== 'string' || actionLink === "") {
@@ -45,8 +48,9 @@ export default {
 
         const componentData = {
             actionLink,
-            title: xss(title),
-            summary: xss(summary)
+            title: title,
+            summary: summary,
+            editMode
         };
 
         return contentTemplate(componentData);

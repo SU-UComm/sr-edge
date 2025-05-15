@@ -1,6 +1,12 @@
 <section data-component="leadership-messages">
     <div class="{{containerClasses width=width}}">
-        {{> linked-heading title=title isAlwaysLight=isAlwaysLight ctaLink=ctaLink ctaNewWindow=ctaNewWindow ctaText=ctaText}}
-        {{{cardGrid}}}
+        {{> linked-heading title=title isAlwaysLight=isAlwaysLight ctaLink=ctaLink ctaNewWindow=ctaNewWindow ctaText=ctaText editMode=editMode}}
+        {{#if editMode}}
+            <div data-sq-field="cardGrid">
+                {{{cardGrid}}}
+            </div>
+        {{else}}
+            {{{cardGrid}}}
+        {{/if}}
     </div>
 </section>

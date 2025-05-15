@@ -2,9 +2,9 @@
     {{~#if imageUrl~}}
     <div class="su-shrink-0 {{getStringByCondition value=cardSize expectedValue="large" trueResult="su-w-[103px] su-h-[69px] md:su-w-[169px] md:su-h-[113px] lg:su-w-[292px] lg:su-h-[193px]" falseResult="su-w-[73px] su-h-[73px] su-relative"}}">
         {{~#ifEquals cardSize "large"~}}
-        {{> card-thumbnail imageUrl=imageUrl imageAlt=imageAlt videoUrl=videoUrl mediaType="image" aspectRatio="card-large" size=cardSize uniqueID=uniqueID}}
+        {{> card-thumbnail imageUrl=imageUrl imageAlt=imageAlt videoUrl=videoUrl mediaType="image" aspectRatio="card-large" size=cardSize uniqueID=uniqueID editMode=editMode}}
         {{~else~}}
-        {{> card-thumbnail imageUrl=imageUrl imageAlt=imageAlt videoUrl=videoUrl mediaType="image" aspectRatio="square" size=cardSize uniqueID=uniqueID}}
+        {{> card-thumbnail imageUrl=imageUrl imageAlt=imageAlt videoUrl=videoUrl mediaType="image" aspectRatio="square" size=cardSize uniqueID=uniqueID editMode=editMode}}
         {{~/ifEquals~}}
     </div>
     {{~else~}}
@@ -16,13 +16,21 @@
         {{~#if taxonomy~}}{{~#ifEquals cardSize "small"~}}
         <p class="su-mb-0 su-text-16 su-font-semibold su-text-digital-red dark:su-text-dark-mode-red hover:dark:su-text-dark-mode-red" data-testid="horizontal-card-taxonomy">
             <a {{~#if taxonomyUrl}}href="{{taxonomyUrl}}"{{~/if}} class="focus:su-outline-0 focus:su-ring su-text-digital-red su-no-underline hover:su-text-digital-red dark:su-text-dark-mode-red hover:dark:su-text-dark-mode-red su-block su-mt-[-6px]">
-                {{{taxonomy}}}
+                {{#if editMode}}
+                    <span data-sq-field="taxonomy">{{{taxonomy}}}</span>
+                {{else}}
+                    {{{taxonomy}}}
+                {{/if}}
             </a>
         </p>
         {{~/ifEquals~}}{{~/if~}}
         <h3 class="{{getStringByCondition value=cardSize expectedValue="large" trueResult="su-font-serif su-text-18 md:su-text-21 lg:su-text-23 su-font-bold su-leading-[21.6px] md:su-leading-[25.2px] lg:su-leading-[27.6px]" falseResult="su-text-18 su-font-semibold su-leading-[21.495px]"}} su-font-sans su-my-0 su-group">
             <a href="{{liveUrl}}" class="su-group su-stretched-link su-inline-block su-text-black dark:su-text-white hocus:su-underline hocus:su-text-digital-red su-transition dark:hocus:su-text-dark-mode-red focus:su-outline-none focus-visible:su-ring-2 focus-visible:su-rounded focus-visible:su-ring-digital-red dark:focus-visible:su-ring-dark-mode-red focus-visible:su-outline-none focus-visible:after:su-outline focus-visible:after:su-outline-offset-8 focus-visible:after:su-outline-digital-red dark:focus-visible:after:su-outline-dark-mode-red">
-                <span>{{{title}}}</span>
+                {{#if editMode}}
+                    <span data-sq-field="title">{{{title}}}</span>
+                {{else}}
+                    <span>{{{title}}}</span>
+                {{/if}}
                 {{~#if isRealExternalLink~}}{{~#ifEquals cardSize "large"~}}
                 {{> fontawesome-icon
                     icon="arrow-up-right"
@@ -45,18 +53,26 @@
         {{~#ifEquals cardSize "small"~}}
         <div data-testid="horizontal-event-date">
             {{{eventStartEndDate}}}
-          </div>
+        </div>
         {{~/ifEquals~}}
         {{~#if type~}}{{~#ifEquals cardSize "large"~}} 
         <p data-testid="horizontal-card-type" class="su-text-black-70 dark:su-text-black-30 su-w-full su-text-14 lg:su-text-16 su-mt-9 md:su-mt-12 su-mb-0 su-flex su-gap-6 su-items-center su-justify-start">
             {{> svg-icons icon=iconType}}
-            <span class="su-font-semibold su-text-14 md:su-text-16 su-leading-4">{{{type}}}</span>
+            {{#if editMode}}
+                <span class="su-font-semibold su-text-14 md:su-text-16 su-leading-4" data-sq-field="type">{{{type}}}</span>
+            {{else}}
+                <span class="su-font-semibold su-text-14 md:su-text-16 su-leading-4">{{{type}}}</span>
+            {{/if}}
         </p>
         {{~/ifEquals~}}{{~/if~}}
         {{~#if description~}}{{~#ifEquals cardSize "large"~}}
         <div data-testid="horizontal-card-description" class="su-hidden md:su-block su-text-16 lg:su-text-18 su-mt-9 md:su-mt-12 su-mb-0">
             <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0">
-                {{{description}}}
+                {{#if editMode}}
+                    <div data-sq-field="description">{{{description}}}</div>
+                {{else}}
+                    {{{description}}}
+                {{/if}}
             </div>
         </div>
         {{~/ifEquals~}}{{~/if~}} 

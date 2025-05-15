@@ -1,5 +1,6 @@
 import xss from "xss";
 import { basicAssetUri, isRealExternalLink } from "../../global/js/utils";
+import { isEditor } from "../../global/js/utils/isEditor";
 import textCalloutTemplate from "./text-callout.hbs";
 
 /**
@@ -39,6 +40,7 @@ export default {
         const { title, content } = args?.displayConfiguration || {};
         const { image, caption, credit, imagePlacement } =  args?.imageConfiguration || {};
         const { buttonText, internalUrl, externalUrl, isNewWindow } =  args?.buttonConfiguration || {};
+        const editMode = isEditor();
 
         // Validate required context functions
         try {
@@ -149,6 +151,7 @@ export default {
             content: xss(content),
             image: figureData,
             button: buttonData,
+            editMode
         };
 
         return textCalloutTemplate(componentData);

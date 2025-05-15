@@ -25,7 +25,10 @@
                     "heading": {
                         "title": "Section heading",
                         "type": "string",
-                        "default": "Section heading"
+                        "default": "Section heading",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "showTopBorder": {
                         "title": "Display horizontal divider at the top.",
@@ -44,12 +47,18 @@
                                 "title": {
                                     "title": "Callout heading",
                                     "description": "The heading text.",
-                                    "type": "string"
+                                    "type": "string",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "content": {
                                     "title": "Content",
                                     "description": "WYSIWYG content for the callout.",
-                                    "type": "FormattedText"
+                                    "type": "FormattedText",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "imageConfiguration": {
                                     "title": "Image configuration",
@@ -63,11 +72,17 @@
                                         "caption": {
                                             "title": "Caption",
                                             "type": "string",
-                                            "format": "multi-line"
+                                            "format": "multi-line",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
                                         },
                                         "credit": {
                                             "title": "Credit",
-                                            "type": "string"
+                                            "type": "string",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
                                         },
                                         "imagePlacement": {
                                             "title": "Image position",

@@ -3,14 +3,24 @@
         <section class="su-flex su-flex-col su-items-center su-gap-8 md:su-gap-9">
             <div class="su-flex su-gap-20 su-items-center lg:su-gap-48">
                 {{~#each images~}}
-                    {{> image src=this.url caption=this.caption showIndividualCaptions=@root.showIndividualCaptions}}
+                    {{#if @root.editMode}}
+                        {{> image src=this.url caption=this.caption showIndividualCaptions=@root.showIndividualCaptions data-sq-field=this.imageAsset}}
+                    {{else}}
+                        {{> image src=this.url caption=this.caption showIndividualCaptions=@root.showIndividualCaptions}}
+                    {{/if}}
                 {{~/each~}}
             </div>
-            {{~#if showIndividualCaptions}}{{~else~}}{{~#if sectionCaption~}}
-                <p class="su-text-14 su-text-black-70 dark:su-text-black-30 su-font-normal su-max-w-[63.3rem] su-leading-[119.415%] su-text-center md:su-text-16 su-mb-0">
+            {{#if editMode}}
+                <p class="su-text-14 su-text-black-70 dark:su-text-black-30 su-font-normal su-max-w-[63.3rem] su-leading-[119.415%] su-text-center md:su-text-16 su-mb-0" data-sq-field="sectionCaption">
                     {{sectionCaption}}
                 </p>
-             {{~/if~}}{{~/if~}}
+            {{else}}
+                {{~#if showIndividualCaptions}}{{~else~}}{{~#if sectionCaption~}}
+                    <p class="su-text-14 su-text-black-70 dark:su-text-black-30 su-font-normal su-max-w-[63.3rem] su-leading-[119.415%] su-text-center md:su-text-16 su-mb-0">
+                        {{sectionCaption}}
+                    </p>
+                {{~/if~}}{{~/if~}}
+            {{/if}}
         </section>
     </div>
 </section>

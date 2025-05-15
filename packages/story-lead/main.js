@@ -1,14 +1,17 @@
 import storyLeadTemplate from './story-lead.hbs';
 import { getFirstWord } from '../../global/js/utils';
+import { isEditor } from "../../global/js/utils/isEditor";
 
 
 export default {
     async main(args, info) {
         // Extracting functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
 
         // Extracting configuration data from arguments
         const { content, variant } = args || {};
+        const editMode = isEditor(ctx.url);
 
         // Validate required functions
         try {
@@ -45,12 +48,13 @@ export default {
         const firstLetter = content ? firstWord[0].toLowerCase() : '';
 
         const componentData = {
-            content,
+            content: content,
             firstWord,
             firstLetter,
             isFeaturedStory,
             variant,
-            width: "narrow"
+            width: "narrow",
+            editMode
         };
 
         return storyLeadTemplate(componentData);

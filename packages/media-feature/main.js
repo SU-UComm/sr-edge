@@ -1,7 +1,7 @@
 import { basicAssetUri } from "../../global/js/utils";
 import { SidebarHeading } from "../../global/js/helpers";
 import mediaFeatureTemplate from './media-feature.hbs';
-
+import { isEditor } from "../../global/js/utils/isEditor";
 /**
  * Media Fateure Component - A Handlebars template component that renders a media feature
  * @module mediaFeature
@@ -28,6 +28,8 @@ export default {
     async main(args, info) {
         // Extracting functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
                 
         // Extracting configuration data from arguments
         const { backgroundImage, image, title, teaserText, mediaType, linkUrl } = args?.contentConfiguration || {};
@@ -136,6 +138,7 @@ export default {
             paddingX: false,
             iconName,
             iconTestId,
+            editMode,
         };
 
         return mediaFeatureTemplate(componentData);

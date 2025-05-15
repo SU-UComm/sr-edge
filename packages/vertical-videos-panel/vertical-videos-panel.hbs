@@ -1,11 +1,53 @@
 <section data-component="vertical-video-panel" data-unique-id="{{carouselID}}">
     <div class="{{containerClasses width=width paddingY=paddingY paddingX=paddingX marginTop=marginTop marginBottom=marginBottom customClasses=customClasses}}">
         <div class="su-relative su-z-30">
-            {{~#if sectionTitle~}}
-                <div class="su-cc">
-                    {{> linked-heading title=sectionTitle ctaLink=sectionCtaLink ctaText=sectionCtaText isAlwaysLight=sectionIsAlwaysLight customClasses=sectionCustomClasses}}
+            {{#if editMode}}
+                <div class="su-cc su-pt-[3.2rem] su-pb-[4.8rem] md:su-pt-[4.8rem] md:su-pb-[7.2rem]">
+                    <div class="su-flex su-flex-col md:su-flex-row su-justify-between su-items-center su-mb-[3.2rem] md:su-mb-[4.8rem]">
+                        <h2 class="su-text-m3 md:su-text-m4 su-font-bold su-mb-20 md:su-mb-0" data-sq-field="sectionConfiguration.title">{{{title}}}</h2>
+                        {{#if ctaUrl}}
+                            <a href="{{{ctaUrl}}}" class="su-group su-inline-flex su-items-center su-gap-4 hover:su-text-digital-red-light su-font-bold" data-sq-field="sectionConfiguration.ctaText">
+                                {{{ctaText}}}
+                                {{> @partial-block/icon-arrow-right class="su-w-12 su-h-12 group-hover:su-translate-x-02 su-transition"}}
+                            </a>
+                        {{/if}}
+                    </div>
+                    <div class="su-grid su-grid-cols-1 md:su-grid-cols-2 lg:su-grid-cols-3 su-gap-[3.2rem]">
+                        {{#each videos}}
+                            <div class="su-flex su-flex-col">
+                                <h3 class="su-text-m2 su-font-bold su-mb-4" data-sq-field="videos.[{{@index}}].heading">{{{heading}}}</h3>
+                                <p class="su-text-m0 su-mb-16" data-sq-field="videos.[{{@index}}].subheading">{{{subheading}}}</p>
+                                {{> video-card video=this editMode=../editMode}}
+                            </div>
+                        {{/each}}
+                    </div>
                 </div>
-            {{~/if~}}
+            {{else}}
+                {{#if title}}
+                    <div class="su-cc su-pt-[3.2rem] su-pb-[4.8rem] md:su-pt-[4.8rem] md:su-pb-[7.2rem]">
+                        <div class="su-flex su-flex-col md:su-flex-row su-justify-between su-items-center su-mb-[3.2rem] md:su-mb-[4.8rem]">
+                            <h2 class="su-text-m3 md:su-text-m4 su-font-bold su-mb-20 md:su-mb-0">{{{title}}}</h2>
+                            {{#if ctaUrl}}
+                                <a href="{{{ctaUrl}}}" class="su-group su-inline-flex su-items-center su-gap-4 hover:su-text-digital-red-light su-font-bold">
+                                    {{{ctaText}}}
+                                    {{> @partial-block/icon-arrow-right class="su-w-12 su-h-12 group-hover:su-translate-x-02 su-transition"}}
+                                </a>
+                            {{/if}}
+                        </div>
+                        <div class="su-grid su-grid-cols-1 md:su-grid-cols-2 lg:su-grid-cols-3 su-gap-[3.2rem]">
+                            {{#each videos}}
+                                <div class="su-flex su-flex-col">
+                                    <h3 class="su-text-m2 su-font-bold su-mb-4">{{{heading}}}</h3>
+                                    {{#if subheading}}
+                                        <p class="su-text-m0 su-mb-16">{{{subheading}}}</p>
+                                    {{/if}}
+                                    {{> video-card video=this editMode=../editMode}}
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                {{/if}}
+            {{/if}}
             {{~#if videosDataLength~}}
                 {{~#unlessEquals videosDataLength "1"~}}
                 <div class="lg:su-hidden">

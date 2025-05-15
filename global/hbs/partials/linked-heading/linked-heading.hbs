@@ -1,23 +1,45 @@
 {{#if title}}
     <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13{{#if customClasses}} {{customClasses}}{{/if}}">
-        <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white {{linkedHeadingHeaderClasses isAlwaysLight}}">
-            {{title}}
-        </h2>
-        <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
-        {{#if ctaLink}}
-            <a data-test="cta" href="{{ctaLink}}"{{#if ctaNewWindow}} target="{{ctaTarget ctaNewWindow}}"{{/if}} class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white {{getStringByCondition value=isAlwaysLight expectedValue=true trueResult="su-text-white hocus:su-text-white/95 dark:hocus:su-text-white/95" falseResult="su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"}}">            
-                <span class="su-flex su-gap-2 su-items-baseline">
-                <span>
-                    {{ctaText}}<!-- --> <span class="sr-only">{{title}}</span>
-                </span>
-                {{> fontawesome-icon
-                    icon="chevron-right"
-                    set="solid"
-                    width=18
-                    classes="fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform"
-                }}
-                </span>
-            </a>
+        {{#if editMode}}
+            <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white {{linkedHeadingHeaderClasses isAlwaysLight}}" data-sq-field="title">
+                {{title}}
+            </h2>
+            <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
+            {{#if ctaLink}}
+                <a data-test="cta" href="{{ctaLink}}"{{#if ctaNewWindow}} target="{{ctaTarget ctaNewWindow}}"{{/if}} class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white {{getStringByCondition value=isAlwaysLight expectedValue=true trueResult="su-text-white hocus:su-text-white/95 dark:hocus:su-text-white/95" falseResult="su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"}}" data-sq-field="ctaText">            
+                    <span class="su-flex su-gap-2 su-items-baseline">
+                    <span>
+                        {{ctaText}}<!-- --> <span class="sr-only">{{title}}</span>
+                    </span>
+                    {{> fontawesome-icon
+                        icon="chevron-right"
+                        set="solid"
+                        width=18
+                        classes="fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform"
+                    }}
+                    </span>
+                </a>
+            {{/if}}
+        {{else}}
+            <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white {{linkedHeadingHeaderClasses isAlwaysLight}}">
+                {{title}}
+            </h2>
+            <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
+            {{#if ctaLink}}
+                <a data-test="cta" href="{{ctaLink}}"{{#if ctaNewWindow}} target="{{ctaTarget ctaNewWindow}}"{{/if}} class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white {{getStringByCondition value=isAlwaysLight expectedValue=true trueResult="su-text-white hocus:su-text-white/95 dark:hocus:su-text-white/95" falseResult="su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"}}">            
+                    <span class="su-flex su-gap-2 su-items-baseline">
+                    <span>
+                        {{ctaText}}<!-- --> <span class="sr-only">{{title}}</span>
+                    </span>
+                    {{> fontawesome-icon
+                        icon="chevron-right"
+                        set="solid"
+                        width=18
+                        classes="fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform"
+                    }}
+                    </span>
+                </a>
+            {{/if}}
         {{/if}}
     </div>
 {{/if}}

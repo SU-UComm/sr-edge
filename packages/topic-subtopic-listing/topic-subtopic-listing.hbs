@@ -21,6 +21,8 @@
                         uniqueID=data.uniqueID
                         iconType=data.iconType
                         isRealExternalLink=data.isRealExternalLink
+                        editMode=editMode
+                        index=@index
                     }}
                     {{else}}
                     {{> card-narrow-horizontal
@@ -38,6 +40,8 @@
                         taxonomyFeaturedUnitLandingPageUrl=data.taxonomyFeaturedUnitLandingPageUrl
                         taxonomyFeaturedUnitText=data.taxonomyFeaturedUnitText
                         storySource=data.storySource
+                        editMode=editMode
+                        index=@index
                      }}
                     {{/ifEquals}}
                 </div>
@@ -51,7 +55,7 @@
     <section data-element="modal-wrapper">
     {{#each modalData}}
         {{#> modal-content uniqueID=uniqueID titleID='card-modal' ariaTitle=title}}
-            {{> embed-video isVertical=isVertical classes=classes videoId=videoId noAutoPlay=noAutoPlay title=title}}
+            {{> embed-video isVertical=isVertical classes=classes videoId=videoId noAutoPlay=noAutoPlay title=title editMode=../editMode}}
         {{/ modal-content}}
     {{/each}}
     </section>

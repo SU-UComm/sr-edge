@@ -1,6 +1,7 @@
 import xss from "xss";
 import { cardDataAdapter, funnelbackCardService, uuid, formatNewsDate, isRealExternalLink } from "../../global/js/utils";
 import { pagination } from "../../global/js/helpers";
+import { isEditor } from "../../global/js/utils/isEditor";
 import topicListingTemplate from "./topic-subtopic-listing.hbs";
 
 /**
@@ -34,6 +35,8 @@ export default {
         
         // Extracting configuration data from arguments 
         const { searchQuery, displayStyle } = args?.displayConfiguration || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
 
         // Validate required environment variables
         try {
@@ -124,10 +127,10 @@ export default {
 
             if(["Press Center", "Leadership Messages", "University Updates", "Announcements", "In the News"].includes(displayStyle)) {
                 cardData.displayConfiguration = displayStyle;
-                return { data: cardData, cardType: "narrowhorizontal" }
+                return { data: cardData, cardType: "narrowhorizontal", editMode }
             } 
 
-            return { data: cardData, cardType: "horizontal", cardSize: "large" }
+            return { data: cardData, cardType: "horizontal", cardSize: "large", editMode }
         });
 
         // Validate fetched card data
@@ -157,6 +160,7 @@ export default {
             query: searchQuery,
             endpoint: FB_JSON_URL,
             display: displayStyle,
+            editMode
         };
         return topicListingTemplate(componentData);
     }

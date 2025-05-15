@@ -1,3 +1,25 @@
+{{#if editMode}}
+<a
+    class='su-block su-leading-display su-border-l-5 hocus:su-underline hocus:su-text-digital-red hocus:su-border-digital-red dark:hocus:su-text-dark-mode-red dark:hocus:su-border-dark-mode-red
+        {{getStringByCondition
+            value=active
+            expectedValue='page'
+            trueResult='su-underline su-text-digital-red su-border-digital-red dark:su-text-dark-mode-red dark:su-border-dark-mode-red'
+            falseResult='su-no-underline su-border-white dark:su-border-black-true'
+        }}
+        {{getStringByCondition
+            value=level
+            expectedValue='one'
+            trueResult='su-p-10'
+            falseResult='su-pl-25 su-pt-0 su-pb-10'
+        }}'
+    href='{{url}}'
+    aria-current='{{active}}'
+    data-sq-field="shortName"
+>
+    {{shortName}}
+</a>
+{{else}}
 <a
     class='su-block su-leading-display su-border-l-5 hocus:su-underline hocus:su-text-digital-red hocus:su-border-digital-red dark:hocus:su-text-dark-mode-red dark:hocus:su-border-dark-mode-red
         {{getStringByCondition
@@ -17,3 +39,4 @@
 >
     {{shortName}}
 </a>
+{{/if}}

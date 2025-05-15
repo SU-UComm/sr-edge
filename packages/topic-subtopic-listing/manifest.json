@@ -31,7 +31,10 @@
                         "properties": {
                             "searchQuery": {
                                 "title": "Search query",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "displayStyle": {
                                 "title": "Topic list display",

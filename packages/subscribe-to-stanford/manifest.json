@@ -32,13 +32,19 @@
               "title": {
                 "title": "Title",
                 "description": "The subscription form title",
-                "type": "string"
+                "type": "string",
+                "ui:metadata": {
+                  "inlineEditable": true
+                }
               },
               "summary": {
                 "title": "Summary",
                 "description": "The summary that presents on the subscription form",
                 "type": "string",
-                "format": "multi-line"
+                "format": "multi-line",
+                "ui:metadata": {
+                  "inlineEditable": true
+                }
               },
               "actionLink": {
                 "title": "Form action",

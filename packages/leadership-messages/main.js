@@ -1,4 +1,5 @@
 import { cardDataAdapter, funnelbackCardService, linkedHeadingService } from "../../global/js/utils";
+import { isEditor } from "../../global/js/utils/isEditor";
 import { Card, multiColumnGrid } from "../../global/js/helpers";
 import leadershipMessagesTemplate from './leadership-messages.hbs';
 /**
@@ -27,6 +28,8 @@ export default {
         // Extracting environment variables and functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
         const { FB_JSON_URL } = info?.env || info?.set?.environment || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
 
         // Extracting configuration data from arguments
         const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
@@ -133,7 +136,8 @@ export default {
             ctaLink: headingData.ctaLink,
             ctaNewWindow: headingData.ctaNewWindow,
             isAlwaysLight: false,
-            cardGrid: cardContent
+            cardGrid: cardContent,
+            editMode,
         };
 
         return leadershipMessagesTemplate(componentData);

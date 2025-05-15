@@ -1,3 +1,4 @@
+import { isEditor } from "../../global/js/utils/isEditor";
 import multicolumnFactPanelTemplate from './multicolumn-fact-panel.hbs';
 
 /**
@@ -16,12 +17,16 @@ export default {
      * @param {string} [args.title] - The text for the title.
      * @param {Array} [args.facts] - The array of facts to display.
      * @param {string} [args.paddingY] - The value of padding abouve and below the component.
+     * @param {Object} info - Additional information about the context.
+     * @param {string} info.url - The URL of the current page.
      * @returns {Promise<string>} The rendered HTML string from the topicListingTemplate, or an error comment if processing fails.
      * @throws {Error} If FB_JSON_URL or query is invalid or if the fetch operation fails.
      */
-    async main(args) {
+    async main(args, info) {
         // Extract configuration data from arguments
         const { title, eyebrow, facts, paddingY } = args;
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
 
         // Validate required fields and ensure correct data types
         try {
@@ -56,6 +61,7 @@ export default {
             eyebrow,
             facts,
             paddingY,
+            editMode,
         }
 
         return multicolumnFactPanelTemplate(componentData)

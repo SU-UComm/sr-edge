@@ -4,6 +4,7 @@ import {
     matrixBasicHeroService,
     uuid,
 } from '../../global/js/utils';
+import { isEditor } from "../../global/js/utils/isEditor";
 import standaloneVisualHeroTemplate from './standalone-visual-hero.hbs';
 
 /**
@@ -23,12 +24,14 @@ export default {
     async main(_args, info) {
         // Extracting functions from provided info
         const fnsCtx = info?.ctx || {};
+        const { ctx } = info;
 
         // Extracting environment variables from provided info
         const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
         // const currentAssetId = '167010';
         const currentAssetId = fnsCtx?.assetId;
+        const editMode = isEditor(ctx.url);
 
         // Validate environment
         try {
@@ -111,6 +114,7 @@ export default {
             captionCredit: [media?.caption, media?.credit]
                 .filter(Boolean)
                 .join(' | '),
+            editMode
         };
 
         return standaloneVisualHeroTemplate(componentData);

@@ -1,5 +1,6 @@
 import relatedStory from './related-story.hbs';
 import { cardDataAdapter, matrixCardService } from '../../global/js/utils';
+import { isEditor } from "../../global/js/utils/isEditor";
 
 /**
  * Related story component that fetches and renders related story content.
@@ -25,9 +26,11 @@ export default {
     async main(args, info) {
         // Extracting functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
 
         // Extracting environment variables
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
+        const editMode = isEditor(ctx.url);
 
         // Extracting configuration data from arguments
         const { story, descriptionOverride } = args && args?.contentConfiguration || {};
@@ -105,6 +108,7 @@ export default {
             imageAlt,
             title,
             description: descriptionOverride ? descriptionOverride : description || "",
+            editMode
         };
 
         return relatedStory(componentData);

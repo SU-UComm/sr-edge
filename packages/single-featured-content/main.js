@@ -1,5 +1,6 @@
 import { cardDataAdapter, matrixCardService, linkedHeadingService } from "../../global/js/utils";
 import { Card } from "../../global/js/helpers";
+import { isEditor } from "../../global/js/utils/isEditor";
 import singleFeaturedTemplate from "./single-featured-content.hbs";
 
 /**
@@ -29,7 +30,9 @@ export default {
     async main(args, info) {
         // Extracting environment variables and function from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
+        const editMode = isEditor(ctx.url);
 
         // Extracting configuration data from arguments
         const { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow } = args?.headingConfiguration || {};

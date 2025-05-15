@@ -1,4 +1,3 @@
-{{#if content}}
 <section data-component="story-lead">
     <div class="{{containerClasses width=width}}">
         {{#if isFeaturedStory}}
@@ -6,13 +5,24 @@
             {{> svg-letters letter=firstLetter}}
         </span>
         {{/if}}
-        <div data-test="component-story-lead" class="su-wysiwyg-content {{variantClasses variant}}">
-            {{#if isFeaturedStory}}
-                {{{formatFirstWord content firstWord}}}
-            {{else}}
-                {{{content}}}
+        {{#if editMode}}
+            <div data-test="component-story-lead" class="su-wysiwyg-content {{variantClasses variant}}" data-sq-field="content">
+                {{#if isFeaturedStory}}
+                    {{{formatFirstWord content firstWord}}}
+                {{else}}
+                    {{{content}}}
+                {{/if}}
+            </div>
+        {{else}}
+            {{#if content}}
+                <div data-test="component-story-lead" class="su-wysiwyg-content {{variantClasses variant}}">
+                    {{#if isFeaturedStory}}
+                        {{{formatFirstWord content firstWord}}}
+                    {{else}}
+                        {{{content}}}
+                    {{/if}}
+                </div>
             {{/if}}
-        </div>
+        {{/if}}
     </div>
 </section>
-{{/if}}

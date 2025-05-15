@@ -1,4 +1,5 @@
 import { basicAssetUri } from "../../global/js/utils";
+import { isEditor } from "../../global/js/utils/isEditor";
 import pullQuote from './pull-quote.hbs';
 
 /**
@@ -28,6 +29,8 @@ export default {
         // Extracting environment variables and functions from provided info
         const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
         
         // Extract configuration data from arguments
         const { asset, quote, name, title, width } = (args && args.displayConfiguration) || {};
@@ -93,7 +96,8 @@ export default {
             quote,
             name,
             title,
-            width: width.toLocaleLowerCase()
+            width: width.toLocaleLowerCase(),
+            editMode
         };
 
         return pullQuote(componentData);

@@ -43,8 +43,7 @@
                             }
                         ],
                         "ui:metadata": {
-                            "inlineEditable": true,
-                            "quickOption": false
+                            "inlineEditable": true
                         }
                     }
                 },

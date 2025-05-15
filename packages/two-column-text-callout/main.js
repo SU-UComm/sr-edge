@@ -1,5 +1,6 @@
 import xss from "xss";
 import { basicAssetUri, isRealExternalLink } from '../../global/js/utils';
+import { isEditor } from "../../global/js/utils/isEditor";
 import twoColumnTemplate from './two-column-text-callout.hbs';
 
 /**
@@ -39,6 +40,8 @@ export default {
  
         // Extract configuration data
         const { heading, showTopBorder = true, callouts = [] } = args;
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
 
         // Validate required context functions
         try {
@@ -120,14 +123,13 @@ export default {
             }
         };
 
-
-
         // Prepare component data for template rendering
         const componentData = {
             heading,
             showTopBorder,
             calloutsData,
             flexContainerLength: `${calloutsData.length}`,
+            editMode
         };
 
         return twoColumnTemplate(componentData);

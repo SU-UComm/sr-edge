@@ -1,5 +1,6 @@
 import mediaCarouselTemplate from './media-carousel.hbs';
 import {cardDataAdapter, matrixMediaCardService, isRealExternalLink, uuid } from "../../global/js/utils";
+import { isEditor } from "../../global/js/utils/isEditor";
 import { SidebarHeading } from "../../global/js/helpers";
 
 /**
@@ -24,6 +25,8 @@ export default {
         // Extracting environment variables and functions from provided info
         const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
         
         // Extracting configuration data from arguments
         const { cards } = args || {};
@@ -123,7 +126,8 @@ export default {
         const componentData = {
             id: uuid(),
             slides: data,
-            width: "large"
+            width: "large",
+            editMode,
         };
 
         return mediaCarouselTemplate(componentData);

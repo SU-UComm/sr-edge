@@ -4,85 +4,144 @@
             <div class="su-col-span-6 su-col-start-1 md:su-col-span-10 md:su-col-start-2">
                 <div class="su-flex su-justify-between su-flex-wrap su-text-16 md:su-basefont-23">
                     <span class="su-flex su-items-center su-justify-center">
-                        <time class="su-m-0 su-mr-4 su-font-semibold">
-                            {{pubDateFormatted}}
-                        </time>
+                        {{#if editMode}}
+                            <time class="su-m-0 su-mr-4 su-font-semibold" data-sq-field="pubDateFormatted">
+                                {{pubDateFormatted}}
+                            </time>
+                        {{else}}
+                            <time class="su-m-0 su-mr-4 su-font-semibold">
+                                {{pubDateFormatted}}
+                            </time>
+                        {{/if}}
                     </span>
-                    {{#if hasTopicText}}
-                    {{#if hasTopicLink}}
-                    <a href="{{topicUrl}}"
-                        class="su-font-semibold su-text-digital-red dark:su-text-dark-mode-red su-no-underline hocus:su-underline">
-                        {{topicName}}
-                    </a>
+                    {{#if editMode}}
+                        {{#if hasTopicLink}}
+                            <a href="{{topicUrl}}" class="su-font-semibold su-text-digital-red dark:su-text-dark-mode-red su-no-underline hocus:su-underline" data-sq-field="topicName">
+                                {{topicName}}
+                            </a>
+                        {{else}}
+                            <span class="su-font-semibold su-text-digital-red dark:su-text-dark-mode-red su-no-underline" data-sq-field="topicName">
+                                {{topicName}}
+                            </span>
+                        {{/if}}
                     {{else}}
-                    <span class="su-font-semibold su-text-digital-red dark:su-text-dark-mode-red su-no-underline">
-                        {{topicName}}
-                    </span>
-                    {{/if}}
+                        {{#if hasTopicText}}
+                            {{#if hasTopicLink}}
+                                <a href="{{topicUrl}}" class="su-font-semibold su-text-digital-red dark:su-text-dark-mode-red su-no-underline hocus:su-underline">
+                                    {{topicName}}
+                                </a>
+                            {{else}}
+                                <span class="su-font-semibold su-text-digital-red dark:su-text-dark-mode-red su-no-underline">
+                                    {{topicName}}
+                                </span>
+                            {{/if}}
+                        {{/if}}
                     {{/if}}
                 </div>
-                <h1 class="su-mt-32 sm:su-mt-45 xl:su-mt-58 su-font-serif">
-                    {{{unescapeHtml title}}}
-                </h1>
-                {{#if summary}}
-                <div class="su-font-serif su-text-21 md:su-text-28 su-rs-mt-2 *:last:su-mb-0">
-                    {{{unescapeHtml summary}}}
-                </div>
+                {{#if editMode}}
+                    <h1 class="su-mt-32 sm:su-mt-45 xl:su-mt-58 su-font-serif" data-sq-field="title">
+                        {{{unescapeHtml title}}}
+                    </h1>
+                    <div class="su-font-serif su-text-21 md:su-text-28 su-rs-mt-2 *:last:su-mb-0" data-sq-field="summary">
+                        {{{unescapeHtml summary}}}
+                    </div>
+                {{else}}
+                    <h1 class="su-mt-32 sm:su-mt-45 xl:su-mt-58 su-font-serif">
+                        {{{unescapeHtml title}}}
+                    </h1>
+                    {{#if summary}}
+                        <div class="su-font-serif su-text-21 md:su-text-28 su-rs-mt-2 *:last:su-mb-0">
+                            {{{unescapeHtml summary}}}
+                        </div>
+                    {{/if}}
                 {{/if}}
             </div>
-            {{#if videoData.videoID}}
-            <div class="su-col-span-6 su-col-start-1 md:su-col-span-12 md:su-col-start-1 su-w-full su-rs-mt-4">
-                <figure class="su-col-span-full su-relative su-z-0">
-                    <div class="su-relative su-w-full">
-                        {{#if videoData.imageUrl}}
-                        <button type="button" aria-haspopup="dialog" class="su-w-full su-aspect-[16/9] su-video-trigger"
-                            data-click="open-modal" data-modal-id="{{uniqueID}}">
-                            <img src="{{videoData.imageUrl}}" alt="{{videoData.imageAlt}}"
-                                class="su-w-full su-h-full su-absolute su-top-0 su-left-0 su-object-cover su-object-center" />
-                            <span
-                                class="su-play-button-icon-hero su-transition-all su-absolute su-bottom-20 su-left-20 *:su-w-[40px] *:su-h-[40px] *:md:su-w-[60px] *:md:su-h-[60px] *:lg:su-w-[100px] *:lg:su-h-[100px]">
-                                {{> svg-icons icon="video play"}}
-                            </span>
-                        </button>
-                        {{else}}
-                        <div class="su-relative su-max-w-full su-h-0 su-pb-[56.25%] su-overflow-hidden">
-                            {{> embed-video isVertical=videoData.isVertical classes=videoData.class
-                            videoId=videoData.videoID noAutoPlay=videoData.noAutoPlay title=videoData.title}}
+            {{#if editMode}}
+                <div class="su-col-span-6 su-col-start-1 md:su-col-span-12 md:su-col-start-1 su-w-full su-rs-mt-4">
+                    <figure class="su-col-span-full su-relative su-z-0">
+                        <div class="su-relative su-w-full" data-sq-field="media">
+                            {{#if videoData.videoID}}
+                                {{#if videoData.imageUrl}}
+                                    <button type="button" aria-haspopup="dialog" class="su-w-full su-aspect-[16/9] su-video-trigger"
+                                        data-click="open-modal" data-modal-id="{{uniqueID}}">
+                                        <img src="{{videoData.imageUrl}}" alt="{{videoData.imageAlt}}"
+                                            class="su-w-full su-h-full su-absolute su-top-0 su-left-0 su-object-cover su-object-center" />
+                                        <span
+                                            class="su-play-button-icon-hero su-transition-all su-absolute su-bottom-20 su-left-20 *:su-w-[40px] *:su-h-[40px] *:md:su-w-[60px] *:md:su-h-[60px] *:lg:su-w-[100px] *:lg:su-h-[100px]">
+                                            {{> svg-icons icon="video play"}}
+                                        </span>
+                                    </button>
+                                {{else}}
+                                    <div class="su-relative su-max-w-full su-h-0 su-pb-[56.25%] su-overflow-hidden">
+                                        {{> embed-video isVertical=videoData.isVertical classes=videoData.class
+                                        videoId=videoData.videoID noAutoPlay=videoData.noAutoPlay title=videoData.title}}
+                                    </div>
+                                {{/if}}
+                            {{else if imageData.url}}
+                                <img src="{{imageData.url}}" alt="{{imageData.alt}}"
+                                    class="su-relative su-w-full su-max-w-full" />
+                            {{/if}}
                         </div>
-                        {{/if}}
+                        <figcaption class="su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white" data-sq-field="captionCredit">
+                            {{captionCredit}}
+                        </figcaption>
+                    </figure>
+                </div>
+            {{else}}
+                {{#if videoData.videoID}}
+                    <div class="su-col-span-6 su-col-start-1 md:su-col-span-12 md:su-col-start-1 su-w-full su-rs-mt-4">
+                        <figure class="su-col-span-full su-relative su-z-0">
+                            <div class="su-relative su-w-full">
+                                {{#if videoData.imageUrl}}
+                                    <button type="button" aria-haspopup="dialog" class="su-w-full su-aspect-[16/9] su-video-trigger"
+                                        data-click="open-modal" data-modal-id="{{uniqueID}}">
+                                        <img src="{{videoData.imageUrl}}" alt="{{videoData.imageAlt}}"
+                                            class="su-w-full su-h-full su-absolute su-top-0 su-left-0 su-object-cover su-object-center" />
+                                        <span
+                                            class="su-play-button-icon-hero su-transition-all su-absolute su-bottom-20 su-left-20 *:su-w-[40px] *:su-h-[40px] *:md:su-w-[60px] *:md:su-h-[60px] *:lg:su-w-[100px] *:lg:su-h-[100px]">
+                                            {{> svg-icons icon="video play"}}
+                                        </span>
+                                    </button>
+                                {{else}}
+                                    <div class="su-relative su-max-w-full su-h-0 su-pb-[56.25%] su-overflow-hidden">
+                                        {{> embed-video isVertical=videoData.isVertical classes=videoData.class
+                                        videoId=videoData.videoID noAutoPlay=videoData.noAutoPlay title=videoData.title}}
+                                    </div>
+                                {{/if}}
+                                {{#if captionCredit}}
+                                    <figcaption class="su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white">
+                                        {{captionCredit}}
+                                    </figcaption>
+                                {{/if}}
+                            </div>
+                        </figure>
                     </div>
-                    {{#if captionCredit}}
-                    <figcaption class="su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white">
-                        {{captionCredit}}
-                    </figcaption>
-                    {{/if}}
-                </figure>
-            </div>
-            {{else if imageData.url}}
-            <div class="su-col-span-6 su-col-start-1 md:su-col-span-12 md:su-col-start-1 su-w-full su-rs-mt-4">
-                <figure class="su-col-span-full su-relative su-z-0">
-                    <div class="su-relative su-w-full">
-                        <img src="{{imageData.url}}" alt="{{imageData.alt}}"
-                            class="su-relative su-w-full su-max-w-full" />
+                {{else if imageData.url}}
+                    <div class="su-col-span-6 su-col-start-1 md:su-col-span-12 md:su-col-start-1 su-w-full su-rs-mt-4">
+                        <figure class="su-col-span-full su-relative su-z-0">
+                            <div class="su-relative su-w-full">
+                                <img src="{{imageData.url}}" alt="{{imageData.alt}}"
+                                    class="su-relative su-w-full su-max-w-full" />
+                            </div>
+                            {{#if captionCredit}}
+                                <figcaption class="su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white">
+                                    {{captionCredit}}
+                                </figcaption>
+                            {{/if}}
+                        </figure>
                     </div>
-                    {{#if captionCredit}}
-                    <figcaption class="su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white">
-                        {{captionCredit}}
-                    </figcaption>
-                    {{/if}}
-                </figure>
-            </div>
+                {{/if}}
             {{/if}}
         </div>
     </div>
     {{#if modalData}}
-    {{#if videoData.videoID}}
-    <section data-modal="modal-wrapper">
-        {{#> modal-content uniqueID=uniqueID titleID=modalData.titleID ariaTitle=modalData.title}}
-        {{> embed-video isVertical=videoData.isVertical classes=videoData.class videoId=videoData.videoID
-        noAutoPlay=videoData.noAutoPlay title=videoData.title}}
-        {{/ modal-content}}
-    </section>
-    {{/if}}
+        {{#if videoData.videoID}}
+            <section data-modal="modal-wrapper">
+                {{#> modal-content uniqueID=uniqueID titleID=modalData.titleID ariaTitle=modalData.title}}
+                    {{> embed-video isVertical=videoData.isVertical classes=videoData.class videoId=videoData.videoID
+                    noAutoPlay=videoData.noAutoPlay title=videoData.title}}
+                {{/ modal-content}}
+            </section>
+        {{/if}}
     {{/if}}
 </section>

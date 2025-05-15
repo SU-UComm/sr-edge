@@ -17,7 +17,7 @@ export default {
      */
     async main( args, info ) {
         const { ctx } = info;
-        const editMode = isEditor(ctx);
+        const editMode = isEditor(ctx.url);
 
         // Extracting configuration data from arguments
         const { title, content } = args || {};

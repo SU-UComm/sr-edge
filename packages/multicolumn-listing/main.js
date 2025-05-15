@@ -1,5 +1,6 @@
 import multicolumnListingTemplate from './multicolumn-listing.hbs';
 import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid, uuid } from "../../global/js/utils";
+import { isEditor } from "../../global/js/utils/isEditor";
 import { Card } from '../../global/js/helpers';
 
 /**
@@ -37,6 +38,8 @@ export default {
         // Extracting environment variables from provided info
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
 
         // Extracting configuration data from arguments
         const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
@@ -150,47 +153,36 @@ export default {
             data = await adapter.getCards(cards);
         }
 
-        // Resolve the URI for the section heading link
-        const headingData = await linkedHeadingService(fnsCtx, { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow });
+        // Prepare heading data
+        const headingData = await linkedHeadingService({
+            title,
+            ctaUrl,
+            ctaManualUrl,
+            ctaText,
+            ctaNewWindow,
+            fnsCtx
+        });
 
-        const cardsMarkup = [];
+        // Prepare cards data
+        const cardsMarkup = data.map(card => {
+            const cardData = new Card(card);
+            cardData.displayThumbnails = displayThumbnails;
+            cardData.displayDescriptions = displayDescriptions;
+            cardData.editMode = editMode;
+            return cardData.render();
+        });
 
-        const maxNumberOfCards =
-            source === "Search"
-                ? searchMaxCards
-                : 3;
-        const numberOfCards = data.length > maxNumberOfCards ? maxNumberOfCards : data.length;
-        const cardSizeMap = new Map();
-
-        cardSizeMap.set(3, "small");
-        cardSizeMap.set(2, "medium");
-
-        const modalData = [];
-
-        // Generate modals for video cards
-        data?.forEach((cardData, i) => {
-            if (i < maxNumberOfCards) {
-                const uniqueId = uuid();
-                if (source === "Search") {
-                    cardsMarkup.push(
-                        Card({data: cardData, displayDescription: displayDescriptions, displayThumbnail: displayThumbnails, cardSize: cardSizeMap.get(searchMaxCards), uniqueId}))
-                }
-                else {
-                    cardsMarkup.push(
-                        Card({data: cardData, displayDescription: displayDescriptions, displayThumbnail: displayThumbnails, cardSize: cardSizeMap.get(numberOfCards), uniqueId}))
-                }
-
-                if(cardData.type === 'Video') {
-                    modalData.push({
-                        isVertical: cardData.size === "vertical-video",
-                        videoId: cardData.videoUrl,
-                        title: `Watch ${cardData.title}`, 
-                        noAutoPlay: true,
-                        uniqueID: uniqueId,
-                        titleID: 'card-modal'
-                    })
-                }
-            }
+        // Prepare modal data
+        const modalData = data.map(card => {
+            const cardData = new Card(card);
+            cardData.displayThumbnails = displayThumbnails;
+            cardData.displayDescriptions = displayDescriptions;
+            cardData.editMode = editMode;
+            return {
+                uniqueId: uuid(),
+                videoUrl: cardData.videoUrl,
+                title: cardData.title
+            };
         });
 
         // Prepare component data for template rendering
@@ -203,6 +195,7 @@ export default {
             multicolumnGrid: multicolumnGrid(cardsMarkup, true),
             modalData,
             width: "large",
+            editMode
         };
 
         return multicolumnListingTemplate(componentData);

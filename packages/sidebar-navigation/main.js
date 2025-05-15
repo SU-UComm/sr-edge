@@ -1,4 +1,5 @@
 import { sidebarNavDataAdapter, matrixSidebarNavService } from '../../global/js/utils';
+import { isEditor } from "../../global/js/utils/isEditor";
 import sidebarNavigationTemplate from './sidebar-navigation.hbs';
 
 /**
@@ -25,6 +26,8 @@ export default {
     async main(args, info) {
         // Extracting functions from provided info
         const fnsCtx = info?.ctx || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
 
         // Extracting environment variables from provided info
         const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
@@ -135,6 +138,7 @@ export default {
         const componentData = {
             id,
             menuData,
+            editMode
         };
         return sidebarNavigationTemplate(componentData);
     }

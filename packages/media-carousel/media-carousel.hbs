@@ -2,9 +2,39 @@
     <div class="{{containerClasses width=width}}">
         {{#> carousel-media uniqueID=id}}
             {{#each slides}}
-            <div class="swiper-slide">
-                {{> card-media sidebarHeading=sidebarHeading title=title imageUrl=imageUrl imageAlt=imageAlt taxonomy=taxonomy liveUrl=liveUrl isRealExternalLink=isRealExternalLink author=author type=type typeIcon=typeIcon description=description}}
-            </div>
+                <div class="swiper-slide">
+                    {{#if @root.editMode}}
+                        {{> card-media 
+                            sidebarHeading=sidebarHeading 
+                            title=title 
+                            imageUrl=imageUrl 
+                            imageAlt=imageAlt 
+                            taxonomy=taxonomy 
+                            liveUrl=liveUrl 
+                            isRealExternalLink=isRealExternalLink 
+                            author=author 
+                            type=type 
+                            typeIcon=typeIcon 
+                            description=description 
+                            editMode=@root.editMode
+                            data-sq-field=id}}
+                    {{else}}
+                        {{#if title}}
+                            {{> card-media 
+                                sidebarHeading=sidebarHeading 
+                                title=title 
+                                imageUrl=imageUrl 
+                                imageAlt=imageAlt 
+                                taxonomy=taxonomy 
+                                liveUrl=liveUrl 
+                                isRealExternalLink=isRealExternalLink 
+                                author=author 
+                                type=type 
+                                typeIcon=typeIcon 
+                                description=description}}
+                        {{/if}}
+                    {{/if}}
+                </div>
             {{/each}}
         {{/ carousel-media}}
     </div>

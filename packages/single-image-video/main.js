@@ -1,6 +1,6 @@
 import xss from "xss";
 import { basicAssetUri, uuid } from '../../global/js/utils';
-
+import { isEditor } from "../../global/js/utils/isEditor";
 import singleImageVideoTemplate from './single-image-video.hbs';
 
 /**
@@ -38,7 +38,9 @@ export default {
     async main(args, info) {
         // Extracting environment varibales and function from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
+        const editMode = isEditor(ctx.url);
 
         // Extracting configuration data from arguments
         const { image, caption, credit, width, marginTop, marginBottom } = args || {};
@@ -194,7 +196,8 @@ export default {
             videoTitle: heading ? `Watch ${heading}` : "",
             captionCredit: xss(captionCredit),
             modalData,
-            uniqueID
+            uniqueID,
+            editMode
         };
 
         return singleImageVideoTemplate(componentData);

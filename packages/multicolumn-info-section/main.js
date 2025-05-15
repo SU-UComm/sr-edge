@@ -1,5 +1,6 @@
 import xss from "xss";
 import { basicAssetUri, isRealExternalLink } from "../../global/js/utils";
+import { isEditor } from "../../global/js/utils/isEditor";
 import multicolumnInfoSectionTemplate from './multicolumn-info-section.hbs';
 
 /**
@@ -22,6 +23,8 @@ export default {
     async main(args, info) {
         // Extracting functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
 
         // Extracting environment variables from provided info
         const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
@@ -125,6 +128,7 @@ export default {
             infoText: xss(colTwo.infoText),
             buttonData,
             infoBoxData,
+            editMode,
         };
 
         return multicolumnInfoSectionTemplate(componentData);

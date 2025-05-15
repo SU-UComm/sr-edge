@@ -1,4 +1,5 @@
 import xss from 'xss';
+import { isEditor } from "../../global/js/utils/isEditor";
 import singleTextBlockTemplate from './single-text-block.hbs';
 
 /**
@@ -18,7 +19,10 @@ export default {
      * @param {string} [args.paddingY="10"] - The vertical padding value (in rem units)
      * @returns {Promise<string>} The rendered HTML string or an error message
      */
-    async main(args) {
+    async main(args, info) {
+        const { ctx } = info;
+        const editMode = isEditor(ctx.url);
+        
         const {
             title = '',
             eyebrow = '',
@@ -64,6 +68,7 @@ export default {
             eyebrow,
             title,
             description: xss(description),
+            editMode
         };
 
         return singleTextBlockTemplate(componentData);

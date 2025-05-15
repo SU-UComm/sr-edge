@@ -24,7 +24,10 @@
                 "properties": {
                     "content": {
                         "title": "Lead",
-                        "type": "FormattedText"
+                        "type": "FormattedText",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "variant": {
                         "title": "Variant",
