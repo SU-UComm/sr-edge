@@ -165,6 +165,7 @@ export default {
             carouselData,
             captionCredit,
             uniqueID,
+            peek: false
         };
         return basicStoryHeroTemplate(componentData);
     }

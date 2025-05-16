@@ -80,7 +80,7 @@
                         {{~/ifEquals~}}
                         {{~#ifEquals mediaType "carousel"~}}
                             {{~#if carouselData~}}
-                                {{#> carousel-media uniqueID=uniqueID}}
+                                {{#> carousel-media uniqueID=uniqueID peek=peek}}
                                     {{~#each carouselData~}}
                                     <div class="swiper-slide">
                                         <div class="su-aspect-[3/2] su-relative">
