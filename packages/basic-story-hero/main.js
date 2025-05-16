@@ -34,8 +34,8 @@ export default {
         // Basic story ID: 165577
         // carousel story ID: 157287
 
-        // const currentAssetId = '157287';
-        const currentAssetId = fnsCtx?.assetId
+        // const currentAssetId = '169707';
+        const currentAssetId = fnsCtx?.assetId;
 
 
         // Validate required environment variables
