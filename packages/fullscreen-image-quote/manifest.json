@@ -1,0 +1,196 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "fullscreen-image-quote",
+    "type": "edge",
+    "version": "1.0.0",
+    "namespace": "stanford-components",
+    "description": "This component displays a full width image with a quote and CTA.",
+    "displayName": "Fullscreen Image Quote",
+    "mainFunction": "main",
+    "icon": {
+        "id": "format_quote",
+        "color": {
+            "type": "enum",
+            "value": "red"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "image": {
+                        "title": "Background image (landscape orientation)",
+                        "description": "The preferred aspect ratio for the image is 3x2. On the largest screens (> 1500px), the image will be cropped to a 2x1 aspect ratio. This background image will be shown on all screen sizes unless a mobile image is also selected below.",
+                        "type": "string",
+                        "format": "matrix-asset-uri"
+                    },
+                    "imageVPosition": {
+                        "title": "Vertical crop position of the background image",
+                        "description": "This setting will only be used if the above image's aspect ratio is taller than its container. It will determine which portion of the image is shown if the image is cropped on some screen sizes.",
+                        "type": "string",
+                        "default": "center",
+                        "enum": ["top", "center", "bottom"]
+                    },
+                    "mobileImage": {
+                        "title": "Mobile background image (portrait orientation)",
+                        "description": "If provided, this image will be shown for phones and tablets (up to screen size 991px). The preferred aspect ratio of the uploaded image is 3x4. On mobile phones, it will be cropped to a 1x2 aspect ratio and the middle part of the image will be shown.",
+                        "type": "string",
+                        "format": "matrix-asset-uri"
+                    },
+                    "quote": {
+                        "title": "Quote (or body content)",
+                        "description": "Please include the quotation marks if this is a quote. They are not automatically included for content versatility.",
+                        "type": "string",
+                        "format": "multi-line"
+                    },
+                    "quoteVAlign": {
+                        "title": "Quote vertical alignment (desktop)",
+                        "description": "This setting will set the vertical alignment of the quote text on desktop. On smaller screens, the quote will always be displayed at the bottom of the component.",
+                        "type": "string",
+                        "default": "center",
+                        "enum": ["top", "center", "bottom"]
+                    },
+                    "quoteHAlign": {
+                        "title": "Quote horizontal alignment",
+                        "type": "string",
+                        "default": "left",
+                        "enum": ["left", "right"]
+                    },
+                    "removeTopSpacing": {
+                        "title": "Remove top spacing",
+                        "description": "Enable this to remove the spacing above this component, e.g., when this is not the first item in a series of this component.",
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "ctaDetails": {
+                        "title": "CTA details",
+                        "required": [],
+                        "description": "Enter the details for the CTA link.",
+                        "properties": {
+                            "ctaPreText": {
+                                "title": "Short text before the CTA label",
+                                "type": "string",
+                                "default": "Meet"
+                            },
+                            "ctaText": {
+                                "title": "CTA text",
+                                "description": "Text for the actual CTA link portion.",
+                                "type": "string"
+                            },
+                            "ctaSubtext": {
+                                "title": "CTA subtext",
+                                "description": "Line of smaller text below the CTA.",
+                                "type": "string",
+                                "default": "’21, international student"
+                            },
+                            "internalUrl": {
+                                "title": "Internal link (Matrix asset link)",
+                                "type": "string",
+                                "description": "Select a Matrix page/asset to link to. If you prefer to paste the full URL manually, use the 'External (manual) link' field below instead.",
+                                "format": "matrix-asset-uri"
+                            },
+                            "externalUrl": {
+                                "title": "External (manual) link",
+                                "type": "string",
+                                "description": "Enter the full URL, including https://. A diagonal arrow icon will be automatically used after the CTA text if the URL does not contain news.stanford.edu."
+                            },
+                            "isNewWindow": {
+                                "title": "Open link in a new window",
+                                "type": "boolean",
+                                "default": false
+                            }
+                        }
+                    }
+                },
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://api-identifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/99100": {
+            "type": "file",
+            "path": "mocked-uris/99100.json"
+        },
+        "matrix-asset://api-identifier/28192": {
+            "type": "file",
+            "path": "mocked-uris/28192.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}

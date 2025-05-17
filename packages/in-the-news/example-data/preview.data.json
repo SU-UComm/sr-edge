@@ -1,0 +1,22 @@
+{
+    "headingConfiguration": {
+        "title": "In the news",
+        "ctaText": "View all",
+        "ctaUrl": "matrix-asset://api-identifier/141464"
+    },
+    "featuredContent": {
+        "featuredTeaser": "matrix-asset://api-identifier/162707",
+        "personHeadshot": "matrix-asset://api-identifier/163591",
+        "featuredCtaText": "See more",
+        "featuredTeaserDescription": "This is a custom feature desc",
+        "featuredQuote": "A sanctuary, it’s a forever thing. And so we want to know not only what’s here now, but how it’s changing over time."
+    },
+    "supplementaryTeaserOne": {
+        "teaserOne": "matrix-asset://api-identifier/162634",
+        "teaserOneDescription": "Jason Borne"
+    },
+    "supplementaryTeaserTwo": {
+        "teaserTwo": "matrix-asset://api-identifier/162759",
+        "teaserTwoDescription": "Jon Doe"
+    }
+}

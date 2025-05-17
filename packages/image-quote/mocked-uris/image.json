@@ -1,0 +1,1011 @@
+{
+  "id": "128612",
+  "type": "image",
+  "type_name": "Image",
+  "version": "0.1.0",
+  "name": "think-faster-book.jpeg",
+  "short_name": "Book Cover 2",
+  "status": {
+    "id": 16,
+    "code": "live",
+    "name": "Live"
+  },
+  "created": {
+    "date": "2024-01-29T22:02:31-08:00",
+    "user_id": "32325"
+  },
+  "updated": {
+    "date": "2024-01-29T22:02:45-08:00",
+    "user_id": "32325"
+  },
+  "published": {
+    "date": "2024-01-29T22:02:43-08:00",
+    "user_id": "32325"
+  },
+  "status_changed": {
+    "date": "2024-01-29T22:02:43-08:00",
+    "user_id": "32325"
+  },
+  "urls": [
+    "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/think-faster-book.jpeg"
+  ],
+  "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/think-faster-book.jpeg",
+  "attributes": {
+    "title": "Book Cover 2",
+    "allow_unrestricted": true,
+    "variety_count": 19,
+    "size": 71655,
+    "height": 1500,
+    "width": 993,
+    "caption": "",
+    "alt": "Example of another book cover",
+    "name": "think-faster-book.jpeg"
+  },
+  "metadata": {
+    "mediaPublished": ["2024-01-01 00:00:00"],
+    "mediaModified": ["2024-01-01 00:00:00"],
+    "mediaDescription": [],
+    "mediaCredit": [],
+    "mediaId": [],
+    "fileFeed": []
+  },
+  "contents": "<img src=\"https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/think-faster-book.jpeg\" width=\"993\" height=\"1500\" alt=\"Example of another book cover\" title=\"Book Cover 2\" />",
+  "additional": {
+    "file_info": {
+      "file_name": "think-faster-book.jpeg",
+      "size_readable": "70.0 KB",
+      "size_bytes": 71655,
+      "width": 993,
+      "height": 1500,
+      "modified_readable": "Jan 29, 2024 10:02 PM",
+      "modified_unix": 1706594552
+    },
+    "varieties": [
+      {
+        "id": "128612:v1",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "100w",
+        "short_name": "100w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/100w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/100w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "100w.jpeg",
+          "name": "100w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 3711,
+          "variety_height": 100,
+          "variety_width": 100,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 100,
+          "height": 0,
+          "width": 0,
+          "constrain": "centre_weighted_square"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v2",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "150w",
+        "short_name": "150w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/150w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/150w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "150w.jpeg",
+          "name": "150w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 5840,
+          "variety_height": 150,
+          "variety_width": 150,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 150,
+          "height": 0,
+          "width": 0,
+          "constrain": "centre_weighted_square"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v3",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "200w",
+        "short_name": "200w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/200w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/200w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "200w.jpeg",
+          "name": "200w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 12519,
+          "variety_height": 302,
+          "variety_width": 200,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 200,
+          "width": 200,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v4",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "300w",
+        "short_name": "300w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/300w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/300w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "300w.jpeg",
+          "name": "300w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 12519,
+          "variety_height": 302,
+          "variety_width": 200,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 300,
+          "width": 200,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v5",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "345w",
+        "short_name": "345w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/345w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/345w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "345w.jpeg",
+          "name": "345w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 26306,
+          "variety_height": 521,
+          "variety_width": 345,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 555,
+          "width": 345,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v6",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "375w",
+        "short_name": "375w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/375w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/375w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "375w.jpeg",
+          "name": "375w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 28893,
+          "variety_height": 566,
+          "variety_width": 375,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 200,
+          "width": 375,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v7",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "400w",
+        "short_name": "400w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/400w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/400w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "400w.jpeg",
+          "name": "400w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 30588,
+          "variety_height": 604,
+          "variety_width": 400,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 100,
+          "width": 400,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v8",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "555w",
+        "short_name": "555w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/555w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/555w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "555w.jpeg",
+          "name": "555w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 45320,
+          "variety_height": 838,
+          "variety_width": 555,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 555,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v9",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "600w",
+        "short_name": "600w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/600w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/600w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "600w.jpeg",
+          "name": "600w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 50018,
+          "variety_height": 906,
+          "variety_width": 600,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 600,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v10",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "690w",
+        "short_name": "690w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/690w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/690w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "690w.jpeg",
+          "name": "690w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 59681,
+          "variety_height": 1042,
+          "variety_width": 690,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 690,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v11",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "705w",
+        "short_name": "705w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/705w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/705w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "705w.jpeg",
+          "name": "705w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 62278,
+          "variety_height": 1065,
+          "variety_width": 705,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 705,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v12",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "750w",
+        "short_name": "750w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/750w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/750w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "750w.jpeg",
+          "name": "750w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 66814,
+          "variety_height": 1133,
+          "variety_width": 750,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 750,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v13",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "795w",
+        "short_name": "795w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/795w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/795w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "795w.jpeg",
+          "name": "795w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 70693,
+          "variety_height": 1201,
+          "variety_width": 795,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 795,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v14",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "960w",
+        "short_name": "960w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/960w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/960w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "960w.jpeg",
+          "name": "960w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 93661,
+          "variety_height": 1450,
+          "variety_width": 960,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 960,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v15",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1024w",
+        "short_name": "1024w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/1024w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/1024w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1024w.jpeg",
+          "name": "1024w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 102147,
+          "variety_height": 1547,
+          "variety_width": 1024,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1024,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v16",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1110w",
+        "short_name": "1110w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/1110w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/1110w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1110w.jpeg",
+          "name": "1110w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 113172,
+          "variety_height": 1677,
+          "variety_width": 1110,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1110,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v17",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1410w",
+        "short_name": "1410w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/1410w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/1410w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1410w.jpeg",
+          "name": "1410w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 165156,
+          "variety_height": 2130,
+          "variety_width": 1410,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1410,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      },
+      {
+        "id": "128612:v18",
+        "type": "image_variety",
+        "type_name": "Image Variety",
+        "version": "",
+        "name": "1500w",
+        "short_name": "1500w",
+        "status": {
+          "id": 16,
+          "code": "live",
+          "name": "Live"
+        },
+        "created": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "updated": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "published": {
+          "date": null,
+          "user_id": null
+        },
+        "status_changed": {
+          "date": "1969-12-31T16:00:00-08:00",
+          "user_id": null
+        },
+        "urls": [
+          "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/1500w.jpeg"
+        ],
+        "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0020/128612/varieties/1500w.jpeg",
+        "attributes": {
+          "variety_type": "resize",
+          "filename": "1500w.jpeg",
+          "name": "1500w",
+          "title": "Book Cover 2",
+          "caption": "",
+          "variety_size": 180032,
+          "variety_height": 2266,
+          "variety_width": 1500,
+          "alt": "Example of another book cover",
+          "dimension_min": 0,
+          "dimension": 0,
+          "height": 0,
+          "width": 1500,
+          "constrain": "width"
+        },
+        "metadata": null,
+        "contents": "",
+        "additional": {}
+      }
+    ],
+    "exif": {
+      "image": {
+        "ImageHeight": 1500,
+        "ImageWidth": 993,
+        "ResolutionUnit": 0,
+        "XResolution": 1,
+        "YResolution": 1
+      }
+    }
+  }
+}
