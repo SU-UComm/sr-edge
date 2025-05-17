@@ -1,0 +1,135 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "image-quote",
+    "type": "edge",
+    "version": "3.0.0",
+    "namespace": "stanford-components",
+    "description": "An image with an associated quote.",
+    "displayName": "Image quote",
+    "mainFunction": "main",
+    "icon": {
+        "id": "format_quote",
+        "color": {
+            "type": "enum",
+            "value": "teal"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "displayConfiguration": {
+                        "title": "",
+                        "description": "",
+                        "required": [],
+                        "properties": {
+                            "image": {
+                                "title": "Image Asset",
+                                "description": "A Matrix image asset",
+                                "type": "string",
+                                "format": "matrix-asset-uri"
+                            },
+                            "imageCaption": {
+                                "title": "Image caption",
+                                "description": "A caption for the image",
+                                "type": "string"
+                            },
+                            "imageCredit": {
+                                "title": "Image credit",
+                                "description": "A credit for the image",
+                                "type": "string"
+                            },
+                            "quote": {
+                                "title": "Quote",
+                                "type": "string",
+                                "format": "multi-line"
+                            },
+                            "name": {
+                                "title": "Name",
+                                "description": "The name of the quotee",
+                                "type": "string"
+                            },
+                            "title": {
+                                "title": "Title",
+                                "description": "The title/role of the quotee",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://api-identifier/128612": {
+            "type": "file",
+            "path": "mocked-uris/128612.json"
+        },
+        "matrix-asset://api-identifier/9848": {
+            "type": "file",
+            "path": "mocked-uris/9848.json"
+        },
+        "matrix-asset://api-identifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}

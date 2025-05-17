@@ -1,0 +1,14 @@
+{
+    "headingConfiguration": {
+        "title": "Upcoming events",
+        "ctaManualUrl": "https://events.stanford.edu",
+        "ctaText": "View all",
+        "ctaNewWindow": false
+    },
+    "contentConfiguration": {
+        "eventsUrl": "https://events.stanford.edu/api/2/events?days=365&sponsored=true"
+    },
+    "displayConfiguration": {
+        "numberOfEvents": 6
+    }
+}

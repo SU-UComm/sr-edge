@@ -1,0 +1,229 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "in-the-news",
+    "version": "3.0.0",
+    "namespace": "stanford-components",
+    "description": "This component contains one featured quote and two supplementary teasers.",
+    "type": "edge",
+    "displayName": "In the news",
+    "mainFunction": "main",
+    "environment": [
+        {
+            "name": "API_IDENTIFIER",
+            "required": true
+        },
+        {
+            "name": "BASE_DOMAIN",
+            "required": true
+        }
+    ],
+    "icon": {
+        "id": "newspaper",
+        "color": {
+            "type": "enum",
+            "value": "purple"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "headingConfiguration": {
+                        "required": [],
+                        "properties": {
+                            "title": {
+                                "title": "Heading",
+                                "description": "The heading text",
+                                "type": "string",
+                                "default": "In the news"
+                            },
+                            "ctaUrl": {
+                                "title": "Matrix Asset Link",
+                                "type": "string",
+                                "description": "Select an asset to link to. If this field is filled out, it will be used instead of the manual link",
+                                "format": "matrix-asset-uri"
+                            },
+                            "ctaManualUrl": {
+                                "title": "Manual Link",
+                                "type": "string",
+                                "description": "Enter the full URL, including https://"
+                            },
+                            "ctaText": {
+                                "title": "Link text",
+                                "type": "string",
+                                "default": "View all"
+                            },
+                            "ctaNewWindow": {
+                                "title": "Open link in a new window",
+                                "type": "boolean",
+                                "default": false
+                            }
+                        }
+                    },
+                    "featuredContent": {
+                        "title": "Featured Content",
+                        "description": "The main featured item in the component",
+                        "required": [],
+                        "properties": {
+                            "featuredTeaser": {
+                                "title": "Featured teaser",
+                                "format": "matrix-asset-uri",
+                                "type": "string"
+                            },
+                            "personHeadshot": {
+                                "title": "Quotee headshot",
+                                "type": "string",
+                                "format": "matrix-asset-uri",
+                                "description": "Please use image assets for the person headshot."
+                            },
+                            "featuredQuote": {
+                                "title": "Featured Quote",
+                                "type": "string"
+                            },
+                            "featuredTeaserDescription": {
+                                "title": "Featured Scholar attribution",
+                                "type": "string"
+                            },
+                            "featuredCtaText": {
+                                "title": "Featured CTA text",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "supplementaryTeaserOne": {
+                        "required": [],
+                        "properties": {
+                            "teaserOne": {
+                                "title": "Teaser One",
+                                "format": "matrix-asset-uri",
+                                "type": "string"
+                            },
+                            "teaserOneDescription": {
+                                "title": "Featured Scholar attribution",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "supplementaryTeaserTwo": {
+                        "required": [],
+                        "properties": {
+                            "teaserTwo": {
+                                "title": "Teaser Two",
+                                "format": "matrix-asset-uri",
+                                "type": "string"
+                            },
+                            "teaserTwoDescription": {
+                                "title": "Featured Scholar attribution",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/14": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/141464": {
+            "type": "file",
+            "path": "mocked-uris/141464.json"
+        },
+        "matrix-asset://api-identifier/162634": {
+            "type": "file",
+            "path": "mocked-uris/162634.json"
+        },
+        "matrix-asset://api-identifier/162707": {
+            "type": "file",
+            "path": "mocked-uris/162707.json"
+        },
+        "matrix-asset://api-identifier/162759": {
+            "type": "file",
+            "path": "mocked-uris/162759.json"
+        },
+        "matrix-asset://api-identifier/163591": {
+            "type": "file",
+            "path": "mocked-uris/163591.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
