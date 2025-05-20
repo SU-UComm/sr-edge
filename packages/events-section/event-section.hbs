@@ -1,0 +1,12 @@
+<section data-component="events-section">
+    <div class="{{containerClasses width=width}}">
+        {{> linked-heading title=title isAlwaysLight=isAlwaysLight ctaLink=ctaLink ctaNewWindow=ctaNewWindow ctaText=ctaText}}
+        {{#> horizontal-card-grid orientation="horizontal"}}
+            {{#each data}} 
+            <div class='su-relative su-grow'>
+                {{> card-horizontal cardSize=../cardSize title=title description=description liveUrl=liveUrl imageUrl=imageUrl imageAlt=imageAlt taxonomy=taxonomy taxonomyUrl=taxonomyUrl type=type date=date endDate=endDate videoUrl=videoUrl uniqueID=uniqueID iconType=iconType}}
+            </div>
+            {{/each}}
+        {{/ horizontal-card-grid}}
+    </div>
+</section>

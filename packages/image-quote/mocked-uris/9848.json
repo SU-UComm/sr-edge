@@ -1,0 +1,24 @@
+{
+    "id": "9848",
+    "type": "image",
+    "type_name": "Image",
+    "version": "0.1.1",
+    "name": "background-image.jpg",
+    "short_name": "Background Image",
+    "status": { "id": 16, "code": "live", "name": "Live" },
+    "urls": [
+        "https://news.stanford.edu/__data/assets/image/0029/9848/Field-Trip-Egan-Range-Phil-Gans.jpeg"
+    ],
+    "url": "https://news.stanford.edu/__data/assets/image/0029/9848/Field-Trip-Egan-Range-Phil-Gans.jpeg",
+    "attributes": {
+        "variety_count": 19,
+        "size": 411964,
+        "height": 998,
+        "width": 1500,
+        "title": "Background Image",
+        "name": "background-image.jpg",
+        "allow_unrestricted": true,
+        "caption": "",
+        "alt": "A decorative background image"
+    }
+}
