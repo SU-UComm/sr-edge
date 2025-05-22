@@ -1,0 +1,24 @@
+{
+    "id": "9856",
+    "type": "image",
+    "type_name": "Image",
+    "version": "0.1.0",
+    "name": "featured-image.jpg",
+    "short_name": "Featured Image",
+    "status": { "id": 16, "code": "live", "name": "Live" },
+    "urls": [
+        "https://news.stanford.edu/__data/assets/image/0028/9856/20221130Elizabeth_Miller_N6A8132.jpeg"
+    ],
+    "url": "https://news.stanford.edu/__data/assets/image/0028/9856/20221130Elizabeth_Miller_N6A8132.jpeg",
+    "attributes": {
+        "title": "Featured Image",
+        "allow_unrestricted": true,
+        "variety_count": 19,
+        "size": 71655,
+        "height": 1500,
+        "width": 993,
+        "caption": "",
+        "alt": "Featured image for the media feature component",
+        "name": "featured-image.jpg"
+    }
+}

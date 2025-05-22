@@ -1,0 +1,18 @@
+{
+    "section": {
+        "title": "Single image or video title is centered",
+        "summary": "<p>Balch, an experimental physicist in the Dionne lab at Stanford, has developed a thumbnail-sized optical sensor that can track the health of marine ecosystems in near-real time through quick detection of environmental DNA. It could be a critical tool for natural resource managers in the face of climate change impacts like coral bleaching, warming seas, and migration of species.</p>",
+        "summaryAlign": "center"
+    },
+    "image": "matrix-asset://api-identifier/99100",
+    "caption": "Caption text goes here lorem ipsum dolor sit amet",
+    "credit": "Credit goes here lorem ipsum lorem ipsum lorem ipsum lorem dolor site amit",
+    "width": "Wide",
+    "video": {
+        "heading": "This is a test title",
+        "vimeoid": "908030173",
+        "youtubeid": "dYdi0Aek664"
+    },
+    "marginTop": "default",
+    "marginBottom": "default"
+}

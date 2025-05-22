@@ -1,0 +1,733 @@
+{
+    "assetid": "163985",
+    "type_code": "image",
+    "version": "0.1.0",
+    "name": "20210422_David_Sklansky796A8268.jpg",
+    "short_name": "David Sklansky",
+    "external_id": true,
+    "status": "16",
+    "languages": "en",
+    "charset": "utf-8",
+    "created": "2025-01-14 13:33:57",
+    "created_userid": "127820",
+    "updated": "2025-01-14 13:34:14",
+    "updated_userid": "127820",
+    "published": "2025-01-14 13:34:12",
+    "published_userid": "127820",
+    "status_changed": "2025-01-14 13:34:12",
+    "status_changed_userid": "127820",
+    "thumbnail": "",
+    "attributes": {
+        "varieties": {
+            "attrid": "922",
+            "type": "serialise",
+            "value": {
+                "lookups": {
+                    "100w": "v1",
+                    "150w": "v2",
+                    "200w": "v3",
+                    "300w": "v4",
+                    "345w": "v5",
+                    "375w": "v6",
+                    "400w": "v7",
+                    "555w": "v8",
+                    "600w": "v9",
+                    "690w": "v10",
+                    "705w": "v11",
+                    "750w": "v12",
+                    "795w": "v13",
+                    "960w": "v14",
+                    "1024w": "v15",
+                    "1110w": "v16",
+                    "1410w": "v17",
+                    "1500w": "v18"
+                },
+                "data": {
+                    "v1": {
+                        "variety_type": "resize",
+                        "filename": "100w.jpg",
+                        "name": "100w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 4698,
+                        "variety_height": 100,
+                        "variety_width": 100,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "100",
+                        "height": "0",
+                        "width": "0",
+                        "constrain": "centre_weighted_square"
+                    },
+                    "v2": {
+                        "variety_type": "resize",
+                        "filename": "150w.jpg",
+                        "name": "150w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 8948,
+                        "variety_height": 150,
+                        "variety_width": 150,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "150",
+                        "height": "0",
+                        "width": "0",
+                        "constrain": "centre_weighted_square"
+                    },
+                    "v3": {
+                        "variety_type": "resize",
+                        "filename": "200w.jpg",
+                        "name": "200w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 10412,
+                        "variety_height": 133,
+                        "variety_width": 200,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "200",
+                        "width": "200",
+                        "constrain": "width"
+                    },
+                    "v4": {
+                        "variety_type": "resize",
+                        "filename": "300w.jpg",
+                        "name": "300w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 10412,
+                        "variety_height": 133,
+                        "variety_width": 200,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "300",
+                        "width": "200",
+                        "constrain": "width"
+                    },
+                    "v5": {
+                        "variety_type": "resize",
+                        "filename": "345w.jpg",
+                        "name": "345w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 28097,
+                        "variety_height": 230,
+                        "variety_width": 345,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "555",
+                        "width": "345",
+                        "constrain": "width"
+                    },
+                    "v6": {
+                        "variety_type": "resize",
+                        "filename": "375w.jpg",
+                        "name": "375w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 32768,
+                        "variety_height": 250,
+                        "variety_width": 375,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "200",
+                        "width": "375",
+                        "constrain": "width"
+                    },
+                    "v7": {
+                        "variety_type": "resize",
+                        "filename": "400w.jpg",
+                        "name": "400w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 36040,
+                        "variety_height": 267,
+                        "variety_width": 400,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "100",
+                        "width": "400",
+                        "constrain": "width"
+                    },
+                    "v8": {
+                        "variety_type": "resize",
+                        "filename": "555w.jpg",
+                        "name": "555w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 64494,
+                        "variety_height": 370,
+                        "variety_width": 555,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "555",
+                        "constrain": "width"
+                    },
+                    "v9": {
+                        "variety_type": "resize",
+                        "filename": "600w.jpg",
+                        "name": "600w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 73122,
+                        "variety_height": 400,
+                        "variety_width": 600,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "600",
+                        "constrain": "width"
+                    },
+                    "v10": {
+                        "variety_type": "resize",
+                        "filename": "690w.jpg",
+                        "name": "690w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 92865,
+                        "variety_height": 460,
+                        "variety_width": 690,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "690",
+                        "constrain": "width"
+                    },
+                    "v11": {
+                        "variety_type": "resize",
+                        "filename": "705w.jpg",
+                        "name": "705w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 96259,
+                        "variety_height": 470,
+                        "variety_width": 705,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "705",
+                        "constrain": "width"
+                    },
+                    "v12": {
+                        "variety_type": "resize",
+                        "filename": "750w.jpg",
+                        "name": "750w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 110385,
+                        "variety_height": 500,
+                        "variety_width": 750,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "750",
+                        "constrain": "width"
+                    },
+                    "v13": {
+                        "variety_type": "resize",
+                        "filename": "795w.jpg",
+                        "name": "795w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 117807,
+                        "variety_height": 530,
+                        "variety_width": 795,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "795",
+                        "constrain": "width"
+                    },
+                    "v14": {
+                        "variety_type": "resize",
+                        "filename": "960w.jpg",
+                        "name": "960w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 158306,
+                        "variety_height": 640,
+                        "variety_width": 960,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "960",
+                        "constrain": "width"
+                    },
+                    "v15": {
+                        "variety_type": "resize",
+                        "filename": "1024w.jpg",
+                        "name": "1024w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 176456,
+                        "variety_height": 683,
+                        "variety_width": 1024,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "1024",
+                        "constrain": "width"
+                    },
+                    "v16": {
+                        "variety_type": "resize",
+                        "filename": "1110w.jpg",
+                        "name": "1110w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 201160,
+                        "variety_height": 740,
+                        "variety_width": 1110,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "1110",
+                        "constrain": "width"
+                    },
+                    "v17": {
+                        "variety_type": "resize",
+                        "filename": "1410w.jpg",
+                        "name": "1410w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 290885,
+                        "variety_height": 940,
+                        "variety_width": 1410,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "1410",
+                        "constrain": "width"
+                    },
+                    "v18": {
+                        "variety_type": "resize",
+                        "filename": "1500w.jpg",
+                        "name": "1500w",
+                        "title": "David Sklansky",
+                        "caption": "",
+                        "variety_size": 341157,
+                        "variety_height": 1000,
+                        "variety_width": 1500,
+                        "alt": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+                        "dimension_min": "0",
+                        "dimension": "0",
+                        "height": "0",
+                        "width": "1500",
+                        "constrain": "width"
+                    }
+                }
+            },
+            "is_contextable": false,
+            "use_default": true
+        },
+        "variety_count": {
+            "attrid": "923",
+            "type": "int",
+            "value": "19",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "embedded_data": {
+            "attrid": "924",
+            "type": "serialise",
+            "value": {
+                "filename": {
+                    "name": "FileName",
+                    "value": "20210422_David_Sklansky796A8268.jpg"
+                },
+                "filesize": {
+                    "name": "FileSize",
+                    "value": "1548 KiB"
+                },
+                "filemodifydate": {
+                    "name": "FileModifyDate",
+                    "value": "2025:01:14 21:33:58+00:00"
+                },
+                "fileaccessdate": {
+                    "name": "FileAccessDate",
+                    "value": "2025:01:14 21:33:58+00:00"
+                },
+                "fileinodechangedate": {
+                    "name": "FileInodeChangeDate",
+                    "value": "2025:01:14 21:33:58+00:00"
+                },
+                "filetype": {
+                    "name": "FileType",
+                    "value": "JPEG"
+                },
+                "filetypeextension": {
+                    "name": "FileTypeExtension",
+                    "value": "jpg"
+                },
+                "mimetype": {
+                    "name": "MIMEType",
+                    "value": "image\/jpeg"
+                },
+                "exifbyteorder": {
+                    "name": "ExifByteOrder",
+                    "value": "Big-endian (Motorola, MM)"
+                },
+                "xresolution": {
+                    "name": "XResolution",
+                    "value": "72"
+                },
+                "yresolution": {
+                    "name": "YResolution",
+                    "value": "72"
+                },
+                "resolutionunit": {
+                    "name": "ResolutionUnit",
+                    "value": "inches"
+                },
+                "copyright": {
+                    "name": "Copyright",
+                    "value": "Stanford University"
+                },
+                "photoshopquality": {
+                    "name": "PhotoshopQuality",
+                    "value": "12"
+                },
+                "photoshopformat": {
+                    "name": "PhotoshopFormat",
+                    "value": "Progressive"
+                },
+                "progressivescans": {
+                    "name": "ProgressiveScans",
+                    "value": "3 Scans"
+                },
+                "iptcdigest": {
+                    "name": "IPTCDigest",
+                    "value": "00000000000000000000000000000000"
+                },
+                "profilecmmtype": {
+                    "name": "ProfileCMMType",
+                    "value": "Linotronic"
+                },
+                "profileversion": {
+                    "name": "ProfileVersion",
+                    "value": "2.1.0"
+                },
+                "profileclass": {
+                    "name": "ProfileClass",
+                    "value": "Display Device Profile"
+                },
+                "colorspacedata": {
+                    "name": "ColorSpaceData",
+                    "value": "RGB "
+                },
+                "profileconnectionspace": {
+                    "name": "ProfileConnectionSpace",
+                    "value": "XYZ "
+                },
+                "profiledatetime": {
+                    "name": "ProfileDateTime",
+                    "value": "1998:02:09 06:49:00"
+                },
+                "profilefilesignature": {
+                    "name": "ProfileFileSignature",
+                    "value": "acsp"
+                },
+                "primaryplatform": {
+                    "name": "PrimaryPlatform",
+                    "value": "Microsoft Corporation"
+                },
+                "cmmflags": {
+                    "name": "CMMFlags",
+                    "value": "Not Embedded, Independent"
+                },
+                "devicemanufacturer": {
+                    "name": "DeviceManufacturer",
+                    "value": "Hewlett-Packard"
+                },
+                "devicemodel": {
+                    "name": "DeviceModel",
+                    "value": "sRGB"
+                },
+                "deviceattributes": {
+                    "name": "DeviceAttributes",
+                    "value": "Reflective, Glossy, Positive, Color"
+                },
+                "renderingintent": {
+                    "name": "RenderingIntent",
+                    "value": "Perceptual"
+                },
+                "connectionspaceilluminant": {
+                    "name": "ConnectionSpaceIlluminant",
+                    "value": "0.9642 1 0.82491"
+                },
+                "profilecreator": {
+                    "name": "ProfileCreator",
+                    "value": "Hewlett-Packard"
+                },
+                "profileid": {
+                    "name": "ProfileID",
+                    "value": "0"
+                },
+                "profilecopyright": {
+                    "name": "ProfileCopyright",
+                    "value": "Copyright (c) 1998 Hewlett-Packard Company"
+                },
+                "profiledescription": {
+                    "name": "ProfileDescription",
+                    "value": "sRGB IEC61966-2.1"
+                },
+                "mediawhitepoint": {
+                    "name": "MediaWhitePoint",
+                    "value": "0.95045 1 1.08905"
+                },
+                "mediablackpoint": {
+                    "name": "MediaBlackPoint",
+                    "value": "0 0 0"
+                },
+                "redmatrixcolumn": {
+                    "name": "RedMatrixColumn",
+                    "value": "0.43607 0.22249 0.01392"
+                },
+                "greenmatrixcolumn": {
+                    "name": "GreenMatrixColumn",
+                    "value": "0.38515 0.71687 0.09708"
+                },
+                "bluematrixcolumn": {
+                    "name": "BlueMatrixColumn",
+                    "value": "0.14307 0.06061 0.7141"
+                },
+                "devicemfgdesc": {
+                    "name": "DeviceMfgDesc",
+                    "value": "IEC http:\/\/www.iec.ch"
+                },
+                "devicemodeldesc": {
+                    "name": "DeviceModelDesc",
+                    "value": "IEC 61966-2.1 Default RGB colour space - sRGB"
+                },
+                "viewingconddesc": {
+                    "name": "ViewingCondDesc",
+                    "value": "Reference Viewing Condition in IEC61966-2.1"
+                },
+                "viewingcondilluminant": {
+                    "name": "ViewingCondIlluminant",
+                    "value": "19.6445 20.3718 16.8089"
+                },
+                "viewingcondsurround": {
+                    "name": "ViewingCondSurround",
+                    "value": "3.92889 4.07439 3.36179"
+                },
+                "viewingcondilluminanttype": {
+                    "name": "ViewingCondIlluminantType",
+                    "value": "D50"
+                },
+                "luminance": {
+                    "name": "Luminance",
+                    "value": "76.03647 80 87.12462"
+                },
+                "measurementobserver": {
+                    "name": "MeasurementObserver",
+                    "value": "CIE 1931"
+                },
+                "measurementbacking": {
+                    "name": "MeasurementBacking",
+                    "value": "0 0 0"
+                },
+                "measurementgeometry": {
+                    "name": "MeasurementGeometry",
+                    "value": "Unknown"
+                },
+                "measurementflare": {
+                    "name": "MeasurementFlare",
+                    "value": "0.999%"
+                },
+                "measurementilluminant": {
+                    "name": "MeasurementIlluminant",
+                    "value": "D65"
+                },
+                "technology": {
+                    "name": "Technology",
+                    "value": "Cathode Ray Tube Display"
+                },
+                "redtrc": {
+                    "name": "RedTRC",
+                    "value": "(Binary data 2060 bytes, use -b option to extract)"
+                },
+                "greentrc": {
+                    "name": "GreenTRC",
+                    "value": "(Binary data 2060 bytes, use -b option to extract)"
+                },
+                "bluetrc": {
+                    "name": "BlueTRC",
+                    "value": "(Binary data 2060 bytes, use -b option to extract)"
+                },
+                "dctencodeversion": {
+                    "name": "DCTEncodeVersion",
+                    "value": "100"
+                },
+                "app14flags0": {
+                    "name": "APP14Flags0",
+                    "value": "[14]"
+                },
+                "app14flags1": {
+                    "name": "APP14Flags1",
+                    "value": "(none)"
+                },
+                "colortransform": {
+                    "name": "ColorTransform",
+                    "value": "YCbCr"
+                },
+                "imagewidth": {
+                    "name": "ImageWidth",
+                    "value": "1500"
+                },
+                "imageheight": {
+                    "name": "ImageHeight",
+                    "value": "1000"
+                },
+                "encodingprocess": {
+                    "name": "EncodingProcess",
+                    "value": "Progressive DCT, Huffman coding"
+                },
+                "bitspersample": {
+                    "name": "BitsPerSample",
+                    "value": "8"
+                },
+                "colorcomponents": {
+                    "name": "ColorComponents",
+                    "value": "3"
+                },
+                "ycbcrsubsampling": {
+                    "name": "YCbCrSubSampling",
+                    "value": "YCbCr4:4:4 (1 1)"
+                },
+                "imagesize": {
+                    "name": "ImageSize",
+                    "value": "1500x1000"
+                },
+                "megapixels": {
+                    "name": "Megapixels",
+                    "value": "1.5"
+                }
+            },
+            "is_contextable": false,
+            "use_default": true
+        },
+        "size": {
+            "attrid": "921",
+            "type": "int",
+            "value": "1585100",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "height": {
+            "attrid": "920",
+            "type": "int",
+            "value": "1000",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "width": {
+            "attrid": "919",
+            "type": "int",
+            "value": "1500",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "name": {
+            "attrid": "915",
+            "type": "text",
+            "value": "20210422_David_Sklansky796A8268.jpg",
+            "is_contextable": false,
+            "use_default": true
+        },
+        "alt": {
+            "attrid": "917",
+            "type": "text",
+            "value": "Profile photo of David Sklansky standing outside with his arms crossed and smiling.",
+            "is_contextable": true,
+            "use_default": true
+        },
+        "title": {
+            "attrid": "916",
+            "type": "text",
+            "value": "David Sklansky",
+            "is_contextable": true,
+            "use_default": true
+        },
+        "allow_unrestricted": {
+            "attrid": "914",
+            "type": "boolean",
+            "value": true,
+            "is_contextable": false,
+            "use_default": true
+        },
+        "caption": {
+            "attrid": "918",
+            "type": "text",
+            "value": "",
+            "is_contextable": true,
+            "use_default": true
+        }
+    },
+    "metadata": {
+        "mediaPublished": {
+            "value": "2025-01-01 00:00:00",
+            "fieldid": "6085",
+            "type": "metadata_field_date",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "mediaModified": {
+            "value": "2025-01-01 00:00:00",
+            "fieldid": "6086",
+            "type": "metadata_field_date",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "mediaDescription": {
+            "value": "",
+            "fieldid": "6087",
+            "type": "metadata_field_wysiwyg",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "mediaCredit": {
+            "value": "",
+            "fieldid": "10688",
+            "type": "metadata_field_wysiwyg",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "mediaId": {
+            "value": "",
+            "fieldid": "6088",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        },
+        "fileFeed": {
+            "value": "",
+            "fieldid": "25491",
+            "type": "metadata_field_text",
+            "is_contextable": true,
+            "default_value": true,
+            "use_default": true
+        }
+    }
+}
