@@ -1,0 +1,153 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "media-feature",
+    "type": "edge",
+    "version": "3.0.0",
+    "namespace": "stanford-components",
+    "description": "The media feature component is used to feature a singular podcast or book.",
+    "displayName": "Media feature",
+    "mainFunction": "main",
+    "icon": {
+        "id": "radio",
+        "color": {
+            "type": "enum",
+            "value": "teal"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "required": [],
+                "type": "object",
+                "properties": {
+                    "contentConfiguration": {
+                        "title": "The media feature component's content.",
+                        "required": [],
+                        "properties": {
+                            "backgroundImage": {
+                                "title": "Background image",
+                                "type": "string",
+                                "format": "matrix-asset-uri"
+                            },
+                            "image": {
+                                "title": "Image",
+                                "type": "string",
+                                "format": "matrix-asset-uri"
+                            },
+                            "title": {
+                                "title": "Title",
+                                "type": "string"
+                            },
+                            "mediaType": {
+                                "title": "Media type",
+                                "enum": ["Podcast", "Book", "Magazine"],
+                                "type": "string",
+                                "default": "Podcast"
+                            },
+                            "teaserText": {
+                                "title": "Teaser text",
+                                "type": "string",
+                                "format": "multi-line"
+                            },
+                            "linkUrl": {
+                                "title": "Link URL",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/9848": {
+            "type": "file",
+            "path": "mocked-uris/9848.json"
+        },
+        "matrix-asset://api-identifier/125800": {
+            "type": "file",
+            "path": "mocked-uris/125800.json"
+        },
+        "matrix-asset://api-identifier/125801": {
+            "type": "file",
+            "path": "mocked-uris/125801.json"
+        },
+        "matrix-asset://api-identifier/9856": {
+            "type": "file",
+            "path": "mocked-uris/9856.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
