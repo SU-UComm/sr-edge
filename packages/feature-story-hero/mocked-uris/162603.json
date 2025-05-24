@@ -1,0 +1,64 @@
+{
+    "storyType": "Basic",
+    "bannerType": "normal",
+    "contentType": "Obituary",
+    "titleAlignment": "left",
+    "orientation": "vertical",
+    "pubDate": "2024-12-02 00:00:00",
+    "pubDateFormatted": "December 2nd, 2024",
+    "mediaType": "image",
+    "topic": {
+        "asset_assetid": "28411",
+        "asset_name": "Community & Culture",
+        "asset_url": "https://news.stanford.edu/on-campus/topic/community-and-culture",
+        "topicPath": "/on-campus/topic/community-and-culture",
+        "target_id": "141735",
+        "group": "127852",
+        "type": "content_topic",
+        "sectionSummary": ""
+    },
+    "media": {
+        "type": "standard",
+        "featureImage": {
+            "id": "162606",
+            "url": "https://news.stanford.edu/__data/assets/image/0021/162606/_DSC0035-McConnell.jpg",
+            "alt": "Jon McConnell in his office",
+            "height": "1000",
+            "width": "1500"
+        },
+        "featureVideo": {
+            "id": ""
+        },
+        "carousel": null,
+        "caption": "Jon McConnell",
+        "credit": "Courtesy Haas Center for Public Service",
+        "captions": [
+            {
+                "caption": "",
+                "credit": ""
+            },
+            {
+                "caption": "",
+                "credit": ""
+            },
+            {
+                "caption": "",
+                "credit": ""
+            },
+            {
+                "caption": "",
+                "credit": ""
+            },
+            {
+                "caption": "",
+                "credit": ""
+            },
+            {
+                "caption": "",
+                "credit": ""
+            }
+        ]
+    },
+    "title": "Jon McConnell, a leader in student public service, dies at 59",
+    "summary": "&lt;p&gt;For more than two decades, Jon McConnell shaped service-learning programs at Stanford&rsquo;s Haas Center for Public Service, leaving an enduring legacy of community engagement and student mentorship.&lt;/p&gt;"
+}
