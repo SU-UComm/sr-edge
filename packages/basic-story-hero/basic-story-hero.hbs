@@ -1,0 +1,123 @@
+<section data-component='basic-story-hero' data-unique-id="{{uniqueID}}">
+    <div class='{{containerClasses width='wide'}}'>
+        <div class='su-grid su-gap su-grid-cols-6 md:su-grid-cols-12'>
+            <div
+                class='su-col-span-6 su-col-start-1 md:su-col-span-10 md:su-col-start-2'
+            >
+                <div
+                    class='su-flex su-gap-y-8 su-gap-x-16 su-justify-between su-flex-wrap su-text-16 md:su-basefont-23'
+                >
+                    <span class='su-flex su-items-center su-justify-center'>
+                        <time class='su-m-0 su-mr-4 su-font-semibold'>
+                            {{pubDateFormatted}}
+                        </time>
+                        <span
+                            class='su-reading-time su-reading-time-separator'
+                        ></span>
+                        |&nbsp;
+                        <span data-reading='true'>{{readingTimeValue}}</span>&nbsp;min read
+                    </span>
+                    {{~#if topic.asset_name~}}
+                        {{~#if topic.asset_url~}}
+                            <a
+                                class='su-font-semibold su-text-digital-red dark:su-text-dark-mode-red su-no-underline hocus:su-underline'
+                                href='{{topic.asset_url}}'
+                            >
+                                {{topic.asset_name}}
+                            </a>
+                        {{~else~}}
+                            <span
+                                class='su-font-semibold su-text-digital-red dark:su-text-dark-mode-red su-no-underline'
+                            >
+                                {{topic.asset_name}}
+                            </span>
+                        {{~/if~}}
+                    {{~/if~}}
+                </div>
+                <h1
+                    class='su-font-bold su-rs-mt-4 su-font-serif su-mb-0 xl:su-text-[6.4rem]'
+                >
+                    {{{unescapeHtml title}}}
+                </h1>
+                <div class="su-font-serif su-intro-text su-mb-0 su-rs-mt-2 su-text-21 su-leading-[27.35px] md:su-text-28 md:su-leading-[36.47px]">
+                    {{{unescapeHtml summary}}}
+                </div>
+            </div>
+            {{~#if mediaFeature~}}
+            <div
+                class='su-col-span-6 su-col-start-1 md:su-col-span-12 md:su-col-start-1 su-w-full basic-story__header-slider su-overflow-visible su-rs-mt-4'
+            >
+                <figure
+                    class='basic-story__header-image su-col-span-full su-relative su-z-0'
+                >
+                    <div class='su-relative su-w-full'>
+                        {{~#ifEquals mediaType "image"~}}
+                            {{~#if imageData.url~}}
+                                <img src="{{imageData.url}}" alt="{{imageData.alt}}" class="su-relative su-w-full su-max-w-full"/>
+                            {{~/if~}}
+                        {{~/ifEquals~}}
+                        {{~#ifEquals mediaType "video"~}}
+                            {{~#if videoData.imageUrl~}}
+                            <button
+                                type="button"
+                                aria-haspopup="dialog"
+                                class="su-w-full su-aspect-[16/9] su-video-trigger"
+                                data-click="open-modal"
+                                data-modal-id="{{uniqueID}}"
+                            >
+                                <img src="{{videoData.imageUrl}}" alt="{{videoData.imageAlt}}" class="su-w-full su-h-full su-absolute su-top-0 su-left-0 su-object-cover su-object-center" />
+                                <span class="su-play-button-icon-hero su-transition-all su-absolute su-bottom-20 su-left-20 *:su-w-[40px] *:su-h-[40px] *:md:su-w-[60px] *:md:su-h-[60px] *:lg:su-w-[100px] *:lg:su-h-[100px]">
+                                     {{> svg-icons icon="video play" classes="su-drop-shadow-[0px_14px_28px_rgba(0,0,0,0.20)]"}}
+                                </span>
+                            </button>
+                            {{~else~}}
+                                {{~#if videoData.videoID~}}
+                                <div class="su-relative su-max-w-full su-h-0 su-pb-[56.25%] su-overflow-hidden">
+                                    {{> embed-video isVertical=videoData.isVertical classes=videoData.class videoId=videoData.videoID noAutoPlay=videoData.noAutoPlay title=videoData.title}}
+                                </div>
+                                {{~/if~}}
+                            {{~/if~}}
+                        {{~/ifEquals~}}
+                        {{~#ifEquals mediaType "carousel"~}}
+                            {{~#if carouselData~}}
+                                {{#> carousel-media uniqueID=uniqueID peek=peek}}
+                                    {{~#each carouselData~}}
+                                    <div class="swiper-slide">
+                                        <div class="su-aspect-[3/2] su-relative">
+                                            <img
+                                                src="{{imageUrl}}"
+                                                alt="{{imageAlt}}"
+                                                class="su-absolute su-top-0 su-left-0 su-w-full su-h-full su-object-scale-down su-object-center"
+                                            />
+                                        </div>
+                                        {{~#if captionCredit~}}
+                                            <figcaption class="su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white">
+                                            {{captionCredit}}
+                                            </figcaption>
+                                        {{~/if~}}
+                                    </div>
+                                    {{~/each~}}
+                                {{/ carousel-media}}
+                            {{~/if~}}
+                        {{~/ifEquals~}}
+                    </div>
+                    {{~#if captionCredit~}}
+                        <figcaption
+                            class='su-text-16 su-text-black su-mb-0 su-rs-mt-neg1 dark:su-text-white'
+                        >
+                            {{{unescapeHtml captionCredit}}}
+                        </figcaption>
+                    {{~/if~}}
+                </figure>
+            </div>
+            {{~/if~}}
+        </div>
+    </div>
+    <section data-modal="modal-wrapper">
+    {{~#if modalData~}}{{~#if videoData.videoID~}}
+        {{#> modal-content uniqueID=uniqueID titleID=modalData.titleID ariaTitle=modalData.title}}
+            {{> embed-video isVertical=videoData.isVertical classes=videoData.class videoId=videoData.videoID noAutoPlay=videoData.noAutoPlay title=videoData.title}}
+        {{/ modal-content}}
+    {{~/if~}}{{~/if~}}
+    </section>
+</section>
