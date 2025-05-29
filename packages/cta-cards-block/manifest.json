@@ -1,0 +1,135 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "cta-cards-block",
+    "version": "3.0.0",
+    "namespace": "stanford-components",
+    "type": "edge",
+    "description": "Add up to 3 CTA cards in this block.",
+    "displayName": "CTA cards block",
+    "mainFunction": "main",
+    "icon": {
+        "id": "view_column",
+        "color": {
+            "type": "enum",
+            "value": "red"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "cards": {
+                        "title": "CTA cards",
+                        "description": "Enter the details for each card. You can add up to 3 cards in this block.",
+                        "type": "array",
+                        "minItems": 1,
+                        "maxItems": 3,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "eyebrow": {
+                                    "type": "string",
+                                    "title": "Eyebrow",
+                                    "description": "This is the superheading above the title."
+                                },
+                                "title": {
+                                    "type": "string",
+                                    "title": "Title"
+                                },
+                                "description": {
+                                    "title": "Description",
+                                    "description": "This is the description that appears below the title.",
+                                    "type": "FormattedText"
+                                },
+                                "linkDetails": {
+                                    "title": "Link details",
+                                    "required": [],
+                                    "description": "Enter the details for the optional link.",
+                                    "properties": {
+                                        "internalUrl": {
+                                            "title": "Internal link (Matrix asset link)",
+                                            "type": "string",
+                                            "description": "Select a page/asset to link to. If this field is filled out, it will be used instead of the external link field below.",
+                                            "format": "matrix-asset-uri"
+                                        },
+                                        "externalUrl": {
+                                            "title": "External (manual) link",
+                                            "type": "string",
+                                            "description": "Enter the full URL, including https://. A diagonal arrow icon will be automatically added after the button text if the URL does not contain news.stanford.edu."
+                                        },
+                                        "isNewWindow": {
+                                            "title": "Open link in a new window",
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            },
+                            "required": []
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/28192": {
+            "type": "file",
+            "path": "mocked-uris/28192.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
