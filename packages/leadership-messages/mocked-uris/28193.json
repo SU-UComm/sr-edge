@@ -1,0 +1,31 @@
+{
+  "id": "28193",
+  "type": "data_record",
+  "type_name": "Data Record",
+  "version": "0.0.1",
+  "name": "Case Study",
+  "short_name": "Case Study",
+  "status": {
+    "id": 2,
+    "code": "under_construction",
+    "name": "Under Construction"
+  },
+  "created": { "date": "2023-08-25T06:08:13-07:00", "user_id": "57" },
+  "updated": { "date": "2023-08-25T06:08:13-07:00", "user_id": "57" },
+  "published": { "date": null, "user_id": null },
+  "status_changed": { "date": "2023-08-25T06:08:13-07:00", "user_id": "57" },
+  "urls": [
+    "https://sug-web.matrix.squiz.cloud/_media/taxonomy/content-warehouse/front-end-taxonomy/content-type/research"
+  ],
+  "url": "https://sug-web.matrix.squiz.cloud/_media/taxonomy/content-warehouse/front-end-taxonomy/content-type/research",
+  "attributes": { "name": "Case Study" },
+  "metadata": {
+    "slug": [],
+    "description": [],
+    "itemId": [],
+    "parentSection": [],
+    "featured": []
+  },
+  "contents": "",
+  "additional": {}
+}
