@@ -13,6 +13,7 @@ export default {
      * @function
      * @param {Object} args - Configuration options for the section.
      * @param {string} [args.image] - Background image (landscape orientation). Preferred aspect ratio: 3x2. Cropped to 2x1 on large screens (>1500px).
+     * @param {string} [args.imageOverlay="dark"] - Adjust the transparency of the gradient image overlay based on the brightness of the background image. Options: "light", "medium", "dark".
      * @param {string} [args.imageVPosition="center"] - Vertical crop position of the background image if it's taller than its container. Options: "top", "center", "bottom".
      * @param {string} [args.mobileImage] - Mobile background image (portrait orientation). Shown on screens ≤ 991px. Preferred ratio: 3x4. Cropped to 1x2.
      * @param {string} [args.quote] - Quote or body content. Include quotation marks manually.
