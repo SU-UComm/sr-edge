@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "featured-content",
     "type": "edge",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "namespace": "stanford-components",
     "description": "",
     "displayName": "Featured content",
