@@ -318,6 +318,15 @@ export const helpers = {
         
         return orientationClasses.get(orientation);
     },
+    overlayGradient: function(opacity) {
+        const overlayClasses = new Map();
+
+        overlayClasses.set("light", "su-from-black-true/50");
+        overlayClasses.set("medium", "su-from-black-true/75");
+        overlayClasses.set("dark", "su-from-black-true");
+
+        return overlayClasses.get(opacity);
+    },
     sidebarHeadingClasses: function(color) {
         const colorClassMap = new Map();
         colorClassMap.set(
@@ -394,5 +403,5 @@ export const helpers = {
         return value > expectedValue ? trueResult : falseResult;
     }
 }
-  
+
 export default helpers;

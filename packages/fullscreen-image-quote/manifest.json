@@ -27,7 +27,7 @@
                         "type": "string",
                         "format": "matrix-asset-uri"
                     },
-                    "imageOverlay": {
+                    "overlayGradient": {
                         "title": "Overlay Transparency",
                         "description": "Use this to adjust the darkness of the overlay on top of the background image.",
                         "type": "string",
