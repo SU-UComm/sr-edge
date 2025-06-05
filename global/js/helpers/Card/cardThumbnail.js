@@ -36,7 +36,6 @@ export function CardThumbnail({
 }) {
   if (videoUrl) {
     const videoMedia = `
-        {/* Add a dark overlay over the image when used in Vertical Video Cards */}
         ${size === "vertical-video" ? `
           <div
             aria-hidden="true"
