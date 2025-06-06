@@ -1,5 +1,6 @@
 import xss from 'xss';
 import { basicHeroDataAdapter, matrixBasicHeroService, readingTime } from '../../global/js/utils';
+import helpers from '../../global/hbs/helpers/helpers.js';
 
 import featureStoryHeroTemplate from './feature-story-hero.hbs';
 
@@ -115,6 +116,7 @@ export default {
         // Prepare data
         const titleWordsCount = title.split(" ").length;
         const captionCredit = [media?.caption, media?.credit].filter(Boolean).join(' | ');
+        const captionCreditUnescaped = helpers.unescapeHtml(captionCredit);
 
         // Prepare component data for template rendering
         const componentData = {
@@ -123,7 +125,7 @@ export default {
             titleWordsCount,
             summary: xss(summary),
             media,
-            captionCredit : xss(captionCredit),
+            captionCredit: captionCreditUnescaped,
             pubDateFormatted,
             readingTimeValue: readingTime(summary),
         };
