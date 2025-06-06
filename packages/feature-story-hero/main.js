@@ -114,7 +114,11 @@ export default {
 
         // Prepare data
         const titleWordsCount = title.split(" ").length;
-        const captionCredit = [media?.caption, media?.credit].filter(Boolean).join(' | ');
+        // const captionCredit = [media?.caption, media?.credit].filter(Boolean).join(' | ');
+        const captionCredit = [media?.caption, media?.credit]
+        .filter(Boolean)
+        .map(item => xss(item)) // sanitize raw text
+        .join(' | ');
 
         // Prepare component data for template rendering
         const componentData = {
