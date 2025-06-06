@@ -114,11 +114,7 @@ export default {
 
         // Prepare data
         const titleWordsCount = title.split(" ").length;
-        // const captionCredit = [media?.caption, media?.credit].filter(Boolean).join(' | ');
-        const captionCredit = [media?.caption, media?.credit]
-        .filter(Boolean)
-        .map(item => xss(item)) // sanitize raw text
-        .join(' | ');
+        const captionCredit = [media?.caption, media?.credit].filter(Boolean).join(' | ');
 
         // Prepare component data for template rendering
         const componentData = {
@@ -127,7 +123,7 @@ export default {
             titleWordsCount,
             summary: xss(summary),
             media,
-            captionCredit,
+            captionCredit : xss(captionCredit),
             pubDateFormatted,
             readingTimeValue: readingTime(summary),
         };
