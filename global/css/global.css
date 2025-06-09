@@ -3872,6 +3872,7 @@ _::-webkit-full-page-media, _:future, :root .media-feature__thumb img {
 .su-bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}
 .su-bg-gradient-to-t{background-image:linear-gradient(to top, var(--tw-gradient-stops))}
 .su-from-black-true{--tw-gradient-from:#000 var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0%) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}
+.su-from-black-true\/50{--tw-gradient-from:rgb(0 0 0 / 50%) var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0%) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}
 .su-from-black-true\/75{--tw-gradient-from:rgb(0 0 0 / 75%) var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0%) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}
 .su-from-black-true\/80{--tw-gradient-from:rgb(0 0 0 / 80%) var(--tw-gradient-from-position);--tw-gradient-to:rgb(0 0 0 / 0%) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}
 .su-from-cardinal-red-dark{--tw-gradient-from:#820000 var(--tw-gradient-from-position);--tw-gradient-to:rgb(130 0 0 / 0%) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}

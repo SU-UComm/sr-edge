@@ -6,7 +6,7 @@ export const helpers = {
         const alignClasses = new Map();
         alignClasses.set("right", "md:su-order-2");
         alignClasses.set("left", "");
-        
+
         return alignClasses.get(align) || "";
     },
     aspectRatioSize: function(cardSize) {
@@ -31,12 +31,12 @@ export const helpers = {
         avatarImageClasses.set("small", "su-w-50 su-h-50 su-top-3 su-left-3");
         avatarImageClasses.set("medium", "su-size-150 su-top-7 su-left-8");
         avatarImageClasses.set("large", "su-size-200 su-top-9 su-left-9");
-        
+
         return avatarImageClasses.get(avatarSize);
     },
     avatarWrapperClasses: function(avatarSize) {
         const avatarWrapperClasses = new Map();
-        
+
         avatarWrapperClasses.set("small", "su-min-w-[56px] su-w-[56px] su-h-[56px] su-p-3");
         avatarWrapperClasses.set("medium", "su-min-w-[165px] su-w-[165px] su-h-[165px] su-p-7");
         avatarWrapperClasses.set("large", "su-min-w-[218px] su-w-[218px] su-h-[218px] su-p-9");
@@ -47,14 +47,14 @@ export const helpers = {
         const alignClasses = new Map();
         alignClasses.set("right", "before:su-right-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-right-[-36px] before:lg:su-right-[-80px]");
         alignClasses.set("left", "before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]");
-        
+
         return alignClasses.get(alignment);
     },
     cardsGrowClasses: function(alignment) {
         const alignClasses = new Map();
         alignClasses.set("right", "md:su-order-2");
         alignClasses.set("left", "");
-        
+
         return alignClasses.get(alignment) || "";
     },
     containerClasses: function (options) {
@@ -71,8 +71,8 @@ export const helpers = {
         outputClasses.push(widthClasses.get(width));
 
         paddingX && outputClasses.push('su-container-px');
-        
-        const paddingYClasses = new Map(); 
+
+        const paddingYClasses = new Map();
         paddingYClasses.set("base", "su-rs-py-0");
         paddingYClasses.set("1", "su-rs-py-1");
         paddingYClasses.set("2", "su-rs-py-2");
@@ -84,7 +84,7 @@ export const helpers = {
         paddingYClasses.set("8", "su-rs-py-8");
         paddingYClasses.set("9", "su-rs-py-9");
         paddingYClasses.set("10", "su-rs-py-10");
-    
+
         outputClasses.push(paddingYClasses.get(paddingY));
 
         const marginTopClasses = new Map();
@@ -128,7 +128,7 @@ export const helpers = {
         const externalLinkClass = new Map();
         externalLinkClass.set("small", "");
         externalLinkClass.set("large", "su-font-semibold su-text-21 su-leading-[26.25px]");
-        
+
         return externalLinkClass.get(ctaSize);
     },
     featuredGridClasses: function(isNested) {
@@ -141,20 +141,20 @@ export const helpers = {
         const alignClasses = new Map();
         alignClasses.set("right", "before:su-right-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-right-[-36px] before:lg:su-right-[-80px]");
         alignClasses.set("left", "before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]");
-        
+
         return isNested
           ? "lg:before:su-w-full lg:before:su-h-px before:su-left-0 before:su-top-[-40px] before:md:su-top-0 lg:before:su-top-[-38px] before:md:su-left-[-36px] before:lg:su-left-0 md:su-flex-wrap lg:su-flex-nowrap"
           : "md:su-items-start md:su-content-start " + alignClasses.get(alignment);
     },
     fontawesomePathData: function(arg1, arg2) {
         const iconSet = arg2 === "regular" ? faRegular : faSolid;
-    
+
         if (!iconSet) return 'Icon not found';
-        
+
         const iconObject = Object.values(iconSet).find(
             icon => icon.iconName === arg1
         );
-        
+
         return iconObject?.icon[4] ?? 'Icon not found';
     },
     fontawesomeViewData: function(arg1, arg2) {
@@ -170,14 +170,14 @@ export const helpers = {
             );
 
             return `0 0 ${iconObject?.icon[0]} ${iconObject?.icon[1]}`;
-        } 
+        }
     },
     formatFirstWord: function (content, firstWord) {
         if (!content) return content;
         if (!firstWord) return content;
 
         const truncatedFirstWord = firstWord.trim().substring(1);
-        
+
         return truncatedFirstWord.length > 0
             ? content.replace(/'/g, "'").replace("&nbsp;", " ").replace(/\s+/g, " ").replace(
                 firstWord,
@@ -190,7 +190,7 @@ export const helpers = {
     },
     getAspectRatio: function(aspectRatio) {
         const aspectRatioClasses = new Map();
-    
+
         aspectRatioClasses.set("card-small", 'su-aspect-[3/2]');
         aspectRatioClasses.set("card-medium", 'su-aspect-[3/2]');
         aspectRatioClasses.set("card-large", 'su-aspect-[3/2]');
@@ -198,19 +198,19 @@ export const helpers = {
         aspectRatioClasses.set("square", 'su-aspect-[1/1]');
         aspectRatioClasses.set("video", 'su-aspect-[16/9]');
         aspectRatioClasses.set("vertical-video", 'su-aspect-[9/16]');
-    
-        
+
+
         return aspectRatioClasses.get(aspectRatio)
     },
     getThumbnailIconClass: function(size) {
         const thumbnailIconClasses = new Map();
-    
+
         thumbnailIconClasses.set("small", 'su-left-13 su-bottom-13 [&>svg]:su-text-[4rem]');
         thumbnailIconClasses.set("medium", 'su-left-13 su-bottom-13 md:su-left-27 md:su-bottom-27 [&>svg]:su-text-[4rem] [&>svg]:md:su-text-[6rem]');
         thumbnailIconClasses.set("large", 'su-left-13 su-bottom-13 [&>svg]:su-text-[4rem]');
         thumbnailIconClasses.set("featured", 'su-left-13 su-bottom-13 md:su-left-27 md:su-bottom-27 [&>svg]:su-text-[4rem] [&>svg]:md:su-text-[6rem]');
         thumbnailIconClasses.set("vertical-video", 'su-z-30 su-left-32 su-bottom-34 sm:su-left-48 sm:su-bottom-61 lg:su-left-32 lg:su-bottom-34 2xl:su-left-48 2xl:su-bottom-61 [&>svg]:su-text-[6rem]');
-        
+
         return thumbnailIconClasses.get(size)
     },
     hasFirstItem: function(items) {
@@ -226,12 +226,12 @@ export const helpers = {
         const backgroundClasses = new Map();
         backgroundClasses.set("Grey", "su-bg-fog-light su-rs-pt-6 su-rs-pb-8 dark:su-bg-black/[0.5]");
         backgroundClasses.set("Transparent", "");
-        
+
         return backgroundClasses.get(variant) || '';
     },
     isValidUrl: function(value, options) {
         const urlPattern = /^(https?:\/\/)([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(:\d{1,5})?(\/.*)?$/;
-    
+
         if (typeof value === "string" && urlPattern.test(value)) {
             return options.fn ? options.fn(this) : true;
         }
@@ -239,15 +239,15 @@ export const helpers = {
     },
     linkButtonClasses: function(variant = "default", size = "default", customClasses = "") {
         const baseClasses = ['su-group su-flex su-items-center su-w-fit hocus:su-underline'];
-        
-        const sizeClasses = new Map(); 
+
+        const sizeClasses = new Map();
 
         sizeClasses.set('default','su-px-30 su-pt-12 su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1');
         sizeClasses.set('large','su-rs-py-0 su-rs-px-4 su-font-semibold su-type-1 dark:hocus:su-ring-2');
-         
+
         baseClasses.push(sizeClasses.get(size));
 
-        const variantClasses =  new Map(); 
+        const variantClasses =  new Map();
 
         variantClasses.set('default','su-button dark:hocus:su-ring-white');
         variantClasses.set('gradient','su-text-white hocus:su-text-white su-no-underline hocus:su-underline su-bg-gradient-to-r su-from-digital-red-light su-to-cardinal-red-dark hocus:su-bg-none hocus:su-bg-black dark:su-from-olive dark:su-to-palo-verde dark:su-text-black-true dark:hocus:su-text-white dark:hocus:su-ring-white');
@@ -293,20 +293,20 @@ export const helpers = {
 
         variantClasses.set('Featured Story', '*:su-text-20 md:*:su-text-25 lg:*:su-text-26 su-font-serif su-font-medium');
         variantClasses.set('Basic Story', 'su-story-first-letter *:su-text-18 md:*:su-text-23');
-        
+
         return variantClasses.get(variant);
     },
     headingTag: function(tagName) {
         if (tagName == null) return 'h2';
-        
+
         const sanitizedTagName = (tagName || '').toString().trim();
-        
+
         if (sanitizedTagName === 'p') return 'p';
-        
+
         if (!sanitizedTagName.match(/^h[1-6]$/)) {
             return 'h2';
         }
-        
+
         return sanitizedTagName;
     },
     horizontalCardOrientation: function(orientation) {
@@ -315,7 +315,7 @@ export const helpers = {
         orientationClasses.set("vertical", "su-grid-cols-1 su-gap-36 md:su-gap-27");
         orientationClasses.set("horizontal", "su-grid-cols-1 md:su-grid-cols-2 lg:su-grid-cols-3 su-gap-34 md:su-gap-36 lg:su-gap-48");
         orientationClasses.set("topiclisting", "su-grid-cols-1 su-gap-30 md:su-gap-48 lg:su-gap-61");
-        
+
         return orientationClasses.get(orientation);
     },
     sidebarHeadingClasses: function(color) {
@@ -337,7 +337,7 @@ export const helpers = {
     },
     getStringByCondition: function(options) {
         const { value, expectedValue, trueResult, falseResult } = options.hash;
-    
+
         return value === expectedValue ? trueResult : falseResult;
     },
     getStringForLastIndex:  function (options) {
@@ -358,13 +358,13 @@ export const helpers = {
         titleSize.set("featured", "su-text-[35px] md:su-text-[40px] lg:su-text-[43px] su-leading-[42px] md:su-leading-[48px] lg:su-leading-[51.6px]");
         titleSize.set("medium", "su-text-21 lg:su-text-[33px] su-leading-[25.2px] lg:su-leading-[39.6px]");
         titleSize.set("default", "su-text-21 lg:su-text-24 su-leading-[25.2px] lg:su-leading-[28.8px]");
-        
+
         const size = cardSize === "featured" || cardSize === "medium" ? cardSize : "default";
         return titleSize.get(size);
     },
     cardTaxonomySizeClasses: function (cardSize) {
         const taxonomySize = new Map();
-        
+
         taxonomySize.set("featured", "su-text-20 md:su-text-20 su-leading-[26px]")
         taxonomySize.set("medium", "su-text-16 md:su-text-16 md:su-text-20 su-leading-[20.8px] md:su-leading-[26px]");
         taxonomySize.set("default", "su-text-18 su-leading-[23.4px]");
@@ -374,7 +374,7 @@ export const helpers = {
     },
     cardTypeSizeClasses: function(cardSize) {
         const typeSize = new Map();
-        
+
         typeSize.set("featured", "su-text-18 su-leading-[23.4px] md:su-text-20 md:su-leading-[26px] lg:su-text-20 lg:su-leading-[26px]")
         typeSize.set("medium", "su-text-16 su-leading-[20.8px] lg:su-text-18 lg:su-leading-[23.4px]");
         typeSize.set("default", "su-text-16 su-leading-[20.8px]");
@@ -392,7 +392,16 @@ export const helpers = {
     getStringIfGreater: function (options) {
         const { value, expectedValue, trueResult, falseResult } = options.hash;
         return value > expectedValue ? trueResult : falseResult;
-    }
+    },
+    imageOverlayClasses: function(imageOverlay) {
+        const imageOverlayClasses = new Map()
+
+        imageOverlayClasses.set('light', 'su-from-black-true/50');
+        imageOverlayClasses.set('medium', 'su-from-black-true/75');
+        imageOverlayClasses.set('dark', 'su-from-black-true');
+
+        return imageOverlayClasses.get(imageOverlay);
+    },
 }
-  
+
 export default helpers;
