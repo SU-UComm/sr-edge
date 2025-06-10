@@ -1,0 +1,22 @@
+{
+    "border": true,
+    "callout": true,
+    "colOne": {
+        "title": "Example 3"
+    },
+    "colTwo": {
+        "addButton": false,
+        "buttonConfiguration": {
+            "isNewWindow": false
+        },
+        "infoText": "This example shows the component when the info text is only filled out. The text callout fields do not have values, but the include text callout checkbox is selected."
+    },
+    "colThree": {
+        "imageConfiguration": {
+            "imagePlacement": "Below content"
+        },
+        "buttonConfiguration": {
+            "isNewWindow": false
+        }
+    }
+}
