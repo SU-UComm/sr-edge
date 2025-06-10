@@ -139,7 +139,7 @@ export default {
         }
 
         const adapter = new cardDataAdapter();
-        let data = null;
+        let dataPromise = null;
 
         // Determine data source: "Search" (fetching from Funnelback) or "Select" (Matrix API)
         if (source.toLowerCase() === "search") {
@@ -147,16 +147,18 @@ export default {
             const service = new funnelbackCardService({ FB_JSON_URL, query });
 
             adapter.setCardService(service);
-            data = await adapter.getCards();
+            dataPromise = adapter.getCards();
         } else {
             const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
 
             adapter.setCardService(service);
-            data = await adapter.getCards(cards);
+            dataPromise = adapter.getCards(cards);
         }
 
-        // Generate linked heading data
-        const headingData = await linkedHeadingService(fnsCtx, { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow });
+        // Run data fetching and heading service in parallel
+        const headingPromise = linkedHeadingService(fnsCtx, { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow });
+        
+        const [data, headingData] = await Promise.all([dataPromise, headingPromise]);
 
         data.map((card) => {
             card.uniqueId = uuid();
