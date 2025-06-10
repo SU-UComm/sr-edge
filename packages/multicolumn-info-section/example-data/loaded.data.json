@@ -1,0 +1,33 @@
+{
+    "border": false,
+    "callout": true,
+    "colOne": {
+        "title": "Research"
+    },
+    "colTwo": {
+        "infoText": "<p>Stanford is continuing to monitor federal directives that are related to or have the potential to impact federally funded research. In an announcement on Feb. 7, the National Institutes of Health said it would cap indirect costs in NIH grants to universities. Separately, a Jan. 27 Office of Management and Budget memo calling for a federal funding pause was rescinded on Jan. 29. However, ongoing legal challenges have limited the administration's ability to implement a pause in funding. In addition, individual federal agencies are issuing directives that take different forms. The Office of the Vice Provost and Dean of Research is providing guidance to researchers on steps they should take based on the announcements of individual agencies.</p>",
+        "addButton": false,
+        "buttonConfiguration": {
+            "buttonText": "Optional link button",
+            "externalUrl": "",
+            "infoInternalUrl": "matrix-asset://api-identifier/28192",
+            "isNewWindow": true
+        }
+    },
+    "colThree": {
+        "title": "Title here",
+        "content": "<p><span class='underline'><a href='https://ora.stanford.edu/2025-federal-administration-transition' target='_self'>Office of Research Administration – 2025 Federal Administration Transition</a></span>: This page provides information and updates related to the effects of federal directives on research activities at Stanford.</p>",
+        "imageConfiguration": {
+            "image": "matrix-asset://api-identifier/99100",
+            "caption": "This is the image's title",
+            "credit": "Isaac Astley",
+            "imagePlacement": "Below content"
+        },
+        "buttonConfiguration": {
+            "buttonText": "Optional link button",
+            "externalUrl": "",
+            "internalUrl": "matrix-asset://api-identifier/28192",
+            "isNewWindow": true
+        }
+    }
+}

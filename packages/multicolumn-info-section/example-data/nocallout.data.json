@@ -1,0 +1,33 @@
+{
+    "border": true,
+    "colOne": {
+        "title": "Research"
+    },
+    "colTwo": {
+        "infoText": "<p><a href='https://news.stanford.edu/stories/2025/02/senate-hears-update-on-federal-policy-matters-approves-research-policy-changes' target='_self'>Faculty Senate hears update on federal issues</a> (Feb. 20, 2025)</p><p><a href='https://news.stanford.edu/stories/2025/02/nih-s-cap-on-indirect-costs-could-threaten-stanford-university-research' target='_self'>NIH's cap on indirect costs could threaten research at Stanford and across the country</a> (Feb. 12, 2025)</p><p><a href='https://news.stanford.edu/stories/2025/02/update-on-nih-announcement' target='_self'>Update on NIH announcement</a> (Feb. 8, 2025)</p><p><a href='https://news.stanford.edu/stories/2025/02/university-leadership-discusses-executive-orders-at-faculty-senate' target='_self'>University leadership discusses executive orders</a> (Feb. 6, 2025)</p><p><a href='https://news.stanford.edu/stories/2025/01/federal-government-directives-on-grants' target='_self'>Message to faculty following rescinding of federal funding freeze</a> (Jan. 29, 2025)</p><p><a href='https://news.stanford.edu/stories/2025/01/yesterdays-omb-memo' target='_self'>University message regarding federal funding freeze</a> (Jan. 28, 2025)</p><p><a href='https://news.stanford.edu/stories/2025/01/student-needs-impacts-of-new-administration-discussed-at-faculty-senate' target='_self'>Remarks of President Levin at the Faculty Senate</a> (Jan. 23, 2025)</p>",
+        "addButton": true,
+        "buttonConfiguration": {
+            "buttonText": "Optional link button",
+            "externalUrl": "",
+            "infoInternalUrl": "matrix-asset://api-identifier/28192",
+            "isNewWindow": true
+        }
+    },
+    "colThree": {
+        "callout": false,
+        "title": "Title here",
+        "content": "<p><span class='underline'><a href='https://ora.stanford.edu/2025-federal-administration-transition' target='_self'>Office of Research Administration – 2025 Federal Administration Transition</a></span>: This page provides information and updates related to the effects of federal directives on research activities at Stanford.</p>",
+        "imageConfiguration": {
+            "image": "matrix-asset://api-identifier/99100",
+            "caption": "This is the image's title",
+            "credit": "Isaac Astley",
+            "imagePlacement": "Below content"
+        },
+        "buttonConfiguration": {
+            "buttonText": "Optional link button",
+            "externalUrl": "",
+            "internalUrl": "matrix-asset://api-identifier/28192",
+            "isNewWindow": true
+        }
+    }
+}
