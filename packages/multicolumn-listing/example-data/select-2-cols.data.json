@@ -1,0 +1,23 @@
+{
+    "headingConfiguration": {
+        "title": "Multicolumn Listing",
+        "ctaText": "View all",
+        "ctaUrl": "matrix-asset://api-identifier/141464",
+        "ctaNewWindow": true
+    },
+    "contentConfiguration": {
+        "source": "Select",
+        "cards": [
+            {
+                "cardAsset": "matrix-asset://api-identifier/162603"
+            },
+            {
+                "cardAsset": "matrix-asset://api-identifier/162759"
+            }
+        ]
+    },
+    "displayConfiguration": {
+        "displayThumbnails": true,
+        "displayDescriptions": true
+    }
+}

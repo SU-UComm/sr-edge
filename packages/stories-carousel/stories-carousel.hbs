@@ -1,0 +1,13 @@
+<section data-component="stories-carousel" data-unique-id="{{id}}" data-source="{{dataSource}}" data-query="{{query}}">
+    <div class="{{containerClasses width=width}}">
+        {{> linked-heading title=title isAlwaysLight=isAlwaysLight ctaLink=ctaLink ctaNewWindow=ctaNewWindow ctaText=ctaText}}
+        {{{carousel}}}
+    </div>
+    <section data-element="modal-wrapper">
+    {{#each modalData}}
+        {{#> modal-content uniqueID=uniqueID titleID='card-modal' ariaTitle=title}}
+            {{> embed-video isVertical=isVertical classes=classes videoId=videoId noAutoPlay=noAutoPlay title=title}}
+        {{/ modal-content}}
+    {{/each}}
+    </section>
+</section>

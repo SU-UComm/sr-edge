@@ -1,0 +1,44 @@
+{
+    "id": "125800",
+    "type": "image",
+    "type_name": "Image",
+    "version": "0.1.0",
+    "name": "jenny-martinez.jpg",
+    "short_name": "Jenny Martinez",
+    "status": { "id": 16, "code": "live", "name": "Live" },
+    "created": { "date": "2023-12-10T21:08:41-08:00", "user_id": "32325" },
+    "updated": { "date": "2023-12-10T21:08:50-08:00", "user_id": "32325" },
+    "published": { "date": "2023-12-10T21:08:49-08:00", "user_id": "32325" },
+    "status_changed": {
+        "date": "2023-12-10T21:08:49-08:00",
+        "user_id": "32325"
+    },
+    "urls": [
+        "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/jenny-martinez.jpg"
+    ],
+    "url": "https://sug-web.matrix.squiz.cloud/__data/assets/image/0016/125800/jenny-martinez.jpg",
+    "attributes": {
+        "variety_count": 19,
+        "size": 56417,
+        "height": 196,
+        "width": 293,
+        "name": "jenny-martinez.jpg",
+        "alt": "Jenny Martinez",
+        "title": "Jenny Martinez",
+        "allow_unrestricted": true,
+        "caption": ""
+    },
+    "metadata": null,
+    "contents": "\"Jenny",
+    "additional": {
+        "file_info": {
+            "file_name": "jenny-martinez.jpg",
+            "size_readable": "55.1 KB",
+            "size_bytes": 56417,
+            "width": 293,
+            "height": 196,
+            "modified_readable": "Dec 10, 2023 9:08 PM",
+            "modified_unix": 1702271322
+        }
+    }
+}
