@@ -38,19 +38,31 @@
                             "layout": {
                                 "title": "Layout",
                                 "type": "string",
-                                "enum": ["Title & Content", "Content Only"],
-                                "default": "Title & Content"
+                                "enum": [
+                                    "Title & Content",
+                                    "Content Only"
+                                ],
+                                "default": "Title & Content",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             },
                             "caption": {
                                 "title": "Gallery caption",
                                 "type": "string",
                                 "format": "multi-line",
-                                "default": ""
+                                "default": "",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "credit": {
                                 "title": "Gallery credit",
                                 "type": "string",
-                                "default": ""
+                                "default": "",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "images": {
                                 "title": "Images",
@@ -59,7 +71,9 @@
                                 "maxItems": 20,
                                 "items": {
                                     "type": "object",
-                                    "required": ["image"],
+                                    "required": [
+                                        "image"
+                                    ],
                                     "properties": {
                                         "image": {
                                             "title": "Image asset",
@@ -70,7 +84,10 @@
                                             "title": "Description",
                                             "description": "The image's caption",
                                             "type": "string",
-                                            "format": "multi-line"
+                                            "format": "multi-line",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
                                         }
                                     }
                                 }
@@ -91,16 +108,25 @@
                                     "properties": {
                                         "title": {
                                             "title": "Heading",
-                                            "type": "string"
+                                            "type": "string",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
                                         },
                                         "summary": {
                                             "title": "Summary",
-                                            "type": "string"
+                                            "type": "string",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
                                         },
                                         "summaryAlign": {
                                             "title": "Summary alignment",
                                             "type": "string",
-                                            "enum": ["left", "center"],
+                                            "enum": [
+                                                "left",
+                                                "center"
+                                            ],
                                             "default": "left"
                                         }
                                     }
@@ -114,19 +140,34 @@
                             "displayIconHeading": {
                                 "title": "Show Icon Heading",
                                 "type": "boolean",
-                                "default": true
+                                "default": true,
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             },
                             "backgroundColor": {
                                 "title": "Background Color",
-                                "enum": ["Grey", "Transparent"],
+                                "enum": [
+                                    "Grey",
+                                    "Transparent"
+                                ],
                                 "type": "string",
-                                "default": "Grey"
+                                "default": "Grey",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             },
                             "width": {
                                 "title": "Width",
                                 "type": "string",
-                                "enum": ["Wide", "Content"],
-                                "default": "Wide"
+                                "enum": [
+                                    "Wide",
+                                    "Content"
+                                ],
+                                "default": "Wide",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             }
                         }
                     }

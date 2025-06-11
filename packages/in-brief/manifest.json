@@ -31,7 +31,10 @@
                         "items": {
                             "type": "string",
                             "title": "Summary Point",
-                            "format": "multi-line"
+                            "format": "multi-line",
+                            "ui:metadata": {
+                                "inlineEditable": true
+                            }
                         }
                     }
                 }

@@ -5,19 +5,19 @@
                 <img src='{{image.url}}' class='su-z-10 su-w-full su-h-auto su-object-center su-object-cover' alt='{{image.alt}}'/>
                 {{#if image.captionCredit}}
                 <figcaption class='dark:su-text-white su-text-14 su-font-normal su-mt-8 md:su-text-16'>
-                    {{image.captionCredit}}
+                    <span data-se="imageCaption">{{imageCaption}}</span>{{#if imageCaption}}{{#if imageCredit}} | {{/if}}{{/if}}<span data-se="imageCredit">{{imageCredit}}</span>
                 </figcaption>
                 {{/if}}
             </figure>
             <figure class='su-ml-0 md:su-w-[83.32%]] su-pl-32 su-pr-45 md:su-pr-0 md:su-pl-50 md:su-mx-[8.33%] lg:su-mx-0 lg:su-pl-[17.7%] lg:su-mt-72 su-flex su-flex-col su-pt-49 lg:su-pt-90 su-gap-20 md:su-gap-26 lg:su-gap-27 lg:su-pr-72 su-relative {{#ifEquals imageOrientation "landscape"}}lg:su-w-[62%] lg:su-ml-[-10%]{{else}}lg:su-w-[70%] lg:su-ml-[-10%] after:su-hidden lg:after:su-block su-bg-gradient-after-reverse after:su-absolute after:su-w-4 after:su-z-[-10] after:su-h-[calc(100%-8.8rem)] after:su-right-0 after:su-top-0{{/ifEquals}}'>
                 {{#if quote.quote}}
-                <blockquote class="story__quote-target su-relative su-pl-0 su-flex su-m-0 su-items-start su-gap-6 su-font-serif su-font-semibold su-text-black dark:su-text-white su-text-24 md:su-text-[3.6rem] su-leading-[1.5] lg:su-leading-[1.32] before:su-content-['“'] before:su-absolute before:su-right-full before:su--mt-30 md:before:su--mt-25 lg:before:su--mt-32 before:su-mr-6 md:before:su-mr-13  before:su-font-serif before:su-text-black dark:before:su-text-white before:su-text-[5.9rem] md:before:su-text-[7.3rem] lg:before:su-text-[9.3rem] before:su-leading-[1.85] md:before:su-leading-[1.6] lg:before:su-leading-[1.4]">
+                <blockquote class="story__quote-target su-relative su-pl-0 su-flex su-m-0 su-items-start su-gap-6 su-font-serif su-font-semibold su-text-black dark:su-text-white su-text-24 md:su-text-[3.6rem] su-leading-[1.5] lg:su-leading-[1.32] before:su-content-['"'] before:su-absolute before:su-right-full before:su--mt-30 md:before:su--mt-25 lg:before:su--mt-32 before:su-mr-6 md:before:su-mr-13  before:su-font-serif before:su-text-black dark:before:su-text-white before:su-text-[5.9rem] md:before:su-text-[7.3rem] lg:before:su-text-[9.3rem] before:su-leading-[1.85] md:before:su-leading-[1.6] lg:before:su-leading-[1.4]" data-se="quote">
                     {{quote.quote}}
                 </blockquote>
                 {{/if}}
                 <figcaption class='su-relative su-text-black su-basefont-21 su-mt-0 su-flex su-flex-col dark:su-text-white su-text-16 md:su-text-21 su-font-normal lg:su-flex su-gap-5 md:su-gap-6'>
-                    {{#if quote.name}}<strong>{{quote.name}}</strong>{{/if}}
-                    {{#if quote.title}}<span>{{quote.title}}</span>{{/if}}
+                    {{#if quote.name}}<strong data-se="name">{{quote.name}}</strong>{{/if}}
+                    {{#if quote.title}}<span data-se="title">{{quote.title}}</span>{{/if}}
                 </figcaption>
             </figure>
         </section>

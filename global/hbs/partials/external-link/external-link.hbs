@@ -1,6 +1,6 @@
 {{#if liveUrl}}
     <a data-test="size-{{ctaSize}}" class="su-group su-component-external-link su-flex su-items-center su-flex-nowrap su-text-digital-red su-no-underline dark:su-text-dark-mode-red hocus:su-underline hocus:su-text-black dark:hocus:su-text-white {{externalLinkClasses ctaSize}}" href={{liveUrl}}>
-        <span>{{ctaText}}</span>
+        <span data-se="ctaText">{{ctaText}}</span>
         {{> fontawesome-icon
             icon="arrow-up-right"
             set="regular"

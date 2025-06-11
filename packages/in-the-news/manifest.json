@@ -39,7 +39,10 @@
                                 "title": "Heading",
                                 "description": "The heading text",
                                 "type": "string",
-                                "default": "In the news"
+                                "default": "In the news",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix Asset Link",
@@ -55,7 +58,10 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "View all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",
@@ -82,15 +88,24 @@
                             },
                             "featuredQuote": {
                                 "title": "Featured Quote",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "featuredTeaserDescription": {
                                 "title": "Featured Scholar attribution",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "featuredCtaText": {
                                 "title": "Featured CTA text",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     },
@@ -104,7 +119,10 @@
                             },
                             "teaserOneDescription": {
                                 "title": "Featured Scholar attribution",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     },
@@ -118,7 +136,10 @@
                             },
                             "teaserTwoDescription": {
                                 "title": "Featured Scholar attribution",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     }

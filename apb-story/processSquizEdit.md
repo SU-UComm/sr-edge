@@ -1458,3 +1458,207 @@ This pattern is ideal for components that:
 The nested field mapping allows editors to modify individual parts of the CTA section while keeping the overall structure intact.
 
 ## Configuration Examples
+```
+
+## Example 10: Interactive Photo Card Component
+
+The `interactive-photo-card` component demonstrates inline editing for an interactive flip card with multiple field types including FormattedText content on the back side.
+
+### Inline Editable Fields:
+1. `title` - Card title (string)
+2. `eyebrow` - Superheading above title (string, optional)
+3. `content` - Rich text content on flip side (FormattedText)
+
+### Template Changes (interactive-photo-card.hbs):
+```handlebars
+<section data-component="interactive-photo-card">
+    <div class="su-cc">
+        <article class="su-relative su-grid xl:su-grid-cols-2 su-gap-20 [perspective:100rem] su-transition-transform">
+            <div class="su-flex su-relative [transform-style:preserve-3d] su-duration-1000 {{contentAlignmentClass}}" data-card-inner="true">
+                <!-- Front side of card -->
+                <div class="su-group/front su-relative su-bg-white su-backface-hidden su-rounded-[8px] su-shadow-lg su-min-w-full" aria-hidden="false" data-card-inner-content="true">
+                    <div class="su-flex su-flex-col su-h-full su-rs-px-5 su-rs-pt-6 su-rs-pb-4">
+                        {{#if eyebrow}}
+                        <div class="su-type-1 su-text-black-60 su-font-semibold su-rs-mb-1" data-se="eyebrow">
+                            {{eyebrow}}
+                        </div>
+                        {{/if}}
+                        <h2 class="su-grow su-type-4 su-font-bold su-font-sans su-text-black dark:su-text-black su-rs-mb-0" data-se="title">
+                            {{title}}
+                        </h2>
+                        <button type="button" tabIndex="" aria-label="See additional information" class="su-block su-ml-auto su-mr-0 su-bg-black su-text-white group-hover/front:su-bg-digital-red focus:su-bg-digital-red su-rounded-full su-p-10 su-stretched-link su-transition-all su-opacity-100 group-aria-hidden/front:su-opacity-0">
+                            {{> svg-icons icon="plus" classes=iconPlusClasses}}
+                        </button>
+                    </div>
+                </div>
+                <!-- Back side of card -->
+                <div class="su-group/back su-relative su-flex su-flex-col su-h-full su-min-w-full su-rounded-[8px] su-rs-px-5 su-rs-pt-6 su-rs-pb-4 su-bg-digital-red-dark su-text-white [transform:rotateY(180deg)_translate(100%,0)] su-backface-hidden su-transition-transform su-shadow-lg" aria-hidden="true" data-card-inner-content="true">
+                    <div class="su-big-paragraph su-grow" data-se="content">
+                        {{{content}}}
+                        <button type="button" tabIndex="-1" aria-label="Dismiss content" class="su-block su-ml-auto su-mr-0 su-border-3 su-border-white su-rounded-full su-text-white focus:su-bg-black group-hover/back:su-bg-black su-p-7 lg:su-p-14 su-stretched-link su-transition-colors">
+                            {{> svg-icons icon="arrows rotate" classes=iconArrowClasses}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="su-rounded-[8px] su-overflow-hidden su-shadow-lg {{imageAlignmentClass}}">
+                <img src={{imageUrl}} alt="" class="su-object-cover su-size-full" />
+            </div>
+        </article>
+    </div>
+</section>
+```
+
+### Main.js Implementation:
+```javascript
+import interactivePhotoCard from './interactive-photo-card.hbs';
+import { basicAssetUri } from "../../global/js/utils";
+import { processSquizEdit } from '../../global/js/utils/isEditor';
+
+export default {
+    async main( args, info ) {
+        const fnsCtx = info?.fns || info?.ctx || {};
+
+        // CHANGE: change const to let for mutability
+        let { title, eyebrow, content, image, imageAlignment } = args || {};
+
+        // NEW: Detect edit mode
+        const squizEdit = false || info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Provide default values for inline editable fields
+            title = title || 'Interactive Card Title';
+            eyebrow = eyebrow || 'Sample Eyebrow';
+            content = content || '<p>This is sample content that appears on the flip side of the interactive card. It demonstrates the inline editing functionality for FormattedText fields.</p>';
+            
+            // Provide default image for edit mode
+            image = image || 'matrix-asset://api-identifier/sample-image';
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "title": { "field": "title" },
+                "eyebrow": { "field": "eyebrow" },
+                "content": { "field": "content" }
+            };
+        }
+
+        // Validate required functions - CHANGE: wrap in !squizEdit check
+        try {
+            if (!squizEdit && (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined')) {
+                throw new Error(
+                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the Interactive photo card component: ', er);
+            return `<!-- Error occurred in the Interactive photo card component: ${er.message} -->`;
+        }
+
+        // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof title !== 'string' || title === '') {
+                    throw new Error(
+                        `The "title" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(title)} was received.`,
+                    );
+                }
+                if (typeof content !== 'string' || content === '') {
+                    throw new Error(
+                        `The "content" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(content)} was received.`,
+                    );
+                }
+                if (typeof image !== 'string' || image === '') {
+                    throw new Error(
+                        `The "image" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(image)} was received.`,
+                    );
+                }
+                if (eyebrow && (typeof eyebrow !== 'string')) {
+                    throw new Error(
+                        `The "eyebrow" field must be a string. The ${JSON.stringify(eyebrow)} was received.`,
+                    );
+                }
+                if (imageAlignment && !["left", "right"].includes(imageAlignment) ) {
+                    throw new Error(
+                        `The "imageAlignment" field cannot be undefined and must be one of ["left", "right"]. The ${JSON.stringify(imageAlignment)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Interactive photo card component: ', er);
+                return `<!-- Error occurred in the Interactive photo card component: ${er.message} -->`;
+            }
+        }
+
+        // Getting image data with error handling
+        let imageData = null;
+        try {
+            imageData = await basicAssetUri(info.fns, image);
+        } catch (er) {
+            console.error('Error occurred in the Interactive photo card component: Failed to fetch image data. ', er);
+            // NEW: In edit mode, provide mock data instead of returning error
+            if (squizEdit) {
+                imageData = {
+                    url: 'https://picsum.photos/600/400',
+                    attributes: {
+                        alt: 'Sample interactive card image',
+                        width: 600,
+                        height: 400
+                    }
+                };
+            } else {
+                return `<!-- Error occurred in the Interactive photo card component: Failed to fetch image data. ${er.message} -->`;
+            }
+        }
+
+        // Prepare component data for template rendering
+        const componentData = {
+            title,
+            eyebrow,
+            content,
+            imageUrl: imageData?.url,
+            contentAlignmentClass: imageAlignment === 'left' ? 'xl:su-order-2' : '',
+            imageAlignmentClass: imageAlignment === 'left' ? 'xl:su-order-first' : '',
+            iconPlusClasses: "su-size-30 md:su-size-50 su-fill-none group-hover/front:su-scale-110 group-focus-within/front:su-scale-110 su-transition-transform",
+            iconArrowClasses: "su-size-30 lg:su-size-36 su-fill-none group-hover/back:su-rotate-45 su-transition-transform"
+        };
+
+        // NEW: Early return pattern for edit mode
+        if (squizEdit) {
+            return processSquizEdit(interactivePhotoCard(componentData), squizEditTargets, args);
+        }
+
+        return interactivePhotoCard(componentData);
+    },
+};
+```
+
+### Key Features Demonstrated:
+- **Mixed Field Types**: String fields (title, eyebrow) and FormattedText field (content)
+- **Optional Fields**: Eyebrow field is optional and conditionally rendered
+- **Interactive Elements**: Maintains flip card functionality with CSS transforms
+- **Image Integration**: Handles image asset loading with error fallback
+- **Layout Options**: Supports left/right image alignment via quick options
+- **Complex UI**: Preserves interactive card animations and button functionality
+
+**Generated `data-sq-field` attributes:**
+- Card title: `data-sq-field="title"`
+- Card eyebrow: `data-sq-field="eyebrow"` (when present)
+- Card content: `data-sq-field="content"` (FormattedText on flip side)
+
+### Interactive Features Preserved:
+- **Flip Animation**: CSS 3D transforms for card flipping remain functional
+- **Button Interactions**: Plus and arrow buttons maintain hover/focus states
+- **Responsive Layout**: Grid layout and responsive classes preserved
+- **Accessibility**: ARIA labels and tab indexing maintained
+- **Visual Effects**: Shadow, border radius, and color transitions intact
+
+This pattern is ideal for components that:
+- Combine simple text fields with rich FormattedText content
+- Have complex interactive UI elements (animations, transforms)
+- Include optional fields that may not always be present
+- Need to maintain existing CSS animations and JavaScript functionality
+- Handle image assets with error fallback scenarios
+
+The implementation preserves all interactive functionality while enabling inline editing of the core content fields, making it easy for editors to update card content without disrupting the user experience.
+
+## Configuration Examples
