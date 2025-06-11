@@ -1663,7 +1663,7 @@ div[data-component="footer-component"]{position:relative}
 
 .su-page-has-sidebar
   [data-component="campaign-cta"]
-  .su-component-campaigncta-content{margin-right:0;border-style:none}}
+  .su-component-campaigncta-content{margin-right:0;border-style:none}} */
 
 /* Medium contextual spacing */
 * + [data-component="pullquote"],
