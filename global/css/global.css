@@ -1638,7 +1638,7 @@ div[data-component="footer-component"]{position:relative}
 .su-page-content > [data-component="campaign-cta"]:first-child{margin-top:0}
 .su-page-content > [data-component="campaign-cta"]:last-child{margin-bottom:0}
 
-/* Campaign CTA on basic story pages */
+/* Campaign CTA on basic story pages
 .su-page-has-sidebar [data-component="campaign-cta"]{margin-left:-2rem;margin-right:-2rem}
 
 @media (width >= 768px){
