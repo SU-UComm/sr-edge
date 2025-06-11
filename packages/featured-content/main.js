@@ -1,6 +1,7 @@
 import featureContentTemplate from './featured-content.hbs';
 import { cardDataAdapter, funnelbackCardService, linkedHeadingService, matrixCardService, uuid } from "../../global/js/utils";
 import { Card, Modal, EmbedVideo } from "../../global/js/helpers";
+import { processSquizEdit } from '../../global/js/utils/isEditor';
  
 /**
  * Feature content component that renderds a list of features cards based on fetched data
@@ -38,104 +39,149 @@ export default {
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
 
-        // Extracting configuration data from arguments
-        const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
-        const { source, searchQuery, featuredDescription, cards } = args?.contentConfiguration || {};
-        const { alignment, displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
+        // CHANGE: change const to let for mutability
+        let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
+        let { source, searchQuery, featuredDescription, cards } = args?.contentConfiguration || {};
+        let { alignment, displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
+
+        // NEW: Detect edit mode
+        const squizEdit = true || info?.ctx?.editor || false;
+        let squizEditTargets = null;
         
-        // Validate required environment variables
-        try {
-            if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
-                throw new Error(
-                    `The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(FB_JSON_URL)} was received.`
-                );
+        if (squizEdit) {
+            // Provide default configurations
+            title = title || 'Featured Content';
+            ctaText = ctaText || 'View all';
+            ctaUrl = ctaUrl || '';
+            ctaManualUrl = ctaManualUrl || 'https://example.com';
+            ctaNewWindow = ctaNewWindow !== undefined ? ctaNewWindow : false;
+            
+            // Provide default content configuration
+            source = source || 'Search';
+            searchQuery = searchQuery || '?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser_not=true';
+            
+            // Provide default display configuration
+            alignment = alignment || 'left';
+            displayThumbnails = displayThumbnails !== undefined ? displayThumbnails : true;
+            displayDescriptions = displayDescriptions !== undefined ? displayDescriptions : true;
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "headingTitle": { "field": "headingConfiguration.title" },
+                "headingCtaText": { "field": "headingConfiguration.ctaText" }
+            };
+            
+            // Add featured description target if using Select mode
+            if (source === 'Select') {
+                featuredDescription = featuredDescription || 'This is a sample featured description that can be edited inline.';
+                cards = cards && cards.length >= 3 ? cards : [
+                    { cardAsset: 'matrix-asset://api-identifier/166535' },
+                    { cardAsset: 'matrix-asset://api-identifier/162707' },
+                    { cardAsset: 'matrix-asset://api-identifier/162759' }
+                ];
+                squizEditTargets["description"] = {
+                    "field": "contentConfiguration.featuredDescription"
+                };
             }
-            if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                throw new Error(
-                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                );
+        }
+        
+        // Validate required environment variables - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
+                    throw new Error(
+                        `The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(FB_JSON_URL)} was received.`
+                    );
+                }
+                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
+                    throw new Error(
+                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
+                    );
+                }
+                if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
+                    throw new Error(
+                        `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
+                    );
+                }
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Feature content component: ', er);
+                return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
             }
-            if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
-                throw new Error(
-                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
-                );
-            }
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Feature content component: ', er);
-            return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
         }
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (!['Search', 'Select'].includes(source) ) {
-                throw new Error(
-                    `The "source" field cannot be undefined and must be one of ["Search", "Select"]. The ${JSON.stringify(source)} was received.`
-                );
+        // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (!['Search', 'Select'].includes(source) ) {
+                    throw new Error(
+                        `The "source" field cannot be undefined and must be one of ["Search", "Select"]. The ${JSON.stringify(source)} was received.`
+                    );
+                }
+                if (source === 'Search' && (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?')) {
+                    throw new Error(
+                        `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
+                    );
+                }
+                if (source === 'Select' && typeof cards !== 'object') {
+                    throw new Error(
+                        `The "cards" field must be an array. The ${JSON.stringify(cards)} was received.`
+                    );
+                }
+                if (source === 'Select' && featuredDescription && typeof featuredDescription !== 'string') {
+                    throw new Error(
+                        `The "featuredDescription" field must be a string. The ${JSON.stringify(featuredDescription)} was received.`
+                    );
+                }
+                if (title && typeof title !== 'string') {
+                    throw new Error(
+                        `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
+                    );
+                }
+                if (ctaUrl && typeof ctaUrl !== 'string') {
+                    throw new Error(
+                        `The "ctaUrl" field must be a string. The ${JSON.stringify(ctaUrl)} was received.`
+                    );
+                }
+                if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
+                    throw new Error(
+                        `The "ctaManualUrl" field must be a string. The ${JSON.stringify(ctaManualUrl)} was received.`
+                    );
+                }
+                if (ctaText && typeof ctaText !== 'string') {
+                    throw new Error(
+                        `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
+                    );
+                }
+                if (typeof ctaNewWindow !== 'boolean') {
+                    throw new Error(
+                        `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
+                    );
+                }
+                if (typeof alignment !== 'string' || !['left', 'right'].includes(alignment) ) {
+                    throw new Error(
+                        `The "alignment" field cannot be undefined and must be one of ["left", "right"]. The ${JSON.stringify(alignment)} was received.`
+                    );
+                }
+                if (typeof displayThumbnails !== 'boolean') {
+                    throw new Error(
+                        `The "displayThumbnails" field must be a boolean. The ${JSON.stringify(displayThumbnails)} was received.`
+                    );
+                }
+                if (typeof displayDescriptions !== 'boolean') {
+                    throw new Error(
+                        `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
+                    );
+                }
+                
+            } catch (er) {
+                console.error('Error occurred in the Feature content component: ', er);
+                return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
             }
-            if (source === 'Search' && (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?')) {
-                throw new Error(
-                    `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
-                );
-            }
-            if (source === 'Select' && typeof cards !== 'object') {
-                throw new Error(
-                    `The "cards" field must be an array. The ${JSON.stringify(cards)} was received.`
-                );
-            }
-            if (source === 'Select' && featuredDescription && typeof featuredDescription !== 'string') {
-                throw new Error(
-                    `The "featuredDescription" field must be a string. The ${JSON.stringify(featuredDescription)} was received.`
-                );
-            }
-            if (title && typeof title !== 'string') {
-                throw new Error(
-                    `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
-                );
-            }
-            if (ctaUrl && typeof ctaUrl !== 'string') {
-                throw new Error(
-                    `The "ctaUrl" field must be a string. The ${JSON.stringify(ctaUrl)} was received.`
-                );
-            }
-            if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
-                throw new Error(
-                    `The "ctaManualUrl" field must be a string. The ${JSON.stringify(ctaManualUrl)} was received.`
-                );
-            }
-            if (ctaText && typeof ctaText !== 'string') {
-                throw new Error(
-                    `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
-                );
-            }
-            if (typeof ctaNewWindow !== 'boolean') {
-                throw new Error(
-                    `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
-                );
-            }
-            if (typeof alignment !== 'string' || !['left', 'right'].includes(alignment) ) {
-                throw new Error(
-                    `The "alignment" field cannot be undefined and must be one of ["left", "right"]. The ${JSON.stringify(alignment)} was received.`
-                );
-            }
-            if (typeof displayThumbnails !== 'boolean') {
-                throw new Error(
-                    `The "displayThumbnails" field must be a boolean. The ${JSON.stringify(displayThumbnails)} was received.`
-                );
-            }
-            if (typeof displayDescriptions !== 'boolean') {
-                throw new Error(
-                    `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
-                );
-            }
-            
-        } catch (er) {
-            console.error('Error occurred in the Feature content component: ', er);
-            return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
         }
 
         const adapter = new cardDataAdapter();
@@ -147,12 +193,96 @@ export default {
             const service = new funnelbackCardService({ FB_JSON_URL, query });
 
             adapter.setCardService(service);
-            data = await adapter.getCards();
+            
+            try {
+                data = await adapter.getCards();
+            } catch (er) {
+                console.error('Error occurred in the Feature content component: Failed to fetch search data. ', er);
+                // NEW: In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    data = [
+                        {
+                            title: 'Sample Featured Article',
+                            description: 'This is a sample featured article description that can be edited inline.',
+                            liveUrl: 'https://example.com',
+                            imageUrl: 'https://picsum.photos/600/400',
+                            imageAlt: 'Sample featured image',
+                            taxonomy: 'Research',
+                            taxonomyUrl: 'https://example.com',
+                            type: 'Article'
+                        },
+                        {
+                            title: 'Sample Article 2',
+                            description: 'This is another sample article description.',
+                            liveUrl: 'https://example.com',
+                            imageUrl: 'https://picsum.photos/400/300',
+                            imageAlt: 'Sample image 2',
+                            taxonomy: 'News',
+                            taxonomyUrl: 'https://example.com',
+                            type: 'Article'
+                        },
+                        {
+                            title: 'Sample Article 3',
+                            description: 'This is a third sample article description.',
+                            liveUrl: 'https://example.com',
+                            imageUrl: 'https://picsum.photos/400/300',
+                            imageAlt: 'Sample image 3',
+                            taxonomy: 'Events',
+                            taxonomyUrl: 'https://example.com',
+                            type: 'Article'
+                        }
+                    ];
+                } else {
+                    return `<!-- Error occurred in the Feature content component: Failed to fetch search data. ${er.message} -->`;
+                }
+            }
         } else {
             const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
 
             adapter.setCardService(service);
-            data = await adapter.getCards(cards);
+            
+            try {
+                data = await adapter.getCards(cards);
+            } catch (er) {
+                console.error('Error occurred in the Feature content component: Failed to fetch card data. ', er);
+                // NEW: In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    data = [
+                        {
+                            title: 'Sample Featured Content',
+                            description: 'This is a sample featured content description that can be edited inline.',
+                            liveUrl: 'https://example.com',
+                            imageUrl: 'https://picsum.photos/600/400',
+                            imageAlt: 'Sample featured image',
+                            taxonomy: 'Featured',
+                            taxonomyUrl: 'https://example.com',
+                            type: 'Article'
+                        },
+                        {
+                            title: 'Sample Content 2',
+                            description: 'This is another sample content description.',
+                            liveUrl: 'https://example.com',
+                            imageUrl: 'https://picsum.photos/400/300',
+                            imageAlt: 'Sample image 2',
+                            taxonomy: 'Content',
+                            taxonomyUrl: 'https://example.com',
+                            type: 'Article'
+                        },
+                        {
+                            title: 'Sample Content 3',
+                            description: 'This is a third sample content description.',
+                            liveUrl: 'https://example.com',
+                            imageUrl: 'https://picsum.photos/400/300',
+                            imageAlt: 'Sample image 3',
+                            taxonomy: 'Content',
+                            taxonomyUrl: 'https://example.com',
+                            type: 'Article'
+                        }
+                    ];
+                } else {
+                    return `<!-- Error occurred in the Feature content component: Failed to fetch card data. ${er.message} -->`;
+                }
+            }
         }
 
         // Generate linked heading data
@@ -182,21 +312,23 @@ export default {
             }
         });
 
-        // Validate fetched card data
-        try {
-            if (typeof featuredCardData !== 'object' || featuredCardData === null) {
-                throw new Error(
-                    `The data cannot be undefined or null. The ${JSON.stringify(data)} was received.`
-                );
+        // Validate fetched card data - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof featuredCardData !== 'object' || featuredCardData === null) {
+                    throw new Error(
+                        `The data cannot be undefined or null. The ${JSON.stringify(data)} was received.`
+                    );
+                }
+                if (typeof cardData !== 'object' || JSON.stringify(cardData) === JSON.stringify([null, null]) || cardData.length < 2) {
+                    throw new Error(
+                        `The data cannot have less then 3 elements. The ${JSON.stringify(data)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Feature content component: ', er);
+                return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
             }
-            if (typeof cardData !== 'object' || JSON.stringify(cardData) === JSON.stringify([null, null]) || cardData.length < 2) {
-                throw new Error(
-                    `The data cannot have less then 3 elements. The ${JSON.stringify(data)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Feature content component: ', er);
-            return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
         }
 
         // Generate card components to render
@@ -219,6 +351,11 @@ export default {
             cardModal: cardModal.join(''),
             width: "large"
         };
+
+        // NEW: Early return pattern for edit mode
+        if (squizEdit) {
+            return processSquizEdit(featureContentTemplate(componentData), squizEditTargets, args);
+        }
 
         return featureContentTemplate(componentData);
     }

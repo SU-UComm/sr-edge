@@ -1,5 +1,6 @@
 import { cardDataAdapter, funnelbackCardService, matrixCardService, eventCardService, linkedHeadingService, basicAssetUri, uuid, isRealExternalLink } from "../../global/js/utils";
 import { EventStartEndDate } from '../../global/js/helpers';
+import { processSquizEdit } from '../../global/js/utils/isEditor';
 import combinedContentGridTemplate from './combined-content-grid.hbs';
 
 /**
@@ -40,10 +41,69 @@ export default {
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
 
-        // Extracting configuration data from arguments
-        const { source, searchQuery, cards, featuredDescription } = args?.contentConfiguration || {};
-        const { displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
-        const { headingConfiguration, eventsConfiguration, announcementsConfiguration } = args || {};
+        // CHANGE: change const to let so we can modify later for squizEdit default values
+        let { source, searchQuery, cards, featuredDescription } = args?.contentConfiguration || {};
+        let { displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
+        let { headingConfiguration, eventsConfiguration, announcementsConfiguration } = args || {};
+
+        // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
+        // Must fallback to false, use true to mock the editor
+        const squizEdit = true || info?.ctx?.editor || false;
+        // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
+        let squizEditTargets = null;
+        
+        // NEW: add defaults if squizEdit is true
+        if (squizEdit) {
+            // Provide default configurations if not present
+            headingConfiguration = headingConfiguration || {};
+            eventsConfiguration = eventsConfiguration || {};
+            announcementsConfiguration = announcementsConfiguration || {};
+            
+            // Add default values for inline editable fields
+            headingConfiguration.title = headingConfiguration.title || 'Featured Content';
+            headingConfiguration.ctaText = headingConfiguration.ctaText || 'View all';
+            eventsConfiguration.heading = eventsConfiguration.heading || 'Upcoming events';
+            announcementsConfiguration.heading = announcementsConfiguration.heading || 'Announcements';
+            
+            // Add default for featured description if using Select mode
+            if (source === 'Select') {
+                featuredDescription = featuredDescription || 'Featured content description goes here.';
+            }
+            
+            // Provide default content configuration
+            source = source || 'Search';
+            searchQuery = searchQuery || '?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser_not=true';
+            
+            // Provide default display configuration
+            displayThumbnails = displayThumbnails !== undefined ? displayThumbnails : true;
+            displayDescriptions = displayDescriptions !== undefined ? displayDescriptions : false;
+            
+            // Provide default events and announcements configuration
+            eventsConfiguration.endPoint = eventsConfiguration.endPoint || 'https://events.stanford.edu/api/2/events?days=365&sponsored=true';
+            eventsConfiguration.numberOfItems = eventsConfiguration.numberOfItems || 3;
+            eventsConfiguration.linkUrl = eventsConfiguration.linkUrl || 'https://events.stanford.edu';
+            
+            announcementsConfiguration.endPoint = announcementsConfiguration.endPoint || '?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_taxonomyAudienceText=External&meta_taxonomyContentTypeText=Announcement&num_ranks=3';
+            announcementsConfiguration.numberOfItems = announcementsConfiguration.numberOfItems || 3;
+            
+            // Add the targets for the squizEdit DOM augmentation
+            // used in processSquizEdit to modify the output to add edit markup
+            squizEditTargets = {
+                "headingTitle": {
+                    "field": "headingConfiguration.title"
+                },
+                "headingCtaText": {
+                    "field": "headingConfiguration.ctaText"
+                },
+            };
+            
+            // Add featured description target if using Select mode
+            if (source === 'Select') {
+                squizEditTargets["description"] = {
+                    "field": "contentConfiguration.featuredDescription"
+                };
+            }
+        }
 
         // Validate required environment variables
         try {
@@ -72,106 +132,110 @@ export default {
             return `<!-- Error occurred in the Combined Content Grid component: ${er.message} -->`;
         }
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (!['Search', 'Select'].includes(source) ) {
-                throw new Error(
-                    `The "source" field cannot be undefined and must be one of ["Search", "Select"]. The ${JSON.stringify(source)} was received.`
-                );
+        // NEW: remove overly stringent validation where it makes sense
+        // if it is to remain, wrap it in a !squizEdit check
+        if (!squizEdit) {
+            // Validate required fields and ensure correct data types
+            try {
+                if (!['Search', 'Select'].includes(source) ) {
+                    throw new Error(
+                        `The "source" field cannot be undefined and must be one of ["Search", "Select"]. The ${JSON.stringify(source)} was received.`
+                    );
+                }
+                if (source === 'Search' && (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?')) {
+                    throw new Error(
+                        `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
+                    );
+                }
+                if (source === 'Select' && typeof cards !== 'object') {
+                    throw new Error(
+                        `The "cards" field must be an array. The ${JSON.stringify(cards)} was received.`
+                    );
+                }
+                if (source === 'Select' && featuredDescription && typeof featuredDescription !== 'string') {
+                    throw new Error(
+                        `The "featuredDescription" field must be a string. The ${JSON.stringify(featuredDescription)} was received.`
+                    );
+                }
+                if (displayThumbnails && typeof displayThumbnails !== 'boolean') {
+                    throw new Error(
+                        `The "displayThumbnails" field must be a boolean. The ${JSON.stringify(displayThumbnails)} was received.`
+                    );
+                }
+                if (displayDescriptions && typeof displayDescriptions !== 'boolean') {
+                    throw new Error(
+                        `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
+                    );
+                }
+                if (headingConfiguration?.title && typeof headingConfiguration.title !== 'string') {
+                    throw new Error(
+                        `The "headingConfiguration.title" field must be a string. The ${JSON.stringify(headingConfiguration.title)} was received.`
+                    );
+                }
+                if (headingConfiguration?.ctaUrl && typeof headingConfiguration.ctaUrl !== 'string') {
+                    throw new Error(
+                        `The "headingConfiguration.ctaUrl" field must be a string. The ${JSON.stringify(headingConfiguration.ctaUrl)} was received.`
+                    );
+                }
+                if (headingConfiguration?.ctaManualUrl && typeof headingConfiguration.ctaManualUrl !== 'string') {
+                    throw new Error(
+                        `The "headingConfiguration.ctaManualUrl" field must be a string. The ${JSON.stringify(headingConfiguration.ctaManualUrl)} was received.`
+                    );
+                }
+                if (headingConfiguration?.ctaText && typeof headingConfiguration.ctaText !== 'string') {
+                    throw new Error(
+                        `The "headingConfiguration.ctaText" field must be a string. The ${JSON.stringify(headingConfiguration.ctaText)} was received.`
+                    );
+                }
+                if (headingConfiguration?.ctaNewWindow && typeof headingConfiguration.ctaNewWindow !== 'boolean') {
+                    throw new Error(
+                        `The "headingConfiguration.ctaNewWindow" field must be a boolean. The ${JSON.stringify(headingConfiguration.ctaNewWindow)} was received.`
+                    );
+                }
+                if (eventsConfiguration?.heading && typeof eventsConfiguration.heading !== 'string') {
+                    throw new Error(
+                        `The "eventsConfiguration.heading" field must be a string. The ${JSON.stringify(eventsConfiguration.heading)} was received.`
+                    );
+                }
+                if (eventsConfiguration?.endPoint && typeof eventsConfiguration.endPoint !== 'string') {
+                    throw new Error(
+                        `The "eventsConfiguration.endPoint" field must be a string. The ${JSON.stringify(eventsConfiguration.endPoint)} was received.`
+                    );
+                }
+                if (eventsConfiguration?.numberOfItems && typeof eventsConfiguration.numberOfItems !== 'number' || ![3, 4, 5, 6].includes(eventsConfiguration.numberOfItems)) {
+                    throw new Error(
+                        `The "eventsConfiguration.numberOfItems" field cannot be undefined and must be a number one of [3, 4, 5, 6]. The ${JSON.stringify(eventsConfiguration.numberOfItems)} was received.`
+                    );
+                }
+                if (eventsConfiguration?.linkUrl && typeof eventsConfiguration.linkUrl !== 'string') {
+                    throw new Error(
+                        `The "eventsConfiguration.linkUrl" field must be a string. The ${JSON.stringify(eventsConfiguration.linkUrl)} was received.`
+                    );
+                }
+                if (announcementsConfiguration?.heading && typeof announcementsConfiguration.heading !== 'string') {
+                    throw new Error(
+                        `The "announcementsConfiguration.heading" field must be a string. The ${JSON.stringify(announcementsConfiguration.heading)} was received.`
+                    );
+                }
+                if (announcementsConfiguration?.endPoint && typeof announcementsConfiguration.endPoint !== 'string') {
+                    throw new Error(
+                        `The "announcementsConfiguration.endPoint" field must be a string. The ${JSON.stringify(announcementsConfiguration.endPoint)} was received.`
+                    );
+                }
+                if (announcementsConfiguration?.numberOfItems && typeof announcementsConfiguration.numberOfItems !== 'number' || ![3, 4, 5, 6].includes(announcementsConfiguration.numberOfItems)) {
+                    throw new Error(
+                        `The "announcementsConfiguration.numberOfItems" field cannot be undefined and must be a number one of [3, 4, 5, 6]. The ${JSON.stringify(announcementsConfiguration.numberOfItems)} was received.`
+                    );
+                }
+                if (announcementsConfiguration?.linkUrl && typeof announcementsConfiguration.linkUrl !== 'string') {
+                    throw new Error(
+                        `The "announcementsConfiguration.linkUrl" field must be a string. The ${JSON.stringify(announcementsConfiguration.linkUrl)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Combined Content Grid component: ', er);
+                return `<!-- Error occurred in the Combined Content Grid component: ${er.message} -->`;
             }
-            if (source === 'Search' && (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?')) {
-                throw new Error(
-                    `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
-                );
-            }
-            if (source === 'Select' && typeof cards !== 'object') {
-                throw new Error(
-                    `The "cards" field must be an array. The ${JSON.stringify(cards)} was received.`
-                );
-            }
-            if (source === 'Select' && featuredDescription && typeof featuredDescription !== 'string') {
-                throw new Error(
-                    `The "featuredDescription" field must be a string. The ${JSON.stringify(featuredDescription)} was received.`
-                );
-            }
-            if (displayThumbnails && typeof displayThumbnails !== 'boolean') {
-                throw new Error(
-                    `The "displayThumbnails" field must be a boolean. The ${JSON.stringify(displayThumbnails)} was received.`
-                );
-            }
-            if (displayDescriptions && typeof displayDescriptions !== 'boolean') {
-                throw new Error(
-                    `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
-                );
-            }
-            if (headingConfiguration?.title && typeof headingConfiguration.title !== 'string') {
-                throw new Error(
-                    `The "headingConfiguration.title" field must be a string. The ${JSON.stringify(headingConfiguration.title)} was received.`
-                );
-            }
-            if (headingConfiguration?.ctaUrl && typeof headingConfiguration.ctaUrl !== 'string') {
-                throw new Error(
-                    `The "headingConfiguration.ctaUrl" field must be a string. The ${JSON.stringify(headingConfiguration.ctaUrl)} was received.`
-                );
-            }
-            if (headingConfiguration?.ctaManualUrl && typeof headingConfiguration.ctaManualUrl !== 'string') {
-                throw new Error(
-                    `The "headingConfiguration.ctaManualUrl" field must be a string. The ${JSON.stringify(headingConfiguration.ctaManualUrl)} was received.`
-                );
-            }
-            if (headingConfiguration?.ctaText && typeof headingConfiguration.ctaText !== 'string') {
-                throw new Error(
-                    `The "headingConfiguration.ctaText" field must be a string. The ${JSON.stringify(headingConfiguration.ctaText)} was received.`
-                );
-            }
-            if (headingConfiguration?.ctaNewWindow && typeof headingConfiguration.ctaNewWindow !== 'boolean') {
-                throw new Error(
-                    `The "headingConfiguration.ctaNewWindow" field must be a boolean. The ${JSON.stringify(headingConfiguration.ctaNewWindow)} was received.`
-                );
-            }
-            if (eventsConfiguration?.heading && typeof eventsConfiguration.heading !== 'string') {
-                throw new Error(
-                    `The "eventsConfiguration.heading" field must be a string. The ${JSON.stringify(eventsConfiguration.heading)} was received.`
-                );
-            }
-            if (eventsConfiguration?.endPoint && typeof eventsConfiguration.endPoint !== 'string') {
-                throw new Error(
-                    `The "eventsConfiguration.endPoint" field must be a string. The ${JSON.stringify(eventsConfiguration.endPoint)} was received.`
-                );
-            }
-            if (eventsConfiguration?.numberOfItems && typeof eventsConfiguration.numberOfItems !== 'number' || ![3, 4, 5, 6].includes(eventsConfiguration.numberOfItems)) {
-                throw new Error(
-                    `The "eventsConfiguration.numberOfItems" field cannot be undefined and must be a number one of [3, 4, 5, 6]. The ${JSON.stringify(eventsConfiguration.numberOfItems)} was received.`
-                );
-            }
-            if (eventsConfiguration?.linkUrl && typeof eventsConfiguration.linkUrl !== 'string') {
-                throw new Error(
-                    `The "eventsConfiguration.linkUrl" field must be a string. The ${JSON.stringify(eventsConfiguration.linkUrl)} was received.`
-                );
-            }
-            if (announcementsConfiguration?.heading && typeof announcementsConfiguration.heading !== 'string') {
-                throw new Error(
-                    `The "announcementsConfiguration.heading" field must be a string. The ${JSON.stringify(announcementsConfiguration.heading)} was received.`
-                );
-            }
-            if (announcementsConfiguration?.endPoint && typeof announcementsConfiguration.endPoint !== 'string') {
-                throw new Error(
-                    `The "announcementsConfiguration.endPoint" field must be a string. The ${JSON.stringify(announcementsConfiguration.endPoint)} was received.`
-                );
-            }
-            if (announcementsConfiguration?.numberOfItems && typeof announcementsConfiguration.numberOfItems !== 'number' || ![3, 4, 5, 6].includes(announcementsConfiguration.numberOfItems)) {
-                throw new Error(
-                    `The "announcementsConfiguration.numberOfItems" field cannot be undefined and must be a number one of [3, 4, 5, 6]. The ${JSON.stringify(announcementsConfiguration.numberOfItems)} was received.`
-                );
-            }
-            if (announcementsConfiguration?.linkUrl && typeof announcementsConfiguration.linkUrl !== 'string') {
-                throw new Error(
-                    `The "announcementsConfiguration.linkUrl" field must be a string. The ${JSON.stringify(announcementsConfiguration.linkUrl)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Combined Content Grid component: ', er);
-            return `<!-- Error occurred in the Combined Content Grid component: ${er.message} -->`;
         }
 
         const adapter = new cardDataAdapter();
@@ -326,7 +390,7 @@ export default {
             card.displayDescription = displayDescriptions;
             card.description = idx === 0 ? featuredDescription ? featuredDescription : card.description : card.description;
             card.headingLvl = headingData?.title ? 'h3' : 'h2';
-
+            
             // Generate modals for video cards
             if (card.type === 'Video' || card.videoUrl) {
                 modalData.push(
@@ -354,6 +418,10 @@ export default {
             announcementData,
         };
 
-        return combinedContentGridTemplate(componentData);
+        // Return original front end code when squizEdit is false, without modification
+        if (!squizEdit) return combinedContentGridTemplate(componentData);
+
+        // NEW: process the output to be editable in Squiz Editor
+        return processSquizEdit(combinedContentGridTemplate(componentData), squizEditTargets);
     }
 };

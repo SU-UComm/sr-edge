@@ -12,11 +12,13 @@
                     {{#if title}}
                         <h2
                             class='su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold'
+                            data-se="title"
                         >{{title}}</h2>
                     {{/if}}
                     {{#if description}}
                         <div
                             class='su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]'
+                            data-se="description"
                         >{{description}}</div>
                     {{/if}}
                 </div>
@@ -24,6 +26,7 @@
                         <a
                             href='{{linkData.url}}'
                             class='su-text-18 su-mt-50 su-font-normal su-leading-display su-inline-block su-px-30 su-pt-10 su-pb-12 su-bg-digital-red su-mr-auto su-text-white su-no-underline hover:su-bg-black su-transition md:su-px-35 md:su-pt-14 md:su-pb-16 md:su-text-24 md:su-leading-[119.415%] md:su-mt-auto su-shrink-0'
+                            data-se="linkText"
                         >
                             {{linkText}}
                         </a>

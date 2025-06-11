@@ -1,6 +1,6 @@
 {{#if buttonUrl}}
-<a href="{{buttonUrl}}"{{#if isNewWindow}} target="_blank"{{/if}}{{#if isRealExternalLink}} rel="noopener nofollow"{{/if}} class="{{linkButtonClasses variant size customClasses }}">
-    {{buttonText}}         
+<a href="{{buttonUrl}}"{{#if isNewWindow}} target="_blank"{{/if}}{{#if isRealExternalLink}} rel="noopener nofollow"{{/if}} class="{{linkButtonClasses variant size customClasses }}" data-se="button">
+    {{buttonText}}
     {{#if isRealExternalLink}}
         {{> fontawesome-icon
             icon="arrow-up"

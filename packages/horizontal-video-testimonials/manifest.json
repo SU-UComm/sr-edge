@@ -30,12 +30,18 @@
                             "title": {
                                 "title": "Section heading",
                                 "type": "string",
-                                "default": "Meet more students"
+                                "default": "Meet more students",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaText": {
                                 "title": "Heading CTA link text",
                                 "type": "string",
-                                "default": "Watch all"
+                                "default": "Watch all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix asset link",

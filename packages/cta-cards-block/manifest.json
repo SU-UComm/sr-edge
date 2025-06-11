@@ -34,16 +34,25 @@
                                 "eyebrow": {
                                     "type": "string",
                                     "title": "Eyebrow",
-                                    "description": "This is the superheading above the title."
+                                    "description": "This is the superheading above the title.",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "title": {
                                     "type": "string",
-                                    "title": "Title"
+                                    "title": "Title",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "description": {
                                     "title": "Description",
                                     "description": "This is the description that appears below the title.",
-                                    "type": "FormattedText"
+                                    "type": "FormattedText",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "linkDetails": {
                                     "title": "Link details",

@@ -1,13 +1,13 @@
 {{#if title}}
     <div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13{{#if customClasses}} {{customClasses}}{{/if}}">
-        <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white {{linkedHeadingHeaderClasses isAlwaysLight}}">
+        <h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white {{linkedHeadingHeaderClasses isAlwaysLight}}" data-se="headingTitle">
             {{title}}
         </h2>
         <hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/>
         {{#if ctaLink}}
             <a data-test="cta" href="{{ctaLink}}"{{#if ctaNewWindow}} target="{{ctaTarget ctaNewWindow}}"{{/if}} class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white {{getStringByCondition value=isAlwaysLight expectedValue=true trueResult="su-text-white hocus:su-text-white/95 dark:hocus:su-text-white/95" falseResult="su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"}}">            
                 <span class="su-flex su-gap-2 su-items-baseline">
-                <span>
+                <span data-se="headingCtaText">
                     {{ctaText}}<!-- --> <span class="sr-only">{{title}}</span>
                 </span>
                 {{> fontawesome-icon

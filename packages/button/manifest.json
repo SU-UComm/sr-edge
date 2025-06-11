@@ -24,7 +24,10 @@
                     "buttonText": {
                         "title": "Button text",
                         "type": "string",
-                        "default": "Button text"
+                        "default": "Button text",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "internalUrl": {
                         "title": "Internal link (Matrix asset link)",
@@ -40,7 +43,10 @@
                     "isNewWindow": {
                         "title": "Open link in a new window",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     }
                 },
                 "required": []

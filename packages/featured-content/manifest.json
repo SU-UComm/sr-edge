@@ -44,7 +44,10 @@
                         "properties": {
                             "title": {
                                 "title": "Heading",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix Asset Link",
@@ -60,7 +63,10 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "View all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",
@@ -73,13 +79,21 @@
                         "title": "Grid Content",
                         "description": "The cards to display in the grid area of the component. The featured card appears larger than the supplementary cards. When manually selecting cards, at least three must be selected for the grid to display.",
                         "type": "object",
-                        "required": ["source"],
+                        "required": [
+                            "source"
+                        ],
                         "properties": {
                             "source": {
                                 "title": "Content source",
                                 "default": "Search",
-                                "enum": ["Search", "Select"],
-                                "type": "string"
+                                "enum": [
+                                    "Search",
+                                    "Select"
+                                ],
+                                "type": "string",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             }
                         },
                         "allOf": [
@@ -93,7 +107,9 @@
                                     }
                                 },
                                 "then": {
-                                    "required": ["searchQuery"],
+                                    "required": [
+                                        "searchQuery"
+                                    ],
                                     "properties": {
                                         "searchQuery": {
                                             "type": "string",
@@ -113,7 +129,9 @@
                                     }
                                 },
                                 "then": {
-                                    "required": ["cards"],
+                                    "required": [
+                                        "cards"
+                                    ],
                                     "properties": {
                                         "cards": {
                                             "title": "Cards",
@@ -130,14 +148,19 @@
                                                         "title": "Card Asset"
                                                     }
                                                 },
-                                                "required": ["cardAsset"]
+                                                "required": [
+                                                    "cardAsset"
+                                                ]
                                             }
                                         },
                                         "featuredDescription": {
                                             "type": "string",
                                             "title": "Featured Content description",
                                             "format": "multi-line",
-                                            "description": "If filled out, it will replace the description of the featured card (first)."
+                                            "description": "If filled out, it will replace the description of the featured card (first).",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
                                         }
                                     }
                                 }
@@ -153,17 +176,29 @@
                                 "title": "Featured Card: Alignment",
                                 "description": "The position of the featured card on larger screens.",
                                 "default": "left",
-                                "enum": ["left", "right"]
+                                "enum": [
+                                    "left",
+                                    "right"
+                                ],
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             },
                             "displayThumbnails": {
                                 "title": "Display Supplementary Thumbnails",
                                 "default": true,
-                                "type": "boolean"
+                                "type": "boolean",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             },
                             "displayDescriptions": {
                                 "title": "Display Supplementary Descriptions",
                                 "default": false,
-                                "type": "boolean"
+                                "type": "boolean",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             }
                         }
                     }

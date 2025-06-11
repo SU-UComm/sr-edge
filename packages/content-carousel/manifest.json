@@ -24,7 +24,10 @@
                     "title": {
                         "title": "Heading",
                         "description": "The heading text",
-                        "type": "string"
+                        "type": "string",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "slides": {
                         "title": "Slides",
@@ -40,7 +43,10 @@
                             "properties": {
                                 "content": {
                                     "title": "Content",
-                                    "type": "FormattedText"
+                                    "type": "FormattedText",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 }
                             }
                         }

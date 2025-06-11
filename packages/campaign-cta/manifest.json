@@ -25,7 +25,9 @@
                     "displayConfiguration": {
                         "title": "Campaign CTA configuration",
                         "description": "These options will output to the frontend of the Campaign CTA component",
-                        "required": ["image"],
+                        "required": [
+                            "image"
+                        ],
                         "properties": {
                             "image": {
                                 "title": "Background image",
@@ -37,13 +39,19 @@
                                 "title": "Title",
                                 "description": "The campaign title",
                                 "type": "string",
-                                "default": ""
+                                "default": "",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "description": {
                                 "title": "Description",
                                 "description": "The campaign text content",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "linkUrl": {
                                 "title": "CTA Destination",
@@ -55,7 +63,10 @@
                                 "title": "CTA text",
                                 "description": "The CTA title",
                                 "type": "string",
-                                "default": "Learn more"
+                                "default": "Learn more",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     }

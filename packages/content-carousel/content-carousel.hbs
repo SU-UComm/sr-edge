@@ -3,7 +3,7 @@
         <div class='su-bg-fog-light dark:su-bg-black su-p-20 md:su-pt-36 md:su-px-36 md:su-pb-26'>
             <div class='su-relative su-mb-38 su-overflow-hidden'>
                 {{~#if title~}}
-                <h3 class='su-relative su-text-23 su-leading-[119.415%] su-z-20 su-font-black su-mb-0 su-inline su-pr-10 su-m-0'>
+                <h3 class='su-relative su-text-23 su-leading-[119.415%] su-z-20 su-font-black su-mb-0 su-inline su-pr-10 su-m-0' data-se="title">
                     {{title}}
                 </h3>
                 {{~/if~}}
@@ -12,7 +12,7 @@
             {{#> carousel-content uniqueID=id}}
                 {{#each slides}}
                 <div class="swiper-slide">
-                    <div class="su-wysiwyg-content su-w-full *:su-mb-6 *:su-text-16 *:su-leading-[125%] *:md:su-text-19 *:lg:su-text-19 [&amp;>*:last-child]:su-mb-0 *:su-card-paragraph">
+                    <div class="su-wysiwyg-content su-w-full *:su-mb-6 *:su-text-16 *:su-leading-[125%] *:md:su-text-19 *:lg:su-text-19 [&amp;>*:last-child]:su-mb-0 *:su-card-paragraph" data-se="content">
                         {{{content}}}
                     </div>
                 </div>

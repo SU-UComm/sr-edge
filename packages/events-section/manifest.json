@@ -31,7 +31,10 @@
                             "title": {
                                 "title": "Heading",
                                 "type": "string",
-                                "default": "Upcoming events"
+                                "default": "Upcoming events",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix Asset Link",
@@ -48,7 +51,10 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "View all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",
@@ -61,7 +67,9 @@
                         "title": "Events section core configuration",
                         "description": "The main purpose for these settings is to source the events API for the component.",
                         "type": "object",
-                        "required": ["eventsUrl"],
+                        "required": [
+                            "eventsUrl"
+                        ],
                         "properties": {
                             "eventsUrl": {
                                 "title": "Events API Endpiont",
@@ -78,7 +86,11 @@
                             "numberOfEvents": {
                                 "title": "Number of Events",
                                 "default": 6,
-                                "enum": [3, 6, 9],
+                                "enum": [
+                                    3,
+                                    6,
+                                    9
+                                ],
                                 "type": "integer"
                             }
                         }

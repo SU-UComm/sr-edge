@@ -3,20 +3,20 @@
         <div class="su-absolute su-z-20 su-h-full su-inset-0 su-flex su-items-end su-p-20 {{#if quoteVAlign}}lg:su-items-{{quoteVAlign}}{{/if}}">
             <blockquote class="su-py-17 sm:su-py-[6.8rem] xl:su-py-100 2xl:su-py-140 su-cc lg:su-max-w-[50%] {{getStringByCondition value=quoteHAlign expectedValue="right" trueResult="su-ml-0 su-mr-auto lg:su-mr-0 lg:su-ml-auto lg:su-pl-0" falseResult="su-ml-0 su-mr-auto lg:su-pr-0"}}">
                 {{~#if quote~}}
-                <p class="su-font-serif su-text-22 md:su-text-[3.3rem] lg:su-text-24 xl:su-text-[2.8rem] 2xl:su-text-[3.3rem] su-leading-display su-max-w-[55rem] xl:su-max-w-600 su-mb-0 su-whitespace-pre-line">
+                <p class="su-font-serif su-text-22 md:su-text-[3.3rem] lg:su-text-24 xl:su-text-[2.8rem] 2xl:su-text-[3.3rem] su-leading-display su-max-w-[55rem] xl:su-max-w-600 su-mb-0 su-whitespace-pre-line" data-se="quote">
                     {{quote}}
                 </p>
                 {{~/if~}}
                 {{~#if ctaText~}}
                 <div class="su-rs-mt-1 su-max-w-[55rem] xl:su-max-w-600">
-                    <span class="su-inline su-text-22 md:su-text-[2.9rem] lg:su-text-24 2xl:su-text-[2.9rem] su-font-bold su-leading-display su-mr-02em">
+                    <span class="su-inline su-text-22 md:su-text-[2.9rem] lg:su-text-24 2xl:su-text-[2.9rem] su-font-bold su-leading-display su-mr-02em" data-se="ctaPreText">
                         {{ctaPreText}}
                     </span>
                     <a href="{{link}}" 
                        {{#if isNewWindow}}target="_blank"{{/if}} 
                        {{#if isRealExternal}}rel="noopener nofollow"{{/if}}
                        class="su-group su-inline su-text-22 md:su-text-[2.9rem] lg:su-text-24 2xl:su-text-[2.9rem] su-font-bold su-leading-display su-text-white dark:su-text-white su-underline su-decoration-dark-mode-red su-underline-offset-4 su-decoration-[3px] hocus:su-decoration-white hocus:su-text-white dark:hocus:su-text-white su-transition-all">
-                        {{ctaText}}
+                        <span data-se="ctaText">{{ctaText}}</span>
                         <span class="su-whitespace-nowrap">
                             {{~#if isRealExternal~}}
                             {{> fontawesome-icon
@@ -40,7 +40,7 @@
                         </span>
                     </a>
                     {{~#if ctaSubtext~}}
-                    <div class="su-card-paragraph su-leading-display su-mt-9">
+                    <div class="su-card-paragraph su-leading-display su-mt-9" data-se="ctaSubtext">
                         {{ctaSubtext}}
                     </div>
                     {{~/if~}}
