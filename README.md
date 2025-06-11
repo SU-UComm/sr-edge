@@ -86,7 +86,13 @@ Make sure you have the following installed:
     cd <repository-folder>
     ```
 
-2. Install the dependencies:
+2. set the environment variable for FONTAWESOME_PACKAGE_TOKEN (you will need to get this from a team member). This allows the installation of the fontawesome Pro fonts. 
+
+   ```bash
+    export FONTAWESOME_PACKAGE_TOKEN="<token here>"
+    ```
+
+3. Install the dependencies:
 
     ```bash
     npm install
