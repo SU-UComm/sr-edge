@@ -14,8 +14,8 @@ export default {
     darkMode: "class",
     prefix: "su-",
     content: [
-        "./global/**/*.{css,js}",
-        "./packages/**/*.{css,jsx,js,scss,html}",
+        "./global/**/*.{css,js,hbs}",
+        "./packages/**/*.{css,jsx,js,scss,html,hbs}",
     ],
     theme: {
         extend: {
