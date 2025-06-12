@@ -3,7 +3,7 @@
     "name": "image-gallery-modal",
     "type": "edge",
     "version": "4.0.6",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "An image gallery that opens in a modal.",
     "displayName": "Image gallery with modal",
     "mainFunction": "main",

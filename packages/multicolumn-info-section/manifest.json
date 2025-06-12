@@ -3,7 +3,7 @@
     "name": "multicolumn-info-section",
     "type": "edge",
     "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "The multicolumn info section displays a title in column 1, WYSIWYG content in column 2, and an optional text callout in column 3",
     "displayName": "Multicolumn Info Section",
     "mainFunction": "main",

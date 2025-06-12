@@ -3,7 +3,7 @@
     "name": "in-brief",
     "type": "edge",
     "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Summary of main points in a bulleted list.",
     "displayName": "In Brief",
     "mainFunction": "main",

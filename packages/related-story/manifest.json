@@ -3,7 +3,7 @@
     "name": "related-story",
     "type": "edge",
     "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Displays a related story on a featured story",
     "displayName": "Related story",
     "mainFunction": "main",

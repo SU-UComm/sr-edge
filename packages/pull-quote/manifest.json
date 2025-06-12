@@ -3,7 +3,7 @@
     "name": "pullquote",
     "type": "edge",
     "version": "4.0.4",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Displays a quote for a story page along with details of the quote",
     "displayName": "Pull quote",
     "mainFunction": "main",

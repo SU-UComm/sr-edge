@@ -3,7 +3,7 @@
     "name": "single-image-video",
     "type": "edge",
     "version": "4.0.7",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Use this to display a large image or video with a caption and credit. Title and summary are optional.",
     "displayName": "Single image or video",
     "mainFunction": "main",

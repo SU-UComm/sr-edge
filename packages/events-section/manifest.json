@@ -3,7 +3,7 @@
     "name": "events-section",
     "type": "edge",
     "version": "4.0.9",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Stanford Events Section is a grid featuring 3, 6, or 9 events",
     "displayName": "Events Section",
     "mainFunction": "main",

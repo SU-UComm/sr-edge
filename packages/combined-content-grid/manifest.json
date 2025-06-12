@@ -3,7 +3,7 @@
     "name": "combined-content-grid",
     "type": "edge",
     "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "A featured content grid combined with announcements and events",
     "displayName": "Combined content grid",
     "mainFunction": "main",

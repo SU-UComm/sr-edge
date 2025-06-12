@@ -3,7 +3,7 @@
     "name": "single-cta-block",
     "type": "edge",
     "version": "4.0.6",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "A block of text content with a CTA and optional image.",
     "displayName": "Single CTA Block",
     "mainFunction": "main",

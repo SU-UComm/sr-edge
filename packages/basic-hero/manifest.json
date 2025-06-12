@@ -3,7 +3,7 @@
     "name": "basic-hero",
     "type": "edge",
     "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-apb",
     "description": "Basic hero and title area.",
     "displayName": "Basic Hero",
     "mainFunction": "main",
