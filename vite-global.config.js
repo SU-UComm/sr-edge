@@ -115,6 +115,7 @@ export default defineConfig({
         },
     },
     css: {
+        postcss: './postcss.config.js',
         preprocessorOptions: {
             scss: {
                 api: 'modern-compiler',

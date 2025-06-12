@@ -4,9 +4,12 @@ import { fileURLToPath } from 'url';
 import decanter from 'decanter';
 import plugin from 'tailwindcss/plugin'; 
 
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const colors = resolve(__dirname, "./global/css/plugins/theme/colors.js");
+
+// Import and execute the colors function
+import colorsFunction from "./global/css/plugins/theme/colors.js";
+const colors = colorsFunction();
+
 const base = resolve(__dirname, "./global/css/plugins/base/base.js");
 
 export default {
@@ -32,6 +35,8 @@ export default {
     variants: {
         extend: {
             textColor: ['hocus'],
+            borderColor: ['hocus'],
+            backgroundColor: ['hocus'],
         },
     },
     plugins: [

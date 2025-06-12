@@ -41,6 +41,7 @@
         "@testing-library/dom": "^7.31.2",
         "@testing-library/jest-dom": "^6.6.3",
         "@vitest/coverage-v8": "^2.1.8",
+        "autoprefixer": "^10.4.21",
         "chokidar-cli": "^3.0.0",
         "cnbuilder": "^3.1.0",
         "concurrently": "^9.1.0",

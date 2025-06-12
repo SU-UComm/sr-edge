@@ -14,18 +14,18 @@
   .component-slider
   .swiper-pagination-horizontal.swiper-pagination-bullets
   .swiper-pagination-bullet {
-  @apply su-size-13 su-border-2 su-border-black dark:su-border-white hocus:su-border-digital-red dark:hocus:su-border-dark-mode-red;
+  @apply su-size-13 su-border-2 su-border-black dark:su-border-white hocus:su-border-digital-red hocus:dark:su-border-dark-mode-red;
 }
 
 [data-component="content-carousel"]
   .component-slider
   .swiper-pagination-horizontal.swiper-pagination-bullets
   .swiper-pagination-bullet.swiper-pagination-bullet-active {
-  @apply su-bg-black dark:su-bg-white su-border-black dark:su-border-white hocus:su-border-black dark:hocus:su-border-white;
+  @apply su-bg-black dark:su-bg-white su-border-black dark:su-border-white hocus:su-border-black hocus:dark:su-border-white;
 }
 
 [data-component="content-carousel"] .component-slider .component-slider-btn {
-  @apply su-border-black-20 su-bg-white su-text-black dark:su-border-black-70 dark:su-bg-black-true dark:su-text-white hocus:su-bg-digital-red hocus:su-text-white hocus:su-border-digital-red dark:hocus:su-bg-dark-mode-red dark:hocus:su-text-white dark:hocus:su-border-dark-mode-red;
+  @apply su-border-black-20 su-bg-white su-text-black dark:su-border-black-70 dark:su-bg-black-true dark:su-text-white hocus:su-bg-digital-red hocus:su-text-white hocus:su-border-digital-red hocus:dark:su-bg-dark-mode-red hocus:dark:su-text-white hocus:dark:su-border-dark-mode-red;
 }
 
 [data-component="content-carousel"] .su-wysiwyg-content > *:first-child {
