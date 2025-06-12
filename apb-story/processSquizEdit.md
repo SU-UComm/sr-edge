@@ -9,7 +9,37 @@ For example, a shared card utility might use `data-se="description"` in its temp
 
 ## Key Principles
 
-### 1. **Static `data-se` Attributes in Templates**
+### 1. **Minimal Changes Only - Preserve Front-End Behavior**
+**CRITICAL:** Keep changes as minimal as possible and **never modify front-end output variables or values**. The goal is to enable inline editing without affecting existing front-end functionality.
+
+**✅ DO:**
+- Only add edit mode detection and early return logic
+- Provide mock data in edit mode when APIs fail
+- Wrap API calls in try-catch blocks for graceful fallbacks
+- Use existing `data-se` attributes from shared partials
+- Let existing error handling and validation remain unchanged
+
+**❌ DON'T:**
+- Modify existing front-end logic, validation, or error handling
+- Change how variables are processed or transformed
+- Add extensive default values or mock data for front-end mode
+- Wrap existing validation logic in `!squizEdit` checks unless absolutely necessary
+- Modify the structure or content of `componentData` for front-end mode
+
+**Example - Minimal API Error Handling:**
+```javascript
+// Wrap API calls with minimal try-catch for edit mode fallbacks
+try {
+    data = await adapter.getCards();
+} catch (er) {
+    if (squizEdit) {
+        data = [/* minimal mock data for edit mode */];
+    }
+    // Let natural error handling occur in front-end mode
+}
+```
+
+### 2. **Static `data-se` Attributes in Templates**
 Templates should use **static** `data-se` attribute values, not dynamic ones passed through partials:
 
 **✅ CORRECT - Static attributes:**
@@ -24,7 +54,7 @@ Templates should use **static** `data-se` attribute values, not dynamic ones pas
 <div{{#if descriptionDataSe}} data-se="{{descriptionDataSe}}"{{/if}}>{{{description}}}</div>
 ```
 
-### 2. **Mapping in Component's main.js**
+### 3. **Mapping in Component's main.js**
 The component's `main.js` file maps static `data-se` attributes to actual data fields:
 
 ```javascript
@@ -34,7 +64,7 @@ squizEditTargets = {
 };
 ```
 
-### 3. **Shared Partials Use Generic Names**
+### 4. **Shared Partials Use Generic Names**
 Shared partials should use generic, reusable `data-se` attribute names:
 
 ```handlebars
@@ -510,18 +540,107 @@ squizEditTargets = {
 **Template:** `<div data-se="description">{{{description}}}</div>`
 **Result:** `data-sq-field="contentConfiguration.featuredDescription"`
 
+### Mixed Format Example (Real-World Component)
+```javascript
+// multicolumn-info-section component
+squizEditTargets = {
+    // Format 1: Simple field mapping
+    "title": {
+        "field": "colOne.title"
+    },
+    "infoText": {
+        "field": "colTwo.infoText"
+    },
+    
+    // Format 3: Custom field mapping for shared partials
+    "button": [
+        { "field": "colTwo.buttonConfiguration.buttonText" },
+        { "field": "colThree.buttonConfiguration.buttonText" }
+    ],
+    
+    // Format 1: Nested object fields
+    "infoBoxTitle": {
+        "field": "colThree.title"
+    },
+    "infoBoxContent": {
+        "field": "colThree.content"
+    },
+    "captionCredit": {
+        "field": "colThree.imageConfiguration.caption"
+    }
+};
+```
+
+**This generates:**
+- Title: `data-sq-field="colOne.title"`
+- Info text: `data-sq-field="colTwo.infoText"`
+- First button: `data-sq-field="colTwo.buttonConfiguration.buttonText"`
+- Second button: `data-sq-field="colThree.buttonConfiguration.buttonText"`
+- Info box title: `data-sq-field="colThree.title"`
+- Info box content: `data-sq-field="colThree.content"`
+- Caption credit: `data-sq-field="colThree.imageConfiguration.caption"`
+
 ## processSquizEdit Function Details
 
-The `processSquizEdit` utility function handles the transformation of `data-se` attributes to `data-sq-field` attributes:
+The `processSquizEdit` utility function handles the transformation of `data-se` attributes to `data-sq-field` attributes and supports three different mapping formats:
+
+### Three Supported Formats
+
+#### Format 1: Simple Field Mapping
+Maps a single `data-se` attribute to a single component field.
+
+```javascript
+"title": {
+    "field": "headingConfiguration.title"
+}
+```
+
+**Template:** `<h2 data-se="title">{{title}}</h2>`
+**Result:** `<h2 data-se="title" data-sq-field="headingConfiguration.title">{{title}}</h2>`
+
+#### Format 2: Array with Auto-Indexing
+Maps multiple elements with the same `data-se` attribute to an array with automatic indexing using square brackets.
+
+```javascript
+"button": {
+    "field": "buttons",
+    "array": true,
+    "property": "buttonText"
+}
+```
+
+**Template:** `<span data-se="button">{{buttonText}}</span>` (repeated in loop)
+**Result:** 
+- `<span data-se="button" data-sq-field="buttons[0].buttonText">Button 1</span>`
+- `<span data-se="button" data-sq-field="buttons[1].buttonText">Button 2</span>`
+
+#### Format 3: Array with Custom Field Mapping (NEW)
+Maps multiple elements with the same `data-se` attribute to completely different field paths in document order.
+
+```javascript
+"button": [
+    { "field": "colTwo.buttonConfiguration.buttonText" },
+    { "field": "colThree.buttonConfiguration.buttonText" }
+]
+```
+
+**Template:** Multiple elements with same `data-se="button"` attribute
+**Result:**
+- First button: `<a data-se="button" data-sq-field="colTwo.buttonConfiguration.buttonText">First Button</a>`
+- Second button: `<a data-se="button" data-sq-field="colThree.buttonConfiguration.buttonText">Second Button</a>`
 
 ### Function Behavior
 - **Appends** `data-sq-field` attributes alongside existing `data-se` attributes
-- **Handles arrays** with automatic indexing using square brackets `[0]`, `[1]`, etc.
-- **Supports properties** on array items like `card[0].title`
+- **Handles arrays** with automatic indexing using square brackets `[0]`, `[1]`, etc. (Format 2)
+- **Supports custom field mapping** for multiple elements with same `data-se` attribute (Format 3)
+- **Supports properties** on array items like `card[0].title` (Format 2)
 - **Uses regex** to handle complex HTML with flexible formatting
+- **Document order processing** for Format 3 - maps elements in the order they appear in HTML
 
 ### Array Processing
-For array configurations, the function:
+
+#### Format 2 (Auto-Indexing)
+For array configurations with `"array": true`, the function:
 1. Finds all elements with the same `data-se` attribute
 2. Assigns incremental indexes starting from `[0]`
 3. Optionally appends property names if specified
@@ -536,6 +655,47 @@ For array configurations, the function:
 <div data-se="button" data-sq-field="buttons[0].buttonText">Button 1</div>
 <div data-se="button" data-sq-field="buttons[1].buttonText">Button 2</div>
 ```
+
+#### Format 3 (Custom Field Mapping)
+For array configurations with custom field mapping, the function:
+1. Finds all elements with the same `data-se` attribute in document order
+2. Maps each element to the corresponding field in the array
+3. Uses fallback to last mapping if more elements exist than mappings
+
+**Example:**
+```html
+<!-- Before -->
+<a data-se="button">Column Two Button</a>
+<div class="info-box">
+    <a data-se="button">Column Three Button</a>
+</div>
+
+<!-- After -->
+<a data-se="button" data-sq-field="colTwo.buttonConfiguration.buttonText">Column Two Button</a>
+<div class="info-box">
+    <a data-se="button" data-sq-field="colThree.buttonConfiguration.buttonText">Column Three Button</a>
+</div>
+```
+
+### When to Use Each Format
+
+#### Use Format 1 (Simple Field Mapping) when:
+- You have a single element with a unique `data-se` attribute
+- The field maps directly to a component property
+- No array processing is needed
+
+#### Use Format 2 (Array with Auto-Indexing) when:
+- You have multiple similar elements (like cards, buttons in a list)
+- All elements map to the same array structure
+- You want automatic indexing (`[0]`, `[1]`, etc.)
+- Elements represent items in a homogeneous collection
+
+#### Use Format 3 (Array with Custom Field Mapping) when:
+- You have multiple elements with the same `data-se` attribute
+- Each element maps to a completely different field path
+- Elements are in different contexts or components
+- You need precise control over field mapping
+- Shared partials are used in multiple contexts with different data structures
 
 ## Implementation Checklist
 - [ ] Import only `processSquizEdit` utility
@@ -2029,5 +2189,498 @@ The template requires wrapping the inline editable fields with `data-se` attribu
 3. **Simplified Error Handling**: Provide mock data when API calls fail in edit mode without console errors or error returns
 4. **Proper Field Defaults**: Provide meaningful sample content for missing fields
 5. **Validation Wrapping**: Skip validation entirely in edit mode for better performance
+
+## Example 13: Multicolumn-Info-Section Component (Format 3: Custom Field Mapping)
+
+This example demonstrates the new **Format 3: Array with Custom Field Mapping** for handling multiple elements with the same `data-se` attribute that need to map to completely different field paths.
+
+### The Challenge
+The multicolumn-info-section component uses the `link-button` partial in two different contexts:
+1. **Column Two**: Direct usage for main content button
+2. **Column Three**: Via `info-box` partial for callout button
+
+Both buttons use the same `data-se="button"` attribute from the shared `link-button` partial, but need to map to different data fields.
+
+### Updated main.js
+```javascript
+import { processSquizEdit } from '../../global/js/utils/isEditor';
+import multicolumnInfoSectionTemplate from './multicolumn-info-section.hbs';
+
+export default {
+    async main(args, info) {
+        // ... component setup ...
+
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Format 3: Array with Custom Field Mapping
+            squizEditTargets = {
+                "title": {
+                    "field": "colOne.title"
+                },
+                "infoText": {
+                    "field": "colTwo.infoText"
+                },
+                // NEW: Format 3 - Multiple buttons with same data-se mapped to different fields
+                "button": [
+                    { "field": "colTwo.buttonConfiguration.buttonText" },
+                    { "field": "colThree.buttonConfiguration.buttonText" }
+                ],
+                "infoBoxTitle": {
+                    "field": "colThree.title"
+                },
+                "infoBoxContent": {
+                    "field": "colThree.content"
+                },
+                "captionCredit": {
+                    "field": "colThree.imageConfiguration.caption"
+                }
+            };
+        }
+
+        // ... component processing ...
+
+        if (!squizEdit) return multicolumnInfoSectionTemplate(componentData);
+        return processSquizEdit(multicolumnInfoSectionTemplate(componentData), squizEditTargets);
+    }
+};
+```
+
+### Template Structure
+```handlebars
+<div data-component="multicolumn-info-section">
+    <h2 data-se="title">{{title}}</h2>
+    <div data-se="infoText">{{{infoText}}}</div>
+    
+    <!-- First button context: Direct usage -->
+    {{#if buttonData}}
+        {{> link-button buttonText=buttonData.buttonText buttonUrl=buttonData.buttonUrl}}
+    {{/if}}
+    
+    <!-- Second button context: Via info-box partial -->
+    {{#if infoBoxData}}
+        {{> info-box 
+            title=infoBoxData.title 
+            content=infoBoxData.content 
+            buttonText=infoBoxData.buttonText 
+            buttonUrl=infoBoxData.buttonUrl}}
+    {{/if}}
+</div>
+```
+
+### Shared Partials (Unchanged)
+**link-button.hbs** (shared partial):
+```handlebars
+{{#if buttonUrl}}
+<a href="{{buttonUrl}}" class="{{linkButtonClasses}}">
+    <span data-se="button">{{buttonText}}</span>
+</a>
+{{/if}}
+```
+
+**info-box.hbs** (shared partial):
+```handlebars
+<div class="info-box">
+    <h3 data-se="infoBoxTitle">{{title}}</h3>
+    <div data-se="infoBoxContent">{{{content}}}</div>
+    {{#if buttonText}}
+        {{> link-button buttonText=buttonText buttonUrl=buttonUrl}}
+    {{/if}}
+</div>
+```
+
+### How Format 3 Works
+1. **Document Order Processing**: `processSquizEdit` scans the HTML and finds both `data-se="button"` elements in document order
+2. **Sequential Mapping**: 
+   - **First button** (in column two) → `colTwo.buttonConfiguration.buttonText`
+   - **Second button** (in info-box) → `colThree.buttonConfiguration.buttonText`
+3. **Result**: Each button gets its own unique `data-sq-field` attribute
+
+### Generated Output
+```html
+<div data-component="multicolumn-info-section">
+    <h2 data-se="title" data-sq-field="colOne.title">Research</h2>
+    <div data-se="infoText" data-sq-field="colTwo.infoText">Content here...</div>
+    
+    <!-- First button gets first mapping -->
+    <a href="#" data-se="button" data-sq-field="colTwo.buttonConfiguration.buttonText">
+        <span>Column Two Button</span>
+    </a>
+    
+    <div class="info-box">
+        <h3 data-se="infoBoxTitle" data-sq-field="colThree.title">Info Title</h3>
+        <div data-se="infoBoxContent" data-sq-field="colThree.content">Info content...</div>
+        
+        <!-- Second button gets second mapping -->
+        <a href="#" data-se="button" data-sq-field="colThree.buttonConfiguration.buttonText">
+            <span>Info Box Button</span>
+        </a>
+    </div>
+</div>
+```
+
+### Key Benefits of Format 3
+- **No Template Changes**: Existing shared partials remain unchanged
+- **Reusable Partials**: `link-button` partial keeps its generic `data-se="button"`
+- **Flexible Mapping**: Same `data-se` attribute maps to completely different data structures
+- **Document Order**: Predictable mapping based on HTML structure
+- **Backward Compatible**: All existing implementations continue to work
+
+### When to Use Format 3
+- Multiple elements with the same `data-se` attribute in different contexts
+- Shared partials used in multiple places with different data structures
+- Need precise control over field mapping for each occurrence
+- Elements represent different types of content (not homogeneous arrays)
+
+This pattern is particularly useful for components that use shared partials (like buttons, cards, headings) in multiple contexts where each usage needs to map to different data fields.
+
+## Example 14: Policy-Brief Component (Nested Object Fields - Simple Pattern)
+
+The `policy-brief` component demonstrates inline editing for nested object fields in a straightforward content card component with proper validation wrapping and asset error handling.
+
+### Inline Editable Fields:
+1. `title` - Policy brief title (string) - in contentConfiguration object
+2. `summary` - Policy brief summary (string, multi-line) - in contentConfiguration object  
+3. `linkText` - Link text (string) - in contentConfiguration object
+
+### Updated main.js
+```javascript
+import { basicAssetUri } from '../../global/js/utils';
+import { processSquizEdit } from '../../global/js/utils/isEditor';
+import policyBriefTemplate from './policy-brief.hbs';
+
+export default {
+    async main(args, info) {
+        const fnsCtx = info?.fns || info?.ctx || {};
+
+        // CHANGE: change const to let for mutability
+        let { image, type, title, summary, linkUrl, linkText } = args?.contentConfiguration || {};
+
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Add default values for inline editable fields
+            title = title || 'Policy Brief Title';
+            summary = summary || 'This is a sample summary for the policy brief that can be edited inline.';
+            linkText = linkText || 'Read the full brief';
+            
+            // Provide default values for other required fields
+            type = type || 'Policy Brief';
+            image = image || 'matrix-asset://api-identifier/63353';
+            linkUrl = linkUrl || 'https://example.com';
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "title": { "field": "contentConfiguration.title" },
+                "summary": { "field": "contentConfiguration.summary" },
+                "linkText": { "field": "contentConfiguration.linkText" }
+            };
+        }
+
+        // Validate required functions - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Policy brief component: ', er);
+                return `<!-- Error occurred in the Policy brief component: ${er.message} -->`;
+            }
+        }
+
+        // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            // ... existing validation logic wrapped in !squizEdit check ...
+        }
+
+        let assetData = null;
+
+        // Getting image data with error handling
+        if (image) {
+            try {
+                assetData = await basicAssetUri(fnsCtx, image);
+            } catch (er) {
+                console.error('Error occurred in the Policy brief component: Failed to fetch image data. ', er);
+                // NEW: In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    assetData = {
+                        url: 'https://picsum.photos/400/600',
+                        attributes: {
+                            alt: 'Sample policy brief image',
+                            width: 400,
+                            height: 600
+                        }
+                    };
+                }
+            }
+        }
+
+        // Prepare component data for template rendering
+        const componentData = {
+            imageUrl: assetData,
+            type,
+            title,
+            summary,
+            linkUrl,
+            linkText,
+            width: "wide",
+            paddingX: false
+        };
+
+        // NEW: Early return pattern
+        if (!squizEdit) return policyBriefTemplate(componentData);
+
+        // NEW: Process for edit mode
+        return processSquizEdit(policyBriefTemplate(componentData), squizEditTargets);
+    }
+};
+```
+
+### Updated Template (policy-brief.hbs)
+```handlebars
+<section data-component="policy-brief">
+    <div class="{{containerClasses width=width paddingX=paddingX}}">
+        <div class="su-relative su-flex su-flex-col su-gap-20 su-py-30 su-px-20 su-bg-fog-light md:su-mx-50 md:su-flex-row md:su-gap-18 lg:su-gap-48 md:su-p-36 lg:su-py-61 lg:su-px-65 dark:su-bg-transparent dark:before:su-bg-black dark:before:su-opacity-[0.5] dark:before:su-content-[''] dark:before:su-absolute dark:before:su-w-full dark:before:su-h-full dark:before:su-top-0 dark:before:su-left-0 dark:before:su-z-1">
+            <div class="su-relative su-w-full su-h-[233px] md:su-h-auto md:su-min-w-[257px] lg:su-h-[378.331px] lg:su-flex-1 su-z-2">
+                {{#if imageUrl.url}}
+                <img src="{{imageUrl.url}}" class="su-absolute su-size-full su-object-cover" alt="" />
+                {{/if}}
+            </div>
+            <div class="lg:su-flex-1 su-relative su-z-2">
+                <div class="su-flex su-gap-6 su-items-center su-text-18 su-font-semibold su-pb-20 md:su-pb-27">
+                    {{#if type}}
+                    {{#ifEquals type "Policy Brief"}}
+                        <span class="dark:su-hidden">{{> svg-icons icon="policy brief" theme="light"}}</span>
+                        <span class="su-hidden dark:su-block">{{> svg-icons icon="policy brief" theme="dark"}}</span>
+                    {{else}}
+                        <span class="dark:su-hidden">{{> svg-icons icon="case study" theme="light"}}</span>
+                        <span class="su-hidden dark:su-block">{{> svg-icons icon="case study" theme="dark"}}</span>
+                    {{/ifEquals}}
+                        <span>{{type}}</span>
+                    {{/if}}
+                </div>
+                {{#if title}}
+                    <h2 class="su-text-[33px] su-font-bold su-leading-[125%] su-font-serif su-pb-19 su-m-0" data-se="title">{{title}}</h2>
+                {{/if}}
+                {{#if summary}}
+                    <p class="su-text-19 su-font-normal su-leading-[125%] su-pb-20 md:su-pb-27 su-m-0" data-se="summary">{{summary}}</p>
+                {{/if}}
+                {{#if linkUrl}}
+                    <a href="{{linkUrl}}" class="su-flex su-gap-2 su-group su-text-19 su-font-semibold su-leading-[125%] su-text-digital-red su-no-underline dark:su-text-dark-mode-red hocus:su-underline">
+                        <span data-se="linkText">{{linkText}}</span>
+                        <span class="su-transition group-hocus:su--translate-y-01em group-hocus:su-translate-x-01em [&>svg]:su-translate-y-1">
+                            {{> svg-icons icon="external arrow"}}
+                        </span>
+                    </a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</section>
+```
+
+### Key Features Demonstrated:
+- **Nested Object Fields**: All inline editable fields are within `contentConfiguration` object
+- **Mixed Field Types**: String fields (title, linkText) and multi-line string field (summary)
+- **Asset Error Handling**: Graceful fallback to mock image data when asset loading fails in edit mode
+- **Validation Wrapping**: All existing validation logic wrapped in `!squizEdit` checks
+- **Link Text Wrapping**: Added `<span>` wrapper around link text to enable precise inline editing
+- **Conditional Rendering**: Proper handling of optional fields with existing conditional logic
+
+**Generated `data-sq-field` attributes:**
+- Policy brief title: `data-sq-field="contentConfiguration.title"`
+- Policy brief summary: `data-sq-field="contentConfiguration.summary"`
+- Link text: `data-sq-field="contentConfiguration.linkText"`
+
+### Key Patterns:
+1. **Nested Object Targeting**: Use dot notation for nested object fields (`contentConfiguration.title`)
+2. **Link Text Precision**: Wrap link text in `<span>` to avoid making icons and other elements editable
+3. **Asset Error Handling**: Provide mock image data when asset loading fails in edit mode
+4. **Validation Wrapping**: Skip all validation in edit mode for better performance
+5. **Meaningful Defaults**: Provide sample content that makes sense for the component type
+
+This pattern is ideal for components that:
+- Have nested configuration objects with multiple inline editable fields
+- Include asset loading that may fail during editing
+- Need precise control over which parts of links are editable
+- Have extensive validation that should be bypassed in edit mode
+- Display content cards with title, description, and call-to-action elements
+
+The implementation maintains all existing functionality while enabling inline editing of the core content fields, with graceful fallback behavior when external dependencies are unavailable.
+
+## Example 15: Pull-Quote Component (Shared Partials with Nested Object Fields)
+
+The `pull-quote` component demonstrates inline editing for nested object fields using shared partials, with proper validation wrapping and asset error handling.
+
+### Inline Editable Fields:
+1. `quote` - Pull quote text (string, multi-line) - in displayConfiguration object
+2. `name` - Quotee name (string) - in displayConfiguration object  
+3. `title` - Quotee title/role (string) - in displayConfiguration object
+
+### Updated main.js
+```javascript
+import { basicAssetUri } from "../../global/js/utils";
+import { processSquizEdit } from '../../global/js/utils/isEditor';
+import pullQuote from './pull-quote.hbs';
+
+export default {
+    async main(args, info) {
+        const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
+        const fnsCtx = info?.fns || info?.ctx || {};
+        
+        // CHANGE: change const to let for mutability
+        let { asset, quote, name, title, width } = (args && args.displayConfiguration) || {};
+
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Add default values for inline editable fields
+            quote = quote || 'This is a sample pull quote that can be edited inline to highlight important content.';
+            name = name || 'Sample Name';
+            title = title || 'Sample Title';
+            
+            // Provide default values for other required fields
+            width = width || 'Narrow';
+            asset = asset || 'matrix-asset://api-identifier/164977';
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "featuredQuote": { "field": "displayConfiguration.quote" },
+                "name": { "field": "displayConfiguration.name" },
+                "title": { "field": "displayConfiguration.title" }
+            };
+        }
+
+        // Validate required functions - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
+                    throw new Error(
+                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Pull quote component: ', er);
+                return `<!-- Error occurred in the Pull quote component: ${er.message} -->`;
+            }
+        }
+
+        // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            // ... existing validation logic wrapped in !squizEdit check ...
+        }
+
+        // Process asset if provided with error handling
+        let assetData = null;
+        if (asset) {
+            try {
+                assetData = await basicAssetUri(fnsCtx, asset);
+            } catch (er) {
+                console.error('Error occurred in the Pull quote component: Failed to fetch asset data. ', er);
+                // NEW: In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    assetData = {
+                        url: 'https://picsum.photos/200/200',
+                        attributes: {
+                            alt: 'Sample avatar image',
+                            width: 200,
+                            height: 200
+                        }
+                    };
+                }
+            }
+        }
+
+        // Prepare template data
+        const componentData = {
+            avatarURL: assetData?.url ? assetData.url : "",
+            quote,
+            name,
+            title,
+            width: width.toLocaleLowerCase()
+        };
+
+        // NEW: Early return pattern
+        if (!squizEdit) return pullQuote(componentData);
+
+        // NEW: Process for edit mode
+        return processSquizEdit(pullQuote(componentData), squizEditTargets);
+    }
+};
+```
+
+### Component Template (pull-quote.hbs)
+```handlebars
+<section data-component="pullquote">
+    <div class="{{containerClasses width=width}}">
+        {{> pull-quote avatarURL=avatarURL avatarAlt="" avatarSize="large" quote=quote name=name title=title}}
+    </div>
+</section>
+```
+
+### Updated Shared Partial (global/hbs/partials/pull-quote/pull-quote.hbs)
+```handlebars
+<div class="su-component-pullquote su-mx-auto su-relative su-mt-0 su-flex su-flex-wrap su-gap-27 su-justify-center su-pr-0 su-py-0">
+    {{#if avatarURL}}{{> avatar avatarURL=avatarURL avatarAlt=avatarAlt size=avatarSize}}{{/if}}
+    <blockquote class="su-w-full su-pl-39 dark:su-text-white dark:before:su-text-white su-font-serif su-text-black {{getStringByCondition value=avatarSize expectedValue="large" trueResult="lg:su-pl-[5.2rem]" falseResult="lg:su-pl-0"}}">
+        <div class="su-font-semibold su-font-serif-0 su-text-[2.4rem] md:su-text-[3.6rem] su-leading md:su-leading-[130.245%] [&>*:last-child]:su-mb-0 [&>*:last-child]:after:su-content-['"'] su-relative before:su-text-[73px] before:su-leading-[109.5px] lg:before:su-leading-[139.5px] lg:before:su-text-[93px] before:su-font-semibold before:su--mt-25 lg:before:su--mt-38 before:su-content-['"'] before:su-text-serif before:su-text-black dark:su-text-white before:su-absolute before:su-right-full lg:before:su-right-full before:su-mr-6 lg:before:su-mr-13 dark:before:su-text-white su-leading-[33.6px] md:su-leading-[46.89px]" data-se="featuredQuote">
+            {{quote}}"
+        </div>
+        {{#if name}}
+            <cite class="su-mt-15 md:su-mt-26 lg:su-mt-29 su-font-sans su-text-21 su-leading-[25.2px] su-flex su-flex-col">
+                <span class="su-font-bold su-block su-leading-[25.2px]" data-se="name">
+                {{name}}
+                </span>
+                {{#if title}}
+                <span class="su-block su-leading-[25.2px]" data-se="title">{{title}}</span>
+                {{/if}}
+            </cite>
+        {{/if}}
+    </blockquote>
+</div>
+```
+
+### Key Features Demonstrated:
+- **Shared Partial Updates**: Modified global shared partial to add static `data-se` attributes
+- **Existing Attribute Reuse**: Leveraged existing `data-se="featuredQuote"` attribute for quote field
+- **Nested Object Fields**: All inline editable fields are within `displayConfiguration` object
+- **Mixed Field Types**: Multi-line string field (quote) and regular string fields (name, title)
+- **Asset Error Handling**: Graceful fallback to mock avatar image when asset loading fails in edit mode
+- **Environment Variable Validation**: Proper handling of required API_IDENTIFIER environment variable
+- **Conditional Rendering**: Proper handling of optional fields (name, title) with existing conditional logic
+
+**Generated `data-sq-field` attributes:**
+- Pull quote text: `data-sq-field="displayConfiguration.quote"`
+- Quotee name: `data-sq-field="displayConfiguration.name"`
+- Quotee title: `data-sq-field="displayConfiguration.title"`
+
+### Key Patterns:
+1. **Shared Partial Modification**: Updated global partial to add static `data-se` attributes for reusability
+2. **Existing Attribute Leverage**: Used existing `data-se="featuredQuote"` without changes
+3. **Nested Object Targeting**: Use dot notation for nested object fields (`displayConfiguration.*`)
+4. **Environment Variable Handling**: Proper validation of required environment variables in edit mode
+5. **Avatar Asset Handling**: Provide mock avatar image when asset loading fails in edit mode
+
+This pattern is ideal for components that:
+- Use shared partials that need to work across multiple components
+- Have nested configuration objects with multiple inline editable fields
+- Include optional avatar/image assets that may fail to load during editing
+- Require environment variables for proper operation
+- Display quoted content with attribution (name and title)
+
+The implementation maintains all existing functionality while enabling inline editing of the core content fields. The shared partial updates ensure that any other components using the same partial will also benefit from the inline editing capabilities.
 
 // ... existing code ...

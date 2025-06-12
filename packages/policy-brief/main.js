@@ -1,4 +1,5 @@
 import { basicAssetUri } from '../../global/js/utils';
+import { processSquizEdit } from '../../global/js/utils/isEditor';
 import policyBriefTemplate from './policy-brief.hbs';
 
 /**
@@ -29,63 +30,105 @@ export default {
         // Extracting environment functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
 
-        // Extract configuration data from arguments
-        const { image, type, title, summary, linkUrl, linkText } = args?.contentConfiguration || {};
+        // CHANGE: change const to let for mutability
+        let { image, type, title, summary, linkUrl, linkText } = args?.contentConfiguration || {};
 
-        // Validate required functions
-        try {
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Policy brief component: ', er);
-            return `<!-- Error occurred in the Policy brief component: ${er.message} -->`;
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Add default values for inline editable fields
+            title = title || 'Policy Brief Title';
+            summary = summary || 'This is a sample summary for the policy brief that can be edited inline.';
+            linkText = linkText || 'Read the full brief';
+            
+            // Provide default values for other required fields
+            type = type || 'Policy Brief';
+            image = image || 'matrix-asset://api-identifier/63353';
+            linkUrl = linkUrl || 'https://example.com';
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "title": { "field": "contentConfiguration.title" },
+                "summary": { "field": "contentConfiguration.summary" },
+                "linkText": { "field": "contentConfiguration.linkText" }
+            };
         }
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (image && typeof image !== 'string') {
-                throw new Error(
-                    `The "image" field must be a string type. The ${JSON.stringify(image)} was received.`
-                );
+        // Validate required functions - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Policy brief component: ', er);
+                return `<!-- Error occurred in the Policy brief component: ${er.message} -->`;
             }
-            if (type && !["Policy Brief", "Case Study"].includes(type)) {
-                throw new Error(
-                    `The "type" field must be one of ["Policy Brief", "Case Study"] values. The ${JSON.stringify(type)} was received.`
-                );
+        }
+
+        // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (image && typeof image !== 'string') {
+                    throw new Error(
+                        `The "image" field must be a string type. The ${JSON.stringify(image)} was received.`
+                    );
+                }
+                if (type && !["Policy Brief", "Case Study"].includes(type)) {
+                    throw new Error(
+                        `The "type" field must be one of ["Policy Brief", "Case Study"] values. The ${JSON.stringify(type)} was received.`
+                    );
+                }
+                if (title && typeof title !== 'string') {
+                    throw new Error(
+                        `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`
+                    );
+                }
+                if (summary && typeof summary !== 'string') {
+                    throw new Error(
+                        `The "summary" field must be a string type. The ${JSON.stringify(summary)} was received.`
+                    );
+                }
+                if (linkUrl && typeof linkUrl !== 'string') {
+                    throw new Error(
+                        `The "linkUrl" field must be a string type. The ${JSON.stringify(linkUrl)} was received.`
+                    );
+                }
+                if (linkText && typeof linkText !== 'string') {
+                    throw new Error(
+                        `The "linkText" field must be a string type. The ${JSON.stringify(linkText)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Policy brief component: ', er);
+                return `<!-- Error occurred in the Policy brief component: ${er.message} -->`;
             }
-            if (title && typeof title !== 'string') {
-                throw new Error(
-                    `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`
-                );
-            }
-            if (summary && typeof summary !== 'string') {
-                throw new Error(
-                    `The "summary" field must be a string type. The ${JSON.stringify(summary)} was received.`
-                );
-            }
-            if (linkUrl && typeof linkUrl !== 'string') {
-                throw new Error(
-                    `The "linkUrl" field must be a string type. The ${JSON.stringify(linkUrl)} was received.`
-                );
-            }
-            if (linkText && typeof linkText !== 'string') {
-                throw new Error(
-                    `The "linkText" field must be a string type. The ${JSON.stringify(linkText)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Policy brief component: ', er);
-            return `<!-- Error occurred in the Policy brief component: ${er.message} -->`;
         }
 
         let assetData = null;
 
-        // Getting image data 
+        // Getting image data with error handling
         if (image) {
-            assetData = await basicAssetUri(fnsCtx, image);
+            try {
+                assetData = await basicAssetUri(fnsCtx, image);
+            } catch (er) {
+                console.error('Error occurred in the Policy brief component: Failed to fetch image data. ', er);
+                // NEW: In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    assetData = {
+                        url: 'https://picsum.photos/400/600',
+                        attributes: {
+                            alt: 'Sample policy brief image',
+                            width: 400,
+                            height: 600
+                        }
+                    };
+                }
+            }
         }
 
         // Prepare component data for template rendering
@@ -100,6 +143,10 @@ export default {
             paddingX: false
         };
 
-        return policyBriefTemplate(componentData);
+        // NEW: Early return pattern
+        if (!squizEdit) return policyBriefTemplate(componentData);
+
+        // NEW: Process for edit mode
+        return processSquizEdit(policyBriefTemplate(componentData), squizEditTargets);
     }
 };

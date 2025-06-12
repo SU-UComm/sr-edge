@@ -43,24 +43,39 @@
                                 "title": "Quote",
                                 "description": "The quote text",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "name": {
                                 "title": "Name",
                                 "description": "The name of the quotee",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "title": {
                                 "title": "Title",
                                 "description": "The quotee's role or title",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "width": {
                                 "title": "Width",
                                 "description": "The width of the pullquote, this option will only take effect on featured story pages, not basic story pages.",
-                                "enum": ["Narrow", "Large"],
+                                "enum": [
+                                    "Narrow",
+                                    "Large"
+                                ],
                                 "type": "string",
-                                "default": "Narrow"
+                                "default": "Narrow",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             }
                         }
                     }

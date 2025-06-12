@@ -1,6 +1,7 @@
 import multicolumnListingTemplate from './multicolumn-listing.hbs';
 import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid, uuid } from "../../global/js/utils";
 import { Card } from '../../global/js/helpers';
+import { processSquizEdit } from '../../global/js/utils/isEditor';
 
 /**
  * Multicolumn lisitng component that renderds a list of features cards based on fetched data
@@ -42,6 +43,20 @@ export default {
         const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
         const { source, searchQuery, searchMaxCards, cards } = args?.contentConfiguration || {};
         const { displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
+
+        // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
+        // Must fallback to false, use true to mock the editor
+        const squizEdit = info?.ctx?.editor || false;
+        // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "headingTitle": { "field": "headingConfiguration.title" },
+                "headingCtaText": { "field": "headingConfiguration.ctaText" }
+            };
+        }
 
         // Validate required environment variables
         try {
@@ -141,13 +156,35 @@ export default {
             const service = new funnelbackCardService({ FB_JSON_URL, query });
 
             adapter.setCardService(service);
-            data = await adapter.getCards();
+            try {
+                data = await adapter.getCards();
+            } catch (er) {
+                if (squizEdit) {
+                    // In edit mode, provide mock data instead of throwing error
+                    data = [
+                        { title: 'Sample Search Result 1', description: 'Sample description', liveUrl: 'https://example.com', imageUrl: 'https://picsum.photos/400/400', imageAlt: 'Sample image', taxonomy: 'Research', type: 'Article' },
+                        { title: 'Sample Search Result 2', description: 'Sample description', liveUrl: 'https://example.com', imageUrl: 'https://picsum.photos/400/400', imageAlt: 'Sample image', taxonomy: 'Research', type: 'Article' },
+                        { title: 'Sample Search Result 3', description: 'Sample description', liveUrl: 'https://example.com', imageUrl: 'https://picsum.photos/400/400', imageAlt: 'Sample image', taxonomy: 'Research', type: 'Article' }
+                    ];
+                }
+            }
         } else {
             const { cards } = args.contentConfiguration;
             const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
 
             adapter.setCardService(service);
-            data = await adapter.getCards(cards);
+            try {
+                data = await adapter.getCards(cards);
+            } catch (er) {
+                if (squizEdit) {
+                    // In edit mode, provide mock data instead of throwing error
+                    data = [
+                        { title: 'Sample Selected Card 1', description: 'Sample description', liveUrl: 'https://example.com', imageUrl: 'https://picsum.photos/400/400', imageAlt: 'Sample image', taxonomy: 'Featured', type: 'Article' },
+                        { title: 'Sample Selected Card 2', description: 'Sample description', liveUrl: 'https://example.com', imageUrl: 'https://picsum.photos/400/400', imageAlt: 'Sample image', taxonomy: 'Featured', type: 'Article' },
+                        { title: 'Sample Selected Card 3', description: 'Sample description', liveUrl: 'https://example.com', imageUrl: 'https://picsum.photos/400/400', imageAlt: 'Sample image', taxonomy: 'Featured', type: 'Article' }
+                    ];
+                }
+            }
         }
 
         // Resolve the URI for the section heading link
@@ -205,6 +242,10 @@ export default {
             width: "large",
         };
 
-        return multicolumnListingTemplate(componentData);
+        // NEW: Early return pattern for edit mode
+        if (!squizEdit) return multicolumnListingTemplate(componentData);
+
+        // NEW: Process for edit mode
+        return processSquizEdit(multicolumnListingTemplate(componentData), squizEditTargets);
     }
 };

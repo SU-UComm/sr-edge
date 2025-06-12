@@ -34,7 +34,10 @@
                             },
                             "type": {
                                 "title": "Type",
-                                "enum": ["Policy Brief", "Case Study"],
+                                "enum": [
+                                    "Policy Brief",
+                                    "Case Study"
+                                ],
                                 "default": "Policy Brief",
                                 "type": "string"
                             },
@@ -42,12 +45,18 @@
                                 "title": "Heading",
                                 "description": "The heading text",
                                 "type": "string",
-                                "default": ""
+                                "default": "",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "summary": {
                                 "title": "Summary",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "linkUrl": {
                                 "title": "Link URL",
@@ -56,7 +65,10 @@
                             "linkText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "Read the full brief"
+                                "default": "Read the full brief",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     }

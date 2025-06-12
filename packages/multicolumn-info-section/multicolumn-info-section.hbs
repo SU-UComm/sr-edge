@@ -1,10 +1,10 @@
 <div data-component="multicolumn-info-section">
     <div class="{{containerClasses width="wide" paddingX=true}}">
         <div class="su-grid lg:su-grid-cols-12 su-grid-gap su-gap-y-0 su-max-w-800 su-mx-auto lg:su-max-w-none {{getStringByCondition value=border expectedValue=true trueResult="su-border-b su-rs-pb-5 su-border-b-black-30 dark:su-border-b-black" falseResult="" }}">
-            <h2 class="su-type-2 su-break-words su-col-span-full lg:su-col-span-8 xl:su-col-span-3">
+            <h2 class="su-type-2 su-break-words su-col-span-full lg:su-col-span-8 xl:su-col-span-3" data-se="title">
                 {{title}}
             </h2>
-            <div class="su-col-span-full lg:su-col-span-8 {{getStringByCondition value=callout expectedValue=true trueResult="xl:su-col-span-6 xl:last:[&>*]:su-mb-0" falseResult="xl:su-col-span-7 last:[&>*]:su-mb-0" }}">
+            <div class="su-col-span-full lg:su-col-span-8 {{getStringByCondition value=callout expectedValue=true trueResult="xl:su-col-span-6 xl:last:[&>*]:su-mb-0" falseResult="xl:su-col-span-7 last:[&>*]:su-mb-0" }}" data-se="infoText">
                 {{{infoText}}}
                 {{#if buttonData}}
                     {{> link-button buttonText=buttonData.buttonText isNewWindow=buttonData.isNewWindow buttonUrl=buttonData.buttonUrl isRealExternalLink=buttonData.isRealExternalLink customClasses="su-rs-mt-1 su-order-3" }}
