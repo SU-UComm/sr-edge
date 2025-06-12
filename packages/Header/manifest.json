@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "header-component",
     "type": "edge",
-    "version": "4.0.4",
+    "version": "4.1.0",
     "namespace": "stanford-apb",
     "description": "Stanford university Header component.",
     "displayName": "Header",

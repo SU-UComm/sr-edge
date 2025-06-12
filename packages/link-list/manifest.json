@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "link-list",
     "type": "edge",
-    "version": "4.0.3",
+    "version": "4.1.0",
     "namespace": "stanford-apb",
     "description": "Recommended stories are shown in this component as a vertical list.",
     "displayName": "Link List",

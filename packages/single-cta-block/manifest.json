@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "single-cta-block",
     "type": "edge",
-    "version": "4.0.6",
+    "version": "4.1.0",
     "namespace": "stanford-apb",
     "description": "A block of text content with a CTA and optional image.",
     "displayName": "Single CTA Block",

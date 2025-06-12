@@ -3014,10 +3014,10 @@ export default {
                     {{> link-button buttonText=ctaText ...}}
                 {{/if}}
             </div>
-            {{#if imageUrl}}
-                <img src="{{imageUrl}}" alt="{{imageAlt}}" class="..."/>
-            {{/if}}
-        </div>
+                          {{#if imageUrl}}
+                  <img src="{{imageUrl}}" alt="{{imageAlt}}" class="..."/>
+             {{/if}}
+          </div>
     </div>
 </section>
 ```
@@ -5207,5 +5207,884 @@ squizEditTargets = {
 ```
 
 This example demonstrates how components that rely heavily on shared partials can be converted with minimal changes, leveraging existing `data-se` attributes while maintaining complex business logic like description overrides and API error handling.
+
+---
+
+## Example 19: Single-Image-Video Component (Multiple Field Types with Separate Elements)
+
+The `single-image-video` component demonstrates inline editing for a component with multiple field types including nested objects, and shows how to handle fields that are combined in display but need separate inline editing.
+
+### Inline Editable Fields:
+1. `section.title` - Section heading (string)
+2. `section.summary` - Section summary (string, multi-line)
+3. `caption` - Image/video caption (string) - *Note: captionCredit display maps to caption field only*
+4. `video.heading` - Accessible video heading (string)
+
+### Key Features:
+- Multiple nested object fields (`section.title`, `section.summary`, `video.heading`)
+- Combined display field mapping (captionCredit maps to caption field only, following established pattern)
+- Asset loading with error handling and mock data fallback
+- Complex validation for environment variables and multiple field types
+- Hidden element pattern for fields not directly displayed
+
+### Updated main.js
+```javascript
+import xss from "xss";
+import { basicAssetUri, uuid } from '../../global/js/utils';
+import { processSquizEdit } from '../../global/js/utils/isEditor';
+
+import singleImageVideoTemplate from './single-image-video.hbs';
+
+export default {
+    async main(args, info) {
+        const fnsCtx = info?.fns || info?.ctx || {};
+        const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
+
+        // CHANGE: change const to let for mutability
+        let { image, caption, credit, width, marginTop, marginBottom } = args || {};
+        let { title, summary, summaryAlign } = args?.section || {}
+        let { heading, vimeoid, youtubeid } = args?.video || {}
+
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Add default values for inline editable fields
+            title = title || 'Single Image or Video';
+            summary = summary || 'This is a sample summary that can be edited inline to provide context for the image or video content.';
+            caption = caption || 'Sample caption for the image or video';
+            credit = credit || 'Sample credit';
+            heading = heading || 'Sample Video';
+            
+            // Provide default values for other required fields
+            image = image || 'matrix-asset://matrixIdentifier/1';
+            width = width || 'Wide';
+            marginTop = marginTop || 'default';
+            marginBottom = marginBottom || 'default';
+            summaryAlign = summaryAlign || 'left';
+            vimeoid = vimeoid || '';
+            youtubeid = youtubeid || '';
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "title": { "field": "section.title" },
+                "summary": { "field": "section.summary" },
+                "captionCredit": { "field": "caption" },
+                "videoHeading": { "field": "video.heading" }
+            };
+        }
+
+        // NEW: Wrap validation in !squizEdit check
+        if (!squizEdit) {
+            // Validate required environment variables
+            try {
+                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
+                    throw new Error(
+                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
+                    );
+                }
+                if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
+                    throw new Error(
+                        `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
+                    );
+                }
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Single Image or Video component: ', er);
+                return `<!-- Error occurred in the Single Image or Video component: ${er.message} -->`;
+            }
+
+            // Validate required fields and ensure correct data types
+            try {
+                if (title && typeof title !== 'string') {
+                    throw new Error(
+                        `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
+                    );
+                }
+                // Additional validation for other fields...
+            } catch (er) {
+                console.error('Error occurred in the Single Image or Video component: ', er);
+                return `<!-- Error occurred in the Single Image or Video component: ${er.message} -->`;
+            }
+        }
+        
+        // Fetch image data with error handling
+        let imageData = null;
+        if (image) {
+            try {
+                imageData = await basicAssetUri(fnsCtx, image);
+                // Check required properties...
+            } catch (er) {
+                console.error('Error occurred in the Single Image or Video component: Failed to fetch image data. ', er);
+                // NEW: In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    imageData = {
+                        url: 'https://picsum.photos/800/600',
+                        attributes: {
+                            alt: 'Sample image for inline editing'
+                        }
+                    };
+                } else {
+                    return `<!-- Error occurred in the Single Image or Video component: Failed to fetch image data. ${er.message} -->`;
+                }
+            }
+        }
+
+        // Prepare checks and unique id
+        const headerSection = !!(title || summary);  
+        const showComponent = !!(vimeoid || youtubeid || image);
+        const uniqueID = uuid();
+        
+        // Prepare caption-credit data
+        const captionCredit = [caption, credit].filter(Boolean).join(' | ');
+        
+        // Prepare modal data 
+        let modalData = null
+        if (youtubeid) {
+            modalData = {
+                isVertical: true, 
+                videoId:  youtubeid, 
+                title:  `Watch ${heading ? heading : ""}`, 
+                noAutoPlay:  true,
+                uniqueID: uniqueID, 
+                titleID:  'video-modal'
+            }
+        }
+
+        // Prepare component data for template rendering
+        const componentData = {
+            width: width?.toLocaleLowerCase() || "wide",
+            marginTop: marginTop || "default",
+            marginBottom: marginBottom || "default",
+            showComponent,
+            headerSection,
+            title,
+            summary: xss(summary),
+            summaryAlign,
+            imageData,
+            vimeoid,
+            youtubeid,
+            videoTitle: heading ? `Watch ${heading}` : "",
+            caption: xss(caption),
+            credit: xss(credit),
+            heading,
+            captionCredit: xss(captionCredit),
+            modalData,
+            uniqueID
+        };
+
+        // NEW: Early return pattern
+        if (!squizEdit) return singleImageVideoTemplate(componentData);
+
+        // NEW: Process for edit mode
+        return processSquizEdit(singleImageVideoTemplate(componentData), squizEditTargets);
+    }
+};
+```
+
+### Updated Template
+The template includes separate `data-se` attributes for each inline editable field:
+
+```handlebars
+{{~#if showComponent~}}
+<section data-component="single-image-video">
+    <div class="{{containerClasses width=width marginTop=marginTop marginBottom=marginBottom}}">
+        <section class="su-flex su-flex-col su-items-center">
+            {{~#if headerSection~}}
+            <div class="su-w-full md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto su-rs-mb-3">
+                {{~#if title~}}
+                <h2 class="..." data-se="title">
+                    {{title}}
+                </h2>
+                {{~/if~}}
+                {{~#if summary~}}
+                <div class="..." data-se="summary">
+                    {{{summary}}}
+                </div>
+                {{~/if~}}
+            </div>
+            {{~/if~}}
+            
+            <!-- Image/Video content -->
+            <div class="...">
+                <!-- Video/Image display logic -->
+            </div>
+            
+                         <div class="...">
+                 <div class="su-mx-auto su-flex su-justify-center su-w-full">
+                     <p class="..." data-se="captionCredit">
+                         {{{captionCredit}}}
+                     </p>
+                 </div>
+             </div>
+        </section>
+    </div>
+</section>
+{{~/if~}}
+
+{{!-- Hidden element for video heading inline editing --}}
+{{~#if heading~}}
+<span style="display: none;" data-se="videoHeading">{{heading}}</span>
+{{~/if~}}
+```
+
+### Key Implementation Notes:
+1. **Combined Field Mapping**: Caption and credit are displayed together as `captionCredit`, but only the `caption` field is inline editable (following established pattern from image-gallery-modal)
+2. **Hidden Element Pattern**: Video heading uses a hidden element since it's not directly displayed but used for accessibility
+3. **Multiple Nested Objects**: Handles fields from both `section` and `video` nested objects using dot notation
+4. **Asset Error Handling**: Provides mock image data when asset loading fails in edit mode
+5. **Existing Logic Preservation**: Maintains all existing logic for combining caption and credit without template modifications
+6. **Minimal Changes**: No changes to componentData structure or template logic, only added `data-se` attributes
+
+### squizEditTargets Configuration:
+```javascript
+squizEditTargets = {
+    "title": { "field": "section.title" },
+    "summary": { "field": "section.summary" },
+    "captionCredit": { "field": "caption" },
+    "videoHeading": { "field": "video.heading" }
+};
+```
+
+This example demonstrates how to handle components with:
+- Multiple nested object structures
+- Combined display fields that map to a single editable field (following established patterns)
+- Hidden elements for accessibility-only fields
+- Complex asset loading with error handling
+- Minimal changes approach that preserves existing component logic
+
+---
+
+## Example 20: Single-Text-Block Component (Simple Component with Basic Fields)
+
+The `single-text-block` component demonstrates inline editing for a simple component with basic field types and minimal validation requirements.
+
+### Inline Editable Fields:
+1. `title` - Main title (string)
+2. `description` - Body content (FormattedText)
+
+### Key Features:
+- Simple component structure with basic field types
+- Minimal validation requirements
+- No API calls or complex asset loading
+- Direct field mapping without nested objects
+- Clean, straightforward implementation
+
+### Updated main.js
+```javascript
+import xss from 'xss';
+import { processSquizEdit } from '../../global/js/utils/isEditor';
+import singleTextBlockTemplate from './single-text-block.hbs';
+
+export default {
+    async main(args, info) {
+        // CHANGE: change const to let for mutability
+        let {
+            title = '',
+            eyebrow = '',
+            description = '',
+            paddingY = '10',
+        } = args || {};
+
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Add default values for inline editable fields
+            title = title || 'Sample Title';
+            description = description || '<p>This is a sample description that can be edited inline to provide content for the text block.</p>';
+            
+            // Provide default values for other fields
+            eyebrow = eyebrow || 'Sample Eyebrow';
+            paddingY = paddingY || '10';
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "title": { "field": "title" },
+                "description": { "field": "description" }
+            };
+        }
+
+        // NEW: Wrap validation in !squizEdit check
+        if (!squizEdit) {
+            try {
+                // Basic validation
+                if (title && typeof title !== 'string') {
+                    throw new Error(
+                        `The "title" field must be a string. The ${JSON.stringify(title)} was received.`,
+                    );
+                }
+
+                if (eyebrow && typeof eyebrow !== 'string') {
+                    throw new Error(
+                        `The "eyebrow" field must be a string. The ${JSON.stringify(eyebrow)} was received.`,
+                    );
+                }
+
+                if (description && typeof description !== 'string') {
+                    throw new Error(
+                        `The "description" field must be a string. The ${JSON.stringify(description)} was received.`,
+                    );
+                }
+
+                if (paddingY && typeof paddingY !== 'string') {
+                    throw new Error(
+                        `The "paddingY" field must be a string. The ${JSON.stringify(paddingY)} was received.`,
+                    );
+                }
+            } catch (er) {
+                console.error(
+                    'Error occurred in the Single Text Block component: ',
+                    er,
+                );
+                return `<!-- Error occurred in the Single Text Block component: ${er.message} -->`;
+            }
+        }
+
+        const componentData = {
+            paddingY,
+            eyebrow,
+            title,
+            description: xss(description),
+        };
+
+        // NEW: Early return pattern
+        if (!squizEdit) return singleTextBlockTemplate(componentData);
+
+        // NEW: Process for edit mode
+        return processSquizEdit(singleTextBlockTemplate(componentData), squizEditTargets);
+    },
+};
+```
+
+### Updated Template
+The template includes `data-se` attributes for the inline editable fields:
+
+```handlebars
+<section data-component="single-text-block">
+    <div class="{{containerClasses width='cc' paddingY=paddingY}}">
+        <div class="su-ml-0 su-max-w-[110rem] su-border-l-2 su-border-black-30 dark:su-border-black-60 su-rs-py-3 su-pl-38 md:su-pl-76 xl:su-pl-170">
+            {{#if eyebrow}}
+            <span aria-hidden="true" class="su-inline-block su-text-black-60 dark:su-text-black-40 su-font-semibold su-type-1 su-leading-display su-rs-mb-1">
+                {{eyebrow}}
+            </span>
+            {{/if}}
+            {{#if title}}
+            <h2 class="su-type-5 su-mb-0 dark:su-text-white" data-se="title">
+                {{#if eyebrow}}
+                <span class="su-sr-only">{{eyebrow}}:</span>
+                {{/if}}
+                {{title}}
+            </h2>
+            {{/if}}
+            {{#if description}}
+            <div data-test="single-text-block-content" class="su-rs-mt-5 su-type-3 *:su-leading-snug *:last:su-mb-0 dark:su-text-white" data-se="description">
+                {{{description}}}
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</section>
+```
+
+### Key Implementation Notes:
+1. **Simple Field Mapping**: Direct mapping of fields without nested objects or complex structures
+2. **Basic Validation**: Simple type checking wrapped in `!squizEdit` conditions
+3. **No External Dependencies**: No API calls, asset loading, or external services
+4. **Preserved Accessibility**: Maintains existing accessibility patterns (eyebrow handling)
+5. **Minimal Changes**: Only added inline editing support without modifying existing logic
+6. **Non-Editable Fields**: Eyebrow field is not marked as inline editable in manifest, so it's excluded from conversion
+
+### squizEditTargets Configuration:
+```javascript
+squizEditTargets = {
+    "title": { "field": "title" },
+    "description": { "field": "description" }
+};
+```
+
+This example demonstrates the simplest form of inline editing conversion for components with:
+- Basic field types (string and FormattedText)
+- No complex business logic
+- Minimal validation requirements
+- Direct field access without nested objects
+- Clean, straightforward implementation patterns
+
+---
+
+## Example 21: Stories-Carousel Component (Complex API Logic with Shared Partials)
+
+The `stories-carousel` component demonstrates inline editing for a complex component with API data fetching, shared partials, and carousel functionality.
+
+### Inline Editable Fields:
+1. `headingConfiguration.title` - Section heading (string)
+2. `headingConfiguration.ctaText` - Call-to-action text (string)
+
+### Key Features:
+- Complex API logic with multiple data sources
+- Shared partials with existing `data-se` attributes
+- Carousel functionality with dynamic content
+- Multiple validation layers and error handling
+- Global vs. local content switching logic
+
+### Updated main.js
+```javascript
+import storiesCarouselTemplate from './stories-carousel.hbs';
+import { linkedHeadingService, uuid } from "../../global/js/utils";
+import { Carousel, Card } from "../../global/js/helpers";
+import { fetchUserStories } from "../../global/js/utils/fetchUserStories";
+import { processSquizEdit } from '../../global/js/utils/isEditor';
+
+export default {
+    async main(args, info) {
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        
+        // Extracting environment variables from provided info
+        const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN, BASE_PATH, NEWS_ARCHIVE_PATH } = info?.env || info?.set?.environment || {};
+        const fnsCtx = info?.fns || info?.ctx || {};
+        
+        // CHANGE: change const to let for mutability
+        let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
+        const { searchQuery } = args?.contentConfiguration || {};
+        
+        // NEW: Provide default values for inline editable fields in edit mode
+        if (squizEdit) {
+            title = title || 'Recent Stories';
+            ctaText = ctaText || 'View all';
+        }
+        
+        const MAX_CARDS = 6;
+        let dataSource = "content";
+        const assetCtx = info?.ctx ||  {};
+        const currentAssetId = assetCtx?.assetId;
+
+        // CHANGE: Wrap validation in !squizEdit
+        if (!squizEdit) {
+            try {
+                // Environment variable validation
+                if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
+                    throw new Error(`The "FB_JSON_URL" variable cannot be undefined and must be non-empty string.`);
+                }
+                // ... other validations
+            } catch (er) {
+                console.error('Error occurred in the Stories carousel component: ', er);
+                return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
+            }
+        }
+
+        // CHANGE: Wrap field validation in !squizEdit
+        if (!squizEdit) {
+            try {
+                if (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?') {
+                    throw new Error(`The "searchQuery" field cannot be undefined and must be a non-empty string.`);
+                }
+                // ... other field validations
+            } catch (er) {
+                console.error('Error occurred in the Stories carousel component: ', er);
+                return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
+            }
+        }
+        
+        let data = [];
+
+        // NEW: Early return for edit mode with mock data
+        if (squizEdit) {
+            // Provide mock data for edit mode
+            data = [
+                {
+                    title: 'Sample Story 1',
+                    description: 'This is a sample story description for the carousel.',
+                    url: '#',
+                    image: { url: 'https://picsum.photos/400/300', attributes: { alt: 'Sample story image' } },
+                    type: 'Story'
+                },
+                {
+                    title: 'Sample Story 2', 
+                    description: 'Another sample story for demonstration purposes.',
+                    url: '#',
+                    image: { url: 'https://picsum.photos/400/300', attributes: { alt: 'Sample story image' } },
+                    type: 'Story'
+                },
+                {
+                    title: 'Sample Story 3',
+                    description: 'A third sample story to show the carousel functionality.',
+                    url: '#', 
+                    image: { url: 'https://picsum.photos/400/300', attributes: { alt: 'Sample story image' } },
+                    type: 'Story'
+                }
+            ];
+        } else {
+            // Complex API logic for production mode
+            let query = searchQuery;
+            let fallbackFbUrl = "";
+            
+            // Parse query string and handle global vs local content
+            const cleanedQuery = query.startsWith('?') ? query.slice(1) : query;
+            const params = cleanedQuery.split('&').reduce((acc, pair) => {
+                const [key, value] = pair.split('=');
+                if (key && value !== undefined) {
+                  acc[key] = decodeURIComponent(value);
+                }
+                return acc;
+              }, {});
+            
+            let headingInfo = args.headingConfiguration;
+            const isGlobal = params.global === 'true';
+            const audience = params.meta_taxonomyAudienceText || "";
+            
+            if(isGlobal){
+                dataSource = "global";
+                const apiData = `${BASE_DOMAIN}_api/mx/storycarousel?story=${currentAssetId}`;
+                const res = await fetch(apiData);
+                const props = await res.json();
+
+                // Construct the FB URL based on API response
+                if (props?.search) {
+                    query = `?profile=${props.search.profile}&collection=${props.search.collection}${
+                        props.search.maintopic?.asset_name !== ""
+                        ? `&query=[taxonomyContentMainTopicId:${props.search.maintopic?.asset_assetid} taxonomyContentTopicsId:${props.search.maintopic?.asset_assetid} taxonomyContentSubtopicsId:${props.search.maintopic?.asset_assetid}]`
+                        : ""
+                    }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 id:${
+                        props.search.currentPage
+                    }]&num_ranks=${MAX_CARDS}&sort=date&meta_taxonomyAudienceText=${audience}`;
+
+                    fallbackFbUrl = `?profile=${props.search.profile}&collection=${
+                        props.search.collection
+                    }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 id:${
+                        props.search.currentPage
+                    }]&num_ranks=12&sort=date`;
+
+                    if (props.search.contentType === "Video") {
+                        fallbackFbUrl += "&meta_taxonomyContentTypeId=28207";
+                        query += "&meta_taxonomyContentTypeId=28207";
+                    }
+                }
+                headingInfo = props.headingConfiguration;
+            }
+
+            try {
+                data = await fetchUserStories({
+                    FB_JSON_URL,
+                    searchQuery: query,
+                    currentPageAssetId: currentAssetId,
+                    baseDomain: BASE_DOMAIN,
+                });
+            
+                // Fallback logic for insufficient data
+                if(isGlobal && Array.isArray(data) && data.length < MAX_CARDS){
+                    query = fallbackFbUrl;
+                    dataSource = "global-fallback";
+                    const fallbackData = await fetchUserStories({
+                        FB_JSON_URL,
+                        searchQuery: fallbackFbUrl,
+                        currentPageAssetId: currentAssetId,
+                        baseDomain: BASE_DOMAIN,
+                    });
+                    fallbackData.forEach(item => data.push(item));
+                }
+
+                if (Array.isArray(data) && data.length > MAX_CARDS) {
+                    data = data.slice(0, MAX_CARDS);
+                }
+                
+            } catch (er) {
+                console.error('Error occurred in the Stories carousel component while fetching user stories:', er);
+                // NEW: Provide mock data when API fails in edit mode
+                if (squizEdit) {
+                    data = [
+                        {
+                            title: 'Sample Story (API Error)',
+                            description: 'Mock data due to API error in edit mode.',
+                            url: '#',
+                            image: { url: 'https://picsum.photos/400/300', attributes: { alt: 'Sample story image' } },
+                            type: 'Story'
+                        }
+                    ];
+                } else {
+                    return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
+                }
+            }
+        }
+
+        // Resolve the URI for the section heading link
+        const headingData = await linkedHeadingService(
+            fnsCtx,
+            { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow }
+        );
+        
+        // CHANGE: Add squizEdit check for default link
+        if (headingData && !headingData.ctaLink && !squizEdit) {
+            headingData.ctaLink = `${BASE_DOMAIN}${BASE_PATH}${NEWS_ARCHIVE_PATH}`;
+        }
+
+        // NEW: Provide default link for edit mode
+        if (squizEdit && headingData && !headingData.ctaLink) {
+            headingData.ctaLink = '#';
+        }
+
+        // Generate carousel cards and modal data
+        const cardData = [];
+        const modalData = [];
+        let uniqueClass = ""
+        
+        if (data !== null && data !== undefined) {
+            uniqueClass = uuid();
+            
+            data.forEach((card) => {
+                const uniqueID = uuid();
+                cardData.push(
+                    `<div class="swiper-slide">
+                        ${Card({data: card, displayDescription: false, uniqueId: uniqueID})}
+                    </div>`
+                );
+
+                if (card.type === 'Video' || card.videoUrl) {
+                    modalData.push({
+                        isVertical: card.size === "vertical-video",
+                        videoId: card.videoUrl,
+                        title: `Watch ${card.title}`, 
+                        noAutoPlay: true,
+                        uniqueID: uniqueID,
+                        titleID: 'card-modal'
+                    })
+                }
+            });
+        }
+
+        // CHANGE: Wrap card data validation in !squizEdit
+        if (!squizEdit) {
+            try {
+                if (typeof cardData !== 'object' || cardData.length < 1) {
+                    throw new Error(`The "data" cannot be undefined or null.`);
+                }
+            } catch (er) {
+                console.error('Error occurred in the Stories carousel component: ', er);
+                return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
+            }
+        }
+
+        // Prepare component data for template rendering
+        const componentData = {
+            id: uniqueClass,
+            title: headingData.title,
+            isAlwaysLight: false,
+            ctaLink: headingData.ctaLink,
+            ctaNewWindow: headingData.ctaNewWindow,
+            ctaText: headingData.ctaText,
+            carousel: Carousel({ variant:"cards", slides: cardData.join(''), uniqueClass: uniqueClass }),
+            modalData,
+            width: "large",
+            dataSource,
+            query: squizEdit ? '' : query
+        };
+
+        // NEW: Configure squizEditTargets for inline editing
+        const squizEditTargets = {
+            "headingTitle": { "field": "headingConfiguration.title" },
+            "headingCtaText": { "field": "headingConfiguration.ctaText" }
+        };
+
+        // NEW: Early return for non-edit mode
+        if (!squizEdit) {
+            return storiesCarouselTemplate(componentData);
+        }
+
+        // NEW: Process and return template with inline editing support
+        return processSquizEdit(storiesCarouselTemplate(componentData), squizEditTargets);
+    }
+};
+```
+
+### Template Structure
+The template leverages the existing `linked-heading` shared partial which already contains the necessary `data-se` attributes:
+
+```handlebars
+<section data-component="stories-carousel" data-unique-id="{{id}}" data-source="{{dataSource}}" data-query="{{query}}">
+    <div class="{{containerClasses width=width}}">
+        {{> linked-heading title=title isAlwaysLight=isAlwaysLight ctaLink=ctaLink ctaNewWindow=ctaNewWindow ctaText=ctaText}}
+        {{{carousel}}}
+    </div>
+    <section data-element="modal-wrapper">
+    {{#each modalData}}
+        {{#> modal-content uniqueID=uniqueID titleID='card-modal' ariaTitle=title}}
+            {{> embed-video isVertical=isVertical classes=classes videoId=videoId noAutoPlay=noAutoPlay title=title}}
+        {{/ modal-content}}
+    {{/each}}
+    </section>
+</section>
+```
+
+### Key Implementation Notes:
+1. **Shared Partials Leverage**: Uses existing `linked-heading` partial with `data-se="headingTitle"` and `data-se="headingCtaText"` attributes
+2. **Complex API Logic**: Handles multiple data sources (global, local, fallback) with comprehensive error handling
+3. **Mock Data Strategy**: Provides realistic sample stories for edit mode with proper structure
+4. **Validation Wrapping**: All environment and field validations wrapped in `!squizEdit` conditions
+5. **Error Recovery**: API failures in edit mode fall back to mock data instead of error messages
+6. **Carousel Integration**: Maintains full carousel functionality with dynamic content generation
+7. **Modal Support**: Preserves video modal functionality for interactive content
+8. **No Template Changes**: Leverages existing shared partial attributes without template modifications
+
+### squizEditTargets Configuration:
+```javascript
+squizEditTargets = {
+    "headingTitle": { "field": "headingConfiguration.title" },
+    "headingCtaText": { "field": "headingConfiguration.ctaText" }
+};
+```
+
+This example demonstrates how to handle components with:
+- Complex API integration and data fetching logic
+- Multiple validation layers and error handling strategies
+- Shared partials with existing inline editing support
+- Dynamic content generation (carousels, modals)
+- Global vs. local content switching logic
+- Comprehensive mock data strategies for edit mode
+- Minimal changes approach that preserves all existing functionality
+
+The conversion maintains the full complexity of the original component while adding robust inline editing support through strategic use of existing shared partials and careful error handling.
+
+---
+
+## Example 22: Story-Lead Component (Simple FormattedText with Conditional Rendering)
+
+The `story-lead` component demonstrates inline editing for a simple component with FormattedText content and conditional rendering logic for different variants.
+
+### Inline Editable Fields:
+1. `content` - Lead content (FormattedText)
+
+### Key Features:
+- Simple FormattedText field with conditional rendering
+- Variant-based display logic (Basic Story vs Featured Story)
+- Decorative first letter for featured stories
+- Minimal validation and clean structure
+
+### Updated main.js
+```javascript
+import storyLeadTemplate from './story-lead.hbs';
+import { getFirstWord } from '../../global/js/utils';
+import { processSquizEdit } from '../../global/js/utils/isEditor';
+
+export default {
+    async main(args, info) {
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        
+        // Extracting functions from provided info
+        const fnsCtx = info?.fns || info?.ctx || {};
+
+        // Extracting configuration data from arguments
+        const { content, variant } = args || {};
+
+        // Validate required functions
+        try {
+            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                throw new Error(
+                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the Story lead component: ', er);
+            return `<!-- Error occurred in the Story lead component: ${er.message} -->`;
+        }
+
+        // Validate required fields and ensure correct data types
+        try {
+            if (content && typeof content !== 'string') {
+                throw new Error(
+                    `The "content" field must be a string. The ${JSON.stringify(content)} was received.`
+                );
+            }
+            if (variant && !['Basic Story', 'Featured Story'].includes(variant)) {
+                throw new Error(
+                    `The "variant" field must be one of ["Basic Story", "Featured Story"]. The ${JSON.stringify(variant)} was received.`
+                );
+            }
+        } catch (er) {
+            console.error('Error occurred in the Story lead component: ', er);
+            return `<!-- Error occurred in the Story lead component: ${er.message} -->`;
+        }
+
+        const isFeaturedStory = variant === "Featured Story";
+        const firstWord = getFirstWord(content);
+        const firstLetter = content ? firstWord[0].toLowerCase() : '';
+
+        const componentData = {
+            content,
+            firstWord,
+            firstLetter,
+            isFeaturedStory,
+            variant,
+            width: "narrow"
+        };
+
+        // NEW: Configure squizEditTargets for inline editing
+        const squizEditTargets = {
+            "content": { "field": "content" }
+        };
+
+        // NEW: Early return for non-edit mode
+        if (!squizEdit) {
+            return storyLeadTemplate(componentData);
+        }
+
+        // NEW: Process and return template with inline editing support
+        return processSquizEdit(storyLeadTemplate(componentData), squizEditTargets);
+    }
+};
+```
+
+### Updated Template
+```handlebars
+{{#if content}}
+<section data-component="story-lead">
+    <div class="{{containerClasses width=width}}">
+        {{#if isFeaturedStory}}
+        <span data-test="component-story-lead-letter" class="su-float-left [&>svg]:su-mt-3 md:[&>svg]:su--mt-2 lg:[&>svg]:su-mt-4 [&>svg]:su-w-41 [&>svg]:su-h-43 md:[&>svg]:su-w-[97px] md:[&>svg]:su-h-[102px] su-mr-8 lg:su-mr-19">
+            {{> svg-letters letter=firstLetter}}
+        </span>
+        {{/if}}
+        <div data-test="component-story-lead" class="su-wysiwyg-content {{variantClasses variant}}" data-se="content">
+            {{#if isFeaturedStory}}
+                {{{formatFirstWord content firstWord}}}
+            {{else}}
+                {{{content}}}
+            {{/if}}
+        </div>
+    </div>
+</section>
+{{/if}}
+```
+
+### Key Implementation Notes:
+1. **Single FormattedText Field**: Simple mapping of one FormattedText field without complex structures
+2. **Conditional Rendering**: Maintains existing logic for Basic Story vs Featured Story variants
+3. **Decorative Elements**: Preserves decorative first letter functionality for featured stories
+4. **Helper Function Integration**: Continues to use `getFirstWord` and `formatFirstWord` helpers
+5. **Minimal Changes**: Only added inline editing support without modifying existing logic
+6. **Clean Structure**: Simple component with straightforward validation and rendering
+
+### squizEditTargets Configuration:
+```javascript
+squizEditTargets = {
+    "content": { "field": "content" }
+};
+```
+
+This example demonstrates inline editing conversion for components with:
+- Single FormattedText field with conditional rendering
+- Variant-based display logic that affects presentation
+- Helper function integration for text processing
+- Decorative elements that depend on content
+- Simple validation and clean component structure
+- Minimal changes approach that preserves all existing functionality
+
+The conversion maintains the component's ability to display content differently based on the variant (with or without decorative first letter) while enabling inline editing of the core content field.
 
 ---

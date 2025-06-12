@@ -45,7 +45,7 @@ export default {
         let { alignment, displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = true || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {

@@ -6,7 +6,7 @@
             {{> svg-letters letter=firstLetter}}
         </span>
         {{/if}}
-        <div data-test="component-story-lead" class="su-wysiwyg-content {{variantClasses variant}}">
+        <div data-test="component-story-lead" class="su-wysiwyg-content {{variantClasses variant}}" data-se="content">
             {{#if isFeaturedStory}}
                 {{{formatFirstWord content firstWord}}}
             {{else}}

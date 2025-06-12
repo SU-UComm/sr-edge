@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "cta-cards-block",
-    "version": "4.0.2",
+    "version": "4.1.0",
     "namespace": "stanford-apb",
     "type": "edge",
     "description": "Add up to 3 CTA cards in this block.",

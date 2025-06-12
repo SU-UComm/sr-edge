@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "popular-stories-cf",
     "type": "edge",
-    "version": "4.0.1",
+    "version": "4.1.0",
     "namespace": "stanford-apb",
     "description": "Displays a list of popular stories.",
     "displayName": "Popular Stories",

@@ -2,6 +2,7 @@ import storiesCarouselTemplate from './stories-carousel.hbs';
 import { linkedHeadingService, uuid } from "../../global/js/utils";
 import { Carousel, Card } from "../../global/js/helpers";
 import { fetchUserStories } from "../../global/js/utils/fetchUserStories";
+import { processSquizEdit } from '../../global/js/utils/isEditor';
 
 /**
  * Stories carousel component that renderds a list of cards based on fetched data.
@@ -28,6 +29,9 @@ export default {
      * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
      */
     async main(args, info) {
+        // Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        
         // Extracting environment variables from provided info
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN, BASE_PATH, NEWS_ARCHIVE_PATH } = info?.env || info?.set?.environment || {};
         const fnsCtx = info?.fns || info?.ctx || {};
@@ -264,7 +268,19 @@ export default {
             dataSource,
             query
         };
-        
-        return storiesCarouselTemplate(componentData);
+
+        // Configure squizEditTargets for inline editing
+        const squizEditTargets = {
+            "headingTitle": { "field": "headingConfiguration.title" },
+            "headingCtaText": { "field": "headingConfiguration.ctaText" }
+        };
+
+        // Early return for non-edit mode
+        if (!squizEdit) {
+            return storiesCarouselTemplate(componentData);
+        }
+
+        // Process and return template with inline editing support
+        return processSquizEdit(storiesCarouselTemplate(componentData), squizEditTargets);
     }
 };

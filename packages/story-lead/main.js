@@ -1,9 +1,13 @@
 import storyLeadTemplate from './story-lead.hbs';
 import { getFirstWord } from '../../global/js/utils';
+import { processSquizEdit } from '../../global/js/utils/isEditor';
 
 
 export default {
     async main(args, info) {
+        // Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        
         // Extracting functions from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
 
@@ -53,6 +57,17 @@ export default {
             width: "narrow"
         };
 
-        return storyLeadTemplate(componentData);
+        // Configure squizEditTargets for inline editing
+        const squizEditTargets = {
+            "content": { "field": "content" }
+        };
+
+        // Early return for non-edit mode
+        if (!squizEdit) {
+            return storyLeadTemplate(componentData);
+        }
+
+        // Process and return template with inline editing support
+        return processSquizEdit(storyLeadTemplate(componentData), squizEditTargets);
     }
 };

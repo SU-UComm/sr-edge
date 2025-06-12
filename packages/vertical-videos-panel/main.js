@@ -1,5 +1,6 @@
 import { basicAssetUri, linkedHeadingService, uuid } from "../../global/js/utils";
 import verticalVideosPanelTemplate from "./vertical-videos-panel.hbs";
+import { processSquizEdit } from '../../global/js/utils/isEditor';
 
 /**
  * Vertical Video Panel component that renders video blocks with images and description
@@ -31,6 +32,9 @@ export default {
      * @returns {Promise<string>} The rendered two column text callout HTML or an error message.
     */
     async main(args, info) {
+        // Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        
         // Extracting environment function from provided info
         const fnsCtx = info?.fns || info?.ctx || {};
     
@@ -174,6 +178,20 @@ export default {
             videoModal: videoModal
         };
 
-        return verticalVideosPanelTemplate(componentData);
+        // Configure squizEditTargets for inline editing
+        const squizEditTargets = {
+            "headingTitle": { "field": "sectionConfiguration.title" },
+            "headingCtaText": { "field": "sectionConfiguration.ctaText" },
+            "videoHeading": { "field": "videos.heading" },
+            "videoSubheading": { "field": "videos.subheading" }
+        };
+
+        // Early return for non-edit mode
+        if (!squizEdit) {
+            return verticalVideosPanelTemplate(componentData);
+        }
+
+        // Process and return template with inline editing support
+        return processSquizEdit(verticalVideosPanelTemplate(componentData), squizEditTargets);
     }
 };

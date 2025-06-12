@@ -5,12 +5,12 @@
             {{~#if headerSection~}}
             <div class="su-w-full md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto su-rs-mb-3">
                 {{~#if title~}}
-                <h2 class="su-text-center su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]">
+                <h2 class="su-text-center su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]" data-se="title">
                     {{title}}
                 </h2>
                 {{~/if~}}
                 {{~#if summary~}}
-                <div data-test="component-story-lead" class="{{getStringByCondition value=summaryAlign expectedValue="center" trueResult="su-text-center" falseResult="su-text-left"}} su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]">
+                <div data-test="component-story-lead" class="{{getStringByCondition value=summaryAlign expectedValue="center" trueResult="su-text-center" falseResult="su-text-left"}} su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]" data-se="summary">
                     {{{summary}}}
                 </div>
                 {{~/if~}}
@@ -18,7 +18,7 @@
             {{~/if~}}
             <div class="{{getStringByCondition value=youtubeid expectedValue="" trueResult="su-w-full" falseResult="su-w-full su-aspect-[16/9]"}} su-relative">
                 {{~#if youtubeid~}}
-                <button data-click="open-modal" class="su-cursor-pointer su-absolute su-top-0 su-left-0 su-size-full su-play-scale" aria-haspopup="dialog" aria-label="Watch video" title="Watch video" data-modal-id="{{uniqueID}}" >
+                <button data-click="open-modal" class="su-cursor-pointer su-absolute su-top-0 su-left-0 su-size-full su-play-scale" aria-haspopup="dialog" aria-label="Watch video" title="Watch video" data-modal-id="{{uniqueID}}">
                     {{~#if vimeoid~}}
                     <iframe
                         src="https://player.vimeo.com/video/{{vimeoid}}?autoplay=0&loop=1&autopause=0&background=1"
@@ -54,7 +54,7 @@
             </div>
             <div class="su-flex su-gap-8 md:su-gap-22 su-w-full su-relative su-flex-col su-items-center lg:su-flex-row lg:su-items-start su-mt-8 md:su-mt-9 lg:su-mt-15">
                 <div class="su-mx-auto su-flex su-justify-center su-w-full">
-                    <p class="dark:su-text-white su-m-0 su-text-14 su-max-w-[633px] su-leading-[16.72px] su-font-normal su-text-black-70 md:su-text-16 md:su-leading-[19.11px] md:su-text-left">
+                    <p class="dark:su-text-white su-m-0 su-text-14 su-max-w-[633px] su-leading-[16.72px] su-font-normal su-text-black-70 md:su-text-16 md:su-leading-[19.11px] md:su-text-left" data-se="captionCredit">
                         {{{captionCredit}}}
                     </p>
                 </div>

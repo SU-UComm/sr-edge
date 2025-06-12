@@ -26,7 +26,7 @@ export default {
         
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
-        const squizEdit = true || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
         let squizEditTargets = null;
         
