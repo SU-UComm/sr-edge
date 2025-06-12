@@ -30,12 +30,18 @@
                             "title": {
                                 "title": "Heading",
                                 "description": "The heading text",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "content": {
                                 "title": "Content",
                                 "description": "The text content for this component",
-                                "type": "FormattedText"
+                                "type": "FormattedText",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     },
@@ -51,15 +57,24 @@
                             "caption": {
                                 "title": "Caption",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "credit": {
                                 "title": "Credit",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "imagePlacement": {
                                 "title": "Image position",
-                                "enum": ["Below content", "Above content"],
+                                "enum": [
+                                    "Below content",
+                                    "Above content"
+                                ],
                                 "type": "string",
                                 "default": "Below content"
                             }
@@ -72,7 +87,10 @@
                         "properties": {
                             "buttonText": {
                                 "title": "Button text",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "internalUrl": {
                                 "title": "Internal link (Matrix asset link)",

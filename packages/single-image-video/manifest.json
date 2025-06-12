@@ -38,18 +38,30 @@
                         "properties": {
                             "title": {
                                 "title": "Heading",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "summary": {
                                 "title": "Summary",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "summaryAlign": {
                                 "title": "Summary alignment",
                                 "type": "string",
-                                "enum": ["left", "center"],
-                                "default": "left"
+                                "enum": [
+                                    "left",
+                                    "center"
+                                ],
+                                "default": "left",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             }
                         }
                     },
@@ -61,15 +73,24 @@
                     },
                     "caption": {
                         "title": "Caption",
-                        "type": "string"
+                        "type": "string",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "credit": {
                         "title": "Credit",
-                        "type": "string"
+                        "type": "string",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "width": {
                         "title": "Width",
-                        "enum": ["Wide", "Narrow"],
+                        "enum": [
+                            "Wide",
+                            "Narrow"
+                        ],
                         "default": "Wide",
                         "type": "string"
                     },
@@ -80,7 +101,10 @@
                             "heading": {
                                 "title": "Accessible video heading",
                                 "description": "This is not displayed visually, but is used for accessibility in the format: 'Watch [heading]'",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "vimeoid": {
                                 "title": "Vimeo video ID",

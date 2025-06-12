@@ -40,7 +40,10 @@
                             "title": {
                                 "title": "Heading",
                                 "description": "The heading text",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix Asset Link",
@@ -56,7 +59,10 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "View all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",
@@ -68,18 +74,26 @@
                     "contentConfiguration": {
                         "title": "Single featured content inner content",
                         "description": "The featured content to display in the component",
-                        "required": ["source"],
+                        "required": [
+                            "source"
+                        ],
                         "properties": {
                             "source": {
                                 "title": "Featured content",
                                 "description": "The source of the featured content",
                                 "format": "matrix-asset-uri",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             },
                             "description": {
                                 "title": "Override the featured description",
                                 "type": "FormattedText",
-                                "description": "Add an override description to replace the Featured content description"
+                                "description": "Add an override description to replace the Featured content description",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     }

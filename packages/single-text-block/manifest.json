@@ -31,12 +31,18 @@
             "title": "Title",
             "description": "The title text.",
             "type": "string",
-            "default": "Lorem ipsum dolor"
+            "default": "Lorem ipsum dolor",
+            "ui:metadata": {
+              "inlineEditable": true
+            }
           },
           "description": {
             "title": "Description",
             "description": "This is the body text.",
-            "type": "FormattedText"
+            "type": "FormattedText",
+            "ui:metadata": {
+              "inlineEditable": true
+            }
           },
           "paddingY": {
             "title": "Vertical padding",
@@ -56,7 +62,10 @@
               "8",
               "9",
               "10"
-            ]
+            ],
+            "ui:metadata": {
+              "quickOption": true
+            }
           }
         },
         "required": []

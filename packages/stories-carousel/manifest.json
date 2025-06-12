@@ -52,7 +52,10 @@
                             "title": {
                                 "title": "Heading",
                                 "type": "string",
-                                "default": "Recent Stories"
+                                "default": "Recent Stories",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix Asset Link",
@@ -68,7 +71,10 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "View all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",
