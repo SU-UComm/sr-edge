@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "button-row",
-    "version": "4.1.0",
+    "version": "4.1.12",
     "type": "edge",
     "namespace": "stanford-apb",
     "description": "Add up to 3 buttons in this row component.",
@@ -57,10 +57,7 @@
                                 "isNewWindow": {
                                     "title": "Open link in a new window",
                                     "type": "boolean",
-                                    "default": false,
-                                    "ui:metadata": {
-                                        "quickOption": true
-                                    }
+                                    "default": false
                                 }
                             },
                             "required": []

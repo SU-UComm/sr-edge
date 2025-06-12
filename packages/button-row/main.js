@@ -49,7 +49,7 @@ export default {
             // For button arrays, we target the "button" data-se attribute with array configuration
             squizEditTargets = {
                 "button": {
-                    "field": "button",
+                    "field": "buttons",
                     "array": true,
                     "property": "buttonText"
                 }

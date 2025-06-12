@@ -82,10 +82,7 @@
                                 "title": "Featured content",
                                 "description": "The source of the featured content",
                                 "format": "matrix-asset-uri",
-                                "type": "string",
-                                "ui:metadata": {
-                                    "quickOption": true
-                                }
+                                "type": "string"
                             },
                             "description": {
                                 "title": "Override the featured description",

@@ -59,7 +59,7 @@ export default {
             heading = heading || 'Sample Video';
             
             // Provide default values for other required fields
-            image = image || 'matrix-asset://matrixIdentifier/1';
+            image = image || 'matrix-asset://StanfordNews/130444';
             width = width || 'Wide';
             marginTop = marginTop || 'default';
             marginBottom = marginBottom || 'default';

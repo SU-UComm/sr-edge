@@ -42,9 +42,9 @@ export default {
             title = title || 'Campaign Title';
             description = description || 'Campaign description text goes here.';
             linkText = linkText || 'Learn more';
-            
+            linkUrl = linkUrl || "matrix-asset://StanfordNews/29389"
             // Provide default image if none exists
-            image = image || 'matrix-asset://matrixIdentifier/1';
+            image = image || 'matrix-asset://StanfordNews/130444';
             
             // Add the targets for the squizEdit DOM augmentation
             // used in processSquizEdit to modify the output to add edit markup
