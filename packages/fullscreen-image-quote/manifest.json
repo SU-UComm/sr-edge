@@ -27,6 +27,13 @@
                         "type": "string",
                         "format": "matrix-asset-uri"
                     },
+                    "imageOverlay": {
+                        "title": "Image gradient overlay",
+                        "description": "An overlay is required to maintain accessibility and readability. Use this to control the darkness of the overlay.",
+                        "type": "string",
+                        "default": "dark",
+                        "enum": ["light", "medium", "dark"]
+                    },
                     "imageVPosition": {
                         "title": "Vertical crop position of the background image",
                         "description": "This setting will only be used if the above image's aspect ratio is taller than its container. It will determine which portion of the image is shown if the image is cropped on some screen sizes.",
