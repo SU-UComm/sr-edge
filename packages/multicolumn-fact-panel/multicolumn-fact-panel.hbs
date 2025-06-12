@@ -4,12 +4,13 @@
             <span
                 aria-hidden="true"
                 class='su-inline-block su-text-black-60 dark:su-text-black-40 su-font-semibold su-type-1 su-leading-display su-rs-mb-1'
+                data-se="eyebrow"
             >
                 {{eyebrow}}
             </span>
         {{~/if~}}
         {{~#if title~}}
-            <h2 class='su-type-4 su-rs-mb-5 dark:su-text-white su-max-w-700'>
+            <h2 class='su-type-4 su-rs-mb-5 dark:su-text-white su-max-w-700' data-se="title">
                 {{~#if eyebrow~}}
                 <span class='su-sr-only'>{{eyebrow}}:</span>{{~/if~}}
                 {{title}}
@@ -26,6 +27,7 @@
                         {{> fontawesome-icon icon=icon set=iconSet width=70 classes="su-rs-mb-1 su-text-[5rem] xl:su-text-[6rem] su-text-black-50"}}
                         <div
                             class='su-text-black dark:su-text-white su-text-24 md:su-text-[3.3rem] lg:su-text-[2.8rem] xl:su-text-[3.3rem] su-font-serif *:su-leading-display last:*:su-mb-0 su-text-center'
+                            data-se="content"
                         >
                             {{{content}}}
                         </div>

@@ -25,13 +25,19 @@
                         "title": "Eyebrow",
                         "description": "This is the superheading above the title.",
                         "type": "string",
-                        "default": "Eyebrow"
+                        "default": "Eyebrow",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "title": {
                         "title": "Title",
                         "description": "The title text.",
                         "type": "string",
-                        "default": "Lorem ipsum dolor"
+                        "default": "Lorem ipsum dolor",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "facts": {
                         "title": "Facts",
@@ -51,13 +57,19 @@
                                     "title": "FontAwesome icon set",
                                     "description": "Select the icon set - solid or regular.",
                                     "type": "string",
-                                    "enum": ["solid", "regular"],
+                                    "enum": [
+                                        "solid",
+                                        "regular"
+                                    ],
                                     "default": "solid"
                                 },
                                 "content": {
                                     "title": "Content",
                                     "description": "The text content for the fact.",
-                                    "type": "FormattedText"
+                                    "type": "FormattedText",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 }
                             },
                             "required": []
@@ -81,7 +93,10 @@
                             "8",
                             "9",
                             "10"
-                        ]
+                        ],
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     }
                 },
                 "required": []

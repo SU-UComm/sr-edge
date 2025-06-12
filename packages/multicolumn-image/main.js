@@ -1,4 +1,5 @@
 import { basicAssetUri } from "../../global/js/utils";
+import { processSquizEdit } from '../../global/js/utils/isEditor';
 import multicolumnImage from './multicolumn-image.hbs';
 
 /**
@@ -30,35 +31,85 @@ export default {
         const fnsCtx = info?.fns || info?.ctx || {};
 
         // Extract configuration data from arguments
-        const { images } = args?.contentConfiguration || {};
+        let { images } = args?.contentConfiguration || {};
 
-        // Validate required functions
-        try {
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-            if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                throw new Error(
-                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Multicolumn image component: ', er);
-            return `<!-- Error occurred in the Multicolumn image component: ${er.message} -->`;
+        // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
+        // Must fallback to false, use true to mock the editor
+        const squizEdit = info?.ctx?.editor || false;
+        // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
+        let squizEditTargets = null;
+
+        // NEW: add a default if squizEdit is true
+        if (squizEdit) {
+            // Add default values if content is not provided
+            images = images && images.length >= 2 ? images : [
+                {
+                    imageAsset: 'matrix-asset://api-identifier/sample-image-1',
+                    imageCaption: 'Sample caption for first image'
+                },
+                {
+                    imageAsset: 'matrix-asset://api-identifier/sample-image-2', 
+                    imageCaption: 'Sample caption for second image'
+                },
+                {
+                    imageAsset: 'matrix-asset://api-identifier/sample-image-3',
+                    imageCaption: ''
+                }
+            ];
+
+            // Ensure each image has default caption
+            images = images.map(image => ({
+                ...image,
+                imageCaption: image.imageCaption || ''
+            }));
+
+            // Add the targets for the squizEdit DOM augmentation
+            // used in processSquizEdit to modify the output to add edit markup
+            // top level keys match the data-se attributes found in the template eg data-se="caption"
+            // the field values are the component data fields eg data-sq-field="contentConfiguration.images[0].imageCaption"
+            squizEditTargets = {
+                "caption": {
+                    "field": "contentConfiguration.images",
+                    "array": true,
+                    "property": "imageCaption"
+                },
+                "sectionCaption": {
+                    "field": "contentConfiguration.images.0.imageCaption"
+                }
+            };
         }
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (images && !Array.isArray(images) || images.length < 2) {
-                throw new Error(
-                    `The "images" field must be an array and at least 2 elements length. The ${JSON.stringify(images)} was received.`
-                );
+        // NEW: remove overly stringent validation where it makes sense
+        // if it is to remain, wrap it in a !squizEdit check
+        if (!squizEdit) {
+            // Validate required functions
+            try {
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
+                    throw new Error(
+                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Multicolumn image component: ', er);
+                return `<!-- Error occurred in the Multicolumn image component: ${er.message} -->`;
             }
-        } catch (er) {
-            console.error('Error occurred in the Multicolumn image component: ', er);
-            return `<!-- Error occurred in the Multicolumn image component: ${er.message} -->`;
+
+            // Validate required fields and ensure correct data types
+            try {
+                if (images && !Array.isArray(images) || images.length < 2) {
+                    throw new Error(
+                        `The "images" field must be an array and at least 2 elements length. The ${JSON.stringify(images)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Multicolumn image component: ', er);
+                return `<!-- Error occurred in the Multicolumn image component: ${er.message} -->`;
+            }
         }
 
         const imageData = [];
@@ -66,7 +117,19 @@ export default {
         let sectionCaption = ''
         
         for (const { imageAsset, imageCaption } of images) {
-            const asset = await basicAssetUri(fnsCtx, imageAsset);
+            let asset;
+            
+            if (squizEdit) {
+                // In edit mode, provide placeholder data if API call fails
+                try {
+                    asset = await basicAssetUri(fnsCtx, imageAsset);
+                } catch (error) {
+                    // Provide mock data silently on API failure
+                    asset = { url: 'https://picsum.photos/400/400' };
+                }
+            } else {
+                asset = await basicAssetUri(fnsCtx, imageAsset);
+            }
         
             if (imageCaption) {
                 sectionCaption ||= imageCaption; // Set only if empty
@@ -83,6 +146,11 @@ export default {
             sectionCaption,
             showIndividualCaptions: numberOfCaptions > 1,
         };
-        return multicolumnImage(componentData);
+
+        // Return original front end code when squizEdit is false, without modification
+        if (!squizEdit) return multicolumnImage(componentData);
+
+        // NEW: process the output to be editable in Squiz Editor
+        return processSquizEdit(multicolumnImage(componentData), squizEditTargets);
     }
 };

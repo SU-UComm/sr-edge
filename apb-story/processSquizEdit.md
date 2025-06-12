@@ -55,8 +55,8 @@ import { processSquizEdit } from '../../global/js/utils/isEditor';
 
 ### 2. Detect Edit Mode
 ```javascript
-// Must fallback to false, use true to mock the editor
-const squizEdit = false || info?.ctx?.editor || false;
+        // Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
 ```
 
 ### 3. Make Variables Mutable
@@ -123,7 +123,7 @@ export default {
         let { buttonText = "Button text", internalUrl, externalUrl, isNewWindow } = args || {};
 
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
@@ -208,7 +208,7 @@ export default {
         let { buttons } = args || {};
         
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
@@ -318,7 +318,7 @@ export default {
         let { source, featuredDescription } = args?.contentConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
@@ -573,6 +573,7 @@ Your Handlebars template must include static `data-se` attributes:
 5. **Always provide defaults** for required content in edit mode
 6. **Test with mock editor mode** by setting `squizEdit = true`
 7. **Keep shared partials generic** - let components handle the mapping
+8. **Simplify error handling in edit mode** - use mock data without console errors or error returns
 
 ## Common Patterns
 
@@ -582,7 +583,7 @@ export default {
     async main(args, info) {
         let { field1, field2 } = args || {};
         
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
@@ -643,7 +644,7 @@ export default {
         let { title, slides } = args || {};
 
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
@@ -774,7 +775,7 @@ export default {
         let { cards } = args || {};
 
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
@@ -899,7 +900,7 @@ export default {
         let { headingConfiguration, contentConfiguration, displayConfiguration } = args || {};
 
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
@@ -1086,7 +1087,7 @@ export default {
         let { alignment, displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
@@ -1307,7 +1308,7 @@ export default {
         let { ctaPreText, ctaText, ctaSubtext, externalUrl, internalUrl, isNewWindow } = ctaDetails || {};
 
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
@@ -1523,7 +1524,7 @@ export default {
         let { title, eyebrow, content, image, imageAlignment } = args || {};
 
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
@@ -1638,7 +1639,8 @@ export default {
 - **Interactive Elements**: Maintains flip card functionality with CSS transforms
 - **Image Integration**: Handles image asset loading with error fallback
 - **Layout Options**: Supports left/right image alignment via quick options
-- **Complex UI**: Preserves interactive card animations and button functionality
+- **Accessibility**: ARIA labels and tab indexing maintained
+- **Visual Effects**: Shadow, border radius, and color transitions intact
 
 **Generated `data-sq-field` attributes:**
 - Card title: `data-sq-field="title"`
@@ -1662,3 +1664,370 @@ This pattern is ideal for components that:
 The implementation preserves all interactive functionality while enabling inline editing of the core content fields, making it easy for editors to update card content without disrupting the user experience.
 
 ## Configuration Examples
+```
+
+## Example 11: Media-Carousel Component (API-Based Array with Shared Partials)
+
+The `media-carousel` component demonstrates inline editing for an array of media cards fetched from an external API, with proper error handling and shared partial updates.
+
+### Inline Editable Fields:
+1. `title` - Card title (string) - in cards array
+2. `author` - Card author (string) - in cards array  
+3. `teaserText` - Card description (string, multi-line) - in cards array
+
+### Updated main.js
+```javascript
+import mediaCarouselTemplate from './media-carousel.hbs';
+import {cardDataAdapter, matrixMediaCardService, isRealExternalLink, uuid } from "../../global/js/utils";
+import { SidebarHeading } from "../../global/js/helpers";
+import { processSquizEdit } from '../../global/js/utils/isEditor';
+
+export default {
+    async main(args, info) {
+        // Extracting environment variables and functions from provided info
+        const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
+        const fnsCtx = info?.fns || info?.ctx || {};
+        
+        // CHANGE: change const to let for mutability
+        let { cards } = args || {};
+
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Add default values if cards array is not provided or empty
+            cards = cards && cards.length > 0 ? cards : [
+                {
+                    cardType: 'Book',
+                    title: 'Sample Media Title 1',
+                    author: 'Sample Author 1',
+                    teaserText: 'This is sample teaser text for the first media card.',
+                    image: 'matrix-asset://api-identifier/sample-image-1',
+                    linkUrl: 'https://example.com'
+                },
+                {
+                    cardType: 'Podcast',
+                    title: 'Sample Media Title 2',
+                    author: 'Sample Author 2',
+                    teaserText: 'This is sample teaser text for the second media card.',
+                    image: 'matrix-asset://api-identifier/sample-image-2',
+                    linkUrl: 'https://example.com'
+                }
+            ];
+            
+            // Ensure each card has default values
+            cards = cards.map(card => ({
+                ...card,
+                title: card.title || 'Sample Media Title',
+                author: card.author || 'Sample Author',
+                teaserText: card.teaserText || 'Sample teaser text for this media item.'
+            }));
+            
+            // Configure edit targets for array - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "title": {
+                    "field": "cards",
+                    "array": true,
+                    "property": "title"
+                },
+                "author": {
+                    "field": "cards",
+                    "array": true,
+                    "property": "author"
+                },
+                "teaserText": {
+                    "field": "cards",
+                    "array": true,
+                    "property": "teaserText"
+                }
+            };
+        }
+
+        // Validate required environment variables - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            // ... existing validation logic ...
+        }
+
+        // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            // ... existing validation logic ...
+        }
+
+        const adapter = new cardDataAdapter();
+        let data = null;
+
+        // Compose and fetch the FB search results
+        const service = new matrixMediaCardService({ ctx: fnsCtx, API_IDENTIFIER });
+        adapter.setCardService(service);
+
+        // Get the cards data with error handling
+        try {
+            data = await adapter.getCards(cards);
+        } catch (er) {
+            console.error('Error occurred in the Media carousel component: Failed to fetch card data. ', er);
+            // NEW: In edit mode, provide mock data instead of returning error
+            if (squizEdit) {
+                data = cards.map((card, index) => ({
+                    type: card.cardType || 'Book',
+                    title: card.title,
+                    author: card.author,
+                    description: card.teaserText,
+                    imageUrl: 'https://picsum.photos/400/600',
+                    imageAlt: `Sample media image ${index + 1}`,
+                    liveUrl: card.linkUrl || 'https://example.com',
+                    taxonomy: card.cardType === 'Podcast' ? 'Featured audio' : 'Featured reading'
+                }));
+            } else {
+                return `<!-- Error occurred in the Media carousel component: Failed to fetch card data. ${er.message} -->`;
+            }
+        }
+
+        // ... rest of processing logic ...
+
+        // Prepare component data for template rendering
+        const componentData = {
+            id: uuid(),
+            slides: data,
+            width: "large"
+        };
+
+        // NEW: Early return pattern for edit mode
+        if (!squizEdit) return mediaCarouselTemplate(componentData);
+
+        // NEW: Process for edit mode
+        return processSquizEdit(mediaCarouselTemplate(componentData), squizEditTargets);
+    }
+};
+```
+
+### Updated card-media.hbs (Shared Partial)
+```handlebars
+<article aria-label="{{title}}" data-test="media-card" class="...">
+    {{#if imageUrl}}
+    <div class="...">
+        <img class="..." src="{{imageUrl}}" alt="{{imageAlt}}" />
+    </div>
+    {{/if}}
+    <div class="su-media-card-text ...">
+        {{#if taxonomy}}
+        <div class="...">
+            {{{sidebarHeading}}}
+        </div>
+        {{/if}}
+        {{#if title}}
+        <h3 class="...">
+            {{#if liveUrl}}
+            <a href="{{liveUrl}}" class="...">
+                <span data-se="title">{{title}}</span>
+                {{#if isRealExternalLink}} 
+                <!-- external link icon -->
+                {{/if}}                  
+            </a>
+            {{else}}
+            <span class="..." data-se="title">{{title}}</span>
+            {{/if}}
+        </h3>
+        {{/if}}
+        {{#if author}}
+        <div data-test="mediacard-author" class="..." data-se="author">{{author}}</div>
+        {{/if}}
+        {{#if type}}
+        <div class="...">
+            <!-- type icon and text -->
+        </div>
+        {{/if}}
+        {{#if description}} 
+        <div data-test="mediacard-description" class="..." data-se="teaserText">
+            {{description}}
+        </div>
+        {{/if}}
+    </div>
+</article>
+```
+
+### Key Features Demonstrated:
+- **Array-based inline editing**: Multiple media cards with auto-indexing
+- **Mixed API data sources**: Uses matrix-asset-uri for images and external APIs for card data
+- **Shared partial updates**: Added static `data-se` attributes to reusable card-media partial
+- **Comprehensive error handling**: Provides mock data when Matrix API fails in edit mode
+- **Complex data transformation**: Maintains existing card processing and type icon logic
+- **Carousel integration**: Works with existing Swiper.js carousel functionality
+
+**Generated `data-sq-field` attributes:**
+- Card titles: `data-sq-field="cards[0].title"`, `cards[1].title`, etc.
+- Card authors: `data-sq-field="cards[0].author"`, `cards[1].author`, etc.
+- Card descriptions: `data-sq-field="cards[0].teaserText"`, `cards[1].teaserText`, etc.
+
+This pattern is ideal for components that:
+- Display arrays of content cards from external APIs
+- Use shared partials that need to work with multiple components
+- Require robust error handling for API failures
+- Include complex data processing and transformation
+- Need to maintain existing carousel/slider functionality
+- Handle both simple string fields and multi-line text content
+
+The implementation preserves all carousel functionality while enabling inline editing of the core content fields, with graceful fallback to mock data when APIs are unavailable during editing.
+
+## Configuration Examples
+```
+
+## Example 12: Media-Feature Component (Nested Object Fields with Media Content)
+
+The `media-feature` component demonstrates inline editing for nested object fields in a media-focused component with proper validation and mock data for edit mode.
+
+### Inline Editable Fields:
+1. `title` - Media title (string) - in contentConfiguration object
+2. `teaserText` - Media description (string, multi-line) - in contentConfiguration object
+
+### Updated main.js
+```javascript
+import { basicAssetUri } from "../../global/js/utils";
+import { SidebarHeading } from "../../global/js/helpers";
+import mediaFeatureTemplate from './media-feature.hbs';
+import { processSquizEdit } from '../../global/js/utils/isEditor';
+
+export default {
+    async main(args, info) {
+        // Extracting functions from provided info
+        const fnsCtx = info?.fns || info?.ctx || {};
+                
+        // CHANGE: change const to let for mutability
+        let { backgroundImage, image, title, teaserText, mediaType, linkUrl } = args?.contentConfiguration || {};
+
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Add default values for inline editable fields
+            title = title || 'Featured Media Title';
+            teaserText = teaserText || 'This is a sample description for the featured media content that can be edited inline.';
+            
+            // Set up inline editing targets for nested object fields
+            squizEditTargets = {
+                "title": {
+                    "field": "contentConfiguration.title"
+                },
+                "teaserText": {
+                    "field": "contentConfiguration.teaserText"
+                }
+            };
+        }
+
+        // Early return for edit mode with wrapped validation
+        if (!squizEdit) {
+            // Validate required functions
+            try {
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Media feature component: ', er);
+                return `<!-- Error occurred in the Media feature component: ${er.message} -->`;
+            }
+            // Additional validation checks...
+        }
+
+        let bgImageData = null;
+        let imageData = null;
+
+        // Asset loading with simplified error handling for edit mode
+        if (backgroundImage) {
+            try {
+                bgImageData = await basicAssetUri(fnsCtx, backgroundImage);
+            } catch (er) {
+                // In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    bgImageData = { url: 'https://via.placeholder.com/1200x600', attributes: { alt: 'Background image' } };
+                }
+            }
+        }
+
+        if (image) {
+            try {
+                imageData = await basicAssetUri(fnsCtx, image);
+            } catch (er) {
+                // In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    imageData = { url: 'https://via.placeholder.com/300x300', attributes: { alt: 'Featured media image' } };
+                }
+            }
+        }
+
+        // Process media type logic...
+        let iconName, iconTestId, heading;
+        
+        if (mediaType === "Book") {
+            iconName = "book-open-cover";
+            iconTestId = "svg-book-open-cover";
+        } else if (mediaType === "Podcast") {
+            iconName = "microphone";
+            iconTestId = "svg-microphone";
+        } else if (mediaType === "Magazine") {
+            iconName = "book-open";
+            iconTestId = "svg-book-open";
+        }
+
+        switch (mediaType) {
+            case "Podcast":
+                heading = SidebarHeading({ icon: "Featured audio", title: "Featured audio" });
+                break;
+            case "Magazine":
+                heading = SidebarHeading({ icon: "Featured reading", title: "Featured reading" });
+                break;
+            default:
+                heading = SidebarHeading({ icon: "Featured reading", title: "Featured book" });
+        }
+
+        // Prepare component data for template rendering
+        const componentData = {
+            bgImageData,
+            imageData,
+            title,
+            teaserText,
+            mediaType,
+            linkUrl,
+            isPodcast: mediaType === "Podcast",
+            heading,
+            width: 'full',
+            paddingX: false,
+            iconName,
+            iconTestId,
+        };
+
+        // NEW: Early return pattern for front-end
+        if (!squizEdit) return mediaFeatureTemplate(componentData);
+
+        // NEW: Process for edit mode
+        return processSquizEdit(mediaFeatureTemplate(componentData), squizEditTargets);
+    }
+};
+```
+
+### Updated media-feature.hbs
+The template requires wrapping the inline editable fields with `data-se` attributes using the nested object paths:
+
+```handlebars
+<h3 class="su-text-[35px] su-font-bold su-leading-tight su-mb-15 md:su-mb-19 md:su-text-[40px] lg:su-text-[43px]">
+    <a href="{{linkUrl}}" class="su-media-feature-title-link su-stretched-link">
+        <span data-se="title">{{title}}</span>
+        <!-- External link icon -->
+    </a>
+</h3>
+
+<p class="su-text-18 su-w-full su-m-0 su-leading-[125%] su-text-black su-font-normal md:su-text-19 lg:su-text-21" data-se="teaserText">
+    {{teaserText}}
+</p>
+```
+
+### Key Patterns:
+1. **Nested Object Targeting**: Use dot notation for nested object fields (`contentConfiguration.title`)
+2. **Graceful Asset Loading**: Try to load real images first, fallback to placeholders only on API failure in edit mode
+3. **Simplified Error Handling**: Provide mock data when API calls fail in edit mode without console errors or error returns
+4. **Proper Field Defaults**: Provide meaningful sample content for missing fields
+5. **Validation Wrapping**: Skip validation entirely in edit mode for better performance
+
+// ... existing code ...

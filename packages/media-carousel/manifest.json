@@ -44,7 +44,11 @@
                                     "type": "string",
                                     "title": "Type",
                                     "default": "Book",
-                                    "enum": ["Book", "Magazine", "Podcast"]
+                                    "enum": [
+                                        "Book",
+                                        "Magazine",
+                                        "Podcast"
+                                    ]
                                 },
                                 "image": {
                                     "type": "string",
@@ -53,23 +57,36 @@
                                 },
                                 "title": {
                                     "type": "string",
-                                    "title": "Title"
+                                    "title": "Title",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "author": {
                                     "type": "string",
-                                    "title": "Author"
+                                    "title": "Author",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "teaserText": {
                                     "type": "string",
                                     "title": "Teaser Text",
-                                    "format": "multi-line"
+                                    "format": "multi-line",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "linkUrl": {
                                     "type": "string",
                                     "title": "Link Url"
                                 }
                             },
-                            "required": ["cardType", "image", "title"]
+                            "required": [
+                                "cardType",
+                                "image",
+                                "title"
+                            ]
                         }
                     }
                 },
