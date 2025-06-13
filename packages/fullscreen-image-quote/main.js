@@ -41,7 +41,7 @@ export default {
         let { ctaPreText, ctaText, ctaSubtext, externalUrl, internalUrl, isNewWindow } = ctaDetails || {};
 
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {

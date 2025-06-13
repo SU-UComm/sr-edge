@@ -27,7 +27,7 @@ export default {
         let { points } = args || {};
 
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {

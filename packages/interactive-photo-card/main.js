@@ -30,7 +30,7 @@ export default {
         let { title, eyebrow, content, image, imageAlignment } = args || {};
 
         // NEW: Detect edit mode
-        const squizEdit = false || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
