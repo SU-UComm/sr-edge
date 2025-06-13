@@ -105,7 +105,9 @@ export default {
 
         // Getting button URL
         const buttonUrl = linkData?.url || externalUrl;
-
+        if (squizEdit) {
+            buttonUrl = buttonUrl || 'https://www.stanford.edu';
+        }
         // NEW: Skip URL validation in edit mode - editor handles this
         if (!squizEdit) {
             // Validate data

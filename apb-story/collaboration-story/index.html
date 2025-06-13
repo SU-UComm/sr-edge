@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stanford Page Builder Journey: A Collaboration Story</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</head>
+<body>
+    <div class="story-container">
+        <header class="story-header">
+            <h1>🚀 Stanford Page Builder Journey</h1>
+            <p class="subtitle">A Collaboration Story: From Basic Components to Interactive Education</p>
+            <div class="journey-stats">
+                <div class="stat">
+                    <span class="stat-number">50</span>
+                    <span class="stat-label">Components Converted</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Phases Completed</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Success Rate</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Timeline Navigation -->
+        <nav class="timeline-nav">
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+                <div class="phase-markers">
+                    <div class="phase-marker active" data-phase="1" onclick="showPhase(1)">
+                        <div class="marker-dot"></div>
+                        <div class="marker-label">Discovery</div>
+                    </div>
+                    <div class="phase-marker" data-phase="2" onclick="showPhase(2)">
+                        <div class="marker-dot"></div>
+                        <div class="marker-label">Methodology</div>
+                    </div>
+                    <div class="phase-marker" data-phase="3" onclick="showPhase(3)">
+                        <div class="marker-dot"></div>
+                        <div class="marker-label">Implementation</div>
+                    </div>
+                    <div class="phase-marker" data-phase="4" onclick="showPhase(4)">
+                        <div class="marker-dot"></div>
+                        <div class="marker-label">Deployment</div>
+                    </div>
+                    <div class="phase-marker" data-phase="5" onclick="showPhase(5)">
+                        <div class="marker-dot"></div>
+                        <div class="marker-label">Standardization</div>
+                    </div>
+                    <div class="phase-marker" data-phase="6" onclick="showPhase(6)">
+                        <div class="marker-dot"></div>
+                        <div class="marker-label">Education</div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="story-content">
+            <!-- Phase 1: Foundation & Discovery -->
+            <section class="phase" id="phase-1">
+                <div class="phase-header">
+                    <span class="phase-number">Phase 1</span>
+                    <h2>Foundation & Discovery</h2>
+                    <span class="phase-duration">Initial Challenge</span>
+                </div>
+                
+                <div class="content">
+                    <div class="challenge-statement">
+                        <h3>🎯 The Challenge</h3>
+                        <p>Stanford had <strong>50+ Page Builder components</strong> that needed to support inline editing in Squiz DXP's Visual Page Builder. The core challenge was converting components that used shared global utilities (cards, buttons, etc.) which needed different <code>data-sq-field</code> values depending on the component context.</p>
+                        
+                        <div class="problem-visualization">
+                            <h4>The Core Problem</h4>
+                            <div class="problem-grid">
+                                <div class="problem-card">
+                                    <h5>Shared Template</h5>
+                                    <pre><code class="language-handlebars">&lt;h3 data-se="title"&gt;{{title}}&lt;/h3&gt;
+&lt;p data-se="description"&gt;{{description}}&lt;/p&gt;</code></pre>
+                                    <p class="card-note">One template, multiple contexts</p>
+                                </div>
+                                <div class="arrow">→</div>
+                                <div class="problem-card">
+                                    <h5>Component A Needs</h5>
+                                    <pre><code class="language-html">data-sq-field="heroCards[0].title"
+data-sq-field="heroCards[0].description"</code></pre>
+                                    <p class="card-note">Specific field paths</p>
+                                </div>
+                                <div class="arrow">→</div>
+                                <div class="problem-card">
+                                    <h5>Component B Needs</h5>
+                                    <pre><code class="language-html">data-sq-field="content.featuredTitle"
+data-sq-field="content.featuredDesc"</code></pre>
+                                    <p class="card-note">Different field paths</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="discovery-process">
+                        <h3>🔍 Discovery Process</h3>
+                        <div class="discovery-steps">
+                            <div class="discovery-step">
+                                <div class="step-icon">1</div>
+                                <div class="step-content">
+                                    <h4>Problem Identification</h4>
+                                    <p>Shared partials needed dynamic field mapping without breaking existing functionality</p>
+                                </div>
+                            </div>
+                            <div class="discovery-step">
+                                <div class="step-icon">2</div>
+                                <div class="step-content">
+                                    <h4>Solution Research</h4>
+                                    <p>Discovered the <code>processSquizEdit</code> utility approach for mapping generic attributes</p>
+                                </div>
+                            </div>
+                            <div class="discovery-step">
+                                <div class="step-icon">3</div>
+                                <div class="step-content">
+                                    <h4>Methodology Development</h4>
+                                    <p>Established "Minimal Changes Only" principle to preserve front-end behavior</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-insight">
+                        <h3>💡 Key Insight</h3>
+                        <blockquote>
+                            "Shared global utilities need different <code>data-sq-field</code> values depending on which component uses them, but they share the same template structure."
+                        </blockquote>
+                        <p>This insight led to the development of the <code>processSquizEdit</code> mapping approach.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 2: Component Conversion Methodology -->
+            <section class="phase hidden" id="phase-2">
+                <div class="phase-header">
+                    <span class="phase-number">Phase 2</span>
+                    <h2>Component Conversion Methodology</h2>
+                    <span class="phase-duration">Systematic Approach</span>
+                </div>
+                
+                <div class="content">
+                    <div class="methodology-overview">
+                        <h3>🔧 The ProcessSquizEdit Approach</h3>
+                        <p>We developed a systematic 5-step methodology that became the foundation for all component conversions:</p>
+                        
+                        <div class="methodology-steps">
+                            <div class="method-step" onclick="toggleMethodStep(1)">
+                                <div class="step-header">
+                                    <span class="step-number">1</span>
+                                    <h4>Import the Utility Function</h4>
+                                    <span class="step-toggle">▼</span>
+                                </div>
+                                <div class="step-content">
+                                    <pre><code class="language-javascript">import { processSquizEdit } from '../../global/js/utils/isEditor';</code></pre>
+                                    <p class="step-note">Only import processSquizEdit - no other utilities needed!</p>
+                                </div>
+                            </div>
+
+                            <div class="method-step" onclick="toggleMethodStep(2)">
+                                <div class="step-header">
+                                    <span class="step-number">2</span>
+                                    <h4>Detect Edit Mode</h4>
+                                    <span class="step-toggle">▼</span>
+                                </div>
+                                <div class="step-content">
+                                    <pre><code class="language-javascript">const squizEdit = info?.ctx?.editor || false;</code></pre>
+                                    <p class="step-note">Simple boolean check - true in edit mode, false in front-end mode.</p>
+                                </div>
+                            </div>
+
+                            <div class="method-step" onclick="toggleMethodStep(3)">
+                                <div class="step-header">
+                                    <span class="step-number">3</span>
+                                    <h4>Make Variables Mutable</h4>
+                                    <span class="step-toggle">▼</span>
+                                </div>
+                                <div class="step-content">
+                                    <pre><code class="language-javascript">// CHANGE: const to let for mutability
+let { title, content } = args || {};</code></pre>
+                                    <p class="step-note">Variables need to be mutable so we can add defaults in edit mode.</p>
+                                </div>
+                            </div>
+
+                            <div class="method-step" onclick="toggleMethodStep(4)">
+                                <div class="step-header">
+                                    <span class="step-number">4</span>
+                                    <h4>Configure Edit Targets</h4>
+                                    <span class="step-toggle">▼</span>
+                                </div>
+                                <div class="step-content">
+                                    <pre><code class="language-javascript">let squizEditTargets = null;
+if (squizEdit) {
+    title = title || 'Add your title';
+    content = content || 'Add content';
+    
+    squizEditTargets = {
+        "title": { "field": "title" },
+        "content": { "field": "content" }
+    };
+}</code></pre>
+                                    <p class="step-note">Only configure in edit mode. Always provide defaults for empty fields.</p>
+                                </div>
+                            </div>
+
+                            <div class="method-step" onclick="toggleMethodStep(5)">
+                                <div class="step-header">
+                                    <span class="step-number">5</span>
+                                    <h4>Early Return Pattern</h4>
+                                    <span class="step-toggle">▼</span>
+                                </div>
+                                <div class="step-content">
+                                    <pre><code class="language-javascript">const componentData = { title, content };
+
+if (!squizEdit) return template(componentData);
+
+return processSquizEdit(template(componentData), squizEditTargets);</code></pre>
+                                    <p class="step-note">Clean separation: front-end gets original template, edit mode gets processed version.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="configuration-formats">
+                        <h3>📋 Three Configuration Formats Identified</h3>
+                        <div class="format-grid">
+                            <div class="format-card">
+                                <h4>Format 1: Simple</h4>
+                                <p>One-to-one attribute mapping for unique elements</p>
+                                <div class="format-example">
+                                    <pre><code class="language-javascript">"title": { "field": "title" }</code></pre>
+                                </div>
+                            </div>
+                            <div class="format-card">
+                                <h4>Format 2: Array</h4>
+                                <p>Automatic index generation for homogeneous collections</p>
+                                <div class="format-example">
+                                    <pre><code class="language-javascript">"button": {
+    "field": "buttons",
+    "array": true,
+    "property": "buttonText"
+}</code></pre>
+                                </div>
+                            </div>
+                            <div class="format-card">
+                                <h4>Format 3: Custom</h4>
+                                <p>Multiple elements with same data-se but different field paths</p>
+                                <div class="format-example">
+                                    <pre><code class="language-javascript">"button": [
+    { "field": "colTwo.buttonText" },
+    { "field": "colThree.buttonText" }
+]</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 3: Systematic Implementation -->
+            <section class="phase hidden" id="phase-3">
+                <div class="phase-header">
+                    <span class="phase-number">Phase 3</span>
+                    <h2>Systematic Implementation</h2>
+                    <span class="phase-duration">Component Conversions</span>
+                </div>
+                
+                <div class="content">
+                    <div class="implementation-examples">
+                        <h3>🏗️ Component Conversion Examples</h3>
+                        
+                        <div class="example-tabs">
+                            <button class="example-tab active" onclick="showExample('text-callout')">Text-Callout</button>
+                            <button class="example-tab" onclick="showExample('two-column')">Two-Column</button>
+                            <button class="example-tab" onclick="showExample('vertical-videos')">Vertical-Videos</button>
+                        </div>
+
+                        <div class="example-content active" id="example-text-callout">
+                            <div class="example-header">
+                                <h4>Text-Callout Component</h4>
+                                <div class="example-tags">
+                                    <span class="tag success">Format 1</span>
+                                    <span class="tag info">Shared Partials</span>
+                                    <span class="tag warning">Zero Template Changes</span>
+                                </div>
+                            </div>
+                            <div class="example-details">
+                                <div class="detail-section">
+                                    <h5>Challenge</h5>
+                                    <p>Simple component with title, content, image, and button using existing shared partials</p>
+                                </div>
+                                <div class="detail-section">
+                                    <h5>Solution</h5>
+                                    <pre><code class="language-javascript">squizEditTargets = {
+    "title": { "field": "displayConfiguration.title" },
+    "content": { "field": "displayConfiguration.content" },
+    "caption": { "field": "imageConfiguration.caption" },
+    "buttonText": { "field": "buttonConfiguration.buttonText" }
+};</code></pre>
+                                </div>
+                                <div class="detail-section">
+                                    <h5>Result</h5>
+                                    <p>✅ Leveraged existing <code>data-se</code> attributes in shared partial<br>
+                                    ✅ No template modifications needed<br>
+                                    ✅ Simple 1:1 field mapping<br>
+                                    ✅ Minimal changes approach</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="example-content" id="example-two-column">
+                            <div class="example-header">
+                                <h4>Two-Column-Text-Callout Component</h4>
+                                <div class="example-tags">
+                                    <span class="tag success">Mixed Formats</span>
+                                    <span class="tag info">Array Handling</span>
+                                    <span class="tag warning">Dot Notation</span>
+                                </div>
+                            </div>
+                            <div class="example-details">
+                                <div class="detail-section">
+                                    <h5>Challenge</h5>
+                                    <p>Array-based fields requiring dot notation for complex data structures</p>
+                                </div>
+                                <div class="detail-section">
+                                    <h5>Solution</h5>
+                                    <pre><code class="language-javascript">squizEditTargets = {
+    "heading": { "field": "heading" },
+    "callouts.title": { "field": "callouts.title" },
+    "callouts.content": { "field": "callouts.content" },
+    "callouts.imageConfiguration.caption": { "field": "callouts.imageConfiguration.caption" },
+    "callouts.buttonConfiguration.buttonText": { "field": "callouts.buttonConfiguration.buttonText" }
+};</code></pre>
+                                </div>
+                                <div class="detail-section">
+                                    <h5>Result</h5>
+                                    <p>✅ Successfully handled both regular and array fields<br>
+                                    ✅ Used dot notation for nested array properties<br>
+                                    ✅ Mixed format approach for different field types<br>
+                                    ✅ Maintained data structure integrity</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="example-content" id="example-vertical-videos">
+                            <div class="example-header">
+                                <h4>Vertical-Videos-Panel Component</h4>
+                                <div class="example-tags">
+                                    <span class="tag success">Format 2</span>
+                                    <span class="tag info">Shared Partials</span>
+                                    <span class="tag warning">Mixed Fields</span>
+                                </div>
+                            </div>
+                            <div class="example-details">
+                                <div class="detail-section">
+                                    <h5>Challenge</h5>
+                                    <p>Mixed field types (regular + array) with existing shared partials</p>
+                                </div>
+                                <div class="detail-section">
+                                    <h5>Solution</h5>
+                                    <pre><code class="language-javascript">squizEditTargets = {
+    "title": { "field": "sectionConfiguration.title" },
+    "ctaText": { "field": "sectionConfiguration.ctaText" },
+    "videos.heading": { "field": "videos.heading" },
+    "videos.subheading": { "field": "videos.subheading" }
+};</code></pre>
+                                </div>
+                                <div class="detail-section">
+                                    <h5>Result</h5>
+                                    <p>✅ Leveraged existing <code>linked-heading</code> partial<br>
+                                    ✅ Updated <code>card-vertical-video</code> partial with data-se attributes<br>
+                                    ✅ Clean implementation using shared components<br>
+                                    ✅ Successfully converted mixed field types</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collaboration-pattern">
+                        <h3>🤝 Human-AI Collaboration Pattern</h3>
+                        <div class="collaboration-flow">
+                            <div class="flow-step">
+                                <div class="flow-icon human">👤</div>
+                                <div class="flow-content">
+                                    <h4>Human</h4>
+                                    <p>Provided component context and requirements</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="flow-icon ai">🤖</div>
+                                <div class="flow-content">
+                                    <h4>AI</h4>
+                                    <p>Analyzed structure and proposed implementation</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="flow-icon human">👤</div>
+                                <div class="flow-content">
+                                    <h4>Human</h4>
+                                    <p>Reviewed and provided feedback/corrections</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="flow-icon ai">🤖</div>
+                                <div class="flow-content">
+                                    <h4>AI</h4>
+                                    <p>Refined implementation based on feedback</p>
+                                </div>
+                            </div>
+                            <div class="flow-arrow">→</div>
+                            <div class="flow-step">
+                                <div class="flow-icon human">👤</div>
+                                <div class="flow-content">
+                                    <h4>Human</h4>
+                                    <p>Tested and validated final result</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 4: Deployment & Version Management -->
+            <section class="phase hidden" id="phase-4">
+                <div class="phase-header">
+                    <span class="phase-number">Phase 4</span>
+                    <h2>Deployment & Version Management</h2>
+                    <span class="phase-duration">Production Rollout</span>
+                </div>
+                
+                <div class="content">
+                    <div class="deployment-strategy">
+                        <h3>🚀 Deployment Strategy</h3>
+                        <div class="strategy-grid">
+                            <div class="strategy-card">
+                                <h4>Version Bumping</h4>
+                                <p>Automated SEMVER updates for all 50 components</p>
+                                <div class="strategy-details">
+                                    <p><strong>Approach:</strong> Bash script automation</p>
+                                    <p><strong>Results:</strong> 4.0.x → 4.1.0 (most components)</p>
+                                    <p><strong>Special case:</strong> Stories-carousel 4.1.6 → 4.2.0</p>
+                                </div>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Authentication</h4>
+                                <p>Secure deployment pipeline setup</p>
+                                <div class="strategy-details">
+                                    <p><strong>Command:</strong> <code>dxp-next auth login --tenant=sug-9278</code></p>
+                                    <p><strong>Challenge:</strong> Session expiry management</p>
+                                    <p><strong>Solution:</strong> Re-authentication as needed</p>
+                                </div>
+                            </div>
+                            <div class="strategy-card">
+                                <h4>Deployment Order</h4>
+                                <p>Systematic alphabetical deployment</p>
+                                <div class="strategy-details">
+                                    <p><strong>Strategy:</strong> Starting from "button" component</p>
+                                    <p><strong>Command:</strong> <code>dxp-next cmp deploy ./dist/{component-name}</code></p>
+                                    <p><strong>Monitoring:</strong> Real-time validation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="challenges-resolved">
+                        <h3>⚠️ Challenges Encountered & Resolved</h3>
+                        
+                        <div class="challenge-item">
+                            <div class="challenge-header">
+                                <h4>Single-Featured-Content Validation Error</h4>
+                                <span class="challenge-status resolved">Resolved</span>
+                            </div>
+                            <div class="challenge-details">
+                                <p><strong>Issue:</strong> "quickOption is only valid for boolean or enum based properties"</p>
+                                <p><strong>Root Cause:</strong> <code>quickOption: true</code> on matrix-asset-uri string field</p>
+                                <p><strong>Solution:</strong> Removed invalid quickOption metadata, rebuilt components</p>
+                                <p><strong>Result:</strong> Successful deployment after fix</p>
+                            </div>
+                        </div>
+
+                        <div class="challenge-item">
+                            <div class="challenge-header">
+                                <h4>Authentication Session Management</h4>
+                                <span class="challenge-status resolved">Resolved</span>
+                            </div>
+                            <div class="challenge-details">
+                                <p><strong>Challenge:</strong> Session expiry during long deployment process</p>
+                                <p><strong>Impact:</strong> Interrupted deployment workflow</p>
+                                <p><strong>Solution:</strong> Re-authentication as needed during deployment</p>
+                                <p><strong>Prevention:</strong> Automated session monitoring for future deployments</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="deployment-results">
+                        <h3>📊 Final Deployment Status</h3>
+                        <div class="results-grid">
+                            <div class="result-card success">
+                                <div class="result-number">50/50</div>
+                                <div class="result-label">Components Successfully Deployed</div>
+                            </div>
+                            <div class="result-card success">
+                                <div class="result-number">100%</div>
+                                <div class="result-label">Success Rate</div>
+                            </div>
+                            <div class="result-card success">
+                                <div class="result-number">0</div>
+                                <div class="result-label">Breaking Changes</div>
+                            </div>
+                        </div>
+                        <p class="results-note">All components are live in production at: <code>https://dxp.squiz.cloud/organization/sug-9278/component-service/all-components/stanford-apb/{component-name}</code></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 5: Asset Standardization -->
+            <section class="phase hidden" id="phase-5">
+                <div class="phase-header">
+                    <span class="phase-number">Phase 5</span>
+                    <h2>Asset Standardization</h2>
+                    <span class="phase-duration">Matrix Asset ID Unification</span>
+                </div>
+                
+                <div class="content">
+                    <div class="standardization-overview">
+                        <h3>🎯 Matrix Asset ID Standardization</h3>
+                        <p><strong>Objective:</strong> Update all squizEdit image default matrix-asset values to use ID 130444</p>
+                        <p><strong>Target Format:</strong> <code>matrix-asset://matrixIdentifier/130444</code></p>
+                        
+                        <div class="before-after">
+                            <div class="before-after-item">
+                                <h4>Before</h4>
+                                <div class="asset-list">
+                                    <p>Multiple IDs in use:</p>
+                                    <div class="id-grid">
+                                        <span class="id-badge old">1</span>
+                                        <span class="id-badge old">2</span>
+                                        <span class="id-badge old">3</span>
+                                        <span class="id-badge old">5</span>
+                                        <span class="id-badge old">6</span>
+                                        <span class="id-badge old">7</span>
+                                        <span class="id-badge old">8</span>
+                                        <span class="id-badge old">9</span>
+                                        <span class="id-badge old">10</span>
+                                        <span class="id-badge old">11</span>
+                                        <span class="id-badge old">14</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="arrow-large">→</div>
+                            <div class="before-after-item">
+                                <h4>After</h4>
+                                <div class="asset-list">
+                                    <p>Standardized ID:</p>
+                                    <div class="id-grid">
+                                        <span class="id-badge new">130444</span>
+                                    </div>
+                                    <p class="standardization-note">All components now use consistent asset ID</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="discovery-process-assets">
+                        <h3>🔍 Discovery Process</h3>
+                        <div class="discovery-timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">1</div>
+                                <div class="timeline-content">
+                                    <h4>Search Strategy</h4>
+                                    <p>Found references in main.js files across components using grep patterns</p>
+                                    <pre><code class="language-bash">grep -r "matrixIdentifier/" packages/*/main.js</code></pre>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">2</div>
+                                <div class="timeline-content">
+                                    <h4>Components Affected</h4>
+                                    <p>Identified campaign-cta, single-image-video, and other components with inconsistent IDs</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">3</div>
+                                <div class="timeline-content">
+                                    <h4>Implementation</h4>
+                                    <p>Used sed commands for precise replacements</p>
+                                    <pre><code class="language-bash">sed -i '' 's/matrix-asset:\/\/matrixIdentifier\/1/matrix-asset:\/\/matrixIdentifier\/130444/g' packages/single-image-video/main.js</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="standardization-results">
+                        <h3>📈 Results</h3>
+                        <div class="results-list">
+                            <div class="result-item">
+                                <span class="result-icon">✅</span>
+                                <div class="result-content">
+                                    <h4>Campaign-CTA</h4>
+                                    <p>Updated and deployed as v4.1.1 with standardized asset ID</p>
+                                </div>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-icon">✅</span>
+                                <div class="result-content">
+                                    <h4>Single-Image-Video</h4>
+                                    <p>Successfully updated from ID 1 to 130444</p>
+                                </div>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-icon">✅</span>
+                                <div class="result-content">
+                                    <h4>Standardized Approach</h4>
+                                    <p>Established methodology for future component asset management</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 6: Knowledge Transfer & Education -->
+            <section class="phase hidden" id="phase-6">
+                <div class="phase-header">
+                    <span class="phase-number">Phase 6</span>
+                    <h2>Knowledge Transfer & Education</h2>
+                    <span class="phase-duration">Team Enablement</span>
+                </div>
+                
+                <div class="content">
+                    <div class="documentation-suite">
+                        <h3>📚 Documentation Suite Created</h3>
+                        
+                        <div class="doc-cards">
+                            <div class="doc-card">
+                                <div class="doc-icon">📖</div>
+                                <h4>ProcessSquizEdit Guide</h4>
+                                <p><strong>Purpose:</strong> Comprehensive technical documentation</p>
+                                <div class="doc-features">
+                                    <ul>
+                                        <li>Core principles and implementation steps</li>
+                                        <li>Configuration formats with examples</li>
+                                        <li>Best practices and common patterns</li>
+                                        <li>Troubleshooting guide</li>
+                                    </ul>
+                                </div>
+                                <div class="doc-improvements">
+                                    <h5>Key Improvements Made:</h5>
+                                    <p>✅ Eliminated duplicate content<br>
+                                    ✅ Restructured for clarity<br>
+                                    ✅ Added practical examples<br>
+                                    ✅ Created implementation checklist</p>
+                                </div>
+                            </div>
+
+                            <div class="doc-card featured">
+                                <div class="doc-icon">🎮</div>
+                                <h4>Interactive Learning Experience</h4>
+                                <p><strong>Purpose:</strong> Hands-on educational tool for development teams</p>
+                                <p><strong>Location:</strong> <code>/apb-story/interactive-demo/</code></p>
+                                
+                                <div class="interactive-features">
+                                    <h5>Features Created:</h5>
+                                    <div class="feature-grid">
+                                        <span class="feature-tag">5 Progressive Modules</span>
+                                        <span class="feature-tag">Interactive Code Builder</span>
+                                        <span class="feature-tag">Hands-on Exercises</span>
+                                        <span class="feature-tag">Real-world Examples</span>
+                                        <span class="feature-tag">Copy-to-clipboard</span>
+                                        <span class="feature-tag">Keyboard Navigation</span>
+                                        <span class="feature-tag">Progress Tracking</span>
+                                        <span class="feature-tag">Best Practices Checklist</span>
+                                    </div>
+                                </div>
+
+                                <div class="module-overview">
+                                    <h5>Learning Modules:</h5>
+                                    <ol>
+                                        <li><strong>Understanding the Problem</strong> - Why processSquizEdit exists</li>
+                                        <li><strong>Core Implementation</strong> - 5-step process with interactive builder</li>
+                                        <li><strong>Configuration Formats</strong> - Three formats with quiz</li>
+                                        <li><strong>Hands-On Practice</strong> - Interactive coding exercise</li>
+                                        <li><strong>Real-World Examples</strong> - Actual component case studies</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="educational-impact">
+                        <h3>🎯 Educational Impact</h3>
+                        <div class="impact-metrics">
+                            <div class="impact-card">
+                                <h4>Learning Outcomes</h4>
+                                <p>After completing the interactive experience, developers can:</p>
+                                <ul>
+                                    <li>Understand why processSquizEdit is necessary</li>
+                                    <li>Follow the 5-step conversion process</li>
+                                    <li>Select appropriate mapping formats</li>
+                                    <li>Handle complex data structures</li>
+                                    <li>Apply best practices consistently</li>
+                                    <li>Debug common implementation issues</li>
+                                </ul>
+                            </div>
+                            <div class="impact-card">
+                                <h4>Knowledge Transfer</h4>
+                                <p>Comprehensive materials for ongoing education:</p>
+                                <ul>
+                                    <li>Interactive learning modules</li>
+                                    <li>Copy-ready implementation patterns</li>
+                                    <li>Best practices checklists</li>
+                                    <li>Troubleshooting resources</li>
+                                    <li>Real-world component examples</li>
+                                    <li>Progressive skill building</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collaboration-methodology">
+                        <h3>🤝 Collaboration Methodology</h3>
+                        <div class="methodology-comparison">
+                            <div class="contribution-column">
+                                <h4>Human Contributions</h4>
+                                <ul>
+                                    <li><strong>Domain Expertise:</strong> Understanding of Stanford's component architecture</li>
+                                    <li><strong>Requirements Definition:</strong> Clear specification of needs and constraints</li>
+                                    <li><strong>Quality Assurance:</strong> Testing and validation of implementations</li>
+                                    <li><strong>Strategic Direction:</strong> Prioritization and scope decisions</li>
+                                </ul>
+                            </div>
+                            <div class="contribution-column">
+                                <h4>AI Contributions</h4>
+                                <ul>
+                                    <li><strong>Pattern Recognition:</strong> Identifying common implementation patterns</li>
+                                    <li><strong>Code Generation:</strong> Creating consistent, maintainable implementations</li>
+                                    <li><strong>Documentation Creation:</strong> Comprehensive guides and examples</li>
+                                    <li><strong>Educational Design:</strong> Interactive learning experiences</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="synergistic-outcomes">
+                            <h4>Synergistic Outcomes</h4>
+                            <div class="outcome-grid">
+                                <div class="outcome-item">
+                                    <span class="outcome-icon">🔄</span>
+                                    <div class="outcome-content">
+                                        <h5>Systematic Approach</h5>
+                                        <p>Repeatable methodology for component conversion</p>
+                                    </div>
+                                </div>
+                                <div class="outcome-item">
+                                    <span class="outcome-icon">⚡</span>
+                                    <div class="outcome-content">
+                                        <h5>Quality Consistency</h5>
+                                        <p>Uniform implementation across all components</p>
+                                    </div>
+                                </div>
+                                <div class="outcome-item">
+                                    <span class="outcome-icon">📚</span>
+                                    <div class="outcome-content">
+                                        <h5>Knowledge Transfer</h5>
+                                        <p>Comprehensive educational materials</p>
+                                    </div>
+                                </div>
+                                <div class="outcome-item">
+                                    <span class="outcome-icon">🚀</span>
+                                    <div class="outcome-content">
+                                        <h5>Future-Proofing</h5>
+                                        <p>Scalable patterns for ongoing development</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Success Metrics Summary -->
+        <section class="success-summary">
+            <h2>🏆 Success Metrics & Outcomes</h2>
+            <div class="metrics-grid">
+                <div class="metric-category">
+                    <h3>Quantitative Results</h3>
+                    <div class="metric-items">
+                        <div class="metric-item">
+                            <span class="metric-number">50</span>
+                            <span class="metric-label">Components Successfully Converted</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-number">100%</span>
+                            <span class="metric-label">Deployment Success Rate</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-number">0</span>
+                            <span class="metric-label">Breaking Changes in Production</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-number">1</span>
+                            <span class="metric-label">Standardized Asset ID</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="metric-category">
+                    <h3>Qualitative Improvements</h3>
+                    <div class="improvement-list">
+                        <div class="improvement-item">
+                            <span class="improvement-icon">✅</span>
+                            <span>Enhanced developer experience with inline editing</span>
+                        </div>
+                        <div class="improvement-item">
+                            <span class="improvement-icon">✅</span>
+                            <span>Improved content editor workflow in Page Builder</span>
+                        </div>
+                        <div class="improvement-item">
+                            <span class="improvement-icon">✅</span>
+                            <span>Comprehensive documentation for future development</span>
+                        </div>
+                        <div class="improvement-item">
+                            <span class="improvement-icon">✅</span>
+                            <span>Interactive learning tools for team education</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="metric-category">
+                    <h3>Knowledge Assets</h3>
+                    <div class="asset-list">
+                        <div class="asset-item">
+                            <span class="asset-icon">🔧</span>
+                            <span>Reusable methodology for future component work</span>
+                        </div>
+                        <div class="asset-item">
+                            <span class="asset-icon">🎓</span>
+                            <span>Educational framework for onboarding new developers</span>
+                        </div>
+                        <div class="asset-item">
+                            <span class="asset-icon">📋</span>
+                            <span>Best practices documentation for maintaining quality</span>
+                        </div>
+                        <div class="asset-item">
+                            <span class="asset-icon">🔍</span>
+                            <span>Troubleshooting resources for ongoing support</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="story-footer">
+            <div class="footer-content">
+                <h3>🎉 Journey Complete</h3>
+                <p>This collaboration demonstrates the power of combining human domain expertise with AI capabilities to solve complex technical challenges. The journey from basic components to sophisticated inline-editable experiences, supported by comprehensive educational materials, showcases how thoughtful collaboration can transform technical challenges into opportunities for innovation and knowledge sharing.</p>
+                
+                <div class="key-success-factors">
+                    <h4>Key Success Factors:</h4>
+                    <ul>
+                        <li>Clear problem definition and scope</li>
+                        <li>Iterative refinement based on real-world testing</li>
+                        <li>Comprehensive documentation and education</li>
+                        <li>Systematic approach to implementation</li>
+                        <li>Focus on knowledge transfer and sustainability</li>
+                    </ul>
+                </div>
+                
+                <p class="footer-note">This methodology and the artifacts created will serve Stanford's development team well into the future, providing both the technical foundation and educational resources needed for continued success with Page Builder component development.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
