@@ -27,8 +27,10 @@ export default {
      * @returns {Promise<string>} Rendered policy brief HTML string
      */
     async main(args, info) {
-        // Extracting environment functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // CHANGE: change const to let for mutability
         let { image, type, title, summary, linkUrl, linkText } = args?.contentConfiguration || {};

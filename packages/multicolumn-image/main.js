@@ -26,9 +26,13 @@ export default {
      * @returns {Promise<string>} Rendered multicolumn image HTML string
      */
     async main(args, info) {
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
+
         // Extracting environment variables from provided info
         const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
-        const fnsCtx = info?.fns || info?.ctx || {};
 
         // Extract configuration data from arguments
         let { images } = args?.contentConfiguration || {};

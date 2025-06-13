@@ -74,6 +74,117 @@ Shared partials should use generic, reusable `data-se` attribute names:
 
 Different components can map these generic names to their specific data structures.
 
+## Fallback Values and Standards
+
+When implementing edit mode fallbacks, it's crucial to provide sensible defaults for all variables that could cause rendering failures. Here are the standardized fallback values to use:
+
+### Matrix Asset URLs
+For any matrix-asset URLs, use these standardized fallback IDs:
+
+```javascript
+// Links
+linkUrl = linkUrl || "matrix-asset://StanfordNews/29389";  // Standard fallback for links
+
+// Images
+image = image || "matrix-asset://StanfordNews/130444";     // Standard fallback for images
+```
+
+### Content Fallbacks
+For text-based content, use these standardized fallbacks:
+
+```javascript
+// Titles and Headings
+title = title || 'Add your title';
+heading = heading || 'Section Heading';
+
+// Descriptions and Content
+description = description || 'Add your description here';
+content = content || '<p>Add your content here</p>';
+
+// Button and Link Text
+buttonText = buttonText || 'Learn more';
+linkText = linkText || 'Read more';
+ctaText = ctaText || 'View all';
+```
+
+### Array Fallbacks
+For array-based content, provide at least one default item:
+
+```javascript
+// Cards or List Items
+items = items?.length ? items : [
+    {
+        title: 'Default Item Title',
+        description: 'Default item description',
+        image: 'matrix-asset://StanfordNews/130444',
+        linkUrl: 'matrix-asset://StanfordNews/29389'
+    }
+];
+
+// Buttons
+buttons = buttons?.length ? buttons : [
+    {
+        buttonText: 'Default Button',
+        linkUrl: 'matrix-asset://StanfordNews/29389'
+    }
+];
+```
+
+### Best Practices for Fallbacks
+
+1. **Always Check for Matrix Assets**: Any variable that expects a matrix-asset URL must have a fallback using the standard IDs.
+
+2. **Content Length**: Fallback text should be long enough to demonstrate the space but short enough to be manageable:
+   - Titles: 2-5 words
+   - Descriptions: 1-2 sentences
+   - Button text: 1-3 words
+
+3. **HTML Content**: When providing fallback HTML content:
+   - Use semantic HTML tags
+   - Include basic formatting
+   - Keep it simple and clean
+
+4. **Array Content**: When providing fallback arrays:
+   - Include at least one item
+   - Ensure all required properties are present
+   - Use standard fallback values for nested properties
+
+5. **Validation**: Always validate the presence of required fields before providing fallbacks:
+   ```javascript
+   if (squizEdit) {
+       // Check for required fields
+       if (!title || !description) {
+           title = title || 'Default Title';
+           description = description || 'Default description';
+       }
+   }
+   ```
+
+### Example Implementation
+
+```javascript
+if (squizEdit) {
+    // Matrix asset fallbacks
+    image = image || 'matrix-asset://StanfordNews/130444';
+    linkUrl = linkUrl || 'matrix-asset://StanfordNews/29389';
+    
+    // Content fallbacks
+    title = title || 'Campaign Title';
+    description = description || 'Campaign description text goes here.';
+    linkText = linkText || 'Learn more';
+    
+    // Array fallbacks
+    cards = cards?.length ? cards : [
+        {
+            title: 'Featured Card',
+            description: 'Card description text',
+            image: 'matrix-asset://StanfordNews/130444',
+            linkUrl: 'matrix-asset://StanfordNews/29389'
+        }
+    ];
+}
+```
+
 ## Implementation Steps
 
 ### 1. Import the Utility Function

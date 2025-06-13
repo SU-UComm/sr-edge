@@ -22,9 +22,10 @@ export default {
      * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
      */
     async main(args, info) {
-        // Extracting environment variables and functions from provided info
-        const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {};
         
         // CHANGE: change const to let for mutability
         let { cards } = args || {};
@@ -85,9 +86,9 @@ export default {
         // Validate required environment variables - CHANGE: wrap in !squizEdit check
         if (!squizEdit) {
             try {
-                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
+                if (typeof fnsCtx.API_IDENTIFIER !== 'string' || fnsCtx.API_IDENTIFIER === '') {
                     throw new Error(
-                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
+                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(fnsCtx.API_IDENTIFIER)} was received.`
                     );
                 }
                 if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
@@ -119,7 +120,7 @@ export default {
         let data = null;
 
         // Compose and fetch the FB search results
-        const service = new matrixMediaCardService({ ctx: fnsCtx, API_IDENTIFIER });
+        const service = new matrixMediaCardService({ ctx: fnsCtx, API_IDENTIFIER: fnsCtx.API_IDENTIFIER });
 
         // Set our card service
         adapter.setCardService(service);

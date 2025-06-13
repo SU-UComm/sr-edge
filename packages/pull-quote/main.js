@@ -28,8 +28,11 @@ export default {
     async main(args, info) {
         // Extracting environment variables and functions from provided info
         const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
-        const fnsCtx = info?.fns || info?.ctx || {};
-        
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
+
         // CHANGE: change const to let for mutability
         let { asset, quote, name, title, width } = (args && args.displayConfiguration) || {};
 

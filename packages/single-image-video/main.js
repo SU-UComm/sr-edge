@@ -37,8 +37,10 @@ export default {
      * @returns {Promise<string>} The rendered two column text callout HTML or an error message.
     */
     async main(args, info) {
-        // Extracting environment varibales and function from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
         // CHANGE: change const to let for mutability

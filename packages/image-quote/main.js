@@ -23,8 +23,10 @@ export default {
      * @returns {Promise<string>} The rendered HTML string for the image-quote section.
      */
     async main(args, info) {
-        // Extracting environment function from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // CHANGE: change const to let for mutability
         let { image, imageCaption, imageCredit, quote, name, title } = args?.displayConfiguration || {};

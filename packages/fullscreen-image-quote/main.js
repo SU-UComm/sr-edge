@@ -33,8 +33,10 @@ export default {
      * @returns {Promise<string>} The rendered Fullscreen Image Quote HTML or an error message.
      */
     async main(args, info) {
-        // Extracting environment function from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // CHANGE: change const to let for mutability
         let { image, imageVPosition, mobileImage, quote, quoteVAlign, quoteHAlign, removeTopSpacing, ctaDetails } = args || {};

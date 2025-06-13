@@ -29,7 +29,9 @@ export default {
      */
     async main(args, info) {
         // Extracting environment variables and function from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
         // CHANGE: change const to let for mutability

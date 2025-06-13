@@ -36,8 +36,10 @@ export default {
         // Detect edit mode
         const squizEdit = info?.ctx?.editor || false;
         
-        // Extracting environment function from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // Extract configuration data
         const { title, content } = args?.displayConfiguration || {};

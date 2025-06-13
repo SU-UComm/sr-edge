@@ -41,8 +41,12 @@ export default {
      */
     async main(args, info) {
         // Extracting environment variables from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
+
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {};
         
         // CHANGE: change const to let for mutability
         let { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow } = args?.headingConfiguration || {};

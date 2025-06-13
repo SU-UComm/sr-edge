@@ -25,7 +25,11 @@ export default {
      */
     async main(args, info) {
         // Extracting functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        
+        // Maintain backward compatibility for existing code
+        const fnsCtx = componentFunctions || componentContext || {};
         
         // CHANGE: change const to let so we can modify later for squizEdit default values
         let { image, title, description, linkUrl, linkText } = (args && args.displayConfiguration) || {};
@@ -114,12 +118,36 @@ export default {
 
         // Getting link data 
         if (linkUrl) {
-            linkData = await basicAssetUri(fnsCtx, linkUrl);
+            try {
+                linkData = await basicAssetUri(fnsCtx, linkUrl);
+            } catch (er) {
+                console.error('Error occurred in the Campaign cta component: Failed to fetch link data. ', er);
+                if (squizEdit) {
+                    linkData = {
+                        url: "https://news.stanford.edu",
+                        text: linkText
+                    };
+                }
+            }
         }
 
         // Getting image data 
         if (image) {
-            imageData = await basicAssetUri(fnsCtx, image);
+            try {
+                imageData = await basicAssetUri(fnsCtx, image);
+            } catch (er) {
+                console.error('Error occurred in the Campaign cta component: Failed to fetch image data. ', er);
+                if (squizEdit) {
+                    imageData = {
+                        "url": "https://news.stanford.edu/__data/assets/image/0016/130444/Jordan-Hall-Dusk.png",
+                        "attributes": {
+                            "alt": {
+                                "value": "Campaign image"
+                            }
+                        }
+                      };
+                }
+            }
         }
         
         // Prepare component data for template rendering

@@ -24,8 +24,10 @@ export default {
      * @throws {Error} If required environment variables or functions are missing or invalid.
      */
     async main(args, info) {
-        // Extracting environment variables and functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
         const { FB_JSON_URL } = info?.env || info?.set?.environment || {};
 
         // Extracting configuration data from arguments

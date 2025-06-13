@@ -26,14 +26,14 @@ import button from './button.hbs';
 export default {
     async main(args, info) {
         // Extracting functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
-        
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
         // CHANGE: change const to let so we can modify later for squizEdit default values
         let { buttonText = "Button text", internalUrl, externalUrl, isNewWindow } = args || {};
 
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
         let squizEditTargets = null;
         
@@ -55,9 +55,9 @@ export default {
 
          // Validate required functions
         try {
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+            if (typeof componentFunctions !== 'object' || typeof componentFunctions.resolveUri === 'undefined') {
                 throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(componentFunctions)} was received.`
                 );
             }
         } catch (er) {
@@ -98,15 +98,25 @@ export default {
 
         let linkData = null;
         
-        // Getting image data 
+        // Getting link data 
         if (internalUrl) {
-            linkData = await basicAssetUri(info.fns, internalUrl);
+            try {
+                linkData = await basicAssetUri(componentFunctions, internalUrl);
+            } catch (er) {
+                console.error('Error occurred in the Button component: ', er);
+                if (squizEdit) {
+                    linkData = {
+                        url: "https://news.stanford.edu",
+                        text: buttonText
+                    };
+                }
+            }
         }
 
         // Getting button URL
-        const buttonUrl = linkData?.url || externalUrl;
+        let buttonUrl = linkData?.url || externalUrl;
         if (squizEdit) {
-            buttonUrl = buttonUrl || 'https://www.stanford.edu';
+            buttonUrl = buttonUrl || 'https://news.stanford.edu';
         }
         // NEW: Skip URL validation in edit mode - editor handles this
         if (!squizEdit) {

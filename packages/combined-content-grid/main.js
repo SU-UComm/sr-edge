@@ -39,7 +39,9 @@ export default {
     async main(args, info) {
         // Extracting environment variables and functions from provided info
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {};
 
         // CHANGE: change const to let so we can modify later for squizEdit default values
         let { source, searchQuery, cards, featuredDescription } = args?.contentConfiguration || {};

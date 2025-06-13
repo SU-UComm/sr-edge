@@ -33,7 +33,10 @@ import singleCtaBlock from './single-cta-block.hbs';
  */
 export default {
     async main(args, info) {
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
         
         let { size, title, eyebrow, description, image, isCard, marginTop, marginBottom } = args || {};
         let { ctaText, ctaType, externalUrl, internalUrl, email, isNewWindow } = (args && args.ctaConfiguration) || {};

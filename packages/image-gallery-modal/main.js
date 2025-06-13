@@ -33,9 +33,13 @@ export default {
      * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
      */
     async main(args, info) {
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {};
+
         // Extracting environment variables from provided info
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
-        const fnsCtx = info?.fns || info?.ctx || {};
 
         // CHANGE: change const to let for mutability
         let { layout, images, caption, credit, title, summary, summaryAlign } = args?.contentConfiguration || {};
