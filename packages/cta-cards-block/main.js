@@ -1,6 +1,6 @@
 import { basicAssetUri, isRealExternalLink } from "../../global/js/utils";
 import ctaCardsBlockTemplate from './cta-cards-block.hbs';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Cta cards block component that prepares and renders Cta cards block  content.
@@ -156,7 +156,7 @@ export default {
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
-            return processSquizEdit(ctaCardsBlockTemplate(componentData), squizEditTargets, args);
+            return processEditor(ctaCardsBlockTemplate(componentData), squizEditTargets, args);
         }
 
         return ctaCardsBlockTemplate(componentData);

@@ -38,10 +38,6 @@
                     </button>
                     <button class="lesson-nav-btn" onclick="showLesson(4)" data-lesson="4">
                         <span class="lesson-num">4</span>
-                        <span class="lesson-title">Hands-On Practice</span>
-                    </button>
-                    <button class="lesson-nav-btn" onclick="showLesson(5)" data-lesson="5">
-                        <span class="lesson-num">5</span>
                         <span class="lesson-title">Real-World Examples</span>
                     </button>
                     <button class="lesson-nav-btn" onclick="showReference()" data-lesson="ref">
@@ -88,7 +84,7 @@ data-sq-field="contentConfig.featuredDesc"</code></pre>
                     </div>
 
                     <div class="solution-preview">
-                        <h3>💡 The Solution</h3>
+                        <h3>💡 The Solution (for now!)</h3>
                         <p>The <code>processSquizEdit</code> method maps generic <code>data-se</code> attributes to specific <code>data-sq-field</code> values for each component's data structure.</p>
                         
                         <div class="interactive-demo">
@@ -137,7 +133,7 @@ data-sq-field="contentConfig.featuredDesc"</code></pre>
                                     <span class="step-toggle">▼</span>
                                 </div>
                                 <div class="step-content">
-                                    <pre><code class="language-javascript">import { processSquizEdit } from '../../global/js/utils/isEditor';</code></pre>
+                                    <pre><code class="language-javascript">import { processSquizEdit } from '../../global/js/utils/processEditor';</code></pre>
                                     <p class="step-note">Only import <code>processSquizEdit</code> - no other utilities needed!</p>
                                 </div>
                             </div>
@@ -176,9 +172,11 @@ let { title, content } = args || {};</code></pre>
                                 <div class="step-content">
                                     <pre><code class="language-javascript">let squizEditTargets = null;
 if (squizEdit) {
+    // Ensure fallback values are set in edit mode for a graceful ui
     title = title || 'Add your title';
     content = content || 'Add content';
     
+    // Configure the edit targets for the component
     squizEditTargets = {
         "title": { "field": "title" },
         "content": { "field": "content" }
@@ -191,26 +189,20 @@ if (squizEdit) {
                             <div class="step" data-step="5">
                                 <div class="step-header" onclick="toggleStep(5)">
                                     <span class="step-number">5</span>
-                                    <h4>Early Return Pattern</h4>
+                                    <h4>Process Template with Squiz Edit Attributes</h4>
                                     <span class="step-toggle">▼</span>
                                 </div>
                                 <div class="step-content">
                                     <pre><code class="language-javascript">const componentData = { title, content };
 
-if (!squizEdit) return template(componentData);
+                                        // If not in edit mode, return the original template
+                                        if (!squizEdit) return template(componentData);
 
-return processSquizEdit(template(componentData), squizEditTargets);</code></pre>
-                                    <p class="step-note">Clean separation: front-end gets original template, edit mode gets processed version.</p>
+                                        // If in edit mode, process the template to support page buileder
+                                        return processEditor(template(componentData), squizEditTargets);</code></pre>
+                                    <p class="step-note">Clean separation: front-end gets original template, edit mode gets processed version with data-sq-field attributes.</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="interactive-builder">
-                        <h3>🎮 Interactive Code Builder</h3>
-                        <p>Click the steps above to build a complete implementation:</p>
-                        <div class="code-builder" id="code-builder">
-                            <pre><code class="language-javascript" id="built-code">// Click the steps above to build your implementation</code></pre>
                         </div>
                     </div>
                 </div>
@@ -361,18 +353,6 @@ return processSquizEdit(template(componentData), squizEditTargets);</code></pre>
                         </div>
                     </div>
 
-                    <div class="format-quiz">
-                        <h3>🧠 Quick Quiz</h3>
-                        <div class="quiz-question" id="quiz-question">
-                            <p>You have 3 buttons in different sections of a component, each needing different field paths. Which format should you use?</p>
-                            <div class="quiz-options">
-                                <button class="quiz-option" onclick="checkAnswer(1, false)">Format 1: Simple</button>
-                                <button class="quiz-option" onclick="checkAnswer(2, false)">Format 2: Array</button>
-                                <button class="quiz-option" onclick="checkAnswer(3, true)">Format 3: Custom</button>
-                            </div>
-                            <div class="quiz-feedback" id="quiz-feedback"></div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="lesson-navigation">
@@ -380,128 +360,15 @@ return processSquizEdit(template(componentData), squizEditTargets);</code></pre>
                         ← Previous: Core Implementation
                     </button>
                     <button class="nav-btn next-btn" onclick="showLesson(4)">
-                        Next: Hands-On Practice →
-                    </button>
-                </div>
-            </section>
-
-            <!-- Lesson 4: Hands-On Practice -->
-            <section class="lesson hidden" id="lesson-4">
-                <div class="lesson-header">
-                    <span class="lesson-number">Module 4</span>
-                    <h2>Hands-On Practice</h2>
-                </div>
-                
-                <div class="content">
-                    <div class="practice-scenario">
-                        <h3>🛠️ Practice Scenario</h3>
-                        <p>You need to convert a "Feature Cards" component that displays an array of feature cards with titles and descriptions.</p>
-                        
-                        <div class="scenario-setup">
-                            <h4>Given Component Structure</h4>
-                            <div class="code-tabs">
-                                <button class="code-tab active" onclick="showCode('manifest')">Manifest</button>
-                                <button class="code-tab" onclick="showCode('template')">Template</button>
-                                <button class="code-tab" onclick="showCode('original')">Original main.js</button>
-                            </div>
-                            
-                            <div class="code-content active" id="code-manifest">
-                                <pre><code class="language-json">{
-  "properties": {
-    "title": {
-      "type": "string",
-      "ui:metadata": { "inlineEditable": true }
-    },
-    "features": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "title": { "type": "string", "ui:metadata": { "inlineEditable": true } },
-          "description": { "type": "string", "ui:metadata": { "inlineEditable": true } }
-        }
-      }
-    }
-  }
-}</code></pre>
-                            </div>
-                            
-                            <div class="code-content" id="code-template">
-                                <pre><code class="language-handlebars">&lt;section class="feature-cards"&gt;
-    &lt;h1 data-se="title"&gt;{{title}}&lt;/h1&gt;
-    &lt;div class="cards-grid"&gt;
-        {{#each features}}
-        &lt;div class="card"&gt;
-            &lt;h3 data-se="cardTitle"&gt;{{title}}&lt;/h3&gt;
-            &lt;p data-se="cardDescription"&gt;{{description}}&lt;/p&gt;
-        &lt;/div&gt;
-        {{/each}}
-    &lt;/div&gt;
-&lt;/section&gt;</code></pre>
-                            </div>
-                            
-                            <div class="code-content" id="code-original">
-                                <pre><code class="language-javascript">export default {
-    async main(args, info) {
-        const { title, features } = args || {};
-        
-        const componentData = { title, features };
-        
-        return template(componentData);
-    }
-};</code></pre>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="practice-exercise">
-                        <h3>✏️ Your Task</h3>
-                        <p>Convert this component to support inline editing. Fill in the missing parts:</p>
-                        
-                        <div class="exercise-editor">
-                            <div class="editor-section">
-                                <h4>1. Add the import statement</h4>
-                                <input type="text" class="code-input" id="import-input" placeholder="import { ... } from '...';" />
-                                <div class="input-feedback" id="import-feedback"></div>
-                            </div>
-                            
-                            <div class="editor-section">
-                                <h4>2. Add edit mode detection</h4>
-                                <input type="text" class="code-input" id="edit-mode-input" placeholder="const squizEdit = ...;" />
-                                <div class="input-feedback" id="edit-mode-feedback"></div>
-                            </div>
-                            
-                            <div class="editor-section">
-                                <h4>3. Configure squizEditTargets</h4>
-                                <textarea class="code-textarea" id="targets-input" placeholder="squizEditTargets = { ... }"></textarea>
-                                <div class="input-feedback" id="targets-feedback"></div>
-                            </div>
-                            
-                            <div class="exercise-actions">
-                                <button class="check-btn" onclick="checkExercise()">Check My Work</button>
-                                <button class="hint-btn" onclick="showHint()">Show Hint</button>
-                                <button class="solution-btn" onclick="showSolution()">Show Solution</button>
-                            </div>
-                        </div>
-                        
-                        <div class="exercise-result" id="exercise-result"></div>
-                    </div>
-                </div>
-
-                <div class="lesson-navigation">
-                    <button class="nav-btn prev-btn" onclick="showLesson(3)">
-                        ← Previous: Configuration Formats
-                    </button>
-                    <button class="nav-btn next-btn" onclick="showLesson(5)">
                         Next: Real-World Examples →
                     </button>
                 </div>
             </section>
 
-            <!-- Lesson 5: Real-World Examples -->
-            <section class="lesson hidden" id="lesson-5">
+            <!-- Lesson 4: Real-World Examples -->
+            <section class="lesson hidden" id="lesson-4">
                 <div class="lesson-header">
-                    <span class="lesson-number">Module 5</span>
+                    <span class="lesson-number">Module 4</span>
                     <h2>Real-World Examples</h2>
                 </div>
                 
@@ -578,8 +445,8 @@ return processSquizEdit(template(componentData), squizEditTargets);</code></pre>
                 </div>
 
                 <div class="lesson-navigation">
-                    <button class="nav-btn prev-btn" onclick="showLesson(4)">
-                        ← Previous: Hands-On Practice
+                    <button class="nav-btn prev-btn" onclick="showLesson(3)">
+                        ← Previous: Configuration Formats
                     </button>
                     <button class="nav-btn next-btn" onclick="showReference()">
                         Next: Quick Reference →
@@ -598,7 +465,7 @@ return processSquizEdit(template(componentData), squizEditTargets);</code></pre>
                     <div class="reference-grid">
                         <div class="reference-card">
                             <h4>Essential Import</h4>
-                            <pre><code class="language-javascript">import { processSquizEdit } from '../../global/js/utils/isEditor';</code></pre>
+                            <pre><code class="language-javascript">import { processSquizEdit } from '../../global/js/utils/processEditor';</code></pre>
                         </div>
                         
                         <div class="reference-card">
@@ -631,7 +498,7 @@ return processSquizEdit(template(componentData), squizEditTargets);</code></pre>
                         <div class="reference-card">
                             <h4>Early Return Pattern</h4>
                             <pre><code class="language-javascript">if (!squizEdit) return template(data);
-return processSquizEdit(template(data), targets);</code></pre>
+return processEditor(template(data), targets);</code></pre>
                         </div>
                     </div>
 
@@ -655,7 +522,7 @@ return processSquizEdit(template(data), targets);</code></pre>
                 </div>
 
                 <div class="lesson-navigation">
-                    <button class="nav-btn prev-btn" onclick="showLesson(5)">
+                    <button class="nav-btn prev-btn" onclick="showLesson(4)">
                         ← Previous: Real-World Examples
                     </button>
                     <button class="nav-btn next-btn" onclick="showLesson(1)">

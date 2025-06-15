@@ -1,6 +1,6 @@
 import xss from "xss";
 import inBriefTemplate from "./in-brief.hbs";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * A module for rendering an in breif with bullet items.
@@ -89,7 +89,7 @@ export default {
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
-            return processSquizEdit(inBriefTemplate(componentData), squizEditTargets, args);
+            return processEditor(inBriefTemplate(componentData), squizEditTargets, args);
         }
 
         return inBriefTemplate(componentData);

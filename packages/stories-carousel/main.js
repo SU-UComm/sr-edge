@@ -2,7 +2,7 @@ import storiesCarouselTemplate from './stories-carousel.hbs';
 import { linkedHeadingService, uuid } from "../../global/js/utils";
 import { Carousel, Card } from "../../global/js/helpers";
 import { fetchUserStories } from "../../global/js/utils/fetchUserStories";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Stories carousel component that renderds a list of cards based on fetched data.
@@ -283,6 +283,6 @@ export default {
         }
 
         // Process and return template with inline editing support
-        return processSquizEdit(storiesCarouselTemplate(componentData), squizEditTargets);
+        return processEditor(storiesCarouselTemplate(componentData), squizEditTargets);
     }
 };

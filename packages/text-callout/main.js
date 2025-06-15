@@ -1,7 +1,7 @@
 import xss from "xss";
 import { basicAssetUri, isRealExternalLink } from "../../global/js/utils";
 import textCalloutTemplate from "./text-callout.hbs";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * A module for rendering an Text callout.
@@ -171,6 +171,6 @@ export default {
         }
 
         // Process and return template with inline editing support
-        return processSquizEdit(textCalloutTemplate(componentData), squizEditTargets);
+        return processEditor(textCalloutTemplate(componentData), squizEditTargets);
     },
 };

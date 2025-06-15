@@ -32,4 +32,4 @@ export { translatePersonalisationProfile } from './translatePersonalisationProfi
 export { useKeypress } from './useKeypress';
 export { useOnClickOutside } from './useOnClickOutside';
 export { uuid } from './uuid';
-export { isEditor, processSquizEdit } from './isEditor';
+export { processEditor } from './processEditor';

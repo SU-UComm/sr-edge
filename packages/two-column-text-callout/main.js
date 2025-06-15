@@ -1,7 +1,7 @@
 import xss from "xss";
 import { basicAssetUri, isRealExternalLink } from '../../global/js/utils';
 import twoColumnTemplate from './two-column-text-callout.hbs';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Two column text callout component that renders content blocks with optional images and buttons
@@ -151,6 +151,6 @@ export default {
         }
 
         // Process and return template with inline editing support
-        return processSquizEdit(twoColumnTemplate(componentData), squizEditTargets);
+        return processEditor(twoColumnTemplate(componentData), squizEditTargets);
     }
 };

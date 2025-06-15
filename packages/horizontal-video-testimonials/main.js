@@ -1,7 +1,7 @@
 import xss from 'xss';
 import horizontalVideoTestimonialsTemplate from './horizontal-video-testimonials.hbs';
 import { basicAssetUri, isRealExternalLink, uuid } from "../../global/js/utils";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Horizontal Video Testimonials renders a video content modal.
@@ -297,7 +297,7 @@ export default {
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
-            return processSquizEdit(horizontalVideoTestimonialsTemplate(componentData), squizEditTargets, args);
+            return processEditor(horizontalVideoTestimonialsTemplate(componentData), squizEditTargets, args);
         }
 
         return horizontalVideoTestimonialsTemplate(componentData);

@@ -1,6 +1,6 @@
 import { basicAssetUri, linkedHeadingService, uuid } from "../../global/js/utils";
 import verticalVideosPanelTemplate from "./vertical-videos-panel.hbs";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Vertical Video Panel component that renders video blocks with images and description
@@ -194,6 +194,6 @@ export default {
         }
 
         // Process and return template with inline editing support
-        return processSquizEdit(verticalVideosPanelTemplate(componentData), squizEditTargets);
+        return processEditor(verticalVideosPanelTemplate(componentData), squizEditTargets);
     }
 };

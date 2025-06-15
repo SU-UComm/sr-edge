@@ -1,6 +1,6 @@
 import { cardDataAdapter, funnelbackCardService, matrixCardService, eventCardService, linkedHeadingService, basicAssetUri, uuid, isRealExternalLink } from "../../global/js/utils";
 import { EventStartEndDate } from '../../global/js/helpers';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import combinedContentGridTemplate from './combined-content-grid.hbs';
 
 /**
@@ -50,7 +50,7 @@ export default {
 
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = true || componentContext?.editor || false;
         // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
         let squizEditTargets = null;
         
@@ -97,6 +97,12 @@ export default {
                 "headingCtaText": {
                     "field": "headingConfiguration.ctaText"
                 },
+                "sidebarTitle-events": {
+                    "field": "eventsConfiguration.heading"
+                },
+                "sidebarTitle-announcements": {
+                    "field": "announcementsConfiguration.heading"
+                }
             };
             
             // Add featured description target if using Select mode
@@ -424,6 +430,6 @@ export default {
         if (!squizEdit) return combinedContentGridTemplate(componentData);
 
         // NEW: process the output to be editable in Squiz Editor
-        return processSquizEdit(combinedContentGridTemplate(componentData), squizEditTargets);
+        return processEditor(combinedContentGridTemplate(componentData), squizEditTargets);
     }
 };

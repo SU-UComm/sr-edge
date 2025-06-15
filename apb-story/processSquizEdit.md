@@ -189,7 +189,7 @@ if (squizEdit) {
 
 ### 1. Import the Utility Function
 ```javascript
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 ```
 **Note:** Only import `processSquizEdit` - `isEditor` is no longer needed.
 
@@ -228,7 +228,7 @@ const componentData = { title, content, width: "narrow" };
 if (!squizEdit) return template(componentData);
 
 // Process for edit mode
-return processSquizEdit(template(componentData), squizEditTargets);
+return processEditor(template(componentData), squizEditTargets);
 ```
 
 ## Configuration Formats
@@ -277,7 +277,7 @@ Maps multiple elements with the same `data-se` attribute to different field path
 
 ### Basic Component
 ```javascript
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import template from './component.hbs';
 
 export default {
@@ -301,7 +301,7 @@ export default {
         
         if (!squizEdit) return template(componentData);
         
-        return processSquizEdit(template(componentData), squizEditTargets);
+        return processEditor(template(componentData), squizEditTargets);
     }
 };
 ```
@@ -416,7 +416,7 @@ export default {
         const componentData = { field1, field2 };
         
         if (!squizEdit) return template(componentData);
-        return processSquizEdit(template(componentData), squizEditTargets);
+        return processEditor(template(componentData), squizEditTargets);
     }
 };
 ```

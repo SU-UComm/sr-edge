@@ -1,6 +1,6 @@
 import xss from "xss";
 import { basicAssetUri, isRealExternalLink } from "../../global/js/utils";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import multicolumnInfoSectionTemplate from './multicolumn-info-section.hbs';
 
 /**
@@ -242,6 +242,6 @@ export default {
         if (!squizEdit) return multicolumnInfoSectionTemplate(componentData);
 
         // NEW: process the output to be editable in Squiz Editor
-        return processSquizEdit(multicolumnInfoSectionTemplate(componentData), squizEditTargets);
+        return processEditor(multicolumnInfoSectionTemplate(componentData), squizEditTargets);
     }
 };

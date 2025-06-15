@@ -1,7 +1,7 @@
 import mediaCarouselTemplate from './media-carousel.hbs';
 import {cardDataAdapter, matrixMediaCardService, isRealExternalLink, uuid } from "../../global/js/utils";
 import { SidebarHeading } from "../../global/js/helpers";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Media carousel component that renderds a list of media cards based on fetched data.
@@ -210,6 +210,6 @@ export default {
         if (!squizEdit) return mediaCarouselTemplate(componentData);
 
         // NEW: Process for edit mode
-        return processSquizEdit(mediaCarouselTemplate(componentData), squizEditTargets);
+        return processEditor(mediaCarouselTemplate(componentData), squizEditTargets);
     }
 };

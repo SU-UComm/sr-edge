@@ -1,6 +1,6 @@
 import { basicAssetUri } from '../../global/js/utils';
 import imageQuoteTemplate from './image-quote.hbs';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * A module for rendering an image-quote section with an image, quote, and attribution.
@@ -165,7 +165,7 @@ export default {
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
-            return processSquizEdit(imageQuoteTemplate(componentData), squizEditTargets, args);
+            return processEditor(imageQuoteTemplate(componentData), squizEditTargets, args);
         }
 
         return imageQuoteTemplate(componentData);

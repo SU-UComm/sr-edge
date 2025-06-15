@@ -1,6 +1,6 @@
 import interactivePhotoCard from './interactive-photo-card.hbs';
 import { basicAssetUri } from "../../global/js/utils";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Interactive photo card component that renders a image and content side by side.
@@ -133,7 +133,7 @@ export default {
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
-            return processSquizEdit(interactivePhotoCard(componentData), squizEditTargets, args);
+            return processEditor(interactivePhotoCard(componentData), squizEditTargets, args);
         }
 
         return interactivePhotoCard(componentData);

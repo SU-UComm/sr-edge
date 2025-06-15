@@ -1,6 +1,6 @@
 import campaignCtaTemplate from './campaign-cta.hbs';
 import { basicAssetUri } from "../../global/js/utils";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Campaign CTA (Call-to-Action) component that renders a campaign block with an image, title, description, and link.
@@ -165,7 +165,7 @@ export default {
         if (!squizEdit) return campaignCtaTemplate(componentData);
 
         // NEW: process the output to be editable in Squiz Editor
-        return processSquizEdit(campaignCtaTemplate(componentData), squizEditTargets);
+        return processEditor(campaignCtaTemplate(componentData), squizEditTargets);
     }
 };
 

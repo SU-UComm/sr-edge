@@ -1,7 +1,7 @@
 import featureContentTemplate from './featured-content.hbs';
 import { cardDataAdapter, funnelbackCardService, linkedHeadingService, matrixCardService, uuid } from "../../global/js/utils";
 import { Card, Modal, EmbedVideo } from "../../global/js/helpers";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
  
 /**
  * Feature content component that renderds a list of features cards based on fetched data
@@ -358,7 +358,7 @@ export default {
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
-            return processSquizEdit(featureContentTemplate(componentData), squizEditTargets, args);
+            return processEditor(featureContentTemplate(componentData), squizEditTargets, args);
         }
 
         return featureContentTemplate(componentData);

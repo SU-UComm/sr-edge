@@ -1,7 +1,7 @@
 import multicolumnListingTemplate from './multicolumn-listing.hbs';
 import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid, uuid } from "../../global/js/utils";
 import { Card } from '../../global/js/helpers';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Multicolumn lisitng component that renderds a list of features cards based on fetched data
@@ -250,6 +250,6 @@ export default {
         if (!squizEdit) return multicolumnListingTemplate(componentData);
 
         // NEW: Process for edit mode
-        return processSquizEdit(multicolumnListingTemplate(componentData), squizEditTargets);
+        return processEditor(multicolumnListingTemplate(componentData), squizEditTargets);
     }
 };

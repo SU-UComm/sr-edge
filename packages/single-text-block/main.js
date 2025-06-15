@@ -1,5 +1,5 @@
 import xss from 'xss';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import singleTextBlockTemplate from './single-text-block.hbs';
 
 /**
@@ -87,6 +87,6 @@ export default {
 
         if (!squizEdit) return singleTextBlockTemplate(componentData);
 
-        return processSquizEdit(singleTextBlockTemplate(componentData), squizEditTargets);
+        return processEditor(singleTextBlockTemplate(componentData), squizEditTargets);
     },
 };

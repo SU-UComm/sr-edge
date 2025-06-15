@@ -1,4 +1,4 @@
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import acknowledgement from './acknowledgement.hbs';
 
 
@@ -66,6 +66,6 @@ export default {
         if (!squizEdit) return acknowledgement(componentData);
 
         // NEW: process the output to be editable in Squiz Editor
-        return processSquizEdit(acknowledgement(componentData), squizEditTargets);
+        return processEditor(acknowledgement(componentData), squizEditTargets);
     },
 };

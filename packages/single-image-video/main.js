@@ -1,6 +1,6 @@
 import xss from "xss";
 import { basicAssetUri, uuid } from '../../global/js/utils';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 import singleImageVideoTemplate from './single-image-video.hbs';
 
@@ -247,6 +247,6 @@ export default {
         if (!squizEdit) return singleImageVideoTemplate(componentData);
 
         // NEW: Process for edit mode
-        return processSquizEdit(singleImageVideoTemplate(componentData), squizEditTargets);
+        return processEditor(singleImageVideoTemplate(componentData), squizEditTargets);
     }
 };

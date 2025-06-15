@@ -1,5 +1,5 @@
 import multicolumnFactPanelTemplate from './multicolumn-fact-panel.hbs';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * @module multicolumnFactPanelTemplate
@@ -121,6 +121,6 @@ export default {
         if (!squizEdit) return multicolumnFactPanelTemplate(componentData);
 
         // NEW: process the output to be editable in Squiz Editor
-        return processSquizEdit(multicolumnFactPanelTemplate(componentData), squizEditTargets);
+        return processEditor(multicolumnFactPanelTemplate(componentData), squizEditTargets);
     }
 };

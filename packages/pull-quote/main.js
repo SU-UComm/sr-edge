@@ -1,5 +1,5 @@
 import { basicAssetUri } from "../../global/js/utils";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import pullQuote from './pull-quote.hbs';
 
 /**
@@ -145,6 +145,6 @@ export default {
         if (!squizEdit) return pullQuote(componentData);
 
         // NEW: Process for edit mode
-        return processSquizEdit(pullQuote(componentData), squizEditTargets);
+        return processEditor(pullQuote(componentData), squizEditTargets);
     }
 };

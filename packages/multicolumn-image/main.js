@@ -1,5 +1,5 @@
 import { basicAssetUri } from "../../global/js/utils";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import multicolumnImage from './multicolumn-image.hbs';
 
 /**
@@ -155,6 +155,6 @@ export default {
         if (!squizEdit) return multicolumnImage(componentData);
 
         // NEW: process the output to be editable in Squiz Editor
-        return processSquizEdit(multicolumnImage(componentData), squizEditTargets);
+        return processEditor(multicolumnImage(componentData), squizEditTargets);
     }
 };

@@ -1,7 +1,7 @@
 import imageGalleryModalTemplate from './image-gallery-modal.hbs';
 import { cardDataAdapter, matrixImageCardService, formatCardDataImage, uuid } from "../../global/js/utils";
 import { ImageMosaic,  mosaic, carouselImages, SidebarHeading, Modal, Carousel } from "../../global/js/helpers";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Image gallery with modal component that renderds a list of images cards that can be viewed in the modal layout.
@@ -267,7 +267,7 @@ export default {
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
-            return processSquizEdit(imageGalleryModalTemplate(componentData), squizEditTargets, args);
+            return processEditor(imageGalleryModalTemplate(componentData), squizEditTargets, args);
         }
 
         return imageGalleryModalTemplate(componentData);

@@ -1,7 +1,7 @@
 import { basicAssetUri } from "../../global/js/utils";
 import { SidebarHeading } from "../../global/js/helpers";
 import mediaFeatureTemplate from './media-feature.hbs';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Media Fateure Component - A Handlebars template component that renders a media feature
@@ -182,6 +182,6 @@ export default {
         if (!squizEdit) return mediaFeatureTemplate(componentData);
 
         // NEW: Process for edit mode
-        return processSquizEdit(mediaFeatureTemplate(componentData), squizEditTargets);
+        return processEditor(mediaFeatureTemplate(componentData), squizEditTargets);
     }
 };

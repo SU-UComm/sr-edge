@@ -1,6 +1,6 @@
 import storyLeadTemplate from './story-lead.hbs';
 import { getFirstWord } from '../../global/js/utils';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 
 export default {
@@ -70,6 +70,6 @@ export default {
         }
 
         // Process and return template with inline editing support
-        return processSquizEdit(storyLeadTemplate(componentData), squizEditTargets);
+        return processEditor(storyLeadTemplate(componentData), squizEditTargets);
     }
 };

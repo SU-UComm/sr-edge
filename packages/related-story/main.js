@@ -1,6 +1,6 @@
 import relatedStory from './related-story.hbs';
 import { cardDataAdapter, matrixCardService } from '../../global/js/utils';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Related story component that fetches and renders related story content.
@@ -150,6 +150,6 @@ export default {
         if (!squizEdit) return relatedStory(componentData);
 
         // NEW: Process for edit mode
-        return processSquizEdit(relatedStory(componentData), squizEditTargets);
+        return processEditor(relatedStory(componentData), squizEditTargets);
     }
 };

@@ -1,7 +1,7 @@
 import xss from "xss";
 import contentCarousel from './content-carousel.hbs';
 import { uuid } from "../../global/js/utils";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Content Carousel component that displays a series of slides with proper sanitization and error handling.
@@ -93,6 +93,6 @@ export default {
         if (!squizEdit) return contentCarousel(componentData);
 
         // NEW: Process for edit mode
-        return processSquizEdit(contentCarousel(componentData), squizEditTargets);
+        return processEditor(contentCarousel(componentData), squizEditTargets);
     }
 };

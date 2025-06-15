@@ -1,6 +1,6 @@
 import { basicAssetUri, cardDataAdapter, matrixCardService, linkedHeadingService } from '../../global/js/utils';
 import inTheNewsTemplate from './in-the-news.hbs';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * In the news component that renders a formatted content card with associated metadata and SVG icons.
@@ -336,7 +336,7 @@ export default {
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
-            return processSquizEdit(inTheNewsTemplate(componentData), squizEditTargets, args);
+            return processEditor(inTheNewsTemplate(componentData), squizEditTargets, args);
         }
 
         return inTheNewsTemplate(componentData);

@@ -1,7 +1,7 @@
 import eventSectionTemplate from './event-section.hbs';
 import { cardDataAdapter, eventCardService, linkedHeadingService, isRealExternalLink, uuid } from "../../global/js/utils";
 import { EventStartEndDate } from '../../global/js/helpers';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * A module for rendering an events section with cards and a linked heading.
@@ -217,7 +217,7 @@ export default {
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
-            return processSquizEdit(eventSectionTemplate(componentData), squizEditTargets, args);
+            return processEditor(eventSectionTemplate(componentData), squizEditTargets, args);
         }
 
         return eventSectionTemplate(componentData);

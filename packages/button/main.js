@@ -1,5 +1,5 @@
 import { basicAssetUri, isRealExternalLink } from '../../global/js/utils';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import button from './button.hbs';
 
 /**
@@ -145,6 +145,6 @@ export default {
         if (!squizEdit) return button(componentData);
 
         // NEW: process the output to be editable in Squiz Editor
-        return processSquizEdit(button(componentData), squizEditTargets);
+        return processEditor(button(componentData), squizEditTargets);
     },
 };

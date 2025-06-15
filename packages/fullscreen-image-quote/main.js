@@ -1,6 +1,6 @@
 import { basicAssetUri, isRealExternalLink, uuid } from "../../global/js/utils";
 import fullscreenImageQuoteTemplate from './fullscreen-image.hbs';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Fullscreen image quote component that renders quoute with background image
@@ -258,7 +258,7 @@ export default {
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
-            return processSquizEdit(fullscreenImageQuoteTemplate(componentData), squizEditTargets, args);
+            return processEditor(fullscreenImageQuoteTemplate(componentData), squizEditTargets, args);
         }
 
         return fullscreenImageQuoteTemplate(componentData);

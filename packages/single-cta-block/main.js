@@ -1,5 +1,5 @@
 import { basicAssetUri, isRealExternalLink, uuid } from "../../global/js/utils";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import singleCtaBlock from './single-cta-block.hbs';
 
 /**
@@ -210,6 +210,6 @@ export default {
 
         if (!squizEdit) return singleCtaBlock(componentData);
 
-        return processSquizEdit(singleCtaBlock(componentData), squizEditTargets);
+        return processEditor(singleCtaBlock(componentData), squizEditTargets);
     }
 };

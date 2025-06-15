@@ -150,7 +150,7 @@ function getStepCode(stepNumber) {
     const stepCodes = {
         1: {
             step: 1,
-            code: "import { processSquizEdit } from '../../global/js/utils/isEditor';"
+            code: "import { processSquizEdit } from '../../global/js/utils/processEditor';"
         },
         2: {
             step: 2,
@@ -179,7 +179,7 @@ if (squizEdit) {
 
 if (!squizEdit) return template(componentData);
 
-return processSquizEdit(template(componentData), squizEditTargets);`
+return processEditor(template(componentData), squizEditTargets);`
         }
     };
     
@@ -285,12 +285,12 @@ function checkExercise() {
     
     // Check import
     const importFeedback = document.getElementById('import-feedback');
-    if (importInput.includes('processSquizEdit') && importInput.includes('isEditor')) {
+    if (importInput.includes('processSquizEdit') && importInput.includes('processEditor')) {
         importFeedback.textContent = '✅ Correct import statement!';
         importFeedback.className = 'input-feedback correct';
         score++;
     } else {
-        importFeedback.textContent = '❌ Should import processSquizEdit from isEditor utils';
+        importFeedback.textContent = '❌ Should import processSquizEdit from processEditor utils';
         importFeedback.className = 'input-feedback incorrect';
     }
     
@@ -332,7 +332,7 @@ function checkExercise() {
 
 function showHint() {
     const hints = [
-        'Import: import { processSquizEdit } from \'../../global/js/utils/isEditor\';',
+        'Import: import { processSquizEdit } from \'../../global/js/utils/processEditor\';',
         'Edit Mode: const squizEdit = info?.ctx?.editor || false;',
         'Targets: Use Format 2 (array) for cardTitle and cardDescription mapping to features array'
     ];
@@ -341,7 +341,7 @@ function showHint() {
 }
 
 function showSolution() {
-    document.getElementById('import-input').value = 'import { processSquizEdit } from \'../../global/js/utils/isEditor\';';
+    document.getElementById('import-input').value = 'import { processSquizEdit } from \'../../global/js/utils/processEditor\';';
     document.getElementById('edit-mode-input').value = 'const squizEdit = info?.ctx?.editor || false;';
     document.getElementById('targets-input').value = `squizEditTargets = {
     "title": { "field": "title" },

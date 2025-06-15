@@ -40,7 +40,7 @@ We developed a systematic 5-step methodology:
 
 1. **Import the Utility Function**
    ```javascript
-   import { processSquizEdit } from '../../global/js/utils/isEditor';
+   import { processEditor } from '../../global/js/utils/processEditor';
    ```
 
 2. **Detect Edit Mode**
@@ -69,7 +69,7 @@ We developed a systematic 5-step methodology:
    ```javascript
    const componentData = { title, content };
    if (!squizEdit) return template(componentData);
-   return processSquizEdit(template(componentData), squizEditTargets);
+   return processEditor(template(componentData), squizEditTargets);
    ```
 
 ### Three Configuration Formats Identified

@@ -25,7 +25,7 @@
  *     ]
  * };
  */
-export async function processSquizEdit(output, squizEditTargets) {
+export async function processEditor(output, squizEditTargets) {
     for (const target in squizEditTargets) {
         const targetConfig = squizEditTargets[target];
         const escapedTarget = target.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

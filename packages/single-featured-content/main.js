@@ -1,5 +1,5 @@
 import { cardDataAdapter, matrixCardService, linkedHeadingService } from "../../global/js/utils";
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import { Card } from "../../global/js/helpers";
 import singleFeaturedTemplate from "./single-featured-content.hbs";
 
@@ -207,6 +207,6 @@ export default {
         if (!squizEdit) return singleFeaturedTemplate(componentData);
 
         // NEW: Process for edit mode
-        return processSquizEdit(singleFeaturedTemplate(componentData), squizEditTargets);
+        return processEditor(singleFeaturedTemplate(componentData), squizEditTargets);
     }
 };

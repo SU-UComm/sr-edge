@@ -1,5 +1,5 @@
 import { basicAssetUri, isRealExternalLink } from '../../global/js/utils';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import buttonRow from './button-row.hbs';
 
 /**
@@ -92,8 +92,19 @@ export default {
                 const { buttonText = "Button text", internalUrl, externalUrl, isNewWindow } = button;
                 let linkData = null;
                 
+                // Getting link data 
                 if (internalUrl) {
-                    linkData = await basicAssetUri(info.fns, internalUrl);
+                    try {
+                        linkData = await basicAssetUri(componentFunctions, internalUrl);
+                    } catch (er) {
+                        console.error('Error occurred in the Button component: ', er);
+                        if (squizEdit) {
+                            linkData = {
+                                url: "https://news.stanford.edu",
+                                text: buttonText
+                            };
+                        }
+                    }
                 }
                 
                 const buttonUrl = linkData?.url || externalUrl;
@@ -106,7 +117,7 @@ export default {
                 return {
                     buttonText,
                     isNewWindow,
-                    buttonUrl: buttonUrl || '#', // Provide fallback URL for edit mode
+                    buttonUrl, 
                     isRealExternalLink: !linkData?.url && externalUrl ? isRealExternalLink(externalUrl) : false,
                 };
             }),
@@ -121,6 +132,6 @@ export default {
         if (!squizEdit) return buttonRow(componentData);
 
         // NEW: process the output to be editable in Squiz Editor
-        return processSquizEdit(buttonRow(componentData), squizEditTargets);
+        return processEditor(buttonRow(componentData), squizEditTargets);
     },
 };

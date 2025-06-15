@@ -1,5 +1,5 @@
 import { basicAssetUri } from '../../global/js/utils';
-import { processSquizEdit } from '../../global/js/utils/isEditor';
+import { processEditor } from '../../global/js/utils/processEditor';
 import policyBriefTemplate from './policy-brief.hbs';
 
 /**
@@ -149,6 +149,6 @@ export default {
         if (!squizEdit) return policyBriefTemplate(componentData);
 
         // NEW: Process for edit mode
-        return processSquizEdit(policyBriefTemplate(componentData), squizEditTargets);
+        return processEditor(policyBriefTemplate(componentData), squizEditTargets);
     }
 };
