@@ -189,7 +189,7 @@ export default {
         }
 
         const adapter = new cardDataAdapter();
-        let data = null;
+        let dataPromise = null;
 
         // Determine data source: "Search" (fetching from Funnelback) or "Select" (Matrix API)
         if (source.toLowerCase() === "search") {
@@ -199,12 +199,11 @@ export default {
             adapter.setCardService(service);
             
             try {
-                data = await adapter.getCards();
+                dataPromise = adapter.getCards();
             } catch (er) {
                 console.error('Error occurred in the Feature content component: Failed to fetch search data. ', er);
-                // NEW: In edit mode, provide mock data instead of returning error
                 if (squizEdit) {
-                    data = [
+                    dataPromise = Promise.resolve([
                         {
                             title: 'Sample Featured Article',
                             description: 'This is a sample featured article description that can be edited inline.',
@@ -235,7 +234,7 @@ export default {
                             taxonomyUrl: 'https://example.com',
                             type: 'Article'
                         }
-                    ];
+                    ]);
                 } else {
                     return `<!-- Error occurred in the Feature content component: Failed to fetch search data. ${er.message} -->`;
                 }
@@ -246,12 +245,11 @@ export default {
             adapter.setCardService(service);
             
             try {
-                data = await adapter.getCards(cards);
+                dataPromise = adapter.getCards(cards);
             } catch (er) {
                 console.error('Error occurred in the Feature content component: Failed to fetch card data. ', er);
-                // NEW: In edit mode, provide mock data instead of returning error
                 if (squizEdit) {
-                    data = [
+                    dataPromise = Promise.resolve([
                         {
                             title: 'Sample Featured Content',
                             description: 'This is a sample featured content description that can be edited inline.',
@@ -282,15 +280,17 @@ export default {
                             taxonomyUrl: 'https://example.com',
                             type: 'Article'
                         }
-                    ];
+                    ]);
                 } else {
                     return `<!-- Error occurred in the Feature content component: Failed to fetch card data. ${er.message} -->`;
                 }
             }
         }
 
-        // Generate linked heading data
-        const headingData = await linkedHeadingService(fnsCtx, { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow });
+        // Run data fetching and heading service in parallel
+        const headingPromise = linkedHeadingService(fnsCtx, { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow });
+        
+        const [data, headingData] = await Promise.all([dataPromise, headingPromise]);
 
         data.map((card) => {
             card.uniqueId = uuid();
