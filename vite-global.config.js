@@ -176,12 +176,9 @@ export default defineConfig({
                     'temp-entry-scss.scss',
                 );
 
-                // Separate SCSS and CSS files
-                const scssFiles = styles.filter(filePath => filePath.endsWith('.scss'));
-                const cssFiles = styles.filter(filePath => filePath.endsWith('.css'));
-
-                // Generate @use statements for SCSS files
-                const scssContent = scssFiles
+                // First, generate all @use statements for SCSS files
+                const useStatements = styles
+                    .filter(filePath => filePath.endsWith('.scss'))
                     .map((filePath) => {
                         const relativePath = relative(
                             resolve(__dirname, 'packages'),
@@ -192,13 +189,14 @@ export default defineConfig({
                     })
                     .join('\n');
 
-                // Generate @import statements for CSS files
-                const cssContent = cssFiles
+                // Then, generate all @import statements for CSS files in the original order
+                const importStatements = styles
+                    .filter(filePath => filePath.endsWith('.css'))
                     .map((filePath) => `@import '${filePath}';`)
                     .join('\n');
 
-                // Combine with @use statements first, then @import statements
-                const tempEntryScssContent = `${scssContent}\n${cssContent}`;
+                // Combine with @use statements first (to satisfy SCSS), then @import statements
+                const tempEntryScssContent = `${useStatements}\n${importStatements}`;
                 writeFileSync(tempEntryScssPath, tempEntryScssContent);
             },
             buildEnd() {
