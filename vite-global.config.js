@@ -31,7 +31,10 @@ function getAllScripts() {
 }
 
 function getAllStyles() {
-    // First get global styles
+    // First get Font Awesome styles
+    const fontAwesomeStyles = resolve(__dirname, 'global/css/fontawesome.css');
+    
+    // Then get global styles
     const globalStyles = resolve(__dirname, 'global/css/global.css');
     
     // Then get component styles in a specific order
@@ -45,8 +48,8 @@ function getAllStyles() {
             return a.localeCompare(b);
         });
 
-    // Always put global styles first
-    return [globalStyles, ...folders];
+    // Put Font Awesome styles first, then global styles, then component styles
+    return [fontAwesomeStyles, globalStyles, ...folders];
 }
 
 function injectInlineContent() {
