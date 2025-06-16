@@ -607,17 +607,12 @@ h4{font-family:"Source Serif 4","Source Serif Pro",Georgia,Times,"Times New Roma
 h5{font-family:"Source Serif 4","Source Serif Pro",Georgia,Times,"Times New Roman",serif}
 h6{font-family:"Source Serif 4","Source Serif Pro",Georgia,Times,"Times New Roman",serif}
 
-/**
- * This injects Tailwind's component classes and any component classes
- * registered by plugins.
- */
-@tailwind components;
+
 
 /**
  * This injects Tailwind's utility classes and any utility classes registered
  * by plugins.
  */
-@tailwind utilities;
 table th{--tw-text-opacity:1;color:rgb(46 45 41 / var(--tw-text-opacity))}
 table th:is(.su-dark *){--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}
 table caption{font-size:1.32em;letter-spacing:-0.012em;}

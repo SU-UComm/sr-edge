@@ -2,6 +2,9 @@
 import { resolve, relative, dirname, extname } from 'path';
 import { defineConfig } from 'vite';
 import viteSass from 'vite-plugin-sass-dts';
+import postcssImport from 'postcss-import';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
 import {
     readdirSync,
     existsSync,
@@ -26,15 +29,22 @@ function getAllScripts() {
 }
 
 function getAllStyles() {
+    // First get global styles
     const globalStyles = resolve(__dirname, 'global/css/global.css');
+    
+    // Then get component styles in a specific order
     const packageDir = resolve(__dirname, 'packages');
     const folders = readdirSync(packageDir, { withFileTypes: true })
         .filter((dirent) => dirent.isDirectory())
         .map((dirent) => resolve(packageDir, dirent.name, 'styles.scss'))
-        .filter((filePath) => existsSync(filePath));
+        .filter((filePath) => existsSync(filePath))
+        .sort((a, b) => {
+            // Ensure consistent ordering of component styles
+            return a.localeCompare(b);
+        });
 
-    folders.push(globalStyles); 
-    return folders;
+    // Always put global styles first
+    return [globalStyles, ...folders];
 }
 
 function injectInlineContent() {
@@ -115,7 +125,13 @@ export default defineConfig({
         },
     },
     css: {
-        postcss: './postcss.config.js',
+        postcss: {
+            plugins: [
+                postcssImport(),
+                tailwindcss(),
+                autoprefixer()
+            ]
+        },
         preprocessorOptions: {
             scss: {
                 api: 'modern-compiler',
