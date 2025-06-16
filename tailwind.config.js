@@ -10,7 +10,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 import colorsFunction from "./global/css/plugins/theme/colors.js";
 const colors = colorsFunction();
 
-const base = resolve(__dirname, "./global/css/plugins/base/base.js");
+// Import base styles
+import baseStyles from "./global/css/plugins/base/base.js";
 
 export default {
     presets: [decanter],
@@ -40,7 +41,7 @@ export default {
         },
     },
     plugins: [
-        base,
+        baseStyles(),
         plugin(function ({ addVariant }) {
             addVariant('hocus', ['&:hover', '&:focus']);
         }),
