@@ -5,6 +5,8 @@ import viteSass from 'vite-plugin-sass-dts';
 import postcssImport from 'postcss-import';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
+import tailwindNesting from 'tailwindcss/nesting';
+
 import {
     readdirSync,
     existsSync,
@@ -128,6 +130,7 @@ export default defineConfig({
         postcss: {
             plugins: [
                 postcssImport(),
+                tailwindNesting(),
                 tailwindcss(),
                 autoprefixer()
             ]
@@ -172,7 +175,13 @@ export default defineConfig({
                     __dirname,
                     'temp-entry-scss.scss',
                 );
-                const tempEntryScssContent = styles
+
+                // Separate SCSS and CSS files
+                const scssFiles = styles.filter(filePath => filePath.endsWith('.scss'));
+                const cssFiles = styles.filter(filePath => filePath.endsWith('.css'));
+
+                // Generate @use statements for SCSS files
+                const scssContent = scssFiles
                     .map((filePath) => {
                         const relativePath = relative(
                             resolve(__dirname, 'packages'),
@@ -182,6 +191,14 @@ export default defineConfig({
                         return `@use '@components/${relativePath.replace('.scss', '')}' as ${validAlias};`;
                     })
                     .join('\n');
+
+                // Generate @import statements for CSS files
+                const cssContent = cssFiles
+                    .map((filePath) => `@import '${filePath}';`)
+                    .join('\n');
+
+                // Combine with @use statements first, then @import statements
+                const tempEntryScssContent = `${scssContent}\n${cssContent}`;
                 writeFileSync(tempEntryScssPath, tempEntryScssContent);
             },
             buildEnd() {
