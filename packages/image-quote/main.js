@@ -32,17 +32,17 @@ export default {
         let { image, imageCaption, imageCredit, quote, name, title } = args?.displayConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = true; // || info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
             // Provide default values for inline editable fields
-            // image = image || 'matrix-asset://api-identifier/sample-image';
-            // imageCaption = imageCaption || 'Sample image caption';
-            // imageCredit = imageCredit || 'Sample image credit';
-            // quote = quote || 'This is a sample quote that demonstrates the inline editing functionality';
-            // name = name || 'Sample Name';
-            // title = title || 'Sample Title/Role';
+            image = image || 'matrix-asset://api-identifier/sample-image';
+            imageCaption = imageCaption || 'Sample image caption';
+            imageCredit = imageCredit || 'Sample image credit';
+            quote = quote || 'This is a sample quote that demonstrates the inline editing functionality';
+            name = name || 'Sample Name';
+            title = title || 'Sample Title/Role';
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -148,11 +148,11 @@ export default {
             captionCredit: imageCaption && imageCredit ? `${imageCaption} | ${imageCredit}` : imageCaption || imageCredit,
         }
 
-
+        // maybe add squiz edit 
         const quoteData = {
             quote: quote ? `${quote}`: '',
-            name,
-            title
+            name: name,
+            title: title
         }
 
         // Prepare component data for template rendering
@@ -161,9 +161,10 @@ export default {
             imageOrientation,
             image: figureData,
             quote: quoteData,
-            imageCaption,
-            imageCredit
+            imageCaption: imageCaption,
+            imageCredit: imageCredit
         }
+
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
