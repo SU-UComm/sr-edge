@@ -28,24 +28,14 @@ export default {
         // Extracting functions from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
-        // CHANGE: change const to let so we can modify later for squizEdit default values
         let { buttonText = "Button text", internalUrl, externalUrl, isNewWindow } = args || {};
 
-        // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
-        // Must fallback to false, use true to mock the editor
         const squizEdit = componentContext?.editor || false;
-        // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
         let squizEditTargets = null;
         
-        // NEW: add a default if squizEdit is true
         if (squizEdit) {
-            // Add default values if content is not provided
-            buttonText = buttonText || 'Click here';
+            buttonText = buttonText || 'Link text';
             
-            // Add the targets for the squizEdit DOM augmentation
-            // used in processSquizEdit to modify the output to add edit markup
-            // top level keys match the data-se attributes found in the template eg data-se="button"
-            // the field values are the component data fields eg data-sq-field="buttonText"
             squizEditTargets = {
                 "button": {
                     "field": "buttonText"

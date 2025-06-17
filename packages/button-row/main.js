@@ -28,7 +28,7 @@ export default {
         
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
         let squizEditTargets = null;
         
@@ -43,7 +43,7 @@ export default {
             // Ensure each button has default buttonText
             buttons = buttons.map(button => ({
                 ...button,
-                buttonText: button.buttonText || 'Click here'
+                buttonText: button.buttonText || 'Link text'
             }));
             
             // Add the targets for the squizEdit DOM augmentation
