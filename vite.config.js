@@ -8,6 +8,10 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import handlebars from 'vite-plugin-handlebars';
 import helpers from './global/hbs/helpers/helpers';
 import Handlebars from 'handlebars';
+import postcssImport from 'postcss-import';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+import tailwindNesting from 'tailwindcss/nesting';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -15,6 +19,21 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const components = readdirSync(resolve(__dirname, 'packages')).filter((dir) => {
     return statSync(resolve(__dirname, 'packages', dir)).isDirectory();
 });
+
+// Custom plugin to handle CSS files
+function cssPlugin() {
+    return {
+        name: 'css-handler',
+        transform(code, id) {
+            if (id.endsWith('.css')) {
+                return {
+                    code: `export default ${JSON.stringify(code)}`,
+                    map: null
+                };
+            }
+        }
+    };
+}
 
 // Custom Vite plugin to precompile Handlebars templates
 function handlebarsPrecompile() {
@@ -142,7 +161,7 @@ export default defineConfig(() => {
     let componentToBuild = process.env.COMPONENT;
 
     if (!componentToBuild && process.env.CHANGED_FILE) {
-        const changedFile = process.env.CHANGED_FILE;``
+        const changedFile = process.env.CHANGED_FILE;
         const pathSegments = changedFile.split('/');
         const packagesIndex = pathSegments.indexOf('packages');
         if (packagesIndex !== -1 && packagesIndex + 1 < pathSegments.length) {
@@ -156,6 +175,24 @@ export default defineConfig(() => {
 
     return {
         define: { 'process.env.NODE_ENV': '"production"' },
+        css: {
+            postcss: {
+                plugins: [
+                    postcssImport(),
+                    tailwindNesting(),
+                    tailwindcss(),
+                    autoprefixer()
+                ]
+            },
+            preprocessorOptions: {
+                scss: {
+                    api: 'modern-compiler',
+                },
+            },
+        },
+        optimizeDeps: {
+            include: ['@fortawesome/fontawesome-svg-core/styles.css']
+        },
         build: {
             target: 'es2015',
             minify: true,
@@ -177,6 +214,7 @@ export default defineConfig(() => {
             },
         },
         plugins: [
+            cssPlugin(),
             handlebars({
                 partialDirectory: resolve(__dirname, 'global'),
             }),
