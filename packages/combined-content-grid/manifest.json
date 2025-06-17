@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "combined-content-grid",
     "type": "edge",
-    "version": "4.1.0",
+    "version": "4.1.12",
     "namespace": "stanford-apb",
     "description": "A featured content grid combined with announcements and events",
     "displayName": "Combined content grid",
@@ -154,7 +154,18 @@
                                                 "required": [
                                                     "cardAsset"
                                                 ]
-                                            }
+                                            },
+                                            "default": [
+                                                {
+                                                    "cardAsset": "matrix-asset://api-identifier/168663"
+                                                },
+                                                {
+                                                    "cardAsset": "matrix-asset://api-identifier/168591"
+                                                },
+                                                {
+                                                    "cardAsset": "matrix-asset://api-identifier/168624"
+                                                }
+                                            ]
                                         },
                                         "featuredDescription": {
                                             "type": "string",

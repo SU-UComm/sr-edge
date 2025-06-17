@@ -60,13 +60,16 @@ export default {
             headingConfiguration = headingConfiguration || {};
             eventsConfiguration = eventsConfiguration || {};
             announcementsConfiguration = announcementsConfiguration || {};
-            
+            cards = cards || [];
             // Add default values for inline editable fields
             headingConfiguration.title = headingConfiguration.title || 'Featured Content';
             headingConfiguration.ctaText = headingConfiguration.ctaText || 'View all';
+            headingConfiguration.ctaUrl = headingConfiguration.ctaUrl || 'matrix-asset://StanfordNews/29389';
+            headingConfiguration.ctaNewWindow = headingConfiguration.ctaNewWindow || false;
+
             eventsConfiguration.heading = eventsConfiguration.heading || 'Upcoming events';
             announcementsConfiguration.heading = announcementsConfiguration.heading || 'Announcements';
-            
+            announcementsConfiguration.linkUrl = announcementsConfiguration.linkUrl || 'matrix-asset://StanfordNews/29389';
             // Add default for featured description if using Select mode
             if (source === 'Select') {
                 featuredDescription = featuredDescription || 'Featured content description goes here.';
@@ -305,7 +308,10 @@ export default {
                 eventDataPromise = eventAdapter.getCards();
             } catch (er) {
                 console.error('Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ', er);
-                return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ${er.message} -->`;
+                if (!squizEdit) {
+                    return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ${er.message} -->`;
+                }
+                eventDataPromise = Promise.resolve([]);
             }
         }
 
@@ -342,7 +348,9 @@ export default {
         if (announcementPageDataPromise) promises.push(announcementPageDataPromise);
 
         const results = await Promise.all(promises);
-        
+
+        // if ( results ) return JSON.stringify(results[2]);
+
         // Extract results
         const data = results[0];
         const headingData = results[1];
