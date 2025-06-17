@@ -1,0 +1,55 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "sidebar-navigation",
+    "type": "edge",
+    "version": "2.0.0",
+    "namespace": "stanford-components",
+    "description": "A navigation element used for a collection of basic informational pages.",
+    "displayName": "Sidebar Navigation",
+    "mainFunction": "main",
+    "icon": {
+        "id": "summarize",
+        "color": {
+            "type": "hex",
+            "value": "#8C1515"
+        }
+    },
+    "environment": [
+        {
+            "name": "BASE_DOMAIN",
+            "required": true
+        }
+    ],
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {},
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        }
+    }
+}
