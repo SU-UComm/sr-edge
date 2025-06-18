@@ -33,6 +33,7 @@
                 "required": [],
                 "properties": {
                     "headingConfiguration": {
+                        "title": "Heading Configuration",
                         "required": [],
                         "properties": {
                             "title": {
@@ -81,7 +82,7 @@
                                 "type": "string"
                             },
                             "personHeadshot": {
-                                "title": "Quotee headshot",
+                                "title": "Quote Headshot",
                                 "type": "string",
                                 "format": "matrix-asset-uri",
                                 "description": "Please use image assets for the person headshot."
@@ -110,6 +111,7 @@
                         }
                     },
                     "supplementaryTeaserOne": {
+                        "title": "Supplementary Teaser One",
                         "required": [],
                         "properties": {
                             "teaserOne": {
@@ -127,6 +129,7 @@
                         }
                     },
                     "supplementaryTeaserTwo": {
+                        "title": "Supplementary Teaser Two",
                         "required": [],
                         "properties": {
                             "teaserTwo": {
