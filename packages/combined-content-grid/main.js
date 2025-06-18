@@ -176,9 +176,10 @@ export default {
 
         const adapter = new cardDataAdapter();
 
-        let data = null;
-        let eventData = null;
-        let announcementData = null;
+        let dataPromise = null;
+        let eventDataPromise = null;
+        let announcementDataPromise = null;
+        let announcementPageDataPromise = null;
         const modalData = [];
 
         // Determine data source: "Search" (fetching from Funnelback) or "Select" (Matrix API)
@@ -191,7 +192,7 @@ export default {
 
             // Get the cards data
             try {
-                data = await adapter.getCards();
+                dataPromise = adapter.getCards();
             } catch (er) {
                 console.error('Error occurred in the Combined Content Grid component: Failed to fetch FB cards data. ', er);
                 return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch FB cards data. ${er.message} -->`;
@@ -205,36 +206,92 @@ export default {
 
             // Get the cards data
             try {
-                data = await adapter.getCards(cards);
+                dataPromise = adapter.getCards(cards);
             } catch (er) {
                 console.error('Error occurred in the Combined Content Grid component: Failed to fetch Matrix cards data. ', er);
                 return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch Matrix cards data. ${er.message} -->`;
             }
         }
 
-        // Resolve the URI for the section heading link
-        const headingData = await linkedHeadingService(
+        // Start heading service promise
+        const headingDataPromise = linkedHeadingService(
             fnsCtx,
             headingConfiguration
         );
 
+        // Start events data fetching if configured
         if (eventsConfiguration?.endPoint) {
-            let events = null
-
             // Create our service
-            const service = new eventCardService({ api: eventsConfiguration.endPoint });
+            const eventService = new eventCardService({ api: eventsConfiguration.endPoint });
+            const eventAdapter = new cardDataAdapter();
 
             // Set our card service
-            adapter.setCardService(service);
+            eventAdapter.setCardService(eventService);
 
             // Get the event cards data
             try {
-                events = await adapter.getCards();
+                eventDataPromise = eventAdapter.getCards();
             } catch (er) {
                 console.error('Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ', er);
                 return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ${er.message} -->`;
             }
+        }
 
+        // Start announcements data fetching if configured
+        if (announcementsConfiguration?.endPoint) {
+            // Create our service
+            const announcementService = new funnelbackCardService({ FB_JSON_URL, query: announcementsConfiguration.endPoint });
+            const announcementAdapter = new cardDataAdapter();
+
+            // Set our card service
+            announcementAdapter.setCardService(announcementService);
+
+             // Get the announcements cards data
+             try {
+                announcementDataPromise = announcementAdapter.getCards();
+            } catch (er) {
+                console.error('Error occurred in the Combined Content Grid component: Failed to fetch announcements cards data. ', er);
+                return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch announcements cards data. ${er.message} -->`;
+            }
+
+            // Start announcements page data fetching if configured
+            if (announcementsConfiguration.linkUrl && announcementsConfiguration.linkUrl !== "") {
+                announcementPageDataPromise = basicAssetUri(
+                    fnsCtx,
+                    announcementsConfiguration.linkUrl
+                );
+            }
+        }
+
+        // Wait for all promises to resolve in parallel
+        const promises = [dataPromise, headingDataPromise];
+        if (eventDataPromise) promises.push(eventDataPromise);
+        if (announcementDataPromise) promises.push(announcementDataPromise);
+        if (announcementPageDataPromise) promises.push(announcementPageDataPromise);
+
+        const results = await Promise.all(promises);
+        
+        // Extract results
+        const data = results[0];
+        const headingData = results[1];
+        let events = null;
+        let announcements = null;
+        let announcementPageData = null;
+        
+        let resultIndex = 2;
+        if (eventDataPromise) {
+            events = results[resultIndex++];
+        }
+        if (announcementDataPromise) {
+            announcements = results[resultIndex++];
+        }
+        if (announcementPageDataPromise) {
+            announcementPageData = results[resultIndex++];
+        }
+
+        // Process events data
+        let eventData = null;
+        if (eventsConfiguration?.endPoint && events) {
             const eventsCards = events.map((item) => {
                 const uniqueID = uuid();
 
@@ -243,7 +300,6 @@ export default {
                 item.uniqueID = uniqueID;
                 item.imageAlt = item.videoUrl ? `Open video ${item.imageAlt} in a modal` : item.imageAlt;
                 item.iconType = item.type?.toLowerCase();
-
 
                 if (item.type === 'Video' || item.videoUrl) {
                     modalData.push(
@@ -270,27 +326,12 @@ export default {
                 ctaIcon: isRealExternalLink(eventsConfiguration.linkUrl) ? "external arrow" : "chevron right",
                 icon: "eventscalendar",
                 data: eventsCards,
-                
             }  
-
         }
 
-        if (announcementsConfiguration?.endPoint) {
-            let announcements = null;
-            // Create our service
-            const service = new funnelbackCardService({ FB_JSON_URL, query: announcementsConfiguration.endPoint });
-
-            // Set our card service
-            adapter.setCardService(service);
-
-             // Get the announcements cards data
-             try {
-                announcements = await adapter.getCards();
-            } catch (er) {
-                console.error('Error occurred in the Combined Content Grid component: Failed to fetch announcements cards data. ', er);
-                return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch announcements cards data. ${er.message} -->`;
-            }
-
+        // Process announcements data
+        let announcementData = null;
+        if (announcementsConfiguration?.endPoint && announcements) {
             const announcementsCards = announcements.map((item) => {
                 item.isRealExternalLink = isRealExternalLink(item.liveUrl);
                 return item;
@@ -304,12 +345,7 @@ export default {
                 data: announcementsCards,
             }
 
-            if (announcementsConfiguration.linkUrl && announcementsConfiguration.linkUrl !== "") {
-                const announcementPageData = await basicAssetUri(
-                    fnsCtx,
-                    announcementsConfiguration.linkUrl
-                );
-    
+            if (announcementPageData) {
                 announcementData.ctaUrl = announcementPageData.url;
                 announcementData.ctaIcon = isRealExternalLink(announcementPageData.url) ? "external arrow" : "chevron right";
             }
