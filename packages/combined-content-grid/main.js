@@ -50,7 +50,7 @@ export default {
 
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
-        const squizEdit = true || componentContext?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
         let squizEditTargets = null;
         
@@ -62,21 +62,17 @@ export default {
             announcementsConfiguration = announcementsConfiguration || {};
             cards = cards || [];
             // Add default values for inline editable fields
-            headingConfiguration.title = headingConfiguration.title || 'Featured Content';
-            headingConfiguration.ctaText = headingConfiguration.ctaText || 'View all';
+            headingConfiguration.title = headingConfiguration.title || 'Title text';
+            headingConfiguration.ctaText = headingConfiguration.ctaText || 'Link text';
             headingConfiguration.ctaUrl = headingConfiguration.ctaUrl || 'matrix-asset://StanfordNews/29389';
             headingConfiguration.ctaNewWindow = headingConfiguration.ctaNewWindow || false;
 
-            eventsConfiguration.heading = eventsConfiguration.heading || 'Upcoming events';
-            announcementsConfiguration.heading = announcementsConfiguration.heading || 'Announcements';
+            eventsConfiguration.heading = eventsConfiguration.heading || 'Title text';
+            announcementsConfiguration.heading = announcementsConfiguration.heading || 'Title text';
             announcementsConfiguration.linkUrl = announcementsConfiguration.linkUrl || 'matrix-asset://StanfordNews/29389';
-            // Add default for featured description if using Select mode
-            if (source === 'Select') {
-                featuredDescription = featuredDescription || 'Featured content description goes here.';
-            }
             
             // Provide default content configuration
-            source = source || 'Search';
+            source = source;
             searchQuery = searchQuery || '?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser_not=true';
             
             // Provide default display configuration
