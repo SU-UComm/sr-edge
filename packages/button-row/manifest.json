@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "button-row",
-    "version": "4.1.13",
+    "version": "4.1.14",
     "type": "edge",
     "namespace": "stanford-apb",
     "description": "Add up to 3 buttons in this row component.",

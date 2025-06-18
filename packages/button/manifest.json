@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "button",
-    "version": "4.1.12",
+    "version": "4.1.13",
     "namespace": "stanford-apb",
     "description": "A button that can be linked to internal or external pages.",
     "displayName": "Button",
