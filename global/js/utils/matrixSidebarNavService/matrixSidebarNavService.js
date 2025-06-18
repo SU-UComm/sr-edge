@@ -22,7 +22,7 @@ export class matrixSidebarNavService {
      */
     async getSidebarNavParentData(currentAssetId) {
         const query = `${this.BASE_DOMAIN}_api/mx/sidebarnav?page=${currentAssetId}`;
-
+ 
         try {
             const res = await fetch(query);
             const json = await res.json();
@@ -42,7 +42,7 @@ export class matrixSidebarNavService {
      * @throws {Error} If the fetch request or JSON parsing fails.
      */
     async getSidebarNavMenuData(parentAssetId) {
-        const query = `${this.BASE_DOMAIN}_api/mx/menu?loc=${parentAssetId}`;
+        const query = `${this.BASE_DOMAIN}_api/mx/sidebarnavedge?page=${parentAssetId}`;
 
         try {
             const res = await fetch(query);
