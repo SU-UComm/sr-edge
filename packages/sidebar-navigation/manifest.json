@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "sidebar-navigation",
     "type": "edge",
-    "version": "4.0.0",
+    "version": "4.0.1",
     "namespace": "pnp-stanford-edge-components-hbs",
     "description": "A navigation element used for a collection of basic informational pages.",
     "displayName": "Sidebar Navigation",
