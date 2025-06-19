@@ -27,7 +27,7 @@
     },
     "eventsConfiguration": {
         "heading": "Upcoming Events",
-        "endPoint": "https://events.stanford.edu/api/2/events?days=365&sponsored=true",
+        "endPoint": "https://news.stanford.edu/_api/events/query",
         "numberOfItems": 3,
         "linkUrl": "https://events.stanford.edu"
     },
