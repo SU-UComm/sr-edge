@@ -1,7 +1,7 @@
 <article aria-label="{{title}}" class="su-component-card su-relative su-w-full" data-testid="vertical-card">
     {{~#if displayThumbnail~}}
     <div class="{{getStringByCondition value=cardSize expectedValue="featured" trueResult="su-mb-15 md:su-mb-26 lg:su-mb-38" falseResult="su-mb-15 md:su-mb-18 lg:su-mb-19"}}">
-        {{> card-thumbnail imageUrl=imageUrl imageAlt=imageAlt videoUrl=videoUrl mediaType="image" aspectRatio=(aspectRatioSize cardSize) size=cardSize uniqueID=uniqueID}}
+        {{> card-thumbnail imageUrl=imageUrl imageAlt=imageAlt videoUrl=videoUrl mediaType="image" aspectRatio=(aspectRatioSize cardSize) size=cardSize uniqueID=uniqueID squizEdit=squizEdit}}
     </div>
     {{~/if~}}       
     <div class="su-flex su-flex-wrap {{getStringByCondition value=cardSize expectedValue="featured" trueResult="su-gap-11 md:su-gap-13 lg:su-gap-13" falseResult="su-gap-11 md:su-gap-12 lg:su-gap-9"}}">
@@ -18,6 +18,7 @@
                     set="regular"
                     width=(getStringByCondition value=cardSize expectedValue="featured" trueResult=20 falseResult=15)
                     classes="su-inline-block su-h-auto su-align-middle su-ml-5 su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
+                    squizEdit=squizEdit
                 }}
                 {{~/if~}}
             </a>
@@ -31,7 +32,7 @@
         {{~/if~}}
         {{~#if type~}}
         <p data-testid="vertical-card-type" class="su-flex su-font-semibold su-text-black-70 dark:su-text-black-60 su-my-0 su-gap-6 su-flex-nowrap su-items-center su-order-3 {{cardTypeSizeClasses cardSize}}">
-            {{> svg-icons icon=iconType}}
+            {{> svg-icons icon=iconType squizEdit=squizEdit}}
             <span>{{{type}}}</span>
         </p>
         {{~/if~}}

@@ -57,7 +57,8 @@ export default {
         let { teaserTwo, teaserTwoDescription } = args?.supplementaryTeaserTwo || {};
 
         // NEW: Detect edit mode
-        const squizEdit = true; // info?.ctx?.editor || false;
+        const squizEdit = info?.ctx?.editor || false;
+        // const squizEdit = true; 
         let squizEditTargets = null;
         
 
@@ -67,10 +68,10 @@ export default {
             title = title || 'In the news';
             ctaText = ctaText || 'View all';
             featuredQuote = featuredQuote || 'This is a sample featured quote that demonstrates the inline editing functionality for the main quote section.';
-            featuredTeaserDescription = featuredTeaserDescription || 'Sample Featured Scholar';
+            featuredTeaserDescription = featuredTeaserDescription || 'Featured Scholar Name';
             featuredCtaText = featuredCtaText || 'Read the story';
-            teaserOneDescription = teaserOneDescription || 'Sample description for teaser one';
-            teaserTwoDescription = teaserTwoDescription || 'Sample description for teaser two';
+            teaserOneDescription = teaserOneDescription || 'Add description for teaser one';
+            teaserTwoDescription = teaserTwoDescription || 'Add description for teaser two';
             
             // Provide default asset IDs for edit mode
             featuredTeaser = featuredTeaser || 'matrix-asset://api-identifier/sample-featured-teaser';
@@ -286,12 +287,11 @@ export default {
             headingCtaText: headingData?.ctaText,
             featuredGridItems: cardData,
             squizEdit: squizEdit 
-        };
+        }; 
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
-            console.log('squizEdit componentData',  componentData);
-            return processEditor(inTheNewsTemplate(componentData), squizEditTargets, args);
+             return processEditor(inTheNewsTemplate(componentData), squizEditTargets, args);
         }
 
         return inTheNewsTemplate(componentData);
