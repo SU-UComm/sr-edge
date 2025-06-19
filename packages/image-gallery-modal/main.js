@@ -45,7 +45,7 @@ export default {
         let { displayIconHeading, backgroundColor, width } = args?.displayConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = true || componentContext?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
@@ -67,7 +67,7 @@ export default {
                 "credit": { "field": "contentConfiguration.credit" },
                 "title": { "field": "contentConfiguration.title" },
                 "summary": { "field": "contentConfiguration.summary" },
-                "image-modelcaption": { "field": "images", "array": true, "property": "caption" }
+                "image-model-caption": { "field": "images", "array": true, "property": "caption" }
             };
             
         }
