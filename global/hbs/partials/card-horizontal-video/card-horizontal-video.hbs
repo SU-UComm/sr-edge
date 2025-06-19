@@ -7,7 +7,7 @@
             class="su-group su-text-black su-transition dark:su-text-white hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red hocus:su-underline"
             rel={{getStringByCondition value=isRealExternalLink expectedValue=true trueResult="noopener noreferrer" falseResult=undefined}}
             >
-                <span data-se="heading">{{heading}}</span>
+                <span data-se="hcardheading">{{heading}}</span>
                 {{~#if isRealExternalLink}}
                 {{!-- Use this whitespace-nowrap trick so icon won't get pushed to the next line on its own --}}
                 <span class="su-group su-whitespace-nowrap">
@@ -23,11 +23,11 @@
                 {{~/if~}}
             </a>
             {{~else~}}
-            <span data-se="heading">{{heading}}</span>
+            <span data-se="hcardheading">{{heading}}</span>
             {{~/if~}}
         </h3>
         {{~#if description~}}
-        <div class="su-max-w-prose md:su-max-w-[45ch] lg:su-max-w-none su-card-paragraph *:last:su-mb-0 *:su-leading-display xl:*:su-leading-snug" data-se="description">
+        <div class="su-max-w-prose md:su-max-w-[45ch] lg:su-max-w-none su-card-paragraph *:last:su-mb-0 *:su-leading-display xl:*:su-leading-snug" data-se="hcarddescription">
             {{{description}}}
         </div>
         {{~/if~}}

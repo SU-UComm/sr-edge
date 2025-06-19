@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "horizontal-video-testimonials",
     "type": "edge",
-    "version": "4.1.0",
+    "version": "4.1.11",
     "namespace": "stanford-apb",
     "description": "A section with a listing of horizontal video cards, with a section title and link to watch more.",
     "displayName": "Horizontal Video Testimonials",
@@ -113,12 +113,18 @@
                             "properties": {
                                 "heading": {
                                     "title": "Card heading",
-                                    "type": "string"
+                                    "type": "string",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "description": {
                                     "title": "Description",
                                     "description": "This is the description/body copy.",
-                                    "type": "FormattedText"
+                                    "type": "FormattedText",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "videoImage": {
                                     "title": "Video preview image",
