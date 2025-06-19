@@ -40,6 +40,8 @@ export default {
      * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
      */
     async main(args, info) {
+        // TODO: tech debt - imageURL and imageUrl are mixed in the templates that render this component
+    
         // Extracting environment variables from provided info
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
@@ -55,10 +57,12 @@ export default {
         let { teaserTwo, teaserTwoDescription } = args?.supplementaryTeaserTwo || {};
 
         // NEW: Detect edit mode
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = true; // info?.ctx?.editor || false;
         let squizEditTargets = null;
         
+
         if (squizEdit) {
+            // if we are in edit mode 
             // Provide default values for inline editable fields
             title = title || 'In the news';
             ctaText = ctaText || 'View all';
@@ -89,9 +93,8 @@ export default {
         }
 
         // Validate required variables - CHANGE: wrap in !squizEdit check
-        // if we are in edit mode, we don't need to validate 
-        if (!squizEdit) {
-
+        // if we are in edit mode, we don't need to validate because values may be blank while editing 
+        if (!squizEdit) { 
             const validateString = (value, fieldName) => {
                 if (value && (typeof value !== 'string' || value === '')) {
                     throw new Error(
@@ -148,25 +151,29 @@ export default {
                 data = await adapter.getCards(cards);
             } catch (er) {
                 console.error('Error occurred in the In the news component: Failed to fetch event data. ', er);
-                // NEW: In edit mode, provide mock data instead of returning error
-                if (squizEdit) {
-                    data = cards.map((card, index) => ({
-                        title: `Sample News Article ${index + 1}`,
-                        description: `This is a sample description for news article ${index + 1}`,
-                        liveUrl: '#',
-                        source: `Sample Source ${index + 1}`,
-                        credit: `Sample Credit ${index + 1}`,
-                        authorName: `Sample Author ${index + 1}`
-                    }));
-                } else {
+                // edit mode will be handled below 
+                if(!squizEdit)  {
                     return `<!-- Error occurred in the In the news component: Failed to fetch event data. ${er.message} -->`;
                 }
             }
         }
 
+        if (squizEdit && data?.length === 0) {
+            // NEW: In edit mode, provide mock data instead of returning error
+            data = cards.map((card, index) => ({
+                title: `Sample News Article ${index + 1}`,
+                description: `This is a sample description for news article ${index + 1}`,
+                liveUrl: '#',
+                source: `Sample Source ${index + 1}`,
+                credit: `Sample Credit ${index + 1}`,
+                authorName: `Sample Author ${index + 1}`
+            }));
+        }
+        
         // Resolve the URI for the section heading link
         let headingData = null;
         try {
+            
             headingData = await linkedHeadingService(
                 fnsCtx,
                 args.headingConfiguration
@@ -189,6 +196,7 @@ export default {
         let imageData = null;
         if (personHeadshot) {
             try {
+                
                 imageData = await basicAssetUri(fnsCtx, personHeadshot);
                 // Check required properties - CHANGE: wrap in !squizEdit check
                 if (!squizEdit) {
@@ -207,11 +215,16 @@ export default {
                 // NEW: In edit mode, provide mock image data
                 if (squizEdit) {
                     imageData = {
-                        url: 'https://picsum.photos/200/200',
+                        url: "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
                         attributes: {
-                            alt: 'Sample headshot',
-                            width: 200,
-                            height: 200
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
                         }
                     };
                 } else {
@@ -221,7 +234,7 @@ export default {
         }
 
         const cardData = [];
-
+        
         // Prepare feature data
         if (data) {
             
@@ -272,10 +285,12 @@ export default {
             headingCtaNewWindow: headingData?.ctaNewWindow,
             headingCtaText: headingData?.ctaText,
             featuredGridItems: cardData,
+            squizEdit: squizEdit 
         };
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
+            console.log('squizEdit componentData',  componentData);
             return processEditor(inTheNewsTemplate(componentData), squizEditTargets, args);
         }
 
