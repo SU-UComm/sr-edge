@@ -32,132 +32,153 @@ export default {
      * @returns {Promise<string>} The rendered two column text callout HTML or an error message.
     */
     async main(args, info) {
-        // Detect edit mode
-        const squizEdit = info?.ctx?.editor || false;
-        
         // Extracting functions from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
         const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
     
         // Extract configuration data
-        const { videos } = args || {};
-        const { title, ctaText, ctaUrl, ctaManualUrl, bgImage, marginTop, marginBottom } = args?.sectionConfiguration || {};
+        let { videos } = args || {};
+        let { title, ctaText, ctaUrl, ctaManualUrl, bgImage, marginTop, marginBottom } = args?.sectionConfiguration || {};
 
-        // Validate required environment variables
-        try {
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Vertical video panel component: ', er);
-            return `<!-- Error occurred in the Vertical video panel component: ${er.message} -->`;
-        }
-
-        // Validate required fields and ensure correct data types
-        try {
-            if (title && typeof title !== 'string') {
-                throw new Error(
-                    `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
-                );
-            }
-            if (ctaText && typeof ctaText !== 'string') {
-                throw new Error(
-                    `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
-                );
-            }
-            if (ctaUrl && typeof ctaUrl !== 'string') {
-                throw new Error(
-                    `The "ctaUrl" field must be a string. The ${JSON.stringify(ctaUrl)} was received.`
-                );
-            }
-            if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
-                throw new Error(
-                    `The "ctaManualUrl" field must be a string. The ${JSON.stringify(ctaManualUrl)} was received.`
-                );
-            }
-            if (bgImage && typeof bgImage !== 'string') {
-                throw new Error(
-                    `The "bgImage" field must be a string. The ${JSON.stringify(bgImage)} was received.`
-                );
-            }
-            if (marginTop && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginTop) ) {
-                throw new Error(
-                    `The "marginTop" field cannot be undefined and must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginTop)} was received.`
-                );
-            }
-            if (marginBottom && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginBottom) ) {
-                throw new Error(
-                    `The "marginBottom" field cannot be undefined and must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginBottom)} was received.`
-                );
-            }
-            if (!Array.isArray(videos)) {
-                throw new Error(
-                    `The "videos" field must be an array. The ${JSON.stringify(videos)} was received.`
-                );
-            }
-            if (videos.length < 1) {
-                throw new Error(
-                    `The "videos" array cannot have less than 1 element. The ${JSON.stringify(videos.length)} elements were received.`
-                );
-            }
-            if (videos.length > 3) {
-                throw new Error(
-                    `The "videos" array cannot have more than 3 elements. The ${JSON.stringify(videos.length)} elements were received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Vertical video panel component: ', er);
-            return `<!-- Error occurred in the Vertical video panel component: ${er.message} -->`;
+        // NEW: Detect edit mode
+        const squizEdit = componentContext?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Provide default configurations for section
+            title = title || 'Heading text';
+            ctaText = ctaText || 'Link text';
+            ctaUrl = ctaUrl || 'matrix-asset://StanfordNews/29389';
+            ctaManualUrl = ctaManualUrl || 'https://news.stanford.edu';
+            bgImage = bgImage || 'matrix-asset://StanfordNews/172387';
+            videos = videos || [];
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "headingTitle": { "field": "sectionConfiguration.title" },
+                "headingCtaText": { "field": "sectionConfiguration.ctaText" },
+                "videoHeading": { "field": "videos", "type": "array",  "property": "heading" },
+                "videoSubheading": { "field": "videos", "type": "array", "property": "subheading" }
+            };
         }
 
         const videoModal = [];
-        const videosData = await Promise.all(
-            videos.map(async (video) => {
-                const { heading, subheading, videoImage, youtubeId } = video;
-                const uniqueID = uuid();
-
-                // Get video image data
-                let imageData = null;
-                if (videoImage) {
-                    imageData = await basicAssetUri(fnsCtx, videoImage);
-                }
-
-                videoModal.push(
-                    {
-                        isVertical: true, 
-                        videoId: video.youtubeId, 
-                        title: `Watch ${video.heading}`, 
-                        noAutoPlay: true,
-                        uniqueID, 
-                        titleID: 'video-modal' 
+        
+        // Prepare all promises to run in parallel for better performance
+        const promises = [];
+        
+        // Add video image promises
+        const videoImagePromises = videos.map(async (video) => {
+            const { videoImage } = video;
+            if (videoImage) {
+                try {
+                    return await basicAssetUri(fnsCtx, videoImage);
+                } catch (er) {
+                    console.error('Error occurred in the Vertical video panel component: Failed to fetch video image data. ', er);
+                    if (squizEdit) {
+                        return {
+                            "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                            "attributes": {
+                                "allow_unrestricted": false,
+                                "size": 1858005,
+                                "height": 960,
+                                "width": 1440,
+                                "title": "placeholder.png",
+                                "name": "placeholder.png",
+                                "caption": "",
+                                "alt": "This is a placeholder"
+                            },
+                        };
                     }
-                );
-                
-                return {
-                    heading,
-                    subheading,
-                    youtubeId,
-                    imageUrl: imageData?.url,
-                    imageAlt: imageData?.attributes?.alt || "",
-                    uniqueID
+                    return null;
                 }
-            })
-        );
+            }
+            return null;
+        });
+        promises.push(...videoImagePromises);
+        
+        // Add section data promise
+        const sectionDataPromise = (async () => {
+            try {
+                return await linkedHeadingService(fnsCtx, args.sectionConfiguration);
+            } catch (er) {
+                console.error('Error occurred in the Vertical video panel component: Failed to fetch section data. ', er);
+                if (squizEdit) {
+                    return {
+                        title: title,
+                        ctaText: ctaText,
+                        ctaLink: ctaManualUrl || ctaUrl || "https://news.stanford.edu"
+                    };
+                }
+                return null;
+            }
+        })();
+        promises.push(sectionDataPromise);
+        
+        // Add background image promise
+        const bgImagePromise = (async () => {
+            if (bgImage) {
+                try {
+                    return await basicAssetUri(fnsCtx, bgImage);
+                } catch (er) {
+                    console.error('Error occurred in the Vertical video panel component: Failed to fetch background image data. ', er);
+                    if (squizEdit) {
+                        return {
+                            "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                            "attributes": {
+                                "allow_unrestricted": false,
+                                "size": 1858005,
+                                "height": 960,
+                                "width": 1440,
+                                "title": "placeholder.png",
+                                "name": "placeholder.png",
+                                "caption": "",
+                                "alt": "This is a placeholder"
+                            },
+                        };
+                    }
+                    return null;
+                }
+            }
+            return null;
+        })();
+        promises.push(bgImagePromise);
+        
+        // Wait for all promises to resolve in parallel
+        const results = await Promise.all(promises);
+        
+        // Extract results
+        const videoImageResults = results.slice(0, videos.length);
+        const sectionData = results[videos.length];
+        const bgImageData = results[videos.length + 1];
+        
+        // Process video data with resolved image results
+        const videosData = videos.map((video, index) => {
+            const { heading, subheading, youtubeId } = video;
+            const uniqueID = uuid();
+            const imageData = videoImageResults[index];
 
-        // Resolve the URI for the section link
-        const sectionData = await linkedHeadingService(
-            fnsCtx,
-            args.sectionConfiguration
-        );
-
-        // Get background image data
-        let bgImageData = null;
-        if(bgImage) {
-            bgImageData = await basicAssetUri(fnsCtx, bgImage);
-        }
+            videoModal.push(
+                {
+                    isVertical: true, 
+                    videoId: video.youtubeId, 
+                    title: `Watch ${video.heading}`, 
+                    noAutoPlay: true,
+                    uniqueID, 
+                    titleID: 'video-modal' 
+                }
+            );
+            
+            return {
+                heading,
+                subheading,
+                youtubeId,
+                imageUrl: imageData?.url,
+                imageAlt: imageData?.attributes?.alt || "",
+                uniqueID
+            }
+        });
 
         const componentData = {
             sectionTitle: sectionData?.title,
@@ -180,15 +201,7 @@ export default {
             videoModal: videoModal
         };
 
-        // Configure squizEditTargets for inline editing
-        const squizEditTargets = {
-            "headingTitle": { "field": "sectionConfiguration.title" },
-            "headingCtaText": { "field": "sectionConfiguration.ctaText" },
-            "videoHeading": { "field": "videos.heading" },
-            "videoSubheading": { "field": "videos.subheading" }
-        };
-
-        // Early return for non-edit mode
+        // Return original front end code when squizEdit is false, without modification
         if (!squizEdit) {
             return verticalVideosPanelTemplate(componentData);
         }
