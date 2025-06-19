@@ -70,8 +70,8 @@ export default {
             featuredQuote = featuredQuote || 'This is a sample featured quote that demonstrates the inline editing functionality for the main quote section.';
             featuredTeaserDescription = featuredTeaserDescription || 'Featured Scholar Name';
             featuredCtaText = featuredCtaText || 'Read the story';
-            teaserOneDescription = teaserOneDescription || 'Add description for teaser one';
-            teaserTwoDescription = teaserTwoDescription || 'Add description for teaser two';
+            teaserOneDescription = teaserOneDescription || 'Add author for teaser one';
+            teaserTwoDescription = teaserTwoDescription || 'Add author for teaser two';
             
             // Provide default asset IDs for edit mode
             featuredTeaser = featuredTeaser || 'matrix-asset://api-identifier/sample-featured-teaser';
@@ -166,8 +166,8 @@ export default {
                 description: `This is a sample description for news article ${index + 1}`,
                 liveUrl: '#',
                 source: `Sample Source ${index + 1}`,
-                credit: `Sample Credit ${index + 1}`,
-                authorName: `Sample Author ${index + 1}`
+                // credit: `Sample Credit ${index + 1}`,
+                // authorName: `Sample Author ${index + 1}`
             }));
         }
         
