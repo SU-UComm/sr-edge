@@ -49,25 +49,18 @@ export default {
         let { alignment, displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
             // Provide default configurations
-            title = title || 'Featured Content';
-            ctaText = ctaText || 'View all';
-            ctaUrl = ctaUrl || '';
-            ctaManualUrl = ctaManualUrl || 'https://example.com';
-            ctaNewWindow = ctaNewWindow !== undefined ? ctaNewWindow : false;
+            title = title || 'Heading text';
+            ctaText = ctaText || 'Link text';
+            ctaUrl = ctaUrl || 'matrix-asset://StanfordNews/29389';
+            ctaManualUrl = ctaManualUrl || 'https://news.stanford.edu';
             
             // Provide default content configuration
-            source = source || 'Search';
             searchQuery = searchQuery || '?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser_not=true';
-            
-            // Provide default display configuration
-            alignment = alignment || 'left';
-            displayThumbnails = displayThumbnails !== undefined ? displayThumbnails : true;
-            displayDescriptions = displayDescriptions !== undefined ? displayDescriptions : true;
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -77,55 +70,15 @@ export default {
             
             // Add featured description target if using Select mode
             if (source === 'Select') {
-                featuredDescription = featuredDescription || 'This is a sample featured description that can be edited inline.';
-                cards = cards && cards.length >= 3 ? cards : [
-                    { cardAsset: 'matrix-asset://api-identifier/166535' },
-                    { cardAsset: 'matrix-asset://api-identifier/162707' },
-                    { cardAsset: 'matrix-asset://api-identifier/162759' }
-                ];
                 squizEditTargets["description"] = {
                     "field": "contentConfiguration.featuredDescription"
                 };
-            }
-        }
-        
-        // Validate required environment variables - CHANGE: wrap in !squizEdit check
-        if (!squizEdit) {
-            try {
-                if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
-                    throw new Error(
-                        `The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(FB_JSON_URL)} was received.`
-                    );
-                }
-                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                    throw new Error(
-                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                    );
-                }
-                if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
-                    throw new Error(
-                        `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
-                    );
-                }
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Feature content component: ', er);
-                return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
             }
         }
 
         // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
         if (!squizEdit) {
             try {
-                if (!['Search', 'Select'].includes(source) ) {
-                    throw new Error(
-                        `The "source" field cannot be undefined and must be one of ["Search", "Select"]. The ${JSON.stringify(source)} was received.`
-                    );
-                }
                 if (source === 'Search' && (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?')) {
                     throw new Error(
                         `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
@@ -166,22 +119,6 @@ export default {
                         `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
                     );
                 }
-                if (typeof alignment !== 'string' || !['left', 'right'].includes(alignment) ) {
-                    throw new Error(
-                        `The "alignment" field cannot be undefined and must be one of ["left", "right"]. The ${JSON.stringify(alignment)} was received.`
-                    );
-                }
-                if (typeof displayThumbnails !== 'boolean') {
-                    throw new Error(
-                        `The "displayThumbnails" field must be a boolean. The ${JSON.stringify(displayThumbnails)} was received.`
-                    );
-                }
-                if (typeof displayDescriptions !== 'boolean') {
-                    throw new Error(
-                        `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
-                    );
-                }
-                
             } catch (er) {
                 console.error('Error occurred in the Feature content component: ', er);
                 return `<!-- Error occurred in the Feature content component: ${er.message} -->`;
@@ -201,43 +138,11 @@ export default {
             try {
                 dataPromise = adapter.getCards();
             } catch (er) {
-                console.error('Error occurred in the Feature content component: Failed to fetch search data. ', er);
-                if (squizEdit) {
-                    dataPromise = Promise.resolve([
-                        {
-                            title: 'Sample Featured Article',
-                            description: 'This is a sample featured article description that can be edited inline.',
-                            liveUrl: 'https://example.com',
-                            imageUrl: 'https://picsum.photos/600/400',
-                            imageAlt: 'Sample featured image',
-                            taxonomy: 'Research',
-                            taxonomyUrl: 'https://example.com',
-                            type: 'Article'
-                        },
-                        {
-                            title: 'Sample Article 2',
-                            description: 'This is another sample article description.',
-                            liveUrl: 'https://example.com',
-                            imageUrl: 'https://picsum.photos/400/300',
-                            imageAlt: 'Sample image 2',
-                            taxonomy: 'News',
-                            taxonomyUrl: 'https://example.com',
-                            type: 'Article'
-                        },
-                        {
-                            title: 'Sample Article 3',
-                            description: 'This is a third sample article description.',
-                            liveUrl: 'https://example.com',
-                            imageUrl: 'https://picsum.photos/400/300',
-                            imageAlt: 'Sample image 3',
-                            taxonomy: 'Events',
-                            taxonomyUrl: 'https://example.com',
-                            type: 'Article'
-                        }
-                    ]);
-                } else {
+                
+                if (!squizEdit) {
                     return `<!-- Error occurred in the Feature content component: Failed to fetch search data. ${er.message} -->`;
                 }
+                dataPromise = Promise.resolve([]);
             }
         } else {
             const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
@@ -248,42 +153,10 @@ export default {
                 dataPromise = adapter.getCards(cards);
             } catch (er) {
                 console.error('Error occurred in the Feature content component: Failed to fetch card data. ', er);
-                if (squizEdit) {
-                    dataPromise = Promise.resolve([
-                        {
-                            title: 'Sample Featured Content',
-                            description: 'This is a sample featured content description that can be edited inline.',
-                            liveUrl: 'https://example.com',
-                            imageUrl: 'https://picsum.photos/600/400',
-                            imageAlt: 'Sample featured image',
-                            taxonomy: 'Featured',
-                            taxonomyUrl: 'https://example.com',
-                            type: 'Article'
-                        },
-                        {
-                            title: 'Sample Content 2',
-                            description: 'This is another sample content description.',
-                            liveUrl: 'https://example.com',
-                            imageUrl: 'https://picsum.photos/400/300',
-                            imageAlt: 'Sample image 2',
-                            taxonomy: 'Content',
-                            taxonomyUrl: 'https://example.com',
-                            type: 'Article'
-                        },
-                        {
-                            title: 'Sample Content 3',
-                            description: 'This is a third sample content description.',
-                            liveUrl: 'https://example.com',
-                            imageUrl: 'https://picsum.photos/400/300',
-                            imageAlt: 'Sample image 3',
-                            taxonomy: 'Content',
-                            taxonomyUrl: 'https://example.com',
-                            type: 'Article'
-                        }
-                    ]);
-                } else {
+                if (!squizEdit) {
                     return `<!-- Error occurred in the Feature content component: Failed to fetch card data. ${er.message} -->`;
                 }
+                dataPromise = Promise.resolve([]);
             }
         }
 
