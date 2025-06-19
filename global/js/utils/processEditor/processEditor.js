@@ -49,7 +49,7 @@ function convertAnchorTagsToSpans(html) {
 
 export async function processEditor(output, squizEditTargets) {
     // First convert any anchor tags with data-se to spans
-    output = convertAnchorTagsToSpans(output);
+    // output = convertAnchorTagsToSpans(output);
 
     for (const target in squizEditTargets) {
         const targetConfig = squizEditTargets[target];
