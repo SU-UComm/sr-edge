@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "related-story",
     "type": "edge",
-    "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "4.1.0",
+    "namespace": "stanford-apb",
     "description": "Displays a related story on a featured story",
     "displayName": "Related story",
     "mainFunction": "main",
@@ -36,7 +36,9 @@
                         "title": "Related story content",
                         "description": "Select an asset ID to be featured as a related story.",
                         "type": "object",
-                        "required": ["story"],
+                        "required": [
+                            "story"
+                        ],
                         "properties": {
                             "story": {
                                 "title": "Related story",
@@ -47,7 +49,10 @@
                                 "title": "Description",
                                 "description": "This field will override the related story description that comes from the selected story asset.",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     }

@@ -1,6 +1,7 @@
 import { basicAssetUri } from "../../global/js/utils";
 import { SidebarHeading } from "../../global/js/helpers";
 import mediaFeatureTemplate from './media-feature.hbs';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Media Fateure Component - A Handlebars template component that renders a media feature
@@ -27,57 +28,82 @@ export default {
      */
     async main(args, info) {
         // Extracting functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
                 
-        // Extracting configuration data from arguments
-        const { backgroundImage, image, title, teaserText, mediaType, linkUrl } = args?.contentConfiguration || {};
+        // CHANGE: change const to let for mutability
+        let { backgroundImage, image, title, teaserText, mediaType, linkUrl } = args?.contentConfiguration || {};
 
-        // Validate required functions
-        try {
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Media feature component: ', er);
-            return `<!-- Error occurred in the Media feature component: ${er.message} -->`;
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Add default values for inline editable fields
+            title = title || 'Featured Media Title';
+            teaserText = teaserText || 'This is a sample description for the featured media content that can be edited inline.';
+            
+            // Set up inline editing targets for nested object fields
+            squizEditTargets = {
+                "title": {
+                    "field": "contentConfiguration.title"
+                },
+                "teaserText": {
+                    "field": "contentConfiguration.teaserText"
+                }
+            };
         }
-        // Validate required fields and ensure correct data types
-        try {
-            if (backgroundImage && typeof backgroundImage !== 'string') {
-                throw new Error(
-                    `The "backgroundImage" field must be a string type. The ${JSON.stringify(backgroundImage)} was received.`
-                );
+
+        // Early return for edit mode
+        if (!squizEdit) {
+            // Validate required functions
+            try {
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Media feature component: ', er);
+                return `<!-- Error occurred in the Media feature component: ${er.message} -->`;
             }
-            if (image && typeof image !== 'string') {
-                throw new Error(
-                    `The "image" field must be a string type. The ${JSON.stringify(image)} was received.`
-                );
+            // Validate required fields and ensure correct data types
+            try {
+                if (backgroundImage && typeof backgroundImage !== 'string') {
+                    throw new Error(
+                        `The "backgroundImage" field must be a string type. The ${JSON.stringify(backgroundImage)} was received.`
+                    );
+                }
+                if (image && typeof image !== 'string') {
+                    throw new Error(
+                        `The "image" field must be a string type. The ${JSON.stringify(image)} was received.`
+                    );
+                }
+                if (title && typeof title !== 'string') {
+                    throw new Error(
+                        `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`,
+                    );
+                }
+                if (teaserText && typeof teaserText !== 'string') {
+                    throw new Error(
+                        `The "teaserText" field must be a string type. The ${JSON.stringify(teaserText)} was received.`,
+                    );
+                }
+                if (!['Podcast', 'Book', 'Magazine'].includes(mediaType) ) {
+                    throw new Error(
+                        `The "mediaType" field must be one of ["Podcast", "Book", "Magazine"]. The ${JSON.stringify(mediaType)} was received.`
+                    );
+                }
+                if (linkUrl && typeof linkUrl !== 'string') {
+                    throw new Error(
+                        `The "linkUrl" field must be a string type. The ${JSON.stringify(linkUrl)} was received.`,
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Media feature component: ', er);
+                return `<!-- Error occurred in the Media feature component: ${er.message} -->`;
             }
-            if (title && typeof title !== 'string') {
-                throw new Error(
-                    `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`,
-                );
-            }
-            if (teaserText && typeof teaserText !== 'string') {
-                throw new Error(
-                    `The "teaserText" field must be a string type. The ${JSON.stringify(teaserText)} was received.`,
-                );
-            }
-            if (!['Podcast', 'Book', 'Magazine'].includes(mediaType) ) {
-                throw new Error(
-                    `The "mediaType" field must be one of ["Podcast", "Book", "Magazine"]. The ${JSON.stringify(mediaType)} was received.`
-                );
-            }
-            if (linkUrl && typeof linkUrl !== 'string') {
-                throw new Error(
-                    `The "linkUrl" field must be a string type. The ${JSON.stringify(linkUrl)} was received.`,
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Media feature component: ', er);
-            return `<!-- Error occurred in the Media feature component: ${er.message} -->`;
         }
 
         let bgImageData = null;
@@ -85,12 +111,26 @@ export default {
 
         // Getting background image data 
         if (backgroundImage) {
-            bgImageData = await basicAssetUri(fnsCtx, backgroundImage);
+            try {
+                bgImageData = await basicAssetUri(fnsCtx, backgroundImage);
+            } catch (er) {
+                // In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    bgImageData = { url: 'https://via.placeholder.com/1200x600', attributes: { alt: 'Background image' } };
+                }
+            }
         }
 
          // Getting image data 
         if (image) {
-            imageData = await basicAssetUri(fnsCtx, image);
+            try {
+                imageData = await basicAssetUri(fnsCtx, image);
+            } catch (er) {
+                // In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    imageData = { url: 'https://via.placeholder.com/300x300', attributes: { alt: 'Featured media image' } };
+                }
+            }
         }
 
         let iconName;
@@ -138,6 +178,10 @@ export default {
             iconTestId,
         };
 
-        return mediaFeatureTemplate(componentData);
+        // NEW: Early return pattern for front-end
+        if (!squizEdit) return mediaFeatureTemplate(componentData);
+
+        // NEW: Process for edit mode
+        return processEditor(mediaFeatureTemplate(componentData), squizEditTargets);
     }
 };

@@ -1,5 +1,6 @@
 import campaignCtaTemplate from './campaign-cta.hbs';
 import { basicAssetUri } from "../../global/js/utils";
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Campaign CTA (Call-to-Action) component that renders a campaign block with an image, title, description, and link.
@@ -24,10 +25,45 @@ export default {
      */
     async main(args, info) {
         // Extracting functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
         
-        // Extracting configuration data from arguments
-        const { image, title, description, linkUrl, linkText } = (args && args.displayConfiguration) || {};
+        // Maintain backward compatibility for existing code
+        const fnsCtx = componentFunctions || componentContext || {};
+        
+        // CHANGE: change const to let so we can modify later for squizEdit default values
+        let { image, title, description, linkUrl, linkText } = (args && args.displayConfiguration) || {};
+
+        // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
+        // Must fallback to false, use true to mock the editor
+        const squizEdit = componentContext?.editor || false;
+        // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
+        let squizEditTargets = null;
+        
+        // NEW: add defaults if squizEdit is true
+        if (squizEdit) {
+            // Add default values for inline editable fields
+            title = title || 'Title text';
+            description = description || 'Add content';
+            linkText = linkText || 'Link text';
+            linkUrl = linkUrl || "matrix-asset://StanfordNews/29389"
+            // Provide default image if none exists
+            image = image || 'matrix-asset://StanfordNews/172387';
+            
+            // Add the targets for the squizEdit DOM augmentation
+            // used in processSquizEdit to modify the output to add edit markup
+            squizEditTargets = {
+                "title": {
+                    "field": "displayConfiguration.title"
+                },
+                "description": {
+                    "field": "displayConfiguration.description"
+                },
+                "linkText": {
+                    "field": "displayConfiguration.linkText"
+                }
+            };
+        }
 
         // Validate required functions
         try {
@@ -41,36 +77,40 @@ export default {
             return `<!-- Error occurred in the Campaign cta component: ${er.message} -->`;
         }
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (!image || typeof image !== 'string') {
-                throw new Error(
-                    `The "image" field cannot be undefined and must be a string type. The ${JSON.stringify(image)} was received.`
-                );
+        // NEW: remove overly stringent validation where it makes sense
+        // if it is to remain, wrap it in a !squizEdit check
+        if (!squizEdit) {
+            // Validate required fields and ensure correct data types
+            try {
+                if (!image || typeof image !== 'string') {
+                    throw new Error(
+                        `The "image" field cannot be undefined and must be a string type. The ${JSON.stringify(image)} was received.`
+                    );
+                }
+                if (title && typeof title !== 'string') {
+                    throw new Error(
+                        `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`,
+                    );
+                }
+                if (description && typeof description !== 'string') {
+                    throw new Error(
+                        `The "description" field must be a string type. The ${JSON.stringify(description)} was received.`,
+                    );
+                }
+                if (linkUrl && typeof linkUrl !== 'string') {
+                    throw new Error(
+                        `The "linkUrl" field must be a string type. The ${JSON.stringify(linkUrl)} was received.`,
+                    );
+                }
+                if (linkText && typeof linkText !== 'string') {
+                    throw new Error(
+                        `The "linkText" field must be a string type. The ${JSON.stringify(linkText)} was received.`,
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Campaign cta component: ', er);
+                return `<!-- Error occurred in the Campaign cta component: ${er.message} -->`;
             }
-            if (title && typeof title !== 'string') {
-                throw new Error(
-                    `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`,
-                );
-            }
-            if (description && typeof description !== 'string') {
-                throw new Error(
-                    `The "description" field must be a string type. The ${JSON.stringify(description)} was received.`,
-                );
-            }
-            if (linkUrl && typeof linkUrl !== 'string') {
-                throw new Error(
-                    `The "linkUrl" field must be a string type. The ${JSON.stringify(linkUrl)} was received.`,
-                );
-            }
-            if (linkText && typeof linkText !== 'string') {
-                throw new Error(
-                    `The "linkText" field must be a string type. The ${JSON.stringify(linkText)} was received.`,
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Campaign cta component: ', er);
-            return `<!-- Error occurred in the Campaign cta component: ${er.message} -->`;
         }
         
         let imageData = null;
@@ -78,12 +118,41 @@ export default {
 
         // Getting link data 
         if (linkUrl) {
-            linkData = await basicAssetUri(fnsCtx, linkUrl);
+            try {
+                linkData = await basicAssetUri(fnsCtx, linkUrl);
+            } catch (er) {
+                console.error('Error occurred in the Campaign cta component: Failed to fetch link data. ', er);
+                if (squizEdit) {
+                    linkData = {
+                        url: "https://news.stanford.edu",
+                        text: linkText
+                    };
+                }
+            }
         }
 
         // Getting image data 
         if (image) {
-            imageData = await basicAssetUri(fnsCtx, image);
+            try {
+                imageData = await basicAssetUri(fnsCtx, image);
+            } catch (er) {
+                console.error('Error occurred in the Campaign cta component: Failed to fetch image data. ', er);
+                if (squizEdit) {
+                    imageData = {
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                        "attributes": {
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
+                        },
+                    };
+                }
+            }
         }
         
         // Prepare component data for template rendering
@@ -97,7 +166,11 @@ export default {
             paddingX: false
         };
 
-        return campaignCtaTemplate(componentData);
+        // Return original front end code when squizEdit is false, without modification
+        if (!squizEdit) return campaignCtaTemplate(componentData);
+
+        // NEW: process the output to be editable in Squiz Editor
+        return processEditor(campaignCtaTemplate(componentData), squizEditTargets);
     }
 };
 

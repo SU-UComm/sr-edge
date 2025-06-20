@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "horizontal-video-testimonials",
     "type": "edge",
-    "version": "4.0.3",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "4.1.0",
+    "namespace": "stanford-apb",
     "description": "A section with a listing of horizontal video cards, with a section title and link to watch more.",
     "displayName": "Horizontal Video Testimonials",
     "mainFunction": "main",
@@ -30,12 +30,18 @@
                             "title": {
                                 "title": "Section heading",
                                 "type": "string",
-                                "default": "Meet more students"
+                                "default": "Meet more students",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaText": {
                                 "title": "Heading CTA link text",
                                 "type": "string",
-                                "default": "Watch all"
+                                "default": "Watch all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix asset link",

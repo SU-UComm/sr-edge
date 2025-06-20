@@ -1,8 +1,8 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "multicolumn-image",
-    "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "4.1.0",
+    "namespace": "stanford-apb",
     "description": "The multicolumn image is a way to display a series of images in 2 to 3 columns.",
     "type": "edge",
     "displayName": "Multicolumn Image",
@@ -49,7 +49,10 @@
                                         },
                                         "imageCaption": {
                                             "title": "Image caption",
-                                            "type": "string"
+                                            "type": "string",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
                                         }
                                     }
                                 }

@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "fullscreen-image-quote",
     "type": "edge",
-    "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "4.1.0",
+    "namespace": "stanford-apb",
     "description": "This component displays a full width image with a quote and CTA.",
     "displayName": "Fullscreen Image Quote",
     "mainFunction": "main",
@@ -36,7 +36,10 @@
                             "top",
                             "center",
                             "bottom"
-                        ]
+                        ],
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     },
                     "mobileImage": {
                         "title": "Mobile background image (portrait orientation)",
@@ -48,7 +51,10 @@
                         "title": "Quote (or body content)",
                         "description": "Please include the quotation marks if this is a quote. They are not automatically included for content versatility.",
                         "type": "string",
-                        "format": "multi-line"
+                        "format": "multi-line",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "quoteVAlign": {
                         "title": "Quote vertical alignment (desktop)",
@@ -59,7 +65,10 @@
                             "top",
                             "center",
                             "bottom"
-                        ]
+                        ],
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     },
                     "quoteHAlign": {
                         "title": "Quote horizontal alignment",
@@ -68,7 +77,10 @@
                         "enum": [
                             "left",
                             "right"
-                        ]
+                        ],
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     },
                     "removeTopSpacing": {
                         "title": "Remove top spacing",
@@ -84,18 +96,27 @@
                             "ctaPreText": {
                                 "title": "Short text before the CTA label",
                                 "type": "string",
-                                "default": "Meet"
+                                "default": "Meet",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaText": {
                                 "title": "CTA text",
                                 "description": "Text for the actual CTA link portion.",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaSubtext": {
                                 "title": "CTA subtext",
                                 "description": "Line of smaller text below the CTA.",
                                 "type": "string",
-                                "default": "’21, international student"
+                                "default": "’21, international student",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "internalUrl": {
                                 "title": "Internal link (Matrix asset link)",

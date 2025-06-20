@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "stories-carousel",
     "type": "edge",
-    "version": "4.1.6",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "4.2.0",
+    "namespace": "stanford-apb",
     "description": "Links to stories displayed as cards in a carousel.",
     "displayName": "Stories carousel",
     "mainFunction": "main",
@@ -52,7 +52,10 @@
                             "title": {
                                 "title": "Heading",
                                 "type": "string",
-                                "default": "Recent Stories"
+                                "default": "Recent Stories",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix Asset Link",
@@ -68,7 +71,10 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "View all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",

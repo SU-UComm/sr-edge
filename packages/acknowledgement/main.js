@@ -1,4 +1,6 @@
+import { processEditor } from '../../global/js/utils/processEditor';
 import acknowledgement from './acknowledgement.hbs';
+
 
 /**
  * Acknowledgement component that renders a formatted acknowledgment message.
@@ -14,34 +16,35 @@ export default {
      * @param {string} args.content - The content of the acknowledgment.
      * @returns {Promise<string>} The rendered acknowledgment HTML or an error message.
      */
-    async main( args ) {
-        // Extracting configuration data from arguments
-        const { title, content } = args || {};
+    async main( args, info ) {
+        let { title, content } = args || {};
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (typeof title !== 'string' || title === '') {
-                throw new Error(
-                    `The "title" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(title)} was received.`,
-                );
-            }
-            if (typeof content !== 'string' || content === '') {
-                throw new Error(
-                    `The "content" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(content)} was received.`,
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Acknowledgement component: ', er);
-            return `<!-- Error occurred in the Acknowledgement component: ${er.message} -->`;
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        if (squizEdit) {
+            // add default values if content is not provided
+            content = content || '<p>Add content</p>';
+
+            squizEditTargets = {
+                "title": {
+                    "field": "title"
+                },
+                "content": {
+                    "field": "content"
+                }
+            };
         }
 
-        // Prepare component data for template rendering
         const componentData = {
             title,
             content,
             width: "narrow"
         };
 
-        return acknowledgement(componentData);
+        // return frontend code
+        if (!squizEdit) return acknowledgement(componentData);
+
+        // return edit code
+        return processEditor(acknowledgement(componentData), squizEditTargets);
     },
 };

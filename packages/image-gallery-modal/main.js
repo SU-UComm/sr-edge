@@ -1,6 +1,7 @@
 import imageGalleryModalTemplate from './image-gallery-modal.hbs';
 import { cardDataAdapter, matrixImageCardService, formatCardDataImage, uuid } from "../../global/js/utils";
 import { ImageMosaic,  mosaic, carouselImages, SidebarHeading, Modal, Carousel } from "../../global/js/helpers";
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Image gallery with modal component that renderds a list of images cards that can be viewed in the modal layout.
@@ -32,91 +33,148 @@ export default {
      * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
      */
     async main(args, info) {
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {};
+
         // Extracting environment variables from provided info
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
-        const fnsCtx = info?.fns || info?.ctx || {};
 
-        // Extracting configuration data from arguments
-        const { layout, images, caption, credit, title, summary, summaryAlign } = args?.contentConfiguration || {};
-        const { displayIconHeading, backgroundColor, width } = args?.displayConfiguration || {};
+        // CHANGE: change const to let for mutability
+        let { layout, images, caption, credit, title, summary, summaryAlign } = args?.contentConfiguration || {};
+        let { displayIconHeading, backgroundColor, width } = args?.displayConfiguration || {};
 
-        // Validate required environment variables
-        try {
-            if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                throw new Error(
-                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                );
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Provide default values for inline editable fields
+            layout = layout || 'Title & Content';
+            caption = caption || 'Sample gallery caption';
+            credit = credit || 'Sample credit';
+            
+            // Conditional defaults based on layout
+            if (layout === 'Title & Content') {
+                title = title || 'Sample Image Gallery';
+                summary = summary || 'This is a sample gallery summary that can be edited inline.';
+                summaryAlign = summaryAlign || 'left';
             }
-            if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
-                throw new Error(
-                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
-                );
+            
+            // Provide default images if not provided or insufficient
+            images = images && images.length >= 4 ? images : [
+                { image: 'matrix-asset://api-identifier/sample-image-1', caption: 'Sample image caption 1' },
+                { image: 'matrix-asset://api-identifier/sample-image-2', caption: 'Sample image caption 2' },
+                { image: 'matrix-asset://api-identifier/sample-image-3', caption: 'Sample image caption 3' },
+                { image: 'matrix-asset://api-identifier/sample-image-4', caption: 'Sample image caption 4' },
+                { image: 'matrix-asset://api-identifier/sample-image-5', caption: 'Sample image caption 5' }
+            ];
+            
+            // Ensure each image has a default caption
+            images = images.map((img, index) => ({
+                ...img,
+                caption: img.caption || `Sample caption for image ${index + 1}`
+            }));
+            
+            // Provide default display configuration
+            displayIconHeading = displayIconHeading !== undefined ? displayIconHeading : true;
+            backgroundColor = backgroundColor || 'Grey';
+            width = width || 'Wide';
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "captionCredit": { "field": "contentConfiguration.caption" }
+            };
+            
+            // Add conditional targets for Title & Content layout
+            if (layout === 'Title & Content') {
+                squizEditTargets["title"] = { "field": "contentConfiguration.title" };
+                squizEditTargets["summary"] = { "field": "contentConfiguration.summary" };
             }
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Image gallery with modal component: ', er);
-            return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
         }
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (typeof layout !== 'string' || !['Title & Content', 'Content Only'].includes(layout)) {
-                throw new Error(
-                    `The "layout" field cannot be undefined and must be one of ["Title & Content", "Content Only"] value. The ${JSON.stringify(layout)} was received.`
-                );
+        // Environment validation - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
+                    throw new Error(
+                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
+                    );
+                }
+                if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
+                    throw new Error(
+                        `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
+                    );
+                }
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Image gallery with modal component: ', er);
+                return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
             }
-            if (!Array.isArray(images) || images.length < 4) {
-                throw new Error(
-                    `The "images" field must be an array and cannot have less then 4 elements. The ${JSON.stringify(images)} was received.`
-                );
+        }
+
+        // Field validation - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof layout !== 'string' || !['Title & Content', 'Content Only'].includes(layout)) {
+                    throw new Error(
+                        `The "layout" field cannot be undefined and must be one of ["Title & Content", "Content Only"] value. The ${JSON.stringify(layout)} was received.`
+                    );
+                }
+                if (!Array.isArray(images) || images.length < 4) {
+                    throw new Error(
+                        `The "images" field must be an array and cannot have less then 4 elements. The ${JSON.stringify(images)} was received.`
+                    );
+                }
+                if (caption && typeof caption !== 'string') {
+                    throw new Error(
+                        `The "caption" field must be a string. The ${JSON.stringify(caption)} was received.`
+                    );
+                }
+                if (credit && typeof credit !== 'string') {
+                    throw new Error(
+                        `The "credit" field must be a string. The ${JSON.stringify(credit)} was received.`
+                    );
+                }
+                if (layout === 'Title & Content' && title && typeof title !== 'string') {
+                    throw new Error(
+                        `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
+                    );
+                }
+                if (layout === 'Title & Content' && summary && typeof summary !== 'string') {
+                    throw new Error(
+                        `The "summary" field must be a string. The ${JSON.stringify(summary)} was received.`
+                    );
+                }
+                if (layout === 'Title & Content' && summaryAlign && !['left', 'center'].includes(summaryAlign)) {
+                    throw new Error(
+                        `The "summaryAlign" field must be one of ["left", "center"]. The ${JSON.stringify(summaryAlign)} was received.`
+                    );
+                }
+                if (displayIconHeading && typeof displayIconHeading !== 'boolean') {
+                    throw new Error(
+                        `The "displayIconHeading" field must be a boolean. The ${JSON.stringify(displayIconHeading)} was received.`
+                    );
+                }
+                if (!['Grey', 'Transparent'].includes(backgroundColor)) {
+                    throw new Error(
+                        `The "backgroundColor" field cannot be undefined and must be one of ["Grey", "Transparent"] value. The ${JSON.stringify(backgroundColor)} was received.`
+                    );
+                }
+                if (!['Wide', 'Content'].includes(width)) {
+                    throw new Error(
+                        `The "width" field cannot be undefined and must be one of ["Wide", "Content"] value. The ${JSON.stringify(width)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Image gallery with modal component: ', er);
+                return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
             }
-            if (caption && typeof caption !== 'string') {
-                throw new Error(
-                    `The "caption" field must be a string. The ${JSON.stringify(caption)} was received.`
-                );
-            }
-            if (credit && typeof credit !== 'string') {
-                throw new Error(
-                    `The "credit" field must be a string. The ${JSON.stringify(credit)} was received.`
-                );
-            }
-            if (layout === 'Title & Content' && title && typeof title !== 'string') {
-                throw new Error(
-                    `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
-                );
-            }
-            if (layout === 'Title & Content' && summary && typeof summary !== 'string') {
-                throw new Error(
-                    `The "summary" field must be a string. The ${JSON.stringify(summary)} was received.`
-                );
-            }
-            if (layout === 'Title & Content' && summaryAlign && !['left', 'center'].includes(summaryAlign)) {
-                throw new Error(
-                    `The "summaryAlign" field must be one of ["left", "center"]. The ${JSON.stringify(summaryAlign)} was received.`
-                );
-            }
-            if (displayIconHeading && typeof displayIconHeading !== 'boolean') {
-                throw new Error(
-                    `The "displayIconHeading" field must be a boolean. The ${JSON.stringify(displayIconHeading)} was received.`
-                );
-            }
-            if (!['Grey', 'Transparent'].includes(backgroundColor)) {
-                throw new Error(
-                    `The "backgroundColor" field cannot be undefined and must be one of ["Grey", "Transparent"] value. The ${JSON.stringify(backgroundColor)} was received.`
-                );
-            }
-            if (!['Wide', 'Content'].includes(width)) {
-                throw new Error(
-                    `The "width" field cannot be undefined and must be one of ["Wide", "Content"] value. The ${JSON.stringify(width)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Image gallery with modal component: ', er);
-            return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
         }
 
         const adapter = new cardDataAdapter();
@@ -134,8 +192,23 @@ export default {
             index === self.findIndex((t) => t.image === item.image)
         );
 
-        // Retrieve the card data
-        data = images && await adapter.getCards(images);
+        // Retrieve the card data with error handling for edit mode
+        try {
+            data = images && await adapter.getCards(images);
+        } catch (er) {
+            console.error('Error occurred in the Image gallery with modal component: Failed to fetch image data. ', er);
+            // NEW: In edit mode, provide mock data instead of returning error
+            if (squizEdit) {
+                data = images.map((img, index) => ({
+                    url: `https://picsum.photos/600/400?random=${index}`,
+                    alt: `Sample image ${index + 1}`,
+                    width: 600,
+                    height: 400
+                }));
+            } else {
+                return `<!-- Error occurred in the Image gallery with modal component: Failed to fetch image data. ${er.message} -->`;
+            }
+        }
 
         // Format image data for rendering.
         const imageData = data && data.map((image, index) => {
@@ -144,16 +217,18 @@ export default {
             return { ...imgData, caption: filteredImages[`${index}`]?.caption };
         });
 
-        // Validate generated image data
-        try {
-            if (typeof imageData !== 'object' || JSON.stringify(imageData) === JSON.stringify([null, null, null, null]) || imageData.length < 4) {
-                throw new Error(
-                    `The imageData cannot have less then 4 elements. The ${JSON.stringify(data)} was received.`
-                );
+        // Image data validation - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof imageData !== 'object' || JSON.stringify(imageData) === JSON.stringify([null, null, null, null]) || imageData.length < 4) {
+                    throw new Error(
+                        `The imageData cannot have less then 4 elements. The ${JSON.stringify(data)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Image gallery with modal component: ', er);
+                return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
             }
-        } catch (er) {
-            console.error('Error occurred in the Image gallery with modal component: ', er);
-            return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
         }
 
         // Generate preview images for the mosaic layout
@@ -189,6 +264,11 @@ export default {
             modal: Modal({uniqueId, content: modalCarousel, titleId: 'image-gallery-modal' }),
             width: width === "Wide" ? width.toLocaleLowerCase() : "narrow"
         };
+
+        // NEW: Early return pattern for edit mode
+        if (squizEdit) {
+            return processEditor(imageGalleryModalTemplate(componentData), squizEditTargets, args);
+        }
 
         return imageGalleryModalTemplate(componentData);
     }

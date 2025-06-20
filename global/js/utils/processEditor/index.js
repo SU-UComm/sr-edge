@@ -1,0 +1,1 @@
+export { processEditor } from './processEditor';

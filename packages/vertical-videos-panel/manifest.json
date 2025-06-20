@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "vertical-videos-panel",
     "type": "edge",
-    "version": "4.0.7",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "4.1.0",
+    "namespace": "stanford-apb",
     "description": "A section that displays up to 3 vertical YouTube videos, with a section title and link to watch more. On smaller devices, the videos will be displayed in a carousel if there are more than 1.",
     "displayName": "Vertical Videos Panel",
     "mainFunction": "main",
@@ -30,12 +30,18 @@
                             "title": {
                                 "title": "Section heading",
                                 "type": "string",
-                                "default": "Meet more students"
+                                "default": "Meet more students",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaText": {
                                 "title": "Heading CTA link text",
                                 "type": "string",
-                                "default": "Watch all"
+                                "default": "Watch all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix asset link",
@@ -108,12 +114,18 @@
                             "properties": {
                                 "heading": {
                                     "title": "Card heading",
-                                    "type": "string"
+                                    "type": "string",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "subheading": {
                                     "title": "Subheading",
                                     "description": "Smaller text below the card heading.",
-                                    "type": "string"
+                                    "type": "string",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "videoImage": {
                                     "title": "Video preview image",

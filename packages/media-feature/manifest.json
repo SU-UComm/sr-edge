@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "media-feature",
     "type": "edge",
-    "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "4.1.0",
+    "namespace": "stanford-apb",
     "description": "The media feature component is used to feature a singular podcast or book.",
     "displayName": "Media feature",
     "mainFunction": "main",
@@ -38,18 +38,28 @@
                             },
                             "title": {
                                 "title": "Title",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "mediaType": {
                                 "title": "Media type",
-                                "enum": ["Podcast", "Book", "Magazine"],
+                                "enum": [
+                                    "Podcast",
+                                    "Book",
+                                    "Magazine"
+                                ],
                                 "type": "string",
                                 "default": "Podcast"
                             },
                             "teaserText": {
                                 "title": "Teaser text",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "linkUrl": {
                                 "title": "Link URL",

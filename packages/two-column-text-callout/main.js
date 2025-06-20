@@ -1,6 +1,7 @@
 import xss from "xss";
 import { basicAssetUri, isRealExternalLink } from '../../global/js/utils';
 import twoColumnTemplate from './two-column-text-callout.hbs';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Two column text callout component that renders content blocks with optional images and buttons
@@ -34,8 +35,13 @@ export default {
      * @returns {Promise<string>} The rendered two column text callout HTML or an error message.
      */
     async main(args, info) {
-        // Extracting environment function from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
  
         // Extract configuration data
         const { heading, showTopBorder = true, callouts = [] } = args;
@@ -130,6 +136,21 @@ export default {
             flexContainerLength: `${calloutsData.length}`,
         };
 
-        return twoColumnTemplate(componentData);
+        // Configure squizEditTargets for inline editing
+        const squizEditTargets = {
+            "heading": { "field": "heading" },
+            "infoBoxTitle": { "field": "callouts.title" },
+            "infoBoxContent": { "field": "callouts.content" },
+            "captionCredit": { "field": "callouts.imageConfiguration.caption" },
+            "button": { "field": "callouts.buttonConfiguration.buttonText" }
+        };
+
+        // Early return for non-edit mode
+        if (!squizEdit) {
+            return twoColumnTemplate(componentData);
+        }
+
+        // Process and return template with inline editing support
+        return processEditor(twoColumnTemplate(componentData), squizEditTargets);
     }
 };

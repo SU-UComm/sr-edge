@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "interactive-photo-card",
     "type": "edge",
-    "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "4.1.0",
+    "namespace": "stanford-apb",
     "description": "2 side by side cards with 1 being a photo and 1 being a fact with the ability to flip the card over for additional information.",
     "displayName": "Interactive Photo Card",
     "mainFunction": "main",
@@ -24,18 +24,27 @@
                     "title": {
                         "title": "Title",
                         "type": "string",
-                        "default": "Card title"
+                        "default": "Card title",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "eyebrow": {
                         "title": "Eyebrow",
                         "description": "This is the superheading above the title.",
                         "type": "string",
-                        "default": "Eyebrow"
+                        "default": "Eyebrow",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "content": {
                         "title": "Content",
                         "description": "This is the text that goes on the flip side of the content card.",
-                        "type": "FormattedText"
+                        "type": "FormattedText",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "image": {
                         "title": "Image",
@@ -46,10 +55,20 @@
                         "title": "Image Alignment",
                         "type": "string",
                         "default": "right",
-                        "enum": ["left", "right"]
+                        "enum": [
+                            "left",
+                            "right"
+                        ],
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     }
                 },
-                "required": ["title", "content", "image"]
+                "required": [
+                    "title",
+                    "content",
+                    "image"
+                ]
             },
             "output": {
                 "responseType": "html"

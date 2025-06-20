@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "image-quote",
     "type": "edge",
-    "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "4.1.0",
+    "namespace": "stanford-apb",
     "description": "An image with an associated quote.",
     "displayName": "Image quote",
     "mainFunction": "main",
@@ -36,27 +36,42 @@
                             "imageCaption": {
                                 "title": "Image caption",
                                 "description": "A caption for the image",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "imageCredit": {
                                 "title": "Image credit",
                                 "description": "A credit for the image",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "quote": {
                                 "title": "Quote",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "name": {
                                 "title": "Name",
                                 "description": "The name of the quotee",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "title": {
                                 "title": "Title",
                                 "description": "The title/role of the quotee",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     }

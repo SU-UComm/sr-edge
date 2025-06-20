@@ -1,8 +1,8 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "in-the-news",
-    "version": "4.0.4",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "4.2.2",
+    "namespace": "stanford-apb",
     "description": "This component contains one featured quote and two supplementary teasers.",
     "type": "edge",
     "displayName": "In the news",
@@ -33,13 +33,17 @@
                 "required": [],
                 "properties": {
                     "headingConfiguration": {
+                        "title": "Heading Configuration",
                         "required": [],
                         "properties": {
                             "title": {
                                 "title": "Heading",
                                 "description": "The heading text",
                                 "type": "string",
-                                "default": "In the news"
+                                "default": "In the news",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix Asset Link",
@@ -55,7 +59,10 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "View all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",
@@ -75,26 +82,36 @@
                                 "type": "string"
                             },
                             "personHeadshot": {
-                                "title": "Quotee headshot",
+                                "title": "Quote Headshot",
                                 "type": "string",
                                 "format": "matrix-asset-uri",
                                 "description": "Please use image assets for the person headshot."
                             },
                             "featuredQuote": {
                                 "title": "Featured Quote",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "featuredTeaserDescription": {
                                 "title": "Featured Scholar attribution",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "featuredCtaText": {
                                 "title": "Featured CTA text",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     },
                     "supplementaryTeaserOne": {
+                        "title": "Supplementary Teaser One",
                         "required": [],
                         "properties": {
                             "teaserOne": {
@@ -104,11 +121,15 @@
                             },
                             "teaserOneDescription": {
                                 "title": "Featured Scholar attribution",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     },
                     "supplementaryTeaserTwo": {
+                        "title": "Supplementary Teaser Two",
                         "required": [],
                         "properties": {
                             "teaserTwo": {
@@ -118,7 +139,10 @@
                             },
                             "teaserTwoDescription": {
                                 "title": "Featured Scholar attribution",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     }

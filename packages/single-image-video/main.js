@@ -1,5 +1,6 @@
 import xss from "xss";
 import { basicAssetUri, uuid } from '../../global/js/utils';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 import singleImageVideoTemplate from './single-image-video.hbs';
 
@@ -36,105 +37,140 @@ export default {
      * @returns {Promise<string>} The rendered two column text callout HTML or an error message.
     */
     async main(args, info) {
-        // Extracting environment varibales and function from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
-        // Extracting configuration data from arguments
-        const { image, caption, credit, width, marginTop, marginBottom } = args || {};
-        const { title, summary, summaryAlign } = args?.section || {}
-        const { heading, vimeoid, youtubeid } = args?.video || {}
+        // CHANGE: change const to let for mutability
+        let { image, caption, credit, width, marginTop, marginBottom } = args || {};
+        let { title, summary, summaryAlign } = args?.section || {}
+        let { heading, vimeoid, youtubeid } = args?.video || {}
 
-        // Validate required environment variables
-        try {
-            if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                throw new Error(
-                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                );
-            }
-            if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
-                throw new Error(
-                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
-                );
-            }
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Single Image or Video component: ', er);
-            return `<!-- Error occurred in the Single Image or Video component: ${er.message} -->`;
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Add default values for inline editable fields
+            title = title || 'Single Image or Video';
+            summary = summary || 'This is a sample summary that can be edited inline to provide context for the image or video content.';
+            caption = caption || 'Sample caption for the image or video';
+            credit = credit || 'Sample credit';
+            heading = heading || 'Sample Video';
+            
+            // Provide default values for other required fields
+            image = image || 'matrix-asset://StanfordNews/130444';
+            width = width || 'Wide';
+            marginTop = marginTop || 'default';
+            marginBottom = marginBottom || 'default';
+            summaryAlign = summaryAlign || 'left';
+            vimeoid = vimeoid || '';
+            youtubeid = youtubeid || '';
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "title": { "field": "section.title" },
+                "summary": { "field": "section.summary" },
+                "captionCredit": { "field": "caption" },
+                "videoHeading": { "field": "video.heading" }
+            };
         }
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (title && typeof title !== 'string') {
-                throw new Error(
-                    `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
-                );
+        // NEW: Wrap validation in !squizEdit check
+        if (!squizEdit) {
+            // Validate required environment variables
+            try {
+                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
+                    throw new Error(
+                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
+                    );
+                }
+                if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
+                    throw new Error(
+                        `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
+                    );
+                }
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Single Image or Video component: ', er);
+                return `<!-- Error occurred in the Single Image or Video component: ${er.message} -->`;
             }
-            if (summary && typeof summary !== 'string') {
-                throw new Error(
-                    `The "summary" field must be a string. The ${JSON.stringify(summary)} was received.`
-                );
+
+            // Validate required fields and ensure correct data types
+            try {
+                if (title && typeof title !== 'string') {
+                    throw new Error(
+                        `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
+                    );
+                }
+                if (summary && typeof summary !== 'string') {
+                    throw new Error(
+                        `The "summary" field must be a string. The ${JSON.stringify(summary)} was received.`
+                    );
+                }
+                if (summaryAlign && !['left', 'center'].includes(summaryAlign) ) {
+                    throw new Error(
+                        `The "summaryAlign" field must be one of ["left", "center"]. The ${JSON.stringify(summaryAlign)} was received.`
+                    );
+                }
+                if (image && typeof image !== 'string') {
+                    throw new Error(
+                        `The "image" field must be a string. The ${JSON.stringify(image)} was received.`
+                    );
+                }
+                if (caption && typeof caption !== 'string') {
+                    throw new Error(
+                        `The "caption" field must be a string. The ${JSON.stringify(caption)} was received.`
+                    );
+                }
+                if (credit && typeof credit !== 'string') {
+                    throw new Error(
+                        `The "credit" field must be a string. The ${JSON.stringify(credit)} was received.`
+                    );
+                }
+                if (width && !['Wide', 'Narrow'].includes(width) ) {
+                    throw new Error(
+                        `The "width" field must be one of ["Wide", "Narrow"]. The ${JSON.stringify(width)} was received.`
+                    );
+                }
+                if (heading && typeof heading !== 'string') {
+                    throw new Error(
+                        `The "heading" field must be a string. The ${JSON.stringify(heading)} was received.`
+                    );
+                }
+                if (vimeoid && typeof vimeoid !== 'string') {
+                    throw new Error(
+                        `The "vimeoid" field must be a string. The ${JSON.stringify(vimeoid)} was received.`
+                    );
+                }
+                if (youtubeid && typeof youtubeid !== 'string') {
+                    throw new Error(
+                        `The "youtubeid" field must be a string. The ${JSON.stringify(youtubeid)} was received.`
+                    );
+                }
+                if (marginTop && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginTop) ) {
+                    throw new Error(
+                        `The "marginTop" field cannot be undefined and must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginTop)} was received.`
+                    );
+                }
+                if (marginBottom && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginBottom) ) {
+                    throw new Error(
+                        `The "marginBottom" field cannot be undefined and must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginBottom)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Single Image or Video component: ', er);
+                return `<!-- Error occurred in the Single Image or Video component: ${er.message} -->`;
             }
-            if (summaryAlign && !['left', 'center'].includes(summaryAlign) ) {
-                throw new Error(
-                    `The "summaryAlign" field must be one of ["left", "center"]. The ${JSON.stringify(summaryAlign)} was received.`
-                );
-            }
-            if (image && typeof image !== 'string') {
-                throw new Error(
-                    `The "image" field must be a string. The ${JSON.stringify(image)} was received.`
-                );
-            }
-            if (caption && typeof caption !== 'string') {
-                throw new Error(
-                    `The "caption" field must be a string. The ${JSON.stringify(caption)} was received.`
-                );
-            }
-            if (credit && typeof credit !== 'string') {
-                throw new Error(
-                    `The "credit" field must be a string. The ${JSON.stringify(credit)} was received.`
-                );
-            }
-            if (width && !['Wide', 'Narrow'].includes(width) ) {
-                throw new Error(
-                    `The "width" field must be one of ["Wide", "Narrow"]. The ${JSON.stringify(width)} was received.`
-                );
-            }
-            if (heading && typeof heading !== 'string') {
-                throw new Error(
-                    `The "heading" field must be a string. The ${JSON.stringify(heading)} was received.`
-                );
-            }
-            if (vimeoid && typeof vimeoid !== 'string') {
-                throw new Error(
-                    `The "vimeoid" field must be a string. The ${JSON.stringify(vimeoid)} was received.`
-                );
-            }
-            if (youtubeid && typeof youtubeid !== 'string') {
-                throw new Error(
-                    `The "youtubeid" field must be a string. The ${JSON.stringify(youtubeid)} was received.`
-                );
-            }
-            if (marginTop && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginTop) ) {
-                throw new Error(
-                    `The "marginTop" field cannot be undefined and must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginTop)} was received.`
-                );
-            }
-            if (marginBottom && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginBottom) ) {
-                throw new Error(
-                    `The "marginBottom" field cannot be undefined and must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginBottom)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Single Image or Video component: ', er);
-            return `<!-- Error occurred in the Single Image or Video component: ${er.message} -->`;
         }
         
-        // Fetch image data
+        // Fetch image data with error handling
         let imageData = null;
         if (image) {
             try {
@@ -152,7 +188,17 @@ export default {
                 }
             } catch (er) {
                 console.error('Error occurred in the Single Image or Video component: Failed to fetch image data. ', er);
-                return `<!-- Error occurred in the Single Image or Video component: Failed to fetch image data. ${er.message} -->`;
+                // NEW: In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    imageData = {
+                        url: 'https://picsum.photos/800/600',
+                        attributes: {
+                            alt: 'Sample image for inline editing'
+                        }
+                    };
+                } else {
+                    return `<!-- Error occurred in the Single Image or Video component: Failed to fetch image data. ${er.message} -->`;
+                }
             }
         }
 
@@ -197,6 +243,10 @@ export default {
             uniqueID
         };
 
-        return singleImageVideoTemplate(componentData);
+        // NEW: Early return pattern
+        if (!squizEdit) return singleImageVideoTemplate(componentData);
+
+        // NEW: Process for edit mode
+        return processEditor(singleImageVideoTemplate(componentData), squizEditTargets);
     }
 };

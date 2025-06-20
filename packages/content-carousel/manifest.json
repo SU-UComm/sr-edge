@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "content-carousel",
     "type": "edge",
-    "version": "4.0.7",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "4.1.11",
+    "namespace": "stanford-apb",
     "description": "A carousel of slides that contain WYSIWYG content.",
     "displayName": "Content Carousel",
     "mainFunction": "main",
@@ -24,7 +24,10 @@
                     "title": {
                         "title": "Heading",
                         "description": "The heading text",
-                        "type": "string"
+                        "type": "string",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "slides": {
                         "title": "Slides",

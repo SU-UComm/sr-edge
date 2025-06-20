@@ -1,6 +1,7 @@
 import xss from 'xss';
 import horizontalVideoTestimonialsTemplate from './horizontal-video-testimonials.hbs';
 import { basicAssetUri, isRealExternalLink, uuid } from "../../global/js/utils";
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Horizontal Video Testimonials renders a video content modal.
@@ -31,69 +32,132 @@ export default {
      */
     async main(args, info) {
         // Extracting functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
         
-        // Extracting configuration data from arguments
-        const { testimonials, sectionConfiguration } = args || {};
-        const { title, ctaText, ctaUrl, ctaManualUrl, bgImage, marginTop, marginBottom } = sectionConfiguration || {};
+        // CHANGE: change const to let for mutability
+        let { testimonials, sectionConfiguration } = args || {};
+        let { title, ctaText, ctaUrl, ctaManualUrl, bgImage, marginTop, marginBottom } = sectionConfiguration || {};
 
-        // Validate required functions
-        try {
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Horizontal Video Testimonials component: ', er);
-            return `<!-- Error occurred in the Horizontal Video Testimonials component: ${er.message} -->`;
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Provide default section configuration
+            sectionConfiguration = sectionConfiguration || {};
+            title = title || 'Meet more students';
+            ctaText = ctaText || 'Watch all';
+            ctaUrl = ctaUrl || '';
+            ctaManualUrl = ctaManualUrl || 'https://news.stanford.edu/video';
+            bgImage = bgImage || 'matrix-asset://api-identifier/sample-bg-image';
+            marginTop = marginTop || '10';
+            marginBottom = marginBottom || '10';
+            
+            // Add default testimonials if not provided or empty
+            testimonials = testimonials && testimonials.length > 0 ? testimonials : [
+                {
+                    heading: 'Sample Student, Class of 2024',
+                    description: '<p>This is a sample testimonial description that can be edited inline.</p>',
+                    youtubeId: 'dQw4w9WgXcQ',
+                    videoImage: 'matrix-asset://api-identifier/sample-video-image',
+                    manualStoryUrl: 'https://example.com'
+                },
+                {
+                    heading: 'Another Student, Class of 2023',
+                    description: '<p>This is another sample testimonial with rich text content.</p>',
+                    youtubeId: 'dQw4w9WgXcQ',
+                    videoImage: 'matrix-asset://api-identifier/sample-video-image-2',
+                    internalStoryUrl: 'matrix-asset://api-identifier/sample-story'
+                }
+            ];
+            
+            // Ensure each testimonial has default values
+            testimonials = testimonials.map(testimonial => ({
+                ...testimonial,
+                heading: testimonial.heading || 'Sample Student',
+                description: testimonial.description || '<p>Add testimonial description here.</p>'
+            }));
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "sectionTitle": { "field": "sectionConfiguration.title" },
+                "sectionCtaText": { "field": "sectionConfiguration.ctaText" },
+                "heading": {
+                    "field": "testimonials",
+                    "array": true,
+                    "property": "heading"
+                },
+                "description": {
+                    "field": "testimonials",
+                    "array": true,
+                    "property": "description"
+                }
+            };
         }
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (title && typeof title !== 'string') {
-                throw new Error(
-                    `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`,
-                );
+        // Validate required functions - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Horizontal Video Testimonials component: ', er);
+                return `<!-- Error occurred in the Horizontal Video Testimonials component: ${er.message} -->`;
             }
-            if (ctaText && typeof ctaText !== 'string') {
-                throw new Error(
-                    `The "ctaText" field must be a string type. The ${JSON.stringify(ctaText)} was received.`,
-                );
+        }
+
+        // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (title && typeof title !== 'string') {
+                    throw new Error(
+                        `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`,
+                    );
+                }
+                if (ctaText && typeof ctaText !== 'string') {
+                    throw new Error(
+                        `The "ctaText" field must be a string type. The ${JSON.stringify(ctaText)} was received.`,
+                    );
+                }
+                if (ctaUrl && typeof ctaUrl !== 'string') {
+                    throw new Error(
+                        `The "ctaUrl" field must be a string type. The ${JSON.stringify(ctaUrl)} was received.`,
+                    );
+                }
+                if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
+                    throw new Error(
+                        `The "ctaManualUrl" field must be a string type. The ${JSON.stringify(ctaManualUrl)} was received.`,
+                    );
+                }
+                if (bgImage && typeof bgImage !== 'string') {
+                    throw new Error(
+                        `The "bgImage" field must be a string type. The ${JSON.stringify(bgImage)} was received.`,
+                    );
+                }
+                if (marginTop && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginTop) ) {
+                    throw new Error(
+                        `The "marginTop" field must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginTop)} was received.`
+                    );
+                }
+                if (marginBottom && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginBottom) ) {
+                    throw new Error(
+                        `The "marginBottom" field must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginBottom)} was received.`
+                    );
+                }
+                if (!Array.isArray(testimonials) || testimonials.length === 0) {
+                    throw new Error(
+                        `The "testimonials" field must be a non-empty array. The ${JSON.stringify(testimonials)} was received.`,
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Horizontal Video Testimonials component: ', er);
+                return `<!-- Error occurred in the Horizontal Video Testimonials component: ${er.message} -->`;
             }
-            if (ctaUrl && typeof ctaUrl !== 'string') {
-                throw new Error(
-                    `The "ctaUrl" field must be a string type. The ${JSON.stringify(ctaUrl)} was received.`,
-                );
-            }
-            if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
-                throw new Error(
-                    `The "ctaManualUrl" field must be a string type. The ${JSON.stringify(ctaManualUrl)} was received.`,
-                );
-            }
-            if (bgImage && typeof bgImage !== 'string') {
-                throw new Error(
-                    `The "bgImage" field must be a string type. The ${JSON.stringify(bgImage)} was received.`,
-                );
-            }
-            if (marginTop && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginTop) ) {
-                throw new Error(
-                    `The "marginTop" field must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginTop)} was received.`
-                );
-            }
-            if (marginBottom && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginBottom) ) {
-                throw new Error(
-                    `The "marginBottom" field must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginBottom)} was received.`
-                );
-            }
-            if (!Array.isArray(testimonials) || testimonials.length === 0) {
-                throw new Error(
-                    `The "testimonials" field must be a non-empty array. The ${JSON.stringify(testimonials)} was received.`,
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Horizontal Video Testimonials component: ', er);
-            return `<!-- Error occurred in the Horizontal Video Testimonials component: ${er.message} -->`;
         }
         
         const modalData = [];
@@ -102,12 +166,41 @@ export default {
 
         // Getting link data 
         if (ctaUrl) {
-            linkData = await basicAssetUri(fnsCtx, ctaUrl);
+            try {
+                linkData = await basicAssetUri(fnsCtx, ctaUrl);
+            } catch (er) {
+                console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch link data. ', er);
+                // NEW: In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    linkData = {
+                        url: 'https://example.com'
+                    };
+                } else {
+                    return `<!-- Error occurred in the Horizontal Video Testimonials component: Failed to fetch link data. ${er.message} -->`;
+                }
+            }
         }
 
         // Getting image data 
         if (bgImage) {
-            bgImageData = await basicAssetUri(fnsCtx, bgImage);
+            try {
+                bgImageData = await basicAssetUri(fnsCtx, bgImage);
+            } catch (er) {
+                console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch background image data. ', er);
+                // NEW: In edit mode, provide mock data instead of returning error
+                if (squizEdit) {
+                    bgImageData = {
+                        url: 'https://picsum.photos/1920/1080',
+                        attributes: {
+                            alt: 'Sample background image',
+                            width: 1920,
+                            height: 1080
+                        }
+                    };
+                } else {
+                    return `<!-- Error occurred in the Horizontal Video Testimonials component: Failed to fetch background image data. ${er.message} -->`;
+                }
+            }
         }
         
         // Getting testimonials data 
@@ -125,13 +218,42 @@ export default {
                 const uniqueID = uuid();
                 let internalLink = null;
                 if (internalStoryUrl) {
-                    internalLink = await basicAssetUri(fnsCtx, internalStoryUrl);
+                    try {
+                        internalLink = await basicAssetUri(fnsCtx, internalStoryUrl);
+                    } catch (er) {
+                        console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch internal story link. ', er);
+                        // NEW: In edit mode, provide mock data instead of returning error
+                        if (squizEdit) {
+                            internalLink = {
+                                url: 'https://example.com'
+                            };
+                        } else {
+                            return `<!-- Error occurred in the Horizontal Video Testimonials component: Failed to fetch internal story link. ${er.message} -->`;
+                        }
+                    }
                 }
                 const internalStoryLink = internalLink?.url;
 
                 let videoImageData = null;
                 if (videoImage) {
-                    videoImageData = await basicAssetUri(fnsCtx, videoImage);
+                    try {
+                        videoImageData = await basicAssetUri(fnsCtx, videoImage);
+                    } catch (er) {
+                        console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch video image data. ', er);
+                        // NEW: In edit mode, provide mock data instead of returning error
+                        if (squizEdit) {
+                            videoImageData = {
+                                url: 'https://picsum.photos/600/400',
+                                attributes: {
+                                    alt: heading || 'Sample video preview',
+                                    width: 600,
+                                    height: 400
+                                }
+                            };
+                        } else {
+                            return `<!-- Error occurred in the Horizontal Video Testimonials component: Failed to fetch video image data. ${er.message} -->`;
+                        }
+                    }
                 }
 
                 modalData.push(
@@ -150,7 +272,7 @@ export default {
                     heading,
                     description: xss(description),
                     videoImageUrl: videoImageData?.url,
-                    videoImageAlt: videoImageData?.alt || heading,
+                    videoImageAlt: videoImageData?.attributes?.alt || heading,
                     youtubeId,
                     storyLink: internalStoryLink || manualStoryUrl,
                     isRealExternalLink: !internalStoryLink && manualStoryUrl ? isRealExternalLink(manualStoryUrl) : false,
@@ -172,6 +294,11 @@ export default {
             testimonialsArrayLength: testimonialsArray.length,
             modalData,
         };
+
+        // NEW: Early return pattern for edit mode
+        if (squizEdit) {
+            return processEditor(horizontalVideoTestimonialsTemplate(componentData), squizEditTargets, args);
+        }
 
         return horizontalVideoTestimonialsTemplate(componentData);
     }

@@ -1,6 +1,7 @@
 import xss from "xss";
 import { basicAssetUri, isRealExternalLink } from "../../global/js/utils";
 import textCalloutTemplate from "./text-callout.hbs";
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * A module for rendering an Text callout.
@@ -32,8 +33,13 @@ export default {
      * @returns {Promise<string>} Rendered Text Callout HTML string
      */
     async main(args, info) {
-        // Extracting environment function from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // Extract configuration data
         const { title, content } = args?.displayConfiguration || {};
@@ -151,6 +157,20 @@ export default {
             button: buttonData,
         };
 
-        return textCalloutTemplate(componentData);
+        // Configure squizEditTargets for inline editing
+        const squizEditTargets = {
+            "infoBoxTitle": { "field": "displayConfiguration.title" },
+            "infoBoxContent": { "field": "displayConfiguration.content" },
+            "captionCredit": { "field": "imageConfiguration.caption" },
+            "button": { "field": "buttonConfiguration.buttonText" }
+        };
+
+        // Early return for non-edit mode
+        if (!squizEdit) {
+            return textCalloutTemplate(componentData);
+        }
+
+        // Process and return template with inline editing support
+        return processEditor(textCalloutTemplate(componentData), squizEditTargets);
     },
 };
