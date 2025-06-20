@@ -4,18 +4,22 @@ import { fileURLToPath } from 'url';
 import decanter from 'decanter';
 import plugin from 'tailwindcss/plugin'; 
 
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const colors = resolve(__dirname, "./global/css/plugins/theme/colors.js");
-const base = resolve(__dirname, "./global/css/plugins/base/base.js");
+
+// Import and execute the colors function
+import colorsFunction from "./global/css/plugins/theme/colors.js";
+const colors = colorsFunction();
+
+// Import base styles
+import baseStyles from "./global/css/plugins/base/base.js";
 
 export default {
     presets: [decanter],
     darkMode: "class",
     prefix: "su-",
     content: [
-        "./global/**/*.{css,js}",
-        "./packages/**/*.{css,jsx,js,scss,html}",
+        "./global/**/*.{css,js,hbs}",
+        "./packages/**/*.{css,jsx,js,scss,html,hbs}",
     ],
     theme: {
         extend: {
@@ -32,10 +36,12 @@ export default {
     variants: {
         extend: {
             textColor: ['hocus'],
+            borderColor: ['hocus'],
+            backgroundColor: ['hocus'],
         },
     },
     plugins: [
-        base,
+        baseStyles(),
         plugin(function ({ addVariant }) {
             addVariant('hocus', ['&:hover', '&:focus']);
         }),
