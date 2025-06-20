@@ -9,7 +9,7 @@
     </div>
     {{~else~}}
     {{~#ifEquals cardSize "large"~}}
-    <div className="su-shrink-0 su-w-[103px] su-h-[69px] md:su-w-[169px] md:su-h-[113px] lg:su-w-[292px] lg:su-h-[193px]"></div>
+    <div class="su-shrink-0 su-w-[103px] su-h-[69px] md:su-w-[169px] md:su-h-[113px] lg:su-w-[292px] lg:su-h-[193px]"></div>
     {{~/ifEquals~}}
     {{~/if~}}       
     <div class="su-flex su-flex-col {{getStringByCondition value=cardSize expectedValue="large" trueResult="su-gap-9 lg:su-gap-12" falseResult="su-gap-6"}}">

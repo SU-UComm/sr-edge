@@ -1,0 +1,19 @@
+{
+  "heading": "Updates",
+  "content": "<p>Stanford is continuing to monitor <a href=''>federal directives</a> that are related to or have the potential to impact federally funded research. <strong>In an announcement on Feb. 7,</strong> the National Institutes of Health said it would cap indirect costs in NIH grants to universities. <i>Separately, a Jan. 27 Office of Management and Budget memo calling for a federal funding pause was rescinded on Jan. 29.</i> However, ongoing legal challenges have limited the administration’s ability to implement a pause in funding. In addition, individual federal agencies are issuing directives that take different forms. The Office of the Vice Provost and Dean of Research is providing guidance to researchers on steps they should take based on the announcements of individual agencies.</p><p>Stanford is continuing to monitor federal directives that are related to or have the potential to impact federally funded research. In an announcement on Feb. 7, the National Institutes of Health said it would cap indirect costs in NIH grants to universities. Separately, a Jan. 27 Office of Management and Budget memo calling for a federal funding pause was rescinded on Jan. 29. However, ongoing legal challenges have limited the administration’s ability to implement a pause in funding. In addition, individual federal agencies are issuing directives that take different forms. The Office of the Vice Provost and Dean of Research is providing guidance to researchers on steps they should take based on the announcements of individual agencies.</p><p>Lorem ipsum odor amet, consectetuer adipiscing elit. Morbi ornare ridiculus pharetra finibus orci elementum; per nec. Ligula facilisis blandit a in suscipit dui. Cubilia est leo efficitur venenatis maecenas taciti vivamus vel. Faucibus consectetur viverra sed, rutrum morbi viverra commodo. Maecenas posuere sed metus, auctor ultrices sociosqu laoreet cubilia dapibus. Fermentum vivamus volutpat per; eros efficitur primis.</p>",
+  "infoBox": {
+    "imageConfiguration": {
+      "image": "matrix-asset://api-identifier/99100",
+      "caption": "This is the image's caption.",
+      "credit": "Photo Grapher",
+      "imagePlacement": "Below content"
+    },
+    "buttonConfiguration": {
+      "isNewWindow": false,
+      "buttonText": "Click me",
+      "internalUrl": "matrix-asset://api-identifier/28192"
+    },
+    "title": "More info",
+    "content": "<p>Lorem ipsum odor amet, consectetuer adipiscing elit. Adipiscing elementum nulla est pharetra arcu nisi magna tortor. Tortor condimentum taciti porta adipiscing sit fusce! Senectus praesent feugiat lectus laoreet magna integer. Natoque per potenti vitae sagittis consectetur. Natoque praesent ac felis dui gravida nostra cursus tempus.</p>"
+  }
+}
