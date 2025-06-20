@@ -2,6 +2,11 @@
 import { resolve, relative, dirname, extname } from 'path';
 import { defineConfig } from 'vite';
 import viteSass from 'vite-plugin-sass-dts';
+import postcssImport from 'postcss-import';
+import tailwindcss from 'tailwindcss';
+import autoprefixer from 'autoprefixer';
+import tailwindNesting from 'tailwindcss/nesting';
+
 import {
     readdirSync,
     existsSync,
@@ -26,15 +31,25 @@ function getAllScripts() {
 }
 
 function getAllStyles() {
+    // First get Font Awesome styles
+    const fontAwesomeStyles = resolve(__dirname, 'global/css/fontawesome.css');
+    
+    // Then get global styles
     const globalStyles = resolve(__dirname, 'global/css/global.css');
+    
+    // Then get component styles in a specific order
     const packageDir = resolve(__dirname, 'packages');
     const folders = readdirSync(packageDir, { withFileTypes: true })
         .filter((dirent) => dirent.isDirectory())
         .map((dirent) => resolve(packageDir, dirent.name, 'styles.scss'))
-        .filter((filePath) => existsSync(filePath));
+        .filter((filePath) => existsSync(filePath))
+        .sort((a, b) => {
+            // Ensure consistent ordering of component styles
+            return a.localeCompare(b);
+        });
 
-    folders.push(globalStyles); 
-    return folders;
+    // Put Font Awesome styles first, then global styles, then component styles
+    return [fontAwesomeStyles, globalStyles, ...folders];
 }
 
 function injectInlineContent() {
@@ -115,6 +130,14 @@ export default defineConfig({
         },
     },
     css: {
+        postcss: {
+            plugins: [
+                postcssImport(),
+                tailwindNesting(),
+                tailwindcss(),
+                autoprefixer()
+            ]
+        },
         preprocessorOptions: {
             scss: {
                 api: 'modern-compiler',
@@ -155,7 +178,10 @@ export default defineConfig({
                     __dirname,
                     'temp-entry-scss.scss',
                 );
-                const tempEntryScssContent = styles
+
+                // First, generate all @use statements for SCSS files
+                const useStatements = styles
+                    .filter(filePath => filePath.endsWith('.scss'))
                     .map((filePath) => {
                         const relativePath = relative(
                             resolve(__dirname, 'packages'),
@@ -165,6 +191,15 @@ export default defineConfig({
                         return `@use '@components/${relativePath.replace('.scss', '')}' as ${validAlias};`;
                     })
                     .join('\n');
+
+                // Then, generate all @import statements for CSS files in the original order
+                const importStatements = styles
+                    .filter(filePath => filePath.endsWith('.css'))
+                    .map((filePath) => `@import '${filePath}';`)
+                    .join('\n');
+
+                // Combine with @use statements first (to satisfy SCSS), then @import statements
+                const tempEntryScssContent = `${useStatements}\n${importStatements}`;
                 writeFileSync(tempEntryScssPath, tempEntryScssContent);
             },
             buildEnd() {

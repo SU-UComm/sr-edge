@@ -1,4 +1,4 @@
-module.exports = function () {
+export default function () {
   return function ({ addBase, config }) {
     addBase({
       html: {
@@ -41,4 +41,4 @@ module.exports = function () {
       },
     });
   };
-};
+}
