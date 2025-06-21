@@ -27,6 +27,15 @@
                         "type": "object",
                         "required": [],
                         "properties": {
+                            "alwaysDark": {
+                                "title": "Always dark mode",
+                                "description": "If checked, this component will always display in dark mode.",
+                                "type": "boolean",
+                                "default": false,
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
+                            },
                             "title": {
                                 "title": "Section heading",
                                 "type": "string",

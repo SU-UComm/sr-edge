@@ -1,10 +1,10 @@
-<article class="su-relative su-flex su-flex-col lg:su-flex-row su-gap-30 md:su-gap-38 2xl:su-gap-72 su-items-start lg:su-items-center su-p-34 md:su-p-61 lg:su-p-38 2xl:su-pl-76 su-bg-white dark:su-bg-black-true su-text-black dark:su-text-white">
+<article class="su-relative su-flex su-flex-col lg:su-flex-row su-gap-30 md:su-gap-38 2xl:su-gap-72 su-items-start lg:su-items-center su-p-34 md:su-p-61 lg:su-p-38 2xl:su-pl-76 {{#if alwaysDark}}su-bg-black-true dark:su-bg-black-true su-text-white dark:su-text-white{{else}}su-bg-white dark:su-bg-black-true su-text-black dark:su-text-white{{/if}}">
     <div class="su-relative su-w-full lg:su-basis-[50%] xl:su-basis-[40%] 2xl:su-basis-[30%]">
-        <h3 class="su-type-3 su-leading-display su-rs-mb-0">
+        <h3 class="su-type-3 su-leading-display su-rs-mb-0 {{#if alwaysDark}}su-text-white dark:su-text-white{{/if}}">
             {{~#if storyLink}}
             <a
             href="{{storyLink}}"
-            class="su-group su-text-black su-transition dark:su-text-white hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red hocus:su-underline"
+            class="su-group su-stretched-link su-no-underline hocus:su-underline dark:su-text-white dark:hocus:su-text-dark-mode-red focus:su-outline-none {{#if alwaysDark}}su-text-white hocus:su-text-dark-mode-red{{else}}su-text-black hocus:su-text-digital-red{{/if}}"
             rel={{getStringByCondition value=isRealExternalLink expectedValue=true trueResult="noopener noreferrer" falseResult=undefined}}
             >
                 <span data-se="hcardheading">{{heading}}</span>
@@ -17,7 +17,7 @@
                         set="regular"
                         title="(link is external)"
                         width=24
-                        classes="su-h-auto su-align-middle su-text-digital-red dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"
+                        classes="fa-fw su-inline-block su-align-middle su-text-[0.8em] su-ml-5 dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform {{#if alwaysDark}}su-text-dark-mode-red{{else}}su-text-digital-red{{/if}}"
                     }}
                 </span>
                 {{~/if~}}

@@ -38,7 +38,7 @@ export default {
         
         // CHANGE: change const to let for mutability
         let { testimonials, sectionConfiguration } = args || {};
-        let { title, ctaText, ctaUrl, ctaManualUrl, bgImage, marginTop, marginBottom } = sectionConfiguration || {};
+        let { title, ctaText, ctaUrl, ctaManualUrl, bgImage, marginTop, marginBottom, alwaysDark } = sectionConfiguration || {};
 
         // NEW: Detect edit mode
         const squizEdit = info?.ctx?.editor || false;
@@ -243,6 +243,9 @@ export default {
             testimonialsArray,
             testimonialsArrayLength: testimonialsArray.length,
             modalData,
+            alwaysDark,
+            paddingY: bgImageData?.url  ? "10" : "base",
+            customClasses: `su-relative su-overflow-hidden su-bg-black dark:su-bg-black-true ${alwaysDark ? "su-bg-black-true" : ""}`
         };
 
         // NEW: Early return pattern for edit mode

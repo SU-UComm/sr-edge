@@ -2,11 +2,11 @@
     <div
         class='{{containerClasses
                 width='full'
-                paddingY='10'
+                paddingY=paddingY
                 paddingX=false
                 marginTop=marginTop
                 marginBottom=marginBottom
-                customClasses='su-relative su-overflow-hidden su-bg-black'
+                customClasses=customClasses
             }}'
     >
         <div
@@ -22,8 +22,8 @@
             {{~#if testimonialsArrayLength~}}
                 <ul class="su-relative su-grid su-gap-20 su-z-30 su-list-unstyled *:su-mb-0">
                     {{~#each testimonialsArray~}}
-                        <li>
-                            {{> card-horizontal-video storyLink=storyLink youtubeId=youtubeId heading=heading description=description videoImageUrl=videoImageUrl videoImageAlt=videoImageAlt isRealExternalLink=isRealExternalLink uniqueID=uniqueID}}
+                        <li class="{{#if bgImageData.url}}{{else}}su-border-2 su-border-black{{/if}}">
+                            {{> card-horizontal-video storyLink=storyLink youtubeId=youtubeId heading=heading description=description videoImageUrl=videoImageUrl videoImageAlt=videoImageAlt isRealExternalLink=isRealExternalLink uniqueID=uniqueID alwaysDark=../alwaysDark}}
                         </li>
                     {{~/each~}}
                 </ul>

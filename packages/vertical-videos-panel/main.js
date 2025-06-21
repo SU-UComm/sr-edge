@@ -39,7 +39,7 @@ export default {
     
         // Extract configuration data
         let { videos } = args || {};
-        let { title, ctaText, ctaUrl, ctaManualUrl, bgImage, marginTop, marginBottom } = args?.sectionConfiguration || {};
+        let { title, ctaText, ctaUrl, ctaManualUrl, bgImage, marginTop, marginBottom, alwaysDark } = args?.sectionConfiguration || {};
 
         // NEW: Detect edit mode
         const squizEdit = componentContext?.editor || false;
@@ -184,21 +184,23 @@ export default {
             sectionTitle: sectionData?.title,
             sectionCtaText: sectionData?.ctaText,
             sectionCtaLink: sectionData?.ctaLink,
-            sectionIsAlwaysLight: bgImageData?.url ? true : false,
+            sectionIsAlwaysLight: (!!bgImageData?.url || alwaysDark) ? true : false,
             sectionBgImageUrl: bgImageData?.url,
             sectionBgImageAlt: bgImageData?.alt,
-            sectionCustomClasses: "2xl:su-px-[17rem] su-rs-mb-5",
+            sectionCustomClasses: `2xl:su-px-[17rem] su-rs-mb-5 ${alwaysDark ? "su-text-white dark:su-text-white" : ""}`,
             carouselID: uuid(),
-            isDarkCarousel: bgImageData?.url ? true : false,
+            isDarkCarousel: (!!bgImageData?.url || alwaysDark) ? true : false,
             videosData,
             videosDataLength: `${videosData.length}`,
             width: "full",
-            paddingY: bgImageData?.url ? "10" : "",
+            paddingY: (bgImageData?.url || alwaysDark) ? "10" : "",
             paddingX: false,
             marginTop: marginTop,
             marginBottom: marginBottom,
-            customClasses: "su-relative su-break-words",
-            videoModal: videoModal
+            customClasses: `su-relative su-break-words ${alwaysDark ? "su-bg-black-true dark:su-bg-black-true" : ""}`,
+            videoModal: videoModal,
+            rounded: true,
+            videoType: "vertical-video-featured"
         };
 
         // Return original front end code when squizEdit is false, without modification
