@@ -38,11 +38,11 @@ export default {
         if (squizEdit) {
             // Provide default values for inline editable fields
             image = image || 'matrix-asset://api-identifier/sample-image';
-            imageCaption = imageCaption || 'Sample image caption';
-            imageCredit = imageCredit || 'Sample image credit';
-            quote = quote || 'This is a sample quote that demonstrates the inline editing functionality';
-            name = name || 'Sample Name';
-            title = title || 'Sample Title/Role';
+            imageCaption = imageCaption || 'Caption text';
+            imageCredit = imageCredit || 'Credit text';
+            quote = quote || 'Add content';
+            name = name || 'Quotee Name';
+            title = title || 'Quotee Title/Role';
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -129,11 +129,11 @@ export default {
             // NEW: In edit mode, provide mock data instead of returning error
             if (squizEdit) {
                 imageData = {
-                    url: 'https://picsum.photos/800/600',
-                    attributes: {
-                        alt: 'Sample image',
-                        width: 800,
-                        height: 600
+                    "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                    "attributes": {
+                        "alt": "Campaign image",
+                        "height": "",
+                        "width": ""
                     }
                 };
             } else {
@@ -147,12 +147,10 @@ export default {
             alt: imageData?.attributes?.alt || "",
             captionCredit: imageCaption && imageCredit ? `${imageCaption} | ${imageCredit}` : imageCaption || imageCredit,
         }
-
-        // maybe add squiz edit 
         const quoteData = {
-            quote: quote ? `${quote}`: '',
-            name: name,
-            title: title
+            quote: quote ? `${quote}”`: '',
+            name,
+            title
         }
 
         // Prepare component data for template rendering
@@ -164,7 +162,6 @@ export default {
             imageCaption: imageCaption,
             imageCredit: imageCredit
         }
-
 
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
