@@ -36,19 +36,19 @@ export default {
 
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
         let squizEditTargets = null;
         
         // NEW: add defaults if squizEdit is true
         if (squizEdit) {
             // Add default values for inline editable fields
-            title = title || 'Campaign Title';
-            description = description || 'Campaign description text goes here.';
-            linkText = linkText || 'Learn more';
+            title = title || 'Title text';
+            description = description || 'Add content';
+            linkText = linkText || 'Link text';
             linkUrl = linkUrl || "matrix-asset://StanfordNews/29389"
             // Provide default image if none exists
-            image = image || 'matrix-asset://StanfordNews/130444';
+            image = image || 'matrix-asset://StanfordNews/172387';
             
             // Add the targets for the squizEdit DOM augmentation
             // used in processSquizEdit to modify the output to add edit markup
@@ -139,13 +139,18 @@ export default {
                 console.error('Error occurred in the Campaign cta component: Failed to fetch image data. ', er);
                 if (squizEdit) {
                     imageData = {
-                        "url": "https://news.stanford.edu/__data/assets/image/0016/130444/Jordan-Hall-Dusk.png",
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
                         "attributes": {
-                            "alt": {
-                                "value": "Campaign image"
-                            }
-                        }
-                      };
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
+                        },
+                    };
                 }
             }
         }
