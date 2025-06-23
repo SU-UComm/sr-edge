@@ -25,7 +25,32 @@
  *     ]
  * };
  */
+
+/**
+ * Converts anchor tags with data-se attributes to span tags while preserving all attributes
+ * @param {string} html - The HTML string to process
+ * @returns {string} The processed HTML with anchor tags converted to spans
+ */
+function convertAnchorTagsToSpans(html) {
+    // First convert opening tags
+    const openingTagRegex = /<a\s+([^>]*?)(data-se\s*=\s*["'][^"']*["'][^>]*)>/gi;
+    html = html.replace(openingTagRegex, (match, beforeDataSe, afterDataSe) => {
+        // Combine the attributes before and after data-se
+        const allAttributes = (beforeDataSe + ' ' + afterDataSe).trim();
+        return `<span ${allAttributes}>`;
+    });
+
+    // Then convert closing tags
+    const closingTagRegex = /<\/a>/gi;
+    html = html.replace(closingTagRegex, '</span>');
+
+    return html;
+}
+
 export async function processEditor(output, squizEditTargets) {
+    // First convert any anchor tags with data-se to spans
+    // output = convertAnchorTagsToSpans(output);
+
     for (const target in squizEditTargets) {
         const targetConfig = squizEditTargets[target];
         const escapedTarget = target.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

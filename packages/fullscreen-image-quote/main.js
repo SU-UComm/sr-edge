@@ -48,23 +48,17 @@ export default {
         
         if (squizEdit) {
             // Provide default values for inline editable fields
-            quote = quote || '"This is a sample quote that can be edited inline."';
+            quote = quote || '"Add quote"';
             
             // Ensure ctaDetails object exists
             ctaDetails = ctaDetails || {};
             ctaPreText = ctaPreText || 'Meet';
-            ctaText = ctaText || 'Sample Person';
+            ctaText = ctaText || 'Link text';
             ctaSubtext = ctaSubtext || "'21, international student";
             
             // Provide default values for other required fields
-            image = image || 'matrix-asset://api-identifier/sample-image';
-            imageVPosition = imageVPosition || 'center';
-            quoteVAlign = quoteVAlign || 'center';
-            quoteHAlign = quoteHAlign || 'left';
-            removeTopSpacing = removeTopSpacing !== undefined ? removeTopSpacing : false;
-            externalUrl = externalUrl || 'https://example.com';
-            isNewWindow = isNewWindow !== undefined ? isNewWindow : false;
-            
+            image = image || 'matrix-asset://StanfordNews/172387';
+
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
                 "quote": { "field": "quote" },
@@ -74,98 +68,9 @@ export default {
             };
         }
 
-        // Validate required environment variables - CHANGE: wrap in !squizEdit check
-        if (!squizEdit) {
-            try {
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Fullscreen Image Quote component: ', er);
-                return `<!-- Error occurred in the Fullscreen Image Quote component: ${er.message} -->`;
-            }
-        }
-
-        // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
-        if (!squizEdit) {
-            try {
-                // if (!image || typeof image !== 'string') {
-                //     throw new Error(
-                //         `The "image" field cannot be undefined and must be a string. The ${JSON.stringify(image)} was received.`
-                //     );
-                // }
-                // if (imageVPosition && !['top', 'center', 'bottom'].includes(imageVPosition)) {
-                //     throw new Error(
-                //         `The "imageVPosition" field must be one of ["top", "center", "bottom"]. The ${JSON.stringify(imageVPosition)} was received.`
-                //     );
-                // }
-                // if (mobileImage && typeof mobileImage !== 'string') {
-                //     throw new Error(
-                //         `The "mobileImage" field must be a string. The ${JSON.stringify(mobileImage)} was received.`
-                //     );
-                // }
-                if (!quote || typeof quote !== 'string') {
-                    throw new Error(
-                        `The "quote" field cannot be undefined and must be a string. The ${JSON.stringify(quote)} was received.`
-                    );
-                }
-                if (quoteHAlign && !['left', 'right'].includes(quoteHAlign)) {
-                    throw new Error(
-                        `The "quoteHAlign" field must be one of ["left", "right"]. The ${JSON.stringify(quoteHAlign)} was received.`
-                    );
-                }
-                if (quoteVAlign && !['top', 'center', 'bottom'].includes(quoteVAlign)) {
-                    throw new Error(
-                        `The "quoteVAlign" field must be one of ["top", "center", "bottom"]. The ${JSON.stringify(quoteVAlign)} was received.`
-                    );
-                }
-                if (removeTopSpacing !== undefined && typeof removeTopSpacing !== 'boolean') {
-                    throw new Error(
-                        `The "removeTopSpacing" field must be a boolean. The ${JSON.stringify(removeTopSpacing)} was received.`
-                    );
-                }
-                if (ctaPreText && typeof ctaPreText !== 'string') {
-                    throw new Error(
-                        `The "ctaPreText" field must be a string. The ${JSON.stringify(ctaPreText)} was received.`
-                    );
-                }
-                if (ctaText && typeof ctaText !== 'string') {
-                    throw new Error(
-                        `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
-                    );
-                }
-                if (ctaSubtext && typeof ctaSubtext !== 'string') {
-                    throw new Error(
-                        `The "ctaSubtext" field must be a string. The ${JSON.stringify(ctaSubtext)} was received.`
-                    );
-                }
-                if (internalUrl && typeof internalUrl !== 'string') {
-                    throw new Error(
-                        `The "internalUrl" field must be a string. The ${JSON.stringify(internalUrl)} was received.`
-                    );
-                }
-                if (externalUrl && typeof externalUrl !== 'string') {
-                    throw new Error(
-                        `The "externalUrl" field must be a string. The ${JSON.stringify(externalUrl)} was received.`
-                    );
-                }
-                if (isNewWindow !== undefined && typeof isNewWindow !== 'boolean') {
-                    throw new Error(
-                        `The "isNewWindow" field must be a boolean. The ${JSON.stringify(isNewWindow)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Fullscreen Image Quote component: ', er);
-                return `<!-- Error occurred in the Fullscreen Image Quote component: ${er.message} -->`;
-            }
-        }
-
         let imageData = null;
         let mobileImageData = null;
         let linkUrl = null;
-        
         
         // Get background image data
         if (image) {
@@ -176,15 +81,18 @@ export default {
                 // NEW: In edit mode, provide mock data instead of returning error
                 if (squizEdit) {
                     imageData = {
-                        url: 'https://picsum.photos/1200/800',
-                        attributes: {
-                            alt: 'Sample background image',
-                            width: 1200,
-                            height: 800
-                        }
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                        "attributes": {
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
+                        },
                     };
-                } else {
-                    return `<!-- Error occurred in the Fullscreen Image Quote component: Failed to fetch image data. ${er.message} -->`;
                 }
             }
         }
@@ -198,15 +106,18 @@ export default {
                 // NEW: In edit mode, provide mock data instead of returning error
                 if (squizEdit) {
                     mobileImageData = {
-                        url: 'https://picsum.photos/600/800',
-                        attributes: {
-                            alt: 'Sample mobile background image',
-                            width: 600,
-                            height: 800
-                        }
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                        "attributes": {
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
+                        },
                     };
-                } else {
-                    return `<!-- Error occurred in the Fullscreen Image Quote component: Failed to fetch mobile image data. ${er.message} -->`;
                 }
             }
         }
@@ -220,10 +131,8 @@ export default {
                 // NEW: In edit mode, provide mock data instead of returning error
                 if (squizEdit) {
                     linkUrl = {
-                        url: 'https://example.com'
+                        url: "#"
                     };
-                } else {
-                    return `<!-- Error occurred in the Fullscreen Image Quote component: Failed to fetch link data. ${er.message} -->`;
                 }
             }
         }
@@ -257,10 +166,9 @@ export default {
         };
 
         // NEW: Early return pattern for edit mode
-        if (squizEdit) {
-            return processEditor(fullscreenImageQuoteTemplate(componentData), squizEditTargets, args);
+        if (!squizEdit) {
+            return fullscreenImageQuoteTemplate(componentData);
         }
-
-        return fullscreenImageQuoteTemplate(componentData);
+        return processEditor(fullscreenImageQuoteTemplate(componentData), squizEditTargets);
     }
 };

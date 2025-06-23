@@ -1,6 +1,7 @@
 {
     "title": "Need-based financial aid for all students",
     "eyebrow": "Affordable",
+    "alwaysDark": false,
     "facts": [
         {
             "icon": "heart",

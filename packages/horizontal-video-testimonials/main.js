@@ -38,58 +38,34 @@ export default {
         
         // CHANGE: change const to let for mutability
         let { testimonials, sectionConfiguration } = args || {};
-        let { title, ctaText, ctaUrl, ctaManualUrl, bgImage, marginTop, marginBottom } = sectionConfiguration || {};
+        let { title, ctaText, ctaUrl, ctaManualUrl, bgImage, marginTop, marginBottom, alwaysDark } = sectionConfiguration || {};
 
         // NEW: Detect edit mode
         const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
-            // Provide default section configuration
-            sectionConfiguration = sectionConfiguration || {};
-            title = title || 'Meet more students';
-            ctaText = ctaText || 'Watch all';
-            ctaUrl = ctaUrl || '';
-            ctaManualUrl = ctaManualUrl || 'https://news.stanford.edu/video';
-            bgImage = bgImage || 'matrix-asset://api-identifier/sample-bg-image';
-            marginTop = marginTop || '10';
-            marginBottom = marginBottom || '10';
-            
-            // Add default testimonials if not provided or empty
-            testimonials = testimonials && testimonials.length > 0 ? testimonials : [
-                {
-                    heading: 'Sample Student, Class of 2024',
-                    description: '<p>This is a sample testimonial description that can be edited inline.</p>',
-                    youtubeId: 'dQw4w9WgXcQ',
-                    videoImage: 'matrix-asset://api-identifier/sample-video-image',
-                    manualStoryUrl: 'https://example.com'
-                },
-                {
-                    heading: 'Another Student, Class of 2023',
-                    description: '<p>This is another sample testimonial with rich text content.</p>',
-                    youtubeId: 'dQw4w9WgXcQ',
-                    videoImage: 'matrix-asset://api-identifier/sample-video-image-2',
-                    internalStoryUrl: 'matrix-asset://api-identifier/sample-story'
-                }
-            ];
+            title = title || 'Heading text';
+            ctaText = ctaText || 'Link text';
+            ctaUrl = ctaUrl || 'matrix-asset://StanfordNews/29389';
             
             // Ensure each testimonial has default values
             testimonials = testimonials.map(testimonial => ({
                 ...testimonial,
-                heading: testimonial.heading || 'Sample Student',
-                description: testimonial.description || '<p>Add testimonial description here.</p>'
+                heading: testimonial.heading || 'Heading text',
+                description: testimonial.description || 'Enter the description text'
             }));
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
-                "sectionTitle": { "field": "sectionConfiguration.title" },
-                "sectionCtaText": { "field": "sectionConfiguration.ctaText" },
-                "heading": {
+                "headingTitle": { "field": "sectionConfiguration.title" },
+                "headingCtaText": { "field": "sectionConfiguration.ctaText" },
+                "hcardheading": {
                     "field": "testimonials",
                     "array": true,
                     "property": "heading"
                 },
-                "description": {
+                "hcarddescription": {
                     "field": "testimonials",
                     "array": true,
                     "property": "description"
@@ -97,189 +73,163 @@ export default {
             };
         }
 
-        // Validate required functions - CHANGE: wrap in !squizEdit check
-        if (!squizEdit) {
-            try {
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Horizontal Video Testimonials component: ', er);
-                return `<!-- Error occurred in the Horizontal Video Testimonials component: ${er.message} -->`;
-            }
-        }
-
-        // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
-        if (!squizEdit) {
-            try {
-                if (title && typeof title !== 'string') {
-                    throw new Error(
-                        `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`,
-                    );
-                }
-                if (ctaText && typeof ctaText !== 'string') {
-                    throw new Error(
-                        `The "ctaText" field must be a string type. The ${JSON.stringify(ctaText)} was received.`,
-                    );
-                }
-                if (ctaUrl && typeof ctaUrl !== 'string') {
-                    throw new Error(
-                        `The "ctaUrl" field must be a string type. The ${JSON.stringify(ctaUrl)} was received.`,
-                    );
-                }
-                if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
-                    throw new Error(
-                        `The "ctaManualUrl" field must be a string type. The ${JSON.stringify(ctaManualUrl)} was received.`,
-                    );
-                }
-                if (bgImage && typeof bgImage !== 'string') {
-                    throw new Error(
-                        `The "bgImage" field must be a string type. The ${JSON.stringify(bgImage)} was received.`,
-                    );
-                }
-                if (marginTop && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginTop) ) {
-                    throw new Error(
-                        `The "marginTop" field must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginTop)} was received.`
-                    );
-                }
-                if (marginBottom && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginBottom) ) {
-                    throw new Error(
-                        `The "marginBottom" field must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginBottom)} was received.`
-                    );
-                }
-                if (!Array.isArray(testimonials) || testimonials.length === 0) {
-                    throw new Error(
-                        `The "testimonials" field must be a non-empty array. The ${JSON.stringify(testimonials)} was received.`,
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Horizontal Video Testimonials component: ', er);
-                return `<!-- Error occurred in the Horizontal Video Testimonials component: ${er.message} -->`;
-            }
-        }
-        
         const modalData = [];
-        let bgImageData = null;
-        let linkData = null;
-
-        // Getting link data 
-        if (ctaUrl) {
-            try {
-                linkData = await basicAssetUri(fnsCtx, ctaUrl);
-            } catch (er) {
-                console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch link data. ', er);
-                // NEW: In edit mode, provide mock data instead of returning error
-                if (squizEdit) {
-                    linkData = {
-                        url: 'https://example.com'
-                    };
-                } else {
-                    return `<!-- Error occurred in the Horizontal Video Testimonials component: Failed to fetch link data. ${er.message} -->`;
-                }
-            }
-        }
-
-        // Getting image data 
-        if (bgImage) {
-            try {
-                bgImageData = await basicAssetUri(fnsCtx, bgImage);
-            } catch (er) {
-                console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch background image data. ', er);
-                // NEW: In edit mode, provide mock data instead of returning error
-                if (squizEdit) {
-                    bgImageData = {
-                        url: 'https://picsum.photos/1920/1080',
-                        attributes: {
-                            alt: 'Sample background image',
-                            width: 1920,
-                            height: 1080
-                        }
-                    };
-                } else {
-                    return `<!-- Error occurred in the Horizontal Video Testimonials component: Failed to fetch background image data. ${er.message} -->`;
-                }
-            }
-        }
         
-        // Getting testimonials data 
-        const testimonialsArray = await Promise.all(
-            testimonials.map(async (testimonial) => {
-                const {
-                    heading,
-                    description,
-                    videoImage,
-                    youtubeId,
-                    internalStoryUrl,
-                    manualStoryUrl,
-                } = testimonial;
+        // Prepare all promises to run in parallel for better performance
+        const promises = [];
+        
+        // Add link data promise
+        const linkDataPromise = (async () => {
+            if (ctaUrl) {
+                try {
+                    return await basicAssetUri(fnsCtx, ctaUrl);
+                } catch (er) {
+                    console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch link data. ', er);
+                    if (squizEdit) {
+                        return {
+                            url: "https://news.stanford.edu"
+                        };
+                    }
+                    return null;
+                }
+            }
+            return null;
+        })();
+        promises.push(linkDataPromise);
+        
+        // Add background image promise
+        const bgImagePromise = (async () => {
+            if (bgImage) {
+                try {
+                    return await basicAssetUri(fnsCtx, bgImage);
+                } catch (er) {
+                    console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch background image data. ', er);
+                    if (squizEdit) {
+                        return {
+                            "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                            "attributes": {
+                                "allow_unrestricted": false,
+                                "size": 1858005,
+                                "height": 960,
+                                "width": 1440,
+                                "title": "placeholder.png",
+                                "name": "placeholder.png",
+                                "caption": "",
+                                "alt": "This is a placeholder"
+                            },
+                        };
+                    }
+                    return null;
+                }
+            }
+            return null;
+        })();
+        promises.push(bgImagePromise);
+        
+        // Add testimonial data promises
+        const testimonialPromises = testimonials.map(async (testimonial) => {
+            const {
+                heading,
+                description,
+                videoImage,
+                youtubeId,
+                internalStoryUrl,
+                manualStoryUrl,
+            } = testimonial;
 
-                const uniqueID = uuid();
-                let internalLink = null;
+            const uniqueID = uuid();
+            
+            // Prepare testimonial-specific promises
+            const testimonialPromises = [];
+            
+            // Add internal link promise
+            const internalLinkPromise = (async () => {
                 if (internalStoryUrl) {
                     try {
-                        internalLink = await basicAssetUri(fnsCtx, internalStoryUrl);
+                        return await basicAssetUri(fnsCtx, internalStoryUrl);
                     } catch (er) {
                         console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch internal story link. ', er);
-                        // NEW: In edit mode, provide mock data instead of returning error
                         if (squizEdit) {
-                            internalLink = {
-                                url: 'https://example.com'
+                            return {
+                                url: "https://news.stanford.edu"
                             };
-                        } else {
-                            return `<!-- Error occurred in the Horizontal Video Testimonials component: Failed to fetch internal story link. ${er.message} -->`;
                         }
+                        return null;
                     }
                 }
-                const internalStoryLink = internalLink?.url;
-
-                let videoImageData = null;
+                return null;
+            })();
+            testimonialPromises.push(internalLinkPromise);
+            
+            // Add video image promise
+            const videoImagePromise = (async () => {
                 if (videoImage) {
                     try {
-                        videoImageData = await basicAssetUri(fnsCtx, videoImage);
+                        return await basicAssetUri(fnsCtx, videoImage);
                     } catch (er) {
                         console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch video image data. ', er);
-                        // NEW: In edit mode, provide mock data instead of returning error
                         if (squizEdit) {
-                            videoImageData = {
-                                url: 'https://picsum.photos/600/400',
-                                attributes: {
-                                    alt: heading || 'Sample video preview',
-                                    width: 600,
-                                    height: 400
-                                }
+                            return {
+                                "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                                "attributes": {
+                                    "allow_unrestricted": false,
+                                    "size": 1858005,
+                                    "height": 960,
+                                    "width": 1440,
+                                    "title": "placeholder.png",
+                                    "name": "placeholder.png",
+                                    "caption": "",
+                                    "alt": "This is a placeholder"
+                                },
                             };
-                        } else {
-                            return `<!-- Error occurred in the Horizontal Video Testimonials component: Failed to fetch video image data. ${er.message} -->`;
                         }
+                        return null;
                     }
                 }
+                return null;
+            })();
+            testimonialPromises.push(videoImagePromise);
+            
+            // Wait for testimonial promises to resolve
+            const testimonialResults = await Promise.all(testimonialPromises);
+            const internalLink = testimonialResults[0];
+            const videoImageData = testimonialResults[1];
+            
+            const internalStoryLink = internalLink?.url;
 
-                modalData.push(
-                    {
-                        isVertical: true, 
-                        videoId: youtubeId, 
-                        title: `Watch ${heading}`, 
-                        noAutoPlay: true,
-                        uniqueID, 
-                        titleID: 'video-modal' 
-                    }
-                )
+            modalData.push(
+                {
+                    isVertical: true, 
+                    videoId: youtubeId, 
+                    title: `Watch ${heading}`, 
+                    noAutoPlay: true,
+                    uniqueID, 
+                    titleID: 'video-modal' 
+                }
+            );
 
-                return {
-                    uniqueID: uniqueID,
-                    heading,
-                    description: xss(description),
-                    videoImageUrl: videoImageData?.url,
-                    videoImageAlt: videoImageData?.attributes?.alt || heading,
-                    youtubeId,
-                    storyLink: internalStoryLink || manualStoryUrl,
-                    isRealExternalLink: !internalStoryLink && manualStoryUrl ? isRealExternalLink(manualStoryUrl) : false,
-
-                };
-            })
-        );
+            return {
+                uniqueID: uniqueID,
+                heading,
+                description: xss(description),
+                videoImageUrl: videoImageData?.url,
+                videoImageAlt: videoImageData?.attributes?.alt || heading,
+                youtubeId,
+                storyLink: internalStoryLink || manualStoryUrl,
+                isRealExternalLink: !internalStoryLink && manualStoryUrl ? isRealExternalLink(manualStoryUrl) : false,
+            };
+        });
+        
+        // Add testimonial promises to main promises array
+        promises.push(...testimonialPromises);
+        
+        // Wait for all promises to resolve in parallel
+        const results = await Promise.all(promises);
+        
+        // Extract results
+        const linkData = results[0];
+        const bgImageData = results[1];
+        const testimonialsArray = results.slice(2);
         
         // Prepare component data for template rendering
         const componentData = {
@@ -293,14 +243,17 @@ export default {
             testimonialsArray,
             testimonialsArrayLength: testimonialsArray.length,
             modalData,
+            alwaysDark,
+            paddingY: bgImageData?.url  ? "10" : "base",
+            customClasses: `su-relative su-overflow-hidden su-bg-black dark:su-bg-black-true ${alwaysDark ? "su-bg-black-true" : ""}`
         };
 
         // NEW: Early return pattern for edit mode
-        if (squizEdit) {
-            return processEditor(horizontalVideoTestimonialsTemplate(componentData), squizEditTargets, args);
+        if (!squizEdit) {
+            return horizontalVideoTestimonialsTemplate(componentData);
         }
 
-        return horizontalVideoTestimonialsTemplate(componentData);
+        return processEditor(horizontalVideoTestimonialsTemplate(componentData), squizEditTargets);
     }
 };
 

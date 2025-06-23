@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "vertical-videos-panel",
     "type": "edge",
-    "version": "4.1.0",
+    "version": "4.1.1",
     "namespace": "stanford-apb",
     "description": "A section that displays up to 3 vertical YouTube videos, with a section title and link to watch more. On smaller devices, the videos will be displayed in a carousel if there are more than 1.",
     "displayName": "Vertical Videos Panel",
@@ -27,10 +27,18 @@
                         "type": "object",
                         "required": [],
                         "properties": {
+                            "alwaysDark": {
+                                "title": "Always dark mode",
+                                "description": "If checked, this component will always display in dark mode.",
+                                "type": "boolean",
+                                "default": false,
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
+                            },
                             "title": {
                                 "title": "Section heading",
                                 "type": "string",
-                                "default": "Meet more students",
                                 "ui:metadata": {
                                     "inlineEditable": true
                                 }
@@ -38,7 +46,6 @@
                             "ctaText": {
                                 "title": "Heading CTA link text",
                                 "type": "string",
-                                "default": "Watch all",
                                 "ui:metadata": {
                                     "inlineEditable": true
                                 }
@@ -52,8 +59,7 @@
                             "ctaManualUrl": {
                                 "title": "External/Manual link",
                                 "type": "string",
-                                "description": "Enter the full URL, including https://. If this field is filled out, it will be used instead of the Matrix asset link.",
-                                "default": "https://news.stanford.edu/video"
+                                "description": "Enter the full URL, including https://. If this field is filled out, it will be used instead of the Matrix asset link."
                             },
                             "bgImage": {
                                 "title": "Background image",

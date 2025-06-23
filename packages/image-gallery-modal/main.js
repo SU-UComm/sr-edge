@@ -36,7 +36,6 @@ export default {
         // Extracting functions from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
-        const fnsCtx = componentFunctions || componentContext || {};
 
         // Extracting environment variables from provided info
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
@@ -46,136 +45,33 @@ export default {
         let { displayIconHeading, backgroundColor, width } = args?.displayConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
             // Provide default values for inline editable fields
-            layout = layout || 'Title & Content';
-            caption = caption || 'Sample gallery caption';
-            credit = credit || 'Sample credit';
-            
-            // Conditional defaults based on layout
-            if (layout === 'Title & Content') {
-                title = title || 'Sample Image Gallery';
-                summary = summary || 'This is a sample gallery summary that can be edited inline.';
-                summaryAlign = summaryAlign || 'left';
-            }
-            
-            // Provide default images if not provided or insufficient
-            images = images && images.length >= 4 ? images : [
-                { image: 'matrix-asset://api-identifier/sample-image-1', caption: 'Sample image caption 1' },
-                { image: 'matrix-asset://api-identifier/sample-image-2', caption: 'Sample image caption 2' },
-                { image: 'matrix-asset://api-identifier/sample-image-3', caption: 'Sample image caption 3' },
-                { image: 'matrix-asset://api-identifier/sample-image-4', caption: 'Sample image caption 4' },
-                { image: 'matrix-asset://api-identifier/sample-image-5', caption: 'Sample image caption 5' }
-            ];
+            caption = `<span data-se="caption">${caption}</span>` || `<span data-se="caption">Caption text</span>`;
+            credit = `<span data-se="credit">${credit}</span>` || `<span data-se="credit">Credit text</span>`;
+            title = title || 'Heading text';
+            summary = summary || 'Add content';
             
             // Ensure each image has a default caption
             images = images.map((img, index) => ({
                 ...img,
-                caption: img.caption || `Sample caption for image ${index + 1}`
+                caption: img.caption || `Add caption`
             }));
-            
-            // Provide default display configuration
-            displayIconHeading = displayIconHeading !== undefined ? displayIconHeading : true;
-            backgroundColor = backgroundColor || 'Grey';
-            width = width || 'Wide';
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
-                "captionCredit": { "field": "contentConfiguration.caption" }
+                "caption": { "field": "contentConfiguration.caption" },
+                "credit": { "field": "contentConfiguration.credit" },
+                "title": { "field": "contentConfiguration.title" },
+                "summary": { "field": "contentConfiguration.summary" },
+                "image-model-caption": { "field": "images", "array": true, "property": "caption" }
             };
             
-            // Add conditional targets for Title & Content layout
-            if (layout === 'Title & Content') {
-                squizEditTargets["title"] = { "field": "contentConfiguration.title" };
-                squizEditTargets["summary"] = { "field": "contentConfiguration.summary" };
-            }
         }
 
-        // Environment validation - CHANGE: wrap in !squizEdit check
-        if (!squizEdit) {
-            try {
-                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                    throw new Error(
-                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                    );
-                }
-                if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
-                    throw new Error(
-                        `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
-                    );
-                }
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Image gallery with modal component: ', er);
-                return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
-            }
-        }
-
-        // Field validation - CHANGE: wrap in !squizEdit check
-        if (!squizEdit) {
-            try {
-                if (typeof layout !== 'string' || !['Title & Content', 'Content Only'].includes(layout)) {
-                    throw new Error(
-                        `The "layout" field cannot be undefined and must be one of ["Title & Content", "Content Only"] value. The ${JSON.stringify(layout)} was received.`
-                    );
-                }
-                if (!Array.isArray(images) || images.length < 4) {
-                    throw new Error(
-                        `The "images" field must be an array and cannot have less then 4 elements. The ${JSON.stringify(images)} was received.`
-                    );
-                }
-                if (caption && typeof caption !== 'string') {
-                    throw new Error(
-                        `The "caption" field must be a string. The ${JSON.stringify(caption)} was received.`
-                    );
-                }
-                if (credit && typeof credit !== 'string') {
-                    throw new Error(
-                        `The "credit" field must be a string. The ${JSON.stringify(credit)} was received.`
-                    );
-                }
-                if (layout === 'Title & Content' && title && typeof title !== 'string') {
-                    throw new Error(
-                        `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
-                    );
-                }
-                if (layout === 'Title & Content' && summary && typeof summary !== 'string') {
-                    throw new Error(
-                        `The "summary" field must be a string. The ${JSON.stringify(summary)} was received.`
-                    );
-                }
-                if (layout === 'Title & Content' && summaryAlign && !['left', 'center'].includes(summaryAlign)) {
-                    throw new Error(
-                        `The "summaryAlign" field must be one of ["left", "center"]. The ${JSON.stringify(summaryAlign)} was received.`
-                    );
-                }
-                if (displayIconHeading && typeof displayIconHeading !== 'boolean') {
-                    throw new Error(
-                        `The "displayIconHeading" field must be a boolean. The ${JSON.stringify(displayIconHeading)} was received.`
-                    );
-                }
-                if (!['Grey', 'Transparent'].includes(backgroundColor)) {
-                    throw new Error(
-                        `The "backgroundColor" field cannot be undefined and must be one of ["Grey", "Transparent"] value. The ${JSON.stringify(backgroundColor)} was received.`
-                    );
-                }
-                if (!['Wide', 'Content'].includes(width)) {
-                    throw new Error(
-                        `The "width" field cannot be undefined and must be one of ["Wide", "Content"] value. The ${JSON.stringify(width)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Image gallery with modal component: ', er);
-                return `<!-- Error occurred in the Image gallery with modal component: ${er.message} -->`;
-            }
-        }
 
         const adapter = new cardDataAdapter();
         let data = null;
@@ -199,14 +95,7 @@ export default {
             console.error('Error occurred in the Image gallery with modal component: Failed to fetch image data. ', er);
             // NEW: In edit mode, provide mock data instead of returning error
             if (squizEdit) {
-                data = images.map((img, index) => ({
-                    url: `https://picsum.photos/600/400?random=${index}`,
-                    alt: `Sample image ${index + 1}`,
-                    width: 600,
-                    height: 400
-                }));
-            } else {
-                return `<!-- Error occurred in the Image gallery with modal component: Failed to fetch image data. ${er.message} -->`;
+                data = [];
             }
         }
 
@@ -217,7 +106,7 @@ export default {
             return { ...imgData, caption: filteredImages[`${index}`]?.caption };
         });
 
-        // Image data validation - CHANGE: wrap in !squizEdit check
+        // Image data validation
         if (!squizEdit) {
             try {
                 if (typeof imageData !== 'object' || JSON.stringify(imageData) === JSON.stringify([null, null, null, null]) || imageData.length < 4) {
@@ -266,10 +155,10 @@ export default {
         };
 
         // NEW: Early return pattern for edit mode
-        if (squizEdit) {
-            return processEditor(imageGalleryModalTemplate(componentData), squizEditTargets, args);
+        if (!squizEdit) {
+            return imageGalleryModalTemplate(componentData);
         }
-
-        return imageGalleryModalTemplate(componentData);
+        
+        return processEditor(imageGalleryModalTemplate(componentData), squizEditTargets);
     }
 };

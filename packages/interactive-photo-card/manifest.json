@@ -21,10 +21,18 @@
             "input": {
                 "type": "object",
                 "properties": {
+                    "alwaysDark": {
+                        "title": "Always dark mode",
+                        "description": "If checked, this component will always display in dark mode.",
+                        "type": "boolean",
+                        "default": false,
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
+                    },
                     "title": {
                         "title": "Title",
                         "type": "string",
-                        "default": "Card title",
                         "ui:metadata": {
                             "inlineEditable": true
                         }
@@ -33,7 +41,6 @@
                         "title": "Eyebrow",
                         "description": "This is the superheading above the title.",
                         "type": "string",
-                        "default": "Eyebrow",
                         "ui:metadata": {
                             "inlineEditable": true
                         }

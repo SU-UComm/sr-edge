@@ -54,26 +54,7 @@ export default {
             };
             
             // NEW: Provide default values for edit mode
-            cards = cards && cards.length > 0 ? cards : [
-                {
-                    eyebrow: 'Sample Eyebrow',
-                    title: 'Sample CTA Card Title',
-                    description: '<p>This is a sample description for the CTA card. You can edit this content inline.</p>',
-                    linkDetails: {
-                        externalUrl: 'https://example.com',
-                        isNewWindow: false
-                    }
-                },
-                {
-                    eyebrow: 'Another Eyebrow',
-                    title: 'Second CTA Card Title',
-                    description: '<p>This is another sample description. CTA cards can have up to 3 cards in a block.</p>',
-                    linkDetails: {
-                        externalUrl: 'https://example.com',
-                        isNewWindow: false
-                    }
-                }
-            ];
+            cards = cards && cards.length > 0 ? cards : [];
         }
 
         // Check for environment vars
@@ -115,13 +96,28 @@ export default {
         // Get the cards data
         const data = await Promise.all(
             cards.map(async (card) => {
-                const { eyebrow, title, description, linkDetails } = card;
+                let { eyebrow, title, description, linkDetails } = card;
                 const { internalUrl, externalUrl, isNewWindow } = linkDetails || {};
-
+                if(squizEdit) {
+                    title = title || 'Title text';
+                    eyebrow = eyebrow || 'Eyebrow text';
+                    description = description || 'Add content';
+                }
                 let linkData = null;
             
                 if (internalUrl) {
-                    linkData = await basicAssetUri(info.fns, internalUrl);
+                    
+                    try {
+                        linkData = await basicAssetUri(info.fns, internalUrl);
+                    } catch (er) {
+                        console.error('Error occurred in the cta cards component: Failed to fetch link data. ', er);
+                        if (squizEdit) {
+                            linkData = {
+                                url: "https://news.stanford.edu",
+                                text: "add link"
+                            };
+                        }
+                    }
                 }
                 
                 return {

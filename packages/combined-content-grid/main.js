@@ -50,7 +50,7 @@ export default {
 
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
-        const squizEdit = true || componentContext?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
         let squizEditTargets = null;
         
@@ -60,25 +60,19 @@ export default {
             headingConfiguration = headingConfiguration || {};
             eventsConfiguration = eventsConfiguration || {};
             announcementsConfiguration = announcementsConfiguration || {};
-            
+            cards = cards || [];
             // Add default values for inline editable fields
-            headingConfiguration.title = headingConfiguration.title || 'Featured Content';
-            headingConfiguration.ctaText = headingConfiguration.ctaText || 'View all';
-            eventsConfiguration.heading = eventsConfiguration.heading || 'Upcoming events';
-            announcementsConfiguration.heading = announcementsConfiguration.heading || 'Announcements';
-            
-            // Add default for featured description if using Select mode
-            if (source === 'Select') {
-                featuredDescription = featuredDescription || 'Featured content description goes here.';
-            }
+            headingConfiguration.title = headingConfiguration.title || 'Title text';
+            headingConfiguration.ctaText = headingConfiguration.ctaText || 'Link text';
+            headingConfiguration.ctaUrl = headingConfiguration.ctaUrl || 'matrix-asset://StanfordNews/29389';
+            headingConfiguration.ctaNewWindow = headingConfiguration.ctaNewWindow || false;
+
+            eventsConfiguration.heading = eventsConfiguration.heading || 'Title text';
+            announcementsConfiguration.heading = announcementsConfiguration.heading || 'Title text';
+            announcementsConfiguration.linkUrl = announcementsConfiguration.linkUrl || 'matrix-asset://StanfordNews/29389';
             
             // Provide default content configuration
-            source = source || 'Search';
             searchQuery = searchQuery || '?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser_not=true';
-            
-            // Provide default display configuration
-            displayThumbnails = displayThumbnails !== undefined ? displayThumbnails : true;
-            displayDescriptions = displayDescriptions !== undefined ? displayDescriptions : false;
             
             // Provide default events and announcements configuration
             eventsConfiguration.endPoint = eventsConfiguration.endPoint || 'https://events.stanford.edu/api/2/events?days=365&sponsored=true';
@@ -113,43 +107,11 @@ export default {
             }
         }
 
-        // Validate required environment variables
-        try {
-            if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
-                throw new Error(
-                    `The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(FB_JSON_URL)} was received.`
-                );
-            }
-            if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                throw new Error(
-                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                );
-            }
-            if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
-                throw new Error(
-                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
-                );
-            }
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Combined Content Grid component: ', er);
-            return `<!-- Error occurred in the Combined Content Grid component: ${er.message} -->`;
-        }
-
         // NEW: remove overly stringent validation where it makes sense
         // if it is to remain, wrap it in a !squizEdit check
         if (!squizEdit) {
             // Validate required fields and ensure correct data types
             try {
-                if (!['Search', 'Select'].includes(source) ) {
-                    throw new Error(
-                        `The "source" field cannot be undefined and must be one of ["Search", "Select"]. The ${JSON.stringify(source)} was received.`
-                    );
-                }
                 if (source === 'Search' && (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?')) {
                     throw new Error(
                         `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
@@ -305,7 +267,10 @@ export default {
                 eventDataPromise = eventAdapter.getCards();
             } catch (er) {
                 console.error('Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ', er);
-                return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ${er.message} -->`;
+                if (!squizEdit) {
+                    return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ${er.message} -->`;
+                }
+                eventDataPromise = Promise.resolve([]);
             }
         }
 
@@ -342,7 +307,9 @@ export default {
         if (announcementPageDataPromise) promises.push(announcementPageDataPromise);
 
         const results = await Promise.all(promises);
-        
+
+        // if ( results ) return JSON.stringify(results[2]);
+
         // Extract results
         const data = results[0];
         const headingData = results[1];

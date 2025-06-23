@@ -1,4 +1,4 @@
-<span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block {{getAspectRatio aspectRatio}}">
+<span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block {{#if rounded}}su-rounded-3xl{{/if}} {{getAspectRatio aspectRatio}}">
     {{~#if videoUrl~}}{{~#isValidUrl videoUrl~}}
     <video class="su-absolute su-object-cover su-object-center su-size-full">
         <source src="{{videoUrl}}" type="video/mp4">

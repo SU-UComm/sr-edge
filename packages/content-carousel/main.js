@@ -31,14 +31,13 @@ export default {
             // Add default values if not provided
             title = title || 'Content Carousel';
             slides = slides && slides.length > 0 ? slides : [
-                { content: '<p>First slide content goes here.</p>' },
-                { content: '<p>Second slide content goes here.</p>' }
+                { content: '<p>Enter slide 1 text</p>' }
             ];
             
             // Ensure each slide has default content
             slides = slides.map(slide => ({
                 ...slide,
-                content: slide.content || '<p>Add your content here.</p>'
+                content: slide.content || '<p>Add content</p>'
             }));
             
             // Configure edit targets - maps static data-se attributes to component fields

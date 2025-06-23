@@ -22,7 +22,7 @@ export default {
      */
     async main(args, info) {
         // Extract configuration data from arguments
-        let { title, eyebrow, facts, paddingY } = args;
+        let { title, eyebrow, facts, paddingY, alwaysDark = false } = args;
 
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
@@ -33,30 +33,14 @@ export default {
         // NEW: add a default if squizEdit is true
         if (squizEdit) {
             // Add default values if content is not provided
-            eyebrow = eyebrow || 'Eyebrow';
-            title = title || 'Lorem ipsum dolor';
-            facts = facts && facts.length > 0 ? facts : [
-                {
-                    icon: 'heart',
-                    iconSet: 'regular',
-                    content: '<p>Almost half of all our undergrads receive need-based financial aid.</p>'
-                },
-                {
-                    icon: 'calculator', 
-                    iconSet: 'solid',
-                    content: '<p>Families earning less than $100,000 with typical assets pay no tuition or room and board.</p>'
-                },
-                {
-                    icon: 'hippo',
-                    iconSet: 'solid', 
-                    content: '<p>Families earning less than $150,000 with typical assets pay no tuition.</p>'
-                }
-            ];
+            eyebrow = eyebrow || 'Eyebrow text';
+            title = title || 'Title text';
+            
 
             // Ensure each fact has default content
             facts = facts.map(fact => ({
                 ...fact,
-                content: fact.content || '<p>Add fact content</p>'
+                content: fact.content || '<p>Add content</p>'
             }));
 
             // Add the targets for the squizEdit DOM augmentation
@@ -108,13 +92,16 @@ export default {
                 return `<!-- Error occurred in the Multicolumn Fact Panel component: ${er.message} -->`;
             }
         }
-
+        const hasHeader = !!(eyebrow || title);
         // Prepare component data for template rendering
         const componentData = {
             title,
             eyebrow,
             facts,
             paddingY,
+            alwaysDark,
+            hasHeader,
+            customClasses: `su-break-words ${alwaysDark ? "su-bg-black-true dark:su-bg-black-true" : ""}`
         }
 
         // Return original front end code when squizEdit is false, without modification
