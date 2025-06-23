@@ -33,12 +33,24 @@ export default {
         let squizEditTargets = null;
         
         if (squizEdit) {
-            // Provide default values for inline editable fields
-            points = points && points.length > 0 ? points : [
-                'This is the first sample summary point that can be edited inline',
-                'This is the second sample summary point demonstrating the functionality',
-                'This is the third sample summary point showing array-based inline editing'
-            ];
+
+            const isEmptyArray = function (arr) {
+                if (arr && arr.length === 0) {
+                    return true;
+                } else {
+                    // This feels like a hack but new empty components are give the value { "points": [null] }
+                    if (arr.length === 1 && arr[0] === null) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // Provide default value for inline editable fields 
+            //     only provide one - editors need to use the sidebar to add more points 
+            points = isEmptyArray(points) ? [
+                'Add content'
+            ] : points;
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
