@@ -37,12 +37,12 @@ export default {
         
         if (squizEdit) {
             // Provide default values for inline editable fields
-            title = title || 'Interactive Card Title';
-            eyebrow = eyebrow || 'Sample Eyebrow';
-            content = content || '<p>This is sample content that appears on the flip side of the interactive card. It demonstrates the inline editing functionality for FormattedText fields.</p>';
+            title = title || 'Title text';
+            eyebrow = eyebrow || 'Eyebrow text';
+            content = content || 'Add content';
             
             // Provide default image for edit mode
-            image = image || 'matrix-asset://api-identifier/sample-image';
+            image = image || 'matrix-asset://StanfordNews/172387';
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -107,11 +107,16 @@ export default {
             // NEW: In edit mode, provide mock image data
             if (squizEdit) {
                 imageData = {
-                    url: 'https://picsum.photos/600/400',
-                    attributes: {
-                        alt: 'Sample interactive card image',
-                        width: 600,
-                        height: 400
+                    "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                    "attributes": {
+                        "allow_unrestricted": false,
+                        "size": 1858005,
+                        "height": 960,
+                        "width": 1440,
+                        "title": "placeholder.png",
+                        "name": "placeholder.png",
+                        "caption": "",
+                        "alt": "This is a placeholder"                
                     }
                 };
             } else {
@@ -121,15 +126,15 @@ export default {
 
         // Prepare component data for template rendering
         const componentData = {
-            title,
-            eyebrow,
-            content,
+            title: title,
+            eyebrow: eyebrow,
+            content: content,
             imageUrl: imageData?.url,
             contentAlignmentClass: imageAlignment === 'left' ? 'xl:su-order-2' : '',
             imageAlignmentClass: imageAlignment === 'left' ? 'xl:su-order-first' : '',
             iconPlusClasses: `su-size-30 md:su-size-50 su-fill-none group-hover:su-scale-110 group-focus-within:su-scale-110 su-transition-transform ${alwaysDark ? "[&_path]:su-fill-black-true" : "su-fill-none"}`,
             iconArrowClasses: "su-size-30 lg:su-size-36 su-fill-none aria-hidden:invisible group-hocus:su-rotate-45 su-transition-transform",
-            alwaysDark
+            alwaysDark: alwaysDark
         };
 
         // NEW: Early return pattern for edit mode
