@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "multicolumn-listing",
     "type": "edge",
-    "version": "4.1.0",
+    "version": "4.1.1",
     "namespace": "stanford-apb",
     "description": "",
     "displayName": "Multicolumn listing",
@@ -63,7 +63,10 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "View all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",

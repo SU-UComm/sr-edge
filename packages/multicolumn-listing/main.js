@@ -44,7 +44,7 @@ export default {
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
         // Extracting configuration data from arguments
-        const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
+        let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
         const { source, searchQuery, searchMaxCards, cards } = args?.contentConfiguration || {};
         const { displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
 
@@ -53,8 +53,15 @@ export default {
         const squizEdit = info?.ctx?.editor || false;
         // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
         let squizEditTargets = null;
-        
+
+
         if (squizEdit) {
+            // defaults
+            title = title || "Heading text";
+            ctaText = ctaText || "Link text";
+            ctaUrl = ctaUrl || "https://news.stanford.edu";
+
+
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
                 "headingTitle": { "field": "headingConfiguration.title" },
