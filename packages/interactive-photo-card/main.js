@@ -29,7 +29,7 @@ export default {
         const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // CHANGE: change const to let for mutability
-        let { title, eyebrow, content, image, imageAlignment } = args || {};
+        let { title, eyebrow, content, image, imageAlignment, alwaysDark } = args || {};
 
         // NEW: Detect edit mode
         const squizEdit = info?.ctx?.editor || false;
@@ -127,8 +127,9 @@ export default {
             imageUrl: imageData?.url,
             contentAlignmentClass: imageAlignment === 'left' ? 'xl:su-order-2' : '',
             imageAlignmentClass: imageAlignment === 'left' ? 'xl:su-order-first' : '',
-            iconPlusClasses: "su-size-30 md:su-size-50 su-fill-none group-hover/front:su-scale-110 group-focus-within/front:su-scale-110 su-transition-transform",
-            iconArrowClasses: "su-size-30 lg:su-size-36 su-fill-none group-hover/back:su-rotate-45 su-transition-transform"
+            iconPlusClasses: `su-size-30 md:su-size-50 su-fill-none group-hover:su-scale-110 group-focus-within:su-scale-110 su-transition-transform ${alwaysDark ? "[&_path]:su-fill-black-true" : "su-fill-none"}`,
+            iconArrowClasses: "su-size-30 lg:su-size-36 su-fill-none aria-hidden:invisible group-hocus:su-rotate-45 su-transition-transform",
+            alwaysDark
         };
 
         // NEW: Early return pattern for edit mode

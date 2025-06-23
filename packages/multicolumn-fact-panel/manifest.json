@@ -21,11 +21,19 @@
             "input": {
                 "type": "object",
                 "properties": {
+                    "alwaysDark": {
+                        "title": "Always dark mode",
+                        "description": "If checked, this component will always display in dark mode.",
+                        "type": "boolean",
+                        "default": false,
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
+                    },
                     "eyebrow": {
                         "title": "Eyebrow",
                         "description": "This is the superheading above the title.",
                         "type": "string",
-                        "default": "Eyebrow",
                         "ui:metadata": {
                             "inlineEditable": true
                         }
@@ -34,7 +42,6 @@
                         "title": "Title",
                         "description": "The title text.",
                         "type": "string",
-                        "default": "Lorem ipsum dolor",
                         "ui:metadata": {
                             "inlineEditable": true
                         }

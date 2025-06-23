@@ -183,7 +183,7 @@ export function featuredMetadata({ data }) {
                       <div>
                         <a
                           href=${item.asset_url}
-                          class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-19 su-font-semibold"
+                          class="su-leading-snug hocus:su-no-underline su-text-black hocus:su-text-digital-red dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-19 su-font-semibold"
                         >
                           ${item.asset_name}
                         </a>
@@ -201,7 +201,7 @@ export function featuredMetadata({ data }) {
           <div class="su-flex su-gap-20 su-max-w-[71.9rem] su-flex-col md:su-gap-x-27 md:su-gap-y-12 md:su-flex-row md:su-flex-wrap md:su-justify-center">
             ${relatedFiltered.map((item) => item ? `
               <div key="${item.asset_assetid}">
-                <a href="${item.asset_url}" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-19 su-font-semibold">
+                <a href="${item.asset_url}" class="su-leading-snug hocus:su-no-underline su-text-black hocus:su-text-digital-red dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-19 su-font-semibold">
                   ${item.asset_name}
                 </a>
               </div>
@@ -215,10 +215,10 @@ export function featuredMetadata({ data }) {
         <button
           type="button"
           data-role="copy-link"
-          class="su-text-digital-blue dark:su-text-digital-blue-vivid su-text-21 su-font-semibold su-mx-auto hocus:su-underline"
+          class="su-group su-text-digital-blue dark:su-text-digital-blue-vivid su-text-21 su-font-semibold su-mx-auto hocus:su-underline hocus:su-text-black dark:hocus:su-text-white su-transition-colors"
         >
           <span data-copy-text>Copy link</span>
-          <span class="*:su-inline-block *:su-ml-8">
+          <span class="*:su-inline-block *:su-ml-8 group-hocus:*:*:su-fill-current">
             ${ShareLink()}
           </span>
         </button>
