@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "multicolumn-listing",
     "type": "edge",
-    "version": "4.1.13",
+    "version": "4.1.16",
     "namespace": "stanford-apb",
     "description": "",
     "displayName": "Multicolumn listing",
@@ -45,7 +45,7 @@
                             "title": {
                                 "title": "Heading",
                                 "type": "string",
-                                "default": "Heading text",
+                                "default": "",
                                 "ui:metadata": {
                                     "inlineEditable": true
                                 }
@@ -65,7 +65,7 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "Link text",
+                                "default": "",
                                 "ui:metadata": {
                                     "inlineEditable": true
                                 }
