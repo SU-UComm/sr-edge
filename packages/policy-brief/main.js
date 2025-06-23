@@ -41,14 +41,13 @@ export default {
         
         if (squizEdit) {
             // Add default values for inline editable fields
-            title = title || 'Policy Brief Title';
-            summary = summary || 'This is a sample summary for the policy brief that can be edited inline.';
-            linkText = linkText || 'Read the full brief';
+            title = title || 'Heading text';
+            summary = summary || 'Add content';
+            linkText = linkText || 'Link text';
             
             // Provide default values for other required fields
-            type = type || 'Policy Brief';
-            image = image || 'matrix-asset://api-identifier/63353';
-            linkUrl = linkUrl || 'https://example.com';
+            image = image || 'matrix-asset://StanfordNews/172387';
+            linkUrl = linkUrl || 'https://news.stanford.edu';
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -56,20 +55,6 @@ export default {
                 "summary": { "field": "contentConfiguration.summary" },
                 "linkText": { "field": "contentConfiguration.linkText" }
             };
-        }
-
-        // Validate required functions - CHANGE: wrap in !squizEdit check
-        if (!squizEdit) {
-            try {
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Policy brief component: ', er);
-                return `<!-- Error occurred in the Policy brief component: ${er.message} -->`;
-            }
         }
 
         // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
@@ -122,11 +107,16 @@ export default {
                 // NEW: In edit mode, provide mock data instead of returning error
                 if (squizEdit) {
                     assetData = {
-                        url: 'https://picsum.photos/400/600',
-                        attributes: {
-                            alt: 'Sample policy brief image',
-                            width: 400,
-                            height: 600
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                        "attributes": {
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
                         }
                     };
                 }
