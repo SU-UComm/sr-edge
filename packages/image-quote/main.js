@@ -148,7 +148,7 @@ export default {
             captionCredit: imageCaption && imageCredit ? `${imageCaption} | ${imageCredit}` : imageCaption || imageCredit,
         }
         const quoteData = {
-            quote: quote ? `${quote}”`: '',
+            quote: quote ? `${quote}`: '',
             name,
             title
         }
