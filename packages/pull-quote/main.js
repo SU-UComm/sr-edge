@@ -42,13 +42,13 @@ export default {
         
         if (squizEdit) {
             // Add default values for inline editable fields
-            quote = quote || 'This is a sample pull quote that can be edited inline to highlight important content.';
-            name = name || 'Sample Name';
-            title = title || 'Sample Title';
+            quote = quote || 'Add content';
+            name = name || 'Quotee Name';
+            title = title || 'Quotee Title';
             
             // Provide default values for other required fields
             width = width || 'Narrow';
-            asset = asset || 'matrix-asset://api-identifier/164977';
+            asset = asset || 'matrix-asset://StanfordNews/172387';
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -121,12 +121,17 @@ export default {
                 // NEW: In edit mode, provide mock data instead of returning error
                 if (squizEdit) {
                     assetData = {
-                        url: 'https://picsum.photos/200/200',
-                        attributes: {
-                            alt: 'Sample avatar image',
-                            width: 200,
-                            height: 200
-                        }
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                        "attributes": {
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
+                        },
                     };
                 }
             }
