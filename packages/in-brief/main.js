@@ -35,9 +35,7 @@ export default {
         if (squizEdit) {
             // Provide default values for inline editable fields
             points = points && points.length > 0 ? points : [
-                'This is the first sample summary point that can be edited inline',
-                'This is the second sample summary point demonstrating the functionality',
-                'This is the third sample summary point showing array-based inline editing'
+                'Add content'
             ];
             
             // Configure edit targets - maps static data-se attributes to component fields
