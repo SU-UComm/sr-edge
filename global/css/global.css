@@ -986,7 +986,7 @@ div[data-component="footer-component"] {
   @apply su-mb-0;
 }
 
-/* Campaign CTA on basic story pages */
+/* Campaign CTA on basic story pages 
 .su-page-has-sidebar [data-component="campaign-cta"] {
   @apply su--mx-20 md:su-mx-[calc(-7.65%+50px)] lg:su-mx-0 md:su-w-[calc(121.5%+100px)] md:su-ml-[calc(calc(-10.75%-50px))] lg:su-w-full;
 }
@@ -1002,6 +1002,7 @@ div[data-component="footer-component"] {
   .su-component-campaigncta-content {
   @apply lg:su-border-none lg:su-mr-0;
 }
+*/
 
 /* Medium contextual spacing */
 * + [data-component="pullquote"],
