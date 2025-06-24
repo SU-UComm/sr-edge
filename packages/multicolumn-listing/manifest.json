@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "multicolumn-listing",
     "type": "edge",
-    "version": "4.1.0",
+    "version": "4.1.16",
     "namespace": "stanford-apb",
     "description": "",
     "displayName": "Multicolumn listing",
@@ -45,6 +45,7 @@
                             "title": {
                                 "title": "Heading",
                                 "type": "string",
+                                "default": "",
                                 "ui:metadata": {
                                     "inlineEditable": true
                                 }
@@ -58,12 +59,16 @@
                             "ctaManualUrl": {
                                 "title": "Manual Link",
                                 "type": "string",
+                                "default": "https://news.stanford.edu",
                                 "description": "Enter the full URL, including https://"
                             },
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",
@@ -102,7 +107,6 @@
                                 },
                                 "then": {
                                     "required": [
-                                        "searchQuery"
                                     ],
                                     "properties": {
                                         "searchQuery": {

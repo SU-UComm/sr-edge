@@ -40,32 +40,24 @@ export default {
         // Extracting functions from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
-        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
-        const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
-        // CHANGE: change const to let for mutability
         let { image, caption, credit, width, marginTop, marginBottom } = args || {};
         let { title, summary, summaryAlign } = args?.section || {}
         let { heading, vimeoid, youtubeid } = args?.video || {}
 
         // NEW: Detect edit mode
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
             // Add default values for inline editable fields
-            title = title || 'Single Image or Video';
-            summary = summary || 'This is a sample summary that can be edited inline to provide context for the image or video content.';
-            caption = caption || 'Sample caption for the image or video';
-            credit = credit || 'Sample credit';
-            heading = heading || 'Sample Video';
+            title = title || 'Heading text';
+            summary = summary || 'Add content';
+            caption = `<span data-se="caption">${caption}</span>` || `<span data-se="caption">Caption text</span>`;
+            credit = `<span data-se="credit">${credit}</span>` || `<span data-se="credit">Credit text</span>`;
+            heading = heading || 'Video heading text';
             
-            // Provide default values for other required fields
-            image = image || 'matrix-asset://StanfordNews/130444';
-            width = width || 'Wide';
-            marginTop = marginTop || 'default';
-            marginBottom = marginBottom || 'default';
-            summaryAlign = summaryAlign || 'left';
+            image = image || 'matrix-asset://StanfordNews/172387';
             vimeoid = vimeoid || '';
             youtubeid = youtubeid || '';
             
@@ -73,35 +65,14 @@ export default {
             squizEditTargets = {
                 "title": { "field": "section.title" },
                 "summary": { "field": "section.summary" },
-                "captionCredit": { "field": "caption" },
+                "caption": { "field": "caption" },
+                "credit": { "field": "credit" },
                 "videoHeading": { "field": "video.heading" }
             };
         }
 
         // NEW: Wrap validation in !squizEdit check
         if (!squizEdit) {
-            // Validate required environment variables
-            try {
-                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                    throw new Error(
-                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                    );
-                }
-                if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
-                    throw new Error(
-                        `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
-                    );
-                }
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Single Image or Video component: ', er);
-                return `<!-- Error occurred in the Single Image or Video component: ${er.message} -->`;
-            }
-
             // Validate required fields and ensure correct data types
             try {
                 if (title && typeof title !== 'string') {
@@ -112,11 +83,6 @@ export default {
                 if (summary && typeof summary !== 'string') {
                     throw new Error(
                         `The "summary" field must be a string. The ${JSON.stringify(summary)} was received.`
-                    );
-                }
-                if (summaryAlign && !['left', 'center'].includes(summaryAlign) ) {
-                    throw new Error(
-                        `The "summaryAlign" field must be one of ["left", "center"]. The ${JSON.stringify(summaryAlign)} was received.`
                     );
                 }
                 if (image && typeof image !== 'string') {
@@ -134,11 +100,6 @@ export default {
                         `The "credit" field must be a string. The ${JSON.stringify(credit)} was received.`
                     );
                 }
-                if (width && !['Wide', 'Narrow'].includes(width) ) {
-                    throw new Error(
-                        `The "width" field must be one of ["Wide", "Narrow"]. The ${JSON.stringify(width)} was received.`
-                    );
-                }
                 if (heading && typeof heading !== 'string') {
                     throw new Error(
                         `The "heading" field must be a string. The ${JSON.stringify(heading)} was received.`
@@ -154,16 +115,6 @@ export default {
                         `The "youtubeid" field must be a string. The ${JSON.stringify(youtubeid)} was received.`
                     );
                 }
-                if (marginTop && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginTop) ) {
-                    throw new Error(
-                        `The "marginTop" field cannot be undefined and must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginTop)} was received.`
-                    );
-                }
-                if (marginBottom && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginBottom) ) {
-                    throw new Error(
-                        `The "marginBottom" field cannot be undefined and must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginBottom)} was received.`
-                    );
-                }
             } catch (er) {
                 console.error('Error occurred in the Single Image or Video component: ', er);
                 return `<!-- Error occurred in the Single Image or Video component: ${er.message} -->`;
@@ -174,37 +125,35 @@ export default {
         let imageData = null;
         if (image) {
             try {
-                imageData = await basicAssetUri(fnsCtx, image);
-    
-                // Check required properties
-                if (!imageData || typeof imageData !== 'object') {
-                    throw new Error('basicAssetUri did not return an object');
-                }
-                if (typeof imageData.url !== 'string' || imageData.url.trim() === '') {
-                    throw new Error('data.url must be a non-empty string');
-                }
-                if (typeof imageData.attributes !== 'object' || imageData.attributes === null) {
-                    throw new Error('data.attributes must be a non-null object');
-                }
+                imageData = await basicAssetUri(componentFunctions, image);
             } catch (er) {
                 console.error('Error occurred in the Single Image or Video component: Failed to fetch image data. ', er);
                 // NEW: In edit mode, provide mock data instead of returning error
                 if (squizEdit) {
                     imageData = {
-                        url: 'https://picsum.photos/800/600',
-                        attributes: {
-                            alt: 'Sample image for inline editing'
-                        }
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                        "attributes": {
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
+                        },
                     };
-                } else {
-                    return `<!-- Error occurred in the Single Image or Video component: Failed to fetch image data. ${er.message} -->`;
                 }
             }
         }
 
         // Prepare checks and unique id
-        const headerSection = !!(title || summary);  
-        const showComponent = !!(vimeoid || youtubeid || image);
+        let headerSection = !!(title || summary);  
+        let showComponent = !!(vimeoid || youtubeid || image);
+        if(squizEdit) {
+            showComponent = true;
+            headerSection = true;
+        }
         const uniqueID = uuid();
         
         // Prepare caption-credit data
@@ -238,7 +187,7 @@ export default {
             vimeoid,
             youtubeid,
             videoTitle: heading ? `Watch ${heading}` : "",
-            captionCredit: xss(captionCredit),
+            captionCredit: captionCredit,
             modalData,
             uniqueID
         };

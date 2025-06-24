@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "media-feature",
     "type": "edge",
-    "version": "4.1.0",
+    "version": "4.1.2",
     "namespace": "stanford-apb",
     "description": "The media feature component is used to feature a singular podcast or book.",
     "displayName": "Media feature",
@@ -45,11 +45,7 @@
                             },
                             "mediaType": {
                                 "title": "Media type",
-                                "enum": [
-                                    "Podcast",
-                                    "Book",
-                                    "Magazine"
-                                ],
+                                "enum": ["Podcast", "Book", "Magazine"],
                                 "type": "string",
                                 "default": "Podcast"
                             },

@@ -32,15 +32,21 @@ export default {
         let squizEditTargets = null;
         
         if (squizEdit) {
-            title = title || 'Sample Title';
-            description = description || '<p>This is a sample description that can be edited inline to provide content for the text block.</p>';
-            
-            eyebrow = eyebrow || 'Sample Eyebrow';
+            title = title || 'Title text';
+            description = description || 'Add content';
+            eyebrow = eyebrow || 'Eyebrow text';
             paddingY = paddingY || '10';
             
             squizEditTargets = {
-                "title": { "field": "title" },
-                "description": { "field": "description" }
+                "title": { 
+                    "field": "title" 
+                },
+                "description": { 
+                    "field": "description" 
+                },
+                "eyebrow": { 
+                    "field": "eyebrow" 
+                }
             };
         }
 
