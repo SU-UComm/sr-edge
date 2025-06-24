@@ -41,7 +41,7 @@ export default {
         
         if (squizEdit) {
             // Add default values for inline editable fields
-            descriptionOverride = descriptionOverride || 'This is a sample description override that can be edited inline to customize the related story description.';
+            descriptionOverride = descriptionOverride || '';
             
             // Provide default values for other required fields
             story = story || 'matrix-asset://api-identifier/163459';
