@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "leadership-messages",
     "type": "edge",
-    "version": "4.1.0",
+    "version": "4.2.4",
     "namespace": "stanford-apb",
     "description": "Links to leadership messages displayed in a grid.",
     "displayName": "Leadership messages",
@@ -37,13 +37,16 @@
                             "title": {
                                 "title": "Heading",
                                 "type": "string",
-                                "default": "Messages from Leadership"
+                                "default": "Messages from Leadership",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix Asset Link",
                                 "type": "string",
                                 "description": "Select an asset to link to. If this field is filled out, it will be used instead of the manual link",
-                                "format": "matrix-asset-uri"
+                                "format": "matrix-asset-uri"                                
                             },
                             "ctaManualUrl": {
                                 "title": "Manual Link",
@@ -53,7 +56,10 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "View all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",

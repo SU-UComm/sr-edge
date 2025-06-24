@@ -28,14 +28,23 @@ export default {
         // Extracting functions from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
+        
+        // CHANGE: change const to let for mutability in edit mode
         let { buttonText = "Button text", internalUrl, externalUrl, isNewWindow } = args || {};
 
+        // NEW: Detect edit mode
         const squizEdit = componentContext?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
-            buttonText = buttonText || 'Link text';
+            // Provide default values for inline editable fields
+            buttonText = buttonText || 'Button text';
             
+            // NEW: Provide default URLs for edit mode
+            internalUrl = internalUrl || null;
+            externalUrl = externalUrl || 'https://news.stanford.edu';
+            
+            // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
                 "button": {
                     "field": "buttonText"
@@ -55,8 +64,7 @@ export default {
             return `<!-- Error occurred in the Button component: ${er.message} -->`;
         }
 
-        // NEW: remove overly stringent validation where it makes sense
-        // if it is to remain, wrap it in a !squizEdit check
+        // NEW: Wrap validation in !squizEdit check - in edit mode we don't need to validate because values may be blank while editing
         if (!squizEdit) {
             // Validate required fields and ensure correct data types
             try {
@@ -94,11 +102,14 @@ export default {
                 linkData = await basicAssetUri(componentFunctions, internalUrl);
             } catch (er) {
                 console.error('Error occurred in the Button component: ', er);
+                // NEW: In edit mode, provide mock data instead of returning error
                 if (squizEdit) {
                     linkData = {
                         url: "https://news.stanford.edu",
                         text: buttonText
                     };
+                } else {
+                    return `<!-- Error occurred in the Button component: ${er.message} -->`;
                 }
             }
         }
@@ -108,6 +119,7 @@ export default {
         if (squizEdit) {
             buttonUrl = buttonUrl || 'https://news.stanford.edu';
         }
+        
         // NEW: Skip URL validation in edit mode - editor handles this
         if (!squizEdit) {
             // Validate data
@@ -131,10 +143,12 @@ export default {
             isRealExternalLink: !linkData?.url && externalUrl ? isRealExternalLink(externalUrl) : false,
         };
 
-        // Return original front end code when squizEdit is false, without modification
-        if (!squizEdit) return button(componentData);
+        // NEW: Early return pattern for edit mode
+        if (squizEdit) {
+            return processEditor(button(componentData), squizEditTargets, args);
+        }
 
-        // NEW: process the output to be editable in Squiz Editor
-        return processEditor(button(componentData), squizEditTargets);
+        // Return original template when not in edit mode
+        return button(componentData);
     },
 };
