@@ -45,114 +45,18 @@ export default {
         let squizEditTargets = null;
         
         if (squizEdit) {
-            eyebrow = eyebrow || 'Sample Eyebrow';
-            title = title || 'Single CTA Block Title';
-            description = description || '<p>This is sample description content for the single CTA block that can be edited inline.</p>';
-            ctaText = ctaText || 'Click here';
-            
-            size = size || 'normal';
-            ctaType = ctaType || 'link';
-            externalUrl = externalUrl || 'https://example.com';
-            isNewWindow = isNewWindow !== undefined ? isNewWindow : false;
-            isCard = isCard !== undefined ? isCard : false;
-            marginTop = marginTop || '8';
-            marginBottom = marginBottom || '8';
+            eyebrow = eyebrow || 'Eyebrow tex';
+            title = title || 'Heading text';
+            description = description || '<p>Add content</p>';
+            ctaText = ctaText || 'Link text';  
+            image = image || 'matrix-asset://StanfordNews/172387';
             
             squizEditTargets = {
                 "eyebrow": { "field": "eyebrow" },
                 "title": { "field": "title" },
                 "description": { "field": "description" },
-                "ctaText": { "field": "ctaConfiguration.ctaText" }
+                "button": { "field": "ctaConfiguration.ctaText" }
             };
-        }
-
-        if (!squizEdit) {
-            try {
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Single CTA Block component: ', er);
-                return `<!-- Error occurred in the Single CTA Block component: ${er.message} -->`;
-            }
-
-            try {
-                if (size && !['normal', 'campaign'].includes(size) ) {
-                    throw new Error(
-                        `The "size" field must be one of ["normal", "campaign"]. The ${JSON.stringify(size)} was received.`
-                    );
-                }
-                if (title && typeof title !== 'string') {
-                    throw new Error(
-                        `The "title" field must be a string type. The ${JSON.stringify(title)} was received.`
-                    );
-                }
-                if (eyebrow && typeof eyebrow !== 'string') {
-                    throw new Error(
-                        `The "eyebrow" field must be a string type. The ${JSON.stringify(eyebrow)} was received.`
-                    );
-                }
-                if (description && typeof description !== 'string') {
-                    throw new Error(
-                        `The "description" field must be a string type. The ${JSON.stringify(description)} was received.`
-                    );
-                }
-                if (image && typeof image !== 'string') {
-                    throw new Error(
-                        `The "image" field must be a string type. The ${JSON.stringify(image)} was received.`
-                    );
-                }
-                if (isCard && typeof isCard !== 'boolean') {
-                    throw new Error(
-                        `The "isCard" field must be a boolean type. The ${JSON.stringify(isCard)} was received.`
-                    );
-                }
-                if (marginTop && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginTop) ) {
-                    throw new Error(
-                        `The "marginTop" field must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginTop)} was received.`
-                    );
-                }
-                if (marginBottom && !['default', 'base', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(marginBottom) ) {
-                    throw new Error(
-                        `The "marginBottom" field must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The ${JSON.stringify(marginBottom)} was received.`
-                    );
-                }
-                if (ctaText && typeof ctaText !== 'string') {
-                    throw new Error(
-                        `The "ctaText" field must be a string type. The ${JSON.stringify(ctaText)} was received.`
-                    );
-                }
-                if (ctaType && !["download", "email", "link"].includes(ctaType) ) {
-                    throw new Error(
-                        `The "ctaType" must be one of ["download", "email", "link"]. The ${JSON.stringify(ctaType)} was received.`
-                    );
-                }
-                if (externalUrl && typeof externalUrl !== 'string') {
-                    throw new Error(
-                        `The "externalUrl" field must be a string type. The ${JSON.stringify(externalUrl)} was received.`
-                    );
-                }
-                if (internalUrl && typeof internalUrl !== 'string') {
-                    throw new Error(
-                        `The "internalUrl" field must be a string type. The ${JSON.stringify(internalUrl)} was received.`
-                    );
-                }
-                if (ctaType === "email" && email && (typeof email !== 'string' || email === '')) {
-                    throw new Error(
-                        `The "email" field must be a non-empty string. The ${JSON.stringify(email)} was received.`
-                    );
-                }
-                if (isNewWindow && typeof isNewWindow !== 'boolean') {
-                    throw new Error(
-                        `The "isNewWindow" field must be a boolean type. The ${JSON.stringify(isNewWindow)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Single CTA Block component: ', er);
-                return `<!-- Error occurred in the Single CTA Block component: ${er.message} -->`;
-            }
         }
 
         let imageData = null;
@@ -162,12 +66,17 @@ export default {
             } catch (er) {
                 if (squizEdit) {
                     imageData = {
-                        url: 'https://picsum.photos/400/300',
-                        attributes: {
-                            alt: 'Sample CTA block image',
-                            width: 400,
-                            height: 300
-                        }
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                        "attributes": {
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
+                        },
                     };
                 }
             }
@@ -179,7 +88,10 @@ export default {
                 linkData = await basicAssetUri(info.fns, internalUrl);
             } catch (er) {
                 if (squizEdit) {
-                    linkData = { url: 'https://example.com' };
+                    linkData = {
+                        url: "https://news.stanford.edu",
+                        text: ctaText || "Link text"
+                    };
                 }
             }
         }
