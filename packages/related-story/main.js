@@ -44,7 +44,7 @@ export default {
             descriptionOverride = descriptionOverride || '';
             
             // Provide default values for other required fields
-            story = story || 'matrix-asset://api-identifier/163459';
+            story = story || 'matrix-asset://StanfordNews/166325';
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -111,10 +111,10 @@ export default {
             // NEW: In edit mode, provide mock data instead of returning error
             if (squizEdit) {
                 data = [{
-                    title: 'Sample Related Story Title',
+                    title: 'Link text',
                     description: 'This is a sample description from the API that would normally be fetched.',
-                    liveUrl: 'https://example.com',
-                    imageUrl: 'https://picsum.photos/200/200',
+                    liveUrl: 'https://news.stanford.edu/stories/2025/03/a-new-molecule-that-targets-a-cryptic-pocket-on-the-body-s-cannabinoid-receptors-could-lead-to-safer-drugs-for-chronic-pain',
+                    imageUrl: 'https://news.stanford.edu/_designs/component-service/editorial/placeholder.png',
                     imageAlt: 'Sample related story image'
                 }];
             } 
