@@ -41,8 +41,12 @@ export default {
         
         if (squizEdit) {
             // Add default values for inline editable fields
-            title = title || 'Featured Media Title';
-            teaserText = teaserText || 'This is a sample description for the featured media content that can be edited inline.';
+            title = title || 'Title text';
+            teaserText = teaserText || 'Add content';
+            // Provide default image if none exists
+            image = image || 'matrix-asset://StanfordNews/172387';
+            // Provide default bcakground image if none exists
+            backgroundImage = backgroundImage || 'matrix-asset://StanfordNews/172387';
             
             // Set up inline editing targets for nested object fields
             squizEditTargets = {
@@ -116,7 +120,19 @@ export default {
             } catch (er) {
                 // In edit mode, provide mock data instead of returning error
                 if (squizEdit) {
-                    bgImageData = { url: 'https://via.placeholder.com/1200x600', attributes: { alt: 'Background image' } };
+                    bgImageData = {
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                        "attributes": {
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
+                        },
+                    }
                 }
             }
         }
@@ -128,7 +144,19 @@ export default {
             } catch (er) {
                 // In edit mode, provide mock data instead of returning error
                 if (squizEdit) {
-                    imageData = { url: 'https://via.placeholder.com/300x300', attributes: { alt: 'Featured media image' } };
+                    imageData = {
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                        "attributes": {
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
+                        },
+                    };
                 }
             }
         }
