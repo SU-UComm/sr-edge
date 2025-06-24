@@ -1,0 +1,148 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "campaign-sidebar-cta",
+    "type": "edge",
+    "version": "1.0.0",
+    "namespace": "stanford-components",
+    "description": "This component is used to promote campaign pages on basic story pages with a sidebar.",
+    "displayName": "Campaign CTA",
+    "mainFunction": "main",
+    "icon": {
+        "id": "star",
+        "color": {
+            "type": "enum",
+            "value": "gray"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [
+                    "image",
+                    "title",
+                    "description",
+                    "linkUrl",
+                    "linkText"
+                ],
+                "properties": {
+                    "image": {
+                        "title": "Image",
+                        "description": "The image displayed above the text elements.",
+                        "type": "string",
+                        "format": "matrix-asset-uri"
+                    },
+                    "title": {
+                        "title": "Title",
+                        "description": "The title.",
+                        "type": "string",
+                        "default": ""
+                    },
+                    "description": {
+                        "title": "Description",
+                        "description": "Short, descriptive copy. 175-350 characters is ideal.",
+                        "type": "string",
+                        "format": "multi-line"
+                    },
+                    "linkUrl": {
+                        "title": "CTA Destination",
+                        "description": "The CTA link destination.",
+                        "type": "string",
+                        "format": "matrix-asset-uri"
+                    },
+                    "linkText": {
+                        "title": "CTA text",
+                        "description": "The CTA button text.",
+                        "type": "string"
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/3": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/7": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/8": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://api-identifier/163293": {
+            "type": "file",
+            "path": "mocked-uris/163293.json"
+        },
+        "matrix-asset://api-identifier/141464": {
+            "type": "file",
+            "path": "mocked-uris/141464.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}
