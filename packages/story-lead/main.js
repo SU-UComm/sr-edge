@@ -5,45 +5,32 @@ import { processEditor } from '../../global/js/utils/processEditor';
 
 export default {
     async main(args, info) {
-        // Detect edit mode
-        const squizEdit = info?.ctx?.editor || false;
         
-        // Extracting functions from provided info
-        const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
-        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
+        const squizEdit = componentContext?.editor || false;
 
-        // Extracting configuration data from arguments
-        const { content, variant } = args || {};
+        let { content, variant } = args || {};
 
-        // Validate required functions
-        try {
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Story lead component: ', er);
-            return `<!-- Error occurred in the Story lead component: ${er.message} -->`;
+        if(squizEdit) {
+            content = content || "Add content";
         }
 
-
-          // Validate required fields and ensure correct data types
-        try {
-            if (content && typeof content !== 'string') {
-                throw new Error(
-                    `The "content" field must be a string. The ${JSON.stringify(content)} was received.`
-                );
+        if(!squizEdit) {
+            try {
+                if (content && typeof content !== 'string') {
+                    throw new Error(
+                        `The "content" field must be a string. The ${JSON.stringify(content)} was received.`
+                    );
+                }
+                if (variant && !['Basic Story', 'Featured Story'].includes(variant)) {
+                    throw new Error(
+                        `The "variant" field must be one of ["Basic Story", "Featured Story"]. The ${JSON.stringify(variant)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Story lead component: ', er);
+                return `<!-- Error occurred in the Story lead component: ${er.message} -->`;
             }
-            if (variant && !['Basic Story', 'Featured Story'].includes(variant)) {
-                throw new Error(
-                    `The "variant" field must be one of ["Basic Story", "Featured Story"]. The ${JSON.stringify(variant)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Story lead component: ', er);
-            return `<!-- Error occurred in the Story lead component: ${er.message} -->`;
         }
 
         const isFeaturedStory = variant === "Featured Story";
