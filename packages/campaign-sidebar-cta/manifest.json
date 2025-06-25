@@ -2,10 +2,10 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "campaign-sidebar-cta",
     "type": "edge",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "namespace": "stanford-components",
     "description": "This component is used to promote campaign pages on basic story pages with a sidebar.",
-    "displayName": "Campaign CTA",
+    "displayName": "Campaign Sidebar CTA",
     "mainFunction": "main",
     "icon": {
         "id": "star",
