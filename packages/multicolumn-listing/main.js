@@ -122,88 +122,30 @@ export default {
             dataPromise = adapter.getCards();
         } else {
             const { cards } = args.contentConfiguration;
-            
-            // In edit mode, provide default cards if none are selected
-            if (squizEdit && (!cards || cards.length === 0)) {
-                dataPromise = Promise.resolve([
-                    {
-                        type: "Feature",
-                        title: "Sample Selected Card 1",
-                        liveUrl: "https://news.stanford.edu",
-                        description: "This is a sample card for when 'Select' mode is chosen but no cards are selected yet.",
-                        imageUrl: "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
-                        imageAlt: "Sample card image",
-                        taxonomy: "Featured Content",
-                        taxonomyUrl: "https://news.stanford.edu",
-                        videoUrl: null,
-                        date: new Date().toISOString().split('T')[0],
-                        source: null,
-                        authorName: null,
-                        authorEmail: null
-                    },
-                    {
-                        type: "News",
-                        title: "Sample Selected Card 2",
-                        liveUrl: "https://news.stanford.edu",
-                        description: "Another sample card showing the Select mode layout with multiple cards.",
-                        imageUrl: "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
-                        imageAlt: "Another sample card image",
-                        taxonomy: "News",
-                        taxonomyUrl: "https://news.stanford.edu",
-                        videoUrl: null,
-                        date: new Date().toISOString().split('T')[0],
-                        source: null,
-                        authorName: null,
-                        authorEmail: null
-                    }
-                ]);
-            } else {
-                const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
-                adapter.setCardService(service);
+            const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
+
+            adapter.setCardService(service);
+                
+            try {
                 dataPromise = adapter.getCards(cards);
+            } catch (err) {
+                if (!squizEdit) {
+                    return `<!-- Error occurred in the Multicolumn listing component: ${err.message} -->`;
+                }
             }
+
+            dataPromise = Promise.resolve([]);
         }
 
         // Add error handling to data promise
         dataPromise = dataPromise.catch(er => {
             console.error('Error occurred in the Multicolumn listing component: Failed to fetch data. ', er);
 
-            if (squizEdit) {
-                return [
-                    {
-                        type: "Feature",
-                        title: "Sample Card Title",
-                        liveUrl: "https://news.stanford.edu",
-                        description: "This is a sample description for the card in edit mode.",
-                        imageUrl: "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
-                        imageAlt: "Sample image description",
-                        taxonomy: "Featured Content",
-                        taxonomyUrl: "https://news.stanford.edu",
-                        videoUrl: null,
-                        date: new Date().toISOString().split('T')[0],
-                        source: null,
-                        authorName: null,
-                        authorEmail: null
-                    },
-                    {
-                        type: "News",  
-                        title: "Another Sample Card",
-                        liveUrl: "https://news.stanford.edu",
-                        description: "This is another sample description showing multiple cards.",
-                        imageUrl: "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
-                        imageAlt: "Another sample image description",
-                        taxonomy: "News",
-                        taxonomyUrl: "https://news.stanford.edu",
-                        videoUrl: null,
-                        date: new Date().toISOString().split('T')[0],
-                        source: null,
-                        authorName: null,
-                        authorEmail: null
-                    }
-                ]; // Always return sample data array on failure in edit mode
+            if (!squizEdit) {
+                return `<!-- Error occurred in the Multicolumn listing component: ${er.message} -->`;
             }
 
-            return `<!-- Error occurred in the Multicolumn listing component: ${er.message} -->`;
+            return []; // Always return sample data array on failure in edit mode
         });
 
         // Run data fetching and heading service in parallel
