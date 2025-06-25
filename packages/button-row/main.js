@@ -34,16 +34,11 @@ export default {
         
         // NEW: add a default if squizEdit is true
         if (squizEdit) {
-            // Add default values if buttons array is not provided or empty
-            buttons = buttons && buttons.length > 0 ? buttons : [
-                { buttonText: 'Button 1', externalUrl: '#' },
-                { buttonText: 'Button 2', externalUrl: '#' }
-            ];
-            
             // Ensure each button has default buttonText
             buttons = buttons.map(button => ({
                 ...button,
-                buttonText: button.buttonText || 'Link text'
+                buttonText: button.buttonText || 'Button text',
+                internalUrl: button.internalUrl || "matrix-asset://StanfordNews/29389"
             }));
             
             // Add the targets for the squizEdit DOM augmentation
@@ -101,7 +96,7 @@ export default {
                         if (squizEdit) {
                             linkData = {
                                 url: "https://news.stanford.edu",
-                                text: buttonText
+                                text: buttonText || "Button text"
                             };
                         }
                     }
