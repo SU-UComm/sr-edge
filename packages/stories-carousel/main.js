@@ -145,7 +145,7 @@ export default {
             const props = await res.json();
 
             // Construct the FB URL
-            if (props && props?.search) {
+            if (props?.search) {
                 query = `?profile=${props.search.profile}&collection=${props.search.collection}${
                     props.search.maintopic?.asset_name !== ""
                     ? `&query=[taxonomyContentMainTopicId:${props.search.maintopic?.asset_assetid} taxonomyContentTopicsId:${props.search.maintopic?.asset_assetid} taxonomyContentSubtopicsId:${props.search.maintopic?.asset_assetid}]`
@@ -164,9 +164,8 @@ export default {
                     fallbackFbUrl += "&meta_taxonomyContentTypeId=28207";
                     query += "&meta_taxonomyContentTypeId=28207";
                 }
-                headingInfo = props.headingConfiguration;
             }
-            
+            headingInfo = props.headingConfiguration;
         }
 
         try {
