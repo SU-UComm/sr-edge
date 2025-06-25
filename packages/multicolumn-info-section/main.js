@@ -45,33 +45,33 @@ export default {
             callout = callout !== undefined ? callout : true;
             
             colOne = colOne || {};
-            colOne.title = colOne.title || 'Research';
+            colOne.title = colOne.title || 'Title text';
             
             colTwo = colTwo || {};
-            colTwo.infoText = colTwo.infoText || '<p>Test info text</p>';
+            colTwo.infoText = colTwo.infoText || '<p>Add content</p>';
             colTwo.addButton = colTwo.addButton !== undefined ? colTwo.addButton : false;
             
             if (colTwo.addButton) {
                 colTwo.buttonConfiguration = colTwo.buttonConfiguration || {};
-                colTwo.buttonConfiguration.buttonText = colTwo.buttonConfiguration.buttonText || 'Read more';
-                colTwo.buttonConfiguration.externalUrl = colTwo.buttonConfiguration.externalUrl || 'https://example.com';
+                colTwo.buttonConfiguration.buttonText = colTwo.buttonConfiguration.buttonText || 'Button text';
+                colTwo.buttonConfiguration.externalUrl = colTwo.buttonConfiguration.externalUrl || 'https://news.stanford.edu';
                 colTwo.buttonConfiguration.isNewWindow = colTwo.buttonConfiguration.isNewWindow !== undefined ? colTwo.buttonConfiguration.isNewWindow : false;
             }
-            
+
             if (callout) {
                 colThree = colThree || {};
-                colThree.title = colThree.title || 'More Info';
-                colThree.content = colThree.content || '<p>Test content</p>';
+                colThree.title = colThree.title || 'Heading text';
+                colThree.content = colThree.content || '<p>Add content</p>';
                 
                 colThree.imageConfiguration = colThree.imageConfiguration || {};
                 colThree.imageConfiguration.image = colThree.imageConfiguration.image || 'matrix-asset://api-identifier/sample-image';
-                colThree.imageConfiguration.caption = colThree.imageConfiguration.caption || 'Test caption';
-                colThree.imageConfiguration.credit = colThree.imageConfiguration.credit || 'Test credit';
+                colThree.imageConfiguration.caption = colThree.imageConfiguration.caption || 'Caption text';
+                colThree.imageConfiguration.credit = colThree.imageConfiguration.credit || 'Credit text';
                 colThree.imageConfiguration.imagePlacement = colThree.imageConfiguration.imagePlacement || 'Below content';
                 
                 colThree.buttonConfiguration = colThree.buttonConfiguration || {};
-                colThree.buttonConfiguration.buttonText = colThree.buttonConfiguration.buttonText || 'Click me';
-                colThree.buttonConfiguration.externalUrl = colThree.buttonConfiguration.externalUrl || 'https://example.com';
+                colThree.buttonConfiguration.buttonText = colThree.buttonConfiguration.buttonText || 'Button text';
+                colThree.buttonConfiguration.externalUrl = colThree.buttonConfiguration.externalUrl || 'https://news.stanford.edu';
                 colThree.buttonConfiguration.isNewWindow = colThree.buttonConfiguration.isNewWindow !== undefined ? colThree.buttonConfiguration.isNewWindow : false;
             }
 
