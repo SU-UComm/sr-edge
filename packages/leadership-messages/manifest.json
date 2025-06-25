@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "leadership-messages",
     "type": "edge",
-    "version": "4.2.4",
+    "version": "4.2.6",
     "namespace": "stanford-apb",
     "description": "Links to leadership messages displayed in a grid.",
     "displayName": "Leadership messages",
@@ -46,7 +46,7 @@
                                 "title": "Matrix Asset Link",
                                 "type": "string",
                                 "description": "Select an asset to link to. If this field is filled out, it will be used instead of the manual link",
-                                "format": "matrix-asset-uri"                                
+                                "format": "matrix-asset-uri"
                             },
                             "ctaManualUrl": {
                                 "title": "Manual Link",

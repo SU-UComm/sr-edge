@@ -27,9 +27,7 @@ export default {
      */
     async main(args, info) {
         // Extracting functions from provided info
-        const componentFunctions = info?.fns || null;
-        const componentContext = info?.ctx || null;
-        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
+        const fnsCtx = info?.fns || info?.ctx || {}; // for backward compatibility - provides the resolveUri function
         const { FB_JSON_URL } = info?.env || info?.set?.environment || {};
 
         // CHANGE: change const to let for mutability in edit mode
@@ -38,82 +36,19 @@ export default {
 
         // NEW: Detect edit mode properly
         const squizEdit = info?.ctx?.editor || false;
-        let squizEditTargets = null;
+        let squizEditTargets = {
+            "headingTitle": { "field": "headingConfiguration.title" },
+            "headingCtaText": { "field": "headingConfiguration.ctaText" }
+        };
 
+        // if in squizEdit mode set up enough defaults so the fields show in the editor
         if (squizEdit) {
-            // Provide default values for inline editable fields
             title = title || 'Add title';
             ctaText = ctaText || 'Add Call to Action';
             searchQuery = searchQuery || 'sample leadership query';
-            
-            // Provide default values for URLs
-            ctaUrl = ctaUrl || null;
-            ctaManualUrl = ctaManualUrl || 'https://news.stanford.edu';
-            ctaNewWindow = ctaNewWindow || false;
-            
-            // Configure edit targets - maps static data-se attributes to component fields
-            squizEditTargets = {
-                "headingTitle": { "field": "headingConfiguration.title" },
-                "headingCtaText": { "field": "headingConfiguration.ctaText" }
-            };
+            ctaUrl = ctaUrl || 'matrix-asset://StanfordNews/29389';                          
         }
 
-        // NEW: Wrap validation in !squizEdit check - in edit mode we don't need to validate because values may be blank while editing
-        if (!squizEdit) {
-            // Validate required environment variables
-            try {
-                if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
-                    throw new Error(
-                        `The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(FB_JSON_URL)} was received.`
-                    );
-                }
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Leadership messages component: ', er);
-                return `<!-- Error occurred in the Leadership messages component: ${er.message} -->`;
-            }
-
-            // Validate required fields and ensure correct data types
-            try {
-                if (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?') {
-                    throw new Error(
-                        `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
-                    );
-                }
-                if (title && typeof title !== 'string') {
-                    throw new Error(
-                        `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
-                    );
-                }
-                if (ctaUrl && typeof ctaUrl !== 'string') {
-                    throw new Error(
-                        `The "ctaUrl" field must be a string. The ${JSON.stringify(ctaUrl)} was received.`
-                    );
-                }
-                if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
-                    throw new Error(
-                        `The "ctaManualUrl" field must be a string. The ${JSON.stringify(ctaManualUrl)} was received.`
-                    );
-                }
-                if (ctaText && typeof ctaText !== 'string') {
-                    throw new Error(
-                        `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
-                    );
-                }
-                if (ctaNewWindow && typeof ctaNewWindow !== 'boolean') {
-                    throw new Error(
-                        `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Leadership messages component: ', er);
-                return `<!-- Error occurred in the Leadership messages component: ${er.message} -->`;
-            }
-        }
 
         const adapter = new cardDataAdapter();
         let data = null;
@@ -132,13 +67,13 @@ export default {
             // NEW: In edit mode, provide mock data instead of returning error
             if (squizEdit) {
                 data = {
-                        title: "Sample Leadership Message 1",
-                        description: "This is a sample leadership message for demonstration purposes in edit mode.",
+                        title: "Add Title",
+                        description: "Add Description",
                         liveUrl: "#",
                         imageUrl: "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
-                        imageAlt: "Sample leadership headshot",
-                        name: "Dr. Sample Leader",
-                        jobTitle: "Sample Position"
+                        imageAlt: "Add alt text",
+                        name: "Add Name",
+                        jobTitle: "Add Job Title"
                     };
             } else {
                 return `<!-- Error occurred in the Leadership messages component: Failed to fetch event data. ${er.message} -->`;
@@ -146,11 +81,13 @@ export default {
         }
         
         // Resolve the URI for the section heading link
+        // linkedHeadingService is a function that resolves the URI for the section heading link    
+        // if the ctaUrl is not set, we use the ctaManualUrl
         let headingData = null;
         try {
             headingData = await linkedHeadingService(
                 fnsCtx,
-                args.headingConfiguration
+                {title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow}                
             );
         } catch (er) {
             console.error('Error occurred in the Leadership messages component: Failed to resolve heading link. ', er);
@@ -159,10 +96,9 @@ export default {
                 headingData = {
                     title: title,
                     ctaText: ctaText,
-                    ctaLink: ctaManualUrl || '#',
+                    ctaLink: ctaUrl || '#',
                     ctaNewWindow: ctaNewWindow || false
                 };
-                console.log('Mock headingData created:', headingData);
             } else {
                 return `<!-- Error occurred in the Leadership messages component: Failed to resolve heading link. ${er.message} -->`;
             }
@@ -184,7 +120,6 @@ export default {
             items: cards
         });
 
-        console.log('headingData', headingData);
         // Prepare component data for template rendering
         if(squizEdit && headingData) {
             headingData.title = headingData.title || 'Add title';
