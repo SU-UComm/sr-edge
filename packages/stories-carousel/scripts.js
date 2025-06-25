@@ -94,7 +94,6 @@ export function _modalInit(section) {
     });
 };
 let useFocus = false;
-let isInitialLoad = true;
 // const handleClick = (e) => {
 //     e.preventDefault();
 //     if (e.detail) {
@@ -159,40 +158,8 @@ export function _carouselInit(section) {
             init: function () {
                 setTimeout(() => {
                     sliderInit = true;
-                    useFocus = true;
-                    isInitialLoad = false;
+                    // useFocus = true;
                 }, 500);
-                
-                // Add event listeners to reset isInitialLoad on user interaction
-                const nextBtn = document.querySelector(`section[data-unique-id="${uniqueClass}"] .component-slider-next`);
-                const prevBtn = document.querySelector(`section[data-unique-id="${uniqueClass}"] .component-slider-prev`);
-                const pagination = document.querySelector(`.component-slider-pagination-${uniqueClass}`);
-                
-                if (nextBtn) {
-                    nextBtn.addEventListener('click', () => {
-                        isInitialLoad = false;
-                    });
-                }
-                
-                if (prevBtn) {
-                    prevBtn.addEventListener('click', () => {
-                        isInitialLoad = false;
-                    });
-                }
-                
-                if (pagination) {
-                    pagination.addEventListener('click', () => {
-                        isInitialLoad = false;
-                    });
-                }
-                
-                // Add keyboard event listener to reset isInitialLoad on keyboard navigation
-                const thisSwiper = document.querySelector(swiperSelector);
-                thisSwiper.addEventListener('keydown', (event) => {
-                    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-                        isInitialLoad = false;
-                    }
-                });
             },
             slideChange: function(swiper){
                 const thisSwiper = document.querySelector(swiperSelector);
@@ -206,8 +173,8 @@ export function _carouselInit(section) {
                 if (oldSlide) {
                     oldSlide.removeAttribute("tabindex");
                 }
-                // Set focus on new current - but only if not the initial load
-                if (sliderInit && !isInitialLoad) {
+                // Set focus on new current
+                if (sliderInit) {
                     setTimeout(() => {
                         const slide = thisSwiper.querySelector(
                             ".swiper-slide-active"
@@ -267,5 +234,4 @@ document.addEventListener('DOMContentLoaded', function () {
         _modalInit(section);
     });    
 });
-
 
