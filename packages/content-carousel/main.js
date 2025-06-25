@@ -29,7 +29,7 @@ export default {
         
         if (squizEdit) {
             // Add default values if not provided
-            title = title || 'Content Carousel';
+            title = title || 'Heading text';
             slides = slides && slides.length > 0 ? slides : [
                 { content: '<p>Enter slide 1 text</p>' }
             ];
