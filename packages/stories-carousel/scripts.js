@@ -175,6 +175,7 @@ export function _carouselInit(section) {
                 }
                 // Set focus on new current
                 if (sliderInit) {
+                    useFocus = true;
                     setTimeout(() => {
                         const slide = thisSwiper.querySelector(
                             ".swiper-slide-active"
