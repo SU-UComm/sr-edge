@@ -22,6 +22,16 @@ export default {
         // Extracting configuration data from arguments
         const { icon, factText, indicatorPosition, width } = args?.displayConfiguration || {};
 
+        let squizEditTargets = null;
+
+        if (squizEdit) {
+            factText = factText || 'Add content';
+
+            squizEditTargets = {
+                "factText": { "field": "displayConfiguration.factText" }
+            };
+        }
+
         // Validate required fields and ensure correct data types
         try {
             if (!['pie chart', 'bar graph'].includes(icon) ) {
@@ -55,6 +65,10 @@ export default {
             icon,
         };
 
-        return factCalloutTemplate(props);
+        // NEW: Early return pattern
+        if (!squizEdit) return pullQuote(componentData);
+
+        // NEW: Process for edit mode
+        return processEditor(pullQuote(componentData), squizEditTargets);
     }
 };

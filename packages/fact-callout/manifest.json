@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "fact-callout",
     "type": "edge",
-    "version": "4.1.0",
+    "version": "4.1.1",
     "namespace": "stanford-apb",
     "description": "Display a fact on featured story pages",
     "displayName": "Fact callout",
@@ -39,7 +39,10 @@
                             "factText": {
                                 "title": "Fact text",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "indicatorPosition": {
                                 "title": "Indicator position",
