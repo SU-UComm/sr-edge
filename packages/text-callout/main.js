@@ -68,8 +68,11 @@
                     "infoBoxContent": { 
                         "field": "displayConfiguration.content" 
                     },
-                    "captionCredit": { 
+                    "caption": { 
                         "field": "imageConfiguration.caption" 
+                    },
+                    "credit": { 
+                        "field": "imageConfiguration.credit" 
                     },
                     "button": { 
                         "field": "buttonConfiguration.buttonText" 
@@ -175,6 +178,8 @@
                 url: imageData?.url,
                 alt: imageData?.attributes?.alt || "",
                 placement: imagePlacement,
+                caption,
+                credit,
                 captionCredit: caption && credit ? `${caption} | ${credit}` : caption || credit,
             }
             
