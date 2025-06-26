@@ -53,8 +53,8 @@
                 // Add default values for inline editable fields
                 title = title || 'Heading text';
                 content = content || 'Add content';
-                caption = `<span data-se="caption">${caption || "Caption text"}</span>`;
-                credit = `<span data-se="credit">${credit || "Credit text"}</span>`;
+                caption = `<span data-se="caption">${caption ? caption : 'Add caption'}</span>`;
+                credit = `<span data-se="credit">${credit ? credit : 'Add credit'}</span>`;
                 buttonText = buttonText || 'Button text';
                 internalUrl = internalUrl || "matrix-asset://StanfordNews/29389"
                 image = image || 'matrix-asset://StanfordNews/172387';
@@ -68,8 +68,11 @@
                     "infoBoxContent": { 
                         "field": "displayConfiguration.content" 
                     },
-                    "captionCredit": { 
+                    "caption": { 
                         "field": "imageConfiguration.caption" 
+                    },
+                    "credit": { 
+                        "field": "imageConfiguration.credit" 
                     },
                     "button": { 
                         "field": "buttonConfiguration.buttonText" 
@@ -175,6 +178,8 @@
                 url: imageData?.url,
                 alt: imageData?.attributes?.alt || "",
                 placement: imagePlacement,
+                caption,
+                credit,
                 captionCredit: caption && credit ? `${caption} | ${credit}` : caption || credit,
             }
             
