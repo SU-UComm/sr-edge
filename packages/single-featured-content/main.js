@@ -91,7 +91,7 @@ export default {
         let headingData;
         try {
             headingData = await linkedHeadingService(
-                componentFunctions || componentContext,
+                componentFunctions,
                 { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow }
             );
         } catch (er) {
