@@ -65,8 +65,8 @@ export default {
                 
                 colThree.imageConfiguration = colThree.imageConfiguration || {};
                 colThree.imageConfiguration.image = colThree.imageConfiguration.image || 'matrix-asset://api-identifier/sample-image';
-                colThree.imageConfiguration.caption = colThree.imageConfiguration.caption || 'Caption text';
-                colThree.imageConfiguration.credit = colThree.imageConfiguration.credit || 'Credit text';
+                colThree.imageConfiguration.caption = `<span data-se="caption">${colThree?.imageConfiguration?.caption ? colThree.imageConfiguration.caption : 'Add caption'}</span>`;
+                colThree.imageConfiguration.credit = `<span data-se="credit">${colThree?.imageConfiguration?.credit ? colThree.imageConfiguration.credit : 'Add credit'}</span>`;
                 colThree.imageConfiguration.imagePlacement = colThree.imageConfiguration.imagePlacement || 'Below content';
                 
                 colThree.buttonConfiguration = colThree.buttonConfiguration || {};
@@ -100,8 +100,11 @@ export default {
                 "infoBoxContent": {
                     "field": "colThree.content"
                 },
-                "captionCredit": {
+                "caption": {
                     "field": "colThree.imageConfiguration.caption"
+                },
+                "credit": {
+                    "field": "colThree.imageConfiguration.credit"
                 }
             };
         }
