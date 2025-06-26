@@ -53,8 +53,8 @@ export default {
             // Add default values for inline editable fields
             title = title || 'Heading text';
             summary = summary || 'Add content';
-            caption = `<span data-se="caption">${caption ? caption : 'Add caption'}</span>`;
-            credit = `<span data-se="credit">${credit ? credit : 'Add credit'}</span>`;
+            caption = `<span data-se="caption">${caption ? caption : 'Caption text'}</span>`;
+            credit = `<span data-se="credit">${credit ? credit : 'Credit text'}</span>`;
             heading = heading || 'Video heading text';
             
             image = image || 'matrix-asset://StanfordNews/172387';

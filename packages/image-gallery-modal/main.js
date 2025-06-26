@@ -50,8 +50,8 @@ export default {
         
         if (squizEdit) {
             // Provide default values for inline editable fields
-            caption = `<span data-se="caption">${caption ? caption : 'Add caption'}</span>`;
-            credit = `<span data-se="credit">${credit ? credit : 'Add credit'}</span>`;
+            caption = `<span data-se="caption">${caption ? caption : 'Caption text'}</span>`;
+            credit = `<span data-se="credit">${credit ? credit : 'Credit text'}</span>`;
 
 
             title = title || 'Heading text';
@@ -60,7 +60,7 @@ export default {
             // Ensure each image has a default caption
             images = images.map((img, index) => ({
                 ...img,
-                caption: img.caption || `Add caption`
+                caption: img.caption || `Caption text`
             }));
             
             // Configure edit targets - maps static data-se attributes to component fields

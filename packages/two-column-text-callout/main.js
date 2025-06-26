@@ -73,8 +73,8 @@ export default {
 
                 buttonText = buttonText || 'Link text';
                 
-                caption = `<span data-se="caption">${caption ? caption : 'Add caption'}</span>`;
-                credit = `<span data-se="credit">${credit ? credit : 'Add credit'}</span>`;
+                caption = `<span data-se="caption">${caption ? caption : 'Caption text'}</span>`;
+                credit = `<span data-se="credit">${credit ? credit : 'Credit text'}</span>`;
 
             }
 
