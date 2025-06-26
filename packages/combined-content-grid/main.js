@@ -248,10 +248,26 @@ export default {
         }
 
         // Start heading service promise
-        const headingDataPromise = linkedHeadingService(
-            fnsCtx,
-            headingConfiguration
-        );
+        let headingDataPromise;
+
+        try {
+            headingDataPromise = linkedHeadingService(
+                fnsCtx,
+                headingConfiguration
+            );
+        } catch (error) {
+            console.error('Error calling linkedHeadingService:', error);
+           if (squizEdit) {
+                headingDataPromise = Promise.resolve({
+                    title: 'Title text',
+                    ctaText: 'Link text',
+                    ctaLink: '#',
+                    ctaNewWindow: false
+                });
+            } else {
+                return `<!-- Error occurred in the In the news component: Failed to resolve heading link. ${er.message} -->`;
+            }
+        }
 
         // Start events data fetching if configured
         if (eventsConfiguration?.endPoint) {
