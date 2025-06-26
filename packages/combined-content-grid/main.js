@@ -283,8 +283,8 @@ export default {
             // Set our card service
             announcementAdapter.setCardService(announcementService);
 
-             // Get the announcements cards data
-             try {
+            // Get the announcements cards data
+            try {
                 announcementDataPromise = announcementAdapter.getCards();
             } catch (er) {
                 console.error('Error occurred in the Combined Content Grid component: Failed to fetch announcements cards data. ', er);
@@ -293,10 +293,14 @@ export default {
 
             // Start announcements page data fetching if configured
             if (announcementsConfiguration.linkUrl && announcementsConfiguration.linkUrl !== "") {
-                announcementPageDataPromise = basicAssetUri(
-                    fnsCtx,
-                    announcementsConfiguration.linkUrl
-                );
+                try {
+                    announcementPageDataPromise = await basicAssetUri(fnsCtx, announcementsConfiguration.linkUrl);
+                } catch (er) {
+                    console.error('Error occurred in the Campaign cta component: Failed to fetch link data. ', er);
+                    if (squizEdit) {
+                        announcementPageDataPromise = Promise.resolve({});
+                    }
+                }
             }
         }
 
@@ -385,7 +389,7 @@ export default {
             }
 
             if (announcementPageData) {
-                announcementData.ctaUrl = announcementPageData.url;
+                announcementData.ctaUrl = announcementPageData?.url;
                 announcementData.ctaIcon = isRealExternalLink(announcementPageData.url) ? "external arrow" : "chevron right";
             }
         }

@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "combined-content-grid",
     "type": "edge",
-    "version": "4.1.16",
+    "version": "4.1.17",
     "namespace": "stanford-apb",
     "description": "A featured content grid combined with announcements and events",
     "displayName": "Combined content grid",
@@ -224,7 +224,7 @@
                                 "title": "Events Endpoint",
                                 "description": "The localist JSON endpoint to fetch events from",
                                 "type": "string",
-                                "default": "https://events.stanford.edu/api/2/events?days=365&sponsored=true"
+                                "default": "https://news.stanford.edu/_api/events/query"
                             },
                             "numberOfItems": {
                                 "title": "Number of Events",
