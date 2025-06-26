@@ -1,5 +1,5 @@
 import eventSectionTemplate from './event-section.hbs';
-import { cardDataAdapter, eventCardService, linkedHeadingService, isRealExternalLink, uuid } from "../../global/js/utils";
+import { cardDataAdapter, eventCardService, linkedHeadingService, isRealExternalLink, uuid, basicAssetUri } from "../../global/js/utils";
 import { EventStartEndDate } from '../../global/js/helpers';
 import { processEditor } from '../../global/js/utils/processEditor';
 
@@ -37,34 +37,54 @@ export default {
 
         // NEW: Detect edit mode
         const squizEdit = info?.ctx?.editor || false;
+
         let squizEditTargets = null;
+
+        // Extracting configuration data from arguments
+        let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = headingConfiguration || {};
+        let { eventsUrl } = contentConfiguration || {};
+        let { numberOfEvents } = displayConfiguration || {};
         
         if (squizEdit) {
-            // Provide default configurations
-            headingConfiguration = headingConfiguration || {};
-            contentConfiguration = contentConfiguration || {};
-            displayConfiguration = displayConfiguration || {};
             
             // Add default values for inline editable fields
-            headingConfiguration.title = headingConfiguration.title || 'Upcoming events';
-            headingConfiguration.ctaText = headingConfiguration.ctaText || 'View all';
-            headingConfiguration.ctaManualUrl = headingConfiguration.ctaManualUrl || 'https://events.stanford.edu';
+            title = title || 'Upcoming events';
+            ctaText = ctaText || 'View all';
+            // ctaUrl = ctaUrl || "matrix-asset://StanfordNews/29389";
+            ctaUrl = null;
+            ctaManualUrl = ctaManualUrl || 'https://events.stanford.edu';
             
             // Add default values for required fields
-            contentConfiguration.eventsUrl = contentConfiguration.eventsUrl || 'https://events.stanford.edu/api/2/events?days=365&sponsored=true';
-            displayConfiguration.numberOfEvents = displayConfiguration.numberOfEvents || 6;
+            eventsUrl = eventsUrl || 'https://events.stanford.edu/api/2/events?days=365&sponsored=true';
+            numberOfEvents = numberOfEvents || 6;
+
+            // Re-assign updated values back to original config objects
+            headingConfiguration = {
+                ...headingConfiguration,
+                title,
+                ctaText,
+                ctaUrl
+            };
+            contentConfiguration = {
+                ...contentConfiguration,
+                eventsUrl
+            };
+            displayConfiguration = {
+                ...displayConfiguration,
+                numberOfEvents
+            };
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
-                "headingTitle": { "field": "headingConfiguration.title" },
-                "headingCtaText": { "field": "headingConfiguration.ctaText" }
+                "headingTitle": { 
+                    "field": "headingConfiguration.title" 
+                },
+                "headingCtaText": { 
+                    "field": "headingConfiguration.ctaText" 
+                }
             };
         }
 
-        // Extracting configuration data from arguments
-        const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = headingConfiguration || {};
-        const { eventsUrl } = contentConfiguration || {};
-        const { numberOfEvents } = displayConfiguration || {};
 
         // Check for environment vars
         try {
@@ -84,11 +104,6 @@ export default {
                 if (typeof eventsUrl !== 'string' || eventsUrl.trim() === '') {
                     throw new Error(
                         `The "eventsUrl" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(eventsUrl)} was received.`
-                    );
-                }
-                if (typeof numberOfEvents !== 'number' || ![3, 6, 9].includes(numberOfEvents)) {
-                    throw new Error(
-                        `The "numberOfEvents" field cannot be undefined and must be a number one of [3, 6, 9]. The ${JSON.stringify(numberOfEvents)} was received.`
                     );
                 }
                 if (title && typeof title !== 'string') {
@@ -203,11 +218,25 @@ export default {
             }
         }
 
+        // Resolve internal link safely
+        let linkData = null;
+            try {
+                linkData = await basicAssetUri(fnsCtx, headingConfiguration.ctaUrl);
+            } catch (er) {
+                console.error('Error occurred in the Events section component: Failed to resolve Matrix asset link.', er);
+                if (squizEdit) {
+                    linkData = {
+                        url: "https://news.stanford.edu",
+                        text: headingConfiguration.ctaText || "Link text"
+                    };
+                }
+            }
+
         // Prepare component data for template rendering
         const componentData = {
             title: headingData.title,
-            ctaText: headingData.ctaText,
-            ctaLink: headingData.ctaLink,
+            ctaText: headingConfiguration.ctaText,
+            ctaLink: linkData?.url || headingConfiguration.ctaManualUrl,
             ctaNewWindow: headingData.ctaNewWindow,
             isAlwaysLight: false,
             width: "large",

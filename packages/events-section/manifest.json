@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "events-section",
     "type": "edge",
-    "version": "4.1.0",
+    "version": "4.1.5",
     "namespace": "stanford-apb",
     "description": "Stanford Events Section is a grid featuring 3, 6, or 9 events",
     "displayName": "Events Section",
@@ -45,13 +45,11 @@
                             "ctaManualUrl": {
                                 "title": "Manual Link",
                                 "type": "string",
-                                "description": "Enter the full URL, including https://",
-                                "default": "https://events.stanford.edu"
+                                "description": "Enter the full URL, including https://"
                             },
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all",
                                 "ui:metadata": {
                                     "inlineEditable": true
                                 }
@@ -67,9 +65,7 @@
                         "title": "Events section core configuration",
                         "description": "The main purpose for these settings is to source the events API for the component.",
                         "type": "object",
-                        "required": [
-                            "eventsUrl"
-                        ],
+                        "required": ["eventsUrl"],
                         "properties": {
                             "eventsUrl": {
                                 "title": "Events API Endpiont",
@@ -86,11 +82,7 @@
                             "numberOfEvents": {
                                 "title": "Number of Events",
                                 "default": 6,
-                                "enum": [
-                                    3,
-                                    6,
-                                    9
-                                ],
+                                "enum": [3, 6, 9],
                                 "type": "integer"
                             }
                         }
