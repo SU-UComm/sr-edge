@@ -53,8 +53,8 @@
                 // Add default values for inline editable fields
                 title = title || 'Heading text';
                 content = content || 'Add content';
-                caption = `<span data-se="caption">${caption || "Caption text"}</span>`;
-                credit = `<span data-se="credit">${credit || "Credit text"}</span>`;
+                caption = `<span data-se="caption">${caption ? caption : 'Add caption'}</span>`;
+                credit = `<span data-se="credit">${credit ? credit : 'Add credit'}</span>`;
                 buttonText = buttonText || 'Button text';
                 internalUrl = internalUrl || "matrix-asset://StanfordNews/29389"
                 image = image || 'matrix-asset://StanfordNews/172387';
