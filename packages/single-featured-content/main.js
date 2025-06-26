@@ -45,15 +45,15 @@ export default {
             // Add default values for inline editable fields
             title = title || 'Heading text';
             ctaText = ctaText || 'Link text';
+            ctaManualUrl = ctaManualUrl || 'https://news.stanford.edu';
             
             // Provide default values for other required fields
-            source = source || 'matrix-asset://api-identifier/29389';
+            source = source || 'matrix-asset://api-identifier/163459';
 
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
                 "headingTitle": { "field": "headingConfiguration.title" },
-                "headingCtaText": { "field": "headingConfiguration.ctaText" },
-                "featDesc": { "field": "contentConfiguration.description" }
+                "headingCtaText": { "field": "headingConfiguration.ctaText" }
             };
         }
 
@@ -91,7 +91,7 @@ export default {
         let headingData;
         try {
             headingData = await linkedHeadingService(
-                componentContext,
+                componentFunctions || componentContext,
                 { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow }
             );
         } catch (er) {
