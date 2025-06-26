@@ -45,11 +45,13 @@ export default {
             image = image || 'matrix-asset://StanfordNews/172387';
             
             // Configure edit targets - maps static data-se attributes to component fields
+            /*
             squizEditTargets = {
                 "title": { "field": "title" },
                 "eyebrow": { "field": "eyebrow" },
                 "content": { "field": "content" }
             };
+            */
         }
 
         // Validate required functions - CHANGE: wrap in !squizEdit check
