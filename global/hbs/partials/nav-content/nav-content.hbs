@@ -21,8 +21,8 @@
                         url=asset_url
                         shortName=asset_short_name
                         active=(getStringByCondition
-                            value=id
-                            expectedValue=asset_assetid
+                            value=current
+                            expectedValue=true
                             trueResult='page'
                             falseResult=''
                         )
@@ -36,8 +36,8 @@
                                     url=asset_url
                                     shortName=asset_short_name
                                     active=(getStringByCondition
-                                        value=id
-                                        expectedValue=asset_assetid
+                                        value=current
+                                        expectedValue=true
                                         trueResult='page'
                                         falseResult=''
                                     )

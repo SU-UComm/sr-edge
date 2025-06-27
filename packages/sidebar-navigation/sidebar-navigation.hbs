@@ -24,9 +24,9 @@
                 classes="su-text-[3rem] !su-hidden"
             }}
         </button>
-        {{> nav-content is_mobile=true id=id asset_url=menuData.asset_url asset_short_name=menuData.asset_short_name menu=menuData.menu asset_assetid=menuData.asset_assetid}}
+        {{> nav-content is_mobile=true id=menuData.currentPage asset_url=menuData.parent.asset_url asset_short_name=menuData.parent.asset_short_name menu=menuData.menu asset_assetid=menuData.parent.asset_assetid}}
     </div>
     <div class="su-hidden lg:su-block">
-        {{> nav-content is_mobile=false id=id asset_url=menuData.asset_url asset_short_name=menuData.asset_short_name menu=menuData.menu asset_assetid=menuData.asset_assetid}}
+        {{> nav-content is_mobile=false id=menuData.currentPage asset_url=menuData.parent.asset_url asset_short_name=menuData.parent.asset_short_name menu=menuData.menu asset_assetid=menuData.parent.asset_assetid}}
     </div>
 </section>
