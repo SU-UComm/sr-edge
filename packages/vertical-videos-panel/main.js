@@ -124,7 +124,7 @@ export default {
         let sectionConfiguration = args?.sectionConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = true; //componentContext?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         let squizEditTargets =  {
             "headingTitle": { "field": "sectionConfiguration.title" },
             "headingCtaText": { "field": "sectionConfiguration.ctaText" }
