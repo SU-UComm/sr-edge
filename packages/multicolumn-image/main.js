@@ -54,7 +54,7 @@ export default {
             "sectionCaption": {
                 "field": "contentConfiguration.images.0.imageCaption"
             }
-        };;
+        };
 
        
         let imageData = [];
