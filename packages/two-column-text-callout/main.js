@@ -72,9 +72,10 @@ export default {
                 content = content || 'Add content';
 
                 buttonText = buttonText || 'Link text';
+                
+                caption = `<span data-se="caption">${caption ? caption : 'Caption text'}</span>`;
+                credit = `<span data-se="credit">${credit ? credit : 'Credit text'}</span>`;
 
-                caption = `<span data-se="caption">${caption}</span>` || `<span data-se="caption">Caption text</span>`;
-                credit = `<span data-se="credit">${credit}</span>` || `<span data-se="credit">Credit text</span>`;
             }
 
              // Prepare caption-credit data
@@ -87,7 +88,6 @@ export default {
                     imageData = await basicAssetUri(fnsCtx, image);
                 } catch (er) {
                     console.error('Error occurred in the Two Column Text Callout component: Failed to fetch image data. ', er);
-                    // NEW: In edit mode, provide mock data instead of returning error
                     if (squizEdit) {
                         imageData = {
                             "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
