@@ -1,5 +1,5 @@
 import eventSectionTemplate from './event-section.hbs';
-import { cardDataAdapter, eventCardService, linkedHeadingService, isRealExternalLink, uuid, basicAssetUri } from "../../global/js/utils";
+import { cardDataAdapter, eventCardService, linkedHeadingService, isRealExternalLink, uuid } from "../../global/js/utils";
 import { EventStartEndDate } from '../../global/js/helpers';
 import { processEditor } from '../../global/js/utils/processEditor';
 
@@ -48,31 +48,9 @@ export default {
         if (squizEdit) {
             
             // Add default values for inline editable fields
-            title = title || 'Upcoming events';
-            ctaText = ctaText || 'View all';
-            // ctaUrl = ctaUrl || "matrix-asset://StanfordNews/29389";
+            title = title || 'Heading text';
+            ctaText = ctaText || 'Link text';
             ctaUrl = null;
-            ctaManualUrl = ctaManualUrl || 'https://events.stanford.edu';
-            
-            // Add default values for required fields
-            eventsUrl = eventsUrl || 'https://events.stanford.edu/api/2/events?days=365&sponsored=true';
-            numberOfEvents = numberOfEvents || 6;
-
-            // Re-assign updated values back to original config objects
-            headingConfiguration = {
-                ...headingConfiguration,
-                title,
-                ctaText,
-                ctaUrl
-            };
-            contentConfiguration = {
-                ...contentConfiguration,
-                eventsUrl
-            };
-            displayConfiguration = {
-                ...displayConfiguration,
-                numberOfEvents
-            };
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -185,10 +163,24 @@ export default {
         }
 
         // Resolve the URI for the section heading link
-        const headingData = await linkedHeadingService(
-            fnsCtx,
-            headingConfiguration
-        );
+        let linkData = null;
+        let headingData = null;
+
+        try {
+            headingData = await linkedHeadingService(fnsCtx, headingConfiguration);
+            linkData = {
+                url: headingData?.url || headingData?.ctaManualUrl,
+                text: headingData?.ctaText
+            };
+        } catch (er) {
+            console.error('Error occurred in the Events section component: Failed to resolve Matrix asset link.', er);
+            if (squizEdit) {
+                linkData = {
+                    url: "https://news.stanford.edu",
+                    text: ctaText || "Link text"
+                };
+            }
+        }
 
         // Prepare card data
         let cardData = [];
@@ -218,26 +210,12 @@ export default {
             }
         }
 
-        // Resolve internal link safely
-        let linkData = null;
-            try {
-                linkData = await basicAssetUri(fnsCtx, headingConfiguration.ctaUrl);
-            } catch (er) {
-                console.error('Error occurred in the Events section component: Failed to resolve Matrix asset link.', er);
-                if (squizEdit) {
-                    linkData = {
-                        url: "https://news.stanford.edu",
-                        text: headingConfiguration.ctaText || "Link text"
-                    };
-                }
-            }
-
         // Prepare component data for template rendering
         const componentData = {
-            title: headingData.title,
-            ctaText: headingConfiguration.ctaText,
-            ctaLink: linkData?.url || headingConfiguration.ctaManualUrl,
-            ctaNewWindow: headingData.ctaNewWindow,
+            title: title,
+            ctaText: linkData?.text || 'Link text',
+            ctaLink: linkData?.url || headingConfiguration?.ctaManualUrl,
+            ctaNewWindow: headingConfiguration?.ctaNewWindow,
             isAlwaysLight: false,
             width: "large",
             cardSize: "small",
