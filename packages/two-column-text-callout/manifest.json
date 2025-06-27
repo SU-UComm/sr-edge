@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "two-column-text-callout",
     "type": "edge",
-    "version": "4.1.14",
+    "version": "4.1.15",
     "namespace": "stanford-apb",
     "description": "This component displays up to 2 text callouts boxes in a two-column layout.",
     "displayName": "Two Column Text Callout",
