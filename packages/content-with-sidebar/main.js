@@ -11,7 +11,10 @@ export default {async main(args, info) {
     
     // Change to let so we can modify for squizEdit defaults
     let { heading, content, infoBox } = args;
-    
+    const { image } = infoBox.imageConfiguration || {};
+    const { internalUrl, externalUrl } = infoBox.buttonConfiguration || {};
+
+
     // Add defaults if squizEdit is true
     if (squizEdit) {
         // Default values for main component
@@ -63,9 +66,6 @@ export default {async main(args, info) {
         };
     }
     
-    const { image } = infoBox.imageConfiguration || {};
-    const { internalUrl, externalUrl } = infoBox.buttonConfiguration || {};
-
     let linkUrl = null;
     if (internalUrl) {
         linkUrl = await basicAssetUri(componentFunctions, internalUrl);
