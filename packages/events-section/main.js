@@ -33,9 +33,9 @@ export default {
 
         let { headingConfiguration, contentConfiguration, displayConfiguration } = args || {};
         // Extracting configuration data from arguments
-        const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = headingConfiguration || {};
-        const { eventsUrl } = contentConfiguration || {};
-        const { numberOfEvents } = displayConfiguration || {};
+        let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = headingConfiguration || {};
+        let { eventsUrl } = contentConfiguration || {};
+        let { numberOfEvents } = displayConfiguration || {};
         
         const squizEdit = componentContext?.editor || false;
         let squizEditTargets = {
@@ -181,10 +181,11 @@ export default {
         };
 
         // NEW: Early return pattern for edit mode
-        if (squizEdit) {
-            return processEditor(eventSectionTemplate(componentData), squizEditTargets, args);
+        if (!squizEdit) {
+            return eventSectionTemplate(componentData);
         }
 
-        return eventSectionTemplate(componentData);
+        return processEditor(eventSectionTemplate(componentData), squizEditTargets);
+        
     }
 };
