@@ -26,46 +26,28 @@ export default {
         // Extracting functions from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
-        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // CHANGE: change const to let for mutability
         let { image, imageCaption, imageCredit, quote, name, title } = args?.displayConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = info?.ctx?.editor || false;
-        let squizEditTargets = null;
+        const squizEdit = componentContext.editor || false;
+
+        let squizEditTargets = {
+            "caption": { "field": "displayConfiguration.imageCaption" },
+            "credit": { "field": "displayConfiguration.imageCredit" },
+            "quote": { "field": "displayConfiguration.quote" },
+            "name": { "field": "displayConfiguration.name" },
+            "title": { "field": "displayConfiguration.title" }
+        };
         
         if (squizEdit) {
-            // Provide default values for inline editable fields
-            image = image || 'matrix-asset://api-identifier/sample-image';
-            imageCaption = imageCaption || 'Sample image caption';
-            imageCredit = imageCredit || 'Sample image credit';
-            quote = quote || 'This is a sample quote that demonstrates the inline editing functionality';
-            name = name || 'Sample Name';
-            title = title || 'Sample Title/Role';
-            
-            // Configure edit targets - maps static data-se attributes to component fields
-            squizEditTargets = {
-                "imageCaption": { "field": "displayConfiguration.imageCaption" },
-                "imageCredit": { "field": "displayConfiguration.imageCredit" },
-                "quote": { "field": "displayConfiguration.quote" },
-                "name": { "field": "displayConfiguration.name" },
-                "title": { "field": "displayConfiguration.title" }
-            };
-        }
-
-        // Validate required environment variables - CHANGE: wrap in !squizEdit check
-        if (!squizEdit) {
-            try {
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Image quote component: ', er);
-                return `<!-- Error occurred in the Image quote component: ${er.message} -->`;
-            }
+            image = image || 'matrix-asset://StanfordNews/172387';
+            imageCaption = `<span data-se="caption">${imageCaption ? imageCaption : 'Caption text'}</span>`;
+            imageCredit = `<span data-se="credit">${imageCredit ? imageCredit : 'Credit text'}</span>`;
+            quote = quote || 'Add content';
+            name = name || 'Quotee Name';
+            title = title || 'Quotee Title/Role';
         }
 
         // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
@@ -110,7 +92,7 @@ export default {
         // Fetch image data
         let imageData = null;
         try {
-            imageData = await basicAssetUri(fnsCtx, image);
+            imageData = await basicAssetUri(componentFunctions, image);
 
             // Check required properties - CHANGE: wrap in !squizEdit check
             if (!squizEdit) {
@@ -126,29 +108,29 @@ export default {
             }
         } catch (er) {
             console.error('Error occurred in the Image quote component: Failed to fetch image data. ', er);
-            // NEW: In edit mode, provide mock data instead of returning error
+            
             if (squizEdit) {
                 imageData = {
-                    url: 'https://picsum.photos/800/600',
-                    attributes: {
-                        alt: 'Sample image',
-                        width: 800,
-                        height: 600
+                    "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                    "attributes": {
+                        "alt": "Campaign image",
+                        "height": 960,
+                        "width": 1440
                     }
                 };
             } else {
                 return `<!-- Error occurred in the Image quote component: Failed to fetch image data. ${er.message} -->`;
             }
         }
-    
+        const captionCredit = [imageCaption, imageCredit].filter(Boolean).join(' | ');
         const imageOrientation = imageData?.attributes?.height > imageData?.attributes?.width ? "portrait" : "landscape";
         const figureData = {
             url: imageData?.url,
             alt: imageData?.attributes?.alt || "",
-            captionCredit: imageCaption && imageCredit ? `${imageCaption} | ${imageCredit}` : imageCaption || imageCredit,
+            captionCredit: captionCredit,
         }
         const quoteData = {
-            quote: quote ? `${quote}”`: '',
+            quote: quote ? `${quote}`: '',
             name,
             title
         }
@@ -159,15 +141,14 @@ export default {
             imageOrientation,
             image: figureData,
             quote: quoteData,
-            imageCaption,
-            imageCredit
+            squizEdit: squizEdit
         }
 
         // NEW: Early return pattern for edit mode
-        if (squizEdit) {
-            return processEditor(imageQuoteTemplate(componentData), squizEditTargets, args);
+        if (!squizEdit) {
+            return imageQuoteTemplate(componentData);
         }
 
-        return imageQuoteTemplate(componentData);
+        return processEditor(imageQuoteTemplate(componentData), squizEditTargets);
     }
 }

@@ -58,9 +58,9 @@ export default {
             // Ensure each card has default values
             cards = cards.map(card => ({
                 ...card,
-                title: card.title || 'Sample Media Title',
-                author: card.author || 'Sample Author',
-                teaserText: card.teaserText || 'Sample teaser text for this media item.'
+                title: card.title || 'Title text',
+                author: card.author || 'Author text',
+                teaserText: card.teaserText || 'Add content'
             }));
             
             // Configure edit targets for array - maps static data-se attributes to component fields
@@ -137,9 +137,9 @@ export default {
                     title: card.title,
                     author: card.author,
                     description: card.teaserText,
-                    imageUrl: 'https://picsum.photos/400/600',
+                    imageUrl: 'https://news.stanford.edu/_designs/component-service/editorial/placeholder.png',
                     imageAlt: `Sample media image ${index + 1}`,
-                    liveUrl: card.linkUrl || 'https://example.com',
+                    liveUrl: card.linkUrl || 'https://news.stanford.edu',
                     taxonomy: card.cardType === 'Podcast' ? 'Featured audio' : 'Featured reading'
                 }));
             } else {

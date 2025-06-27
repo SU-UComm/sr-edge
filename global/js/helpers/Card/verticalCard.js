@@ -158,7 +158,7 @@ export function VerticalCard({
         ` : ''}
 
         ${displayDescription && description ? `
-          <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0 su-order-4 ${descriptionSize(cardSize)}">
+          <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0 su-order-4 ${descriptionSize(cardSize)}" data-se="featDesc">
             ${xss(description)}
           </div>
         ` : ''}

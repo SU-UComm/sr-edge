@@ -31,119 +31,83 @@ export default {
         const componentContext = info?.ctx || null;
         const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
-        // Extracting environment variables from provided info
-        const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
-
         // Extract configuration data from arguments
-        let { images } = args?.contentConfiguration || {};
+        let images = [];
 
+        // if contentConfiguration is provided and images is an array, use the images from the contentConfiguration
+        if (args?.contentConfiguration && args.contentConfiguration?.images) {
+            images = args.contentConfiguration.images;
+        }
+
+
+        
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
         const squizEdit = info?.ctx?.editor || false;
         // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
-        let squizEditTargets = null;
-
-        // NEW: add a default if squizEdit is true
-        if (squizEdit) {
-            // Add default values if content is not provided
-            images = images && images.length >= 2 ? images : [
-                {
-                    imageAsset: 'matrix-asset://api-identifier/sample-image-1',
-                    imageCaption: 'Sample caption for first image'
-                },
-                {
-                    imageAsset: 'matrix-asset://api-identifier/sample-image-2', 
-                    imageCaption: 'Sample caption for second image'
-                },
-                {
-                    imageAsset: 'matrix-asset://api-identifier/sample-image-3',
-                    imageCaption: ''
-                }
-            ];
-
-            // Ensure each image has default caption
-            images = images.map(image => ({
-                ...image,
-                imageCaption: image.imageCaption || ''
-            }));
-
-            // Add the targets for the squizEdit DOM augmentation
-            // used in processSquizEdit to modify the output to add edit markup
-            // top level keys match the data-se attributes found in the template eg data-se="caption"
-            // the field values are the component data fields eg data-sq-field="contentConfiguration.images[0].imageCaption"
-            squizEditTargets = {
-                "caption": {
-                    "field": "contentConfiguration.images",
-                    "array": true,
-                    "property": "imageCaption"
-                },
-                "sectionCaption": {
-                    "field": "contentConfiguration.images.0.imageCaption"
-                }
-            };
-        }
-
-        // NEW: remove overly stringent validation where it makes sense
-        // if it is to remain, wrap it in a !squizEdit check
-        if (!squizEdit) {
-            // Validate required functions
-            try {
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                    throw new Error(
-                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Multicolumn image component: ', er);
-                return `<!-- Error occurred in the Multicolumn image component: ${er.message} -->`;
+        let squizEditTargets = {
+            "caption": {
+                "field": "contentConfiguration.images",
+                "array": true,
+                "property": "imageCaption"
+            },
+            "sectionCaption": {
+                "field": "contentConfiguration.images.0.imageCaption"
             }
+        };
 
-            // Validate required fields and ensure correct data types
-            try {
-                if (images && !Array.isArray(images) || images.length < 2) {
-                    throw new Error(
-                        `The "images" field must be an array and at least 2 elements length. The ${JSON.stringify(images)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Multicolumn image component: ', er);
-                return `<!-- Error occurred in the Multicolumn image component: ${er.message} -->`;
-            }
-        }
-
-        const imageData = [];
+       
+        let imageData = [];
         let numberOfCaptions = 0;
         let sectionCaption = ''
         
         for (const { imageAsset, imageCaption } of images) {
             let asset;
-            
-            if (squizEdit) {
-                // In edit mode, provide placeholder data if API call fails
-                try {
-                    asset = await basicAssetUri(fnsCtx, imageAsset);
-                } catch (error) {
-                    // Provide mock data silently on API failure
-                    asset = { url: 'https://picsum.photos/400/400' };
-                }
-            } else {
-                asset = await basicAssetUri(fnsCtx, imageAsset);
+            if (squizEdit && typeof imageAsset === 'undefined') {
+                break;
             }
-        
+
+            try {
+                asset = await basicAssetUri(fnsCtx, imageAsset);
+            } catch (error) {
+                if (squizEdit) {
+                    asset = {
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                        "attributes": {
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
+                        },
+                    };
+                } else {
+                    console.error('Error occurred in the multicolumn image component: Failed to fetch image data. ', error);
+                    return `<!-- Error occurred in the Multicolumn image component: ${error.message} -->`;
+    
+                }
+            }
             if (imageCaption) {
                 sectionCaption ||= imageCaption; // Set only if empty
                 numberOfCaptions++;
             }
-            
-            imageData.push({ ...asset, caption: imageCaption });
+            if (asset) {
+                imageData.push({ ...asset, caption: imageCaption });
+            }
         }
 
-        // Prepare template data
+        // NEW: add a default if squizEdit is true
+        if (squizEdit) {
+            // Ensure each image has default caption
+            imageData = imageData.map(image => ({
+                ...image,
+                imageCaption: image.imageCaption || 'Add caption'
+            }));
+        }
+           // Prepare template data
         const componentData = {
             width: "wide",
             images: imageData,
@@ -151,9 +115,15 @@ export default {
             showIndividualCaptions: numberOfCaptions > 1,
         };
 
-        // Return original front end code when squizEdit is false, without modification
-        if (!squizEdit) return multicolumnImage(componentData);
+        
+        if (!squizEdit) {
+            return multicolumnImage(componentData);  
+        } 
 
+        // if in squiz edit and there are less than 2 images, return an empty div
+        if (imageData.length < 2) {
+            return "<div></div>";
+        } 
         // NEW: process the output to be editable in Squiz Editor
         return processEditor(multicolumnImage(componentData), squizEditTargets);
     }

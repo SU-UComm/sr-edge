@@ -1,4 +1,5 @@
 import factCalloutTemplate from './fact-callout.hbs';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Fact callout Component - A Handlebars template component that renders a fact callout
@@ -18,29 +19,43 @@ export default {
      * @param {string} [args.displayConfiguration.width] - The width of component "wide" or "narrow" (optional).
      * @returns {Promise<string>} The rendered Fact callout HTML or an error message.
      */
-    async main(args) { 
+    async main(args, info) { 
         // Extracting configuration data from arguments
-        const { icon, factText, indicatorPosition, width } = args?.displayConfiguration || {};
+        let { icon, factText, indicatorPosition, width } = args?.displayConfiguration || {};
+
+        const squizEdit = info?.ctx?.editor || false;
+
+        let squizEditTargets = null;
+
+        if (squizEdit) {
+            factText = factText || 'Add content';
+
+            squizEditTargets = {
+                "factText": { "field": "displayConfiguration.factText" }
+            };
+        }
 
         // Validate required fields and ensure correct data types
         try {
-            if (!['pie chart', 'bar graph'].includes(icon) ) {
-                throw new Error(
-                    `The "icon" field must be one of ["pie chart", "bar graph"]. The ${JSON.stringify(icon)} was received.`
-                );
-            }
-            if (factText && typeof factText !== 'string') {
-                throw new Error(`The "factText" field must be a string type. The ${JSON.stringify(factText)} was received.`);
-            }
-            if (!['top', 'bottom'].includes(indicatorPosition) ) {
-                throw new Error(
-                    `The "indicatorPosition" field must be one of ["top", "bottom"]. The ${JSON.stringify(indicatorPosition)} was received.`
-                );
-            }
-            if (!['Wide', 'Narrow'].includes(width) ) {
-                throw new Error(
-                    `The "width" field must be one of ["Wide", "Narrow"]. The ${JSON.stringify(width)} was received.`
-                );
+            if (!squizEdit) {
+                if (!['pie chart', 'bar graph'].includes(icon) ) {
+                    throw new Error(
+                        `The "icon" field must be one of ["pie chart", "bar graph"]. The ${JSON.stringify(icon)} was received.`
+                    );
+                }
+                if (factText && typeof factText !== 'string') {
+                    throw new Error(`The "factText" field must be a string type. The ${JSON.stringify(factText)} was received.`);
+                }
+                if (!['top', 'bottom'].includes(indicatorPosition) ) {
+                    throw new Error(
+                        `The "indicatorPosition" field must be one of ["top", "bottom"]. The ${JSON.stringify(indicatorPosition)} was received.`
+                    );
+                }
+                if (!['Wide', 'Narrow'].includes(width) ) {
+                    throw new Error(
+                        `The "width" field must be one of ["Wide", "Narrow"]. The ${JSON.stringify(width)} was received.`
+                    );
+                }
             }
         } catch (err) {
             console.error('Error occurred in the Fact callout component:', err);
@@ -55,6 +70,10 @@ export default {
             icon,
         };
 
-        return factCalloutTemplate(props);
+        // NEW: Early return pattern
+        if (!squizEdit) return factCalloutTemplate(props);
+
+        // NEW: Process for edit mode
+        return processEditor(factCalloutTemplate(props), squizEditTargets);
     }
 };

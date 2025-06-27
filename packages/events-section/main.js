@@ -30,52 +30,29 @@ export default {
         // Extracting functions from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
-        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
-        // CHANGE: change const to let for mutability
         let { headingConfiguration, contentConfiguration, displayConfiguration } = args || {};
-
-        // NEW: Detect edit mode
-        const squizEdit = info?.ctx?.editor || false;
-        let squizEditTargets = null;
+        // Extracting configuration data from arguments
+        let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = headingConfiguration || {};
+        let { eventsUrl } = contentConfiguration || {};
+        let { numberOfEvents } = displayConfiguration || {};
+        
+        const squizEdit = componentContext?.editor || false;
+        let squizEditTargets = {
+            "headingTitle": { "field": "headingConfiguration.title" },
+            "headingCtaText": { "field": "headingConfiguration.ctaText" }
+        };
         
         if (squizEdit) {
-            // Provide default configurations
-            headingConfiguration = headingConfiguration || {};
-            contentConfiguration = contentConfiguration || {};
-            displayConfiguration = displayConfiguration || {};
-            
-            // Add default values for inline editable fields
-            headingConfiguration.title = headingConfiguration.title || 'Upcoming events';
-            headingConfiguration.ctaText = headingConfiguration.ctaText || 'View all';
-            headingConfiguration.ctaManualUrl = headingConfiguration.ctaManualUrl || 'https://events.stanford.edu';
-            
-            // Add default values for required fields
-            contentConfiguration.eventsUrl = contentConfiguration.eventsUrl || 'https://events.stanford.edu/api/2/events?days=365&sponsored=true';
-            displayConfiguration.numberOfEvents = displayConfiguration.numberOfEvents || 6;
-            
-            // Configure edit targets - maps static data-se attributes to component fields
-            squizEditTargets = {
-                "headingTitle": { "field": "headingConfiguration.title" },
-                "headingCtaText": { "field": "headingConfiguration.ctaText" }
+            title = title || 'Heading text';
+            ctaText = ctaText || 'Link text';
+            ctaUrl = null;
+            headingConfiguration = {
+                ...headingConfiguration,
+                title: title,
+                ctaText: ctaText,
+                ctaUrl: ctaUrl
             };
-        }
-
-        // Extracting configuration data from arguments
-        const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = headingConfiguration || {};
-        const { eventsUrl } = contentConfiguration || {};
-        const { numberOfEvents } = displayConfiguration || {};
-
-        // Check for environment vars
-        try {
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Events section component: ', er);
-            return `<!-- Error occurred in the Events section component: ${er.message} -->`;
         }
 
         // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
@@ -138,42 +115,30 @@ export default {
             console.error('Error occurred in the Events section component: Failed to fetch event data. ', er);
             // NEW: In edit mode, provide mock data instead of returning error
             if (squizEdit) {
-                data = [
-                    {
-                        title: 'Sample Event 1',
-                        description: 'This is a sample event description.',
-                        liveUrl: 'https://example.com',
-                        imageUrl: 'https://picsum.photos/400/400',
-                        imageAlt: 'Sample event image',
-                        taxonomy: 'Events',
-                        taxonomyUrl: 'https://example.com',
-                        type: 'Event',
-                        date: new Date().toISOString(),
-                        endDate: new Date(Date.now() + 3600000).toISOString()
-                    },
-                    {
-                        title: 'Sample Event 2',
-                        description: 'This is another sample event description.',
-                        liveUrl: 'https://example.com',
-                        imageUrl: 'https://picsum.photos/400/400',
-                        imageAlt: 'Another sample event image',
-                        taxonomy: 'Events',
-                        taxonomyUrl: 'https://example.com',
-                        type: 'Event',
-                        date: new Date().toISOString(),
-                        endDate: new Date(Date.now() + 3600000).toISOString()
-                    }
-                ];
+                data = [];
             } else {
                 return `<!-- Error occurred in the Events section component: Failed to fetch event data. ${er.message} -->`;
             }
         }
 
         // Resolve the URI for the section heading link
-        const headingData = await linkedHeadingService(
-            fnsCtx,
-            headingConfiguration
-        );
+        let headingData = null;
+        try {
+            headingData = await linkedHeadingService(
+                componentFunctions,
+                headingConfiguration
+            );
+        } catch (er) {
+            console.error('Error occurred in the Vertical video panel component: Failed to fetch section data. ', er);
+            if (squizEdit) {
+                headingData = {
+                    title: title,
+                    ctaText: ctaText,
+                    ctaLink: "https://news.stanford.edu"
+                };
+            }
+            return null;
+        }
 
         // Prepare card data
         let cardData = [];
@@ -216,10 +181,11 @@ export default {
         };
 
         // NEW: Early return pattern for edit mode
-        if (squizEdit) {
-            return processEditor(eventSectionTemplate(componentData), squizEditTargets, args);
+        if (!squizEdit) {
+            return eventSectionTemplate(componentData);
         }
 
-        return eventSectionTemplate(componentData);
+        return processEditor(eventSectionTemplate(componentData), squizEditTargets);
+        
     }
 };
