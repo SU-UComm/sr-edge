@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "multicolumn-image",
-    "version": "4.2.8",
+    "version": "4.3.0",
     "namespace": "stanford-apb",
     "description": "The multicolumn image is a way to display a series of images in 2 to 3 columns.",
     "type": "edge",
