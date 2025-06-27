@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "multicolumn-listing",
     "type": "edge",
-    "version": "4.1.16",
+    "version": "4.1.31",
     "namespace": "stanford-apb",
     "description": "",
     "displayName": "Multicolumn listing",

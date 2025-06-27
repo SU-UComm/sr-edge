@@ -60,7 +60,8 @@ export default {
             title = title || "Heading text";
             ctaText = ctaText || "Link text";
             ctaManualUrl = ctaManualUrl || "https://news.stanford.edu";
-
+            // Clear ctaUrl in edit mode to prevent Matrix URI resolution issues
+            ctaUrl = null;
 
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -71,36 +72,38 @@ export default {
 
         // Validate required fields and ensure correct data types
         try {
-            // Add this in the validation try-catch block
-            if (title && typeof title !== 'string') {
-                throw new Error(
-                    `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
-                );
-            }
-            if (ctaText && typeof ctaText !== 'string') {
-                throw new Error(
-                    `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
-                );
-            }
-            if (ctaNewWindow && typeof ctaNewWindow !== 'boolean') {
-                throw new Error(
-                    `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
-                );
-            } 
-            if (source === 'Select' && typeof cards !== 'object') {
-                throw new Error(
-                    `The "cards" field must be an array. The ${JSON.stringify(cards)} was received.`
-                );
-            }
-            if (displayDescriptions && typeof displayDescriptions !== 'boolean') {
-                throw new Error(
-                    `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
-                );
-            }
-            if (displayThumbnails && typeof displayThumbnails !== 'boolean') {
-                throw new Error(
-                    `The "displayThumbnails" field must be a boolean. The ${JSON.stringify(displayThumbnails)} was received.`
-                );
+            if (!squizEdit) {
+                // Add this in the validation try-catch block
+                if (title && typeof title !== 'string') {
+                    throw new Error(
+                        `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
+                    );
+                }
+                if (ctaText && typeof ctaText !== 'string') {
+                    throw new Error(
+                        `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
+                    );
+                }
+                if (ctaNewWindow && typeof ctaNewWindow !== 'boolean') {
+                    throw new Error(
+                        `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
+                    );
+                } 
+                if (source === 'Select' && typeof cards !== 'object') {
+                    throw new Error(
+                        `The "cards" field must be an array. The ${JSON.stringify(cards)} was received.`
+                    );
+                }
+                if (displayDescriptions && typeof displayDescriptions !== 'boolean') {
+                    throw new Error(
+                        `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
+                    );
+                }
+                if (displayThumbnails && typeof displayThumbnails !== 'boolean') {
+                    throw new Error(
+                        `The "displayThumbnails" field must be a boolean. The ${JSON.stringify(displayThumbnails)} was received.`
+                    );
+                }
             }
         } catch (er) {
             console.error('Error occurred in the Multicolumn listing component: ', er);
@@ -122,13 +125,27 @@ export default {
             const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
 
             adapter.setCardService(service);
-            dataPromise = adapter.getCards(cards);
+                
+            try {
+                dataPromise = adapter.getCards(cards);
+            } catch (err) {
+                if (!squizEdit) {
+                    return `<!-- Error occurred in the Multicolumn listing component: ${err.message} -->`;
+                }
+            }
+
+            dataPromise = Promise.resolve([]);
         }
 
         // Add error handling to data promise
         dataPromise = dataPromise.catch(er => {
             console.error('Error occurred in the Multicolumn listing component: Failed to fetch data. ', er);
-            return []; // Always return empty array on failure
+
+            if (!squizEdit) {
+                return `<!-- Error occurred in the Multicolumn listing component: ${er.message} -->`;
+            }
+
+            return []; // Always return sample data array on failure in edit mode
         });
 
         // Run data fetching and heading service in parallel
