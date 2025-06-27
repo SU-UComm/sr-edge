@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "leadership-messages",
     "type": "edge",
-    "version": "4.2.6",
+    "version": "4.3.0",
     "namespace": "stanford-apb",
     "description": "Links to leadership messages displayed in a grid.",
     "displayName": "Leadership messages",
@@ -72,7 +72,9 @@
                         "title": "Grid Content",
                         "description": "The cards to display in the grid area of the component.",
                         "type": "object",
-                        "required": ["searchQuery"],
+                        "required": [
+                            "searchQuery"
+                        ],
                         "properties": {
                             "searchQuery": {
                                 "type": "string",

@@ -30,29 +30,24 @@ export default {
         const fnsCtx = info?.fns || info?.ctx || {}; // for backward compatibility - provides the resolveUri function
         const { FB_JSON_URL } = info?.env || info?.set?.environment || {};
 
-        // CHANGE: change const to let for mutability in edit mode
         let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
         let { searchQuery } = args?.contentConfiguration || {};
 
-        // NEW: Detect edit mode properly
         const squizEdit = info?.ctx?.editor || false;
         let squizEditTargets = {
             "headingTitle": { "field": "headingConfiguration.title" },
             "headingCtaText": { "field": "headingConfiguration.ctaText" }
         };
 
-        // if in squizEdit mode set up enough defaults so the fields show in the editor
         if (squizEdit) {
-            title = title || 'Add title';
-            ctaText = ctaText || 'Add Call to Action';
-            searchQuery = searchQuery || 'sample leadership query';
-            ctaUrl = ctaUrl || 'matrix-asset://StanfordNews/29389';                          
+            title = title || 'Heading text';
+            ctaText = ctaText || 'Link text';
+            searchQuery = searchQuery || '';
+            ctaUrl = ctaUrl || null;
         }
-
 
         const adapter = new cardDataAdapter();
         let data = null;
-        
         // Compose and fetch the FB search results
         const service = new funnelbackCardService({ FB_JSON_URL, query: searchQuery });
         
@@ -66,15 +61,7 @@ export default {
             console.error('Error occurred in the Leadership messages component: Failed to fetch event data. ', er);
             // NEW: In edit mode, provide mock data instead of returning error
             if (squizEdit) {
-                data = {
-                        title: "Add Title",
-                        description: "Add Description",
-                        liveUrl: "#",
-                        imageUrl: "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
-                        imageAlt: "Add alt text",
-                        name: "Add Name",
-                        jobTitle: "Add Job Title"
-                    };
+                data = null;
             } else {
                 return `<!-- Error occurred in the Leadership messages component: Failed to fetch event data. ${er.message} -->`;
             }
@@ -91,12 +78,11 @@ export default {
             );
         } catch (er) {
             console.error('Error occurred in the Leadership messages component: Failed to resolve heading link. ', er);
-            // NEW: In edit mode, provide mock heading data
             if (squizEdit) {
                 headingData = {
                     title: title,
                     ctaText: ctaText,
-                    ctaLink: ctaUrl || '#',
+                    ctaLink: '#',
                     ctaNewWindow: ctaNewWindow || false
                 };
             } else {
@@ -119,14 +105,6 @@ export default {
         const cardContent = cards.length > 0 && multiColumnGrid({
             items: cards
         });
-
-        // Prepare component data for template rendering
-        if(squizEdit && headingData) {
-            headingData.title = headingData.title || 'Add title';
-            headingData.ctaText = headingData.ctaText || 'Add Call to Action';
-            headingData.ctaLink = headingData.ctaLink || '#';
-            headingData.ctaNewWindow = headingData.ctaNewWindow || false;
-        }
         
         const componentData = {
             width: "large",
@@ -139,10 +117,9 @@ export default {
         };
 
         // NEW: Early return pattern for edit mode
-        if (squizEdit) {
-            return processEditor(leadershipMessagesTemplate(componentData), squizEditTargets, args);
+        if (!squizEdit) {
+            return leadershipMessagesTemplate(componentData);
         }
-
-        return leadershipMessagesTemplate(componentData);
+        return processEditor(leadershipMessagesTemplate(componentData), squizEditTargets);
     }
 };
