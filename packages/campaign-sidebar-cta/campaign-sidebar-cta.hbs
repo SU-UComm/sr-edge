@@ -1,0 +1,24 @@
+<div data-component='campaign-sidebar-cta' class='su-relative'>
+    <div class='su-h-10 su-bg-gradient-report'></div>
+    <img
+        class='su-rs-mb-0 su-w-full'
+        src='{{imageData.url}}'
+        alt='{{imageData.attributes.alt.value}}'
+    />
+
+    <div class='su-rs-mb-1'>
+        <h2 class='su-font-serif su-fluid-type-1 su-mb-10'>
+            {{title}}
+        </h2>
+
+        <div class='su-card-paragraph'>{{description}}</div>
+    </div>
+
+    <a
+        href='{{linkData.url}}'
+        class='su-inline-block su-stretched-link su-text-16 md:su-text-20 su-font-regular su-text-black dark:su-text-white su-no-underline su-text-center hocus:su-underline su-px-30 su-pt-12 su-pb-14 su-border su-border-black hocus:su-border-digital-red dark:su-border-white hocus:dark:su-border-dark-mode-red'
+    >
+        {{linkText}}
+    </a>
+
+</div>
