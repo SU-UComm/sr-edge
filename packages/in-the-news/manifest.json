@@ -1,8 +1,8 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "in-the-news",
-    "version": "2.1.0",
-    "namespace": "mig-stanford-components",
+    "version": "3.0.1",
+    "namespace": "stanford-components",
     "description": "This component contains one featured quote and two supplementary teasers.",
     "type": "edge",
     "displayName": "In the news",
