@@ -1,6 +1,7 @@
 import xss from 'xss';
 import { basicHeroDataAdapter, matrixBasicHeroService, readingTime, uuid } from '../../global/js/utils';
 import basicStoryHeroTemplate from './basic-story-hero.hbs';
+import helpers from '../../global/hbs/helpers/helpers.js';
 
 /**
  * Basic Story Hero component that renders hero banner for stories
@@ -146,7 +147,7 @@ export default {
             carouselData.push({
                 imageUrl: slide.asset_url,
                 imageAlt: slide.asset_attribute_alt,
-                captionCredit,
+                captionCredit: helpers.unescapeHtml(captionCredit),
             });
         });
 
@@ -163,7 +164,7 @@ export default {
             videoData,
             modalData,
             carouselData,
-            captionCredit,
+            captionCredit: helpers.unescapeHtml(captionCredit),
             uniqueID,
             peek: false
         };
