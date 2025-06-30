@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "in-the-news",
-    "version": "4.2.2",
+    "version": "4.2.6",
     "namespace": "stanford-apb",
     "description": "This component contains one featured quote and two supplementary teasers.",
     "type": "edge",
@@ -38,9 +38,9 @@
                         "properties": {
                             "title": {
                                 "title": "Heading",
-                                "description": "The heading text",
+                                "description": "Heading text",
                                 "type": "string",
-                                "default": "In the news",
+                                "default": "Heading text",
                                 "ui:metadata": {
                                     "inlineEditable": true
                                 }
@@ -59,7 +59,7 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all",
+                                "default": "Add link text",
                                 "ui:metadata": {
                                     "inlineEditable": true
                                 }
