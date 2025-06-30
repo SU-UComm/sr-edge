@@ -49,13 +49,11 @@ export default {
 
             colTwo = colTwo || {};
             colTwo.infoText = colTwo.infoText || '<p>Add content</p>';
-            colTwo.addButton = colTwo.addButton !== undefined ? colTwo.addButton : false;
             
             if (colTwo.addButton) {
                 colTwo.buttonConfiguration = colTwo.buttonConfiguration || {};
                 colTwo.buttonConfiguration.buttonText = colTwo.buttonConfiguration.buttonText || 'Button text';
-                colTwo.buttonConfiguration.externalUrl = colTwo.buttonConfiguration.externalUrl || 'https://news.stanford.edu';
-                colTwo.buttonConfiguration.isNewWindow = colTwo.buttonConfiguration.isNewWindow !== undefined ? colTwo.buttonConfiguration.isNewWindow : false;
+                colTwo.buttonConfiguration.infoInternalUrl = colTwo.buttonConfiguration.infoInternalUrl || null;
             }
 
             if (callout) {
@@ -64,15 +62,14 @@ export default {
                 colThree.content = colThree.content || '<p>Add content</p>';
                 
                 colThree.imageConfiguration = colThree.imageConfiguration || {};
-                colThree.imageConfiguration.image = colThree.imageConfiguration.image || 'matrix-asset://api-identifier/sample-image';
+                colThree.imageConfiguration.image = colThree.imageConfiguration.image || 'matrix-asset://StanfordNews/172387';
                 colThree.imageConfiguration.caption = `<span data-se="caption">${colThree?.imageConfiguration?.caption ? colThree.imageConfiguration.caption : 'Caption text'}</span>`;
                 colThree.imageConfiguration.credit = `<span data-se="credit">${colThree?.imageConfiguration?.credit ? colThree.imageConfiguration.credit : 'Credit text'}</span>`;
                 colThree.imageConfiguration.imagePlacement = colThree.imageConfiguration.imagePlacement || 'Below content';
                 
                 colThree.buttonConfiguration = colThree.buttonConfiguration || {};
                 colThree.buttonConfiguration.buttonText = colThree.buttonConfiguration.buttonText || 'Button text';
-                colThree.buttonConfiguration.externalUrl = colThree.buttonConfiguration.externalUrl || 'https://news.stanford.edu';
-                colThree.buttonConfiguration.isNewWindow = colThree.buttonConfiguration.isNewWindow !== undefined ? colThree.buttonConfiguration.isNewWindow : false;
+                colThree.buttonConfiguration.internalUrl = colThree.buttonConfiguration.internalUrl || null;
             }
 
             // Add the targets for the squizEdit DOM augmentation
