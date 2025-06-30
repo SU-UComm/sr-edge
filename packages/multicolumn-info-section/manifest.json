@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "multicolumn-info-section",
     "type": "edge",
-    "version": "4.2.1",
+    "version": "4.2.11",
     "namespace": "stanford-apb",
     "description": "The multicolumn info section displays a title in column 1, WYSIWYG content in column 2, and an optional text callout in column 3",
     "displayName": "Multicolumn Info Section",
