@@ -18,7 +18,9 @@
             "imagePlacement": "Below content"
         },
         "buttonConfiguration": {
-            "isNewWindow": false
+            "isNewWindow": false,
+            "buttonText": "Button text",
+            "externalUrl": "https://example.com"
         }
     }
 }

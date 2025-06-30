@@ -52,24 +52,21 @@ export async function processEditor(output, squizEditTargets) {
         );
         
         if (Array.isArray(targetConfig)) {
-            // Handle array mapping - multiple elements with same data-se mapped to different fields
-            let index = 0;
-            output = output.replace(regex, (match, capturedGroup, targetValue) => {
-                // Use the field mapping for this index, or the last one if we run out
-                const fieldMapping = targetConfig[index] || targetConfig[targetConfig.length - 1];
-                
-                // Check if target filtering is required and if target matches
-                if (fieldMapping.target && targetValue !== fieldMapping.target) {
-                    // Target doesn't match, return unchanged
-                    return match;
-                }
-                
-                const fieldName = fieldMapping.field;
-                // Preserve the data-se-target attribute if it exists
-                const targetAttr = targetValue ? ` data-se-target="${targetValue}"` : '';
-                const result = `${capturedGroup}${targetAttr} data-sq-field="${fieldName}"`;
-                index++;
-                return result;
+            // Handle array mapping - each object in the array gets its own processing
+            targetConfig.forEach((fieldMapping) => {
+                output = output.replace(regex, (match, capturedGroup, targetValue) => {
+                    // Check if target filtering is required and if target matches
+                    if (fieldMapping.target && targetValue !== fieldMapping.target) {
+                        // Target doesn't match, return unchanged
+                        return match;
+                    }
+                    
+                    const fieldName = fieldMapping.field;
+                    // Preserve the data-se-target attribute if it exists
+                    const targetAttr = targetValue ? ` data-se-target="${targetValue}"` : '';
+                    const result = `${capturedGroup}${targetAttr} data-sq-field="${fieldName}"`;
+                    return result;
+                });
             });
         } else if (targetConfig.array) {
             // Handle array types with automatic indexing using square brackets
