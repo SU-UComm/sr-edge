@@ -65,13 +65,13 @@ export default {
         if (squizEdit) {
             // if we are in edit mode 
             // Provide default values for inline editable fields
-            title = title || 'In the news';
-            ctaText = ctaText || 'View all';
-            featuredQuote = featuredQuote || 'This is a sample featured quote that demonstrates the inline editing functionality for the main quote section.';
-            featuredTeaserDescription = featuredTeaserDescription || 'Featured Scholar Name';
+            title = title || 'Heading text';
+            ctaText = ctaText || 'Link text';
+            featuredQuote = featuredQuote || 'Add content';
+            featuredTeaserDescription = featuredTeaserDescription || 'Scholar Name';
             featuredCtaText = featuredCtaText || 'Read the story';
-            teaserOneDescription = teaserOneDescription || 'Add author for teaser one';
-            teaserTwoDescription = teaserTwoDescription || 'Add author for teaser two';
+            teaserOneDescription = teaserOneDescription || 'Scholar Name';
+            teaserTwoDescription = teaserTwoDescription || 'Scholar Name';
             
             // Provide default asset IDs for edit mode
             featuredTeaser = featuredTeaser || 'matrix-asset://api-identifier/sample-featured-teaser';
