@@ -5,9 +5,11 @@
         "title": "Example 3"
     },
     "colTwo": {
-        "addButton": false,
+        "addButton": true,
         "buttonConfiguration": {
-            "isNewWindow": false
+            "isNewWindow": false,
+            "buttonText": "Button text",
+            "externalUrl": "https://example.com"
         },
         "infoText": "This example shows the component when the info text is only filled out. The text callout fields do not have values, but the include text callout checkbox is selected."
     },
