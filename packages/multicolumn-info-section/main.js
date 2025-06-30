@@ -46,7 +46,7 @@ export default {
             
             colOne = colOne || {};
             colOne.title = colOne.title || 'Title text';
-            
+
             colTwo = colTwo || {};
             colTwo.infoText = colTwo.infoText || '<p>Add content</p>';
             colTwo.addButton = colTwo.addButton !== undefined ? colTwo.addButton : false;
@@ -174,7 +174,7 @@ export default {
                     imageData = await basicAssetUri(fnsCtx, colThree.imageConfiguration.image);
                 } catch (error) {
                     // Provide mock data silently on API failure
-                    imageData = { url: 'https://example.com' };
+                    imageData = { url: null };
                 }
             } else {
                 imageData = await basicAssetUri(fnsCtx, colThree.imageConfiguration.image);
@@ -188,7 +188,7 @@ export default {
                     infoInternalLinkUrl = infoLinkUrl?.url;
                 } catch (error) {
                     // Provide mock data silently on API failure
-                    infoInternalLinkUrl = 'https://example.com';
+                    infoInternalLinkUrl = null;
                 }
             } else {
                 const infoLinkUrl = await basicAssetUri(fnsCtx, colTwo.buttonConfiguration.infoInternalUrl);
@@ -203,7 +203,7 @@ export default {
                     internalLinkUrl = linkUrl?.url;
                 } catch (error) {
                     // Provide mock data silently on API failure
-                    internalLinkUrl = 'https://example.com';
+                    internalLinkUrl = null;
                 }
             } else {
                 const linkUrl = await basicAssetUri(fnsCtx, colThree.buttonConfiguration.internalUrl);
@@ -239,6 +239,7 @@ export default {
             infoText: xss(colTwo.infoText),
             buttonData,
             infoBoxData,
+            buttonJson: JSON.stringify(buttonData)
         };
 
         // Return original front end code when squizEdit is false, without modification
