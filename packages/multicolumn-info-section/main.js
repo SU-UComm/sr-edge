@@ -34,7 +34,7 @@ export default {
 
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
         let squizEditTargets = null;
 
@@ -85,10 +85,12 @@ export default {
                 },
                 "button": [
                     {
-                        "field": "colTwo.buttonConfiguration.buttonText"
+                        "field": "colTwo.buttonConfiguration.buttonText",
+                        "target": "infoTextButton"
                     },
                     {
-                        "field": "colThree.buttonConfiguration.buttonText"
+                        "field": "colThree.buttonConfiguration.buttonText",
+                        "target": "infoBoxButton"
                     }
                 ],
                 "infoBoxTitle": {
@@ -236,7 +238,8 @@ export default {
             infoText: xss(colTwo.infoText),
             buttonData,
             infoBoxData,
-            buttonJson: JSON.stringify(buttonData)
+            buttonJson: JSON.stringify(buttonData),
+            editing: squizEdit
         };
 
         // Return original front end code when squizEdit is false, without modification
