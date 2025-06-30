@@ -25,42 +25,23 @@ export default {
         // Extracting functions from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
-        const fnsCtx = componentFunctions || componentContext || {};
+        const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
         
         // CHANGE: change const to let for mutability
         let { cards } = args || {};
 
         // NEW: Detect edit mode
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
             // Add default values if cards array is not provided or empty
-            cards = cards && cards.length > 0 ? cards : [
-                {
-                    cardType: 'Book',
-                    title: 'Sample Media Title 1',
-                    author: 'Sample Author 1',
-                    teaserText: 'This is sample teaser text for the first media card.',
-                    image: 'matrix-asset://api-identifier/sample-image-1',
-                    linkUrl: 'https://example.com'
-                },
-                {
-                    cardType: 'Podcast',
-                    title: 'Sample Media Title 2',
-                    author: 'Sample Author 2',
-                    teaserText: 'This is sample teaser text for the second media card.',
-                    image: 'matrix-asset://api-identifier/sample-image-2',
-                    linkUrl: 'https://example.com'
-                }
-            ];
+            cards = cards || [];
             
             // Ensure each card has default values
             cards = cards.map(card => ({
                 ...card,
-                title: card.title || 'Title text',
-                author: card.author || 'Author text',
-                teaserText: card.teaserText || 'Add content'
+                title: card.title || 'Title text'
             }));
             
             // Configure edit targets for array - maps static data-se attributes to component fields
@@ -83,25 +64,6 @@ export default {
             };
         }
 
-        // Validate required environment variables - CHANGE: wrap in !squizEdit check
-        if (!squizEdit) {
-            try {
-                if (typeof fnsCtx.API_IDENTIFIER !== 'string' || fnsCtx.API_IDENTIFIER === '') {
-                    throw new Error(
-                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(fnsCtx.API_IDENTIFIER)} was received.`
-                    );
-                }
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Media carousel component: ', er);
-                return `<!-- Error occurred in the Media carousel component: ${er.message} -->`;
-            }
-        }
-
         // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
         if (!squizEdit) {
             try {
@@ -120,7 +82,7 @@ export default {
         let data = null;
 
         // Compose and fetch the FB search results
-        const service = new matrixMediaCardService({ ctx: fnsCtx, API_IDENTIFIER: fnsCtx.API_IDENTIFIER });
+        const service = new matrixMediaCardService({ ctx: componentFunctions, API_IDENTIFIER: API_IDENTIFIER });
 
         // Set our card service
         adapter.setCardService(service);
@@ -132,16 +94,7 @@ export default {
             console.error('Error occurred in the Media carousel component: Failed to fetch card data. ', er);
             // NEW: In edit mode, provide mock data instead of returning error
             if (squizEdit) {
-                data = cards.map((card, index) => ({
-                    type: card.cardType || 'Book',
-                    title: card.title,
-                    author: card.author,
-                    description: card.teaserText,
-                    imageUrl: 'https://news.stanford.edu/_designs/component-service/editorial/placeholder.png',
-                    imageAlt: `Sample media image ${index + 1}`,
-                    liveUrl: card.linkUrl || 'https://news.stanford.edu',
-                    taxonomy: card.cardType === 'Podcast' ? 'Featured audio' : 'Featured reading'
-                }));
+                data = null
             } else {
                 return `<!-- Error occurred in the Media carousel component: Failed to fetch card data. ${er.message} -->`;
             }

@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "media-carousel",
     "type": "edge",
-    "version": "4.1.2",
+    "version": "4.2.0",
     "namespace": "stanford-apb",
     "description": "Links to media, displayed as cards in a carousel.",
     "displayName": "Media carousel",

@@ -134,10 +134,9 @@ export default {
             // Provide default configurations for section
             sectionConfiguration.title = sectionConfiguration.title || 'Heading text';
             sectionConfiguration.ctaText = sectionConfiguration.ctaText || 'Link text';
-            sectionConfiguration.ctaUrl = sectionConfiguration.ctaUrl || 'matrix-asset://StanfordNews/29389';
-            sectionConfiguration.ctaManualUrl = sectionConfiguration.ctaManualUrl || 'https://news.stanford.edu';
+            sectionConfiguration.ctaUrl = sectionConfiguration.ctaUrl || null;
             sectionConfiguration.bgImage = sectionConfiguration.bgImage || 'matrix-asset://StanfordNews/172387';
-            videos = videos || [];            
+            videos = videos || [];
         }
 
                  
@@ -171,12 +170,12 @@ export default {
 
             videoModals.push(
                 {
-                    isVertical: true, 
-                    videoId: video.youtubeId, 
-                    title: `Watch ${video.heading}`, 
+                    isVertical: true,
+                    videoId: video.youtubeId,
+                    title: `Watch ${video.heading}`,
                     noAutoPlay: true,
-                    uniqueID, 
-                    titleID: 'video-modal' 
+                    uniqueID,
+                    titleID: 'video-modal'
                 }
             );
             
