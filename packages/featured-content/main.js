@@ -70,7 +70,7 @@ export default {
             
             // Add featured description target if using Select mode
             if (source === 'Select') {
-                squizEditTargets["description"] = {
+                squizEditTargets["featDesc"] = {
                     "field": "contentConfiguration.featuredDescription"
                 };
             }

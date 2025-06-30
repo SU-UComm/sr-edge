@@ -39,12 +39,7 @@ export default {
             images = args.contentConfiguration.images;
         }
 
-
-        
-        // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
-        // Must fallback to false, use true to mock the editor
-        const squizEdit = info?.ctx?.editor || false;
-        // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
+        const squizEdit = componentContext?.editor || false;
         let squizEditTargets = {
             "caption": {
                 "field": "contentConfiguration.images",
@@ -56,7 +51,6 @@ export default {
             }
         };
 
-       
         let imageData = [];
         let numberOfCaptions = 0;
         let sectionCaption = ''
@@ -68,7 +62,7 @@ export default {
             }
 
             try {
-                asset = await basicAssetUri(fnsCtx, imageAsset);
+                asset = await basicAssetUri(componentFunctions, imageAsset);
             } catch (error) {
                 if (squizEdit) {
                     asset = {
@@ -104,7 +98,7 @@ export default {
             // Ensure each image has default caption
             imageData = imageData.map(image => ({
                 ...image,
-                imageCaption: image.imageCaption || 'Add caption'
+                imageCaption: image.imageCaption || 'Add image caption'
             }));
         }
            // Prepare template data
