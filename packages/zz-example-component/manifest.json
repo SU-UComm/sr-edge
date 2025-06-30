@@ -1,0 +1,70 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "camexample-component",
+    "type": "edge",
+    "version": "0.0.1",
+    "namespace": "stanford-apb",
+    "description": "This component serves as an example to base ongoing development on.",
+    "displayName": "Example Component",
+    "mainFunction": "main",
+    "icon": {
+        "id": "star",
+        "color": {
+            "type": "enum",
+            "value": "gray"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "image": {
+                        "title": "Image",
+                        "type": "string",
+                        "format": "matrix-asset-uri"
+                    },
+                    "title": {
+                        "title": "Title",
+                        "type": "string",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
+                    },
+                    "description": {
+                        "title": "Description",
+                        "type": "formattedText",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {},
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        }
+    }
+}

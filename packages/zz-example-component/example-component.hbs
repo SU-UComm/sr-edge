@@ -1,0 +1,22 @@
+<section data-component='example-component'>
+
+    {{#if title}}
+        <h2 data-sq-field="title">{{unescapeHtml title}}
+
+            {{#if currentPage}}
+                <span class="su-text-14 su-font-normal su-text-gray-500">
+                    Current page asset ID: {{currentPage}}
+                </span>
+            {{/if}}
+        </h2>
+    {{/if}}
+
+    {{#if description}}
+        <div data-sq-field="description">{{{unescapeHtml description}}}</div>
+    {{/if}}
+
+    {{#if image}}
+        <img data-sq-field="image" src="{{image.url}}" alt="{{image.attributes.alt}}" width="{{image.attributes.width}}" height="{{image.attributes.height}}">
+    {{/if}}
+
+</section>
