@@ -60,7 +60,7 @@ export default {async main(args, info) {
             "credit": {
                 "field": "infoBox.imageConfiguration.credit"
             },
-            "buttonText": {
+            "button": {
                 "field": "infoBox.buttonConfiguration.buttonText"
             }
         };

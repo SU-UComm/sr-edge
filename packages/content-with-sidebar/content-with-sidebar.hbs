@@ -12,7 +12,6 @@
                 {{~/if~}}
             </div>
             {{~#if infoBox~}}
-            <div class="su-break-words su-col-span-full sm:su-col-start-2 sm:su-col-span-10 lg:su-col-span-4 lg:su-col-start-9">
                 {{> info-box 
                     title=infoBox.title
                     content=infoBox.content
@@ -23,10 +22,10 @@
                     buttonUrl=buttonUrl
                     isNewWindow=infoBox.buttonConfiguration.isNewWindow
                     isRealExternalLink=isRealExternalLink
-                    containerClasses="su-bg-fog-light lg:su-mx-auto dark:su-bg-black"
+                    paddingX=""
+                    containerClasses="su-break-words su-col-span-full sm:su-col-start-2 sm:su-col-span-10 lg:su-col-span-4 lg:su-col-start-9"
                     innerClasses="su-p-20 md:su-p-36 lg:su-px-20 lg:su-py-26"
                 }}
-            </div>
             {{~/if~}}
         </div>
     </div>
