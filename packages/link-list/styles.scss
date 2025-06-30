@@ -1,0 +1,30 @@
+.su-linklist-mob-width {
+  width: calc(100% - 60px);
+}
+
+.su-link-list-no-stories {
+  display: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+[data-component="link-list"] {
+  position: absolute;
+}
+
+@media (width >= 768px) {
+  .su-linklist-mob-width {
+    width: calc(100% - 352px);
+  }
+}
+
+@media (width >= 992px) {
+  .su-linklist-mob-width {
+    width: 100%;
+  }
+
+  [data-component="link-list"] {
+    position: unset;
+  }
+}

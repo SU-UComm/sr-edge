@@ -1,0 +1,105 @@
+<footer data-component="footer-component" class="su-shadow-[0px_-3px_6px_0px_rgba(0,0,0,0.1)] su-pt-70 lg:su-pt-[17.5rem] dark:su-shadow-[0px_-3px_6px_0px_rgba(46,45,41,0.5)] su-bg-white dark:su-bg-black-true">
+    <div class="dark:su-bg-black-true dark:su-text-white su-flex lg:su-items-center lg:su-justify-center su-bg-white">
+        <section class="pre-footer su-pl-20 su-pr-20 md:su-pl-50 md:su-pr-50 su-max-w-[1412px]">
+            {{> footer-mission-logo url=site.url mission=site.mission}}
+            {{~#if navigation.major~}}
+                {{> footer-major-nav navigation=navigation.major}}
+            {{~/if~}}
+            <hr aria-hidden="true" class="pre-footer-line su-border-none su-mx-auto su-mb-30 lg:su-mb-38 su-bg-black-10 dark:su-bg-black"/>
+            <div class="pre-footer-bottom-section su-flex su-flex-col lg:su-flex-row su-flex-wrap lg:su-flex-nowrap lg:su-gap-x-20">
+                {{> footer-minor-nav navigation=navigation.minor}}
+                {{> footer-contact-nav navigation=navigation.contacts audience="external"}}
+                {{> footer-contact-nav navigation=navigation.contactsStudent audience="student" customClasses="su-hidden"}}
+                {{> footer-contact-nav navigation=navigation.contactsStaff audience="faculty" customClasses="su-hidden"}}
+            </div>
+            {{~#if navigation.external.anonymous~}}
+                <div data-audience="external" class="su-pb-60 lg:su-pb-95">
+                    <ul class="su-list-none su-flex su-flex-wrap su-pl-0 su-gap-y-6 su-gap-x-20 lg:su-gap-x-27 pre-footer-bottom-third">
+                        {{~#each navigation.external.anonymous~}}
+                        <li>
+                            <a href="{{asset_attribute_redirect_url}}" class="su-group su-flex hocus:su-underline su-leading-[26px] su-items-center su-text-black dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 md:su-text-16 hocus:su-text-digital-red su-font-normal su-no-underline su-transition">
+                                <span class="su-mr-2">{{unescapeHtml asset_name}}</span>
+                                {{> svg-icons icon="external arrow" classes="su-stroke-digital-red dark:su-stroke-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"}}
+                            </a>
+                        </li>
+                        {{~/each~}}
+                    </ul>
+                </div>
+            {{~/if~}}
+            {{~#if navigation.external.student~}}
+                <div data-audience="student" class="su-pb-60 lg:su-pb-95 su-hidden">
+                    <ul class="su-list-none su-flex su-flex-wrap su-pl-0 su-gap-y-6 su-gap-x-20 lg:su-gap-x-27 pre-footer-bottom-third">
+                        {{~#each navigation.external.student~}}
+                        <li>
+                            <a href="{{asset_attribute_redirect_url}}" class="su-group su-flex hocus:su-underline su-leading-[26px] su-items-center su-text-black dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 md:su-text-16 hocus:su-text-digital-red su-font-normal su-no-underline su-transition">
+                                <span class="su-mr-2">{{unescapeHtml asset_name}}</span>
+                                {{> svg-icons icon="external arrow" classes="su-stroke-digital-red dark:su-stroke-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"}}
+                            </a>
+                        </li>
+                        {{~/each~}}
+                    </ul>
+                </div>
+            {{~/if~}}
+            {{~#if navigation.external.staff~}}
+                <div data-audience="faculty" class="su-pb-60 lg:su-pb-95 su-hidden">
+                    <ul class="su-list-none su-flex su-flex-wrap su-pl-0 su-gap-y-6 su-gap-x-20 lg:su-gap-x-27 pre-footer-bottom-third">
+                        {{~#each navigation.external.staff~}}
+                        <li>
+                            <a href="{{asset_attribute_redirect_url}}" class="su-group su-flex hocus:su-underline su-leading-[26px] su-items-center su-text-black dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-14 md:su-text-16 hocus:su-text-digital-red su-font-normal su-no-underline su-transition">
+                                <span class="su-mr-2">{{unescapeHtml asset_name}}</span>
+                                {{> svg-icons icon="external arrow" classes="su-stroke-digital-red dark:su-stroke-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform"}}
+                            </a>
+                        </li>
+                        {{~/each~}}
+                    </ul>
+                </div>
+            {{~/if~}}
+        </section>
+    </div>
+    <div class="su-flex lg:su-items-center  su-text-white su-bg-cardinal-red">
+        <div class="su-text-white su-flex su-pl-20 su-pr-20 md:su-pl-50 md:su-pr-50 su-mx-auto su-w-full su-max-w-[1412px]">
+            <div class="bottom-footer su-pb-12 md:su-pb-25 lg:su-pb-32 su-grow su-flex su-flex-col lg:su-flex-row lg:su-gap-42">
+                <div class="su-flex su-mx-auto">
+                    <a href="{{site.url}}">
+                        <img class="su-mt-12 md:su-mt-10 lg:su-mt-[19.5px] su-mb-auto" src="{{site.logoFooter.url}}" alt="{{site.logoFooter.alt}}"/>
+                    </a>
+                </div>
+                <div class="su-flex lg:su-flex-col footer-links-wrapper su-flex-wrap lg:su-grow">
+                    {{~#if navigation.footerPrimary~}}
+                    <div class="footer-top-links su-font-sans su-font-semibold su-text-14 md:su-text-18 lg:su-text-17 lg:su-mt-31 su-mx-auto md:su-mb-11 lg:su-mb-8 lg:su-ml-0 lg:su-mr-0">
+                        <ul class="su-flex su-gap-9 md:su-gap-x-24 md:su-gap-x-31 md:su-text-center">
+                            {{~#each navigation.footerPrimary~}}
+                            <li class="su-mb-0">
+                                <a class="su-no-underline focus:su-text-white hover:su-text-white hover:su-underline su-text-white dark:su-text-white" href="{{asset_attribute_redirect_url}}">
+                                    {{unescapeHtml asset_name}}
+                                </a>
+                            </li>
+                            {{~/each~}}
+                        </ul>
+                    </div>
+                    {{~/if~}}
+                    {{~#if navigation.footerSecondary~}}
+                    <div class="footer-bottom-links su-mx-auto lg:su-ml-0 lg:su-mr-0 su-font-normal su-text-14 md:su-text-16 md:su-mb-10 lg:su-mb-9 lg:su-text-15">
+                        <ul class="su-flex su-gap-9 md:su-gap-x-24 md:su-gap-x-29 md:su-text-center">
+                            {{~#each navigation.footerSecondary~}}
+                            <li class="su-mb-0">
+                                <a class="su-no-underline focus:su-text-white hover:su-text-white hover:su-underline su-font-semibold md:su-font-normal su-text-white dark:su-text-white" href="{{asset_attribute_redirect_url}}">
+                                {{unescapeHtml asset_name}}
+                                </a>
+                            </li>
+                            {{~/each~}}
+                        </ul>
+                    </div>
+                    {{~/if~}}
+                    <div class="footer-bottom-copyright su-w-full su-text-white su-font-source-sans-pro su-text-15 su-font-normal su-tracking-normal su-mt-17 lg:su-mt-0 su-mx-auto lg:su-mx-0">
+                        <p class="su-mb-0 su-text-center lg:su-text-left su-w-full">
+                            &copy;
+                            <span class="su-hidden md:su-inline su-mr-2">Copyright</span>
+                            {{unescapeHtml site.copyright}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
