@@ -9,7 +9,11 @@
                 {{{unescapeHtml title}}}
                 {{~/if~}}
             </h1>
-            {{~#if summary}}
+            {{~#if parentData.parentSummary~}}
+            <div class="su-col-span-full lg:su-col-span-10 lg:su-col-start-2 xl:su-col-span-8 xl:su-col-start-3 su-font-serif su-mb-0 su-rs-mt-2 {{getStringByCondition value=relation expectedValue="child" trueResult="su-text-18" falseResult="su-text-[1.125em]"}}">
+                {{{unescapeHtml parentData.parentSummary}}}
+            </div>
+            {{~else if summary~}}
             <div class="su-col-span-full lg:su-col-span-10 lg:su-col-start-2 xl:su-col-span-8 xl:su-col-start-3 su-font-serif su-mb-0 su-rs-mt-2 {{getStringByCondition value=relation expectedValue="child" trueResult="su-text-18" falseResult="su-text-[1.125em]"}}">
                 {{{unescapeHtml summary}}}
             </div>
