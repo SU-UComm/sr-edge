@@ -73,11 +73,7 @@ export default {
             teaserOneDescription = teaserOneDescription || 'Scholar Name';
             teaserTwoDescription = teaserTwoDescription || 'Scholar Name';
             
-            // Provide default asset IDs for edit mode
-            featuredTeaser = featuredTeaser || 'matrix-asset://api-identifier/sample-featured-teaser';
-            personHeadshot = personHeadshot || 'matrix-asset://api-identifier/sample-headshot';
-            teaserOne = teaserOne || 'matrix-asset://api-identifier/sample-teaser-one';
-            teaserTwo = teaserTwo || 'matrix-asset://api-identifier/sample-teaser-two';
+            
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -141,8 +137,10 @@ export default {
         adapter.setCardService(service);
 
         // Add component data to the cards 
+        const featuredCards = [];
         const cards = []
         featuredTeaser && cards.push({ cardAsset: featuredTeaser })
+        featuredTeaser && featuredCards.push({ cardAsset: featuredTeaser })
         teaserOne && cards.push({ cardAsset: teaserOne });
         teaserTwo && cards.push({ cardAsset: teaserTwo });
    
@@ -241,7 +239,7 @@ export default {
         // Prepare feature data
         if (data) {
             
-             data[0] && cardData.push({
+             data[0] && featuredCards.length > 0 && cardData.push({
                 ...data[0],
                 quote: featuredQuote,
                 description: featuredTeaserDescription ? featuredTeaserDescription : '',
@@ -251,18 +249,35 @@ export default {
             });
     
             // Prepare teaser one data
-            data[1] && cardData.push({
-                ...data[1],
-                description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[1].description,
-                isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
-            });
-            
-            // Prepare teaser two data
-             data[2] && cardData.push({
-                ...data[2],
-                description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[2].description,
-                isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
-            });
+            if(data[0] && featuredCards.length === 0){
+                cardData.push({
+                    ...data[0],
+                    description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[0].description,
+                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
+                });
+
+                if(data[1]){
+                    cardData.push({
+                        ...data[1],
+                        description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[1].description,
+                        isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
+                    });
+                }
+            } else {
+                // Prepare teaser one data
+                data[1] && cardData.push({
+                    ...data[1],
+                    description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[1].description,
+                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
+                });
+
+                // Prepare teaser two data
+                data[2] && cardData.push({
+                    ...data[2],
+                    description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[2].description,
+                    isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
+                });
+            }
     
         }
 
@@ -288,7 +303,8 @@ export default {
             headingCtaNewWindow: headingData?.ctaNewWindow,
             headingCtaText: headingData?.ctaText,
             featuredGridItems: cardData,
-            squizEdit: squizEdit 
+            squizEdit: squizEdit,
+            featuredCards: featuredCards.length > 0 ? true : false
         }; 
 
         // NEW: Early return pattern for edit mode
