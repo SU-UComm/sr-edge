@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "basic-hero",
     "type": "edge",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "namespace": "mig-stanford-components",
     "description": "Basic hero and title area.",
     "displayName": "Basic Hero",
