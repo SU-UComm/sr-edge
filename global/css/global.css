@@ -1572,9 +1572,3 @@ Will need to further evaluate, but this will do for now. */
 div[data-component="multicolumn-info-section"] a {
   @apply hocus:su-no-underline;
 }
-
-
-/* Link styles for basic hero on updates pages. */
-div[data-component="basic-hero"] a {
-  @apply su-text-white hocus:su-no-underline hocus:su-opacity-80 dark:hocus:su-text-white;
-}
