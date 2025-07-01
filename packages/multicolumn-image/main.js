@@ -98,8 +98,9 @@ export default {
             // Ensure each image has default caption
             imageData = imageData.map(image => ({
                 ...image,
-                imageCaption: image.imageCaption || 'Add image caption'
+                caption: image.caption || 'Add image caption'
             }));
+            numberOfCaptions = imageData.length;
         }
            // Prepare template data
         const componentData = {
