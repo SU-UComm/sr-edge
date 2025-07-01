@@ -2,16 +2,23 @@
     <article class="su-group su-relative su-w-full su-flex su-flex-col su-break-words su-rounded-[8px] su-rs-pt-5 su-rs-px-4 su-max-w-900 su-mx-auto su-transition-shadow su-border dark:su-border-2 su-border-black-30/30 dark:su-border-black su-shadow dark:su-shadow-black/80 su-bg-white dark:su-bg-black-true su-text-black dark:su-text-white su-rs-pb-5">
         {{#if title}}
             <h2 class="su-type-5 md:su-type-4 2xl:su-type-3 su-mb-0 su-font-sans su-text-black dark:su-text-white">
+                
                 {{#if editing}}
-                    Editing: <span data-sq-field="title">{{unescapeHtml title}}</span>
+                    Editing: <span data-se="titleTarget">{{unescapeHtml title}}</span>
                 {{else}}
                     {{unescapeHtml title}}
+                {{/if}}
+
+                {{#if currentPage}}
+                    <span class="su-text-14 su-font-normal su-text-gray-500 dark:su-text-gray-400 su-block su-mt-2">
+                        Current page asset ID: {{currentPage}}
+                    </span>
                 {{/if}}
             </h2>
         {{/if}}
 
         {{#if description}}
-            <div data-sq-field="description" class="su-text-black dark:su-text-white su-big-paragraph su-rs-mt-4 *:su-leading-snug *:last:su-mb-0">
+            <div data-se="descriptionTarget" class="su-text-black dark:su-text-white su-big-paragraph su-rs-mt-4 *:su-leading-snug *:last:su-mb-0">
                 {{{unescapeHtml description}}}
             </div>
         {{/if}}

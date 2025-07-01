@@ -1,4 +1,5 @@
-import componentTemplate from './example-component.hbs';
+import { processEditor } from '../../global/js/utils/processEditor';
+import componentTemplate from './example-component-se.hbs';
 
 export default {
     
@@ -8,13 +9,25 @@ export default {
         const componentFunctions = info?.fns || null;
         // component context
         const componentContext = info?.ctx || null;
+        // component environment variables
+        const componentEnvironment = info?.env || null;
 
         // component input
         let { title, description, image } = args || {};
 
+        // The current page asset id (if needed)
+        const currentPage = componentContext?.assetId || null;
+
         // context value to determine if the component is being edited
         const squizEdit = componentContext?.editor || false;
-
+        const squizEditTargets = {
+            "titleTarget": {
+                "field": "title"
+            },
+            "descriptionTarget": {
+                "field": "description"
+            }
+        };
         // Provide some defaults if squizEdit is true
         if (squizEdit) {
             // Add fallback values for inline edit
@@ -45,11 +58,16 @@ export default {
             title: title, 
             description: description, 
             image: imageData,
+            currentPage: currentPage,
             editing: squizEdit
         };
 
-        // return the component data
-        return componentTemplate(componentData);
+        // return frontend code
+        if (!squizEdit) return componentTemplate(componentData);
+
+        // return edit code
+        return processEditor(componentTemplate(componentData), squizEditTargets);
+
     }
 };
 

@@ -1,8 +1,8 @@
 {
-    "assetid": "63353",
+    "assetid": "172387",
     "type_code": "image",
     "version": "0.1.0",
-    "name": "photo-1461749280684-dccba630e2f6.jpg",
+    "name": "placeholder.png",
     "short_name": "Web Standards",
     "external_id": false,
     "status": "16",
@@ -16,7 +16,7 @@
     "published_userid": "48904",
     "status_changed": "2024-10-10 00:55:17",
     "status_changed_userid": "48904",
-    "url": "https://picsum.photos/1200/400",
+    "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
     "thumbnail": "",
     "attributes": {
         "allow_unrestricted": {
