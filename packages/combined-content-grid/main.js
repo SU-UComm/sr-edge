@@ -65,7 +65,6 @@ export default {
             headingConfiguration.title = headingConfiguration.title || 'Title text';
             headingConfiguration.ctaText = headingConfiguration.ctaText || 'Link text';
             headingConfiguration.ctaUrl = headingConfiguration.ctaUrl || null;
-            headingConfiguration.ctaNewWindow = headingConfiguration.ctaNewWindow || false;
 
             eventsConfiguration.heading = eventsConfiguration.heading || 'Title text';
             announcementsConfiguration.heading = announcementsConfiguration.heading || 'Title text';
@@ -76,11 +75,9 @@ export default {
             
             // Provide default events and announcements configuration
             eventsConfiguration.endPoint = eventsConfiguration.endPoint || 'https://news.stanford.edu/_api/events/query';
-            eventsConfiguration.numberOfItems = eventsConfiguration.numberOfItems || 3;
             eventsConfiguration.linkUrl = eventsConfiguration.linkUrl || 'https://events.stanford.edu';
             
             announcementsConfiguration.endPoint = announcementsConfiguration.endPoint || '?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_taxonomyAudienceText=External&meta_taxonomyContentTypeText=Announcement&num_ranks=3';
-            announcementsConfiguration.numberOfItems = announcementsConfiguration.numberOfItems || 3;
             
             // Add the targets for the squizEdit DOM augmentation
             // used in processSquizEdit to modify the output to add edit markup
