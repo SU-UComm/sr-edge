@@ -46,7 +46,7 @@ export default {
         if (squizEdit) {
             title = title || 'Heading text';
             ctaText = ctaText || 'Link text';
-            ctaUrl = null;
+            ctaUrl = ctaUrl || null;
             headingConfiguration = {
                 ...headingConfiguration,
                 title: title,

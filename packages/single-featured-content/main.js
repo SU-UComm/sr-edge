@@ -45,7 +45,8 @@ export default {
             // Add default values for inline editable fields
             title = title || 'Heading text';
             ctaText = ctaText || 'Link text';
-            ctaManualUrl = ctaManualUrl || 'https://news.stanford.edu';
+            ctaUrl = ctaUrl || null;
+            // ctaManualUrl = ctaManualUrl || 'https://news.stanford.edu';
             
             // Provide default values for other required fields
             source = source || 'matrix-asset://api-identifier/163459';
@@ -94,8 +95,9 @@ export default {
                 componentFunctions,
                 { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow }
             );
+            headingData.ctaLink = headingData.ctaLink || "#";
         } catch (er) {
-            console.error('Error occurred in the Single featured content: Failed to resolve heading link. ', er);
+            
             if (squizEdit) {
                 headingData = {
                     title: title,
@@ -103,6 +105,10 @@ export default {
                     ctaLink: '#',
                     ctaNewWindow: ctaNewWindow || false
                 };
+
+            } else {
+                // console.error('Error occurred in the Single featured content: Failed to resolve heading link. ', er);
+                return `<!-- Error occurred in the Single featured content: Failed to resolve heading link. ${er.message} -->`;
             }
         }
 
@@ -132,6 +138,7 @@ export default {
             card: Card({ data: cardData, cardSize: "featured" }),
             data: JSON.stringify(cardData)
         };
+
 
         if (!squizEdit) return singleFeaturedTemplate(componentData);
         

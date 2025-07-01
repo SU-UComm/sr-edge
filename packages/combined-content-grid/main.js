@@ -64,7 +64,7 @@ export default {
             // Add default values for inline editable fields
             headingConfiguration.title = headingConfiguration.title || 'Title text';
             headingConfiguration.ctaText = headingConfiguration.ctaText || 'Link text';
-            headingConfiguration.ctaUrl = headingConfiguration.ctaUrl || 'matrix-asset://StanfordNews/29389';
+            headingConfiguration.ctaUrl = headingConfiguration.ctaUrl || null;
             headingConfiguration.ctaNewWindow = headingConfiguration.ctaNewWindow || false;
 
             eventsConfiguration.heading = eventsConfiguration.heading || 'Title text';
@@ -75,7 +75,7 @@ export default {
             searchQuery = searchQuery || '?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser_not=true';
             
             // Provide default events and announcements configuration
-            eventsConfiguration.endPoint = eventsConfiguration.endPoint || 'https://events.stanford.edu/api/2/events?days=365&sponsored=true';
+            eventsConfiguration.endPoint = eventsConfiguration.endPoint || 'https://news.stanford.edu/_api/events/query';
             eventsConfiguration.numberOfItems = eventsConfiguration.numberOfItems || 3;
             eventsConfiguration.linkUrl = eventsConfiguration.linkUrl || 'https://events.stanford.edu';
             

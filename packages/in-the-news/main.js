@@ -67,6 +67,7 @@ export default {
             // Provide default values for inline editable fields
             title = title || 'In the news';
             ctaText = ctaText || 'View all';
+            ctaUrl = ctaUrl || null;
             featuredQuote = featuredQuote || 'This is a sample featured quote that demonstrates the inline editing functionality for the main quote section.';
             featuredTeaserDescription = featuredTeaserDescription || 'Featured Scholar Name';
             featuredCtaText = featuredCtaText || 'Read the story';
@@ -288,7 +289,7 @@ export default {
             featuredGridItems: cardData,
             squizEdit: squizEdit 
         }; 
-
+        
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
              return processEditor(inTheNewsTemplate(componentData), squizEditTargets, args);

@@ -56,8 +56,7 @@ export default {
             // Provide default configurations
             title = title || 'Heading text';
             ctaText = ctaText || 'Link text';
-            ctaUrl = ctaUrl || 'matrix-asset://StanfordNews/29389';
-            ctaManualUrl = ctaManualUrl || 'https://news.stanford.edu';
+            ctaUrl = ctaUrl || null;
             
             // Provide default content configuration
             searchQuery = searchQuery || '?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser_not=true';
@@ -214,7 +213,6 @@ export default {
                 ${Card({data: card, cardSize: "small", displayThumbnail: displayThumbnails, displayDescription: displayDescriptions, headingLvl: title ? 3 : 2, uniqueId: card.uniqueId })}
                 </div>
             `).join('');
-
         // Prepare component data for template rendering
         const componentData = {
             alignment,
