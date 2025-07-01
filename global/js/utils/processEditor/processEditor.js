@@ -1,5 +1,5 @@
 /**
- * Processes the output to be editable in Squiz Editor.
+ * Processes the output to be editable in Page Builder.
  *
  * @param {string} output - The HTML output to be processed.
  * @param {Object} squizEditTargets - The targets to be processed for Squiz Editor.
@@ -24,29 +24,19 @@
  *         { field: "colThree.buttonConfiguration.buttonText" }
  *     ]
  * };
+ * 
+ * @example
+ * // Target-based filtering - only process elements with matching data-se-target
+ * const squizEditTargets = {
+ *     button: [
+ *         { field: "colTwo.buttonConfiguration.buttonText", target: "infoTextButton" },
+ *         { field: "colThree.buttonConfiguration.buttonText", target: "ctaButton" }
+ *     ]
+ * };
+ * // HTML: <span data-se-target="infoTextButton" data-se="button"> will get data-sq-field="colTwo.buttonConfiguration.buttonText"
+ * // HTML: <span data-se-target="ctaButton" data-se="button"> will get data-sq-field="colThree.buttonConfiguration.buttonText"
+ * // HTML: <span data-se="button"> will not be processed if target is required
  */
-
-/**
- * Converts anchor tags with data-se attributes to span tags while preserving all attributes
- * @param {string} html - The HTML string to process
- * @returns {string} The processed HTML with anchor tags converted to spans
- */
-function convertAnchorTagsToSpans(html) {
-    // First convert opening tags
-    const openingTagRegex = /<a\s+([^>]*?)(data-se\s*=\s*["'][^"']*["'][^>]*)>/gi;
-    html = html.replace(openingTagRegex, (match, beforeDataSe, afterDataSe) => {
-        // Combine the attributes before and after data-se
-        const allAttributes = (beforeDataSe + ' ' + afterDataSe).trim();
-        return `<span ${allAttributes}>`;
-    });
-
-    // Then convert closing tags
-    const closingTagRegex = /<\/a>/gi;
-    html = html.replace(closingTagRegex, '</span>');
-
-    return html;
-}
-
 export async function processEditor(output, squizEditTargets) {
     // First convert any anchor tags with data-se to spans
     // output = convertAnchorTagsToSpans(output);
@@ -55,52 +45,63 @@ export async function processEditor(output, squizEditTargets) {
         const targetConfig = squizEditTargets[target];
         const escapedTarget = target.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         
+        // Shared regex pattern for all cases
+        const regex = new RegExp(
+            `(data-se\\s*=\\s*["']${escapedTarget}["'])(?:\\s+data-se-target\\s*=\\s*["']([^"']*)["'])?(?!\\s+data-sq-field)`, 
+            'gi'
+        );
+        
         if (Array.isArray(targetConfig)) {
-            // Handle array mapping - multiple elements with same data-se mapped to different fields
-            const regex = new RegExp(
-                `(data-se\\s*=\\s*["']${escapedTarget}["'])(?!\\s+data-sq-field)`, 
-                'gi'
-            );
-            
-            let index = 0;
-            output = output.replace(regex, (match, capturedGroup) => {
-                // Use the field mapping for this index, or the last one if we run out
-                const fieldMapping = targetConfig[index] || targetConfig[targetConfig.length - 1];
-                const fieldName = fieldMapping.field;
-                
-                const result = `${capturedGroup} data-sq-field="${fieldName}"`;
-                index++;
-                return result;
+            // Handle array mapping - each object in the array gets its own processing
+            targetConfig.forEach((fieldMapping) => {
+                output = output.replace(regex, (match, capturedGroup, targetValue) => {
+                    // Check if target filtering is required and if target matches
+                    if (fieldMapping.target && targetValue !== fieldMapping.target) {
+                        // Target doesn't match, return unchanged
+                        return match;
+                    }
+                    
+                    const fieldName = fieldMapping.field;
+                    // Preserve the data-se-target attribute if it exists
+                    const targetAttr = targetValue ? ` data-se-target="${targetValue}"` : '';
+                    const result = `${capturedGroup}${targetAttr} data-sq-field="${fieldName}"`;
+                    return result;
+                });
             });
         } else if (targetConfig.array) {
             // Handle array types with automatic indexing using square brackets
-            const regex = new RegExp(
-                `(data-se\\s*=\\s*["']${escapedTarget}["'])(?!\\s+data-sq-field)`, 
-                'gi'
-            );
-            
             let index = 0;
-            output = output.replace(regex, (match, capturedGroup) => {
+            output = output.replace(regex, (match, capturedGroup, targetValue) => {
+                // Check if target filtering is required and if target matches
+                if (targetConfig.target && targetValue !== targetConfig.target) {
+                    // Target doesn't match, return unchanged
+                    return match;
+                }
+                
                 // Build field name with optional property
                 const fieldName = targetConfig.property 
                     ? `${targetConfig.field}[${index}].${targetConfig.property}`
                     : `${targetConfig.field}[${index}]`;
                 
-                const result = `${capturedGroup} data-sq-field="${fieldName}"`;
+                // Preserve the data-se-target attribute if it exists
+                const targetAttr = targetValue ? ` data-se-target="${targetValue}"` : '';
+                const result = `${capturedGroup}${targetAttr} data-sq-field="${fieldName}"`;
                 index++;
                 return result;
             });
         } else {
             // Handle regular single fields
-            const regex = new RegExp(
-                `(data-se\\s*=\\s*["']${escapedTarget}["'])(?!\\s+data-sq-field)`, 
-                'gi'
-            );
-            
-            output = output.replace(
-                regex, 
-                `$1 data-sq-field="${targetConfig.field}"`
-            );
+            output = output.replace(regex, (match, capturedGroup, targetValue) => {
+                // Check if target filtering is required and if target matches
+                if (targetConfig.target && targetValue !== targetConfig.target) {
+                    // Target doesn't match, return unchanged
+                    return match;
+                }
+                
+                // Preserve the data-se-target attribute if it exists
+                const targetAttr = targetValue ? ` data-se-target="${targetValue}"` : '';
+                return `${capturedGroup}${targetAttr} data-sq-field="${targetConfig.field}"`;
+            });
         }
     }
     return output;
