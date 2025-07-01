@@ -159,16 +159,18 @@ export default {
             }
         }
 
-        if (squizEdit && data?.length === 0) {
-            // NEW: In edit mode, provide mock data instead of returning error
-            data = cards.map((card, index) => ({
-                title: `Sample News Article ${index + 1}`,
-                description: `This is a sample description for news article ${index + 1}`,
-                liveUrl: '#',
-                source: `Sample Source ${index + 1}`,
-                // credit: `Sample Credit ${index + 1}`,
-                // authorName: `Sample Author ${index + 1}`
-            }));
+        // In edit mode, ensure we have data for all 3 positions
+        if (squizEdit && data) {
+            // Pad missing slots with sample data
+            const sampleData = [
+                { title: `Sample Featured Article`, description: `Sample featured description`, liveUrl: '#', source: `Sample Featured Source` },
+                { title: `Sample News Article 1`, description: `This is a sample description for news article 1`, liveUrl: '#', source: `Sample Source 1` },
+                { title: `Sample News Article 2`, description: `This is a sample description for news article 2`, liveUrl: '#', source: `Sample Source 2` }
+            ];
+            
+            while (data.length < 3) {
+                data.push(sampleData[data.length]);
+            }
         }
         
         // Resolve the URI for the section heading link
