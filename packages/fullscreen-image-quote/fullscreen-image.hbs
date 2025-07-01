@@ -12,8 +12,8 @@
                     <span class="su-inline su-text-22 md:su-text-[2.9rem] lg:su-text-24 2xl:su-text-[2.9rem] su-font-bold su-leading-display su-mr-02em">
                         {{ctaPreText}}
                     </span>
-                    <a href="{{link}}" 
-                       {{#if isNewWindow}}target="_blank"{{/if}} 
+                    <a href="{{link}}"
+                       {{#if isNewWindow}}target="_blank"{{/if}}
                        {{#if isRealExternal}}rel="noopener nofollow"{{/if}}
                        class="su-group su-inline su-text-22 md:su-text-[2.9rem] lg:su-text-24 2xl:su-text-[2.9rem] su-font-bold su-leading-display su-text-white dark:su-text-white su-underline su-decoration-dark-mode-red su-underline-offset-4 su-decoration-[3px] hocus:su-decoration-white hocus:su-text-white dark:hocus:su-text-white su-transition-all">
                         {{ctaText}}
@@ -55,6 +55,6 @@
         <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}"
             class="su-object-cover su-w-full su-h-full su-p-20 {{#if mobileImageData.url}}su-hidden lg:su-block{{/if}} {{#if imageVPosition}}su-object-{{imageVPosition}}{{/if}}" />
         {{~/if~}}
-        <div aria-hidden="true" class="su-absolute su-inset-0 su-z-10 su-border-[2rem] su-border-black-true su-bg-gradient-to-t {{imageOverlayClasses imageOverlay}} {{getStringByCondition value=quoteHAlign expectedValue="left" trueResult="lg:su-bg-gradient-to-r" falseResult="lg:su-bg-gradient-to-l"}}"></div>
+        <div aria-hidden="true" class="su-absolute su-inset-0 su-z-10 su-bg-gradient-to-t {{imageOverlayClasses imageOverlay}} {{getStringByCondition value=quoteHAlign expectedValue="left" trueResult="lg:su-bg-gradient-to-r" falseResult="lg:su-bg-gradient-to-l"}}"></div>
     </div>
 </section>
