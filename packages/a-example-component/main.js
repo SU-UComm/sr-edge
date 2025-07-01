@@ -1,4 +1,4 @@
-import componentTemplate from './example-component.hbs';
+import componentTemplate from './component-template.hbs';
 
 export default {
     

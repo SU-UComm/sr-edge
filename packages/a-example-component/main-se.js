@@ -1,5 +1,5 @@
 import { processEditor } from '../../global/js/utils/processEditor';
-import componentTemplate from './example-component-se.hbs';
+import componentTemplate from './component-template-se.hbs';
 
 export default {
     
