@@ -1,8 +1,5 @@
 import xss from 'xss';
-import {
-    basicHeroDataAdapter,
-    matrixBasicHeroService,
-} from '../../global/js/utils';
+import { basicHeroDataAdapter, matrixBasicHeroService } from '../../global/js/utils';
 
 import basicHeroTemplate from './basic-hero.hbs';
 
@@ -13,7 +10,7 @@ import basicHeroTemplate from './basic-hero.hbs';
 export default {
     /**
      * Fetches and processes current page data, rendering them as Basic hero.
-     *
+     * 
      * @async
      * @function main
      * @param {Object} args - Configuration arguments for the listing.
@@ -28,39 +25,36 @@ export default {
      * @returns {Promise<string>} The rendered HTML string from the topicListingTemplate, or an error comment if processing fails.
      * @throws {Error} If FB_JSON_URL or query is invalid or if the fetch operation fails.
      */
-    async main(args, info) {
+    async main( args, info ) {
         // Extracting functions from provided info
         const fnsCtx = info?.ctx || {};
-
+        
         // Extracting environment variables from provided info
         const { BASE_DOMAIN } = info?.env || info?.set?.environment || {};
-
-        const currentAssetId = fnsCtx?.assetId;
+       
+        const currentAssetId = fnsCtx?.assetId
         // const currentAssetId = '162603';
 
         // Validate required environment variables
         try {
             if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
                 throw new Error(
-                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`,
+                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
                 );
             }
-            if (
-                typeof fnsCtx !== 'object' ||
-                typeof currentAssetId !== 'string' ||
-                currentAssetId.trim() === ''
-            ) {
+            if (typeof fnsCtx !== 'object' || typeof currentAssetId !== 'string' || currentAssetId.trim() === '') {
                 throw new Error(
-                    `The "info.fns.assetId" must be a non-empty string. The ${JSON.stringify(currentAssetId)} was received.`,
+                    `The "info.fns.assetId" must be a non-empty string. The ${JSON.stringify(currentAssetId)} was received.`
                 );
             }
+
         } catch (er) {
             console.error('Error occurred in the Basic Hero component: ', er);
             return `<!-- Error occurred in the Basic Hero component: ${er.message} -->`;
         }
-
+        
         const adapter = new basicHeroDataAdapter();
-        let heroData = null;
+        let heroData = null
 
         // Create our service
         const service = new matrixBasicHeroService({ BASE_DOMAIN });
@@ -73,66 +67,50 @@ export default {
             heroData = await adapter.getBasicHeroData(currentAssetId);
 
             if (!heroData || typeof heroData !== 'object') {
-                throw new Error(
-                    'Invalid API response: heroData is missing or not an object.',
-                );
+                throw new Error("Invalid API response: heroData is missing or not an object.");
             }
         } catch (er) {
-            console.error(
-                'Error occurred in the Basic Hero component: Error parsing hero data JSON response: ',
-                er,
-            );
+            console.error('Error occurred in the Basic Hero component: Error parsing hero data JSON response: ', er);
             return `<!-- Error occurred in the Basic Hero component: Error parsing hero data JSON response: ${er.message} -->`;
         }
 
-        const {
-            title,
-            titleAlignment,
-            summary,
-            updatesPage,
-            backgroundColor,
-            relation,
-            parentData,
-        } = heroData;
+        const { title, titleAlignment, summary, updatesPage, backgroundColor, relation, parentData } = heroData;
 
         // Validate fetched data
         try {
             if (typeof title !== 'string' || title.trim() === '') {
                 throw new Error(
-                    `The "title" must be non-empty string. The ${JSON.stringify(title)} was received.`,
+                    `The "title" must be non-empty string. The ${JSON.stringify(title)} was received.`
                 );
             }
-            if (
-                titleAlignment &&
-                !['center', 'left'].includes(titleAlignment)
-            ) {
+            if (titleAlignment && !['center', 'left' ].includes(titleAlignment)) {
                 throw new Error(
-                    `The "titleAlignment" must be one of ["center", "left"]. The ${JSON.stringify(titleAlignment)} was received.`,
+                    `The "titleAlignment" must be one of ["center", "left"]. The ${JSON.stringify(titleAlignment)} was received.`
                 );
             }
             if (summary && typeof summary !== 'string') {
                 throw new Error(
-                    `The "summary" must be a string. The ${JSON.stringify(summary)} was received.`,
+                    `The "summary" must be a string. The ${JSON.stringify(summary)} was received.`
                 );
             }
             if (updatesPage && typeof updatesPage !== 'string') {
                 throw new Error(
-                    `The "updatesPage" must be a string. The ${JSON.stringify(updatesPage)} was received.`,
+                    `The "updatesPage" must be a string. The ${JSON.stringify(updatesPage)} was received.`
                 );
             }
             if (backgroundColor && typeof backgroundColor !== 'string') {
                 throw new Error(
-                    `The "backgroundColor" must be a string. The ${JSON.stringify(backgroundColor)} was received.`,
+                    `The "backgroundColor" must be a string. The ${JSON.stringify(backgroundColor)} was received.`
                 );
             }
             if (relation && typeof relation !== 'string') {
                 throw new Error(
-                    `The "relation" must be a string. The ${JSON.stringify(relation)} was received.`,
+                    `The "relation" must be a string. The ${JSON.stringify(relation)} was received.`
                 );
             }
             if (parentData && typeof parentData !== 'object') {
                 throw new Error(
-                    `The "parentData" must be an object. The ${JSON.stringify(parentData)} was received.`,
+                    `The "parentData" must be an object. The ${JSON.stringify(parentData)} was received.`
                 );
             }
         } catch (er) {
@@ -140,17 +118,10 @@ export default {
             return `<!-- Error occurred in the Basic Hero component: ${er.message} -->`;
         }
 
-        let heroSummary = '';
-        let childSummary = '';
+        let heroSummary = "";
 
-        if (
-            parentData &&
-            parentData.parentSummary &&
-            summary &&
-            relation === 'child'
-        ) {
+        if (parentData && parentData.parentSummary && summary && relation === "child") {
             heroSummary = parentData.parentSummary;
-            childSummary = summary;
         } else {
             heroSummary = summary;
         }
@@ -163,14 +134,13 @@ export default {
             updatesPage,
             backgroundColor,
             relation,
-            childSummary: xss(childSummary),
             parentData: {
                 ...parentData,
                 parentTitle: xss(parentData?.parentTitle),
                 parentSummary: xss(parentData?.parentSummary),
-            },
+            }
         };
 
         return basicHeroTemplate(componentData);
-    },
+    }
 };
