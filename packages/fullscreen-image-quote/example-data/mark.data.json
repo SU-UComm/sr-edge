@@ -1,0 +1,15 @@
+{
+    "image": "matrix-asset://api-identifier/167069",
+    "imageOverlay": "light",
+    "quote": "I want to grow patients a new heart.",
+    "quoteVAlign": "bottom",
+    "quoteHAlign": "right",
+    "imageVPosition": "center",
+    "removeTopSpacing": false,
+    "ctaDetails": {
+        "ctaPreText": "Hear how Mark Skylar-Scott is chasing the",
+        "ctaText": "“holy grail of curative medicine”",
+        "ctaSubtext": "",
+        "internalUrl": "matrix-asset://api-identifier/28192"
+    }
+}

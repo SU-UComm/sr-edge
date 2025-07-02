@@ -146,21 +146,13 @@ export default {
 
         const isRealExternal = externalUrl ? isRealExternalLink(externalUrl) : false;
 
-
-        const quoteVAligns = {
-            top: "start",
-            center: "center",
-            bottom: "",
-        };
-        const convertedQuoteVAlign = quoteVAligns[quoteVAlign] || quoteVAlign;
-        
         const quoteVAlignClasses = {
             top: "lg:su-items-start",
             center: "lg:su-items-center",
             bottom: "",
         };
         const convertedQuoteVAlignClasses = quoteVAlignClasses[quoteVAlign];
-        
+
         const imageVPositionClasses = {
             top: "su-object-top",
             center: "su-object-center",

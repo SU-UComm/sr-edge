@@ -396,9 +396,9 @@ export const helpers = {
     imageOverlayClasses: function(imageOverlay) {
         const imageOverlayClasses = new Map()
 
-        imageOverlayClasses.set('light', 'su-from-black-true/50');
-        imageOverlayClasses.set('medium', 'su-from-black-true/75');
-        imageOverlayClasses.set('dark', 'su-from-black-true su-to-black-true/0 su-to-60%');
+        imageOverlayClasses.set('light', 'lg:su-from-black-true/50');
+        imageOverlayClasses.set('medium', 'lg:su-from-black-true/75');
+        imageOverlayClasses.set('dark', 'lg:su-from-black-true');
 
         return imageOverlayClasses.get(imageOverlay);
     },
