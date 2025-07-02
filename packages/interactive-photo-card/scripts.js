@@ -83,6 +83,12 @@ export const _interactivePhotoCardContentInit = (cardElement) => {
     );
 };
 
+function initializeInteractivePhotoCards() {
+    document.querySelectorAll(INTERACTIVE_PHOTO_CARD).forEach(card => {
+        _interactivePhotoCardInit(card);
+        _interactivePhotoCardContentInit(card);
+    });
+}
 /**
  * Initializes interactive photo cards when the DOM content is fully loaded.
  *
@@ -91,10 +97,5 @@ export const _interactivePhotoCardContentInit = (cardElement) => {
  *
  * @listens DOMContentLoaded
  */
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll(INTERACTIVE_PHOTO_CARD).forEach(card => {
-        _interactivePhotoCardInit(card);
-        _interactivePhotoCardContentInit(card);
-
-    });
-});
+document.addEventListener('DOMContentLoaded', initializeInteractivePhotoCards);
+document.addEventListener('livePreviewUpdated', initializeInteractivePhotoCards);
