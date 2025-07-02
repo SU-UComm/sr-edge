@@ -113,6 +113,7 @@ function initializeContentCarousels() {
     });    
 };
 
+console.log('setting up listeners');
 /*
 * 
 * @listens DOMContentLoaded & livePreviewUpdated (which occurs in editMode on the front end)
