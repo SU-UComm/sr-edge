@@ -106,6 +106,8 @@ export function _carouselInit(section) {
 
  */
 function initializeContentCarousels() {
+
+    console.log('initializeContentCarousels called');
     document.querySelectorAll(CONTENT_CAROUSEL_SELECTOR).forEach(section => {
         _carouselInit(section)
     });    
