@@ -152,13 +152,27 @@ export default {
             bottom: "",
         };
         const convertedQuoteVAlign = quoteVAligns[quoteVAlign] || quoteVAlign;
+        
+        const quoteVAlignClasses = {
+            top: "lg:su-items-start",
+            center: "lg:su-items-center",
+            bottom: "",
+        };
+        const convertedQuoteVAlignClasses = quoteVAlignClasses[quoteVAlign];
+        
+        const imageVPositionClasses = {
+            top: "su-object-top",
+            center: "su-object-center",
+            bottom: "su-object-bottom",
+        };
+        const convertedImageVPositionClasses = imageVPositionClasses[imageVPosition];
 
         // Prepare component data for template rendering
         const componentData = {
             quote,
             quoteHAlign,
-            quoteVAlign: convertedQuoteVAlign,
-            imageVPosition,
+            quoteVAlign: convertedQuoteVAlignClasses,
+            imageVPosition: convertedImageVPositionClasses,
             removeTopSpacing,
             ctaPreText,
             ctaText,
