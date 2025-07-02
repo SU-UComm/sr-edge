@@ -95,7 +95,6 @@ export default {
                 componentFunctions,
                 { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow }
             );
-            headingData.ctaLink = headingData.ctaLink || "#";
         } catch (er) {
             
             if (squizEdit) {
