@@ -387,7 +387,10 @@ export const helpers = {
                    .replace(/&gt;/g, '>')
                    .replace(/&amp;/g, '&')
                    .replace(/&quot;/g, '"')
-                   .replace(/&#039;/g, "'");
+                   .replace(/&#039;/g, "'")
+                   .replace(/&rsquo;/g, "’")
+                   .replace(/&ldquo;/g, '“')
+                   .replace(/&rdquo;/g, '”');
     },
     getStringIfGreater: function (options) {
         const { value, expectedValue, trueResult, falseResult } = options.hash;
