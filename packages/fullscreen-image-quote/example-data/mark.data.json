@@ -3,7 +3,7 @@
     "imageOverlay": "light",
     "quote": "I want to grow patients a new heart.",
     "quoteVAlign": "bottom",
-    "quoteHAlign": "right",
+    "quoteHAlign": "left",
     "imageVPosition": "center",
     "removeTopSpacing": false,
     "ctaDetails": {
