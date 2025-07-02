@@ -23,8 +23,7 @@
         "watch": "chokidar \"./packages/**/*.{js,scss,json,html,hbs}\" --silent -c \"CHANGED_FILE={path} vite build --config vite.config.js && CHANGED_FILE={path} vite build --config vite-global.config.js\"",
         "dxp": "dxp-next cmp dev-ui ./dist",
         "dev": "npm run build && concurrently \"npm run watch\" \"npm run dxp\"",
-        "dev:server": "node dev-server/server.js",
-        "dev:full": "npm run build && concurrently \"npm run watch\" \"npm run dxp\" \"npm run dev:server\"",
+        "full": "npm run build && concurrently \"npm run watch\" \"npm run dxp\" \"node dev-server/server.js\"",
         "vermgmt": "vermgmt"
     },
     "dependencies": {
