@@ -42,7 +42,6 @@ export default {
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
         const fnsCtx = componentFunctions || componentContext || {};
-
         // CHANGE: change const to let so we can modify later for squizEdit default values
         let { source, searchQuery, cards, featuredDescription } = args?.contentConfiguration || {};
         let { displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
@@ -425,7 +424,7 @@ export default {
             eventData,
             announcementData,
         };
-
+        
         // Return original front end code when squizEdit is false, without modification
         if (!squizEdit) return combinedContentGridTemplate(componentData);
 

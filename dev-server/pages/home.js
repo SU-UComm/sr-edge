@@ -3,7 +3,7 @@ export default async function Home() {
     <!doctype html>
     <html lang="en" class="">
     <head>
-        <title>Stanford Report</title>
+        <title>Stanford Report test</title>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta charset="utf-8" />
 
