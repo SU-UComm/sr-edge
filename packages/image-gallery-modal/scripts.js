@@ -171,8 +171,11 @@ export function _modalInit(section) {
  *
  * @listens DOMContentLoaded
  */
-document.addEventListener('DOMContentLoaded', function () {
+function initializeImageGalleryModals() {
     document.querySelectorAll(IMAGE_GALLERY_SELECTOR).forEach(section => {
         _modalInit(section);
     });
-});
+};
+
+document.addEventListener('DOMContentLoaded', initializeImageGalleryModals);
+document.addEventListener('livePreviewUpdated', initializeImageGalleryModals);  

@@ -193,9 +193,12 @@ export function _videoInit(section) {
  *
  * @listens DOMContentLoaded
  */
-document.addEventListener('DOMContentLoaded', function () {
+function initializeSingleImageVideos() {
     document.querySelectorAll(SINGLE_IMAGE_VIDEO_SELECTOR).forEach(section => {
         _modalInit(section);
         _videoInit(section);
     });    
-});
+};
+
+document.addEventListener('DOMContentLoaded', initializeSingleImageVideos);
+document.addEventListener('livePreviewUpdated', initializeSingleImageVideos);
