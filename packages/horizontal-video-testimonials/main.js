@@ -47,7 +47,7 @@ export default {
         if (squizEdit) {
             title = title || 'Heading text';
             ctaText = ctaText || 'Link text';
-            ctaUrl = ctaUrl || 'matrix-asset://StanfordNews/29389';
+            ctaUrl = ctaUrl || null;
             
             // Ensure each testimonial has default values
             testimonials = testimonials.map(testimonial => ({
