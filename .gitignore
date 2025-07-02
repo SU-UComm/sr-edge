@@ -24,3 +24,6 @@ temp-*
 .idea
 .vscode``
 .aider*
+
+# Generated manifest file
+dev-server/component-service/manifests.json

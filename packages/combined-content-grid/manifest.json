@@ -379,6 +379,19 @@
                     }
                 }
             }
+        },
+        "raw": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/select.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/raw.html"
+                    }
+                }
+            }
         }
     }
 }
