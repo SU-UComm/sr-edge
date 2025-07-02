@@ -94,7 +94,7 @@
 }
 
 svg {
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 .su-dark body {
@@ -1222,7 +1222,7 @@ WYSIWYG formatting styles
 .su-page-content > span ul > li::before,
 .su-page-content > div:not([data-component], .site-search) ul > li::before,
 .su-page-content > ul > li::before {
-  background-color: currentColor;
+  background-color: currentcolor;
 }
 
 .container > span .bold,
