@@ -764,7 +764,8 @@ audio::-webkit-media-controls-panel {
 }
 
 /* Footer */
-div[data-component="footer-component"] {
+div[data-component="footer-component"],
+footer[data-component="footer-component"] {
   @apply su-relative;
 }
 
@@ -1562,13 +1563,15 @@ Subscribe to Stanford Report Marketo form styles
 }
 
 /* Link styles for basic hero on updates pages. */
-div[data-component="basic-hero"] a {
+div[data-component="basic-hero"] a,
+section[data-component="basic-hero"] a {
   @apply su-text-white hocus:su-no-underline hocus:su-opacity-80 dark:hocus:su-text-white;
 }
 
 /* Link styles to remove underline on :hocus for multicolumn-info-section component.
 The .su-wysiwyg-content class adds some odd stuff that I'm not sure we want here.
 Will need to further evaluate, but this will do for now. */
-div[data-component="multicolumn-info-section"] a {
+div[data-component="multicolumn-info-section"] a,
+section[data-component="multicolumn-info-section"] a {
   @apply hocus:su-no-underline;
 }
