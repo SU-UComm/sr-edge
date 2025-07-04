@@ -29,6 +29,7 @@ export default {
      * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
      */
     async main(args, info) {
+
         // Detect edit mode
         const squizEdit = info?.ctx?.editor || false;
         
@@ -135,6 +136,7 @@ export default {
 
         if (squizEdit) {
             
+            headingInfo.title = headingInfo.title || "Heading text"
             headingInfo.ctaUrl = headingInfo.ctaUrl || null;
             headingInfo.ctaText = headingInfo.ctaText || "Link text";
             
