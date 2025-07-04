@@ -103,10 +103,16 @@ export function _carouselInit(section) {
  * This function selects all elements matching the `CONTENT_CAROUSEL_SELECTOR` selector
  * applies the `_carouselInit` function to each of them
  *
- * @listens DOMContentLoaded
+
  */
-document.addEventListener('DOMContentLoaded', function () {
+function initializeContentCarousels() {
     document.querySelectorAll(CONTENT_CAROUSEL_SELECTOR).forEach(section => {
         _carouselInit(section)
     });    
-});
+};
+/*
+* 
+* @listens DOMContentLoaded & livePreviewUpdated (which occurs in editMode on the front end)
+*/
+document.addEventListener('DOMContentLoaded', initializeContentCarousels);
+document.addEventListener('livePreviewUpdated', initializeContentCarousels);
