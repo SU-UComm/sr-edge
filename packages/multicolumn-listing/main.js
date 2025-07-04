@@ -45,7 +45,7 @@ export default {
 
         // Extracting configuration data from arguments
         let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
-        const { source, searchQuery, searchMaxCards, cards } = args?.contentConfiguration || {};
+        let { source, searchQuery, searchMaxCards, cards } = args?.contentConfiguration || {};
         const { displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
 
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
@@ -59,10 +59,10 @@ export default {
             // defaults
             title = title || "Heading text";
             ctaText = ctaText || "Link text";
-            
+            searchQuery = (searchQuery === `?` || !searchQuery) ? '?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser=false&meta_taxonomyContentTypeText_not=Announcement+Leadership%20Messages&num_ranks=3&start_rank=4' : searchQuery;
             // Clear ctaUrl in edit mode to prevent Matrix URI resolution issues
             ctaUrl = ctaUrl || null;
-
+            cards = cards || [];
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
                 "headingTitle": { "field": "headingConfiguration.title" },
@@ -119,19 +119,29 @@ export default {
             const service = new funnelbackCardService({ FB_JSON_URL, query });
 
             adapter.setCardService(service);
-            dataPromise = adapter.getCards();
+            
+            try {
+                dataPromise = adapter.getCards();
+            } catch (er) {
+                if (!squizEdit) {
+                    return `<!-- Error occurred in the Multicolumn listing component: ${er.message} -->`;
+                }
+                dataPromise = Promise.resolve([]);
+            }
+
         } else {
             const { cards } = args.contentConfiguration;
             const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
 
             adapter.setCardService(service);
-                
+
             try {
                 dataPromise = adapter.getCards(cards);
             } catch (err) {
                 if (!squizEdit) {
                     return `<!-- Error occurred in the Multicolumn listing component: ${err.message} -->`;
                 }
+                dataPromise = Promise.resolve([]);
             }
         }
 
