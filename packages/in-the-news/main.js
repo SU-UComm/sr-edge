@@ -137,13 +137,21 @@ export default {
         const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
         adapter.setCardService(service);
 
-        // Add component data to the cards 
+        
         const featuredCards = [];
         const cards = []
-        featuredTeaser && cards.push({ cardAsset: featuredTeaser })
-        featuredTeaser && featuredCards.push({ cardAsset: featuredTeaser })
-        teaserOne && cards.push({ cardAsset: teaserOne });
-        teaserTwo && cards.push({ cardAsset: teaserTwo });
+
+        // Add featured data to the cards and ffeaturedCards Arrays
+        featuredTeaser && cards.push({ type: 'featured', cardAsset: featuredTeaser })
+        featuredTeaser && featuredCards.push({ type: 'featured', cardAsset: featuredTeaser })
+
+        // Add supplementary data to the cards Array
+        teaserOne && cards.push({ type: 'teaserOne', cardAsset: teaserOne });
+        teaserTwo && cards.push({ type: 'teaserTwo', cardAsset: teaserTwo });
+
+        const featured = cards.find(c => c.type === 'featured');
+        const teaserOneCard = cards.find(c => c.type === 'teaserOne');
+        const teaserTwoCard = cards.find(c => c.type === 'teaserTwo');
    
         // if we found cards fetch the data from matrix
         if (cards?.length) {
@@ -158,18 +166,14 @@ export default {
             }
         }
 
-        // In edit mode, ensure we have data for all 3 positions
-        if (squizEdit && data) {
-            // Pad missing slots with sample data
-            const sampleData = [
-                { title: `Sample Featured Article`, description: `Sample featured description`, liveUrl: '#', source: `Sample Featured Source` },
-                { title: `Sample News Article 1`, description: `This is a sample description for news article 1`, liveUrl: '#', source: `Sample Source 1` },
-                { title: `Sample News Article 2`, description: `This is a sample description for news article 2`, liveUrl: '#', source: `Sample Source 2` }
-            ];
-            
-            while (data.length < 3) {
-                data.push(sampleData[data.length]);
-            }
+        if (squizEdit && data?.length === 0) {
+            // NEW: In edit mode, provide mock data instead of returning error
+            data = cards.map((card, index) => ({
+                title: `Sample News Article ${index + 1}`,
+                description: `This is a sample description for news article ${index + 1}`,
+                liveUrl: '#',
+                source: `Sample Source ${index + 1}`
+            }));
         }
         
         // Resolve the URI for the section heading link
@@ -237,49 +241,52 @@ export default {
 
         const cardData = [];
         
-        // Prepare feature data
-        if (data) {
-            
-             data[0] && featuredCards.length > 0 && cardData.push({
-                ...data[0],
-                quote: featuredQuote,
-                description: featuredTeaserDescription ? featuredTeaserDescription : '',
-                ctaText: featuredCtaText || "Read the story",
+        const getDataObject = (id) => {
+            return data?.find(item => item.id === id || item.assetId === id) || {};
+        };
+                
+                
+        if (featured) {
+            const base = {
+                ...getDataObject(featured.cardAsset?.id),
                 imageURL: imageData?.url,
                 imageAlt: imageData?.alt
+            };
+
+            cardData.push({
+                ...base,
+                quote: featuredQuote,
+                description: featuredTeaserDescription || '',
+                ctaText: featuredCtaText || 'Read the story'
             });
-    
-            // Prepare teaser one data
-            if(data[0] && featuredCards.length === 0){
-                cardData.push({
-                    ...data[0],
-                    description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[0].description,
-                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
-                });
+        }
 
-                if(data[1]){
-                    cardData.push({
-                        ...data[1],
-                        description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[1].description,
-                        isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
-                    });
-                }
-            } else {
-                // Prepare teaser one data
-                data[1] && cardData.push({
-                    ...data[1],
-                    description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[1].description,
-                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
-                });
+        if (teaserOneCard) {
+            const base = {
+                ...getDataObject(teaserOneCard.cardAsset?.id),
+                imageURL: imageData?.url,
+                imageAlt: imageData?.alt
+            };
 
-                // Prepare teaser two data
-                data[2] && cardData.push({
-                    ...data[2],
-                    description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[2].description,
-                    isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
-                });
-            }
-    
+            cardData.push({
+                ...base,
+                description: teaserOneDescription || base.description,
+                isCustomDescription: !!teaserOneDescription
+            });
+        }
+
+        if (teaserTwoCard) {
+            const base = {
+                ...getDataObject(teaserTwoCard.cardAsset?.id),
+                imageURL: imageData?.url,
+                imageAlt: imageData?.alt
+            };
+
+            cardData.push({
+                ...base,
+                description: teaserTwoDescription || base.description,
+                isCustomDescription: !!teaserTwoDescription
+            });
         }
 
         // Data validation - CHANGE: wrap in !squizEdit check
