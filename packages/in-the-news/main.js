@@ -67,6 +67,7 @@ export default {
             // Provide default values for inline editable fields
             title = title || 'Heading text';
             ctaText = ctaText || 'Link text';
+            ctaUrl = ctaUrl || null;
             featuredQuote = featuredQuote || 'Add content';
             featuredTeaserDescription = featuredTeaserDescription || 'Scholar Name';
             featuredCtaText = featuredCtaText || 'Read the story';
@@ -306,7 +307,7 @@ export default {
             squizEdit: squizEdit,
             featuredCards: featuredCards.length > 0 ? true : false
         }; 
-
+        
         // NEW: Early return pattern for edit mode
         if (squizEdit) {
              return processEditor(inTheNewsTemplate(componentData), squizEditTargets, args);

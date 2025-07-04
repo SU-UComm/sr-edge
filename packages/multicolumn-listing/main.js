@@ -59,9 +59,9 @@ export default {
             // defaults
             title = title || "Heading text";
             ctaText = ctaText || "Link text";
-            ctaManualUrl = ctaManualUrl || "https://news.stanford.edu";
+            
             // Clear ctaUrl in edit mode to prevent Matrix URI resolution issues
-            ctaUrl = null;
+            ctaUrl = ctaUrl || null;
 
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
