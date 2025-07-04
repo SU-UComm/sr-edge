@@ -1,6 +1,7 @@
 import { basicAssetUri, cardDataAdapter, matrixCardService, linkedHeadingService } from '../../global/js/utils';
 import inTheNewsTemplate from './in-the-news.hbs';
 import { processEditor } from '../../global/js/utils/processEditor';
+import helpers from '../../global/hbs/helpers/helpers.js';
 
 /**
  * In the news component that renders a formatted content card with associated metadata and SVG icons.
