@@ -155,6 +155,7 @@ export default {
             iconArrowClasses:
                 'su-size-30 lg:su-size-36 su-fill-none aria-hidden:invisible group-hocus:su-rotate-45 su-transition-transform',
             alwaysDark: alwaysDark,
+            squizEdit: squizEdit
         };
 
         // NEW: Early return pattern for edit mode
