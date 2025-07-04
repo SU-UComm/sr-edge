@@ -1,13 +1,21 @@
 <div class="su-w-full su-component-featured-grid">
     <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap {{featuredGridClasses isNested}}">
-        {{~#unless hasNestedGrid~}}{{~#if items.[0]~}}
-            {{> featured-grid-content placement=1 alignment=alignment isNested=isNested item=items.[0] includeVerticalVideo=includeVerticalVideo gridType=gridType squizEdit=squizEdit}}
-        {{~/if~}}{{~/unless~}}
+        {{~#unless hasNestedGrid~}}
+            {{~#if items.[0]~}}
+                {{~#if featuredCards~}}
+                    {{> featured-grid-content placement=1 alignment=alignment isNested=isNested item=items.[0] includeVerticalVideo=includeVerticalVideo gridType=gridType squizEdit=squizEdit}}
+                {{~/if~}}
+            {{~/if~}}
+        {{~/unless~}}
         <div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black {{getStringByCondition value=includeVerticalVideo expectedValue=true trueResult="su-gap-36" falseResult="su-gap-80 md:su-gap-72 lg:su-gap-[76px]"}} before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] {{featuredGridDivClasses isNested alignment}}">
             {{~#each items~}}
-                {{~#unlessEquals @index 0~}}
+                {{~#if featuredCards~}}
+                    {{~#unlessEquals @index 0~}}
+                        {{> featured-grid-content squizEdit=../squizEdit placement=(increment @index) alignment=../alignment isNested=../isNested includeVerticalVideo=../includeVerticalVideo gridType=../gridType }}
+                    {{~/unlessEquals~}}
+                {{~else~}}
                     {{> featured-grid-content squizEdit=../squizEdit placement=(increment @index) alignment=../alignment isNested=../isNested includeVerticalVideo=../includeVerticalVideo gridType=../gridType }}
-                {{~/unlessEquals~}}
+                {{~/if~}}
             {{~/each~}}
         </div>
         {{~#if hasNestedGrid~}}{{~#if items.[0]~}}

@@ -75,11 +75,7 @@ export default {
             teaserOneDescription = teaserOneDescription || 'Scholar Name';
             teaserTwoDescription = teaserTwoDescription || 'Scholar Name';
             
-            // Provide default asset IDs for edit mode
-            featuredTeaser = featuredTeaser || 'matrix-asset://api-identifier/sample-featured-teaser';
-            personHeadshot = personHeadshot || 'matrix-asset://api-identifier/sample-headshot';
-            teaserOne = teaserOne || 'matrix-asset://api-identifier/sample-teaser-one';
-            teaserTwo = teaserTwo || 'matrix-asset://api-identifier/sample-teaser-two';
+            
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -142,11 +138,21 @@ export default {
         const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
         adapter.setCardService(service);
 
-        // Add component data to the cards 
+        
+        const featuredCards = [];
         const cards = []
-        featuredTeaser && cards.push({ cardAsset: featuredTeaser })
-        teaserOne && cards.push({ cardAsset: teaserOne });
-        teaserTwo && cards.push({ cardAsset: teaserTwo });
+
+        // Add featured data to the cards and ffeaturedCards Arrays
+        featuredTeaser && cards.push({ type: 'featured', cardAsset: featuredTeaser })
+        featuredTeaser && featuredCards.push({ type: 'featured', cardAsset: featuredTeaser })
+
+        // Add supplementary data to the cards Array
+        teaserOne && cards.push({ type: 'teaserOne', cardAsset: teaserOne });
+        teaserTwo && cards.push({ type: 'teaserTwo', cardAsset: teaserTwo });
+
+        const featured = cards.find(c => c.type === 'featured');
+        const teaserOneCard = cards.find(c => c.type === 'teaserOne');
+        const teaserTwoCard = cards.find(c => c.type === 'teaserTwo');
    
         // if we found cards fetch the data from matrix
         if (cards?.length) {
@@ -167,9 +173,7 @@ export default {
                 title: `Sample News Article ${index + 1}`,
                 description: `This is a sample description for news article ${index + 1}`,
                 liveUrl: '#',
-                source: `Sample Source ${index + 1}`,
-                // credit: `Sample Credit ${index + 1}`,
-                // authorName: `Sample Author ${index + 1}`
+                source: `Sample Source ${index + 1}`
             }));
         }
         
@@ -238,32 +242,52 @@ export default {
 
         const cardData = [];
         
-        // Prepare feature data
-        if (data) {
-            
-             data[0] && cardData.push({
-                ...data[0],
-                quote: helpers.unescapeHtml(featuredQuote),
-                description: featuredTeaserDescription ? helpers.unescapeHtml(featuredTeaserDescription) : '',
-                ctaText: featuredCtaText || "Read the story",
+        const getDataObject = (id) => {
+            return data?.find(item => item.id === id || item.assetId === id) || {};
+        };
+                
+                
+        if (featured) {
+            const base = {
+                ...getDataObject(featured.cardAsset?.id),
                 imageURL: imageData?.url,
                 imageAlt: imageData?.alt
+            };
+
+            cardData.push({
+                ...base,
+                quote: featuredQuote,
+                description: featuredTeaserDescription || '',
+                ctaText: featuredCtaText || 'Read the story'
             });
-    
-            // Prepare teaser one data
-            data[1] && cardData.push({
-                ...data[1],
-                description: teaserOneDescription && teaserOneDescription !== "" ? helpers.unescapeHtml(teaserOneDescription) : helpers.unescapeHtml(data[1].description),
-                isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
+        }
+
+        if (teaserOneCard) {
+            const base = {
+                ...getDataObject(teaserOneCard.cardAsset?.id),
+                imageURL: imageData?.url,
+                imageAlt: imageData?.alt
+            };
+
+            cardData.push({
+                ...base,
+                description: teaserOneDescription || base.description,
+                isCustomDescription: !!teaserOneDescription
             });
-            
-            // Prepare teaser two data
-             data[2] && cardData.push({
-                ...data[2],
-                description: teaserTwoDescription && teaserTwoDescription !== "" ? helpers.unescapeHtml(teaserTwoDescription) : helpers.unescapeHtml(data[2].description),
-                isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
+        }
+
+        if (teaserTwoCard) {
+            const base = {
+                ...getDataObject(teaserTwoCard.cardAsset?.id),
+                imageURL: imageData?.url,
+                imageAlt: imageData?.alt
+            };
+
+            cardData.push({
+                ...base,
+                description: teaserTwoDescription || base.description,
+                isCustomDescription: !!teaserTwoDescription
             });
-    
         }
 
         // Data validation - CHANGE: wrap in !squizEdit check
@@ -288,7 +312,8 @@ export default {
             headingCtaNewWindow: headingData?.ctaNewWindow,
             headingCtaText: headingData?.ctaText,
             featuredGridItems: cardData,
-            squizEdit: squizEdit 
+            squizEdit: squizEdit,
+            featuredCards: featuredCards.length > 0 ? true : false
         }; 
         
         // NEW: Early return pattern for edit mode
