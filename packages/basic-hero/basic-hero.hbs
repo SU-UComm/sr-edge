@@ -3,7 +3,7 @@
     <div class="{{getStringByCondition value=relation expectedValue="child" trueResult="su-rs-py-3" falseResult="su-rs-py-5"}} {{getStringByCondition value=backgroundColor expectedValue="cardinal" trueResult="su-bg-gradient-to-t su-from-cardinal-red-dark su-from-5% su-via-cardinal-red su-via-50% su-to-cardinal-red-dark su-to-95%" falseResult=""}} {{getStringByCondition value=backgroundColor expectedValue="digital red" trueResult="su-bg-digital-red" falseResult=""}} {{getStringByCondition value=parentData expectedValue=true trueResult="su-rs-mb-0" falseResult="su-rs-mb-3"}}"> 
         <div class='{{containerClasses width="wide" customClasses="su-grid su-grid-cols-6 su-grid-gap su-gap-y-0 md:su-grid-cols-12 su-text-white"}}'>
             <h1 class="su-font-serif su-drop-shadow-md su-mb-0 su-col-span-full lg:su-col-span-10 lg:su-col-start-2 {{getStringByCondition value=titleAlignment expectedValue="center" trueResult="su-text-center su-mx-auto" falseResult=""}} {{getStringByCondition value=relation expectedValue="child" trueResult="su-type-3" falseResult=""}} {{#ifEquals relation "child"}} {{getStringByCondition value=parentData.parentTitleAlignment expectedValue="center" trueResult="su-text-center su-mx-auto" falseResult=""}}{{/ifEquals}}">
-                {{~#if parentData.parentTitle~}}
+                {{~#if parentData~}}
                 {{{unescapeHtml parentData.parentTitle}}} 
                 {{~else~}}
                 {{{unescapeHtml title}}}
@@ -16,7 +16,7 @@
             {{~/if~}}
         </div>
     </div>
-    {{~#if parentData.parentTitle~}}
+    {{~#if parentData~}}
     <div class='{{containerClasses width="wide" customClasses="su-grid su-grid-cols-6 su-grid-gap su-gap-y-0 md:su-grid-cols-12"}}'>
         <div class="su-col-span-full lg:su-col-span-10 lg:su-col-start-2 xl:su-col-span-8 xl:su-col-start-3">
             <nav aria-label="breadcrumb" class="su-rs-mb-3">
@@ -32,9 +32,9 @@
                 </ul>
             </nav>
             <h2>{{title}}</h2>
-            {{~#if childSummary~}}
+            {{~#if summary~}}
             <div class="su-text-[1.125em]" >
-                {{{unescapeHtml childSummary}}}
+                {{{unescapeHtml summary}}}
             </div>
             {{~/if~}}
         </div>
