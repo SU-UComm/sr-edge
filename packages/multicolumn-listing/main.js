@@ -133,20 +133,7 @@ export default {
                     return `<!-- Error occurred in the Multicolumn listing component: ${err.message} -->`;
                 }
             }
-
-            dataPromise = Promise.resolve([]);
         }
-
-        // Add error handling to data promise
-        dataPromise = dataPromise.catch(er => {
-            console.error('Error occurred in the Multicolumn listing component: Failed to fetch data. ', er);
-
-            if (!squizEdit) {
-                return `<!-- Error occurred in the Multicolumn listing component: ${er.message} -->`;
-            }
-
-            return []; // Always return sample data array on failure in edit mode
-        });
 
         // Run data fetching and heading service in parallel
         const headingPromise = linkedHeadingService(fnsCtx, { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow });
