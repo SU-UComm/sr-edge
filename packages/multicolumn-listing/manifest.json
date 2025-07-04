@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "multicolumn-listing",
     "type": "edge",
-    "version": "4.1.0",
+    "version": "4.2.1",
     "namespace": "stanford-apb",
     "description": "",
     "displayName": "Multicolumn listing",
@@ -45,6 +45,7 @@
                             "title": {
                                 "title": "Heading",
                                 "type": "string",
+                                "default": "",
                                 "ui:metadata": {
                                     "inlineEditable": true
                                 }
@@ -58,12 +59,16 @@
                             "ctaManualUrl": {
                                 "title": "Manual Link",
                                 "type": "string",
+                                "default": "https://news.stanford.edu",
                                 "description": "Enter the full URL, including https://"
                             },
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",
@@ -76,17 +81,12 @@
                         "title": "Grid Content",
                         "description": "The cards to display in the grid area of the component. When manually selecting cards, at least two must be selected for the grid to display.",
                         "type": "object",
-                        "required": [
-                            "source"
-                        ],
+                        "required": ["source"],
                         "properties": {
                             "source": {
                                 "title": "Content source",
                                 "default": "Search",
-                                "enum": [
-                                    "Search",
-                                    "Select"
-                                ],
+                                "enum": ["Search", "Select"],
                                 "type": "string"
                             }
                         },
@@ -101,9 +101,7 @@
                                     }
                                 },
                                 "then": {
-                                    "required": [
-                                        "searchQuery"
-                                    ],
+                                    "required": [],
                                     "properties": {
                                         "searchQuery": {
                                             "type": "string",
@@ -115,10 +113,7 @@
                                             "title": "Number of cards",
                                             "description": "The maximum number of cards to display.",
                                             "default": 3,
-                                            "enum": [
-                                                2,
-                                                3
-                                            ],
+                                            "enum": [2, 3],
                                             "type": "number"
                                         }
                                     }
@@ -151,9 +146,7 @@
                                                         "title": "Card Asset"
                                                     }
                                                 },
-                                                "required": [
-                                                    "cardAsset"
-                                                ]
+                                                "required": ["cardAsset"]
                                             }
                                         }
                                     }

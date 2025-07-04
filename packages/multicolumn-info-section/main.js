@@ -34,7 +34,7 @@ export default {
 
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
         let squizEditTargets = null;
 
@@ -45,34 +45,31 @@ export default {
             callout = callout !== undefined ? callout : true;
             
             colOne = colOne || {};
-            colOne.title = colOne.title || 'Research';
-            
+            colOne.title = colOne.title || 'Title text';
+
             colTwo = colTwo || {};
-            colTwo.infoText = colTwo.infoText || '<p>Test info text</p>';
-            colTwo.addButton = colTwo.addButton !== undefined ? colTwo.addButton : false;
+            colTwo.infoText = colTwo.infoText || '<p>Add content</p>';
             
             if (colTwo.addButton) {
                 colTwo.buttonConfiguration = colTwo.buttonConfiguration || {};
-                colTwo.buttonConfiguration.buttonText = colTwo.buttonConfiguration.buttonText || 'Read more';
-                colTwo.buttonConfiguration.externalUrl = colTwo.buttonConfiguration.externalUrl || 'https://example.com';
-                colTwo.buttonConfiguration.isNewWindow = colTwo.buttonConfiguration.isNewWindow !== undefined ? colTwo.buttonConfiguration.isNewWindow : false;
+                colTwo.buttonConfiguration.buttonText = colTwo.buttonConfiguration.buttonText || 'Button text';
+                colTwo.buttonConfiguration.infoInternalUrl = colTwo.buttonConfiguration.infoInternalUrl || null;
             }
-            
+
             if (callout) {
                 colThree = colThree || {};
-                colThree.title = colThree.title || 'More Info';
-                colThree.content = colThree.content || '<p>Test content</p>';
+                colThree.title = colThree.title || 'Heading text';
+                colThree.content = colThree.content || '<p>Add content</p>';
                 
                 colThree.imageConfiguration = colThree.imageConfiguration || {};
-                colThree.imageConfiguration.image = colThree.imageConfiguration.image || 'matrix-asset://api-identifier/sample-image';
-                colThree.imageConfiguration.caption = colThree.imageConfiguration.caption || 'Test caption';
-                colThree.imageConfiguration.credit = colThree.imageConfiguration.credit || 'Test credit';
+                colThree.imageConfiguration.image = colThree.imageConfiguration.image || 'matrix-asset://StanfordNews/172387';
+                colThree.imageConfiguration.caption = `<span data-se="caption">${colThree?.imageConfiguration?.caption ? colThree.imageConfiguration.caption : 'Caption text'}</span>`;
+                colThree.imageConfiguration.credit = `<span data-se="credit">${colThree?.imageConfiguration?.credit ? colThree.imageConfiguration.credit : 'Credit text'}</span>`;
                 colThree.imageConfiguration.imagePlacement = colThree.imageConfiguration.imagePlacement || 'Below content';
                 
                 colThree.buttonConfiguration = colThree.buttonConfiguration || {};
-                colThree.buttonConfiguration.buttonText = colThree.buttonConfiguration.buttonText || 'Click me';
-                colThree.buttonConfiguration.externalUrl = colThree.buttonConfiguration.externalUrl || 'https://example.com';
-                colThree.buttonConfiguration.isNewWindow = colThree.buttonConfiguration.isNewWindow !== undefined ? colThree.buttonConfiguration.isNewWindow : false;
+                colThree.buttonConfiguration.buttonText = colThree.buttonConfiguration.buttonText || 'Button text';
+                colThree.buttonConfiguration.internalUrl = colThree.buttonConfiguration.internalUrl || null;
             }
 
             // Add the targets for the squizEdit DOM augmentation
@@ -88,10 +85,12 @@ export default {
                 },
                 "button": [
                     {
-                        "field": "colTwo.buttonConfiguration.buttonText"
+                        "field": "colTwo.buttonConfiguration.buttonText",
+                        "target": "infoTextButton"
                     },
                     {
-                        "field": "colThree.buttonConfiguration.buttonText"
+                        "field": "colThree.buttonConfiguration.buttonText",
+                        "target": "infoBoxButton"
                     }
                 ],
                 "infoBoxTitle": {
@@ -100,8 +99,11 @@ export default {
                 "infoBoxContent": {
                     "field": "colThree.content"
                 },
-                "captionCredit": {
+                "caption": {
                     "field": "colThree.imageConfiguration.caption"
+                },
+                "credit": {
+                    "field": "colThree.imageConfiguration.credit"
                 }
             };
         }
@@ -171,7 +173,7 @@ export default {
                     imageData = await basicAssetUri(fnsCtx, colThree.imageConfiguration.image);
                 } catch (error) {
                     // Provide mock data silently on API failure
-                    imageData = { url: 'https://example.com' };
+                    imageData = { url: null };
                 }
             } else {
                 imageData = await basicAssetUri(fnsCtx, colThree.imageConfiguration.image);
@@ -185,7 +187,7 @@ export default {
                     infoInternalLinkUrl = infoLinkUrl?.url;
                 } catch (error) {
                     // Provide mock data silently on API failure
-                    infoInternalLinkUrl = 'https://example.com';
+                    infoInternalLinkUrl = null;
                 }
             } else {
                 const infoLinkUrl = await basicAssetUri(fnsCtx, colTwo.buttonConfiguration.infoInternalUrl);
@@ -200,7 +202,7 @@ export default {
                     internalLinkUrl = linkUrl?.url;
                 } catch (error) {
                     // Provide mock data silently on API failure
-                    internalLinkUrl = 'https://example.com';
+                    internalLinkUrl = null;
                 }
             } else {
                 const linkUrl = await basicAssetUri(fnsCtx, colThree.buttonConfiguration.internalUrl);
@@ -236,6 +238,8 @@ export default {
             infoText: xss(colTwo.infoText),
             buttonData,
             infoBoxData,
+            buttonJson: JSON.stringify(buttonData),
+            editing: squizEdit
         };
 
         // Return original front end code when squizEdit is false, without modification

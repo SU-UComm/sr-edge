@@ -1,6 +1,7 @@
 import xss from "xss";
 import { cardDataAdapter, funnelbackCardService, uuid, formatNewsDate, isRealExternalLink } from "../../global/js/utils";
 import { pagination } from "../../global/js/helpers";
+import { processEditor } from "../../global/js/utils/processEditor";
 import topicListingTemplate from "./topic-subtopic-listing.hbs";
 
 /**
@@ -33,37 +34,27 @@ export default {
         const { FB_JSON_URL } = info?.env || info?.set?.environment || {};
         
         // Extracting configuration data from arguments 
-        const { searchQuery, displayStyle } = args?.displayConfiguration || {};
+        let { searchQuery, displayStyle } = args?.displayConfiguration || {};
 
-        // Validate required environment variables
-        try {
-            if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
-                throw new Error(
-                    `The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(FB_JSON_URL)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Topic subtopic listing component: ', er);
-            return `<!-- Error occurred in the Topic subtopic listing component: ${er.message} -->`;
-        }
-        
-        // Validate required fields and ensure correct data types
-        try {
-            if (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?') {
-                throw new Error(
-                    `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
-                );
-            }
-            if (!['Default', 'News Archive', 'Press Center', 'Announcements', 'In the News', 'University Updates', 'Leadership Messages'].includes(displayStyle) ) {
-                throw new Error(
-                    `The "displayStyle" field cannot be undefined and must be one of ["Default", "News Archive", "Press Center", "Announcements", "In the News", "University Updates", "Leadership Messages"]. The ${JSON.stringify(displayStyle)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Topic subtopic listing component: ', er);
-            return `<!-- Error occurred in the Topic subtopic listing component: ${er.message} -->`;
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        if(squizEdit) {
+            searchQuery = searchQuery || "?profile=stanford-report-push-search&collection=sug~sp-stanford-report-search&sort=date&log=false";
         }
 
+        if(!squizEdit) {
+            // Validate required fields and ensure correct data types
+            try {
+                if (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?') {
+                    throw new Error(
+                        `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Topic subtopic listing component: ', er);
+                return `<!-- Error occurred in the Topic subtopic listing component: ${er.message} -->`;
+            }
+        }
 
         const adapter = new cardDataAdapter();
         let data = null;
@@ -80,7 +71,11 @@ export default {
             data = await adapter.getResultData();
         } catch (er) {
             console.error('Error occurred in the Topic subtopic listing component: Error parsing Funnelback JSON response: ', er);
-            return `<!-- Error occurred in the Topic subtopic listing component: Error parsing Funnelback JSON response: ${er.message} -->`;
+            if (squizEdit) {
+                // In edit mode, provide mock data instead of throwing error
+                data = [];
+                return `<div></div>`;
+            }
         }
 
         const resultsSummary = data?.resultsSummary;
@@ -130,16 +125,12 @@ export default {
             return { data: cardData, cardType: "horizontal", cardSize: "large" }
         });
 
-        // Validate fetched card data
-        try {
-            if (typeof cards !== 'object' || cards.length < 1) {
+        if(!squizEdit) {
+            if(typeof cards !== 'object' || cards.length < 1) {
                 throw new Error(
                     `The "cards" cannot be undefined or null. The ${JSON.stringify(cards)} was received.`
                 );
             }
-        } catch (er) {
-            console.error('Error occurred in the Topic subtopic listing component: ', er);
-            return `<!-- Error occurred in the Topic subtopic listing component: ${er.message} -->`;
         }
 
         // Prepare component data for template rendering
@@ -158,6 +149,11 @@ export default {
             endpoint: FB_JSON_URL,
             display: displayStyle,
         };
-        return topicListingTemplate(componentData);
+
+        // NEW: Early return pattern for edit mode
+        if (!squizEdit) return topicListingTemplate(componentData);
+
+        // NEW: Process for edit mode
+        return processEditor(topicListingTemplate(componentData), squizEditTargets);
     }
 }

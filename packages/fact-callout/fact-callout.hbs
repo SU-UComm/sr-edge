@@ -12,7 +12,7 @@
                 <span data-test="icon" class="dark:su-hidden">{{#ifEquals icon "pie chart"}}{{> svg-icons icon="pie chart" theme="light"}}{{else}}{{> svg-icons icon="bar graph" theme="light"}}{{/ifEquals}}</span>              
                 <span data-test="icon" class="su-hidden dark:su-block">{{#ifEquals icon "pie chart"}}{{> svg-icons icon="pie chart" theme="dark"}}{{else}}{{> svg-icons icon="bar graph" theme="dark"}}{{/ifEquals}}</span>              
                 {{#if factText}}
-                    <p class="su-font-serif su-m-0">{{factText}}</p>
+                    <p class="su-font-serif su-m-0" data-se="factText">{{factText}}</p>
                 {{/if}}
                 </div>
             </section>

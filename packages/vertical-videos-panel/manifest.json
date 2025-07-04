@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "vertical-videos-panel",
     "type": "edge",
-    "version": "4.1.1",
+    "version": "4.2.8",
     "namespace": "stanford-apb",
     "description": "A section that displays up to 3 vertical YouTube videos, with a section title and link to watch more. On smaller devices, the videos will be displayed in a carousel if there are more than 1.",
     "displayName": "Vertical Videos Panel",
@@ -120,18 +120,12 @@
                             "properties": {
                                 "heading": {
                                     "title": "Card heading",
-                                    "type": "string",
-                                    "ui:metadata": {
-                                        "inlineEditable": true
-                                    }
+                                    "type": "string"
                                 },
                                 "subheading": {
                                     "title": "Subheading",
                                     "description": "Smaller text below the card heading.",
-                                    "type": "string",
-                                    "ui:metadata": {
-                                        "inlineEditable": true
-                                    }
+                                    "type": "string"
                                 },
                                 "videoImage": {
                                     "title": "Video preview image",
@@ -197,6 +191,10 @@
             "path": "mocked-uris/page.json"
         },
         "matrix-asset://matrixIdentifier/11": {
+            "type": "file",
+            "path": "mocked-uris/page.json"
+        },
+        "matrix-asset://matrixIdentifier/29389": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },

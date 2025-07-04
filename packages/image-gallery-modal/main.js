@@ -50,15 +50,17 @@ export default {
         
         if (squizEdit) {
             // Provide default values for inline editable fields
-            caption = `<span data-se="caption">${caption}</span>` || `<span data-se="caption">Caption text</span>`;
-            credit = `<span data-se="credit">${credit}</span>` || `<span data-se="credit">Credit text</span>`;
+            caption = `<span data-se="caption">${caption ? caption : 'Caption text'}</span>`;
+            credit = `<span data-se="credit">${credit ? credit : 'Credit text'}</span>`;
+
+
             title = title || 'Heading text';
             summary = summary || 'Add content';
             
             // Ensure each image has a default caption
             images = images.map((img, index) => ({
                 ...img,
-                caption: img.caption || `Add caption`
+                caption: img.caption || `Caption text`
             }));
             
             // Configure edit targets - maps static data-se attributes to component fields
@@ -137,7 +139,7 @@ export default {
 
         const modalImages = carouselImages(imageData);
         const modalCarousel = Carousel({ variant: 'imagegallery', slides: modalImages, isDark: true, uniqueClass: uniqueId});
-        const captionCredit = caption && credit ? `${caption} | ${credit}` : caption || credit;
+        const captionCredit = [caption, credit].filter(Boolean).join(' | ');
         const leftOverImages = imageData.length - previewData.length;
     
         // Prepare component data for template rendering

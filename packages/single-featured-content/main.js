@@ -31,7 +31,6 @@ export default {
         // Extracting environment variables and function from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
-        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
         // CHANGE: change const to let for mutability
@@ -39,94 +38,24 @@ export default {
         let { source, description } = args?.contentConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         let squizEditTargets = null;
         
         if (squizEdit) {
             // Add default values for inline editable fields
-            title = title || 'Featured Content';
-            ctaText = ctaText || 'View all';
-            description = description || '<p>This is a sample description override that can be edited inline to customize the featured content description.</p>';
+            title = title || 'Heading text';
+            ctaText = ctaText || 'Link text';
+            ctaUrl = ctaUrl || null;
+            // ctaManualUrl = ctaManualUrl || 'https://news.stanford.edu';
             
             // Provide default values for other required fields
-            source = source || 'matrix-asset://api-identifier/162618';
-            ctaUrl = ctaUrl || '';
-            ctaManualUrl = ctaManualUrl || 'https://example.com';
-            ctaNewWindow = ctaNewWindow !== undefined ? ctaNewWindow : false;
-            
+            source = source || 'matrix-asset://api-identifier/163459';
+
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
                 "headingTitle": { "field": "headingConfiguration.title" },
-                "headingCtaText": { "field": "headingConfiguration.ctaText" },
-                "description": { "field": "contentConfiguration.description" }
+                "headingCtaText": { "field": "headingConfiguration.ctaText" }
             };
-        }
-
-        // NEW: Wrap validation in !squizEdit check
-        if (!squizEdit) {
-            // Validate required environment variables
-            try {
-                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                    throw new Error(
-                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                    );
-                }
-                if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
-                    throw new Error(
-                        `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
-                    );
-                }
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                    throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Single featured content component: ', er);
-                return `<!-- Error occurred in the Single featured content component: ${er.message} -->`;
-            }
-
-            // Validate required fields and ensure correct data types
-            try {
-                if (typeof source !== 'string' || source.trim() === '') {
-                    throw new Error(
-                        `The "source" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(source)} was received.`
-                    );
-                }
-                if (description && typeof description !== 'string') {
-                    throw new Error(
-                        `The "description" field must be a string. The ${JSON.stringify(description)} was received.`
-                    );
-                }
-                if (title && typeof title !== 'string') {
-                    throw new Error(
-                        `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
-                    );
-                }
-                if (ctaUrl && typeof ctaUrl !== 'string') {
-                    throw new Error(
-                        `The "ctaUrl" field must be a string. The ${JSON.stringify(ctaUrl)} was received.`
-                    );
-                }
-                if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
-                    throw new Error(
-                        `The "ctaManualUrl" field must be a string. The ${JSON.stringify(ctaManualUrl)} was received.`
-                    );
-                }
-                if (ctaText && typeof ctaText !== 'string') {
-                    throw new Error(
-                        `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
-                    );
-                }
-                if (ctaNewWindow && typeof ctaNewWindow !== 'boolean') {
-                    throw new Error(
-                        `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
-                    );
-                }
-            } catch (er) {
-                console.error('Error occurred in the Single featured content component: ', er);
-                return `<!-- Error occurred in the Single featured content component: ${er.message} -->`;
-            }
         }
 
         const adapter = new cardDataAdapter();
@@ -143,20 +72,9 @@ export default {
             data = await adapter.getCards([{ cardAsset: source }]);
         } catch (er) {
             console.error('Error occurred in the Single featured content: Failed to fetch feature data. ', er);
-            // NEW: In edit mode, provide mock data instead of returning error
+            
             if (squizEdit) {
-                data = [{
-                    title: 'Sample Featured Content Title',
-                    description: 'This is a sample description from the API that would normally be fetched.',
-                    liveUrl: 'https://example.com',
-                    imageUrl: 'https://picsum.photos/600/400',
-                    imageAlt: 'Sample featured content image',
-                    taxonomy: 'Featured',
-                    taxonomyUrl: 'https://example.com',
-                    type: 'Article'
-                }];
-            } else {
-                return `<!-- Error occurred in the Single featured content: Failed to fetch feature data. ${er.message} -->`;
+                data = null;
             }
         }
 
@@ -171,10 +89,27 @@ export default {
         })[0]
 
         // Resolve the URI for the section heading link
-        const headingData = await linkedHeadingService(
-            fnsCtx,
-            { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow }
-        );
+        let headingData;
+        try {
+            headingData = await linkedHeadingService(
+                componentFunctions,
+                { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow }
+            );
+        } catch (er) {
+            
+            if (squizEdit) {
+                headingData = {
+                    title: title,
+                    ctaText: ctaText,
+                    ctaLink: '#',
+                    ctaNewWindow: ctaNewWindow || false
+                };
+
+            } else {
+                // console.error('Error occurred in the Single featured content: Failed to resolve heading link. ', er);
+                return `<!-- Error occurred in the Single featured content: Failed to resolve heading link. ${er.message} -->`;
+            }
+        }
 
         // NEW: Wrap validation in !squizEdit check
         if (!squizEdit) {
@@ -203,10 +138,9 @@ export default {
             data: JSON.stringify(cardData)
         };
 
-        // NEW: Early return pattern
-        if (!squizEdit) return singleFeaturedTemplate(componentData);
 
-        // NEW: Process for edit mode
+        if (!squizEdit) return singleFeaturedTemplate(componentData);
+        
         return processEditor(singleFeaturedTemplate(componentData), squizEditTargets);
     }
 };
