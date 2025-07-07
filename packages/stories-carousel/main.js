@@ -157,7 +157,6 @@ export default {
             // we should strip the double slash but preserve protocol://            
             headingData.ctaLink = `${BASE_DOMAIN}${BASE_PATH}${NEWS_ARCHIVE_PATH}`;
             headingData.ctaLink = headingData.ctaLink.replace(/([^:])\/\//g, '$1/');
-            console.log("headingData -> default cta link", headingData);
         } 
 
         const cardData = [];
