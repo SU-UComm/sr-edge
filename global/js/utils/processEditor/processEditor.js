@@ -52,44 +52,26 @@ export async function processEditor(output, squizEditTargets) {
         );
         
         if (Array.isArray(targetConfig)) {
-
-            //NEW FIX
-            // output = output.replace(regex, (match, capturedGroup, targetValue) => {
+            // Handle array mapping - each element gets sequential field mappings
+            let elementIndex = 0;
+            
+            output = output.replace(regex, (match, capturedGroup, targetValue) => {
+                // Get the field mapping for this element index
+                const fieldMapping = targetConfig[elementIndex];
                 
-            //     // Find the correct field mapping based on target
-            //     const fieldMapping = targetConfig.find(mapping => {
-            //         if (mapping.target) {
-            //             return targetValue === mapping.target;
-            //         }
-            //         return true; // If no target specified, use first available
-            //     });
+                // Check if target filtering is required and if target matches
+                if (fieldMapping.target && targetValue !== fieldMapping.target) {
+                    // Target doesn't match, return unchanged
+                    return match;
+                }
                 
-            //     // If no matching field mapping found, return unchanged
-            //     if (!fieldMapping) {
-            //         return match;
-            //     }
-            //END NEW FIX
-
-
-            // Handle array mapping - each object in the array gets its own processing
-            targetConfig.forEach((fieldMapping) => {
-                output = output.replace(regex, (match, capturedGroup, targetValue) => {
-                    // Check if target filtering is required and if target matches
-                    if (fieldMapping.target && targetValue !== fieldMapping.target) {
-                        // Target doesn't match, return unchanged
-                        return match;
-                    }
-                    
-                    const fieldName = fieldMapping.field;
-                    // Preserve the data-se-target attribute if it exists
-                    const targetAttr = targetValue ? ` data-se-target="${targetValue}"` : '';
-                    const result = `${capturedGroup}${targetAttr} data-sq-field="${fieldName}"`;
-                    return result;
-
-
-                });
-
-
+                const fieldName = fieldMapping.field;
+                // Preserve the data-se-target attribute if it exists
+                const targetAttr = targetValue ? ` data-se-target="${targetValue}"` : '';
+                const result = `${capturedGroup}${targetAttr} data-sq-field="${fieldName}"`;
+                
+                elementIndex++; // Move to next field mapping for next element
+                return result;
             });
 
 

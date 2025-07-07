@@ -49,20 +49,14 @@ export default {
         // Extracting functions from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
-        const fnsCtx = componentFunctions || componentContext || {};
-        
-        // CHANGE: change const to let for mutability
+
         let { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow } = args?.headingConfiguration || {};
         let { featuredTeaser, personHeadshot, featuredCtaText, featuredTeaserDescription, featuredQuote } = args?.featuredContent || {};
         let { teaserOne, teaserOneDescription } = args?.supplementaryTeaserOne || {};
         let { teaserTwo, teaserTwoDescription } = args?.supplementaryTeaserTwo || {};
 
-        // NEW: Detect edit mode
-
         const squizEdit = info?.ctx?.editor || false;
-        // const squizEdit = true; 
         let squizEditTargets = null;
-        
 
         if (squizEdit) {
             // if we are in edit mode 
@@ -86,12 +80,8 @@ export default {
                 "featuredTeaserDescription": { "field": "featuredContent.featuredTeaserDescription" },
                 "ctaText": { "field": "featuredContent.featuredCtaText" },
                 "teaserDescription": [
-                    { "field": "supplementaryTeaserOne.teaserOneDescription",
-                    //   "target": "teaserOne"
-                     },
-                    { "field": "supplementaryTeaserTwo.teaserTwoDescription",
-                    //   "target": "teaserTwo"
-                     }
+                    { "field": "supplementaryTeaserOne.teaserOneDescription", "target": "teaserOne"},
+                    { "field": "supplementaryTeaserTwo.teaserTwoDescription", "target": "teaserTwo"}
                 ]
             };
         }
@@ -108,9 +98,9 @@ export default {
             }
 
             try {
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                if (typeof componentFunctions !== 'object' || typeof componentFunctions.resolveUri === 'undefined') {
                     throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(componentFunctions)} was received.`
                     );
                 }
                 validateString(API_IDENTIFIER, 'API_IDENTIFIER');
@@ -177,10 +167,9 @@ export default {
         // Resolve the URI for the section heading link
         let headingData = null;
         try {
-            
             headingData = await linkedHeadingService(
-                fnsCtx,
-                args.headingConfiguration
+                componentFunctions,
+                { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow }
             );
         } catch (er) {
             console.error('Error occurred in the In the news component: Failed to resolve heading link. ', er);
@@ -201,7 +190,7 @@ export default {
         if (personHeadshot) {
             try {
                 
-                imageData = await basicAssetUri(fnsCtx, personHeadshot);
+                imageData = await basicAssetUri(componentFunctions, personHeadshot);
                 // Check required properties - CHANGE: wrap in !squizEdit check
                 if (!squizEdit) {
                     if (!imageData || typeof imageData !== 'object') {
@@ -241,8 +230,8 @@ export default {
         if (data) {
              data[0] && featuredCards.length > 0 && cardData.push({
                 ...data[0],
-                quote: featuredQuote,
-                description: featuredTeaserDescription ? featuredTeaserDescription : '',
+                quote: helpers.unescapeHtml(featuredQuote),
+                description: featuredTeaserDescription ? helpers.unescapeHtml(featuredTeaserDescription) : '',
                 ctaText: featuredCtaText || "Read the story",
                 imageURL: imageData?.url,
                 imageAlt: imageData?.alt
@@ -251,7 +240,7 @@ export default {
             if(data[0] && featuredCards.length === 0){
                 cardData.push({
                     ...data[0],
-                    description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[0].description,
+                    description: teaserOneDescription && teaserOneDescription !== "" ? helpers.unescapeHtml(teaserOneDescription) : helpers.unescapeHtml(data[0].description),
                     isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false,
                     teaserTarget: "teaserOne"
                 });
@@ -259,7 +248,7 @@ export default {
                 if(data[1]){
                     cardData.push({
                         ...data[1],
-                        description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[1].description,
+                        description: teaserTwoDescription && teaserTwoDescription !== "" ? helpers.unescapeHtml(teaserTwoDescription) : helpers.unescapeHtml(data[1].description),
                         isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false,
                         teaserTarget: "teaserTwo"
                     });
@@ -268,7 +257,7 @@ export default {
                 // Prepare teaser one data
                 data[1] && cardData.push({
                     ...data[1],
-                    description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[1].description,
+                    description: teaserOneDescription && teaserOneDescription !== "" ? helpers.unescapeHtml(teaserOneDescription) : helpers.unescapeHtml(data[1].description),
                     isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false,
                     teaserTarget: "teaserOne"
                 });
@@ -276,7 +265,7 @@ export default {
                 // Prepare teaser two data
                 data[2] && cardData.push({
                     ...data[2],
-                    description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[2].description,
+                    description: teaserTwoDescription && teaserTwoDescription !== "" ? helpers.unescapeHtml(teaserTwoDescription) : helpers.unescapeHtml(data[2].description),
                     isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false,
                     teaserTarget: "teaserTwo"
                 });
