@@ -5,6 +5,7 @@ import {
     uuid,
 } from '../../global/js/utils';
 import standaloneVisualHeroTemplate from './standalone-visual-hero.hbs';
+import helpers from '../../global/hbs/helpers/helpers.js';
 
 /**
  * Standalone Visual Hero component that renders a hero banner with video
@@ -77,6 +78,9 @@ export default {
             mediaType = 'image';
         }
 
+        const captionCredit = [media?.caption, media?.credit].filter(Boolean).join(' | ');
+        const captionCreditUnescaped = helpers.unescapeHtml(captionCredit);
+
         const uniqueID = uuid();
 
         const componentData = {
@@ -108,9 +112,7 @@ export default {
                       titleID: 'video-modal',
                   }
                 : null,
-            captionCredit: [media?.caption, media?.credit]
-                .filter(Boolean)
-                .join(' | '),
+            captionCredit: captionCreditUnescaped,
         };
 
         return standaloneVisualHeroTemplate(componentData);

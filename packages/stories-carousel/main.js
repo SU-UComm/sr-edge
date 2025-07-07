@@ -29,6 +29,7 @@ export default {
      * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
      */
     async main(args, info) {
+
         // Detect edit mode
         const squizEdit = info?.ctx?.editor || false;
         
@@ -131,10 +132,11 @@ export default {
             console.error('Error occurred in the Stories carousel component while fetching user stories:', er);
             return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
         }
-        ////// ------------
+        
 
         if (squizEdit) {
             
+            headingInfo.title = headingInfo.title || "Heading text"
             headingInfo.ctaUrl = headingInfo.ctaUrl || null;
             headingInfo.ctaText = headingInfo.ctaText || "Link text";
             
@@ -147,10 +149,15 @@ export default {
             fnsCtx,
             headingInfo
         );
+
         
-        if (headingData && !headingData.ctaLink) {
+        if (headingData && !headingData.ctaLink) {            
+            // there is a case where these environment variable cause 
+            // https://news.stanford.edu//news-archive/
+            // we should strip the double slash but preserve protocol://            
             headingData.ctaLink = `${BASE_DOMAIN}${BASE_PATH}${NEWS_ARCHIVE_PATH}`;
-        }
+            headingData.ctaLink = headingData.ctaLink.replace(/([^:])\/\//g, '$1/');
+        } 
 
         const cardData = [];
         const modalData = [];

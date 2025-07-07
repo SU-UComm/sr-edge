@@ -244,9 +244,13 @@ export function _topicsInit(section) {
  *
  * @listens DOMContentLoaded
  */
-document.addEventListener('DOMContentLoaded', function () {
+function initializeTopicSubtopicListings() {
     document.querySelectorAll(TOPICS_SUBTOPICS_SELECTOR).forEach(section => {
         _modalInit(section);
         _topicsInit(section);
     });
-});
+};
+
+document.addEventListener('DOMContentLoaded', initializeTopicSubtopicListings);
+document.addEventListener('livePreviewUpdated', initializeTopicSubtopicListings);
+

@@ -208,9 +208,12 @@ export function _carouselInit(section) {
  *
  * @listens DOMContentLoaded
  */
-document.addEventListener('DOMContentLoaded', function () {
+function initializeVerticalVideosPanels() {
     document.querySelectorAll(VERTICAL_VIDEO_PANEL_SELECTOR).forEach(section => {
         _carouselInit(section);
         _modalInit(section);
     });    
-});
+};
+
+document.addEventListener('DOMContentLoaded', initializeVerticalVideosPanels);
+document.addEventListener('livePreviewUpdated', initializeVerticalVideosPanels);

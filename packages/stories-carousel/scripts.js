@@ -228,11 +228,13 @@ export function _carouselInit(section) {
  *
  * @listens DOMContentLoaded
  */
-document.addEventListener('DOMContentLoaded', function () {
+function initializeStoriesCarousels() {
     document.querySelectorAll(STORIES_CAROUSEL_SELECTOR).forEach(section => {
         _carouselInit(section)
         _modalInit(section);
     });    
-});
+};
 
+document.addEventListener('DOMContentLoaded', initializeStoriesCarousels);
+document.addEventListener('livePreviewUpdated', initializeStoriesCarousels);
 
