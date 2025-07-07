@@ -18,8 +18,14 @@
                     </div>
                 </div>
                 <div class="su-relative su-flex su-flex-col su-h-full su-min-w-full su-rounded-[8px] su-rs-px-5 su-rs-pt-6 su-rs-pb-4 su-bg-digital-red-dark su-text-white [transform:rotateY(180deg)_translate(100%,0)] su-backface-hidden su-transition-transform {{#unless alwaysDark}}su-shadow-lg{{/unless}}" aria-hidden="true" data-card-inner-content="true">
-                    <div class="su-big-paragraph su-grow" data-se="content">
-                        {{{content}}}
+                    <div class="su-big-paragraph su-grow">
+                        {{#if squizEdit}}
+                        <div data-se="content">
+                            {{{content}}}
+                        </div>
+                        {{else}}
+                            {{{content}}}
+                        {{/if}}                        
                         <button type="button" tabIndex="-1" aria-label="Dismiss content" class="su-group su-block su-ml-auto su-mr-0 su-border-3 su-border-white su-rounded-full su-text-white su-p-7 lg:su-p-14 su-transition-colors {{#if alwaysDark}}focus:su-bg-black-true hocus:su-bg-black-true{{else}}focus:su-bg-black hocus:su-bg-black{{/if}}">
                             {{> svg-icons icon="arrows rotate" classes=iconArrowClasses}}
                         </button>
