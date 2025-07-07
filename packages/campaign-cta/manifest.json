@@ -33,6 +33,13 @@
                                 "type": "string",
                                 "format": "matrix-asset-uri"
                             },
+                            "imageOverlay": {
+                                "title": "Image gradient overlay",
+                                "description": "An overlay is required to maintain accessibility and readability. Use this to control the darkness of the overlay.",
+                                "type": "string",
+                                "default": "dark",
+                                "enum": ["light", "medium", "dark"]
+                            },
                             "title": {
                                 "title": "Title",
                                 "description": "The campaign title",

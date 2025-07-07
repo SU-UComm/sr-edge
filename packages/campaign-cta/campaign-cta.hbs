@@ -36,7 +36,14 @@
                     alt='{{imageData.attributes.alt.value}}'
                 />
             {{/if}}
-            <div class='su-campaign-cta-gradient su-z-[1]'></div>
+            <div
+                class='su-absolute su-w-full su-h-full su-bg-black-true/25 su-z-[1]'
+            ></div>
+            <div
+                class='su-absolute su-w-full su-h-full su-bg-gradient-to-t
+                    {{imageOverlayClasses imageOverlay}}
+                    su-z-[1]'
+            ></div>
         </div>
     </div>
 </section>
