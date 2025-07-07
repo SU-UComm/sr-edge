@@ -1,6 +1,7 @@
 import { basicAssetUri, cardDataAdapter, matrixCardService, linkedHeadingService } from '../../global/js/utils';
 import inTheNewsTemplate from './in-the-news.hbs';
 import { processEditor } from '../../global/js/utils/processEditor';
+import helpers from '../../global/hbs/helpers/helpers.js';
 
 /**
  * In the news component that renders a formatted content card with associated metadata and SVG icons.
@@ -242,8 +243,8 @@ export default {
             
              data[0] && cardData.push({
                 ...data[0],
-                quote: featuredQuote,
-                description: featuredTeaserDescription ? featuredTeaserDescription : '',
+                quote: helpers.unescapeHtml(featuredQuote),
+                description: featuredTeaserDescription ? helpers.unescapeHtml(featuredTeaserDescription) : '',
                 ctaText: featuredCtaText || "Read the story",
                 imageURL: imageData?.url,
                 imageAlt: imageData?.alt
@@ -252,14 +253,14 @@ export default {
             // Prepare teaser one data
             data[1] && cardData.push({
                 ...data[1],
-                description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[1].description,
+                description: teaserOneDescription && teaserOneDescription !== "" ? helpers.unescapeHtml(teaserOneDescription) : helpers.unescapeHtml(data[1].description),
                 isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
             });
             
             // Prepare teaser two data
              data[2] && cardData.push({
                 ...data[2],
-                description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[2].description,
+                description: teaserTwoDescription && teaserTwoDescription !== "" ? helpers.unescapeHtml(teaserTwoDescription) : helpers.unescapeHtml(data[2].description),
                 isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
             });
     
