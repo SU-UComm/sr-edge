@@ -58,6 +58,7 @@ export default {
         let { teaserTwo, teaserTwoDescription } = args?.supplementaryTeaserTwo || {};
 
         // NEW: Detect edit mode
+
         const squizEdit = info?.ctx?.editor || false;
         // const squizEdit = true; 
         let squizEditTargets = null;
@@ -85,8 +86,12 @@ export default {
                 "featuredTeaserDescription": { "field": "featuredContent.featuredTeaserDescription" },
                 "ctaText": { "field": "featuredContent.featuredCtaText" },
                 "teaserDescription": [
-                    { "field": "supplementaryTeaserOne.teaserOneDescription" },
-                    { "field": "supplementaryTeaserTwo.teaserTwoDescription" }
+                    { "field": "supplementaryTeaserOne.teaserOneDescription",
+                    //   "target": "teaserOne"
+                     },
+                    { "field": "supplementaryTeaserTwo.teaserTwoDescription",
+                    //   "target": "teaserTwo"
+                     }
                 ]
             };
         }
@@ -247,14 +252,16 @@ export default {
                 cardData.push({
                     ...data[0],
                     description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[0].description,
-                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
+                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false,
+                    teaserTarget: "teaserOne"
                 });
 
                 if(data[1]){
                     cardData.push({
                         ...data[1],
                         description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[1].description,
-                        isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
+                        isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false,
+                        teaserTarget: "teaserTwo"
                     });
                 }
             } else {
@@ -262,14 +269,16 @@ export default {
                 data[1] && cardData.push({
                     ...data[1],
                     description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[1].description,
-                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
+                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false,
+                    teaserTarget: "teaserOne"
                 });
 
                 // Prepare teaser two data
                 data[2] && cardData.push({
                     ...data[2],
                     description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[2].description,
-                    isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
+                    isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false,
+                    teaserTarget: "teaserTwo"
                 });
             }
         }

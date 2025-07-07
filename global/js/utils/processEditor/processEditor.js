@@ -52,6 +52,25 @@ export async function processEditor(output, squizEditTargets) {
         );
         
         if (Array.isArray(targetConfig)) {
+
+            //NEW FIX
+            // output = output.replace(regex, (match, capturedGroup, targetValue) => {
+                
+            //     // Find the correct field mapping based on target
+            //     const fieldMapping = targetConfig.find(mapping => {
+            //         if (mapping.target) {
+            //             return targetValue === mapping.target;
+            //         }
+            //         return true; // If no target specified, use first available
+            //     });
+                
+            //     // If no matching field mapping found, return unchanged
+            //     if (!fieldMapping) {
+            //         return match;
+            //     }
+            //END NEW FIX
+
+
             // Handle array mapping - each object in the array gets its own processing
             targetConfig.forEach((fieldMapping) => {
                 output = output.replace(regex, (match, capturedGroup, targetValue) => {
@@ -66,8 +85,14 @@ export async function processEditor(output, squizEditTargets) {
                     const targetAttr = targetValue ? ` data-se-target="${targetValue}"` : '';
                     const result = `${capturedGroup}${targetAttr} data-sq-field="${fieldName}"`;
                     return result;
+
+
                 });
+
+
             });
+
+
         } else if (targetConfig.array) {
             // Handle array types with automatic indexing using square brackets
             let index = 0;
