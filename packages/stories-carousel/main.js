@@ -132,7 +132,7 @@ export default {
             console.error('Error occurred in the Stories carousel component while fetching user stories:', er);
             return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
         }
-        ////// ------------
+        
 
         if (squizEdit) {
             
@@ -149,10 +149,16 @@ export default {
             fnsCtx,
             headingInfo
         );
+
         
-        if (headingData && !headingData.ctaLink) {
+        if (headingData && !headingData.ctaLink) {            
+            // there is a case where these environment variable cause 
+            // https://news.stanford.edu//news-archive/
+            // we should strip the double slash but preserve protocol://            
             headingData.ctaLink = `${BASE_DOMAIN}${BASE_PATH}${NEWS_ARCHIVE_PATH}`;
-        }
+            headingData.ctaLink = headingData.ctaLink.replace(/([^:])\/\//g, '$1/');
+            console.log("headingData -> default cta link", headingData);
+        } 
 
         const cardData = [];
         const modalData = [];
