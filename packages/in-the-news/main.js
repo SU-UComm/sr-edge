@@ -138,21 +138,13 @@ export default {
         const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
         adapter.setCardService(service);
 
-        
+
         const featuredCards = [];
         const cards = []
-
-        // Add featured data to the cards and ffeaturedCards Arrays
-        featuredTeaser && cards.push({ type: 'featured', cardAsset: featuredTeaser })
-        featuredTeaser && featuredCards.push({ type: 'featured', cardAsset: featuredTeaser })
-
-        // Add supplementary data to the cards Array
-        teaserOne && cards.push({ type: 'teaserOne', cardAsset: teaserOne });
-        teaserTwo && cards.push({ type: 'teaserTwo', cardAsset: teaserTwo });
-
-        const featured = cards.find(c => c.type === 'featured');
-        const teaserOneCard = cards.find(c => c.type === 'teaserOne');
-        const teaserTwoCard = cards.find(c => c.type === 'teaserTwo');
+        featuredTeaser && cards.push({ cardAsset: featuredTeaser })
+        featuredTeaser && featuredCards.push({ cardAsset: featuredTeaser })
+        teaserOne && cards.push({ cardAsset: teaserOne });
+        teaserTwo && cards.push({ cardAsset: teaserTwo });
    
         // if we found cards fetch the data from matrix
         if (cards?.length) {
@@ -241,53 +233,45 @@ export default {
         }
 
         const cardData = [];
-        
-        const getDataObject = (id) => {
-            return data?.find(item => item.id === id || item.assetId === id) || {};
-        };
-                
-                
-        if (featured) {
-            const base = {
-                ...getDataObject(featured.cardAsset?.id),
-                imageURL: imageData?.url,
-                imageAlt: imageData?.alt
-            };
-
-            cardData.push({
-                ...base,
+        if (data) {
+             data[0] && featuredCards.length > 0 && cardData.push({
+                ...data[0],
                 quote: featuredQuote,
-                description: featuredTeaserDescription || '',
-                ctaText: featuredCtaText || 'Read the story'
-            });
-        }
-
-        if (teaserOneCard) {
-            const base = {
-                ...getDataObject(teaserOneCard.cardAsset?.id),
+                description: featuredTeaserDescription ? featuredTeaserDescription : '',
+                ctaText: featuredCtaText || "Read the story",
                 imageURL: imageData?.url,
                 imageAlt: imageData?.alt
-            };
-
-            cardData.push({
-                ...base,
-                description: teaserOneDescription || base.description,
-                isCustomDescription: !!teaserOneDescription
             });
-        }
+        
+            if(data[0] && featuredCards.length === 0){
+                cardData.push({
+                    ...data[0],
+                    description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[0].description,
+                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
+                });
 
-        if (teaserTwoCard) {
-            const base = {
-                ...getDataObject(teaserTwoCard.cardAsset?.id),
-                imageURL: imageData?.url,
-                imageAlt: imageData?.alt
-            };
+                if(data[1]){
+                    cardData.push({
+                        ...data[1],
+                        description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[1].description,
+                        isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
+                    });
+                }
+            } else {
+                // Prepare teaser one data
+                data[1] && cardData.push({
+                    ...data[1],
+                    description: teaserOneDescription && teaserOneDescription !== "" ? teaserOneDescription : data[1].description,
+                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
+                });
 
-            cardData.push({
-                ...base,
-                description: teaserTwoDescription || base.description,
-                isCustomDescription: !!teaserTwoDescription
-            });
+                // Prepare teaser two data
+                data[2] && cardData.push({
+                    ...data[2],
+                    description: teaserTwoDescription && teaserTwoDescription !== "" ? teaserTwoDescription : data[2].description,
+                    isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
+                });
+            }
         }
 
         // Data validation - CHANGE: wrap in !squizEdit check
