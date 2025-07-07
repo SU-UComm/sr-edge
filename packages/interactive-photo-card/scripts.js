@@ -22,6 +22,10 @@ export function handleFlip(cardInner) {
     const newRotation = (currentRotation + 180) % 360;
     
     cardInner.style.transform = `rotateY(${newRotation}deg)`;
+    
+    // Update accessibility states for both sides of the card
+    const cardsInnerContent = cardInner.querySelectorAll(CARD_INNER_CONTENT);
+    toggleCardsVisibility(cardsInnerContent);
 }
 
 /**
@@ -40,7 +44,21 @@ export function _interactivePhotoCardInit(cardElement) {
         return;
     }
     
-    cardInner.addEventListener('click', () => handleFlip(cardInner));
+    // Find both flip buttons (plus icon and rotate arrows icon)
+    const flipButtons = cardInner.querySelectorAll('button[aria-label="See additional information"], button[aria-label="Dismiss content"]');
+    
+    if (!flipButtons.length) {
+        console.error('Could not find flip buttons for component');
+        return;
+    }
+    
+    // Add click event to each flip button
+    flipButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent event bubbling
+            handleFlip(cardInner);
+        });
+    });
 }
 
 /**
@@ -66,11 +84,10 @@ export const toggleCardsVisibility = (cardsInnerContent) => {
 
 /**
  * Initializes interactive photo card content functionality
- * Sets up click handlers for all card inner content elements
+ * Sets up initial accessibility states for card content elements
  *
  * @function initInteractivePhotoCardContent
  * @param {HTMLElement} cardElement - Parent element containing card inner content elements
- * @throws {Error} If card inner content elements are not found
  * @returns {void}
  */
 export const _interactivePhotoCardContentInit = (cardElement) => {
@@ -78,9 +95,15 @@ export const _interactivePhotoCardContentInit = (cardElement) => {
     
     if (!cardsInnerContent.length) return;
     
-    cardsInnerContent.forEach(card => 
-        card.addEventListener('click', () => toggleCardsVisibility(cardsInnerContent))
-    );
+    // Set initial accessibility states without adding click events
+    // Click events are now handled by the flip buttons only
+    cardsInnerContent.forEach(card => {
+        const button = card.querySelector('button');
+        if (button) {
+            const isHidden = card.getAttribute('aria-hidden') === 'true';
+            button.tabIndex = isHidden ? '-1' : '';
+        }
+    });
 };
 
 function initializeInteractivePhotoCards() {
