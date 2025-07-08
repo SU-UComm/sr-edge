@@ -1595,7 +1595,8 @@ Subscribe to Stanford Report Marketo form styles
    shoudn't use the site's default link styles.
 */
 div[data-component="basic-hero"] a,
-div[data-component="interactive-photo-card"] a {
+div[data-component="interactive-photo-card"] a,
+div[data-component="interactive-photo-card"] [data-component="interactive-photo-card"] a {
   @apply su-text-white hocus:su-no-underline hocus:su-opacity-80 dark:hocus:su-text-white;
 }
 
