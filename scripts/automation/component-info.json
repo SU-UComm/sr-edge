@@ -1,0 +1,282 @@
+[
+    {
+        "asset_assetid": "173333",
+        "asset_name": "Acknowledgement (Inline Edge)",
+        "component_name": "acknowledgement",
+        "component_path": "packages/acknowledgement",
+        "version": "4.1.51"
+    },
+    {
+        "asset_assetid": "173334",
+        "asset_name": "Button (Inline Edge)",
+        "component_name": "button",
+        "component_path": "packages/button",
+        "version": "4.1.13"
+    },
+    {
+        "asset_assetid": "173335",
+        "asset_name": "Button row (Inline Edge)",
+        "component_name": "button-row",
+        "component_path": "packages/button-row",
+        "version": "4.1.15"
+    },
+    {
+        "asset_assetid": "173336",
+        "asset_name": "Campaign CTA (Inline Edge)",
+        "component_name": "campaign-cta",
+        "component_path": "packages/campaign-cta",
+        "version": "4.1.13"
+    },
+    {
+        "asset_assetid": "173337",
+        "asset_name": "Combined Content Grid (Inline Edge)",
+        "component_name": "combined-content-grid",
+        "component_path": "packages/combined-content-grid",
+        "version": "4.2.31"
+    },
+    {
+        "asset_assetid": "173338",
+        "asset_name": "Content Carousel (Inline Edge)",
+        "component_name": "content-carousel",
+        "component_path": "packages/content-carousel",
+        "version": "4.2.0"
+    },
+    {
+        "asset_assetid": "173339",
+        "asset_name": "CTA Cards Block (Inline Edge)",
+        "component_name": "cta-cards-block",
+        "component_path": "packages/cta-cards-block",
+        "version": "4.1.11"
+    },
+    {
+        "asset_assetid": "173340",
+        "asset_name": "Events Section (Inline Edge)",
+        "component_name": "events-section",
+        "component_path": "packages/events-section",
+        "version": "4.2.2"
+    },
+    {
+        "asset_assetid": "173342",
+        "asset_name": "Fact callout (Inline Edge)",
+        "component_name": "fact-callout",
+        "component_path": "packages/fact-callout",
+        "version": "4.1.3"
+    },
+    {
+        "asset_assetid": "173343",
+        "asset_name": "Featured content (Inline Edge)",
+        "component_name": "featured-content",
+        "component_path": "packages/featured-content",
+        "version": "4.2.1"
+    },
+    {
+        "asset_assetid": "173344",
+        "asset_name": "Fullscreen Image Quote (Inline Edge)",
+        "component_name": "fullscreen-image-quote",
+        "component_path": "packages/fullscreen-image-quote",
+        "version": "4.1.1"
+    },
+    {
+        "asset_assetid": "173345",
+        "asset_name": "Horizontal Video Testimonials (Inline Edge)",
+        "component_name": "horizontal-video-testimonials",
+        "component_path": "packages/horizontal-video-testimonials",
+        "version": "4.2.1"
+    },
+    {
+        "asset_assetid": "173346",
+        "asset_name": "Image gallery with modal (Inline Edge)",
+        "component_name": "image-gallery-modal",
+        "component_path": "packages/image-gallery-modal",
+        "version": "4.1.11"
+    },
+    {
+        "asset_assetid": "173347",
+        "asset_name": "Image quote (Inline Edge)",
+        "component_name": "image-quote",
+        "component_path": "packages/image-quote",
+        "version": "4.2.81"
+    },
+    {
+        "asset_assetid": "173348",
+        "asset_name": "In brief (Inline Edge)",
+        "component_name": "in-brief",
+        "component_path": "packages/in-brief",
+        "version": "4.2.1"
+    },
+    {
+        "asset_assetid": "173349",
+        "asset_name": "In the news (Inline Edge)",
+        "component_name": "in-the-news",
+        "component_path": "packages/in-the-news",
+        "version": "4.2.8"
+    },
+    {
+        "asset_assetid": "173350",
+        "asset_name": "Interactive Photo Card (Inline Edge)",
+        "component_name": "interactive-photo-card",
+        "component_path": "packages/interactive-photo-card",
+        "version": "4.2.5"
+    },
+    {
+        "asset_assetid": "173351",
+        "asset_name": "Leadership messages (Inline Edge)",
+        "component_name": "leadership-messages",
+        "component_path": "packages/leadership-messages",
+        "version": "4.3.0"
+    },
+    {
+        "asset_assetid": "173352",
+        "asset_name": "Media carousel (Inline Edge)",
+        "component_name": "media-carousel",
+        "component_path": "packages/media-carousel",
+        "version": "4.2.0"
+    },
+    {
+        "asset_assetid": "173353",
+        "asset_name": "Media feature (Inline Edge)",
+        "component_name": "media-feature",
+        "component_path": "packages/media-feature",
+        "version": "4.1.2"
+    },
+    {
+        "asset_assetid": "173354",
+        "asset_name": "Multicolumn Fact Panel (Inline Edge)",
+        "component_name": "multicolumn-fact-panel",
+        "component_path": "packages/multicolumn-fact-panel",
+        "version": "4.1.1"
+    },
+    {
+        "asset_assetid": "173355",
+        "asset_name": "Multicolumn image (Inline Edge)",
+        "component_name": "multicolumn-image",
+        "component_path": "packages/multicolumn-image",
+        "version": "4.3.3"
+    },
+    {
+        "asset_assetid": "173356",
+        "asset_name": "Multicolumn Info Section (Inline Edge)",
+        "component_name": "multicolumn-info-section",
+        "component_path": "packages/multicolumn-info-section",
+        "version": "4.2.11"
+    },
+    {
+        "asset_assetid": "173357",
+        "asset_name": "Multicolumn listing (Inline Edge)",
+        "component_name": "multicolumn-listing",
+        "component_path": "packages/multicolumn-listing",
+        "version": "4.2.14"
+    },
+    {
+        "asset_assetid": "173358",
+        "asset_name": "Policy brief (Inline Edge)",
+        "component_name": "policy-brief",
+        "component_path": "packages/policy-brief",
+        "version": "4.1.3"
+    },
+    {
+        "asset_assetid": "173359",
+        "asset_name": "Pull quote (Inline Edge)",
+        "component_name": "pull-quote",
+        "component_path": "packages/pull-quote",
+        "version": "4.1.3"
+    },
+    {
+        "asset_assetid": "173360",
+        "asset_name": "Related stroy (Inline Edge)",
+        "component_name": "related-story",
+        "component_path": "packages/related-story",
+        "version": "4.1.4"
+    },
+    {
+        "asset_assetid": "173361",
+        "asset_name": "Single Image or Video (Inline Edge)",
+        "component_name": "single-image-video",
+        "component_path": "packages/single-image-video",
+        "version": "4.1.13"
+    },
+    {
+        "asset_assetid": "173362",
+        "asset_name": "Single CTA Block (Inline Edge)",
+        "component_name": "single-cta-block",
+        "component_path": "packages/single-cta-block",
+        "version": "4.1.11"
+    },
+    {
+        "asset_assetid": "173363",
+        "asset_name": "Single Featured Content (Inline Edge)",
+        "component_name": "single-featured-content",
+        "component_path": "packages/single-featured-content",
+        "version": "4.3.1"
+    },
+    {
+        "asset_assetid": "173364",
+        "asset_name": "Single Text Block (Inline Edge)",
+        "component_name": "single-text-block",
+        "component_path": "packages/single-text-block",
+        "version": "4.1.3"
+    },
+    {
+        "asset_assetid": "173365",
+        "asset_name": "Stories carousel (Inline Edge)",
+        "component_name": "stories-carousel",
+        "component_path": "packages/stories-carousel",
+        "version": "4.2.6"
+    },
+    {
+        "asset_assetid": "173366",
+        "asset_name": "Story Lead (Inline Edge)",
+        "component_name": "story-lead",
+        "component_path": "packages/story-lead",
+        "version": "4.1.1"
+    },
+    {
+        "asset_assetid": "173367",
+        "asset_name": "Text Callout (Inline Edge)",
+        "component_name": "text-callout",
+        "component_path": "packages/text-callout",
+        "version": "4.1.7"
+    },
+    {
+        "asset_assetid": "173368",
+        "asset_name": "Topic Subtopic listing (Inline Edge)",
+        "component_name": "topic-subtopic-listing",
+        "component_path": "packages/topic-subtopic-listing",
+        "version": "4.1.12"
+    },
+    {
+        "asset_assetid": "173369",
+        "asset_name": "Two column text callout (Inline Edge)",
+        "component_name": "two-column-text-callout",
+        "component_path": "packages/two-column-text-callout",
+        "version": "4.1.15"
+    },
+    {
+        "asset_assetid": "173370",
+        "asset_name": "Vertical Videos Panel (Inline Edge)",
+        "component_name": "vertical-videos-panel",
+        "component_path": "packages/vertical-videos-panel",
+        "version": "4.2.8"
+    },
+    {
+        "asset_assetid": "173371",
+        "asset_name": "Content with Sidebar (Inline Edge)",
+        "component_name": "content-with-sidebar",
+        "component_path": "packages/content-with-sidebar",
+        "version": "1.0.12"
+    },
+    {
+        "asset_assetid": "173372",
+        "asset_name": "Campaign Hero (Inline Edge)",
+        "component_name": "campaign-cta",
+        "component_path": "packages/campaign-cta",
+        "version": "4.1.13"
+    },
+    {
+        "asset_assetid": "173373",
+        "asset_name": "Featured Content - VV (Inline Edge)",
+        "component_name": "featured-content",
+        "component_path": "packages/featured-content",
+        "version": "4.2.1"
+    }
+]
