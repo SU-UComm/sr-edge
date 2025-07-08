@@ -55,6 +55,6 @@
         <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}"
             class="su-object-cover su-w-full su-h-full su-p-20 {{#if mobileImageData.url}}su-hidden lg:su-block{{/if}} {{imageVPosition}}" />
         {{~/if~}}
-        <div aria-hidden="true" class="su-absolute su-inset-0 su-z-10 su-bg-gradient-to-t su-from-black-true {{imageOverlayClasses imageOverlay}} su-to-black-true/0 su-to-70% lg:su-to-60% {{getStringByCondition value=quoteHAlign expectedValue="left" trueResult="lg:su-bg-gradient-to-r" falseResult="lg:su-bg-gradient-to-l"}}"></div>
+        <div aria-hidden="true" class="su-absolute su-inset-0 su-z-10 su-bg-gradient-to-t su-from-black-true {{gradientOverlayClasses imageOverlay}} su-to-black-true/0 su-to-70% lg:su-to-60% {{getStringByCondition value=quoteHAlign expectedValue="left" trueResult="lg:su-bg-gradient-to-r" falseResult="lg:su-bg-gradient-to-l"}}"></div>
     </div>
 </section>

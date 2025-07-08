@@ -396,14 +396,14 @@ export const helpers = {
         const { value, expectedValue, trueResult, falseResult } = options.hash;
         return value > expectedValue ? trueResult : falseResult;
     },
-    imageOverlayClasses: function(imageOverlay) {
-        const imageOverlayClasses = new Map()
+    gradientOverlayClasses: function(imageOverlay) {
+        const gradientOverlayClasses = new Map()
 
-        imageOverlayClasses.set('light', 'lg:su-from-black-true/50');
-        imageOverlayClasses.set('medium', 'lg:su-from-black-true/75');
-        imageOverlayClasses.set('dark', 'lg:su-from-black-true');
+        gradientOverlayClasses.set('light', 'lg:su-from-black-true/50');
+        gradientOverlayClasses.set('medium', 'lg:su-from-black-true/75');
+        gradientOverlayClasses.set('dark', 'lg:su-from-black-true');
 
-        return imageOverlayClasses.get(imageOverlay);
+        return gradientOverlayClasses.get(imageOverlay);
     },
 }
 
