@@ -55,7 +55,7 @@ export default {
         let { teaserOne, teaserOneDescription } = args?.supplementaryTeaserOne || {};
         let { teaserTwo, teaserTwoDescription } = args?.supplementaryTeaserTwo || {};
 
-        const squizEdit = info?.ctx?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         let squizEditTargets = null;
 
         if (squizEdit) {
@@ -69,8 +69,6 @@ export default {
             featuredCtaText = featuredCtaText || 'Read the story';
             teaserOneDescription = teaserOneDescription || 'Scholar Name';
             teaserTwoDescription = teaserTwoDescription || 'Scholar Name';
-            
-            
             
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
@@ -298,12 +296,11 @@ export default {
             featuredCards: featuredCards.length > 0 ? true : false
         }; 
         
-        // NEW: Early return pattern for edit mode
-        if (squizEdit) {
-             return processEditor(inTheNewsTemplate(componentData), squizEditTargets, args);
+        if (!squizEdit) {
+            return inTheNewsTemplate(componentData);
         }
-
-        return inTheNewsTemplate(componentData);
+        return processEditor(inTheNewsTemplate(componentData), squizEditTargets);
+        
     }
 };
 
