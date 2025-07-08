@@ -1509,7 +1509,9 @@ Subscribe to Stanford Report Marketo form styles
  .su-always-dark .su-page-campaign main {
    @apply su-text-white;
  }
- /* Links in default wysiwyg*/
+ 
+ /* Links in default wysiwyg and inner-card-content */
+ [data-component="interactive-photo-card"] [data-card-inner-content] a
  .su-always-dark .su-page-campaign .su-page-content > p a {
    @apply su-text-white hocus:su-text-dark-mode-red;
  }
@@ -1594,13 +1596,15 @@ Subscribe to Stanford Report Marketo form styles
    and Interactive Photo Card. Both have red backgrounds and
    shoudn't use the site's default link styles.
 */
-div[data-component="basic-hero"] a,
-div[data-component="interactive-photo-card"] a,
-div[data-component="interactive-photo-card"] a [data-card-inner-component] a  {
+[data-component="basic-hero"] a,
+[data-component="interactive-photo-card"] a {
   @apply su-text-white hocus:su-no-underline hocus:su-opacity-80 dark:hocus:su-text-white;
-
 }
 
+
+/* div[data-component="interactive-photo-card"] [data-card-inner-content="true"][aria-hidden="true"] a  {
+  color: blue !important;
+} */
 /* Link styles to remove underline on :hocus for multicolumn-info-section component.
 The .su-wysiwyg-content class adds some odd stuff that I'm not sure we want here.
 Will need to further evaluate, but this will do for now. */
