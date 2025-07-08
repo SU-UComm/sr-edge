@@ -1596,8 +1596,9 @@ Subscribe to Stanford Report Marketo form styles
 */
 div[data-component="basic-hero"] a,
 div[data-component="interactive-photo-card"] a,
-div[data-component="interactive-photo-card"] [data-component="card-inner-content"] a {
+div[data-component="interactive-photo-card"] a [data-card-inner-component] a  {
   @apply su-text-white hocus:su-no-underline hocus:su-opacity-80 dark:hocus:su-text-white;
+
 }
 
 /* Link styles to remove underline on :hocus for multicolumn-info-section component.
