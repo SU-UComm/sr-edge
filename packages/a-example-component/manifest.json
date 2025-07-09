@@ -1,0 +1,78 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "example-component",
+    "type": "edge",
+    "version": "0.0.1",
+    "namespace": "stanford-apb",
+    "description": "This component serves as an example to base ongoing development on.",
+    "displayName": "Example Component",
+    "mainFunction": "main",
+    "icon": {
+        "id": "star",
+        "color": {
+            "type": "enum",
+            "value": "gray"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [
+                    "title"
+                ],
+                "properties": {
+                    "title": {
+                        "title": "Title",
+                        "type": "string",
+                        "default": "Title text",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
+                    },
+                    "description": {
+                        "title": "Description",
+                        "type": "FormattedText",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
+                    },
+                    "image": {
+                        "title": "Image",
+                        "type": "string",
+                        "format": "matrix-asset-uri"
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://StanfordNews/172387": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        }
+    }
+}
