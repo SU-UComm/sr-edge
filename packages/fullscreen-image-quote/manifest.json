@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "fullscreen-image-quote",
     "type": "edge",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "namespace": "stanford-components",
     "description": "This component displays a full width image with a quote and CTA.",
     "displayName": "Fullscreen Image Quote",
