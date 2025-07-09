@@ -23,8 +23,7 @@
         "watch": "chokidar \"./packages/**/*.{js,scss,json,html,hbs}\" --silent -c \"CHANGED_FILE={path} vite build --config vite.config.js && CHANGED_FILE={path} vite build --config vite-global.config.js\"",
         "dxp": "dxp-next cmp dev-ui ./dist",
         "dev": "npm run build && concurrently \"npm run watch\" \"npm run dxp\"",
-        "vermgmt": "vermgmt",
-        "uat": "node scripts/automation/uat.js"
+        "vermgmt": "vermgmt"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -54,7 +53,6 @@
         "handlebars": "^4.7.7",
         "handlebars-helpers": "^0.10.0",
         "happy-dom": "^15.11.7",
-        "node-fetch": "^2.7.0",
         "npm-run-all": "^4.1.5",
         "object-hash": "^3.0.0",
         "postcss-import": "^16.1.0",

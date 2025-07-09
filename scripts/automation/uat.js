@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import fetch from 'node-fetch';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -15,14 +14,112 @@ const __dirname = path.dirname(__filename);
 // Configuration
 const CONFIG = {
     // Base URL for the Asset Management API
-    AMAPI_BASE_URL: process.env.AMAPI_BASE_URL || 'https://news.stanford.edu/__management_api/v1',
+    AMAPI_BASE_URL: process.env.AMAPI_BASE_URL,
     // Authorization token
     AUTH_TOKEN: process.env.MANAGEMENT_API_KEY,
+    // DXP API token for component version sync
+    DXP_TOKEN: process.env.DXP_TOKEN,
+    // DXP API base URL for component management
+    DXP_API_URL: 'https://dxp.squiz.cloud/__dxp/au/components-management/sug-9278/v1/component-set/stanford-apb',
     // Path to packages directory relative to script location
     PACKAGES_DIR: path.join(__dirname, '..', '..', 'packages'),
     // Path to component info JSON file
     COMPONENT_INFO_PATH: path.join(__dirname, 'component-info.json')
 };
+
+/**
+ * Fetch latest component versions from DXP API and update component-info.json
+ * @returns {Promise<boolean>} Success status
+ */
+async function syncComponentVersions() {
+    try {
+        console.log('🔄 Syncing component versions from DXP API...');
+        
+        // Check if DXP token is available
+        if (!CONFIG.DXP_TOKEN) {
+            console.error('❌ DXP_TOKEN not found in environment variables.');
+            console.error('Please add your DXP API token to the .env file:');
+            console.error('DXP_TOKEN=your_dxp_token_here');
+            return false;
+        }
+        
+        // Fetch component data from DXP API
+        const response = await fetch(CONFIG.DXP_API_URL, {
+            method: 'GET',
+            headers: {
+                'x-api-key': CONFIG.DXP_TOKEN,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (!data.components) {
+            throw new Error('No components data found in API response');
+        }
+        
+        console.log(`Found ${Object.keys(data.components).length} components in DXP API`);
+        
+        // Load current component info
+        const currentComponentInfo = await fetchPageAssets();
+        let hasUpdates = false;
+        
+        // Process each component from the API
+        for (const [componentKey, componentVersions] of Object.entries(data.components)) {
+            if (!Array.isArray(componentVersions) || componentVersions.length === 0) {
+                continue;
+            }
+            
+            // Extract component name from key (e.g., "stanford-apb/cta-cards-block" -> "cta-cards-block")
+            const componentName = componentKey.replace('stanford-apb/', '');
+            
+            // Find the latest version (assuming versions are sorted or we need to find the highest)
+            const latestVersion = componentVersions.reduce((latest, current) => {
+                // Compare semantic versions
+                const latestParts = latest.version.split('.').map(Number);
+                const currentParts = current.version.split('.').map(Number);
+                
+                for (let i = 0; i < Math.max(latestParts.length, currentParts.length); i++) {
+                    const latestPart = latestParts[i] || 0;
+                    const currentPart = currentParts[i] || 0;
+                    
+                    if (currentPart > latestPart) {
+                        return current;
+                    } else if (currentPart < latestPart) {
+                        return latest;
+                    }
+                }
+                return latest;
+            });
+            
+            // Find matching component in our local data
+            const localComponent = currentComponentInfo.find(comp => comp.component_name === componentName);
+            
+            if (localComponent && localComponent.version !== latestVersion.version) {
+                console.log(`📦 Updating ${componentName}: ${localComponent.version} → ${latestVersion.version}`);
+                localComponent.version = latestVersion.version;
+                hasUpdates = true;
+            }
+        }
+        
+        if (hasUpdates) {
+            // Write updated component info back to file
+            await fs.writeFile(CONFIG.COMPONENT_INFO_PATH, JSON.stringify(currentComponentInfo, null, 4), 'utf8');
+            console.log('✅ Component versions synced successfully');
+        } else {
+            console.log('✅ All component versions are up to date');
+        }
+        
+        return true;
+    } catch (error) {
+        console.error('❌ Error syncing component versions:', error.message);
+        return false;
+    }
+}
 
 /**
  * Parse command line arguments to extract component names
@@ -502,36 +599,15 @@ async function processComponent(componentName, pageAssets) {
  */
 async function main() {
     console.log('Starting UAT content update process...\n');
-    
-    // Check if auth token is available
-    if (!CONFIG.AUTH_TOKEN) {
-        console.error('❌ AUTH_TOKEN not found in environment variables.');
-        console.error('Please add your authorization token to the .env file:');
-        console.error('AUTH_TOKEN=your_actual_token_here');
-        process.exit(1);
+
+    // Sync component versions from DXP API first
+    const syncSuccess = await syncComponentVersions();
+    if (!syncSuccess) {
+        console.error('❌ Failed to sync component versions. Continuing with existing versions...');
     }
-    
-    console.log('✅ Authorization token loaded from .env file');
     
     // Parse command line arguments
     const { components: componentsToProcess, showSummary } = parseCommandLineArgs();
-    
-    // If --summary flag is provided, show available example data files
-    if (showSummary) {
-        console.log('=== Available Example Data Files ===\n');
-        const summary = await getExampleDataSummary();
-        
-        if (Object.keys(summary).length === 0) {
-            console.log('No example data files found.');
-        } else {
-            for (const [componentName, files] of Object.entries(summary)) {
-                console.log(`${componentName}:`);
-                files.forEach(file => console.log(`  - ${file}`));
-                console.log('');
-            }
-        }
-        return;
-    }
     
     console.log(`Components to process: ${componentsToProcess.join(', ')}`);
     
@@ -563,5 +639,6 @@ export {
     processComponent,
     getExampleDataSummary,
     convertHtmlToFormattedText,
-    processFormattedTextFields
+    processFormattedTextFields,
+    syncComponentVersions
 }; 
