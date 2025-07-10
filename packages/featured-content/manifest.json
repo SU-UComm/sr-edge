@@ -3,7 +3,7 @@
     "name": "featured-content",
     "type": "edge",
     "version": "3.0.1",
-    "namespace": "stanford-components",
+    "namespace": "mig-stanford-components",
     "description": "",
     "displayName": "Featured content",
     "mainFunction": "main",
