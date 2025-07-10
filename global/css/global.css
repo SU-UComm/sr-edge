@@ -1511,7 +1511,7 @@ Subscribe to Stanford Report Marketo form styles
  }
 
  /* Links in default wysiwyg and inner-card-content */
- [data-component="interactive-photo-card"] [data-card-inner-content] a
+ [data-component="interactive-photo-card"] [data-card-inner-content] a,
  .su-always-dark .su-page-campaign .su-page-content > p a {
    @apply su-text-white hocus:su-text-dark-mode-red;
  }
