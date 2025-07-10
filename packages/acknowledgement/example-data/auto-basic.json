@@ -1,0 +1,15 @@
+{
+    "title": "For more information",
+    "content": [
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "For more information about this research, please contact the Stanford News Service at news-service@stanford.edu or call (650) 723-2558."
+                }
+            ]
+        }
+    ]
+}

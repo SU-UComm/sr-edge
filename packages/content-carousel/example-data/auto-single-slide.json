@@ -1,0 +1,60 @@
+{
+    "title": "Important Announcement",
+    "slides": [
+        {
+            "content": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "Stanford University is pleased to announce the launch of its new "
+                        },
+                        {
+                            "type": "tag",
+                            "tag": "em",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "value": "Global Innovation Initiative"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": ", a comprehensive program designed to address global challenges through collaborative research, education, and community engagement. This initiative represents a significant step forward in Stanford's mission to create positive change worldwide."
+                        }
+                    ]
+                },
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "For more information about this groundbreaking program, please visit our "
+                        },
+                        {
+                            "type": "tag",
+                            "tag": "a",
+                            "attributes": {
+                                "href": "https://stanford.edu"
+                            },
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "value": "dedicated website"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": " or contact the program office directly."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

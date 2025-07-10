@@ -1,0 +1,46 @@
+{
+    "slides": [
+        {
+            "content": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "Stanford University continues to lead in innovation and research, pushing the boundaries of knowledge across all disciplines while preparing students to address the world's most pressing challenges."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "The university's commitment to "
+                        },
+                        {
+                            "type": "tag",
+                            "tag": "strong",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "value": "access and affordability"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": " ensures that talented students from all backgrounds can access a Stanford education, regardless of their financial circumstances."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

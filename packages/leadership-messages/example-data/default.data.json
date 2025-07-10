@@ -2,7 +2,7 @@
     "headingConfiguration": {
         "title": "Messages from Leadership",
         "ctaText": "View all",
-        "ctaUrl": "matrix-asset://api-identifier/28192",
+        "ctaUrl": "matrix-asset://StanfordNews/28192",
         "ctaNewWindow": false
     },
     "contentConfiguration": {

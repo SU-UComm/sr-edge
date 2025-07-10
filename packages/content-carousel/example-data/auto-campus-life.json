@@ -1,0 +1,103 @@
+{
+    "title": "Campus Life",
+    "slides": [
+        {
+            "content": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "Stanford's vibrant campus community celebrates diversity and inclusion through numerous cultural events, student organizations, and community engagement programs that enrich the educational experience."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "The university's commitment to sustainability is evident across campus, from "
+                        },
+                        {
+                            "type": "tag",
+                            "tag": "strong",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "value": "zero-waste initiatives"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": " to renewable energy projects and sustainable transportation options that serve as models for other institutions."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "Stanford's athletic programs continue to excel, with student-athletes achieving both academic and competitive success while representing the university's values of excellence, integrity, and sportsmanship."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "The campus dining experience has been transformed with "
+                        },
+                        {
+                            "type": "tag",
+                            "tag": "em",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "value": "locally sourced ingredients"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": " and diverse menu options that reflect the global community of students and faculty."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "Stanford's residential communities provide more than just housing—they create spaces for intellectual growth, cultural exchange, and lifelong friendships that extend far beyond graduation."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

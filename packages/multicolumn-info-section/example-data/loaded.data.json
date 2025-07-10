@@ -10,7 +10,7 @@
         "buttonConfiguration": {
             "buttonText": "Optional link button",
             "externalUrl": "",
-            "infoInternalUrl": "matrix-asset://api-identifier/28192",
+            "infoInternalUrl": "matrix-asset://StanfordNews/28192",
             "isNewWindow": true
         }
     },
@@ -18,7 +18,7 @@
         "title": "Title here",
         "content": "<p><span class='underline'><a href='https://ora.stanford.edu/2025-federal-administration-transition' target='_self'>Office of Research Administration – 2025 Federal Administration Transition</a></span>: This page provides information and updates related to the effects of federal directives on research activities at Stanford.</p>",
         "imageConfiguration": {
-            "image": "matrix-asset://api-identifier/99100",
+            "image": "matrix-asset://StanfordNews/99100",
             "caption": "This is the image's title",
             "credit": "Isaac Astley",
             "imagePlacement": "Below content"
@@ -26,7 +26,7 @@
         "buttonConfiguration": {
             "buttonText": "Optional link button",
             "externalUrl": "",
-            "internalUrl": "matrix-asset://api-identifier/28192",
+            "internalUrl": "matrix-asset://StanfordNews/28192",
             "isNewWindow": true
         }
     }

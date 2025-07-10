@@ -2,10 +2,10 @@
     "headingConfiguration": {
         "title": "Welcome to Stanford University!",
         "ctaText": "View all",
-        "ctaUrl": "matrix-asset://api-identifier/162618"
+        "ctaUrl": "matrix-asset://StanfordNews/162618"
     },
     "contentConfiguration": {
-        "source": "matrix-asset://api-identifier/162618",
+        "source": "matrix-asset://StanfordNews/162618",
         "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>"
     }
 }

@@ -1,0 +1,92 @@
+{
+    "title": "Research Highlights",
+    "slides": [
+        {
+            "content": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "Stanford researchers have developed a new approach to "
+                        },
+                        {
+                            "type": "tag",
+                            "tag": "strong",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "value": "renewable energy storage"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": " that could significantly improve efficiency and reduce costs for solar and wind power systems worldwide."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "A breakthrough in "
+                        },
+                        {
+                            "type": "tag",
+                            "tag": "em",
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "value": "quantum computing"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": " has been achieved by Stanford scientists, opening new possibilities for solving complex computational problems that were previously impossible to tackle."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "content": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "The Stanford School of Medicine has launched a new initiative to advance "
+                        },
+                        {
+                            "type": "tag",
+                            "tag": "a",
+                            "attributes": {
+                                "href": "https://med.stanford.edu"
+                            },
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "value": "precision medicine"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "text",
+                            "value": " research, bringing together experts from across disciplines to develop personalized treatment approaches."
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

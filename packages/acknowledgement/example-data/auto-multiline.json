@@ -1,0 +1,35 @@
+{
+    "title": "Research acknowledgements",
+    "content": [
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "The authors would like to thank the participants who generously contributed their time and insights to this study. Their valuable feedback and cooperation were essential to the success of this research project."
+                }
+            ]
+        },
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "We also extend our gratitude to the research assistants and graduate students who provided support throughout the data collection and analysis phases. Their dedication and attention to detail significantly enhanced the quality of our findings."
+                }
+            ]
+        },
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "For questions about this research or to request additional information, please contact the lead researcher at research@stanford.edu."
+                }
+            ]
+        }
+    ]
+}

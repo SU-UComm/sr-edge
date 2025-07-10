@@ -2,20 +2,20 @@
     "headingConfiguration": {
         "title": "Multicolumn Listing",
         "ctaText": "View all",
-        "ctaUrl": "matrix-asset://api-identifier/141464",
+        "ctaUrl": "matrix-asset://StanfordNews/141464",
         "ctaNewWindow": true
     },
     "contentConfiguration": {
         "source": "Select",
         "cards": [
             {
-                "cardAsset": "matrix-asset://api-identifier/166535"
+                "cardAsset": "matrix-asset://StanfordNews/166535"
             },
             {
-                "cardAsset": "matrix-asset://api-identifier/162707"
+                "cardAsset": "matrix-asset://StanfordNews/162707"
             },
             {
-                "cardAsset": "matrix-asset://api-identifier/162759"
+                "cardAsset": "matrix-asset://StanfordNews/162759"
             }
         ]
     },

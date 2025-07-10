@@ -1,0 +1,79 @@
+{
+    "heading": "Sustainability Initiatives",
+    "content": [
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "Stanford University has made significant strides in sustainability, implementing comprehensive programs to reduce its environmental footprint and serve as a model for other institutions. The university's "
+                },
+                {
+                    "type": "tag",
+                    "tag": "strong",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "Stanford Energy System Innovations"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": " project has transformed the campus energy infrastructure, reducing greenhouse gas emissions by 68% and saving millions of dollars annually."
+                }
+            ]
+        },
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "Beyond energy, Stanford's sustainability efforts encompass water conservation, waste reduction, and sustainable transportation. The university has achieved "
+                },
+                {
+                    "type": "tag",
+                    "tag": "em",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "zero waste"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": " status and continues to innovate in sustainable practices that can be replicated globally."
+                }
+            ]
+        }
+    ],
+    "infoBox": {
+        "title": "Environmental Impact",
+        "content": [
+            {
+                "type": "tag",
+                "tag": "p",
+                "children": [
+                    {
+                        "type": "text",
+                        "value": "Stanford's sustainability programs have prevented over 150,000 metric tons of CO2 emissions annually, equivalent to removing 32,000 cars from the road."
+                    }
+                ]
+            }
+        ],
+        "imageConfiguration": {
+            "image": "matrix-asset://StanfordNews/125800",
+            "caption": "Solar panels on Stanford campus",
+            "credit": "Courtesy Stanford Sustainability",
+            "imagePlacement": "Above content"
+        },
+        "buttonConfiguration": {
+            "buttonText": "Learn More",
+            "externalUrl": "https://sustainability.stanford.edu",
+            "isNewWindow": false
+        }
+    }
+}

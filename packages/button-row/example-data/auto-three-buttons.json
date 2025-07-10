@@ -1,0 +1,19 @@
+{
+    "buttons": [
+        {
+            "buttonText": "Learn more",
+            "internalUrl": "matrix-asset://StanfordNews/28192",
+            "isNewWindow": false
+        },
+        {
+            "buttonText": "Apply now",
+            "externalUrl": "https://apply.stanford.edu",
+            "isNewWindow": true
+        },
+        {
+            "buttonText": "Contact us",
+            "externalUrl": "https://news.stanford.edu/contact",
+            "isNewWindow": false
+        }
+    ]
+}

@@ -6,35 +6,35 @@
         "summaryAlign": "center",
         "images": [
             {
-                "image": "matrix-asset://api-identifier/163904",
+                "image": "matrix-asset://StanfordNews/163904",
                 "caption": "Graduating seniors participate in the Wacky Walk, an annual Stanford Commencement tradition. | Andrew Brodhead"
             },
             {
-                "image": "matrix-asset://api-identifier/163293",
+                "image": "matrix-asset://StanfordNews/163293",
                 "caption": "A surfer rides a towering wave at sunrise off the coast of Hawaii. | John Doe"
             },
             {
-                "image": "matrix-asset://api-identifier/163591",
+                "image": "matrix-asset://StanfordNews/163591",
                 "caption": "Cherry blossoms in full bloom frame the Washington Monument in spring. | Jane Smith"
             },
             {
-                "image": "matrix-asset://api-identifier/163980",
+                "image": "matrix-asset://StanfordNews/163980",
                 "caption": "A cyclist navigates a foggy morning on the Golden Gate Bridge. | Michael Lee"
             },
             {
-                "image": "matrix-asset://api-identifier/163985",
+                "image": "matrix-asset://StanfordNews/163985",
                 "caption": "Fireworks light up the night sky over the Eiffel Tower on Bastille Day. | Emily Johnson"
             },
             {
-                "image": "matrix-asset://api-identifier/163996",
+                "image": "matrix-asset://StanfordNews/163996",
                 "caption": "A street performer captivates a crowd in New York’s Times Square. | Robert Chen"
             },
             {
-                "image": "matrix-asset://api-identifier/164139",
+                "image": "matrix-asset://StanfordNews/164139",
                 "caption": "Autumn leaves blanket a quiet path in Central Park. | Sarah Martinez"
             },
             {
-                "image": "matrix-asset://api-identifier/164142",
+                "image": "matrix-asset://StanfordNews/164142",
                 "caption": "Graduates pose outside Stanford Stadium. | Andrew Brodhead"
             }
         ],

@@ -1,0 +1,9 @@
+{
+    "buttons": [
+        {
+            "buttonText": "Explore research opportunities",
+            "externalUrl": "https://research.stanford.edu",
+            "isNewWindow": true
+        }
+    ]
+}

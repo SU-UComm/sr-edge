@@ -1,0 +1,60 @@
+{
+    "title": "Article details",
+    "content": [
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "This research was supported by the "
+                },
+                {
+                    "type": "tag",
+                    "tag": "strong",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "National Science Foundation"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": " and the "
+                },
+                {
+                    "type": "tag",
+                    "tag": "em",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "Stanford Institute for Research in the Social Sciences"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": ". Additional funding was provided by the "
+                },
+                {
+                    "type": "tag",
+                    "tag": "a",
+                    "attributes": {
+                        "href": "https://stanford.edu"
+                    },
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "Stanford Research Office"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": "."
+                }
+            ]
+        }
+    ]
+}

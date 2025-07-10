@@ -1,7 +1,7 @@
 {
     "contentConfiguration": {
-        "backgroundImage": "matrix-asset://api-identifier/9848",
-        "image": "matrix-asset://api-identifier/9856",
+        "backgroundImage": "matrix-asset://StanfordNews/9848",
+        "image": "matrix-asset://StanfordNews/9856",
         "title": "University leadership discusses executive orders at Faculty Senate",
         "mediaType": "Magazine",
         "teaserText": "On Thursday, the Faculty Senate heard updates on the university’s response to recent executive orders and from the AI at Stanford Advisory Committee. Senators also voted on two senate governance matters.",

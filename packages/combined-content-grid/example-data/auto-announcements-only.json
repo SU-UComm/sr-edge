@@ -1,0 +1,22 @@
+{
+    "headingConfiguration": {
+        "title": "University News",
+        "ctaText": "View all news",
+        "ctaUrl": "matrix-asset://StanfordNews/163459",
+        "ctaNewWindow": false
+    },
+    "contentConfiguration": {
+        "source": "Search",
+        "searchQuery": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser=false&meta_taxonomyContentTypeText_not=Leadership Message&num_ranks=3"
+    },
+    "displayConfiguration": {
+        "displayThumbnails": true,
+        "displayDescriptions": true
+    },
+    "announcementsConfiguration": {
+        "heading": "Important Updates",
+        "endPoint": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_taxonomyAudienceText=External&meta_taxonomyContentTypeText=Announcement&num_ranks=6",
+        "numberOfItems": 6,
+        "linkUrl": "matrix-asset://StanfordNews/163459"
+    }
+}

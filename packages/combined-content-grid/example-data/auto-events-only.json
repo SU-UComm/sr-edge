@@ -1,0 +1,33 @@
+{
+    "headingConfiguration": {
+        "title": "Research Highlights",
+        "ctaText": "Explore research",
+        "ctaUrl": "matrix-asset://StanfordNews/163459",
+        "ctaNewWindow": true
+    },
+    "contentConfiguration": {
+        "source": "Select",
+        "cards": [
+            {
+                "cardAsset": "matrix-asset://StanfordNews/168663"
+            },
+            {
+                "cardAsset": "matrix-asset://StanfordNews/168591"
+            },
+            {
+                "cardAsset": "matrix-asset://StanfordNews/168624"
+            }
+        ],
+        "featuredDescription": ""
+    },
+    "displayConfiguration": {
+        "displayThumbnails": true,
+        "displayDescriptions": false
+    },
+    "eventsConfiguration": {
+        "heading": "Research Events",
+        "endPoint": "https://news.stanford.edu/_api/events/query",
+        "numberOfItems": 6,
+        "linkUrl": "https://events.stanford.edu"
+    }
+}

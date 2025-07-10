@@ -1,0 +1,39 @@
+{
+    "storyType": "Basic",
+    "bannerType": "normal",
+    "contentType": "News",
+    "titleAlignment": "left",
+    "orientation": "vertical",
+    "pubDate": "2024-12-15 00:00:00",
+    "pubDateFormatted": "December 15th, 2024",
+    "mediaType": "image",
+    "topic": {
+        "asset_assetid": "28411",
+        "asset_name": "Research & Innovation",
+        "asset_url": "https://news.stanford.edu/research/topic/research-and-innovation",
+        "topicPath": "/research/topic/research-and-innovation",
+        "target_id": "141735",
+        "group": "127852",
+        "type": "content_topic",
+        "sectionSummary": ""
+    },
+    "media": {
+        "type": "standard",
+        "featureImage": {
+            "id": "162606",
+            "url": "https://news.stanford.edu/__data/assets/image/0021/162606/research-lab.jpg",
+            "alt": "Scientists working in a research laboratory",
+            "height": "1000",
+            "width": "1500"
+        },
+        "featureVideo": {
+            "id": ""
+        },
+        "carousel": null,
+        "caption": "Research team in the laboratory",
+        "credit": "Courtesy Stanford Research",
+        "captions": []
+    },
+    "title": "Stanford researchers discover breakthrough in renewable energy technology",
+    "summary": "<p>Scientists at Stanford have developed a new approach to solar energy conversion that could significantly improve efficiency and reduce costs for renewable energy systems worldwide.</p>"
+}

@@ -2,10 +2,10 @@
   "buttons": [
     {
       "buttonText": "Button 1",
-      "internalUrl": "matrix-asset://api-identifier/28192"
+      "internalUrl": "matrix-asset://StanfordNews/28192"
     },
     {
-      "buttonText": "Button 2", 
+      "buttonText": "Button 2",
       "externalUrl": "https://google.com",
       "isNewWindow": true
     },

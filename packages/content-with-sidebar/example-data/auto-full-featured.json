@@ -1,0 +1,79 @@
+{
+    "heading": "Research Innovation at Stanford",
+    "content": [
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "Stanford University continues to lead in research innovation across multiple disciplines. Our researchers are developing breakthrough technologies in "
+                },
+                {
+                    "type": "tag",
+                    "tag": "strong",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "artificial intelligence"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": ", renewable energy, and biomedical engineering that have the potential to transform industries and improve lives worldwide."
+                }
+            ]
+        },
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "The university's commitment to interdisciplinary collaboration has resulted in groundbreaking discoveries that bridge traditional academic boundaries. From "
+                },
+                {
+                    "type": "tag",
+                    "tag": "em",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "quantum computing"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": " to sustainable urban development, Stanford researchers are addressing the world's most pressing challenges through innovative approaches and cutting-edge technology."
+                }
+            ]
+        }
+    ],
+    "infoBox": {
+        "title": "Research Highlights",
+        "content": [
+            {
+                "type": "tag",
+                "tag": "p",
+                "children": [
+                    {
+                        "type": "text",
+                        "value": "Stanford researchers have published over 2,000 peer-reviewed papers in the past year, with significant contributions to fields ranging from climate science to medical technology."
+                    }
+                ]
+            }
+        ],
+        "imageConfiguration": {
+            "image": "matrix-asset://StanfordNews/99100",
+            "caption": "Stanford researchers working in the laboratory",
+            "credit": "Courtesy Stanford Research",
+            "imagePlacement": "Below content"
+        },
+        "buttonConfiguration": {
+            "buttonText": "Explore Research",
+            "internalUrl": "matrix-asset://StanfordNews/28192",
+            "isNewWindow": false
+        }
+    }
+}

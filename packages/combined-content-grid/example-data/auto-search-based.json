@@ -1,0 +1,26 @@
+{
+    "headingConfiguration": {
+        "title": "",
+        "ctaUrl": "matrix-asset://StanfordNews/163459"
+    },
+    "contentConfiguration": {
+        "source": "Search",
+        "searchQuery": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser_not=true&num_ranks=3"
+    },
+    "displayConfiguration": {
+        "displayThumbnails": false,
+        "displayDescriptions": true
+    },
+    "eventsConfiguration": {
+        "heading": "Campus Events",
+        "endPoint": "https://news.stanford.edu/_api/events/query",
+        "numberOfItems": 5,
+        "linkUrl": "https://events.stanford.edu"
+    },
+    "announcementsConfiguration": {
+        "heading": "Student Announcements",
+        "endPoint": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_taxonomyAudienceText=Student&meta_taxonomyContentTypeText=Announcement&num_ranks=3",
+        "numberOfItems": 5,
+        "linkUrl": "matrix-asset://StanfordNews/163459"
+    }
+}

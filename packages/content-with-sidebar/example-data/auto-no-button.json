@@ -1,0 +1,74 @@
+{
+    "heading": "Academic Excellence",
+    "content": [
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "Stanford University maintains its position as a world leader in higher education through its commitment to academic excellence, innovative teaching methods, and groundbreaking research. The university's faculty includes "
+                },
+                {
+                    "type": "tag",
+                    "tag": "strong",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "Nobel laureates"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": ", MacArthur Fellows, and members of prestigious national academies who are dedicated to advancing knowledge and mentoring the next generation of leaders."
+                }
+            ]
+        },
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "The university's interdisciplinary approach to education encourages students to explore connections between different fields, fostering creativity and innovation. Stanford's "
+                },
+                {
+                    "type": "tag",
+                    "tag": "em",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "liberal arts foundation"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": " combined with cutting-edge research opportunities provides students with a comprehensive education that prepares them for success in an increasingly complex world."
+                }
+            ]
+        }
+    ],
+    "infoBox": {
+        "title": "Student Success",
+        "content": [
+            {
+                "type": "tag",
+                "tag": "p",
+                "children": [
+                    {
+                        "type": "text",
+                        "value": "Stanford graduates consistently achieve remarkable success in their chosen fields, with alumni leading major corporations, founding innovative startups, and making significant contributions to academia, government, and the arts."
+                    }
+                ]
+            }
+        ],
+        "imageConfiguration": {
+            "image": "matrix-asset://StanfordNews/125801",
+            "caption": "Stanford students in discussion",
+            "credit": "Courtesy Stanford University",
+            "imagePlacement": "Below content"
+        }
+    }
+}

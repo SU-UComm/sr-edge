@@ -1,0 +1,14 @@
+{
+    "buttons": [
+        {
+            "buttonText": "Read the full study",
+            "internalUrl": "matrix-asset://StanfordNews/28192",
+            "isNewWindow": false
+        },
+        {
+            "buttonText": "Download PDF",
+            "externalUrl": "https://example.com/research-paper.pdf",
+            "isNewWindow": true
+        }
+    ]
+}

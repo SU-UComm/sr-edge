@@ -1,0 +1,38 @@
+{
+    "storyType": "Basic",
+    "bannerType": "normal",
+    "contentType": "Announcement",
+    "titleAlignment": "left",
+    "orientation": "vertical",
+    "pubDate": "2024-12-20 00:00:00",
+    "pubDateFormatted": "December 20th, 2024",
+    "mediaType": "none",
+    "topic": {
+        "asset_assetid": "28413",
+        "asset_name": "University Announcements",
+        "asset_url": "https://news.stanford.edu/announcements/topic/university-announcements",
+        "topicPath": "/announcements/topic/university-announcements",
+        "target_id": "141737",
+        "group": "127854",
+        "type": "content_topic",
+        "sectionSummary": ""
+    },
+    "media": {
+        "type": "standard",
+        "featureImage": {
+            "id": "",
+            "url": "",
+            "alt": "",
+            "height": "",
+            "width": ""
+        },
+        "featureVideo": {
+            "id": ""
+        },
+        "carousel": null,
+        "caption": "",
+        "credit": "",
+        "captions": []
+    },
+    "title": "Stanford University announces new sustainability initiative for 2025"
+}

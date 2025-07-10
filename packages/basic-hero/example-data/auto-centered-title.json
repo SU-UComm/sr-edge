@@ -1,0 +1,39 @@
+{
+    "storyType": "Basic",
+    "bannerType": "normal",
+    "contentType": "Feature",
+    "titleAlignment": "center",
+    "orientation": "vertical",
+    "pubDate": "2024-12-10 00:00:00",
+    "pubDateFormatted": "December 10th, 2024",
+    "mediaType": "image",
+    "topic": {
+        "asset_assetid": "28412",
+        "asset_name": "Campus Life",
+        "asset_url": "https://news.stanford.edu/campus-life/topic/campus-life",
+        "topicPath": "/campus-life/topic/campus-life",
+        "target_id": "141736",
+        "group": "127853",
+        "type": "content_topic",
+        "sectionSummary": ""
+    },
+    "media": {
+        "type": "standard",
+        "featureImage": {
+            "id": "162607",
+            "url": "https://news.stanford.edu/__data/assets/image/0021/162607/campus-life.jpg",
+            "alt": "Students walking across Stanford campus",
+            "height": "1000",
+            "width": "1500"
+        },
+        "featureVideo": {
+            "id": ""
+        },
+        "carousel": null,
+        "caption": "Stanford campus life",
+        "credit": "Courtesy Stanford University",
+        "captions": []
+    },
+    "title": "Celebrating 50 years of innovation and excellence at Stanford",
+    "summary": "<p>As Stanford University marks its 50th anniversary, we reflect on the institution's remarkable journey from a regional university to a global leader in education, research, and innovation.</p>"
+}

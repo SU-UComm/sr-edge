@@ -1,0 +1,44 @@
+{
+    "content": [
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "Stanford's campus life offers students a rich and diverse experience that extends far beyond the classroom. With over 600 student organizations, cultural events, and community engagement opportunities, students have countless ways to explore their interests and develop leadership skills."
+                }
+            ]
+        },
+        {
+            "type": "tag",
+            "tag": "p",
+            "children": [
+                {
+                    "type": "text",
+                    "value": "The university's residential communities provide more than just housing—they create spaces for intellectual growth, cultural exchange, and lifelong friendships. Each residential area has its own unique character and traditions, contributing to the vibrant tapestry of campus life."
+                }
+            ]
+        }
+    ],
+    "infoBox": {
+        "title": "Campus Statistics",
+        "content": [
+            {
+                "type": "tag",
+                "tag": "p",
+                "children": [
+                    {
+                        "type": "text",
+                        "value": "Stanford's campus spans over 8,000 acres and includes more than 700 major buildings, providing students with world-class facilities for learning, research, and recreation."
+                    }
+                ]
+            }
+        ],
+        "buttonConfiguration": {
+            "buttonText": "Virtual Tour",
+            "externalUrl": "https://visit.stanford.edu",
+            "isNewWindow": true
+        }
+    }
+}
