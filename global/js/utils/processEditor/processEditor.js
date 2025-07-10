@@ -46,8 +46,9 @@ export async function processEditor(output, squizEditTargets) {
         const escapedTarget = target.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         
         // Shared regex pattern for all cases - capture the entire element
+        // More robust pattern that handles quoted attributes with > characters
         const regex = new RegExp(
-            `(<[^>]*data-se\\s*=\\s*["']${escapedTarget}["'][^>]*>)(?!.*data-sq-field)`, 
+            `(<(?:[^>"']|"[^"]*"|'[^']*')*?data-se\\s*=\\s*["']${escapedTarget}["'](?:[^>"']|"[^"]*"|'[^']*')*?>)`, 
             'gi'
         );
         
@@ -56,6 +57,11 @@ export async function processEditor(output, squizEditTargets) {
             let elementIndex = 0;
             
             output = output.replace(regex, (match, fullElement) => {
+                // Skip if already has data-sq-field
+                if (fullElement.includes('data-sq-field')) {
+                    return match;
+                }
+                
                 // Get the field mapping for this element index
                 const fieldMapping = targetConfig[elementIndex];
 
@@ -83,6 +89,11 @@ export async function processEditor(output, squizEditTargets) {
             // Handle array types with automatic indexing using square brackets
             let index = 0;
             output = output.replace(regex, (match, fullElement) => {
+                // Skip if already has data-sq-field
+                if (fullElement.includes('data-sq-field')) {
+                    return match;
+                }
+                
                 // Build field name with optional property
                 const fieldName = targetConfig.property 
                     ? `${targetConfig.field}[${index}].${targetConfig.property}`
@@ -96,6 +107,11 @@ export async function processEditor(output, squizEditTargets) {
         } else {
             // Handle regular single fields
             output = output.replace(regex, (match, fullElement) => {
+                // Skip if already has data-sq-field
+                if (fullElement.includes('data-sq-field')) {
+                    return match;
+                }
+                
                 // Add data-sq-field to the element
                 const result = fullElement.replace(/>$/, ` data-sq-field="${targetConfig.field}">`);
                 return result;

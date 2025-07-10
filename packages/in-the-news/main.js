@@ -123,7 +123,6 @@ export default {
             }
         }
 
-
         const adapter = new cardDataAdapter();
         let data = null;
         
@@ -131,9 +130,8 @@ export default {
         const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
         adapter.setCardService(service);
 
-
         const featuredCards = [];
-        const cards = []
+        const cards = [];
         featuredTeaser && cards.push({ cardAsset: featuredTeaser })
         featuredTeaser && featuredCards.push({ cardAsset: featuredTeaser })
         teaserOne && cards.push({ cardAsset: teaserOne });
@@ -148,18 +146,10 @@ export default {
                 // edit mode will be handled below 
                 if(!squizEdit)  {
                     return `<!-- Error occurred in the In the news component: Failed to fetch event data. ${er.message} -->`;
+                } else {
+                    data = null;
                 }
             }
-        }
-
-        if (squizEdit && data?.length === 0) {
-            // NEW: In edit mode, provide mock data instead of returning error
-            data = cards.map((card, index) => ({
-                title: `Sample News Article ${index + 1}`,
-                description: `This is a sample description for news article ${index + 1}`,
-                liveUrl: '#',
-                source: `Sample Source ${index + 1}`
-            }));
         }
         
         // Resolve the URI for the section heading link
@@ -226,7 +216,7 @@ export default {
 
         const cardData = [];
         if (data) {
-             data[0] && featuredCards.length > 0 && cardData.push({
+            data[0] && featuredCards.length > 0 && cardData.push({
                 ...data[0],
                 quote: helpers.unescapeHtml(featuredQuote),
                 description: featuredTeaserDescription ? helpers.unescapeHtml(featuredTeaserDescription) : '',
@@ -234,13 +224,14 @@ export default {
                 imageURL: imageData?.url,
                 imageAlt: imageData?.alt
             });
-        
+            // no featured cards
             if(data[0] && featuredCards.length === 0){
                 cardData.push({
                     ...data[0],
                     description: teaserOneDescription && teaserOneDescription !== "" ? helpers.unescapeHtml(teaserOneDescription) : helpers.unescapeHtml(data[0].description),
                     isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false,
-                    teaserTarget: "teaserOne"
+                    teaserTarget: "teaserOne",
+                    placement: 2
                 });
 
                 if(data[1]){
@@ -248,16 +239,19 @@ export default {
                         ...data[1],
                         description: teaserTwoDescription && teaserTwoDescription !== "" ? helpers.unescapeHtml(teaserTwoDescription) : helpers.unescapeHtml(data[1].description),
                         isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false,
-                        teaserTarget: "teaserTwo"
+                        teaserTarget: "teaserTwo",
+                        placement: 3
                     });
                 }
             } else {
+
                 // Prepare teaser one data
                 data[1] && cardData.push({
                     ...data[1],
                     description: teaserOneDescription && teaserOneDescription !== "" ? helpers.unescapeHtml(teaserOneDescription) : helpers.unescapeHtml(data[1].description),
                     isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false,
-                    teaserTarget: "teaserOne"
+                    teaserTarget: "teaserOne",
+                    placement: 2
                 });
 
                 // Prepare teaser two data
@@ -265,7 +259,8 @@ export default {
                     ...data[2],
                     description: teaserTwoDescription && teaserTwoDescription !== "" ? helpers.unescapeHtml(teaserTwoDescription) : helpers.unescapeHtml(data[2].description),
                     isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false,
-                    teaserTarget: "teaserTwo"
+                    teaserTarget: "teaserTwo",
+                    placement: 3
                 });
             }
         }

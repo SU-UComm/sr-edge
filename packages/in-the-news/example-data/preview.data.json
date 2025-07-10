@@ -2,21 +2,19 @@
     "headingConfiguration": {
         "title": "In the news",
         "ctaText": "View all",
-        "ctaUrl": "matrix-asset://api-identifier/141464"
+        "ctaNewWindow": false
     },
     "featuredContent": {
-        "featuredTeaser": "matrix-asset://api-identifier/162707",
-        "personHeadshot": "matrix-asset://api-identifier/163591",
-        "featuredCtaText": "See more",
-        "featuredTeaserDescription": "This is a custom feature desc",
-        "featuredQuote": "A sanctuary, it’s a forever thing. And so we want to know not only what’s here now, but how it’s changing over time."
+        "featuredTeaser": "matrix-asset://StanfordNews/173311",
+        "featuredQuote": "The technical challenges and the architecture coming out of Stanford was super unique and novel.",
+        "featuredTeaserDescription": "David Rosenthal, Stanford alum and host of the “Acquired” podcast, in a series tracing Google’s rise from a research project on campus to a tech giant",
+        "featuredCtaText": "Listen to the story on Acquired podcast",
+        "personHeadshot": "matrix-asset://StanfordNews/173312"
     },
     "supplementaryTeaserOne": {
-        "teaserOne": "matrix-asset://api-identifier/162634",
-        "teaserOneDescription": "Jason Borne"
+        "teaserOne": "matrix-asset://StanfordNews/172922"
     },
     "supplementaryTeaserTwo": {
-        "teaserTwo": "matrix-asset://api-identifier/162759",
-        "teaserTwoDescription": "Jon Doe"
+        "teaserTwo": "matrix-asset://StanfordNews/172923"
     }
 }
