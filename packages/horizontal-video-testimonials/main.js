@@ -53,7 +53,7 @@ export default {
             testimonials = testimonials.map(testimonial => ({
                 ...testimonial,
                 heading: testimonial.heading || 'Heading text',
-                description: testimonial.description || 'Enter the description text'
+                description: testimonial.description || 'Description text'
             }));
             
             // Configure edit targets - maps static data-se attributes to component fields
@@ -85,11 +85,6 @@ export default {
                     return await basicAssetUri(fnsCtx, ctaUrl);
                 } catch (er) {
                     console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch link data. ', er);
-                    if (squizEdit) {
-                        return {
-                            url: "https://news.stanford.edu"
-                        };
-                    }
                     return null;
                 }
             }
@@ -149,11 +144,6 @@ export default {
                         return await basicAssetUri(fnsCtx, internalStoryUrl);
                     } catch (er) {
                         console.error('Error occurred in the Horizontal Video Testimonials component: Failed to fetch internal story link. ', er);
-                        if (squizEdit) {
-                            return {
-                                url: "https://news.stanford.edu"
-                            };
-                        }
                         return null;
                     }
                 }
