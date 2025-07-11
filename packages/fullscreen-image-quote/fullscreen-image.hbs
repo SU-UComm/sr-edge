@@ -3,12 +3,12 @@
         <div class="su-absolute su-z-20 su-h-full su-inset-0 su-flex su-items-end su-p-20 {{#if quoteVAlign}}lg:su-items-{{quoteVAlign}}{{/if}}">
             <blockquote class="su-py-17 sm:su-py-[6.8rem] xl:su-py-100 2xl:su-py-140 su-cc lg:su-max-w-[50%] {{getStringByCondition value=quoteHAlign expectedValue="right" trueResult="su-ml-0 su-mr-auto lg:su-mr-0 lg:su-ml-auto lg:su-pl-0" falseResult="su-ml-0 su-mr-auto lg:su-pr-0"}}">
                 {{~#if quote~}}
-                <p class="su-font-serif su-text-22 md:su-text-[3.3rem] lg:su-text-24 xl:su-text-[2.8rem] 2xl:su-text-[3.3rem] su-leading-display su-max-w-[55rem] xl:su-max-w-600 su-mb-0 su-whitespace-pre-line" data-se="quote">
+                <p class="su-font-serif su-text-22 md:su-text-[3.3rem] lg:su-text-24 xl:su-text-[2.8rem] 2xl:su-text-[3.3rem] su-leading-display su-max-w-[55rem] xl:su-max-w-600 su-mb-0 su-whitespace-pre-line" {{getStringByCondition value=quoteHAlign expectedValue="right" trueResult="su-text-shadow-[3px_3px_5px_rgba(0,0,0,0.33)]" falseResult="su-text-shadow-[-3px_3px_5px_rgba(0,0,0,0.33)]"}} data-se="quote">
                     {{quote}}
                 </p>
                 {{~/if~}}
                 {{~#if ctaText~}}
-                <div class="su-rs-mt-1 su-max-w-[55rem] xl:su-max-w-600">
+                <div class="su-rs-mt-1 su-max-w-[55rem] xl:su-max-w-600 {{getStringByCondition value=quoteHAlign expectedValue="right" trueResult="su-text-shadow-[3px_3px_5px_rgba(0,0,0,0.33)]" falseResult="su-text-shadow-[-3px_3px_5px_rgba(0,0,0,0.33)]"}}">
                     <span class="su-inline su-text-22 md:su-text-[2.9rem] lg:su-text-24 2xl:su-text-[2.9rem] su-font-bold su-leading-display su-mr-02em" data-se="ctaPreText">
                         {{ctaPreText}}
                     </span>
@@ -55,6 +55,6 @@
         <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}"
             class="su-object-cover su-w-full su-h-full su-p-20 {{#if mobileImageData.url}}su-hidden lg:su-block{{/if}} {{#if imageVPosition}}su-object-{{imageVPosition}}{{/if}}" />
         {{~/if~}}
-        <div aria-hidden="true" class="su-absolute su-inset-0 su-z-10 su-border-[2rem] su-border-black-true su-bg-gradient-to-t su-from-black-true {{getStringByCondition value=quoteHAlign expectedValue="left" trueResult="lg:su-bg-gradient-to-r" falseResult="lg:su-bg-gradient-to-l"}}"></div>
+        <div aria-hidden="true" class="su-absolute su-inset-0 su-z-10 su-bg-gradient-to-t su-from-black-true {{gradientOverlayClasses imageOverlay}} su-to-black-true/0 su-to-70% lg:su-to-60% {{getStringByCondition value=quoteHAlign expectedValue="left" trueResult="lg:su-bg-gradient-to-r" falseResult="lg:su-bg-gradient-to-l"}}"></div>
     </div>
 </section>
