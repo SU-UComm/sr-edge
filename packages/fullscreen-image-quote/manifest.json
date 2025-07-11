@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "fullscreen-image-quote",
     "type": "edge",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "namespace": "stanford-components",
     "description": "This component displays a full width image with a quote and CTA.",
     "displayName": "Fullscreen Image Quote",
@@ -27,16 +27,19 @@
                         "type": "string",
                         "format": "matrix-asset-uri"
                     },
+                    "imageOverlay": {
+                        "title": "Image gradient overlay",
+                        "description": "An overlay is required to maintain accessibility and readability. Use this to control the darkness of the overlay.",
+                        "type": "string",
+                        "default": "dark",
+                        "enum": ["light", "medium", "dark"]
+                    },
                     "imageVPosition": {
                         "title": "Vertical crop position of the background image",
                         "description": "This setting will only be used if the above image's aspect ratio is taller than its container. It will determine which portion of the image is shown if the image is cropped on some screen sizes.",
                         "type": "string",
                         "default": "center",
-                        "enum": [
-                            "top",
-                            "center",
-                            "bottom"
-                        ]
+                        "enum": ["top", "center", "bottom"]
                     },
                     "mobileImage": {
                         "title": "Mobile background image (portrait orientation)",
@@ -55,20 +58,13 @@
                         "description": "This setting will set the vertical alignment of the quote text on desktop. On smaller screens, the quote will always be displayed at the bottom of the component.",
                         "type": "string",
                         "default": "center",
-                        "enum": [
-                            "top",
-                            "center",
-                            "bottom"
-                        ]
+                        "enum": ["top", "center", "bottom"]
                     },
                     "quoteHAlign": {
                         "title": "Quote horizontal alignment",
                         "type": "string",
                         "default": "left",
-                        "enum": [
-                            "left",
-                            "right"
-                        ]
+                        "enum": ["left", "right"]
                     },
                     "removeTopSpacing": {
                         "title": "Remove top spacing",
@@ -174,6 +170,14 @@
         "matrix-asset://api-identifier/28192": {
             "type": "file",
             "path": "mocked-uris/28192.json"
+        },
+        "matrix-asset://api-identifier/167069": {
+            "type": "file",
+            "path": "mocked-uris/167069.json"
+        },
+        "matrix-asset://api-identifier/169077": {
+            "type": "file",
+            "path": "mocked-uris/169077.json"
         }
     },
     "previews": {
@@ -183,6 +187,32 @@
                     "inputData": {
                         "type": "file",
                         "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "mark": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/mark.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "renee": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/renee.data.json"
                     },
                     "wrapper": {
                         "path": "previews/preview.html"
