@@ -395,6 +395,24 @@ export const helpers = {
     getStringIfGreater: function (options) {
         const { value, expectedValue, trueResult, falseResult } = options.hash;
         return value > expectedValue ? trueResult : falseResult;
+    },
+    gradientOverlayClasses: function(imageOverlay) {
+        const gradientOverlayClasses = new Map()
+
+        gradientOverlayClasses.set('light', 'su-from-black-true/50');
+        gradientOverlayClasses.set('medium', 'su-from-black-true/75');
+        gradientOverlayClasses.set('dark', 'su-from-black-true');
+
+        return gradientOverlayClasses.get(imageOverlay);
+    },
+    solidOverlayClasses: function(imageOverlay) {
+        const solidOverlayClasses = new Map()
+
+        solidOverlayClasses.set('light', 'su-bg-black-true/25');
+        solidOverlayClasses.set('medium', 'su-bg-black-true/25');
+        solidOverlayClasses.set('dark', 'su-bg-black-true/50');
+
+        return solidOverlayClasses.get(imageOverlay);
     }
 }
   

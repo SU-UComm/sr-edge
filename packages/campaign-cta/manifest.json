@@ -35,6 +35,17 @@
                                 "type": "string",
                                 "format": "matrix-asset-uri"
                             },
+                            "imageOverlay": {
+                                "title": "Image gradient overlay",
+                                "description": "An overlay is required to maintain accessibility and readability. Use this to control the darkness of the overlay.",
+                                "type": "string",
+                                "default": "dark",
+                                "enum": [
+                                    "light",
+                                    "medium",
+                                    "dark"
+                                ]
+                            },
                             "title": {
                                 "title": "Title",
                                 "description": "The campaign title",
@@ -128,6 +139,10 @@
         "matrix-asset://api-identifier/141464": {
             "type": "file",
             "path": "mocked-uris/141464.json"
+        },
+        "matrix-asset://api-identifier/170202": {
+            "type": "file",
+            "path": "mocked-uris/170202.json"
         }
     },
     "previews": {
@@ -153,6 +168,19 @@
                     },
                     "wrapper": {
                         "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        },
+        "rm": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/rm.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
                     }
                 }
             }

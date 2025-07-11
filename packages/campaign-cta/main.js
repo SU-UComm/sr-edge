@@ -14,6 +14,7 @@ export default {
      * @param {Object} args - The arguments for the component.
      * @param {Object} args.displayConfiguration - The display configuration for the component.
      * @param {string} args.displayConfiguration.image - The image URL for the CTA.
+     * @param {string} [args.displayConfiguration.imageOverlay] - The image gradient overlay (optional, default is "dark").
      * @param {string} [args.displayConfiguration.title] - The title text for the CTA (optional).
      * @param {string} [args.displayConfiguration.description] - The description text for the CTA (optional).
      * @param {string} [args.displayConfiguration.linkUrl] - The URL for the CTA link (optional).
@@ -32,7 +33,7 @@ export default {
         const fnsCtx = componentFunctions || componentContext || {};
         
         // CHANGE: change const to let so we can modify later for squizEdit default values
-        let { image, title, description, linkUrl, linkText } = (args && args.displayConfiguration) || {};
+        let { image, imageOverlay, title, description, linkUrl, linkText } = (args && args.displayConfiguration) || {};
 
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
@@ -157,6 +158,7 @@ export default {
         
         // Prepare component data for template rendering
         const componentData = {
+            imageOverlay,
             title,
             description,
             linkText,
