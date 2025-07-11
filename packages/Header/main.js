@@ -49,7 +49,7 @@ export default {
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
         const componentEnvVars = info?.env || null;
-        const currentAssetId = componentContext?.assetId || "173403";
+        const currentAssetId = componentContext?.assetId;
 
         const { CONTENT_API, CONTENT_API_KEY } = componentEnvVars || {};
 
@@ -95,7 +95,7 @@ export default {
         const { id, short_name } = pageData;
         const { storyLayout = null, srContentType, srContentMainTopic} = pageData.metadata;
         
-        const isVideo = srContentType.includes("28207");
+        const isVideo = srContentType && srContentType?.includes("28207");
         const isStory = !!storyLayout;
         const persona = getPersonaFromDataUrl(dataUrl);
 
