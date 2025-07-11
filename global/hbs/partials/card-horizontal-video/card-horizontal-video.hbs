@@ -8,11 +8,9 @@
             rel={{getStringByCondition value=isRealExternalLink expectedValue=true trueResult="noopener noreferrer" falseResult=undefined}}
             >
                 <span data-se="hcardheading">{{heading}}</span>
-                {{~#if isRealExternalLink}}
-                {{!-- Use this whitespace-nowrap trick so icon won't get pushed to the next line on its own --}}
+                {{~#if isRealExternalLink~}}
                 <span class="su-group su-whitespace-nowrap">
-                    &#65279;
-                    {{~#if alwaysDark}}
+                    {{~#if alwaysDark~}}
                         {{> fontawesome-icon
                             icon="arrow-up-right"
                             set="regular"
@@ -20,7 +18,7 @@
                             width=24
                             classes="fa-fw su-inline-block su-align-middle su-text-[0.8em] su-ml-5 dark:su-text-dark-mode-red group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em su-transition-transform su-text-dark-mode-red"
                         }}
-                    {{~else}}
+                    {{~else~}}
                         {{> fontawesome-icon
                             icon="arrow-up-right"
                             set="regular"
