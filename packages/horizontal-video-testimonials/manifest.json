@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "horizontal-video-testimonials",
     "type": "edge",
-    "version": "4.2.21",
+    "version": "4.2.22",
     "namespace": "stanford-apb",
     "description": "A section with a listing of horizontal video cards, with a section title and link to watch more.",
     "displayName": "Horizontal Video Testimonials",
