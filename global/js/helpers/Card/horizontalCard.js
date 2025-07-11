@@ -54,7 +54,7 @@ const cardSizeStyles = {
   large: {
     gap: "su-gap-20 lg:su-gap-48",
     contentGap: "su-gap-9 lg:su-gap-12",
-    title: "su-text-18 md:su-text-21 lg:su-text-23 su-font-bold su-leading-[21.6px] md:su-leading-[25.2px] lg:su-leading-[27.6px]",
+    title: "su-font-serif su-text-18 md:su-text-21 lg:su-text-23 su-font-bold su-leading-[21.6px] md:su-leading-[25.2px] lg:su-leading-[27.6px]",
     imageWrapper: "su-w-[103px] su-h-[69px] md:su-w-[169px] md:su-h-[113px] lg:su-w-[292px] lg:su-h-[193px]"
   },
   small: {
