@@ -62,6 +62,8 @@ export default {
 
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
+                "fullscreenImageQuoteImage": { "field": "image" },
+                "fullscreenImageQuoteMobileImage": { "field": "mobileImage" },
                 "quote": { "field": "quote" },
                 "ctaPreText": { "field": "ctaDetails.ctaPreText" },
                 "ctaText": { "field": "ctaDetails.ctaText" },

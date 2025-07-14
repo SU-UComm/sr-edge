@@ -54,7 +54,8 @@ export default {
             squizEditTargets = {
                 "featuredQuote": { "field": "displayConfiguration.quote" },
                 "name": { "field": "displayConfiguration.name" },
-                "title": { "field": "displayConfiguration.title" }
+                "title": { "field": "displayConfiguration.title" },
+                "pullQuoteAvatar": { "field": "displayConfiguration.asset" }
             };
         }
 

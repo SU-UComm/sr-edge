@@ -72,6 +72,11 @@ export default {
                 squizEditTargets["featDesc"] = {
                     "field": "contentConfiguration.featuredDescription"
                 };
+                squizEditTargets["featuredContentCardAsset"] = {
+                    "field": "contentConfiguration.cards",
+                    "array": true,
+                    "property": "cardAsset"
+                };
             }
         }
 

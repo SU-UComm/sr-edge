@@ -38,7 +38,8 @@ export default {
             "credit": { "field": "displayConfiguration.imageCredit" },
             "quote": { "field": "displayConfiguration.quote" },
             "name": { "field": "displayConfiguration.name" },
-            "title": { "field": "displayConfiguration.title" }
+            "title": { "field": "displayConfiguration.title" },
+            "image": { "field": "displayConfiguration.image" }
         };
         
         if (squizEdit) {

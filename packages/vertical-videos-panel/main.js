@@ -127,7 +127,13 @@ export default {
         const squizEdit = componentContext?.editor || false;
         let squizEditTargets =  {
             "headingTitle": { "field": "sectionConfiguration.title" },
-            "headingCtaText": { "field": "sectionConfiguration.ctaText" }
+            "headingCtaText": { "field": "sectionConfiguration.ctaText" },
+            "verticalVideosPanelBackgroundImage": { "field": "sectionConfiguration.bgImage" },
+            "mediaRatioImage": {
+                "field": "videos",
+                "array": true,
+                "property": "videoImage"
+            }
         };
         
         if (squizEdit) {

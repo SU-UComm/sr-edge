@@ -49,11 +49,11 @@
             </blockquote>
         </div>
         {{~#if mobileImageData.url~}}
-        <img src="{{mobileImageData.url}}" alt="{{mobileImageData.attributes.alt}}" class="su-object-cover su-w-full su-h-full su-p-20 lg:su-hidden" />
+        <img src="{{mobileImageData.url}}" alt="{{mobileImageData.attributes.alt}}" class="su-object-cover su-w-full su-h-full su-p-20 lg:su-hidden" data-se="fullscreenImageQuoteMobileImage"/>
         {{~/if~}}
         {{~#if imageData.url~}}
         <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}"
-            class="su-object-cover su-w-full su-h-full su-p-20 {{#if mobileImageData.url}}su-hidden lg:su-block{{/if}} {{#if imageVPosition}}su-object-{{imageVPosition}}{{/if}}" />
+            class="su-object-cover su-w-full su-h-full su-p-20 {{#if mobileImageData.url}}su-hidden lg:su-block{{/if}} {{#if imageVPosition}}su-object-{{imageVPosition}}{{/if}}" data-se="fullscreenImageQuoteImage"/>
         {{~/if~}}
         <div aria-hidden="true" class="su-absolute su-inset-0 su-z-10 su-bg-gradient-to-t su-from-black-true {{gradientOverlayClasses imageOverlay}} su-to-black-true/0 su-to-70% lg:su-to-60% {{getStringByCondition value=quoteHAlign expectedValue="left" trueResult="lg:su-bg-gradient-to-r" falseResult="lg:su-bg-gradient-to-l"}}"></div>
     </div>

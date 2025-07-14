@@ -62,6 +62,9 @@ export default {
                 },
                 "linkText": {
                     "field": "displayConfiguration.linkText"
+                },
+                "campaignCtaBackgroundImage": {
+                    "field": "displayConfiguration.image"
                 }
             };
         }

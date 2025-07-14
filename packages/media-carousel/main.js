@@ -60,6 +60,11 @@ export default {
                     "field": "cards",
                     "array": true,
                     "property": "teaserText"
+                },
+                "mediaCarouselImage": {
+                    "field": "cards",
+                    "array": true,
+                    "property": "image"
                 }
             };
         }

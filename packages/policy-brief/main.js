@@ -53,7 +53,8 @@ export default {
             squizEditTargets = {
                 "title": { "field": "contentConfiguration.title" },
                 "summary": { "field": "contentConfiguration.summary" },
-                "linkText": { "field": "contentConfiguration.linkText" }
+                "linkText": { "field": "contentConfiguration.linkText" },
+                "policyBriefImage": { "field": "contentConfiguration.image" }
             };
         }
 

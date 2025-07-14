@@ -41,6 +41,11 @@ export default {
 
         const squizEdit = componentContext?.editor || false;
         let squizEditTargets = {
+            "image": {
+                "field": "contentConfiguration.images",
+                "array": true,
+                "property": "imageAsset"
+            },
             "caption": {
                 "field": "contentConfiguration.images",
                 "array": true,

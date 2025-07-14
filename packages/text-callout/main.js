@@ -68,6 +68,9 @@
                     "infoBoxContent": { 
                         "field": "displayConfiguration.content" 
                     },
+                    "infoBoxImage": { 
+                        "field": "imageConfiguration.image" 
+                    },
                     "caption": { 
                         "field": "imageConfiguration.caption" 
                     },

@@ -60,6 +60,12 @@ export default {
             squizEditTargets = {
                 "headingTitle": { "field": "sectionConfiguration.title" },
                 "headingCtaText": { "field": "sectionConfiguration.ctaText" },
+                "horizontalVideoTestimonialsBackgroundImage": { "field": "sectionConfiguration.bgImage" },
+                "mediaRatioImage": {
+                    "field": "testimonials",
+                    "array": true,
+                    "property": "videoImage"
+                },
                 "hcardheading": {
                     "field": "testimonials",
                     "array": true,

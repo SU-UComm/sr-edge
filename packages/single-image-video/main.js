@@ -67,7 +67,8 @@ export default {
                 "summary": { "field": "section.summary" },
                 "caption": { "field": "caption" },
                 "credit": { "field": "credit" },
-                "videoHeading": { "field": "video.heading" }
+                "videoHeading": { "field": "video.heading" },
+                "singleImageVideoImage": { "field": "image" }
             };
         }
 

@@ -77,6 +77,7 @@ export default {
                 "featuredQuote": { "field": "featuredContent.featuredQuote" },
                 "featuredTeaserDescription": { "field": "featuredContent.featuredTeaserDescription" },
                 "ctaText": { "field": "featuredContent.featuredCtaText" },
+                "pullQuoteAvatarImage": { "field": "featuredContent.personHeadshot" },
                 "teaserDescription": [
                     { "field": "supplementaryTeaserOne.teaserOneDescription", "target": "teaserOne"},
                     { "field": "supplementaryTeaserTwo.teaserTwoDescription", "target": "teaserTwo"}

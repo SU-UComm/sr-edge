@@ -54,6 +54,9 @@ export default {async main(args, info) {
             "infoBoxContent": {
                 "field": "infoBox.content"
             },
+            "infoBoxImage": {
+                "field": "infoBox.imageConfiguration.image"
+            },
             "caption": {
                 "field": "infoBox.imageConfiguration.caption"
             },

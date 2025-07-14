@@ -99,6 +99,9 @@ export default {
                 "infoBoxContent": {
                     "field": "colThree.content"
                 },
+                "infoBoxImage": {
+                    "field": "colThree.imageConfiguration.image"
+                },
                 "caption": {
                     "field": "colThree.imageConfiguration.caption"
                 },

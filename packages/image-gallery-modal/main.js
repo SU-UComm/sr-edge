@@ -69,7 +69,8 @@ export default {
                 "credit": { "field": "contentConfiguration.credit" },
                 "title": { "field": "contentConfiguration.title" },
                 "summary": { "field": "contentConfiguration.summary" },
-                "image-model-caption": { "field": "images", "array": true, "property": "caption" }
+                "image-model-caption": { "field": "images", "array": true, "property": "caption" },
+                "imageGalleryModalImage": { "field": "images", "array": true, "property": "image" }
             };
             
         }
