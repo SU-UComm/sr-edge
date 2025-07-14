@@ -987,22 +987,32 @@ div[data-component="footer-component"] {
   @apply su-mb-0;
 }
 
-/* Campaign CTA on basic story pages */
-.su-page-has-sidebar [data-component="campaign-cta"] {
-  @apply su--mx-20 md:su-mx-[calc(-7.65%+50px)] lg:su-mx-0 md:su-w-[calc(121.5%+100px)] md:su-ml-[calc(calc(-10.75%-50px))] lg:su-w-full;
-}
+/* Campaign CTA on basic story pages
+.su-page-has-sidebar [data-component="campaign-cta"]{margin-left:-2rem;margin-right:-2rem}
+
+@media (width >= 768px){
+.su-page-has-sidebar [data-component="campaign-cta"]{margin-right:calc(-7.65% + 50px);margin-left:calc(calc(-10.75% - 50px));width:calc(121.5% + 100px)}}
+
+@media (width >= 992px){
+.su-page-has-sidebar [data-component="campaign-cta"]{margin-left:0;margin-right:0;width:100%}}
 
 .su-page-has-sidebar
   [data-component="campaign-cta"]
-  .su-component-campaigncta-wrap {
-  @apply su-w-full su-px-20 md:su-px-50 lg:su-px-60 lg:su-flex-col;
-}
+  .su-component-campaigncta-wrap{width:100%;padding-left:2rem;padding-right:2rem}
+
+@media (width >= 768px){
+.su-page-has-sidebar
+  [data-component="campaign-cta"]
+  .su-component-campaigncta-wrap{padding-left:5rem;padding-right:5rem}}
+
+@media (width >= 992px){
+.su-page-has-sidebar
+  [data-component="campaign-cta"]
+  .su-component-campaigncta-wrap{flex-direction:column;padding-left:6rem;padding-right:6rem}
 
 .su-page-has-sidebar
   [data-component="campaign-cta"]
-  .su-component-campaigncta-content {
-  @apply lg:su-border-none lg:su-mr-0;
-}
+  .su-component-campaigncta-content{margin-right:0;border-style:none}} */
 
 /* Medium contextual spacing */
 * + [data-component="pullquote"],
