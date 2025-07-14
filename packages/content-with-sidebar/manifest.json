@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "content-with-sidebar",
     "type": "edge",
-    "version": "1.0.12",
+    "version": "5.0.0",
     "namespace": "stanford-apb",
     "description": "Use this component to display WYSIWYG text with a Text Callout as a sidebar.",
     "displayName": "Content with sidebar",
@@ -26,7 +26,9 @@
             "entry": "main.js",
             "input": {
                 "type": "object",
-                "required": ["content"],
+                "required": [
+                    "content"
+                ],
                 "properties": {
                     "heading": {
                         "title": "Optional Heading",
@@ -45,7 +47,9 @@
                         }
                     },
                     "infoBox": {
-                        "required": ["content"],
+                        "required": [
+                            "content"
+                        ],
                         "title": "Text Callout",
                         "description": "A text callout component will display as a sidebar.",
                         "properties": {

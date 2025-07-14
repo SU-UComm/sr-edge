@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "image-gallery-modal",
     "type": "edge",
-    "version": "4.1.11",
+    "version": "5.0.0",
     "namespace": "stanford-apb",
     "description": "An image gallery that opens in a modal.",
     "displayName": "Image gallery with modal",

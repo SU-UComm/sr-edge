@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "subtopic-subnav-component",
     "type": "edge",
-    "version": "4.1.0",
+    "version": "5.0.0",
     "namespace": "stanford-apb",
     "description": "Stanford university Subtopic Subnav component.",
     "displayName": "Subtopic Subnav",
