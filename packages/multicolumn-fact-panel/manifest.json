@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "multicolumn-fact-panel",
     "type": "edge",
-    "version": "4.1.1",
+    "version": "5.0.0",
     "namespace": "stanford-apb",
     "description": "This component displays up to 3 facts with FontAwesome icons in a multi-column layout.",
     "displayName": "Multicolumn Fact Panel",
