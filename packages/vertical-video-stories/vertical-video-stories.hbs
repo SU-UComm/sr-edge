@@ -1,0 +1,37 @@
+<section data-component="vertical-video-stories" class="test">
+    <div class="su-component-container su-container-full su-max-w-900 su-mx-auto su-flex su-flex-col su-items-end su-gap-27 {{getStringByCondition value=videoPosition expectedValue="left" trueResult="sm:su-flex-row" falseResult="sm:su-flex-row-reverse"}}">
+        <button data-click="open-modal" class="su-component-card-thumbnail su-play-scale su-group su-block su-relative su-size-full focus:su-outline-none focus-visible:su-ring-[3px] focus-visible:su-ring-offset-8 focus-visible:su-ring-digital-red dark:focus-visible:su-ring-dark-mode-red focus-visible:su-outline-none" aria-haspopup="dialog" aria-label="Watch video" title="Watch video" data-modal-id="{{uniqueID}}" >
+            <span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block su-aspect-[9/16] su-rounded-3xl">
+                <img src="{{videoImageData.url}}" alt="{{videoImageData.attributes.alt}}" class="su-size-full su-rounded-3xl" />
+                <div aria-hidden="true" class="su-absolute su-inset-0 su-bg-gradient-to-t su-from-black-true/80 su-via-80% su-via-black-true/10 su-pointer-events-none"></div>
+                <span class="su-play-button-icon su-play-btn su-transition-all su-absolute su-left-1/2 su-top-1/2 -su-translate-x-1/2 -su-translate-y-1/2 [&>svg]:su-text-[6rem]">
+                    {{> svg-icons icon="video play"}}
+                </span>
+            </span>
+        </button>
+
+        <div class="su-w-full su-mx-auto su-rs-mb-3">
+            <div class="su-h-3 su-w-full su-block su-bg-gradient-light-red-h su-mb-16"></div>
+            {{~#if heading~}}
+            <h2 class="su-text-23">
+                {{heading}}
+            </h2>
+            {{~/if~}}
+            {{~#if description~}}
+            <div class="su-card-paragraph">
+                {{{description}}}
+            </div>
+            {{~/if~}}
+            {{~#if credit~}}
+            <div class="su-text-14 md:su-text-16 su-text-black-70 dark:su-text-white su-rs-mt-0">
+                {{{credit}}}
+            </div>
+            {{~/if~}}
+        </div>
+    </div>
+    <section data-modal="modal-wrapper">
+            {{#> modal-content uniqueID=modalData.uniqueID titleID=modalData.titleID ariaTitle=modalData.title}}
+                {{> embed-video isVertical=modalData.isVertical classes=modalData.classes videoId=modalData.videoId noAutoPlay=modalData.noAutoPlay title=modalData.title}}
+            {{/ modal-content}}
+    </section>
+</section>
