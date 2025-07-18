@@ -1,4 +1,4 @@
-<section data-component="vertical-video-stories" class="test">
+<section data-component="vertical-video-stories">
     <div class="su-component-container su-container-full su-max-w-900 su-mx-auto su-flex su-flex-col su-items-end su-gap-27 {{getStringByCondition value=videoPosition expectedValue="left" trueResult="sm:su-flex-row" falseResult="sm:su-flex-row-reverse"}}">
         <button data-click="open-modal" class="su-component-card-thumbnail su-play-scale su-group su-block su-relative su-size-full focus:su-outline-none focus-visible:su-ring-[3px] focus-visible:su-ring-offset-8 focus-visible:su-ring-digital-red dark:focus-visible:su-ring-dark-mode-red focus-visible:su-outline-none" aria-haspopup="dialog" aria-label="Watch video" title="Watch video" data-modal-id="{{uniqueID}}" >
             <span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block su-aspect-[9/16] su-rounded-3xl">
@@ -30,8 +30,8 @@
         </div>
     </div>
     <section data-modal="modal-wrapper">
-            {{#> modal-content uniqueID=modalData.uniqueID titleID=modalData.titleID ariaTitle=modalData.title}}
-                {{> embed-video isVertical=modalData.isVertical classes=modalData.classes videoId=modalData.videoId noAutoPlay=modalData.noAutoPlay title=modalData.title}}
-            {{/ modal-content}}
+        {{#> modal-content uniqueID=modalData.uniqueID titleID=modalData.titleID ariaTitle=modalData.title}}
+            {{> embed-video isVertical=modalData.isVertical classes=modalData.classes videoId=modalData.videoId noAutoPlay=modalData.noAutoPlay title=modalData.title}}
+        {{/ modal-content}}
     </section>
 </section>

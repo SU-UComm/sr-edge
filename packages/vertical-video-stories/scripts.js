@@ -11,7 +11,7 @@ import { postMessageToVimeo, setControlLabel } from '../../global/js/helpers/Vid
  * @constant {string} VERTICAL_VIDEO_STORIES_CLOSE_MODAL_BTN - Selector for the button that closes the modal.
  * @constant {string} VERTICAL_VIDEO_STORIES_MODAL_IFRAME - Selector for iframe container.
  */
-export const VERTICAL_VIDEO_STORIES_SELECTOR = 'section[data-component="single-image-video"]';
+export const VERTICAL_VIDEO_STORIES_SELECTOR = 'section[data-component="vertical-video-stories"]';
 export const VERTICAL_VIDEO_STORIES_VIDEO_PLAYER_FRAME = 'iframe[data-role="video-player"]';
 export const VERTICAL_VIDEO_STORIES_VIDEO_CONTROL_BTN = 'button[data-role="video-control"]';
 export const VERTICAL_VIDEO_STORIES_HIDDEN_CLASS = 'su-hidden';

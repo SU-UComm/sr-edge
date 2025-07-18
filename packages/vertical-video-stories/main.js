@@ -117,7 +117,6 @@ export default {
         }
 
         // Prepare checks and unique id
-        const showComponent = !!(youtubeId || videoImage);
         const uniqueID = uuid();
 
         // Prepare modal data
