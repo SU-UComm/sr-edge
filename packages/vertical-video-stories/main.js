@@ -143,7 +143,6 @@ export default {
             credit: xss(credit),
             videoTitle: heading ? `Watch ${heading}` : "",
             modalData,
-            showComponent,
             uniqueID
         };
 
