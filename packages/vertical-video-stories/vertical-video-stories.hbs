@@ -1,10 +1,10 @@
 <section data-component="vertical-video-stories">
     <div class="su-component-container su-container-full su-max-w-900 su-mx-auto su-flex su-flex-col su-items-end su-gap-27 {{getStringByCondition value=videoPosition expectedValue="left" trueResult="sm:su-flex-row" falseResult="sm:su-flex-row-reverse"}}">
-        <button data-click="open-modal" class="su-component-card-thumbnail su-play-scale su-group su-block su-relative su-size-full focus:su-outline-none focus-visible:su-ring-[3px] focus-visible:su-ring-offset-8 focus-visible:su-ring-digital-red dark:focus-visible:su-ring-dark-mode-red focus-visible:su-outline-none" aria-haspopup="dialog" aria-label="Watch video" title="Watch video" data-modal-id="{{uniqueID}}" >
-            <span class="su-component-media-ratio su-overflow-hidden su-relative su-size-full su-block su-aspect-[9/16] su-rounded-3xl">
-                <img src="{{videoImageData.url}}" alt="{{videoImageData.attributes.alt}}" class="su-size-full su-rounded-3xl" />
+        <button data-click="open-modal" class="su-component-card-thumbnail su-block su-relative su-size-full focus:su-outline-none focus-visible:su-ring-[3px] focus-visible:su-ring-offset-8 focus-visible:su-ring-digital-red dark:focus-visible:su-ring-dark-mode-red focus-visible:su-outline-none" aria-haspopup="dialog" aria-label="Watch video" title="Watch video" data-modal-id="{{uniqueID}}" >
+            <span class="su-component-media-ratio su-group su-overflow-hidden su-relative su-size-full su-block su-aspect-[9/16] su-rounded-3xl">
+                <img src="{{videoImageData.url}}" alt="{{videoImageData.attributes.alt}}" class="su-absolute su-object-cover su-object-center su-size-full" />
                 <div aria-hidden="true" class="su-absolute su-inset-0 su-bg-gradient-to-t su-from-black-true/80 su-via-80% su-via-black-true/10 su-pointer-events-none"></div>
-                <span class="su-play-button-icon su-play-btn su-transition-all su-absolute su-left-1/2 su-top-1/2 -su-translate-x-1/2 -su-translate-y-1/2 [&>svg]:su-text-[6rem]">
+                <span class="su-transition-all su-absolute su-left-1/2 su-top-1/2 -su-translate-x-1/2 -su-translate-y-1/2 [&>svg]:su-text-[6rem] group-hocus:su-scale-110">
                     {{> svg-icons icon="video play"}}
                 </span>
             </span>

@@ -2,13 +2,13 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "vertical-video-stories",
     "type": "edge",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "namespace": "stanford-components",
     "description": "Use this to display a vertical video within a story page.",
     "displayName": "Vertical video stories",
     "mainFunction": "main",
     "icon": {
-        "id": "perm_media",
+        "id": "play_circle",
         "color": {
             "type": "enum",
             "value": "purple"
