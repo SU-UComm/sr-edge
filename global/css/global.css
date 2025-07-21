@@ -891,13 +891,6 @@ footer[data-component="footer-component"] {
     .su-page-has-sidebar--left
   )
   [data-component="text-callout"]
-  > div,
-  .su-page:not(
-      .su-page-story-basic,
-      .su-page-story-featured,
-      .su-page-has-sidebar--left
-    )
-    [data-component="vertical-video-stories"]
   > div {
   @apply su-w-full su-px-20 md:su-px-50 xl:su-px-0 md:su-max-w-900 xl:su-max-w-800;
 }
