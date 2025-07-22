@@ -14,6 +14,7 @@ export default {
      * @function
      * @param {Object} args - Configuration options for the section.
      * @param {string} [args.image] - Background image (landscape orientation). Preferred aspect ratio: 3x2. Cropped to 2x1 on large screens (>1500px).
+     * @param {string} [args.imageOverlay="dark"] - Overlay color for the background image. Options: "dark", "light". Default is "dark".
      * @param {string} [args.imageVPosition="center"] - Vertical crop position of the background image if it's taller than its container. Options: "top", "center", "bottom".
      * @param {string} [args.mobileImage] - Mobile background image (portrait orientation). Shown on screens ≤ 991px. Preferred ratio: 3x4. Cropped to 1x2.
      * @param {string} [args.quote] - Quote or body content. Include quotation marks manually.
@@ -39,7 +40,7 @@ export default {
         const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // CHANGE: change const to let for mutability
-        let { image, imageVPosition, mobileImage, quote, quoteVAlign, quoteHAlign, removeTopSpacing, ctaDetails } = args || {};
+        let { image, imageOverlay, imageVPosition, mobileImage, quote, quoteVAlign, quoteHAlign, removeTopSpacing, ctaDetails } = args || {};
         let { ctaPreText, ctaText, ctaSubtext, externalUrl, internalUrl, isNewWindow } = ctaDetails || {};
 
         // NEW: Detect edit mode
@@ -163,6 +164,7 @@ export default {
             isRealExternal,
             imageData: imageData,
             mobileImageData: mobileImageData,
+            imageOverlay
         };
 
         // NEW: Early return pattern for edit mode

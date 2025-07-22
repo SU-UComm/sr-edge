@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "fullscreen-image-quote",
     "type": "edge",
-    "version": "4.1.1",
+    "version": "5.0.0",
     "namespace": "stanford-apb",
     "description": "This component displays a full width image with a quote and CTA.",
     "displayName": "Fullscreen Image Quote",
@@ -26,6 +26,17 @@
                         "description": "The preferred aspect ratio for the image is 3x2. On the largest screens (> 1500px), the image will be cropped to a 2x1 aspect ratio. This background image will be shown on all screen sizes unless a mobile image is also selected below.",
                         "type": "string",
                         "format": "matrix-asset-uri"
+                    },
+                    "imageOverlay": {
+                        "title": "Image gradient overlay",
+                        "description": "An overlay is required to maintain accessibility and readability. Use this to control the darkness of the overlay.",
+                        "type": "string",
+                        "default": "dark",
+                        "enum": [
+                            "light",
+                            "medium",
+                            "dark"
+                        ]
                     },
                     "imageVPosition": {
                         "title": "Vertical crop position of the background image",
@@ -195,6 +206,14 @@
         "matrix-asset://api-identifier/28192": {
             "type": "file",
             "path": "mocked-uris/28192.json"
+        },
+        "matrix-asset://api-identifier/167069": {
+            "type": "file",
+            "path": "mocked-uris/167069.json"
+        },
+        "matrix-asset://api-identifier/169077": {
+            "type": "file",
+            "path": "mocked-uris/169077.json"
         }
     },
     "previews": {
@@ -220,6 +239,32 @@
                     },
                     "wrapper": {
                         "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        },
+        "mark": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/mark.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "renee": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/renee.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
                     }
                 }
             }

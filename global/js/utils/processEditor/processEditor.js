@@ -45,36 +45,52 @@ export async function processEditor(output, squizEditTargets) {
         const targetConfig = squizEditTargets[target];
         const escapedTarget = target.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         
-        // Shared regex pattern for all cases
+        // Shared regex pattern for all cases - capture the entire element
+        // More robust pattern that handles quoted attributes with > characters
         const regex = new RegExp(
-            `(data-se\\s*=\\s*["']${escapedTarget}["'])(?:\\s+data-se-target\\s*=\\s*["']([^"']*)["'])?(?!\\s+data-sq-field)`, 
+            `(<(?:[^>"']|"[^"]*"|'[^']*')*?data-se\\s*=\\s*["']${escapedTarget}["'](?:[^>"']|"[^"]*"|'[^']*')*?>)`, 
             'gi'
         );
         
         if (Array.isArray(targetConfig)) {
-            // Handle array mapping - each object in the array gets its own processing
-            targetConfig.forEach((fieldMapping) => {
-                output = output.replace(regex, (match, capturedGroup, targetValue) => {
-                    // Check if target filtering is required and if target matches
-                    if (fieldMapping.target && targetValue !== fieldMapping.target) {
-                        // Target doesn't match, return unchanged
+            // Handle array mapping - each element gets sequential field mappings
+            let elementIndex = 0;
+            
+            output = output.replace(regex, (match, fullElement) => {
+                // Skip if already has data-sq-field
+                if (fullElement.includes('data-sq-field')) {
+                    return match;
+                }
+                
+                // Get the field mapping for this element index
+                const fieldMapping = targetConfig[elementIndex];
+
+                const fieldName = fieldMapping.field;
+                const fieldTarget = fieldMapping.target;
+                
+                // Check if this field mapping requires a specific target
+                if (fieldTarget) {
+                    // Look for data-se-target attribute in the current element
+                    const targetRegex = new RegExp(`data-se-target\\s*=\\s*["']${fieldTarget.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["']`, 'i');
+                    if (!targetRegex.test(fullElement)) {
+                        // Target doesn't match, skip this element
                         return match;
                     }
-                    
-                    const fieldName = fieldMapping.field;
-                    // Preserve the data-se-target attribute if it exists
-                    const targetAttr = targetValue ? ` data-se-target="${targetValue}"` : '';
-                    const result = `${capturedGroup}${targetAttr} data-sq-field="${fieldName}"`;
-                    return result;
-                });
+                }
+                
+                // Add data-sq-field to the element
+                const result = fullElement.replace(/>$/, ` data-sq-field="${fieldName}">`);
+                
+                elementIndex++; // Move to next field mapping for next element
+                return result;
             });
+
         } else if (targetConfig.array) {
             // Handle array types with automatic indexing using square brackets
             let index = 0;
-            output = output.replace(regex, (match, capturedGroup, targetValue) => {
-                // Check if target filtering is required and if target matches
-                if (targetConfig.target && targetValue !== targetConfig.target) {
-                    // Target doesn't match, return unchanged
+            output = output.replace(regex, (match, fullElement) => {
+                // Skip if already has data-sq-field
+                if (fullElement.includes('data-sq-field')) {
                     return match;
                 }
                 
@@ -83,24 +99,22 @@ export async function processEditor(output, squizEditTargets) {
                     ? `${targetConfig.field}[${index}].${targetConfig.property}`
                     : `${targetConfig.field}[${index}]`;
                 
-                // Preserve the data-se-target attribute if it exists
-                const targetAttr = targetValue ? ` data-se-target="${targetValue}"` : '';
-                const result = `${capturedGroup}${targetAttr} data-sq-field="${fieldName}"`;
+                // Add data-sq-field to the element
+                const result = fullElement.replace(/>$/, ` data-sq-field="${fieldName}">`);
                 index++;
                 return result;
             });
         } else {
             // Handle regular single fields
-            output = output.replace(regex, (match, capturedGroup, targetValue) => {
-                // Check if target filtering is required and if target matches
-                if (targetConfig.target && targetValue !== targetConfig.target) {
-                    // Target doesn't match, return unchanged
+            output = output.replace(regex, (match, fullElement) => {
+                // Skip if already has data-sq-field
+                if (fullElement.includes('data-sq-field')) {
                     return match;
                 }
                 
-                // Preserve the data-se-target attribute if it exists
-                const targetAttr = targetValue ? ` data-se-target="${targetValue}"` : '';
-                return `${capturedGroup}${targetAttr} data-sq-field="${targetConfig.field}"`;
+                // Add data-sq-field to the element
+                const result = fullElement.replace(/>$/, ` data-sq-field="${targetConfig.field}">`);
+                return result;
             });
         }
     }

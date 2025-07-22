@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "related-story",
     "type": "edge",
-    "version": "4.1.4",
+    "version": "5.0.0",
     "namespace": "stanford-apb",
     "description": "Displays a related story on a featured story",
     "displayName": "Related story",
@@ -36,7 +36,9 @@
                         "title": "Related story content",
                         "description": "Select an asset ID to be featured as a related story.",
                         "type": "object",
-                        "required": ["story"],
+                        "required": [
+                            "story"
+                        ],
                         "properties": {
                             "story": {
                                 "title": "Related story",

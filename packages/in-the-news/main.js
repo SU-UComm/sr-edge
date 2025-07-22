@@ -49,19 +49,14 @@ export default {
         // Extracting functions from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
-        const fnsCtx = componentFunctions || componentContext || {};
-        
-        // CHANGE: change const to let for mutability
+
         let { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow } = args?.headingConfiguration || {};
         let { featuredTeaser, personHeadshot, featuredCtaText, featuredTeaserDescription, featuredQuote } = args?.featuredContent || {};
         let { teaserOne, teaserOneDescription } = args?.supplementaryTeaserOne || {};
         let { teaserTwo, teaserTwoDescription } = args?.supplementaryTeaserTwo || {};
 
-        // NEW: Detect edit mode
-        const squizEdit = info?.ctx?.editor || false;
-        // const squizEdit = true; 
+        const squizEdit = componentContext?.editor || false;
         let squizEditTargets = null;
-        
 
         if (squizEdit) {
             // if we are in edit mode 
@@ -75,12 +70,6 @@ export default {
             teaserOneDescription = teaserOneDescription || 'Scholar Name';
             teaserTwoDescription = teaserTwoDescription || 'Scholar Name';
             
-            // Provide default asset IDs for edit mode
-            featuredTeaser = featuredTeaser || 'matrix-asset://api-identifier/sample-featured-teaser';
-            personHeadshot = personHeadshot || 'matrix-asset://api-identifier/sample-headshot';
-            teaserOne = teaserOne || 'matrix-asset://api-identifier/sample-teaser-one';
-            teaserTwo = teaserTwo || 'matrix-asset://api-identifier/sample-teaser-two';
-            
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {
                 "headingTitle": { "field": "headingConfiguration.title" },
@@ -89,8 +78,8 @@ export default {
                 "featuredTeaserDescription": { "field": "featuredContent.featuredTeaserDescription" },
                 "ctaText": { "field": "featuredContent.featuredCtaText" },
                 "teaserDescription": [
-                    { "field": "supplementaryTeaserOne.teaserOneDescription" },
-                    { "field": "supplementaryTeaserTwo.teaserTwoDescription" }
+                    { "field": "supplementaryTeaserOne.teaserOneDescription", "target": "teaserOne"},
+                    { "field": "supplementaryTeaserTwo.teaserTwoDescription", "target": "teaserTwo"}
                 ]
             };
         }
@@ -107,9 +96,9 @@ export default {
             }
 
             try {
-                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                if (typeof componentFunctions !== 'object' || typeof componentFunctions.resolveUri === 'undefined') {
                     throw new Error(
-                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(componentFunctions)} was received.`
                     );
                 }
                 validateString(API_IDENTIFIER, 'API_IDENTIFIER');
@@ -134,7 +123,6 @@ export default {
             }
         }
 
-
         const adapter = new cardDataAdapter();
         let data = null;
         
@@ -142,9 +130,10 @@ export default {
         const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
         adapter.setCardService(service);
 
-        // Add component data to the cards 
-        const cards = []
+        const featuredCards = [];
+        const cards = [];
         featuredTeaser && cards.push({ cardAsset: featuredTeaser })
+        featuredTeaser && featuredCards.push({ cardAsset: featuredTeaser })
         teaserOne && cards.push({ cardAsset: teaserOne });
         teaserTwo && cards.push({ cardAsset: teaserTwo });
    
@@ -157,29 +146,18 @@ export default {
                 // edit mode will be handled below 
                 if(!squizEdit)  {
                     return `<!-- Error occurred in the In the news component: Failed to fetch event data. ${er.message} -->`;
+                } else {
+                    data = null;
                 }
             }
-        }
-
-        if (squizEdit && data?.length === 0) {
-            // NEW: In edit mode, provide mock data instead of returning error
-            data = cards.map((card, index) => ({
-                title: `Sample News Article ${index + 1}`,
-                description: `This is a sample description for news article ${index + 1}`,
-                liveUrl: '#',
-                source: `Sample Source ${index + 1}`,
-                // credit: `Sample Credit ${index + 1}`,
-                // authorName: `Sample Author ${index + 1}`
-            }));
         }
         
         // Resolve the URI for the section heading link
         let headingData = null;
         try {
-            
             headingData = await linkedHeadingService(
-                fnsCtx,
-                args.headingConfiguration
+                componentFunctions,
+                { title, ctaText, ctaUrl, ctaManualUrl, ctaNewWindow }
             );
         } catch (er) {
             console.error('Error occurred in the In the news component: Failed to resolve heading link. ', er);
@@ -200,7 +178,7 @@ export default {
         if (personHeadshot) {
             try {
                 
-                imageData = await basicAssetUri(fnsCtx, personHeadshot);
+                imageData = await basicAssetUri(componentFunctions, personHeadshot);
                 // Check required properties - CHANGE: wrap in !squizEdit check
                 if (!squizEdit) {
                     if (!imageData || typeof imageData !== 'object') {
@@ -237,11 +215,8 @@ export default {
         }
 
         const cardData = [];
-        
-        // Prepare feature data
         if (data) {
-            
-             data[0] && cardData.push({
+            data[0] && featuredCards.length > 0 && cardData.push({
                 ...data[0],
                 quote: helpers.unescapeHtml(featuredQuote),
                 description: featuredTeaserDescription ? helpers.unescapeHtml(featuredTeaserDescription) : '',
@@ -249,21 +224,45 @@ export default {
                 imageURL: imageData?.url,
                 imageAlt: imageData?.alt
             });
-    
-            // Prepare teaser one data
-            data[1] && cardData.push({
-                ...data[1],
-                description: teaserOneDescription && teaserOneDescription !== "" ? helpers.unescapeHtml(teaserOneDescription) : helpers.unescapeHtml(data[1].description),
-                isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false
-            });
-            
-            // Prepare teaser two data
-             data[2] && cardData.push({
-                ...data[2],
-                description: teaserTwoDescription && teaserTwoDescription !== "" ? helpers.unescapeHtml(teaserTwoDescription) : helpers.unescapeHtml(data[2].description),
-                isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false
-            });
-    
+            // no featured cards
+            if(data[0] && featuredCards.length === 0){
+                cardData.push({
+                    ...data[0],
+                    description: teaserOneDescription && teaserOneDescription !== "" ? helpers.unescapeHtml(teaserOneDescription) : helpers.unescapeHtml(data[0].description),
+                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false,
+                    teaserTarget: "teaserOne",
+                    placement: 2
+                });
+
+                if(data[1]){
+                    cardData.push({
+                        ...data[1],
+                        description: teaserTwoDescription && teaserTwoDescription !== "" ? helpers.unescapeHtml(teaserTwoDescription) : helpers.unescapeHtml(data[1].description),
+                        isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false,
+                        teaserTarget: "teaserTwo",
+                        placement: 3
+                    });
+                }
+            } else {
+
+                // Prepare teaser one data
+                data[1] && cardData.push({
+                    ...data[1],
+                    description: teaserOneDescription && teaserOneDescription !== "" ? helpers.unescapeHtml(teaserOneDescription) : helpers.unescapeHtml(data[1].description),
+                    isCustomDescription: teaserOneDescription && teaserOneDescription !== "" ? true : false,
+                    teaserTarget: "teaserOne",
+                    placement: 2
+                });
+
+                // Prepare teaser two data
+                data[2] && cardData.push({
+                    ...data[2],
+                    description: teaserTwoDescription && teaserTwoDescription !== "" ? helpers.unescapeHtml(teaserTwoDescription) : helpers.unescapeHtml(data[2].description),
+                    isCustomDescription: teaserTwoDescription && teaserTwoDescription !== "" ? true : false,
+                    teaserTarget: "teaserTwo",
+                    placement: 3
+                });
+            }
         }
 
         // Data validation - CHANGE: wrap in !squizEdit check
@@ -288,15 +287,15 @@ export default {
             headingCtaNewWindow: headingData?.ctaNewWindow,
             headingCtaText: headingData?.ctaText,
             featuredGridItems: cardData,
-            squizEdit: squizEdit 
+            squizEdit: squizEdit,
+            featuredCards: featuredCards.length > 0 ? true : false
         }; 
         
-        // NEW: Early return pattern for edit mode
-        if (squizEdit) {
-             return processEditor(inTheNewsTemplate(componentData), squizEditTargets, args);
+        if (!squizEdit) {
+            return inTheNewsTemplate(componentData);
         }
-
-        return inTheNewsTemplate(componentData);
+        return processEditor(inTheNewsTemplate(componentData), squizEditTargets);
+        
     }
 };
 

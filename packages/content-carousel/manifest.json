@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "content-carousel",
     "type": "edge",
-    "version": "4.2.0",
+    "version": "5.0.0",
     "namespace": "stanford-apb",
     "description": "A carousel of slides that contain WYSIWYG content.",
     "displayName": "Content Carousel",
@@ -36,7 +36,9 @@
                         "minItems": 1,
                         "maxItems": 5,
                         "items": {
-                            "required": ["content"],
+                            "required": [
+                                "content"
+                            ],
                             "type": "object",
                             "properties": {
                                 "content": {
