@@ -1,7 +1,7 @@
 import { postMessageToVimeo, setControlLabel } from '../../global/js/helpers/VideoUtils';
 
 /**
- * Globals variables
+ * Global variables
  * @constant {string} VERTICAL_VIDEO_STORIES_SELECTOR - Selector for vertical video panel elements.
  * @constant {string} VERTICAL_VIDEO_STORIES_VIDEO_PLAYER_FRAME - Selector for video iframe container.
  * @constant {string} VERTICAL_VIDEO_STORIES_VIDEO_CONTROL_BTN - Selector for the button that control the video.
@@ -71,7 +71,7 @@ export function openModal(modal) {
     document.body.style.overflow = 'hidden';
     modal.querySelector('[data-focus-scope-start="true"]').focus();
 
-    ///Focus trap for modal
+    // Focus trap for modal
     document.addEventListener('keydown', (event) => {
         if (modal) {
             focusTrap(event, modal);
@@ -95,7 +95,7 @@ export function closeModal(modal) {
 }
 
 /**
- * Modal Init function 
+ * Modal Init function
  * @param {HTMLElement} section - The section DOM Element
  */
 export function _modalInit(section) {
@@ -185,7 +185,7 @@ export function _videoInit(section) {
 };
 
 /**
- * Initializes carousel when the DOM content is fully loaded.
+ * Initializes modal when the DOM content is fully loaded.
  *
  * This function selects all elements matching the `VERTICAL_VIDEO_STORIES_SELECTOR` selector
  * applies the `_modalInit` function to each of them
