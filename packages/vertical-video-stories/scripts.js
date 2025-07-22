@@ -72,11 +72,13 @@ export function openModal(modal) {
     modal.querySelector('[data-focus-scope-start="true"]').focus();
 
     // Focus trap for modal
-    document.addEventListener('keydown', (event) => {
+    const keydownListener = (event) => {
         if (modal) {
             focusTrap(event, modal);
         }
-    });
+    };
+    document.addEventListener('keydown', keydownListener);
+    modal.keydownListener = keydownListener; // Store the listener on the modal for cleanup
 }
 
 /**
@@ -124,21 +126,26 @@ export function _modalInit(section) {
                 currentModal.dataset.listenerAdded = 'true';
             }
 
+            window.currentModal = currentModal;
             openModal(currentModal);
         });
     });
-
     closeBtn && closeBtn.forEach(btn => {
         btn && btn.addEventListener('click', function() {
-            currentModal && closeModal(currentModal);
+            if (currentModal) {
+                closeModal(currentModal);
+                window.currentModal = null;
+            }
         });
     });
-
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            currentModal && closeModal(currentModal);
-        }
-    });
+    if (!window.escapeKeyListenerAdded) {
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && window.currentModal) {
+                closeModal(window.currentModal);
+            }
+        });
+        window.escapeKeyListenerAdded = true;
+    }
   }
 
 /**
