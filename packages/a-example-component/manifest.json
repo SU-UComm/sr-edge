@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "example-component",
     "type": "edge",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "namespace": "stanford-apb",
     "description": "This component serves as an example to base ongoing development on.",
     "displayName": "Example Component",
@@ -42,7 +42,10 @@
                     "image": {
                         "title": "Image",
                         "type": "string",
-                        "format": "matrix-asset-uri"
+                        "format": "matrix-asset-uri",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     }
                 }
             },
