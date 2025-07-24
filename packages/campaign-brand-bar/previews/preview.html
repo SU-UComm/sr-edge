@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- [[inline-styles]] -->
+    </head>
+    <body class="dark:su-bg-black-true dark:su-text-white">
+        <script>
+            // window.pageController2 = {
+            //   "id": 130290,
+            //   "title": "Home Page",
+            //   "isStory": false,
+            //   "mainTopic": "",
+            //   "storyLayout": "",
+            //   "search": {
+            //     "endpoint": "https://dxp-us-search.funnelback.squiz.cloud/s/search.html",
+            //     "collection": "sug~sp-stanford-report-search",
+            //     "profile": "stanford-report-push-search"
+            //   }
+            // }
+            // window.pageController = {
+            //   "id": 129882,
+            //   "title": "Hannah&#039;s Leadership Test Page",
+            //   "isStory": true,
+            //   "mainTopic": "Leadership &amp; governance",
+            //   "storyLayout": "LeadershipMessage",
+            //   "search": {
+            //     "endpoint": "https://dxp-us-search.funnelback.squiz.cloud/s/search.html",
+            //     "collection": "sug~sp-stanford-report-search",
+            //     "profile": "stanford-report-push-search"
+            //   }
+            // };
+
+            //  window.pageController = {
+            //   "id": 129646,
+            //   "title": "DC test",
+            //   "isStory": true,
+            //   "mainTopic": "",
+            //   "mainTopicId": "",
+            //   "storyLayout": "Basic",
+            //   "search": {
+            //       "endpoint": "https://dxp-us-search.funnelback.squiz.cloud/s/search.html",
+            //       "collection": "sug~sp-stanford-report-search",
+            //       "profile": "stanford-report-push-search",
+            //       "resultPage": "https://sug-web.matrix.squiz.cloud/report/search"
+            //   }
+            //   }
+
+            // window.pageController = {
+            //     "id": 130699,
+            //     "title": "295 Video Basic Story Hero UAT",
+            //     "isStory": true,
+            //     "mainTopic": "Community &amp;amp; Culture",
+            //     "mainTopicId": "28411",
+            //     "contentType": "Video",
+            //     "storyLayout": "Basic",
+            //     "search": {
+            //         "endpoint": "https://dxp-us-search.funnelback.squiz.cloud/s/search.html",
+            //         "collection": "sug~sp-stanford-report-search",
+            //         "profile": "stanford-report-push-search",
+            //         "resultPage": "https://sug-web.matrix.squiz.cloud/report/search",
+            //     }
+            // }
+        </script>
+        <a id="skiplinks" href="#main-content" class="skiplink"
+            >Skip to content</a
+        >
+        <main
+            id="main-content"
+            role="main"
+            class="su-page su-page--hero su-page--top-margin su-page--bottom-margin"
+        >
+            <div class="su-upper-content"><h1>Hello world</h1></div>
+        </main>
+        [component://output]
+        <!-- [[inline-scripts]] -->
+
+        <script src="https://dxp-us-stage-search.funnelback.squiz.cloud/s/resources-global/js/jquery/jquery-1.10.2.min.js"></script>
+        <script src="https://dxp-us-stage-search.funnelback.squiz.cloud/s/resources-global/thirdparty/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+        <script src="https://dxp-us-stage-search.funnelback.squiz.cloud/s/resources-global/thirdparty/typeahead-0.11.1/typeahead.bundle.min.js"></script>
+        <script src="https://dxp-us-stage-search.funnelback.squiz.cloud/s/resources-global/thirdparty/handlebars-4.7/handlebars.min.js"></script>
+        <script src="https://dxp-us-stage-search.funnelback.squiz.cloud/s/resources-global/js/funnelback.autocompletion-2.6.0.js"></script>
+        <script>
+            let fbAutocomplete = jQuery(
+                'input#mobile_search_query,input#desktop_search_query',
+            ).autocompletion({
+                datasets: {
+                    organic: {
+                        collection: 'sug~sp-stanford-report-search',
+                        profile: '_default_preview',
+                        program:
+                            'https://dxp-us-stage-search.funnelback.squiz.cloud/s/suggest.json',
+                        format: 'extended',
+                        alpha: '0.5',
+                        show: '10',
+                        sort: '0',
+                        group: true,
+                        queryKey: 'partial_query',
+                    },
+                },
+                typeahead: { hint: true },
+                length: 3,
+            });
+
+            // Clear searches
+            let searchClear = document.querySelectorAll(
+                '.report-header__clear',
+            );
+            if (searchClear.length) {
+                searchClear.forEach((btn) => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        fbAutocomplete.typeahead('val', '');
+                    });
+                });
+            }
+
+            // Wrap all WYSIWYG tables
+            document.addEventListener('DOMContentLoaded', function (event) {
+                const pageTables = document.querySelectorAll(
+                    '.su-wysiwyg-content table,.container > span table,.su-page-content > *:not([data-component], .container) table',
+                );
+                if (pageTables.length) {
+                    pageTables.forEach((table) => {
+                        var parent = table.parentNode;
+                        var wrapper = document.createElement('div');
+                        wrapper.classList.add('su-responsive-table');
+                        parent.insertBefore(wrapper, table);
+                        wrapper.appendChild(table);
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>
