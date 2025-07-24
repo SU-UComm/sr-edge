@@ -9,7 +9,7 @@
  */
 export const FEATURED_CONTENT_SELECTOR = 'section[data-component="featured-content"]';
 export const FEATURED_CONTENT_HIDDEN_CLASS = 'su-hidden';
-export const FEATURED_CONTENT_MODAL_SELECTOR = 'div[data-modal="modal"]';
+export const FEATURED_CONTENT_MODAL_SELECTOR = '[data-modal="modal"]';
 export const FEATURED_CONTENT_OPEN_MODAL_BTN = 'button[data-click="open-modal"]';
 export const FEATURED_CONTENT_CLOSE_MODAL_BTN = 'button[data-dismiss="modal"]';
 export const FEATURED_CONTENT_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
@@ -58,7 +58,7 @@ export function _modalInit(section) {
             const uniqueId = btn.dataset.modalId;
 
             // Set current modal
-            currentModal = section.querySelector(`div[data-modal-id="${uniqueId}"]`);
+            currentModal = section.querySelector(`[data-modal-id="${uniqueId}"]`);
 
             if (!currentModal) return;
 

@@ -20,9 +20,7 @@
         </div>
     </div>
 
-    <section data-modal="modal-wrapper">
-        {{#> modal-content titleID=videoModal.titleID uniqueID=uniqueID ariaTitle=videoModal.title}}
-            {{> embed-video isVertical=videoModal.isVertical videoId=youtubeId title=videoModal.title noAutoPlay=videoModal.noAutoPlay}}
-        {{/ modal-content}}
-    </section>
+    {{#> modal-content titleID=videoModal.titleID uniqueID=uniqueID ariaTitle=videoModal.title}}
+        {{> embed-video isVertical=videoModal.isVertical videoId=youtubeId title=videoModal.title noAutoPlay=videoModal.noAutoPlay}}
+    {{/ modal-content}}
 </section> 
