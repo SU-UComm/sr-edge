@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "content-with-sidebar",
     "type": "edge",
-    "version": "5.0.0",
+    "version": "5.0.1",
     "namespace": "stanford-apb",
     "description": "Use this component to display WYSIWYG text with a Text Callout as a sidebar.",
     "displayName": "Content with sidebar",
