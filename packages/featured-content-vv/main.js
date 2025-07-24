@@ -1,5 +1,5 @@
 import featuredContentVVTemplate from './featured-content-vv.hbs';
-import { cardDataAdapter, matrixCardService, linkedHeadingService, basicAssetUri } from '../../global/js/utils';
+import { cardDataAdapter, matrixCardService, linkedHeadingService, basicAssetUri, uuid } from '../../global/js/utils';
 import { Card } from '../../global/js/helpers';
 import { processEditor } from '../../global/js/utils/processEditor';
 
@@ -58,7 +58,11 @@ export default {
             // Configure edit targets
             squizEditTargets = {
                 "headingTitle": { "field": "headingConfiguration.title" },
-                "headingCtaText": { "field": "headingConfiguration.ctaText" }
+                "headingCtaText": { "field": "headingConfiguration.ctaText" },
+                "featDesc": [
+                    { "field": "contentConfiguration.featuredDescriptionOverride"},
+                    { "field": "contentConfiguration.relatedDescriptionOverride"}
+                ]
             };
         }
 
@@ -133,6 +137,8 @@ export default {
             }
         }
 
+        const uniqueID = uuid();
+
         // Process card data
         const adapter = new cardDataAdapter();
         const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
@@ -173,6 +179,15 @@ export default {
             relatedCardData.description = relatedDescriptionOverride;
         }
 
+        const videoModal = {
+            isVertical: true,
+            videoId: youtubeId,
+            title: `Watch ${relatedCardData?.title}`,
+            noAutoPlay: true,
+            uniqueID,
+            titleID: 'video-modal'
+        };
+
         // Prepare component data for template rendering
         const componentData = {
             headingConfiguration: {
@@ -190,6 +205,8 @@ export default {
             videoImageUrl: videoImageData?.url,
             videoImageAlt: videoImageData?.attributes?.alt || '',
             youtubeId,
+            uniqueID: uniqueID,
+            videoModal,
             relatedCard: Card({
                 data: relatedCardData,
                 displayThumbnail: false,
