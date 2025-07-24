@@ -202,7 +202,7 @@ export default {
             videosData,
             videosDataLength: `${videosData.length}`,
             width: "full",
-            paddingY: (bgImageData?.url || sectionConfiguration.alwaysDark) ? "10" : "",
+            paddingY: bgImageData?.url ? "10" : "",
             paddingX: false,
             marginTop: sectionConfiguration.marginTop,
             marginBottom: sectionConfiguration.marginBottom,
