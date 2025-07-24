@@ -55,6 +55,12 @@ export default {
                 },
                 "teaserText": {
                     "field": "contentConfiguration.teaserText"
+                },
+                "mediaFeatureImage": {
+                    "field": "contentConfiguration.image"
+                },
+                "mediaFeatureBackgroundImage": {
+                    "field": "contentConfiguration.backgroundImage"
                 }
             };
         }

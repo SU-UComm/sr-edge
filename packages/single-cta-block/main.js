@@ -55,7 +55,8 @@ export default {
                 "eyebrow": { "field": "eyebrow" },
                 "title": { "field": "title" },
                 "description": { "field": "description" },
-                "button": { "field": "ctaConfiguration.ctaText" }
+                "button": { "field": "ctaConfiguration.ctaText" },
+                "singleCtaBlockImage": { "field": "image" }
             };
         }
 

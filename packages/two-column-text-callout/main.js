@@ -54,6 +54,7 @@ export default {
                 "heading": { "field": "heading" },
                 "infoBoxTitle": { "field": "callouts", "array": true, "property": "title" },
                 "infoBoxContent": { "field": "callouts", "array": true, "property": "content" },
+                "infoBoxImage": { "field": "callouts", "array": true, "property": "imageConfiguration.image" },
                 "caption": { "field": "callouts", "array": true, "property": "imageConfiguration.caption"},
                 "credit": { "field": "callouts", "array": true, "property": "imageConfiguration.credit"},
                 "button": { "field": "callouts", "array": true, "property": "buttonConfiguration.buttonText"}

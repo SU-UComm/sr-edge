@@ -45,7 +45,7 @@ export function ImageMosaic({ data, remainingImageCount }) {
                 : articleClass;
 
         images.push(
-            `<article class="${articleClass} su-relative">
+            `<article class="${articleClass} su-relative" data-se="imageGalleryModalImage">
                 <img src="${url}" alt="${alt}" class="su-w-full su-h-full su-object-cover" />
                 ${remainingImageCount && i === data.length - 1 ? `
                 <div class="su-bg-black/[0.33] su-w-full su-h-full su-absolute su-top-0 su-left-0 su-flex su-justify-center su-items-center su-z-[1]">

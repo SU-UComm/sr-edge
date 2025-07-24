@@ -29,7 +29,7 @@
                     ></iframe>
                     {{~else~}}
                         {{~#if imageData.url~}}
-                        <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-size-full" />
+                        <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-size-full" data-se="singleImageVideoImage" />
                         {{~/if~}}
                     {{~/if~}}
                     <span class="{{getStringByCondition value=width expectedValue="wide" trueResult="*:su-w-[40px] *:su-h-[40px] *:md:su-w-[60px] *:md:su-h-[60px] *:lg:su-w-[100px] *:lg:su-h-[100px] *:lg:su-size-100 lg:su-bottom-38 lg:su-left-38" falseResult="*:su-w-[40px] *:md:su-w-[60px]"}} su-play-button-icon su-play-btn su-transition-all su-absolute su-bottom-20 su-left-20 md:su-left-27 md:su-bottom-27 md:su-block">
@@ -47,7 +47,7 @@
                     ></iframe>
                     {{~else~}}
                         {{~#if imageData.url~}}
-                        <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-w-full su-object-cover" />
+                        <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-w-full su-object-cover" data-se="singleImageVideoImage" />
                         {{~/if~}}
                     {{~/if~}}
                 {{~/if~}}

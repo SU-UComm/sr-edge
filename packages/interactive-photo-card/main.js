@@ -50,6 +50,7 @@ export default {
                 title: { field: 'title' },
                 eyebrow: { field: 'eyebrow' },
                 content: { field: 'content' },
+                interactivePhotoCardImage: { field: 'image' },
             };
         }
 
