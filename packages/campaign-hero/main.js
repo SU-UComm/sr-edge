@@ -195,7 +195,8 @@ export default {
             quoteLink: quoteInternalLinkUrl || quoteManualUrl,
             quoteImageUrl: quoteImageData?.url,
             quoteImageAlt: quoteImageData?.attributes?.alt || '',
-            width: 'full'
+            width: 'full',
+            paddingX: false,
         };
 
         // NEW: Early return pattern for edit mode

@@ -1,6 +1,6 @@
 <section data-component="campaign-hero">
-    <div class="{{containerClasses width=width}}">
-        <div class="su-relative [clip-path:inset(0)] su-bg-black-true">
+    <div class="{{containerClasses width=width paddingX=paddingX}} [clip-path:inset(0)] su-bg-black-true">
+        <section class="su-relative">
             <div class="su-relative">
                 <div class="su-relative">
                     {{#if isBgVideo}}
@@ -26,7 +26,7 @@
                         </div>
                     {{/if}}
                     <div class="su-absolute su-block su-top-0 {{#if isBgVideo}}{{#if hasQuote}}su-bg-black-true/20 su-size-full{{else}}su-bg-gradient-to-t su-from-black-true su-w-full su-h-[max(100vh,100%)]{{/if}}{{else}}su-bg-black-true/20 su-size-full{{/if}}" aria-hidden="true"></div>
-                    <div class="su-cc su-relative su-z-20 {{#if isBgVideo}}su-mt-[-70vh]{{else}}su-pt-300 md:su-pt-[40vw] lg:su-pt-[26vw] 2xl:su-pt-400{{/if}} {{#if hasIntro}}{{#if isIntroPulledLeft}}su-rs-pb-6{{else}}su-rs-pb-2{{/if}}{{else}}{{#unless hasQuote}}su-pb-300 md:su-pb-[40vw] lg:su-pb-[26vw] 2xl:su-pb-400{{/unless}}{{/if}} {{#if isBgVideo}}{{#unless hasQuote}}{{#unless hasIntro}}su-rs-pb-6{{/unless}}{{/unless}}{{/if}} {{#if isBgVideoNoQuote}}su-bg-gradient-to-t su-from-black-true{{/if}}">
+                    <div class="su-cc su-relative su-z-20 {{#if isBgVideo}}su-mt-[-70vh]{{else}}su-pt-300 md:su-pt-[40vw] lg:su-pt-[26vw] 2xl:su-pt-400{{/if}} su-bg-gradient-to-t su-from-black-true {{#if hasIntro}}{{#if isIntroPulledLeft}}su-rs-pb-6{{else}}su-rs-pb-2{{/if}}{{else}}{{#unless hasQuote}}su-pb-300 md:su-pb-[40vw] lg:su-pb-[26vw] 2xl:su-pb-400{{/unless}}{{/if}} {{#if isBgVideo}}{{#unless hasQuote}}{{#unless hasIntro}}su-rs-pb-6{{/unless}}{{/unless}}{{/if}} {{#if isBgVideoNoQuote}}su-bg-gradient-to-t su-from-black-true{{/if}}">
                         <h1 class="su-fluid-type-6 su-text-white su-text-shadow-lg su-text-center su-max-w-1000 su-mx-auto su-mb-0 su-text-balance" data-se="title">{{title}}</h1>
                         {{#unless isIntroPulledLeft}}
                             {{#if hasIntro}}
@@ -79,6 +79,6 @@
                     </div>
                 {{/if}}
             </div>
-        </div>
+        </section>
     </div>
 </section> 
