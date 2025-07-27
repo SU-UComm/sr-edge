@@ -1,0 +1,20 @@
+{
+    "bkgConfig": {
+        "type": "Video",
+        "bkgImage": "matrix-asset://api-identifier/99100",
+        "bkgVideo": "https://player.vimeo.com/video/904625167"
+    },
+    "textConfig": {
+        "title": "Making a world-class education possible",
+        "intro": "<p>We meet the full financial need of every admitted undergraduate who qualifies for assistance. <strong>We do not expect students to borrow to meet their need.</strong></p>"
+    },
+    "youtubeId": "zNxzOliUCTc",
+    "quoteConfig": {
+        "include": true,
+        "quote": "...it came with such a generous financial aid package, that made the decision really easy for me. I just figured, okay, if it's the cheapest option and it's Stanford, might as well take it.",
+        "name": "Grayson Armour",
+        "extra": "on his acceptance to Stanford",
+        "quoteInternalUrl": "matrix-asset://api-identifier/28192",
+        "image": "matrix-asset://api-identifier/99100"
+    }
+}

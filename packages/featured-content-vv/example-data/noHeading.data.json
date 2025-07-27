@@ -1,0 +1,19 @@
+{
+    "headingConfiguration": {
+        "includeSectionHeading": false,
+        "title": "Here's a headline",
+        "ctaText": "View all",
+        "ctaUrl": "matrix-asset://api-identifier/89422",
+        "ctaNewWindow": false
+    },
+    "contentConfiguration": {
+        "featuredStory": "matrix-asset://api-identifier/159910",
+        "featuredDescriptionOverride": "",
+        "relatedStory": "matrix-asset://api-identifier/157852",
+        "youtubeId": "52H4lQIEQdk",
+        "videoImage": "matrix-asset://api-identifier/99100"
+    },
+    "displayConfiguration": {
+        "alignment": "right"
+    }
+}

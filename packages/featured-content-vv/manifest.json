@@ -1,0 +1,207 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "featured-content-vv",
+    "type": "edge",
+    "version": "0.0.8",
+    "namespace": "stanford-apb",
+    "description": "",
+    "displayName": "Featured content with vertical video",
+    "mainFunction": "main",
+    "environment": [
+        {
+            "name": "API_IDENTIFIER",
+            "required": true
+        },
+        {
+            "name": "FB_JSON_URL",
+            "required": true
+        },
+        {
+            "name": "BASE_DOMAIN",
+            "required": true
+        }
+    ],
+    "icon": {
+        "id": "auto_awesome_mosaic",
+        "color": {
+            "type": "enum",
+            "value": "blue"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "headingConfiguration": {
+                        "title": "Section Heading Configuration",
+                        "description": "The heading for the section, appearing before the grid of cards.",
+                        "required": [],
+                        "properties": {
+                            "includeSectionHeading": {
+                                "title": "Include Section Heading",
+                                "type": "boolean",
+                                "default": false
+                            }
+                        },
+                        "allOf": [
+                            {
+                                "if": {
+                                    "required": [],
+                                    "properties": {
+                                        "includeSectionHeading": {
+                                            "const": true
+                                        }
+                                    }
+                                },
+                                "then": {
+                                    "required": [],
+                                    "properties": {
+                                        "title": {
+                                            "title": "Heading",
+                                            "type": "string",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
+                                        },
+                                        "ctaUrl": {
+                                            "title": "Matrix Asset Link",
+                                            "type": "string",
+                                            "description": "Select an asset to link to. If this field is filled out, it will be used instead of the manual link",
+                                            "format": "matrix-asset-uri"
+                                        },
+                                        "ctaManualUrl": {
+                                            "title": "Manual Link",
+                                            "type": "string",
+                                            "description": "Enter the full URL, including https://"
+                                        },
+                                        "ctaText": {
+                                            "title": "Link text",
+                                            "type": "string",
+                                            "default": "View all",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
+                                        },
+                                        "ctaNewWindow": {
+                                            "title": "Open link in a new window",
+                                            "type": "boolean",
+                                            "default": false
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "contentConfiguration": {
+                        "title": "Grid Content",
+                        "type": "object",
+                        "required": [],
+                        "properties": {
+                            "featuredStory": {
+                                "title": "Featured Item",
+                                "description": "The large featured item.",
+                                "type": "string",
+                                "format": "matrix-asset-uri"
+                            },
+                            "featuredDescriptionOverride": {
+                                "title": "Featured Item Description",
+                                "description": "Use this field to override the Featured Item's description that comes from the story asset.",
+                                "type": "string",
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
+                            },
+                            "videoImage": {
+                                "title": "Video preview image",
+                                "description": "Select an image to use as the video preview. The aspect ratio of the image displayed will be the same as the YouTube shorts which is 9x16. Images of a different size will be centered and fit to the height of the container.",
+                                "type": "string",
+                                "format": "matrix-asset-uri"
+                            },
+                            "youtubeId": {
+                                "title": "YouTube video ID",
+                                "description": "Enter the video ID from YouTube.",
+                                "type": "string"
+                            },
+                            "relatedStory": {
+                                "title": "Related Story",
+                                "description": "Choose a story that is related to the video above.",
+                                "type": "string",
+                                "format": "matrix-asset-uri"
+                            },
+                            "relatedDescriptionOverride": {
+                                "title": "Related Story Description",
+                                "description": "Use this field to override the related story description that comes from the selected story asset.",
+                                "type": "string",
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
+                            }
+                        }
+                    },
+                    "displayConfiguration": {
+                        "title": "Grid Display Configuration",
+                        "required": [],
+                        "properties": {
+                            "alignment": {
+                                "title": "Featured Card: Alignment",
+                                "description": "The position of the Featured Item on larger screens.",
+                                "default": "left",
+                                "enum": ["left", "right"]
+                            }
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://api-identifier/89422": {
+            "type": "file",
+            "path": "mocked-uris/89422.json"
+        },
+        "matrix-asset://api-identifier/99100": {
+            "type": "file",
+            "path": "mocked-uris/99100.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/select.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "noHeading": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/noHeading.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        }
+    }
+}
