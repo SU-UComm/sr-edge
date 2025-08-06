@@ -7,6 +7,9 @@ export
 coverage
 cdk.out
 
+# uat instructions working folder
+uat-instructions/
+
 # temp files
 temp-*
 *.temp
