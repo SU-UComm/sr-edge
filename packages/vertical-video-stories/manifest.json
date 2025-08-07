@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "vertical-video-stories",
     "type": "edge",
-    "version": "0.0.6",
+    "version": "1.0.0",
     "namespace": "stanford-components",
     "description": "Use this to display a vertical video within a story page.",
     "displayName": "Vertical video stories",
