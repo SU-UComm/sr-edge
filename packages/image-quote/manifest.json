@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "image-quote",
     "type": "edge",
-    "version": "5.0.0",
+    "version": "5.0.3",
     "namespace": "stanford-apb",
     "description": "An image with an associated quote.",
     "displayName": "Image quote",
