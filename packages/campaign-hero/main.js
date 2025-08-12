@@ -58,7 +58,8 @@ export default {
             // Configure edit targets
             squizEditTargets = {
                 "title": { "field": "textConfig.title" },
-                "intro": { "field": "textConfig.intro" }
+                "intro": { "field": "textConfig.intro" },
+                "bgimage": { "field": "bkgConfig.bkgImage" }
             };
 
             if (hasQuote) {

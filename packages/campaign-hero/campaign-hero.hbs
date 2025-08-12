@@ -21,7 +21,7 @@
                             <img
                                 src="{{bkgImageUrl}}"
                                 class="su-object-cover su-size-full"
-                                alt="{{bkgImageAlt}}"
+                                alt="{{bkgImageAlt}}" data-se="bgimage"
                             />
                         </div>
                     {{/if}}
@@ -63,7 +63,7 @@
                         {{/if}}
                         {{#if isIntroPulledLeft}}
                             {{#if hasIntro}}
-                                <div class="su-type-3 lg:su-max-w-800 xl:su-max-w-1000 2xl:su-max-w-1100 su-ml-0 *:su-leading-snug su-text-white su-font-serif su-border-l su-border-color su-border-black-30 su-pl-32 md:su-pl-48 lg:su-pl-100 2xl:su-pl-170 su-py-38 last:*:su-mb-0 su-rs-mt-10">{{{intro}}}</div>
+                                <div class="su-type-3 lg:su-max-w-800 xl:su-max-w-1000 2xl:su-max-w-1100 su-ml-0 *:su-leading-snug su-text-white su-font-serif su-border-l su-border-color su-border-black-30 su-pl-32 md:su-pl-48 lg:su-pl-100 2xl:su-pl-170 su-py-38 last:*:su-mb-0 su-rs-mt-10"  data-se="intro">{{{intro}}}</div>
                             {{/if}}
                         {{/if}}
                         {{#if hasQuote}}
