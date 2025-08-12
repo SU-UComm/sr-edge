@@ -90,51 +90,51 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/1": {
+        "matrix-asset://stanfordNews/1": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/2": {
+        "matrix-asset://stanfordNews/2": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/5": {
+        "matrix-asset://stanfordNews/5": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/6": {
+        "matrix-asset://stanfordNews/6": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/9": {
+        "matrix-asset://stanfordNews/9": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/10": {
+        "matrix-asset://stanfordNews/10": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/3": {
+        "matrix-asset://stanfordNews/3": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/7": {
+        "matrix-asset://stanfordNews/7": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/8": {
+        "matrix-asset://stanfordNews/8": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/11": {
+        "matrix-asset://stanfordNews/11": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/14": {
+        "matrix-asset://stanfordNews/14": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/164977": {
+        "matrix-asset://stanfordNews/164977": {
             "type": "file",
             "path": "mocked-uris/164977.json"
         }

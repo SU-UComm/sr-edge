@@ -67,7 +67,7 @@ describe('[Events section]', () => {
             title: "Upcoming events",
             ctaText: "View all",
             ctaManualUrl: "https://news.stanford.edu/home-page",
-            ctaUrl: "matrix-asset://api-identifier/28192",
+            ctaUrl: "matrix-asset://stanfordNews/28192",
             ctaNewWindow: false
         },
         contentConfiguration: {

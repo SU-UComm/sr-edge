@@ -44,23 +44,23 @@ describe('[Image Gallery Modal]', () => {
             summaryAlign: "center",
             images: [
                 {
-                    "image": "matrix-asset://api-identifier/63391",
+                    "image": "matrix-asset://stanfordNews/63391",
                     "caption": "image 1 caption | John Doe"
                 },
                 {
-                    "image": "matrix-asset://api-identifier/63353",
+                    "image": "matrix-asset://stanfordNews/63353",
                     "caption": "image 2 caption | John Doe"
                 },
                 {
-                    "image": "matrix-asset://api-identifier/63354",
+                    "image": "matrix-asset://stanfordNews/63354",
                     "caption": "image 4 caption | John Doe"
                 },
                 {
-                    "image": "matrix-asset://api-identifier/63355",
+                    "image": "matrix-asset://stanfordNews/63355",
                     "caption": "image 4 caption | John Doe"
                 },
                 {
-                    "image": "matrix-asset://api-identifier/63356",
+                    "image": "matrix-asset://stanfordNews/63356",
                     "caption": "image 5 caption | John Doe"
                 }
             ],

@@ -211,7 +211,7 @@ describe('[Multicolumn listing]', () => {
         headingConfiguration: {
             title: "Multicolumn Listing",
             ctaText: "View all",
-            ctaUrl: "matrix-asset://api-identifier/89422",
+            ctaUrl: "matrix-asset://stanfordNews/89422",
             ctaNewWindow: true
         },
         contentConfiguration: {

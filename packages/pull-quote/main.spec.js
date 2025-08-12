@@ -20,7 +20,7 @@ describe('[Pull Quote]', () => {
 
     const defaultMockData = {
         displayConfiguration: {
-            asset: "matrix-asset://api-identifier/63353",
+            asset: "matrix-asset://stanfordNews/63353",
             quote: "Test quote",
             name: "Test name",
             title: "Test title",

@@ -2,20 +2,20 @@
     "headingConfiguration": {
         "title": "Existing EV batteries may last up to 40% longer than expected",
         "ctaText": "View all",
-        "ctaUrl": "matrix-asset://api-identifier/141464",
+        "ctaUrl": "matrix-asset://stanfordNews/141464",
         "ctaNewWindow": false
     },
     "contentConfiguration": {
         "source": "Select",
         "cards": [
             {
-                "cardAsset": "matrix-asset://api-identifier/166535"
+                "cardAsset": "matrix-asset://stanfordNews/166535"
             },
             {
-                "cardAsset": "matrix-asset://api-identifier/162707"
+                "cardAsset": "matrix-asset://stanfordNews/162707"
             },
             {
-                "cardAsset": "matrix-asset://api-identifier/162759"
+                "cardAsset": "matrix-asset://stanfordNews/162759"
             }
         ],
         "featuredDescription": ""

@@ -172,7 +172,7 @@ squizEditTargets = {
 
 ### Matrix Asset ID Standardization
 **Objective**: Update all squizEdit image default matrix-asset values to use ID 130444
-**Target Format**: `matrix-asset://matrixIdentifier/130444`
+**Target Format**: `matrix-asset://stanfordNews/130444`
 
 ### Discovery Process
 - **Search Strategy**: Found references in main.js files across components
@@ -182,7 +182,7 @@ squizEditTargets = {
 ### Implementation
 ```bash
 # Example fix for single-image-video
-sed -i '' 's/matrix-asset:\/\/matrixIdentifier\/1/matrix-asset:\/\/matrixIdentifier\/130444/g' packages/single-image-video/main.js
+sed -i '' 's/matrix-asset:\/\/stanfordNews\/1/matrix-asset:\/\/stanfordNews\/130444/g' packages/single-image-video/main.js
 ```
 
 ### Results

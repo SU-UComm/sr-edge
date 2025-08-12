@@ -7,7 +7,7 @@ export class matrixCardService {
     }
 
     formatMatrixURItoID(cards) {
-        return cards.map((card) => card.cardAsset.replace(`matrix-asset://${this.API_IDENTIFIER}/`, "").replace('matrix-asset://api-identifier/', '') );
+        return cards.map((card) => card.cardAsset.replace(`matrix-asset://${this.API_IDENTIFIER}/`, "").replace('matrix-asset://stanfordNews/', '') );
     }
 
     formatCardIDsToCSV(cards) {

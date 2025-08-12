@@ -18,10 +18,10 @@ describe('[Campaign CTA]', () => {
 
     const defaultMockData = {
         displayConfiguration: {
-            image: 'matrix-asset://api-identifier/63353',
+            image: 'matrix-asset://stanfordNews/63353',
             title: 'Campaign Title',
             description: 'Campaign Description',
-            linkUrl: 'matrix-asset://api-identifier/63492',
+            linkUrl: 'matrix-asset://stanfordNews/63492',
             linkText: 'Click Here'
         }
     };

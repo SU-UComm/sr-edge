@@ -26,7 +26,7 @@ describe('[Multicolumn Info Section]', () => {
             addButton: true,
             buttonConfiguration: {
                 buttonText: "Read more",
-                infoInternalUrl: "matrix-asset://api-identifier/28192",
+                infoInternalUrl: "matrix-asset://stanfordNews/28192",
                 isNewWindow: false
             }
         },
@@ -34,14 +34,14 @@ describe('[Multicolumn Info Section]', () => {
             title: "More Info",
             content: "<p>Test content</p>",
             imageConfiguration: {
-                image: "matrix-asset://api-identifier/99100",
+                image: "matrix-asset://stanfordNews/99100",
                 caption: "Test caption",
                 credit: "Test credit",
                 imagePlacement: "Below content"
             },
             buttonConfiguration: {
                 buttonText: "Click me",
-                internalUrl: "matrix-asset://api-identifier/28192",
+                internalUrl: "matrix-asset://stanfordNews/28192",
                 isNewWindow: false
             }
         }

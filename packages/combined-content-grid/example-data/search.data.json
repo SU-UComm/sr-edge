@@ -2,7 +2,7 @@
     "headingConfiguration": {
         "title": "Stories",
         "ctaText": "View all",
-        "ctaUrl": "matrix-asset://api-identifier/128705",
+        "ctaUrl": "matrix-asset://stanfordNews/128705",
         "ctaNewWindow": false
     },
     "contentConfiguration": {

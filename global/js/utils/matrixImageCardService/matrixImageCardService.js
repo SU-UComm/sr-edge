@@ -5,7 +5,7 @@ export class matrixImageCardService {
     }
   
     formatMatrixURItoID(items) {
-        return items.map((item) => item.image.replace(`matrix-asset://${this.API_IDENTIFIER}/`, "").replace('matrix-asset://api-identifier/', '') );
+        return items.map((item) => item.image.replace(`matrix-asset://${this.API_IDENTIFIER}/`, "").replace('matrix-asset://stanfordNews/', '') );
     }
   
     formatCardIDsToCSV(items) {

@@ -47,17 +47,17 @@ describe('[Single Featured Content Component]', () => {
         headingConfiguration: {
             title: "Welcome to Stanford University!",
             ctaText: "View all",
-            ctaUrl: "matrix-asset://api-identifier/28397"
+            ctaUrl: "matrix-asset://stanfordNews/28397"
         },
         contentConfiguration: {
-            source: "matrix-asset://api-identifier/162618",
+            source: "matrix-asset://stanfordNews/162618",
             description: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>"
         }
     };
 
     const defaultMockInfo = {
         env: {
-            API_IDENTIFIER: 'api-identifier',
+            API_IDENTIFIER: 'stanfordNews',
             BASE_DOMAIN: 'https://google.com'
         },
         fns: mockFnsCtx

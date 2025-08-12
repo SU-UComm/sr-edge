@@ -191,7 +191,7 @@ describe('[Two Column Text Callout]', () => {
                         buttonConfiguration: {
                             isNewWindow: false,
                             buttonText: "Button",
-                            internalUrl: "matrix-asset://api-identifier/28192",
+                            internalUrl: "matrix-asset://stanfordNews/28192",
                         }
                     }
                 ]

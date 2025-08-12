@@ -9,28 +9,28 @@
         {
             "heading": "Alma, Class of 2024",
             "youtubeId": "LoUdz1saXJU",
-            "videoImage": "matrix-asset://api-identifier/99100",
+            "videoImage": "matrix-asset://stanfordNews/99100",
             "description": "The master’s student and Knight-Hennessy scholar is challenging notions of what it means to be a scholar, a soldier and a pageant winner. “The greatest things in life lie on the other side of fear.”",
             "manualStoryUrl": "https://news.stanford.edu/stories/2024/07/meet-alma-cooper-army-officer-data-scientist-and-miss-michigan"
         },
         {
             "heading": "Adam, Class of 2024",
             "youtubeId": "dx_-W5HIVOU",
-            "videoImage": "matrix-asset://api-identifier/125800",
+            "videoImage": "matrix-asset://stanfordNews/125800",
             "description": "Adam Nayak, winner of the 2022 J.E. Wallace Sterling Award for outstanding leadership and service, will graduate in June with a bachelor’s degree in civil and environmental engineering and a minor in comparative studies in race and ethnicity.",
-            "internalStoryUrl": "matrix-asset://api-identifier/28192"
+            "internalStoryUrl": "matrix-asset://stanfordNews/28192"
         },
         {
             "heading": "Adam, External Link",
             "youtubeId": "dx_-W5HIVOU",
-            "videoImage": "matrix-asset://api-identifier/128610",
+            "videoImage": "matrix-asset://stanfordNews/128610",
             "description": "Adam Nayak, winner of the 2022 J.E. Wallace Sterling Award for outstanding leadership and service, will graduate in June with a bachelor’s degree in civil and environmental engineering and a minor in comparative studies in race and ethnicity.",
             "manualStoryUrl": "https://google.com"
         },
         {
             "heading": "Alma no link, Class of 2024",
             "youtubeId": "LoUdz1saXJU",
-            "videoImage": "matrix-asset://api-identifier/9861",
+            "videoImage": "matrix-asset://stanfordNews/9861",
             "description": "The master’s student and Knight-Hennessy scholar is challenging notions of what it means to be a scholar, a soldier and a pageant winner. “The greatest things in life lie on the other side of fear.”"
         }
     ]

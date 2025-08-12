@@ -25,14 +25,14 @@ describe("[Text Callout]", () => {
             content: "This is a test content.",
         },
         imageConfiguration: {
-            image: "matrix-asset://api-identifier/99100",
+            image: "matrix-asset://stanfordNews/99100",
             caption: "Test Caption",
             credit: "Test Credit",
             imagePlacement: "Below content",
         },
         buttonConfiguration: {
             buttonText: "Click here",
-            internalUrl: "matrix-asset://api-identifier/67890",
+            internalUrl: "matrix-asset://stanfordNews/67890",
             externalUrl: "https://google.com",
             isNewWindow: false,
         },
@@ -319,7 +319,7 @@ describe("[Text Callout]", () => {
                 ...defaultMockData,
                 imageConfiguration: {
                     ...defaultMockData.imageConfiguration,
-                    image: "matrix-asset://api-identifier/99100",
+                    image: "matrix-asset://stanfordNews/99100",
                     caption: "Test Caption",
                     credit: undefined,
                 },
@@ -336,7 +336,7 @@ describe("[Text Callout]", () => {
                 ...defaultMockData,
                 imageConfiguration: {
                     ...defaultMockData.imageConfiguration,
-                    image: "matrix-asset://api-identifier/99100",
+                    image: "matrix-asset://stanfordNews/99100",
                     caption: undefined,
                     credit: "Test Credit",
                 },
@@ -359,7 +359,7 @@ describe("[Text Callout]", () => {
                 ...defaultMockData,
                 imageConfiguration: {
                     ...defaultMockData.imageConfiguration,
-                    image: "matrix-asset://api-identifier/99100",
+                    image: "matrix-asset://stanfordNews/99100",
                     caption: undefined,
                     credit: "Test Credit",
                 },

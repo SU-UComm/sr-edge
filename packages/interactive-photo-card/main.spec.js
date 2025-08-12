@@ -18,7 +18,7 @@ describe('[Interactive Photo Card]', () => {
     const defaultMockData = {
         title: 'Photo Title',
         content: 'Photo Content',
-        image: 'matrix-asset://api-identifier/image-id',
+        image: 'matrix-asset://stanfordNews/image-id',
         eyebrow: 'Optional Eyebrow',
         imageAlignment: 'left'
     };

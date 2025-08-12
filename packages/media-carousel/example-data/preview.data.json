@@ -2,7 +2,7 @@
     "cards": [
         {
             "cardType": "Book",
-            "image": "matrix-asset://api-identifier/163293",
+            "image": "matrix-asset://stanfordNews/163293",
             "title": "Two Example Two",
             "author": "",
             "teaserText": "Second ipsum dolor sit amet this is a slightly shorter teaser to test how this visually displays.",
@@ -10,7 +10,7 @@
         },
         {
             "cardType": "Podcast",
-            "image": "matrix-asset://api-identifier/163591",
+            "image": "matrix-asset://stanfordNews/163591",
             "title": "One Auden and the Muse of History",
             "author": "Susannah Young-ah Gottlieb",
             "teaserText": "First concentrating on W. H. Auden's work from the late 1930s, when he seeks to understand the poet's responsibility in the face of a triumphant fascism, to the late 1950s, when he discerns an irreconcilable \"divorce\" between poetry...",
