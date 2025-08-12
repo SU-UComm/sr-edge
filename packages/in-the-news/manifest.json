@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "in-the-news",
-    "version": "5.0.0",
+    "version": "5.0.2",
     "namespace": "stanford-apb",
     "description": "This component contains one featured quote and two supplementary teasers.",
     "type": "edge",

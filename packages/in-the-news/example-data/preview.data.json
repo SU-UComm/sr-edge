@@ -5,16 +5,16 @@
         "ctaNewWindow": false
     },
     "featuredContent": {
-        "featuredTeaser": "matrix-asset://StanfordNews/173311",
+        "featuredTeaser": "matrix-asset://api-identifier/162759",
         "featuredQuote": "The technical challenges and the architecture coming out of Stanford was super unique and novel.",
         "featuredTeaserDescription": "David Rosenthal, Stanford alum and host of the “Acquired” podcast, in a series tracing Google’s rise from a research project on campus to a tech giant",
         "featuredCtaText": "Listen to the story on Acquired podcast",
-        "personHeadshot": "matrix-asset://StanfordNews/173312"
+        "personHeadshot": "matrix-asset://matrixIdentifier/10"
     },
     "supplementaryTeaserOne": {
-        "teaserOne": "matrix-asset://StanfordNews/172922"
+        "teaserOne": "matrix-asset://api-identifier/141464"
     },
     "supplementaryTeaserTwo": {
-        "teaserTwo": "matrix-asset://StanfordNews/172923"
+        "teaserTwo": "matrix-asset://api-identifier/162634"
     }
 }
