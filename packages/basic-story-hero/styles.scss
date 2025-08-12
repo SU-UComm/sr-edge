@@ -1,9 +1,6 @@
 /* stylelint-disable at-rule-empty-line-before */
 /* stylelint-disable at-rule-no-deprecated */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
+
 
 .su-reading-time-separator:empty {
     @apply su-hidden;
