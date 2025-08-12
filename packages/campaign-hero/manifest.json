@@ -1,0 +1,239 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "campaign-hero",
+    "type": "edge",
+    "version": "0.0.7",
+    "namespace": "stanford-apb",
+    "description": "Hero component for use on Campaign pages.",
+    "displayName": "Campaign Hero",
+    "mainFunction": "main",
+    "icon": {
+        "id": "foundation",
+        "color": {
+            "type": "enum",
+            "value": "green"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "bkgConfig": {
+                        "title": "Background",
+                        "description": "Would you like to use an image or looping video as the background?",
+                        "type": "object",
+                        "required": [
+                            "type"
+                        ],
+                        "properties": {
+                            "type": {
+                                "title": "Background type",
+                                "default": "Image",
+                                "enum": [
+                                    "Image",
+                                    "Video"
+                                ],
+                                "type": "string"
+                            }
+                        },
+                        "allOf": [
+                            {
+                                "if": {
+                                    "required": [],
+                                    "properties": {
+                                        "type": {
+                                            "const": "Image"
+                                        }
+                                    }
+                                },
+                                "then": {
+                                    "required": [
+                                        "bkgImage"
+                                    ],
+                                    "properties": {
+                                        "bkgImage": {
+                                            "title": "Background image",
+                                            "description": "Select a background image in landscape orientation. A 3x2 aspect ratio generally works well.",
+                                            "type": "string",
+                                            "format": "matrix-asset-uri",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "if": {
+                                    "required": [],
+                                    "properties": {
+                                        "type": {
+                                            "const": "Video"
+                                        }
+                                    }
+                                },
+                                "then": {
+                                    "required": [
+                                        "bkgVideo"
+                                    ],
+                                    "properties": {
+                                        "bkgVideo": {
+                                            "title": "Background video",
+                                            "description": "Please enter the full Vimeo URL, including https://.",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "textConfig": {
+                        "title": "Title & introduction",
+                        "type": "object",
+                        "required": [
+                            "title"
+                        ],
+                        "properties": {
+                            "title": {
+                                "title": "Heading",
+                                "description": "The heading text",
+                                "type": "string",
+                                "default": "Lorem ipsum dolor",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
+                            },
+                            "intro": {
+                                "title": "Intro",
+                                "description": "Introduction text that displays below the headline.",
+                                "type": "FormattedText",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
+                            }
+                        }
+                    },
+                    "youtubeId": {
+                        "title": "YouTube video ID",
+                        "description": "The ID of the YouTube video that will play in a modal.",
+                        "type": "string"
+                    },
+                    "quoteConfig": {
+                        "title": "Quote",
+                        "type": "object",
+                        "required": [
+                            "include"
+                        ],
+                        "properties": {
+                            "include": {
+                                "title": "Would you like to include a quote at the bottom of the hero?",
+                                "default": true,
+                                "type": "boolean"
+                            }
+                        },
+                        "allOf": [
+                            {
+                                "if": {
+                                    "required": [],
+                                    "properties": {
+                                        "include": {
+                                            "const": true
+                                        }
+                                    }
+                                },
+                                "then": {
+                                    "required": [
+                                        "quote",
+                                        "name"
+                                    ],
+                                    "properties": {
+                                        "quote": {
+                                            "title": "Quote text",
+                                            "description": "The quoted text. Do not include quotation marks, they will display automatically",
+                                            "type": "string",
+                                            "format": "multi-line",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
+                                        },
+                                        "name": {
+                                            "title": "Name",
+                                            "description": "The name of the quotee.",
+                                            "type": "string",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
+                                        },
+                                        "extra": {
+                                            "title": "Extra",
+                                            "description": "Extra text after the name for attribution, if needed. Could be a job title or descriptive information.",
+                                            "type": "string",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
+                                        },
+                                        "quoteInternalUrl": {
+                                            "title": "Quote internal link (Matrix asset link)",
+                                            "type": "string",
+                                            "description": "Link for quote name attribution, if needed. Select a Matrix page/asset to link to. If you prefer to paste the full URL manually, use the 'Quote manual/external link' field below instead.",
+                                            "format": "matrix-asset-uri"
+                                        },
+                                        "quoteManualUrl": {
+                                            "title": "Quote manual/external link",
+                                            "description": "Link for quote name attribution, if needed. Enter the full URL, including https://.",
+                                            "type": "string"
+                                        },
+                                        "image": {
+                                            "title": "Image",
+                                            "description": "Typically a headshot of the person quoted. It will be displayed in as a circular thumbnail next to the quote. A square image would work best.",
+                                            "type": "string",
+                                            "format": "matrix-asset-uri"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "bkgConfig",
+                    "textConfig"
+                ]
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://api-identifier/99100": {
+            "type": "file",
+            "path": "mocked-uris/99100.json"
+        },
+        "matrix-asset://api-identifier/28192": {
+            "type": "file",
+            "path": "mocked-uris/28192.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        }
+    }
+}

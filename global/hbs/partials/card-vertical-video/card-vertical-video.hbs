@@ -1,6 +1,6 @@
 <article class="su-relative su-flex su-flex-col su-text-white su-bg-black-true su-rounded-3xl">
     <div class="su-absolute su-inset su-z-40 su-px-32 2xl:su-px-48 su-bottom-100 sm:su-bottom-120 lg:su-bottom-80 2xl:su-bottom-120 su-pointer-events-none su-text-center su-flex su-flex-col su-items-center su-w-full su-rs-mb-3">
-        <h3 class="su-type-1 su-leading-display su-mb-6">{{heading}}</h3>
+        <h3 class="{{#if headingClasses}}{{headingClasses}}{{else}}su-type-1 su-leading-display su-mb-6{{/if}}">{{heading}}</h3>
         <p class="su-text-21 su-mb-0 su-leading-display xl:su-leading-snug">{{subheading}}</p>
     </div>
     <div class="su-relative su-w-full">
