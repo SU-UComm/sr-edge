@@ -51,7 +51,7 @@ export default {
         const { alignment = 'left' } = displayConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = componentContext?.editor || false;
+        const squizEdit = true || componentContext?.editor || false;
         let squizEditTargets = null;
 
         if (squizEdit) {
@@ -156,6 +156,21 @@ export default {
                 return `<!-- Error occurred in the Featured content with vertical video component: Failed to fetch card data. ${er.message} -->`;
             }
             data = [];
+
+            // Add defaults so it doesn't just error
+            if (squizEdit) {
+                data = [{
+                    "title": "Featured Story",
+                    description: 'Featured Story Description',
+                    imageUrl: 'https://news.stanford.edu/_designs/component-service/editorial/placeholder.png',
+                    liveUrl: '#'
+                }, {
+                    title: 'Related Story',
+                    description: 'Related Story Description',
+                    imageUrl: 'https://news.stanford.edu/_designs/component-service/editorial/placeholder.png',
+                    liveUrl: '#'
+                }];
+            }
         }
 
         // Process heading data

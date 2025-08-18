@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "featured-content-vv",
     "type": "edge",
-    "version": "0.0.9",
+    "version": "0.0.12",
     "namespace": "stanford-apb",
     "description": "",
     "displayName": "Featured content with vertical video",
