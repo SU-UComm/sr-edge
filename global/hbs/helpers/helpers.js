@@ -210,7 +210,8 @@ export const helpers = {
         thumbnailIconClasses.set("large", 'su-left-13 su-bottom-13 [&>svg]:su-text-[4rem]');
         thumbnailIconClasses.set("featured", 'su-left-13 su-bottom-13 md:su-left-27 md:su-bottom-27 [&>svg]:su-text-[4rem] [&>svg]:md:su-text-[6rem]');
         thumbnailIconClasses.set("vertical-video", 'su-z-30 su-left-32 su-bottom-34 sm:su-left-48 sm:su-bottom-61 lg:su-left-32 lg:su-bottom-34 2xl:su-left-48 2xl:su-bottom-61 [&>svg]:su-text-[6rem]');
-        
+        thumbnailIconClasses.set("vertical-video-featured", 'su-left-1/2 su-top-1/2 -su-translate-x-1/2 -su-translate-y-1/2 [&>svg]:su-text-[6rem]');
+
         return thumbnailIconClasses.get(size)
     },
     hasFirstItem: function(items) {

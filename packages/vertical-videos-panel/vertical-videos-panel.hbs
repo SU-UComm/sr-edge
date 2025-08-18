@@ -12,7 +12,7 @@
                 {{#> carousel-vertical-videos isDark=isDarkCarousel uniqueID=carouselID}}
                     {{~#each videosData~}}
                     <div class="swiper-slide">
-                        {{> card-vertical-video heading=heading subheading=subheading youtubeId=youtubeId imageUrl=imageUrl imageAlt=imageAlt uniqueID=uniqueID rounded=../rounded videoType=../videoType}}
+                        {{> card-vertical-video heading=heading subheading=subheading youtubeId=youtubeId imageUrl=imageUrl imageAlt=imageAlt uniqueID=uniqueID rounded=../rounded videoType=../videoType headingClasses="su-text-[3.6rem] sm:su-text-[4.8rem] lg:su-text-[3.6rem] 2xl:su-text-[4.8rem] su-leading-display su-mb-6"}}
                     </div>
                     {{~/each~}}
                 {{/ carousel-vertical-videos}}

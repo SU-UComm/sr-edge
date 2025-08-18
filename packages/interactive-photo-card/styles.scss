@@ -1,0 +1,7 @@
+/*
+* Hover and focus styles for links within the content
+* These are important to override the campaign-page specific styles
+*/
+[data-component="interactive-photo-card"] [data-card-inner-content="true"] a {
+    @apply hocus:!su-no-underline hocus:!su-text-white hocus:!su-opacity-80;
+}
