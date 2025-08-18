@@ -7,7 +7,7 @@
  * @constant {string} FEATURED_CONTENT_CLOSE_MODAL_BTN - Selector for the button that closes the modal.
  * @constant {string} FEATURED_CONTENT_MODAL_IFRAME - Selector for iframe container.
  */
-export const FEATURED_CONTENT_SELECTOR = 'section[data-component="featured-content"]';
+export const FEATURED_CONTENT_SELECTOR = 'section[data-component="featured-content-vv"]';
 export const FEATURED_CONTENT_HIDDEN_CLASS = 'su-hidden';
 export const FEATURED_CONTENT_MODAL_SELECTOR = '[data-modal="modal"]';
 export const FEATURED_CONTENT_OPEN_MODAL_BTN = 'button[data-click="open-modal"]';
