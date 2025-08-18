@@ -9,17 +9,17 @@
         {
             "heading": "The future of transparent tissue",
             "youtubeId": "MrbhPacSTpg",
-            "videoImage": "matrix-asset://api-identifier/99100"
+            "videoImage": "matrix-asset://stanfordNews/99100"
         },
         {
             "heading": "We're studying a brand new organ",
             "youtubeId": "DImCsDKydLA",
-            "videoImage": "matrix-asset://api-identifier/128610"
+            "videoImage": "matrix-asset://stanfordNews/128610"
         },
         {
             "heading": "I study how sleep repairs the brain",
             "youtubeId": "dW7Kcgtgp7E",
-            "videoImage": "matrix-asset://api-identifier/125800"
+            "videoImage": "matrix-asset://stanfordNews/125800"
         }
     ]
 }

@@ -104,31 +104,31 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/3": {
+        "matrix-asset://stanfordNews/3": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/7": {
+        "matrix-asset://stanfordNews/7": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/8": {
+        "matrix-asset://stanfordNews/8": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/11": {
+        "matrix-asset://stanfordNews/11": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/28397": {
+        "matrix-asset://stanfordNews/28397": {
             "type": "file",
             "path": "mocked-uris/28397.json"
         },
-        "matrix-asset://api-identifier/162618": {
+        "matrix-asset://stanfordNews/162618": {
             "type": "file",
             "path": "mocked-uris/162618.json"
         },
-        "matrix-asset://api-identifier/167215": {
+        "matrix-asset://stanfordNews/167215": {
             "type": "file",
             "path": "mocked-uris/167215.json"
         }

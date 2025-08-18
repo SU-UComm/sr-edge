@@ -2,15 +2,15 @@
     "contentConfiguration": {
         "images": [
             {
-                "imageAsset": "matrix-asset://api-identifier/99100",
+                "imageAsset": "matrix-asset://stanfordNews/99100",
                 "imageCaption": "Nunc mauris curae dui fringilla facilisis fermentum facilisi fermentum nibh. Tempor fames turpis ridiculus sit, parturient tempor interdum ultricies. "
             },
             {
-                "imageAsset": "matrix-asset://api-identifier/125800",
+                "imageAsset": "matrix-asset://stanfordNews/125800",
                 "imageCaption": "Most of the Peace-Athabasca Delta lies within Wood Buffalo National Park, a UNESCO World Heritage Site. Its wetlands provide habitat for more than 200 species of birds and 20 fish species, as well as dozens of mammals, including muskrats. \\ Image credit: Shutterstock"
             },
             {
-                "imageAsset": "matrix-asset://api-identifier/125801",
+                "imageAsset": "matrix-asset://stanfordNews/125801",
                 "imageCaption": ""
             }
         ]

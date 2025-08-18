@@ -147,19 +147,19 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://api-identifier/99100": {
+        "matrix-asset://stanfordNews/99100": {
             "type": "file",
             "path": "mocked-uris/99100.json"
         },
-        "matrix-asset://api-identifier/125800": {
+        "matrix-asset://stanfordNews/125800": {
             "type": "file",
             "path": "mocked-uris/125800.json"
         },
-        "matrix-asset://api-identifier/125801": {
+        "matrix-asset://stanfordNews/125801": {
             "type": "file",
             "path": "mocked-uris/125801.json"
         },
-        "matrix-asset://api-identifier/28192": {
+        "matrix-asset://stanfordNews/28192": {
             "type": "file",
             "path": "mocked-uris/28192.json"
         }

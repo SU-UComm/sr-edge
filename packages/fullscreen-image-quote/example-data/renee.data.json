@@ -1,5 +1,5 @@
 {
-    "image": "matrix-asset://api-identifier/169077",
+    "image": "matrix-asset://stanfordNews/169077",
     "imageOverlay": "medium",
     "quote": "I design tiny robot surgeons.",
     "quoteVAlign": "center",
@@ -10,6 +10,6 @@
         "ctaPreText": "Hear how Renee Zhao’s inventions could",
         "ctaText": "fix brain damage from strokes",
         "ctaSubtext": "",
-        "internalUrl": "matrix-asset://api-identifier/28192"
+        "internalUrl": "matrix-asset://stanfordNews/28192"
     }
 }

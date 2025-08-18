@@ -49,7 +49,7 @@ export default {
             // ctaManualUrl = ctaManualUrl || 'https://news.stanford.edu';
             
             // Provide default values for other required fields
-            source = source || 'matrix-asset://api-identifier/163459';
+            source = source || 'matrix-asset://stanfordNews/163459';
 
             // Configure edit targets - maps static data-se attributes to component fields
             squizEditTargets = {

@@ -92,47 +92,47 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/1": {
+        "matrix-asset://stanfordNews/1": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/2": {
+        "matrix-asset://stanfordNews/2": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/5": {
+        "matrix-asset://stanfordNews/5": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/6": {
+        "matrix-asset://stanfordNews/6": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/9": {
+        "matrix-asset://stanfordNews/9": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/10": {
+        "matrix-asset://stanfordNews/10": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://api-identifier/163293": {
+        "matrix-asset://stanfordNews/163293": {
             "type": "file",
             "path": "mocked-uris/163293.json"
         },
-        "matrix-asset://api-identifier/163591": {
+        "matrix-asset://stanfordNews/163591": {
             "type": "file",
             "path": "mocked-uris/163591.json"
         },
-        "matrix-asset://api-identifier/163904": {
+        "matrix-asset://stanfordNews/163904": {
             "type": "file",
             "path": "mocked-uris/163904.json"
         },
-        "matrix-asset://api-identifier/163985": {
+        "matrix-asset://stanfordNews/163985": {
             "type": "file",
             "path": "mocked-uris/163985.json"
         },
-        "matrix-asset://api-identifier/163996": {
+        "matrix-asset://stanfordNews/163996": {
             "type": "file",
             "path": "mocked-uris/163996.json"
         }

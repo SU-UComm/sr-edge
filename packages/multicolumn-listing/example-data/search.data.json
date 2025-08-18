@@ -2,7 +2,7 @@
     "headingConfiguration": {
         "title": "Multicolumn Listing",
         "ctaText": "View all",
-        "ctaUrl": "matrix-asset://api-identifier/141464",
+        "ctaUrl": "matrix-asset://stanfordNews/141464",
         "ctaNewWindow": true
     },
     "contentConfiguration": {

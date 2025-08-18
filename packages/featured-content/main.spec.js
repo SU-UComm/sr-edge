@@ -273,13 +273,13 @@ describe('[Feature Content]', () => {
                     source: 'Select',
                     cards: [
                         {
-                            "cardAsset": "matrix-asset://api-identifier/63418"
+                            "cardAsset": "matrix-asset://stanfordNews/63418"
                         },
                         {
-                            "cardAsset": "matrix-asset://api-identifier/63436"
+                            "cardAsset": "matrix-asset://stanfordNews/63436"
                         },
                         {
-                            "cardAsset": "matrix-asset://api-identifier/63412"
+                            "cardAsset": "matrix-asset://stanfordNews/63412"
                         }
                     ],
                     featuredDescription: [1,2,3]

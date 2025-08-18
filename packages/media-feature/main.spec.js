@@ -34,8 +34,8 @@ describe('[Media Feature]', () => {
     
     const defaultMockData = {
         contentConfiguration: {
-            backgroundImage: 'matrix-asset://api-identifier/background-image',
-            image: 'matrix-asset://api-identifier/image',
+            backgroundImage: 'matrix-asset://stanfordNews/background-image',
+            image: 'matrix-asset://stanfordNews/image',
             title: 'Test Title',
             teaserText: 'Test Description',
             mediaType: 'Book',

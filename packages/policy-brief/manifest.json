@@ -83,7 +83,7 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://api-identifier/63353": {
+        "matrix-asset://stanfordNews/63353": {
             "type": "file",
             "path": "mocked-uris/63353.json"
         }
