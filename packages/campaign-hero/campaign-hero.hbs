@@ -27,7 +27,7 @@
                     {{/if}}
                     <div class="su-absolute su-block su-top-0 {{#if isBgVideo}}{{#if hasQuote}}su-bg-black-true/20 su-size-full{{else}}su-bg-gradient-to-t su-from-black-true su-w-full su-h-[max(100vh,100%)]{{/if}}{{else}}su-bg-black-true/20 su-size-full{{/if}}" aria-hidden="true"></div>
                     <div class="su-cc su-relative su-z-20 {{#if isBgVideo}}su-mt-[-70vh]{{else}}su-pt-300 md:su-pt-[40vw] lg:su-pt-[26vw] 2xl:su-pt-400{{/if}} su-bg-gradient-to-t su-from-black-true {{#if hasIntro}}{{#if isIntroPulledLeft}}su-rs-pb-6{{else}}su-rs-pb-2{{/if}}{{else}}{{#unless hasQuote}}su-pb-300 md:su-pb-[40vw] lg:su-pb-[26vw] 2xl:su-pb-400{{/unless}}{{/if}} {{#if isBgVideo}}{{#unless hasQuote}}{{#unless hasIntro}}su-rs-pb-6{{/unless}}{{/unless}}{{/if}} {{#if isBgVideoNoQuote}}su-bg-gradient-to-t su-from-black-true{{/if}}">
-                        <h1 class="su-fluid-type-6 su-text-white su-text-shadow-lg su-text-center su-max-w-1000 su-mx-auto su-mb-0 su-text-balance" data-se="title">{{title}}</h1>
+                        <h1 id="modal-title-{{youtubeId}}" class="su-fluid-type-6 su-text-white su-text-shadow-lg su-text-center su-max-w-1000 su-mx-auto su-mb-0 su-text-balance" data-se="title">{{title}}</h1>
                         {{#unless isIntroPulledLeft}}
                             {{#if hasIntro}}
                                 <div class="su-rs-mt-3 su-text-white su-text-center su-type-3 last:*:su-mb-0 *:su-leading-snug su-max-w-800 su-mx-auto {{#if youtubeId}}su-rs-pb-1{{else}}{{#if isBgVideo}}su-rs-pb-1{{else}}su-rs-pb-6{{/if}}{{/if}}" data-se="intro">{{{intro}}}</div>
@@ -43,10 +43,6 @@
                             >
                                 {{> fontawesome-icon icon="circle-play" set="regular" width=75 classes="su-text-[4.5rem] md:su-text-[7.5rem] su-text-white"}}
                             </button>
-                            <div class="su-hidden" id="youtube-modal-{{youtubeId}}" role="dialog" aria-modal="true" aria-labelledby="youtube-modal-title-{{youtubeId}}">
-                                <h2 class="su-sr-only" id="youtube-modal-title-{{youtubeId}}">YouTube Video</h2>
-                                {{> embed-video videoId=youtubeId}}
-                            </div>
                         {{/if}}
                         {{#if isBgVideo}}
                             <div class="su-max-w-1200 su-mx-auto {{#unless hasIntro}}su-mt-150 md:su-mt-200{{/unless}}">
@@ -56,8 +52,8 @@
                                     data-video-control
                                 >
                                     <span data-video-control-text>Play background</span>
-                                    {{> fontawesome-icon icon="circle-play" set="regular" width=20 classes="su-text-20 su-text-white group-hocus-visible:su-animate-pulse group-hocus-visible:su-scale-110 su-transition-transform" data-video-control-icon="play"}}
-                                    {{> fontawesome-icon icon="circle-pause" set="regular" width=20 classes="su-hidden su-text-20 su-text-white group-hocus-visible:su-animate-pulse group-hocus-visible:su-scale-110 su-transition-transform" data-video-control-icon="pause"}}
+                                    {{> fontawesome-icon icon="circle-play" set="regular" width=20 classes="su-text-20 su-text-white group-hocus-visible:su-animate-pulse group-hocus-visible:su-scale-110 su-transition-transform" iconControl="play"}}
+                                    {{> fontawesome-icon icon="circle-pause" set="regular" width=20 classes="su-hidden su-text-20 su-text-white group-hocus-visible:su-animate-pulse group-hocus-visible:su-scale-110 su-transition-transform" iconControl="pause"}}
                                 </button>
                             </div>
                         {{/if}}
@@ -79,6 +75,7 @@
                     </div>
                 {{/if}}
             </div>
+            {{{campaignModal}}}
         </section>
     </div>
 </section> 
