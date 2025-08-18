@@ -52,7 +52,7 @@ export default {
         let squizEditTargets = null;
 
         // Create Modal
-        const campaignModal = Modal({content: EmbedVideo({ isVertical: false, videoId: youtubeId, title: `Watch ${title}`, noAutoPlay: true }), uniqueId: `youtube-modal-${youtubeId}`, titleId: `modal-title-${youtubeId}`, title: `Watch ${title}` });
+        let campaignModal = '';
 
         if (squizEdit) {
             // Provide default configurations
@@ -180,6 +180,11 @@ export default {
         const hasIntro = !!intro;
         const isIntroPulledLeft = !hasQuote && bkgType === 'Image' && !youtubeId;
         const isBgVideoNoQuote = isBgVideo && !hasQuote;
+
+        // Only add the modal if there is a video
+        if ( youtubeId ) {
+            campaignModal = Modal({content: EmbedVideo({ isVertical: false, videoId: youtubeId, title: `Watch ${title}`, noAutoPlay: true }), uniqueId: `youtube-modal-${youtubeId}`, titleId: `modal-title-${youtubeId}`, title: `Watch ${title}` });
+        }
 
         // Prepare component data for template rendering
         const componentData = {
