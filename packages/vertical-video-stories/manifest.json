@@ -1,0 +1,136 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "vertical-video-stories",
+    "type": "edge",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
+    "description": "Use this to display a vertical video within a story page.",
+    "displayName": "Vertical video stories",
+    "mainFunction": "main",
+    "icon": {
+        "id": "play_circle",
+        "color": {
+            "type": "enum",
+            "value": "purple"
+        }
+    },
+    "environment": [
+        {
+            "name": "API_IDENTIFIER",
+            "required": true
+        },
+        {
+            "name": "BASE_DOMAIN",
+            "required": true
+        }
+    ],
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "videoImage": {
+                        "title": "Video preview image",
+                        "description": "Select an image to use as the video preview.",
+                        "type": "string",
+                        "format": "matrix-asset-uri"
+                    },
+                    "youtubeId": {
+                        "title": "YouTube video ID",
+                        "description": "Enter the video ID from YouTube.",
+                        "type": "string"
+                    },
+                    "videoPosition": {
+                        "title": "Video position",
+                        "description": "Display the video on the left or right?",
+                        "type": "string",
+                        "enum": ["left", "right"],
+                        "default": "left"
+                    },
+                    "heading": {
+                        "title": "Heading",
+                        "description": "Heading displayed next to the video.",
+                        "type": "string"
+                    },
+                    "description": {
+                        "title": "Description",
+                        "description": "A short description of the video, for context.",
+                        "type": "string",
+                        "format": "multi-line"
+                    },
+                    "credit": {
+                        "title": "Credit",
+                        "type": "string"
+                    }
+                },
+                "required": []
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://matrixIdentifier/1": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/2": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/5": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/6": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/9": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://matrixIdentifier/10": {
+            "type": "file",
+            "path": "mocked-uris/image.json"
+        },
+        "matrix-asset://api-identifier/99100": {
+            "type": "file",
+            "path": "mocked-uris/99100.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "basicstory": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        }
+    }
+}

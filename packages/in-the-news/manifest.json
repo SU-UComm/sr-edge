@@ -2,7 +2,6 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "in-the-news",
     "version": "6.0.0",
-    ,
     "namespace": "stanford-components",
     "description": "This component contains one featured quote and two supplementary teasers.",
     "type": "edge",

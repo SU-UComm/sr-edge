@@ -3,7 +3,6 @@
     "name": "content-with-sidebar",
     "type": "edge",
     "version": "6.0.0",
-    ,
     "namespace": "stanford-components",
     "description": "Use this component to display WYSIWYG text with a Text Callout as a sidebar.",
     "displayName": "Content with sidebar",

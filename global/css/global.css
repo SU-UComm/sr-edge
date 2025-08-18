@@ -1121,6 +1121,9 @@ div[data-component="footer-component"] {
 [data-component="featured-content"]
   + [data-component="multicolumn-listing"]
   .component-multicolumn-listing.has-title,
+[data-component="featured-content-vv"]
+  + [data-component="multicolumn-listing"]
+  .component-multicolumn-listing.has-title,
 [data-component="combined-content-grid"]
   + [data-component="multicolumn-listing"]
   .component-multicolumn-listing.has-title,

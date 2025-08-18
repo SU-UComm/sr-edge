@@ -7,7 +7,7 @@
  * @constant {string} FEATURED_CONTENT_CLOSE_MODAL_BTN - Selector for the button that closes the modal.
  * @constant {string} FEATURED_CONTENT_MODAL_IFRAME - Selector for iframe container.
  */
-export const FEATURED_CONTENT_SELECTOR = 'section[data-component="featured-content"]';
+export const FEATURED_CONTENT_SELECTOR = 'section[data-component="featured-content-vv"]';
 export const FEATURED_CONTENT_HIDDEN_CLASS = 'su-hidden';
 export const FEATURED_CONTENT_MODAL_SELECTOR = '[data-modal="modal"]';
 export const FEATURED_CONTENT_OPEN_MODAL_BTN = 'button[data-click="open-modal"]';
@@ -20,10 +20,13 @@ export const FEATURED_CONTENT_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
  */
 export function openModal(modal) {
     const iframe =  modal.querySelector(FEATURED_CONTENT_MODAL_IFRAME);
-    const currentSrc = iframe.getAttribute('src');
-    const newSrc = currentSrc.replace('autoplay=0','autoplay=1');
 
-    iframe.setAttribute('src', newSrc);
+    if ( iframe ) {
+        const currentSrc = iframe.getAttribute('src');
+        const newSrc = currentSrc.replace('autoplay=0','autoplay=1');
+        iframe.setAttribute('src', newSrc);
+    }
+    
     modal.classList.remove(FEATURED_CONTENT_HIDDEN_CLASS);
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -35,10 +38,13 @@ export function openModal(modal) {
  */
 export function closeModal(modal) {
     const iframe =  modal.querySelector(FEATURED_CONTENT_MODAL_IFRAME);
-    const currentSrc = iframe.getAttribute('src');
-    const newSrc = currentSrc.replace('autoplay=1','autoplay=0');
 
-    iframe.setAttribute('src', newSrc);
+    if ( iframe ) {
+        const currentSrc = iframe.getAttribute('src');
+        const newSrc = currentSrc.replace('autoplay=1','autoplay=0');
+        iframe.setAttribute('src', newSrc);
+    }
+    
     modal.classList.add(FEATURED_CONTENT_HIDDEN_CLASS);
     modal.hidden = true;
     document.body.style.overflow = '';
@@ -58,7 +64,7 @@ export function _modalInit(section) {
             const uniqueId = btn.dataset.modalId;
 
             // Set current modal
-            currentModal = section.querySelector(`[data-modal-id="${uniqueId}"]`);
+            currentModal = section.querySelector(`.su-modal[data-modal-id="${uniqueId}"]`);
 
             if (!currentModal) return;
 
