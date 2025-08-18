@@ -1,9 +1,9 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "footer",
-    "version": "5.0.0",
+    "version": "6.0.0",
     "type": "edge",
-    "namespace": "stanford-apb",
+    "namespace": "stanford-components",
     "description": "Stanford university Footer component.",
     "displayName": "Footer",
     "mainFunction": "main",

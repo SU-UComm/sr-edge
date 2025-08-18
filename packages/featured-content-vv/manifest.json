@@ -3,7 +3,7 @@
     "name": "featured-content-vv",
     "type": "edge",
     "version": "0.0.8",
-    "namespace": "stanford-apb",
+    "namespace": "stanford-components",
     "description": "",
     "displayName": "Featured content with vertical video",
     "mainFunction": "main",
@@ -152,7 +152,10 @@
                                 "title": "Featured Card: Alignment",
                                 "description": "The position of the Featured Item on larger screens.",
                                 "default": "left",
-                                "enum": ["left", "right"]
+                                "enum": [
+                                    "left",
+                                    "right"
+                                ]
                             }
                         }
                     }
