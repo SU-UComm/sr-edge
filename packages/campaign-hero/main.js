@@ -1,5 +1,6 @@
 import campaignHeroTemplate from './campaign-hero.hbs';
 import { basicAssetUri } from '../../global/js/utils';
+import { Modal, EmbedVideo } from "../../global/js/helpers";
 import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
@@ -49,6 +50,9 @@ export default {
         // NEW: Detect edit mode
         const squizEdit = componentContext?.editor || false;
         let squizEditTargets = null;
+
+        // Create Modal
+        let campaignModal = '';
 
         if (squizEdit) {
             // Provide default configurations
@@ -177,6 +181,11 @@ export default {
         const isIntroPulledLeft = !hasQuote && bkgType === 'Image' && !youtubeId;
         const isBgVideoNoQuote = isBgVideo && !hasQuote;
 
+        // Only add the modal if there is a video
+        if ( youtubeId ) {
+            campaignModal = Modal({content: EmbedVideo({ isVertical: false, videoId: youtubeId, title: `Watch ${title}`, noAutoPlay: true }), uniqueId: `youtube-modal-${youtubeId}`, titleId: `modal-title-${youtubeId}`, title: `Watch ${title}` });
+        }
+
         // Prepare component data for template rendering
         const componentData = {
             isBgVideo,
@@ -198,6 +207,7 @@ export default {
             quoteImageAlt: quoteImageData?.attributes?.alt || '',
             width: 'full',
             paddingX: false,
+            campaignModal: campaignModal,
         };
 
         // NEW: Early return pattern for edit mode

@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "campaign-hero",
     "type": "edge",
-    "version": "0.0.7",
+    "version": "0.0.12",
     "namespace": "stanford-apb",
     "description": "Hero component for use on Campaign pages.",
     "displayName": "Campaign Hero",
@@ -25,17 +25,12 @@
                         "title": "Background",
                         "description": "Would you like to use an image or looping video as the background?",
                         "type": "object",
-                        "required": [
-                            "type"
-                        ],
+                        "required": ["type"],
                         "properties": {
                             "type": {
                                 "title": "Background type",
                                 "default": "Image",
-                                "enum": [
-                                    "Image",
-                                    "Video"
-                                ],
+                                "enum": ["Image", "Video"],
                                 "type": "string"
                             }
                         },
@@ -50,9 +45,7 @@
                                     }
                                 },
                                 "then": {
-                                    "required": [
-                                        "bkgImage"
-                                    ],
+                                    "required": ["bkgImage"],
                                     "properties": {
                                         "bkgImage": {
                                             "title": "Background image",
@@ -76,9 +69,7 @@
                                     }
                                 },
                                 "then": {
-                                    "required": [
-                                        "bkgVideo"
-                                    ],
+                                    "required": ["bkgVideo"],
                                     "properties": {
                                         "bkgVideo": {
                                             "title": "Background video",
@@ -93,9 +84,7 @@
                     "textConfig": {
                         "title": "Title & introduction",
                         "type": "object",
-                        "required": [
-                            "title"
-                        ],
+                        "required": ["title"],
                         "properties": {
                             "title": {
                                 "title": "Heading",
@@ -124,9 +113,7 @@
                     "quoteConfig": {
                         "title": "Quote",
                         "type": "object",
-                        "required": [
-                            "include"
-                        ],
+                        "required": ["include"],
                         "properties": {
                             "include": {
                                 "title": "Would you like to include a quote at the bottom of the hero?",
@@ -145,10 +132,7 @@
                                     }
                                 },
                                 "then": {
-                                    "required": [
-                                        "quote",
-                                        "name"
-                                    ],
+                                    "required": ["quote", "name"],
                                     "properties": {
                                         "quote": {
                                             "title": "Quote text",
@@ -198,10 +182,7 @@
                         ]
                     }
                 },
-                "required": [
-                    "bkgConfig",
-                    "textConfig"
-                ]
+                "required": ["bkgConfig", "textConfig"]
             },
             "output": {
                 "responseType": "html"

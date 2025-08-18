@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "combined-content-grid",
     "type": "edge",
-    "version": "5.0.0",
+    "version": "5.0.2",
     "namespace": "stanford-apb",
     "description": "A featured content grid combined with announcements and events",
     "displayName": "Combined content grid",
@@ -82,17 +82,12 @@
                         "title": "Grid Content",
                         "description": "The cards to display in the grid area of the component. The featured card appears larger than the supplementary cards. When manually selecting cards, at least three must be selected for the grid to display.",
                         "type": "object",
-                        "required": [
-                            "source"
-                        ],
+                        "required": ["source"],
                         "properties": {
                             "source": {
                                 "title": "Content source",
                                 "default": "Search",
-                                "enum": [
-                                    "Search",
-                                    "Select"
-                                ],
+                                "enum": ["Search", "Select"],
                                 "type": "string",
                                 "ui:metadata": {
                                     "quickOption": true
@@ -110,9 +105,7 @@
                                     }
                                 },
                                 "then": {
-                                    "required": [
-                                        "searchQuery"
-                                    ],
+                                    "required": ["searchQuery"],
                                     "properties": {
                                         "searchQuery": {
                                             "type": "string",
@@ -132,9 +125,7 @@
                                     }
                                 },
                                 "then": {
-                                    "required": [
-                                        "cards"
-                                    ],
+                                    "required": ["cards"],
                                     "properties": {
                                         "cards": {
                                             "title": "Cards",
@@ -151,9 +142,7 @@
                                                         "title": "Card Asset"
                                                     }
                                                 },
-                                                "required": [
-                                                    "cardAsset"
-                                                ]
+                                                "required": ["cardAsset"]
                                             },
                                             "default": [
                                                 {
@@ -207,10 +196,7 @@
                     "eventsConfiguration": {
                         "title": "Events Configuration",
                         "type": "object",
-                        "required": [
-                            "endPoint",
-                            "numberOfItems"
-                        ],
+                        "required": ["endPoint", "numberOfItems"],
                         "properties": {
                             "heading": {
                                 "title": "Heading",
@@ -224,19 +210,14 @@
                                 "title": "Events Endpoint",
                                 "description": "The localist JSON endpoint to fetch events from",
                                 "type": "string",
-                                "default": "https://events.stanford.edu/api/2/events?days=365&sponsored=true"
+                                "default": "https://news.stanford.edu/_api/events/query"
                             },
                             "numberOfItems": {
                                 "title": "Number of Events",
                                 "description": "The number of events to display",
                                 "type": "number",
                                 "default": 3,
-                                "enum": [
-                                    3,
-                                    4,
-                                    5,
-                                    6
-                                ]
+                                "enum": [3, 4, 5, 6]
                             },
                             "linkUrl": {
                                 "title": "Events Link",
@@ -248,10 +229,7 @@
                     "announcementsConfiguration": {
                         "title": "Announcements Configuration",
                         "type": "object",
-                        "required": [
-                            "endPoint",
-                            "numberOfItems"
-                        ],
+                        "required": ["endPoint", "numberOfItems"],
                         "properties": {
                             "heading": {
                                 "title": "Heading",
@@ -272,12 +250,7 @@
                                 "description": "The number of announcements to display",
                                 "type": "number",
                                 "default": 3,
-                                "enum": [
-                                    3,
-                                    4,
-                                    5,
-                                    6
-                                ]
+                                "enum": [3, 4, 5, 6]
                             },
                             "linkUrl": {
                                 "title": "Announcements Link",

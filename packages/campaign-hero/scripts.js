@@ -1,17 +1,55 @@
-import { Modal } from '../../global/js/helpers';
+/**
+ * Globals variables 
+ * @constant {string} CAMPAIGN_HERO_HIDDEN_CLASS - CSS class to hide elements.
+ * @constant {string} CAMPAIGN_HERO_MODAL_IFRAME - Selector for the modal iframe.
+ */
+export const CAMPAIGN_HERO_HIDDEN_CLASS = 'su-hidden';
+export const CAMPAIGN_HERO_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
+
+/**
+ * Opens a modal by modifying the iframe's autoplay parameter and removing the hidden class.
+ * @param {HTMLElement} modal - The modal element to open.
+ */
+export function openModal(modal) {
+    const iframe =  modal.querySelector(CAMPAIGN_HERO_MODAL_IFRAME);
+    const currentSrc = iframe.getAttribute('src');
+    const newSrc = currentSrc.replace('autoplay=0','autoplay=1');
+
+    iframe.setAttribute('src', newSrc);
+    modal.classList.remove(CAMPAIGN_HERO_HIDDEN_CLASS);
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Closes a modal by modifying the iframe's autoplay parameter and adding the hidden class.
+ * @param {HTMLElement} modal - The modal element to close.
+ */
+export function closeModal(modal) {
+    const iframe =  modal.querySelector(CAMPAIGN_HERO_MODAL_IFRAME);
+    const currentSrc = iframe.getAttribute('src');
+    const newSrc = currentSrc.replace('autoplay=1','autoplay=0');
+
+    iframe.setAttribute('src', newSrc);
+    modal.classList.add(CAMPAIGN_HERO_HIDDEN_CLASS);
+    modal.hidden = true;
+    document.body.style.overflow = '';
+}
 
 /**
  * Initialize the Campaign Hero component
  */
 export function _campaignHeroInit(component) {
+
+    let currentModal = null;
     
     // Handle background video controls
     const videoControl = component.querySelector('[data-video-control]');
     if (videoControl) {
         const iframe = component.querySelector('iframe');
         const controlText = videoControl.querySelector('[data-video-control-text]');
-        const playIcon = videoControl.querySelector('[data-video-control-icon="play"]');
-        const pauseIcon = videoControl.querySelector('[data-video-control-icon="pause"]');
+        const playIcon = videoControl.querySelector('[data-control-icon="play"]');
+        const pauseIcon = videoControl.querySelector('[data-control-icon="pause"]');
         let isPlaying = true;
         let isUserPaused = false;
 
@@ -56,17 +94,42 @@ export function _campaignHeroInit(component) {
 
     // Initialize modals for YouTube videos
     const modalTriggers = component.querySelectorAll('[data-modal-trigger]');
+    
     modalTriggers.forEach(trigger => {
         const modalId = trigger.getAttribute('data-modal-trigger');
-        const modalElement = document.getElementById(modalId);
+        const modalElement = component.querySelector(`[data-modal-id="${modalId}"]`);
 
-        if (modalElement) {
-            Modal({
-                trigger,
-                content: modalElement,
-                uniqueId: modalId,
-                describedby: 'card-modal'
-            });
+        trigger && trigger.addEventListener('click', function() {
+            // Set current modal
+            currentModal = modalElement;
+            if (!currentModal) return;
+
+            const modalContent = currentModal.querySelector('.su-modal-content');
+            
+            if (!currentModal.dataset.listenerAdded) {
+                modalContent && currentModal.addEventListener('click', (event) => {
+                    if (!modalContent.contains(event.target)) {
+                        closeModal(currentModal);
+                    }
+                });
+
+                currentModal.dataset.listenerAdded = 'true';
+            }
+
+            openModal(currentModal);
+        });
+    });
+
+    const closeBtns = component.querySelectorAll('[data-modal-close]');
+    closeBtns && closeBtns.forEach(btn => {
+        btn && btn.addEventListener('click', function() {
+            currentModal && closeModal(currentModal);
+        });
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            currentModal && closeModal(currentModal);
         }
     });
 } 
@@ -79,8 +142,16 @@ export function _campaignHeroInit(component) {
  *
  * @listens DOMContentLoaded
  */
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('[data-component="campaign-hero"]').forEach(section => {
-        _campaignHeroInit(section);
-    });    
-});
+export function initCampaignHeroListeners() {
+    const campaignHeroSections = document.querySelectorAll('[data-component="campaign-hero"]');
+    
+    if ( campaignHeroSections.length > 0) {
+        campaignHeroSections.forEach(section => {
+            _campaignHeroInit(section);
+        });
+    }
+}
+
+// Listen on both DOMContentLoaded and livePreviewUpdated events
+document.addEventListener('DOMContentLoaded', initCampaignHeroListeners);
+document.addEventListener('livePreviewUpdated', initCampaignHeroListeners);
