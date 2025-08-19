@@ -56,4 +56,9 @@ export default {
             );
           }),
     ],
+    safelist: [
+      'su-object-top',
+      'su-object-center',
+      'su-object-bottom',
+    ],
 };
