@@ -46,7 +46,10 @@
                         "title": "Video position",
                         "description": "Display the video on the left or right?",
                         "type": "string",
-                        "enum": ["left", "right"],
+                        "enum": [
+                            "left",
+                            "right"
+                        ],
                         "default": "left"
                     },
                     "heading": {

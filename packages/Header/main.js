@@ -85,15 +85,15 @@ export default {
             }
             // Process both results
         } catch (error) {
-            console.error('Error occurred in the Header component: Error parsing hero data JSON response: ', er);
-            return `<!-- Error occurred in the Header component: Error parsing hero data JSON response: ${er.message} -->`;
+            console.error('Error occurred in the Header component: Error parsing hero data JSON response: ', error);
+            return `<!-- Error occurred in the Header component: Error parsing hero data JSON response: ${error.message} -->`;
         }
         
         const { site, navigation, search } = siteData;
         const { url, logo, logoLight, logoTopBar, cookieStatement } = site;
         
         const { id, short_name } = pageData;
-        const { storyLayout = null, srContentType, srContentMainTopic} = pageData.metadata;
+        const { storyLayout = null, srContentType = null, srContentMainTopic = null} = pageData?.metadata || {};
         
         const isVideo = srContentType && srContentType?.includes("28207");
         const isStory = !!storyLayout;
