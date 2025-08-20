@@ -3,7 +3,7 @@
     "name": "campaign-cta",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "This component serves as a preview & to promote campaign pages.",
     "displayName": "Campaign CTA",
     "mainFunction": "main",

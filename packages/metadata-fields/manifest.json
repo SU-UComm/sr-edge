@@ -3,7 +3,7 @@
     "name": "metadata-fields",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "This is a global element that is designed to render client side based on page information.",
     "displayName": "Metadata fields",
     "mainFunction": "main",

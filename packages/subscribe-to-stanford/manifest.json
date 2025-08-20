@@ -3,7 +3,7 @@
   "name": "subscribe-to-stanford-report",
   "version": "6.0.0",
   "type": "edge",
-  "namespace": "stanford-components",
+  "namespace": "stanford-development",
   "description": "Allows users to be able to subscribe to Stanford Report newsletters",
   "displayName": "Subscribe to Stanford Report",
   "mainFunction": "main",

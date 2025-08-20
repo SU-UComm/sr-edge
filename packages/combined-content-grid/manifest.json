@@ -3,7 +3,7 @@
     "name": "combined-content-grid",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "A featured content grid combined with announcements and events",
     "displayName": "Combined content grid",
     "mainFunction": "main",

@@ -3,7 +3,7 @@
     "name": "leadership-messages",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "Links to leadership messages displayed in a grid.",
     "displayName": "Leadership messages",
     "mainFunction": "main",

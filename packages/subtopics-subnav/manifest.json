@@ -3,7 +3,7 @@
     "name": "subtopic-subnav-component",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "Stanford university Subtopic Subnav component.",
     "displayName": "Subtopic Subnav",
     "mainFunction": "main",

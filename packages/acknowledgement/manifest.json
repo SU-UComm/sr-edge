@@ -3,7 +3,7 @@
     "name": "acknowledgement",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "Acknowledgement and title area.",
     "displayName": "Acknowledgement",
     "mainFunction": "main",

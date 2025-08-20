@@ -3,7 +3,7 @@
     "name": "single-text-block",
     "version": "6.0.0",
     "type": "edge",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "A block of text with a heading and eyebrow.",
     "displayName": "Single Text Block",
     "mainFunction": "main",

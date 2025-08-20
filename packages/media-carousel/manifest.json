@@ -3,7 +3,7 @@
     "name": "media-carousel",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "Links to media, displayed as cards in a carousel.",
     "displayName": "Media carousel",
     "mainFunction": "main",

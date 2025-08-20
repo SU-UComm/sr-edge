@@ -3,7 +3,7 @@
     "name": "topic-subtopic-listing",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "Listing of stories as cards with pagination.",
     "displayName": "Topic / subtopic listing",
     "mainFunction": "main",

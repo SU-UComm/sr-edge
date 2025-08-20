@@ -3,7 +3,7 @@
     "name": "sidebar-navigation",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "A navigation element used for a collection of basic informational pages.",
     "displayName": "Sidebar Navigation",
     "mainFunction": "main",

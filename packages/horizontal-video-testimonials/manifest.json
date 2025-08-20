@@ -3,7 +3,7 @@
     "name": "horizontal-video-testimonials",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "A section with a listing of horizontal video cards, with a section title and link to watch more.",
     "displayName": "Horizontal Video Testimonials",
     "mainFunction": "main",

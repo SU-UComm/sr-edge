@@ -3,7 +3,7 @@
     "name": "image-quote",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "An image with an associated quote.",
     "displayName": "Image quote",
     "mainFunction": "main",

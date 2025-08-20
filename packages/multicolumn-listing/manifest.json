@@ -3,7 +3,7 @@
     "name": "multicolumn-listing",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "",
     "displayName": "Multicolumn listing",
     "mainFunction": "main",

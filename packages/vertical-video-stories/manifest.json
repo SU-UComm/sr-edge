@@ -3,7 +3,7 @@
     "name": "vertical-video-stories",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "Use this to display a vertical video within a story page.",
     "displayName": "Vertical video stories",
     "mainFunction": "main",
@@ -46,7 +46,10 @@
                         "title": "Video position",
                         "description": "Display the video on the left or right?",
                         "type": "string",
-                        "enum": ["left", "right"],
+                        "enum": [
+                            "left",
+                            "right"
+                        ],
                         "default": "left"
                     },
                     "heading": {

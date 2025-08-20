@@ -3,7 +3,7 @@
     "name": "policy-brief",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "This component allows a content manager to create a policy brief that can be externally linked to a policy brief or case study.",
     "displayName": "Policy brief",
     "mainFunction": "main",

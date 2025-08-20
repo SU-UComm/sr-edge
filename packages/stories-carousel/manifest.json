@@ -3,7 +3,7 @@
     "name": "stories-carousel",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "Links to stories displayed as cards in a carousel.",
     "displayName": "Stories carousel",
     "mainFunction": "main",

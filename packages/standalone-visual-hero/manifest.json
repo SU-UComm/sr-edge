@@ -3,7 +3,7 @@
     "name": "standalone-visual-hero",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-components",
+    "namespace": "stanford-development",
     "description": "Standalone Visual story hero",
     "displayName": "Standalone Visual Hero",
     "mainFunction": "main",
