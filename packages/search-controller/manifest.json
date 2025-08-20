@@ -1,0 +1,114 @@
+{
+  "$schema": "http://localhost:3000/schemas/v1.json",
+  "name": "search-controller",
+  "namespace": "stanford-components",
+  "description": "The search controller presents a global search modal that queries a specific endpoint.",
+  "displayName": "Search Controller",
+  "version": "1.0.0",
+  "type": "edge",
+  "mainFunction": "main",
+  "icon": {
+    "id": "search",
+    "color": {
+      "type": "enum",
+      "value": "blue"
+    }
+  },
+  "functions": [
+    {
+      "name": "main",
+      "entry": "main.js",
+      "input": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "endpoint": {
+            "type": "string",
+            "title": "Search Endpoint",
+            "description": "What endpoint to query search results from.",
+            "enum": [
+              "Funnelback"
+            ],
+            "default": "Funnelback"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of this search controller.",
+            "default": "card-search"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "required": [
+                "endpoint"
+              ],
+              "properties": {
+                "endpoint": {
+                  "const": "Funnelback"
+                }
+              }
+            },
+            "then": {
+              "required": [],
+              "properties": {
+                "config": {
+                  "title": "Funnelback configuration",
+                  "type": "object",
+                  "required": [],
+                  "properties": {
+                    "searchEndpoint": {
+                      "type": "string",
+                      "title": "Search URL",
+                      "description": "The search URL should follow the URL pattern of 'https://search.example.com/s/search.json'"
+                    },
+                    "profile": {
+                      "type": "string",
+                      "title": "Profile",
+                      "description": "The Funnelback profile."
+                    },
+                    "collection": {
+                      "type": "string",
+                      "title": "Collection",
+                      "description": "The Funnelback collection to query."
+                    },
+                    "sorting": {
+                      "type": "string",
+                      "title": "Sort",
+                      "description": "How to sort the results.",
+                      "default": "date"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "output": {
+        "responseType": "html"
+      }
+    }
+  ],
+  "staticFiles": {
+    "locationRoot": "./"
+  },
+  "previews": {
+    "default": {
+      "functionData": {
+        "main": {
+          "inputData": {
+            "type": "file",
+            "path": "example-data/example.data.json"
+          },
+          "wrapper": {
+            "path": "previews/preview.html"
+          }
+        }
+      }
+    }
+  }
+}

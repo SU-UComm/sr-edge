@@ -1,0 +1,141 @@
+{
+  "$schema": "http://localhost:3000/schemas/v1.json#",
+  "name": "search-cards",
+  "namespace": "stanford-components",
+  "type": "edge",
+  "version": "1.0.0",
+  "description": "The search cards component displays a list of cards based on the search results.",
+  "displayName": "Search Cards",
+  "mainFunction": "main",
+  "icon": {
+    "id": "search",
+    "color": {
+      "type": "enum",
+      "value": "red"
+    }
+  },
+  "environment": [
+    {
+      "name": "FB_JSON_URL",
+      "required": true
+    }
+  ],
+  "functions": [
+    {
+      "name": "main",
+      "entry": "main.js",
+      "input": {
+        "type": "object",
+        "required": [],
+        "properties": {
+          "headingConfiguration": {
+            "type": "object",
+            "title": "Heading Configuration",
+            "description": "Configuration for the component heading",
+            "required": [],
+            "properties": {
+              "title": {
+                "type": "string",
+                "title": "Heading Title",
+                "description": "The main heading for the search cards section"
+              },
+              "ctaUrl": {
+                "type": "string",
+                "title": "CTA Asset URL",
+                "description": "Matrix asset URL for the call-to-action link"
+              },
+              "ctaManualUrl": {
+                "type": "string",
+                "title": "CTA Manual URL",
+                "description": "Manual URL for the call-to-action link (overrides ctaUrl if provided)"
+              },
+              "ctaText": {
+                "type": "string",
+                "title": "CTA Text",
+                "description": "Text for the call-to-action link"
+              },
+              "ctaNewWindow": {
+                "type": "boolean",
+                "title": "Open CTA in New Window",
+                "description": "Whether to open the CTA link in a new window",
+                "default": false
+              }
+            }
+          },
+          "contentConfiguration": {
+            "type": "object",
+            "title": "Content Configuration",
+            "description": "Configuration for the cards content",
+            "required": [],
+            "properties": {
+              "cards": {
+                "type": "array",
+                "title": "Content Cards",
+                "description": "Array of content cards to fetch from Funnelback",
+                "items": {
+                  "type": "object",
+                  "required": [],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "title": "Card ID",
+                      "description": "The unique identifier for the card to fetch"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "displayConfiguration": {
+            "type": "object",
+            "title": "Display Configuration",
+            "description": "Configuration for how the cards are displayed",
+            "required": [],
+            "properties": {
+              "searchQuery": {
+                "type": "string",
+                "title": "Funnelback Search Query",
+                "description": "Base Funnelback search query parameters",
+                "default": "?profile=stanford-report-push-search&collection=sug~sp-stanford-report-search&sort=date&log=false"
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "responseType": "html"
+      }
+    }
+  ],
+  "staticFiles": {
+    "locationRoot": "./"
+  },
+  "previews": {
+    "default": {
+      "functionData": {
+        "main": {
+          "inputData": {
+            "type": "file",
+            "path": "example.data.json"
+          },
+          "wrapper": {
+            "path": "previews/preview.html"
+          }
+        }
+      }
+    },
+    "alternative": {
+      "functionData": {
+        "main": {
+          "inputData": {
+            "type": "file",
+            "path": "example.data.json"
+          },
+          "wrapper": {
+            "path": "previews/preview-alt.html"
+          }
+        }
+      }
+    }
+  }
+}

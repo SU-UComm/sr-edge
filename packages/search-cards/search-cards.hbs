@@ -1,0 +1,11 @@
+<section data-component="search-cards">
+    <div class="{{containerClasses width=width}}">
+        {{> linked-heading title=headingTitle isAlwaysLight=headingIsAlwaysLight ctaLink=headingCtaLink ctaNewWindow=headingCtaNewWindow ctaText=headingCtaText}}
+        {{{searchCardsGrid}}}
+    </div>
+    {{#each modalData}}
+        {{#> modal-content uniqueID=uniqueID titleID='card-modal' ariaTitle=title}}
+            {{> embed-video isVertical=isVertical classes=classes videoId=videoId noAutoPlay=noAutoPlay title=title}}
+        {{/ modal-content}}
+    {{/each}}
+</section>

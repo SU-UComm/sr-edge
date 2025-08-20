@@ -1,0 +1,20 @@
+{
+  "headingConfiguration": {
+    "title": "Related Stories!",
+    "ctaText": "View All Stories",
+    "ctaNewWindow": false
+  },
+  "contentConfiguration": {
+    "cards": [
+      {
+        "id": "171710"
+      },
+      {
+        "id": "174814"
+      }
+    ]
+  },
+  "displayConfiguration": {
+    "searchQuery": "?profile=stanford-report-push-search&collection=sug~sp-stanford-report-search&sort=date&log=false"
+  }
+}

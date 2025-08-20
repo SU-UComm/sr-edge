@@ -1,0 +1,9 @@
+{
+  "endpoint": "Funnelback",
+  "name": "card-search",
+  "config": {
+    "searchEndpoint": "https://news-search.stanford.edu/s/search.json",
+    "profile": "stanford-report-push-search",
+    "collection": "sug~sp-stanford-report-search"
+  }
+}
