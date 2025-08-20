@@ -84,7 +84,6 @@ import Z from"https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs";cons
       ${e}
     </span>
   `}const l1={small:"su-left-13 su-bottom-13 [&>svg]:su-text-[4rem]",medium:"su-left-13 su-bottom-13 md:su-left-27 md:su-bottom-27 [&>svg]:su-text-[4rem] [&>svg]:md:su-text-[6rem]",large:"su-left-13 su-bottom-13 [&>svg]:su-text-[4rem]",featured:"su-left-13 su-bottom-13 md:su-left-27 md:su-bottom-27 [&>svg]:su-text-[4rem] [&>svg]:md:su-text-[6rem]","vertical-video":"su-left-32 su-bottom-34 sm:su-left-48 sm:su-bottom-61 lg:su-left-32 lg:su-bottom-34 2xl:su-left-48 2xl:su-bottom-61 [&>svg]:su-text-[6rem]","vertical-video-featured":"su-left-1/2 su-top-1/2 -su-translate-x-1/2 -su-translate-y-1/2 [&>svg]:su-text-[6rem]"};function je({imageUrl:e,alt:t="",aspectRatio:s,videoUrl:n,size:r="small",title:o="",videoIconClasses:a,uniqueId:i}){if(n){const l=`
-        {/* Add a dark overlay over the image when used in Vertical Video Cards */}
         ${r==="vertical-video"||r==="vertical-video-featured"?`
           <div
             aria-hidden="true"

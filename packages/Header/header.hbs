@@ -53,7 +53,9 @@
                     {{> header-search collection=search.collection profile=search.profile resultPage=search.resultPage}}
                 </div>
                 {{> header-site-logo url=url logo=logo logoLight=logoLight}}
-                {{> header-current-story-headline title=pageControls.title story=relatedStory contentType=pageControls.contentType}}
+                {{~#if pageControls.isStory~}}
+                    {{> header-current-story-headline title=pageControls.title story=relatedStory contentType=pageControls.contentType}}
+                {{~/if~}}
                 {{> header-preferences-tray audience=audience consent=consent}}
             </div>
             {{> header-main-nav items=navigation.major currentPage=pageControls.id}}
