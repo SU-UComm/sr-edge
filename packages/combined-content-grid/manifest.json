@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "combined-content-grid",
     "type": "edge",
-    "version": "6.0.0",
+    "version": "6.0.1",
     "namespace": "stanford-components",
     "description": "A featured content grid combined with announcements and events",
     "displayName": "Combined content grid",

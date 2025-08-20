@@ -51,7 +51,7 @@ export default {
         const { alignment = 'left' } = displayConfiguration || {};
 
         // NEW: Detect edit mode
-        const squizEdit = true || componentContext?.editor || false;
+        const squizEdit = componentContext?.editor || false;
         let squizEditTargets = null;
 
         if (squizEdit) {
