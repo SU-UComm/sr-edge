@@ -1,6 +1,6 @@
 
 import xss from "xss";
-import { cardDataAdapter, funnelbackCardService, linkedHeadingService, uuid, formatNewsDate, isRealExternalLink } from "../../global/js/utils";
+import { cardDataAdapter, funnelbackCardService, uuid, formatNewsDate, isRealExternalLink } from "../../global/js/utils";
 import { Card } from "../../global/js/helpers";
 import { processEditor } from "../../global/js/utils/processEditor";
 import searchCardsTemplate from "./search-cards.hbs";
@@ -49,12 +49,6 @@ export default {
      * @async
      * @function main
      * @param {Object} args - Configuration arguments for the component.
-     * @param {Object} args.headingConfiguration - The header configuration for the component.
-     * @param {string} [args.headingConfiguration.title] - The text for the heading (optional).
-     * @param {string} [args.headingConfiguration.ctaUrl] - The assetid for the CTA link (optional).
-     * @param {string} [args.headingConfiguration.ctaManualUrl] - The URL for the CTA link (optional).
-     * @param {string} [args.headingConfiguration.ctaText] - The text for the CTA link (optional).
-     * @param {string} [args.headingConfiguration.ctaNewWindow] - Flag to open CTA link in new window (optional).
      * @param {Object} args.contentConfiguration - The content configuration for the component.
      * @param {Array<Object>} [args.contentConfiguration.cards] - An array of card configurations with IDs to fetch.
      * @param {Object} args.displayConfiguration - The display configuration for the component.
@@ -77,26 +71,16 @@ export default {
         const fnsCtx = componentFunctions || componentContext || {};
 
         // Extracting configuration data from arguments
-        let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
         let { cards } = args?.contentConfiguration || {};
         let { searchQuery } = args?.displayConfiguration || {};
 
         // Detect edit mode
         const squizEdit = componentContext?.editor || false;
-        let squizEditTargets = null;
 
         if (squizEdit) {
             // Provide default configurations for edit mode
-            title = title || 'Search Cards';
-            ctaText = ctaText || 'View All';
             searchQuery = searchQuery || '?profile=stanford-report-push-search&collection=sug~sp-stanford-report-search&sort=date&log=false';
             cards = cards || [{ id: '171710' }, { id: '174814' }];
-            
-            // Configure edit targets
-            squizEditTargets = {
-                "headingTitle": { "field": "headingConfiguration.title" },
-                "headingCtaText": { "field": "headingConfiguration.ctaText" }
-            };
         }
 
         // Validate required fields for non-edit mode
@@ -194,24 +178,16 @@ export default {
             }
         });
 
-        // Run heading service
-        const headingData = await linkedHeadingService(fnsCtx, { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow });
-
         // Prepare component data for template rendering
         const componentData = {
             width: "large",
             searchCardsGrid: searchCardsGrid(cardsMarkup),
-            modalData,
-            headingTitle: headingData?.title,
-            headingIsAlwaysLight: false,
-            headingCtaLink: headingData?.ctaLink,
-            headingCtaNewWindow: headingData?.ctaNewWindow,
-            headingCtaText: headingData?.ctaText
+            modalData
         };
 
         // Early return pattern for edit mode
         if (squizEdit) {
-            return processEditor(searchCardsTemplate(componentData), squizEditTargets, args);
+            return processEditor(searchCardsTemplate(componentData), {}, args);
         }
 
         return searchCardsTemplate(componentData);

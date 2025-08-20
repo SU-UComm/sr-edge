@@ -3,7 +3,7 @@
   "name": "search-cards",
   "namespace": "stanford-components",
   "type": "edge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The search cards component displays a list of cards based on the search results.",
   "displayName": "Search Cards",
   "mainFunction": "main",
@@ -28,40 +28,6 @@
         "type": "object",
         "required": [],
         "properties": {
-          "headingConfiguration": {
-            "type": "object",
-            "title": "Heading Configuration",
-            "description": "Configuration for the component heading",
-            "required": [],
-            "properties": {
-              "title": {
-                "type": "string",
-                "title": "Heading Title",
-                "description": "The main heading for the search cards section"
-              },
-              "ctaUrl": {
-                "type": "string",
-                "title": "CTA Asset URL",
-                "description": "Matrix asset URL for the call-to-action link"
-              },
-              "ctaManualUrl": {
-                "type": "string",
-                "title": "CTA Manual URL",
-                "description": "Manual URL for the call-to-action link (overrides ctaUrl if provided)"
-              },
-              "ctaText": {
-                "type": "string",
-                "title": "CTA Text",
-                "description": "Text for the call-to-action link"
-              },
-              "ctaNewWindow": {
-                "type": "boolean",
-                "title": "Open CTA in New Window",
-                "description": "Whether to open the CTA link in a new window",
-                "default": false
-              }
-            }
-          },
           "contentConfiguration": {
             "type": "object",
             "title": "Content Configuration",
@@ -79,7 +45,10 @@
                     "id": {
                       "type": "string",
                       "title": "Card ID",
-                      "description": "The unique identifier for the card to fetch"
+                      "description": "The unique identifier for the card to fetch",
+                      "ui:metadata": {
+                        "inlineEditable": true
+                      }
                     }
                   }
                 }

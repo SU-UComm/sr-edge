@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { cardDataAdapter, funnelbackCardService, linkedHeadingService, uuid, formatNewsDate, isRealExternalLink } from "../../global/js/utils";
+import { cardDataAdapter, funnelbackCardService, uuid, formatNewsDate, isRealExternalLink } from "../../global/js/utils";
 import { Card } from "../../global/js/helpers";
 import component from "./main.js";
 
@@ -51,12 +51,6 @@ vi.mock("../../global/js/utils", () => ({
         ])
     })),
     funnelbackCardService: vi.fn(),
-    linkedHeadingService: vi.fn().mockResolvedValue({
-        title: "Mock Heading",
-        ctaLink: "https://example.com",
-        ctaNewWindow: false,
-        ctaText: "View All"
-    }),
     uuid: vi.fn().mockReturnValue("mock-uuid"),
     formatNewsDate: vi.fn().mockImplementation(date => `Formatted: ${date}`),
     isRealExternalLink: vi.fn().mockImplementation(url => url?.includes('external')),
@@ -87,10 +81,6 @@ describe("Search Cards Component", () => {
     describe("Basic functionality", () => {
         it("should render successfully with valid input", async () => {
             const args = {
-                headingConfiguration: {
-                    title: "Test Heading",
-                    ctaText: "View All"
-                },
                 contentConfiguration: {
                     cards: [
                         { id: "171710" },
@@ -119,7 +109,6 @@ describe("Search Cards Component", () => {
             expect(result).toContain('data-component="search-cards"');
             expect(result).toContain('mock-vertical-card');
             expect(funnelbackCardService).toHaveBeenCalled();
-            expect(linkedHeadingService).toHaveBeenCalled();
         });
 
         it("should handle edit mode with default values", async () => {
@@ -477,32 +466,7 @@ describe("Search Cards Component", () => {
             expect(adapterInstance.getCards).toHaveBeenCalledWith(["test"]);
         });
 
-        it("should call linkedHeadingService with heading configuration", async () => {
-            const headingConfig = {
-                title: "Custom Title",
-                ctaText: "Custom CTA",
-                ctaLink: "https://custom.com"
-            };
 
-            const args = {
-                headingConfiguration: headingConfig,
-                contentConfiguration: {
-                    cards: [{ id: "test" }]
-                },
-                displayConfiguration: {
-                    searchQuery: "valid-query"
-                }
-            };
-
-            const info = {
-                env: { FB_JSON_URL: "https://test-funnelback.com" },
-                ctx: { editor: false }
-            };
-
-            await component.main(args, info);
-            
-            expect(linkedHeadingService).toHaveBeenCalledWith(headingConfig);
-        });
 
         it("should configure funnelbackCardService with correct URL and query", async () => {
             const args = {
