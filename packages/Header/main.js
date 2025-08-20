@@ -93,7 +93,7 @@ export default {
         const { url, logo, logoLight, logoTopBar, cookieStatement } = site;
         
         const { id, short_name } = pageData;
-        const { storyLayout = null, srContentType, srContentMainTopic} = pageData.metadata;
+        const { storyLayout = null, srContentType = null, srContentMainTopic = null} = pageData?.metadata || {};
         
         const isVideo = srContentType && srContentType?.includes("28207");
         const isStory = !!storyLayout;
