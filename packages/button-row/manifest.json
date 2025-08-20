@@ -3,7 +3,7 @@
     "name": "button-row",
     "version": "6.0.0",
     "type": "edge",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "Add up to 3 buttons in this row component.",
     "displayName": "Button row",
     "mainFunction": "main",

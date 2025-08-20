@@ -3,7 +3,7 @@
     "name": "in-brief",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "Summary of main points in a bulleted list.",
     "displayName": "In Brief",
     "mainFunction": "main",

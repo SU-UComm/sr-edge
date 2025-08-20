@@ -3,7 +3,7 @@
     "name": "two-column-text-callout",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "This component displays up to 2 text callouts boxes in a two-column layout.",
     "displayName": "Two Column Text Callout",
     "mainFunction": "main",

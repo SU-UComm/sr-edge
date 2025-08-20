@@ -3,7 +3,7 @@
     "name": "related-story",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "Displays a related story on a featured story",
     "displayName": "Related story",
     "mainFunction": "main",

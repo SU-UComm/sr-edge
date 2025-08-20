@@ -3,7 +3,7 @@
     "name": "multicolumn-fact-panel",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "This component displays up to 3 facts with FontAwesome icons in a multi-column layout.",
     "displayName": "Multicolumn Fact Panel",
     "mainFunction": "main",

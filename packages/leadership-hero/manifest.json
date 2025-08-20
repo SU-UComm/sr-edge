@@ -3,7 +3,7 @@
     "name": "leadership-hero",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "Leadership hero and title area.",
     "displayName": "Leadership Messages Hero",
     "mainFunction": "main",

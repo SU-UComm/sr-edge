@@ -3,7 +3,7 @@
     "name": "campaign-hero",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "Hero component for use on Campaign pages.",
     "displayName": "Campaign Hero",
     "mainFunction": "main",

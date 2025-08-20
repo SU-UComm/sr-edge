@@ -3,7 +3,7 @@
     "name": "basic-story-hero",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "The basic story hero appears on basic story pages",
     "displayName": "Basic story hero",
     "mainFunction": "main",

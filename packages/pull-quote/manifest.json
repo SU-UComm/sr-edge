@@ -3,7 +3,7 @@
     "name": "pullquote",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "Displays a quote for a story page along with details of the quote",
     "displayName": "Pull quote",
     "mainFunction": "main",

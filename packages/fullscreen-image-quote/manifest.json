@@ -3,7 +3,7 @@
     "name": "fullscreen-image-quote",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "This component displays a full width image with a quote and CTA.",
     "displayName": "Fullscreen Image Quote",
     "mainFunction": "main",

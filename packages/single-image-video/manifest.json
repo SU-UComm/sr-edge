@@ -3,7 +3,7 @@
     "name": "single-image-video",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "Use this to display a large image or video with a caption and credit. Title and summary are optional.",
     "displayName": "Single image or video",
     "mainFunction": "main",

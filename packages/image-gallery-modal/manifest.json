@@ -3,7 +3,7 @@
     "name": "image-gallery-modal",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "An image gallery that opens in a modal.",
     "displayName": "Image gallery with modal",
     "mainFunction": "main",

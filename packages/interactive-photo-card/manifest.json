@@ -3,7 +3,7 @@
     "name": "interactive-photo-card",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "2 side by side cards with 1 being a photo and 1 being a fact with the ability to flip the card over for additional information.",
     "displayName": "Interactive Photo Card",
     "mainFunction": "main",

@@ -3,7 +3,7 @@
     "name": "fact-callout",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "Display a fact on featured story pages",
     "displayName": "Fact callout",
     "mainFunction": "main",

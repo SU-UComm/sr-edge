@@ -3,7 +3,7 @@
     "name": "basic-hero",
     "type": "edge",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "Basic hero and title area.",
     "displayName": "Basic Hero",
     "mainFunction": "main",

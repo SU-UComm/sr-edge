@@ -3,7 +3,7 @@
     "name": "header-component",
     "type": "edge",
     "version": "6.0.5",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "description": "Stanford university Header component.",
     "displayName": "Header",
     "mainFunction": "main",

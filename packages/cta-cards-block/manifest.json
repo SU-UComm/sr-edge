@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "cta-cards-block",
     "version": "6.0.0",
-    "namespace": "stanford-development",
+    "namespace": "stanford-components",
     "type": "edge",
     "description": "Add up to 3 CTA cards in this block.",
     "displayName": "CTA cards block",
