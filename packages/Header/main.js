@@ -85,8 +85,8 @@ export default {
             }
             // Process both results
         } catch (error) {
-            console.error('Error occurred in the Header component: Error parsing hero data JSON response: ', er);
-            return `<!-- Error occurred in the Header component: Error parsing hero data JSON response: ${er.message} -->`;
+            console.error('Error occurred in the Header component: Error parsing hero data JSON response: ', error);
+            return `<!-- Error occurred in the Header component: Error parsing hero data JSON response: ${error.message} -->`;
         }
         
         const { site, navigation, search } = siteData;
