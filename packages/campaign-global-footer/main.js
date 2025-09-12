@@ -1,20 +1,20 @@
 import { FetchAdapter } from '../../global/js/utils';
-import footerTemplate from './footer.hbs';
+import campaignGlobalFooterTemplate from './campaign-global-footer.hbs';
 
 /**
- * Footer component that renders site footer
- * @module Footer
+ * Campaign Global Footer component that renders site global footer only
+ * @module CampaignGlobalFooter
  */
 export default {
     /**
-     * Renders the Footer component.
-     * 
+     * Renders the Campaign Global Footer component.
+     *
      * @async
      * @function
      * @param {Object} args - Configuration options for the section.
-     * @param {string} args.dataUrl - The data url form the fetch should be. 
+     * @param {string} args.dataUrl - The data url form the fetch should be.
      * @param {Object} info.ctx - Functions available in the execution context.
-     * @returns {Promise<string>} The rendered Footer HTML or an error message.
+     * @returns {Promise<string>} The rendered Campaign Global Footer HTML or an error message.
      * @throws {Error} If footer data fetch operation fails.
     */
     async main(args, info) {
@@ -25,7 +25,7 @@ export default {
 
         // Extracting configuration data from arguments
         const { dataUrl } = args || {};
-        
+
         // Validate required environment variables
         try {
             if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
@@ -34,8 +34,8 @@ export default {
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the Footer component: ', er);
-            return `<!-- Error occurred in the Footer component: ${er.message} -->`;
+            console.error('Error occurred in the Campaign Global Footer component: ', er);
+            return `<!-- Error occurred in the Campaign Global Footer component: ${er.message} -->`;
         }
 
         // Validate required fields and ensure correct data types
@@ -46,8 +46,8 @@ export default {
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the Footer component: ', er);
-            return `<!-- Error occurred in the Footer component: ${er.message} -->`;
+            console.error('Error occurred in the Campaign Global Footer component: ', er);
+            return `<!-- Error occurred in the Campaign Global Footer component: ${er.message} -->`;
         }
 
         // Fetch site data
@@ -64,10 +64,10 @@ export default {
                 throw new Error("Invalid API response: siteData is missing or not an object.");
             }
         } catch (er) {
-            console.error('Error occurred in the Footer component: Error parsing footer data JSON response: ', er);
-            return `<!-- Error occurred in the Footer component: Error parsing footer data JSON response: ${er.message} -->`;
+            console.error('Error occurred in the Campaign Global Footer component: Error parsing footer data JSON response: ', er);
+            return `<!-- Error occurred in the Campaign Global Footer component: Error parsing footer data JSON response: ${er.message} -->`;
         }
-        
+
 
         // Prepare component data for template rendering
         const componentData = {
@@ -75,6 +75,6 @@ export default {
             ...siteData,
         };
 
-        return footerTemplate(componentData);
+        return campaignGlobalFooterTemplate(componentData);
     }
 };

@@ -22,22 +22,14 @@ vi.mock('../../global/js/utils', () => ({
                     alt: 'Logo alt text'
                 },
                 copyright: '2025 Stanford University'
-            },
-            navigation: {
-                major: [],
-                minor: [],
-                contacts: [],
-                external: [],
-                footerPrimary: [],
-                footerSecondary: []
             }
         })
     }))
 }));
 
-describe('[Footer]', () => {
+describe('[Campaign Global Footer]', () => {
     const mockFnsCtx = { resolveUri: vi.fn() };
-    
+
     const defaultMockData = {
         dataUrl: 'https://example.com/data.json'
     };
@@ -53,24 +45,24 @@ describe('[Footer]', () => {
     describe('[Error Handling]', () => {
         it('Should throw an error when no parameters were provided', async () => {
             const result = await main();
-            
-            expect(result).toContain('<!-- Error occurred in the Footer component: The "info.ctx" cannot be undefined or null. The {} was received.');
+
+            expect(result).toContain('<!-- Error occurred in the Campaign Global Footer component: The "info.ctx" cannot be undefined or null. The {} was received.');
             expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should throw an error when fns was not provided', async () => {
             const mockInfo = {};
             const result = await main(defaultMockData, mockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Footer component: The "info.ctx" cannot be undefined or null. The {} was received.');
+
+            expect(result).toContain('<!-- Error occurred in the Campaign Global Footer component: The "info.ctx" cannot be undefined or null. The {} was received.');
             expect(mockedError).toBeCalledTimes(1);
         });
 
         it('Should throw an error when dataUrl was not provided', async () => {
             const mockData = {};
             const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Footer component: The "dataUrl" field cannot be undefined');
+
+            expect(result).toContain('<!-- Error occurred in the Campaign Global Footer component: The "dataUrl" field cannot be undefined');
             expect(mockedError).toBeCalledTimes(1);
         });
     });
@@ -80,7 +72,6 @@ describe('[Footer]', () => {
             const result = await main(defaultMockData, defaultMockInfo);
 
             expect(result).toContain('footer');
-            expect(result).toContain('Test mission');
             expect(result).toContain('2025 Stanford University');
         });
 
@@ -100,7 +91,7 @@ describe('[Footer]', () => {
             }));
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toBe('<!-- Error occurred in the Footer component: Error parsing footer data JSON response: Network Error -->');
+            expect(result).toBe('<!-- Error occurred in the Campaign Global Footer component: Error parsing footer data JSON response: Network Error -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -111,7 +102,7 @@ describe('[Footer]', () => {
             }));
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toBe('<!-- Error occurred in the Footer component: Error parsing footer data JSON response: Invalid API response: siteData is missing or not an object. -->');
+            expect(result).toBe('<!-- Error occurred in the Campaign Global Footer component: Error parsing footer data JSON response: Invalid API response: siteData is missing or not an object. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
     });
