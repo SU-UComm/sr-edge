@@ -12,7 +12,7 @@ export default {
      * @async
      * @function
      * @param {Object} args - Configuration options for the section.
-     * @param {string} args.dataUrl - The data url form the fetch should be.
+     * @param {string} args.dataUrl - The data url from the fetch should be.
      * @param {Object} info.ctx - Functions available in the execution context.
      * @returns {Promise<string>} The rendered Campaign Global Footer HTML or an error message.
      * @throws {Error} If footer data fetch operation fails.
@@ -67,7 +67,6 @@ export default {
             console.error('Error occurred in the Campaign Global Footer component: Error parsing footer data JSON response: ', er);
             return `<!-- Error occurred in the Campaign Global Footer component: Error parsing footer data JSON response: ${er.message} -->`;
         }
-
 
         // Prepare component data for template rendering
         const componentData = {
