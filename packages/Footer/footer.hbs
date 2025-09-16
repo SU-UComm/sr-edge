@@ -56,50 +56,5 @@
             {{~/if~}}
         </section>
     </div>
-    <div class="su-flex lg:su-items-center  su-text-white su-bg-cardinal-red">
-        <div class="su-text-white su-flex su-pl-20 su-pr-20 md:su-pl-50 md:su-pr-50 su-mx-auto su-w-full su-max-w-[1412px]">
-            <div class="bottom-footer su-pb-12 md:su-pb-25 lg:su-pb-32 su-grow su-flex su-flex-col lg:su-flex-row lg:su-gap-42">
-                <div class="su-flex su-mx-auto">
-                    <a href="{{site.url}}">
-                        <img class="su-mt-12 md:su-mt-10 lg:su-mt-[19.5px] su-mb-auto" src="{{site.logoFooter.url}}" alt="{{site.logoFooter.alt}}"/>
-                    </a>
-                </div>
-                <div class="su-flex lg:su-flex-col footer-links-wrapper su-flex-wrap lg:su-grow">
-                    {{~#if navigation.footerPrimary~}}
-                    <div class="footer-top-links su-font-sans su-font-semibold su-text-14 md:su-text-18 lg:su-text-17 lg:su-mt-31 su-mx-auto md:su-mb-11 lg:su-mb-8 lg:su-ml-0 lg:su-mr-0">
-                        <ul class="su-flex su-gap-9 md:su-gap-x-24 md:su-gap-x-31 md:su-text-center">
-                            {{~#each navigation.footerPrimary~}}
-                            <li class="su-mb-0">
-                                <a class="su-no-underline focus:su-text-white hover:su-text-white hover:su-underline su-text-white dark:su-text-white" href="{{asset_attribute_redirect_url}}">
-                                    {{unescapeHtml asset_name}}
-                                </a>
-                            </li>
-                            {{~/each~}}
-                        </ul>
-                    </div>
-                    {{~/if~}}
-                    {{~#if navigation.footerSecondary~}}
-                    <div class="footer-bottom-links su-mx-auto lg:su-ml-0 lg:su-mr-0 su-font-normal su-text-14 md:su-text-16 md:su-mb-10 lg:su-mb-9 lg:su-text-15">
-                        <ul class="su-flex su-gap-9 md:su-gap-x-24 md:su-gap-x-29 md:su-text-center">
-                            {{~#each navigation.footerSecondary~}}
-                            <li class="su-mb-0">
-                                <a class="su-no-underline focus:su-text-white hover:su-text-white hover:su-underline su-font-semibold md:su-font-normal su-text-white dark:su-text-white" href="{{asset_attribute_redirect_url}}">
-                                {{unescapeHtml asset_name}}
-                                </a>
-                            </li>
-                            {{~/each~}}
-                        </ul>
-                    </div>
-                    {{~/if~}}
-                    <div class="footer-bottom-copyright su-w-full su-text-white su-font-source-sans-pro su-text-15 su-font-normal su-tracking-normal su-mt-17 lg:su-mt-0 su-mx-auto lg:su-mx-0">
-                        <p class="su-mb-0 su-text-center lg:su-text-left su-w-full">
-                            &copy;
-                            <span class="su-hidden md:su-inline su-mr-2">Copyright</span>
-                            {{unescapeHtml site.copyright}}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{> footer-global-footer logoLink=navigation.footerPrimary.[0].asset_attribute_redirect_url logoUrl=site.logoFooterStacked.url logoAlt=site.logoFooterStacked.alt navigationTop=navigation.footerPrimary navigationBottom=navigation.footerSecondary copyright=site.copyright}}
 </footer>
