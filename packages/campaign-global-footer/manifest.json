@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "campaign-global-footer",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "type": "edge",
     "namespace": "stanford-components",
     "description": "Just the global footer for Campaign pages.",
