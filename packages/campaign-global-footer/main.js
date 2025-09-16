@@ -68,7 +68,6 @@ export default {
             return `<!-- Error occurred in the Campaign Global Footer component: Error parsing footer data JSON response: ${er.message} -->`;
         }
 
-
         // Prepare component data for template rendering
         const componentData = {
             ...args,
