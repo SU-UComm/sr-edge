@@ -1,7 +1,7 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "campaign-brand-bar",
-    "version": "0.0.2",
+    "version": "1.0.0",
     "type": "edge",
     "namespace": "stanford-components",
     "description": "Stanford university Campaign Brand Bar component.",
