@@ -1,18 +1,12 @@
 <div
-    class='report-header__utility su-w-full su-bg-cardinal-red su-relative su-z-40'
+    class='report-header__utility su-flex su-items-center su-w-full su-bg-cardinal-red su-relative su-z-40 su-h-30'
 >
     <div class='su-max-w-[141.2rem] su-px-20 md:su-px-49 su-w-full su-mx-auto'>
-        <a
-            href='{{url}}'
-            data-ga-action='logo'
-            class='su--ml-5 su-inline-block'
-        >
+        <a href='{{url}}' data-ga-action='logo' class='su-inline-block'>
             {{~#if logo.url~}}
                 <img
                     alt='{{logo.alt}}'
-                    class='su-inline-block img-responsive'
-                    width='161'
-                    height='35'
+                    class='su-inline-block su-max-w-[142px]'
                     src='{{logo.url}}'
                 />
             {{~/if~}}
