@@ -1,31 +1,18 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
-    "name": "header-component",
+    "name": "campaign-brand-bar",
+    "version": "1.0.0",
     "type": "edge",
-    "version": "6.0.6",
     "namespace": "stanford-components",
-    "description": "Stanford university Header component.",
-    "displayName": "Header",
+    "description": "Stanford university Campaign Brand Bar component.",
+    "displayName": "Campaign Brand Bar",
     "mainFunction": "main",
-    "environment": [
-        {
-            "name": "CONTENT_API",
-            "required": true
-        },
-        {
-            "name": "CONTENT_API_KEY",
-            "required": true
-        },
-        {
-            "name": "FB_JSON_URL",
-            "required": true
-        }
-    ],
+    "environment": [],
     "icon": {
-        "id": "explore",
+        "id": "foundation",
         "color": {
             "type": "enum",
-            "value": "orange"
+            "value": "gray"
         }
     },
     "functions": [
@@ -36,7 +23,8 @@
                 "type": "object",
                 "properties": {
                     "dataUrl": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "URL to fetch site data from"
                     }
                 },
                 "required": ["dataUrl"]

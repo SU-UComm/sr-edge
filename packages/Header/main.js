@@ -90,7 +90,7 @@ export default {
         }
         
         const { site, navigation, search } = siteData;
-        const { url, logo, logoLight, logoTopBar, cookieStatement } = site;
+        const { url, logo, logoLight, logoBrandBar, cookieStatement } = site;
         
         const { id, short_name } = pageData;
         const { storyLayout = null, srContentType = null, srContentMainTopic = null} = pageData?.metadata || {};
@@ -117,9 +117,9 @@ export default {
         // Prepare component data for template rendering
         const componentData = {
             urlTopBar,
-            logoTopBar,
+            logoBrandBar,
             url,
-            logo, 
+            logo,
             logoLight,
             navigation,
             search,
