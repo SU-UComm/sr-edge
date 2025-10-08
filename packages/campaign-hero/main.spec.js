@@ -1,5 +1,4 @@
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import main from './main';
 
 describe('Campaign Hero Component', () => {

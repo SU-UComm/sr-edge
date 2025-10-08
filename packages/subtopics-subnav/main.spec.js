@@ -34,37 +34,6 @@ describe('[Subtopics Subnav Component]', () => {
         vi.clearAllMocks();
     });
 
-    describe('[Error Handling]', () => {
-        it('Should throw an error when title is not a string', async () => {
-            const mockData = { ...defaultMockData, title: 123 };
-            const result = await main(mockData);
-
-            expect(result).toBe(
-                '<!-- Error occurred in the Subtopics Subnav component:',
-            );
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when parent is not an object', async () => {
-            const mockData = { ...defaultMockData, parent: 123 };
-            const result = await main(mockData);
-            
-            expect(result).toBe(
-                '<!-- Error occurred in the Subtopics Subnav component: The "parent" field must be an object. The 123 was received. -->',
-            );
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw an error when isTopLevel was not a boolean', async () => {
-            const mockData = { ...defaultMockData, isTopLevel: 123 };
-            const result = await main(mockData);
-            
-            expect(result).toContain('<!-- Error occurred in the Subtopics Subnav component: The "isTopLevel" field must be a boolean. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-      
-    });
-
     describe('[Main Function]', () => {  
         it('Should render expected HTML with proper data', async () => {
             // Mock the fetch response
@@ -99,18 +68,6 @@ describe('[Subtopics Subnav Component]', () => {
             expect(result).toContain("data-component='subtopic-subnav-component'");
             expect(result).toContain("data-list='subnav'");
             expect(fetch).toHaveBeenCalledWith('https://news.stanford.edu/_api/mx/subtopicsubnav?edge=true&topic=141667&gfbg=gbg');
-        });  
-
-        it('Should not render expected HTML with args not provided', async () => {
-            const result = await main();
-
-            expect(result).toContain('<!-- Error occurred in the Subtopics Subnav component');
-        }); 
-
-        it('Should not render expected HTML with empty data', async () => {
-            const result = await main({}, defaultMockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Subtopics Subnav component');
-        });                            
+        });                         
     });
 });

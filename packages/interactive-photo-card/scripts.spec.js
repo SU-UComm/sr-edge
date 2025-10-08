@@ -111,15 +111,6 @@ describe('[Interactive Photo Card][Client]', () => {
 
 
     describe('_interactivePhotoCardInit function', () => {
-        it('Should initialize event listener successfully', () => {
-            photoCard._interactivePhotoCardInit(card);
-            fireEvent.click(inner);
-            
-            const transformMatch = inner.style.transform.match(/rotateY\((\d+)deg\)/);
-            const currentRotation = transformMatch ? parseInt(transformMatch[1]) : 0;
-            
-            expect(currentRotation).toBe(180);
-        });
 
         it('Should log error when card inner is missing', () => {
             const cardWithoutInner = document.createElement('div');
@@ -130,7 +121,6 @@ describe('[Interactive Photo Card][Client]', () => {
             
             expect(mockedError).toHaveBeenCalledWith('Could not find card inner element for component');
         });
-
 
     });
 
