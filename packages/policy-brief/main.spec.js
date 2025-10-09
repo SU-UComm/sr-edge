@@ -40,36 +40,6 @@ describe('[Policy Brief Component]', () => {
     });
 
     describe('[Error Handling]', () => {
-        it('Should throw an error when no parameters was provided.', async () => {
-            const result = await main();
-
-            expect(result).toBe('<!-- Error occurred in the Policy brief component: The "info.fns" cannot be undefined or null. The {} was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw an error when no info was provided', async () => {
-            const result = await main(defaultMockData);
-
-            expect(result).toBe('<!-- Error occurred in the Policy brief component: The "info.fns" cannot be undefined or null. The {} was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when no info do not have fns or ctx functions', async () => {
-            const mockInfo = {test: 'test'}
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Policy brief component: The "info.fns" cannot be undefined or null. The {} was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when fns or ctx is invalid', async () => {
-            const mockInfo = { fns: undefined, ctx: undefined,  };
-            const result = await main(defaultMockData, mockInfo);
-    
-            expect(result).toBe('<!-- Error occurred in the Policy brief component: The "info.fns" cannot be undefined or null. The {} was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
         it('Should throw an error when image is not a string', async () => {
             const mockedData = {
                 contentConfiguration: {

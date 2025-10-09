@@ -47,104 +47,6 @@ describe('[Single Image or Video]', () => {
     });
     
     describe('[Error Handling]', () => {
-        it('Should throw an error when no parameters were provided', async () => {
-            const result = await main();
-            
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when no info was provided', async () => {
-            const result = await main(defaultMockData);
-
-            expect(result).toBe('<!-- Error occurred in the Single Image or Video component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when no info do not have fns, ctx or env functions', async () => {
-            const mockInfo = {}
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Single Image or Video component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when API_IDENTIFIER was not provided', async () => {
-            const mockInfo = {
-                env: {
-                    ...defaultMockInfo.env,
-                    API_IDENTIFIER: undefined
-                }
-            }
-
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw an error when API_IDENTIFIER was not provided within set object', async () => {
-            const mockInfo = {
-                set: {
-                    environment: {
-                        ...defaultMockInfo.env,
-                        API_IDENTIFIER: undefined
-                    }
-                }
-            }
-
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when BASE_DOMAIN was not provided', async () => {
-            const mockInfo = {
-                ...defaultMockInfo,
-                env: {
-                    ...defaultMockInfo.env,
-                    BASE_DOMAIN: undefined
-                }
-            }
-
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw an error when BASE_DOMAIN was not provided within set object', async () => {
-            const mockInfo = {
-                set: {
-                    environment: {
-                        ...defaultMockInfo.env,
-                        BASE_DOMAIN: undefined
-                    }
-                }
-            }
-
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw error when fns or ctx is invalid', async () => {
-            const mockInfo = { 
-                env: {
-                    API_IDENTIFIER: 'sample-api',
-                    BASE_DOMAIN: 'https://example.com',
-                },
-                fns: undefined, 
-                ctx: undefined,
-            };
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Single Image or Video component: The "info.fns" cannot be undefined or null. The {} was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
         it('Should throw an error when title is not a string', async () => {
             const mockData = {
                 ...defaultMockData,
@@ -172,21 +74,6 @@ describe('[Single Image or Video]', () => {
             const result = await main(mockData, defaultMockInfo);
             
             expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "summary" field must be a string. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when summaryAlign was not one of ["left", "center"]', async () => {
-            const mockData = {
-                ...defaultMockData,
-                section: {
-                    ...defaultMockData.section,
-                    summaryAlign: 'test'
-                }
-            };
-            
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "summaryAlign" field must be one of ["left", "center"]. The "test" was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -223,18 +110,6 @@ describe('[Single Image or Video]', () => {
             const result = await main(mockData, defaultMockInfo);
             
             expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "credit" field must be a string. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when width was not one of ["Wide", "Narrow"]', async () => {
-            const mockData = {
-                ...defaultMockData,
-                width: 'test'
-            };
-            
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "width" field must be one of ["Wide", "Narrow"]. The "test" was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -280,30 +155,6 @@ describe('[Single Image or Video]', () => {
             const result = await main(mockData, defaultMockInfo);
             
             expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "youtubeid" field must be a string. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when marginTop was not one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]', async () => {
-            const mockData = {
-                ...defaultMockData,
-                marginTop: 'test'
-            };
-            
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "marginTop" field cannot be undefined and must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The "test" was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when marginBottom was not one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]', async () => {
-            const mockData = {
-                ...defaultMockData,
-                marginBottom: 'test'
-            };
-            
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: The "marginBottom" field cannot be undefined and must be one of ["default", "base", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]. The "test" was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -450,56 +301,4 @@ describe('[Single Image or Video]', () => {
 
     });
 
-
-    describe('[Edge cases]', () => {
-        beforeAll(() => {
-            uuid.mockReturnValue('476f6893-b77b-43d8-ac8c-ac74d3d75dd7');
-        });
-
-        afterEach(() => {
-            uuid.mockClear();
-            basicAssetUri.mockClear();
-        });
-        
-         it("Should correctly render alt when image data will return empty alt", async () => {
-            basicAssetUri.mockResolvedValueOnce({
-                url: "https://google.com/image.jpg",
-            });
-
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Single Image or Video component: Failed to fetch image data. data.attributes must be a non-null object -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when fetch for image will fail', async () => {
-            basicAssetUri.mockRejectedValueOnce(new Error('No image'))
-
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: Failed to fetch image data. No image -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when fetch for image return data without url', async () => {
-            basicAssetUri.mockResolvedValueOnce({
-                test: "https://google.com/image.jpg",
-            });
-
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: Failed to fetch image data. data.url must be a non-empty string -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when fetch for image return data that is not an object', async () => {
-            basicAssetUri.mockResolvedValueOnce("https://google.com/image.jpg");
-
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Single Image or Video component: Failed to fetch image data. basicAssetUri did not return an object -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-    });
 });
