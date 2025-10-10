@@ -33,7 +33,8 @@ export default {
             }
         } catch (er) {
             console.error('Error occurred in the Footer component: ', er);
-            return `<!-- Error occurred in the Footer component: ${er.message} -->`;
+            throw er;
+            // return `<!-- Error occurred in the Footer component: ${er.message} -->`;
         }
 
         // Validate required fields and ensure correct data types
