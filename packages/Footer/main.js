@@ -46,7 +46,8 @@ export default {
             }
         } catch (er) {
             console.error('Error occurred in the Footer component: ', er);
-            return `<!-- Error occurred in the Footer component: ${er.message} -->`;
+            throw er;
+            // return `<!-- Error occurred in the Footer component: ${er.message} -->`;
         }
 
         // Fetch site data
@@ -64,7 +65,8 @@ export default {
             }
         } catch (er) {
             console.error('Error occurred in the Footer component: Error parsing footer data JSON response: ', er);
-            return `<!-- Error occurred in the Footer component: Error parsing footer data JSON response: ${er.message} -->`;
+            throw er;
+            // return `<!-- Error occurred in the Footer component: Error parsing footer data JSON response: ${er.message} -->`;
         }
         
 
