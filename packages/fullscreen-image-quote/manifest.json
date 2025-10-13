@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "fullscreen-image-quote",
     "type": "edge",
-    "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "This component displays a full width image with a quote and CTA.",
     "displayName": "Fullscreen Image Quote",
     "mainFunction": "main",
@@ -27,6 +27,17 @@
                         "type": "string",
                         "format": "matrix-asset-uri"
                     },
+                    "imageOverlay": {
+                        "title": "Image gradient overlay",
+                        "description": "An overlay is required to maintain accessibility and readability. Use this to control the darkness of the overlay.",
+                        "type": "string",
+                        "default": "dark",
+                        "enum": [
+                            "light",
+                            "medium",
+                            "dark"
+                        ]
+                    },
                     "imageVPosition": {
                         "title": "Vertical crop position of the background image",
                         "description": "This setting will only be used if the above image's aspect ratio is taller than its container. It will determine which portion of the image is shown if the image is cropped on some screen sizes.",
@@ -36,7 +47,10 @@
                             "top",
                             "center",
                             "bottom"
-                        ]
+                        ],
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     },
                     "mobileImage": {
                         "title": "Mobile background image (portrait orientation)",
@@ -48,7 +62,10 @@
                         "title": "Quote (or body content)",
                         "description": "Please include the quotation marks if this is a quote. They are not automatically included for content versatility.",
                         "type": "string",
-                        "format": "multi-line"
+                        "format": "multi-line",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "quoteVAlign": {
                         "title": "Quote vertical alignment (desktop)",
@@ -59,7 +76,10 @@
                             "top",
                             "center",
                             "bottom"
-                        ]
+                        ],
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     },
                     "quoteHAlign": {
                         "title": "Quote horizontal alignment",
@@ -68,7 +88,10 @@
                         "enum": [
                             "left",
                             "right"
-                        ]
+                        ],
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     },
                     "removeTopSpacing": {
                         "title": "Remove top spacing",
@@ -84,18 +107,27 @@
                             "ctaPreText": {
                                 "title": "Short text before the CTA label",
                                 "type": "string",
-                                "default": "Meet"
+                                "default": "Meet",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaText": {
                                 "title": "CTA text",
                                 "description": "Text for the actual CTA link portion.",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaSubtext": {
                                 "title": "CTA subtext",
                                 "description": "Line of smaller text below the CTA.",
                                 "type": "string",
-                                "default": "’21, international student"
+                                "default": "’21, international student",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "internalUrl": {
                                 "title": "Internal link (Matrix asset link)",
@@ -127,53 +159,61 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://api-identifier/1": {
+        "matrix-asset://stanfordNews/1": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://api-identifier/2": {
+        "matrix-asset://stanfordNews/2": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://api-identifier/5": {
+        "matrix-asset://stanfordNews/5": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://api-identifier/6": {
+        "matrix-asset://stanfordNews/6": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://api-identifier/9": {
+        "matrix-asset://stanfordNews/9": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://api-identifier/10": {
+        "matrix-asset://stanfordNews/10": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/3": {
+        "matrix-asset://stanfordNews/3": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/7": {
+        "matrix-asset://stanfordNews/7": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/8": {
+        "matrix-asset://stanfordNews/8": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/11": {
+        "matrix-asset://stanfordNews/11": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/99100": {
+        "matrix-asset://stanfordNews/99100": {
             "type": "file",
             "path": "mocked-uris/99100.json"
         },
-        "matrix-asset://api-identifier/28192": {
+        "matrix-asset://stanfordNews/28192": {
             "type": "file",
             "path": "mocked-uris/28192.json"
+        },
+        "matrix-asset://stanfordNews/167069": {
+            "type": "file",
+            "path": "mocked-uris/167069.json"
+        },
+        "matrix-asset://stanfordNews/169077": {
+            "type": "file",
+            "path": "mocked-uris/169077.json"
         }
     },
     "previews": {
@@ -199,6 +239,32 @@
                     },
                     "wrapper": {
                         "path": "previews/basicstory.html"
+                    }
+                }
+            }
+        },
+        "mark": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/mark.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "renee": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/renee.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
                     }
                 }
             }

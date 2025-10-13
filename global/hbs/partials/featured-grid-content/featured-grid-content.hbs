@@ -1,25 +1,25 @@
 {{~#ifEquals placement 1~}}
     <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow {{alignClass alignment}}">
     {{~#ifEquals gridType "stories"~}}
-        {{> card-vertical title=item.title description=item.description liveUrl=item.liveUrl imageUrl=item.imageUrl imageAlt=item.imageAlt taxonomy=item.taxonomy taxonomyUrl=item.taxonomyUrl type=item.type iconType=item.iconType videoUrl=item.videoUrl cardSize=item.cardSize displayDescription=true displayThumbnail=item.displayThumbnail headingLvl=item.headingLvl uniqueID=item.uniqueID }}
+        {{> card-vertical title=item.title description=item.description liveUrl=item.liveUrl imageUrl=item.imageUrl imageAlt=item.imageAlt taxonomy=item.taxonomy taxonomyUrl=item.taxonomyUrl type=item.type iconType=item.iconType videoUrl=item.videoUrl cardSize=item.cardSize displayDescription=true displayThumbnail=item.displayThumbnail headingLvl=item.headingLvl uniqueID=item.uniqueID squizEdit=squizEdit }}
     {{~else~}}
-        {{> card-pull-quote imageURL=item.imageURL imageAlt=item.imageAlt quote=item.quote title=item.title description=item.description ctaText=item.ctaText liveUrl=item.liveUrl }}
+        {{> card-pull-quote imageURL=item.imageURL imageAlt=item.imageAlt quote=item.quote title=item.title description=item.description ctaText=item.ctaText liveUrl=item.liveUrl squizEdit=squizEdit }}
     {{~/ifEquals~}}
     </div>
 {{~else ifEquals placement 2~}}
     <div class="su-relative su-w-full">
         {{~#ifEquals gridType "stories"~}}
-            {{> card-vertical title=this.title description=this.description liveUrl=this.liveUrl imageUrl=this.imageUrl imageAlt=this.imageAlt taxonomy=this.taxonomy taxonomyUrl=this.taxonomyUrl type=this.type iconType=this.iconType videoUrl=this.videoUrl cardSize=this.cardSize displayDescription=this.displayDescription displayThumbnail=this.displayThumbnail headingLvl=this.headingLvl uniqueID=this.uniqueID }}
+            {{> card-vertical title=this.title description=this.description liveUrl=this.liveUrl imageUrl=this.imageUrl imageAlt=this.imageAlt taxonomy=this.taxonomy taxonomyUrl=this.taxonomyUrl type=this.type iconType=this.iconType videoUrl=this.videoUrl cardSize=this.cardSize displayDescription=this.displayDescription displayThumbnail=this.displayThumbnail headingLvl=this.headingLvl uniqueID=this.uniqueID squizEdit=squizEdit }}
         {{~else~}}
-            {{> card-teaser title=this.title liveUrl=this.liveUrl source=this.source isCustomDescription=this.isCustomDescription credit=this.credit description=this.description authorName=this.authorName }}
+            {{> card-teaser title=this.title liveUrl=this.liveUrl source=this.source isCustomDescription=this.isCustomDescription credit=this.credit description=this.description authorName=this.authorName squizEdit=squizEdit }}
         {{~/ifEquals~}}
     </div>
 {{~else~}}
     <div class="su-relative su-w-full {{getStringByCondition value=includeVerticalVideo expectedValue=true trueResult="" falseResult="before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px"}} {{getStringByCondition value=isNested expectedValue=true trueResult="md:before:su-w-full lg:before:su-w-px lg:before:su-h-full before:su-left-0 lg:before:su-left-[-38px] before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-0" falseResult="before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px]"}}">
         {{~#ifEquals gridType "stories"~}}
-            {{> card-vertical title=this.title description=this.description liveUrl=this.liveUrl imageUrl=this.imageUrl imageAlt=this.imageAlt taxonomy=this.taxonomy taxonomyUrl=this.taxonomyUrl type=this.type iconType=this.iconType videoUrl=this.videoUrl cardSize=this.cardSize displayDescription=this.displayDescription displayThumbnail=this.displayThumbnail headingLvl=this.headingLvl uniqueID=this.uniqueID }}
+            {{> card-vertical title=this.title description=this.description liveUrl=this.liveUrl imageUrl=this.imageUrl imageAlt=this.imageAlt taxonomy=this.taxonomy taxonomyUrl=this.taxonomyUrl type=this.type iconType=this.iconType videoUrl=this.videoUrl cardSize=this.cardSize displayDescription=this.displayDescription displayThumbnail=this.displayThumbnail headingLvl=this.headingLvl uniqueID=this.uniqueID squizEdit=squizEdit }}
         {{~else~}}
-            {{> card-teaser title=this.title liveUrl=this.liveUrl source=this.source isCustomDescription=this.isCustomDescription credit=this.credit description=this.description authorName=this.authorName }}
+            {{> card-teaser title=this.title liveUrl=this.liveUrl source=this.source isCustomDescription=this.isCustomDescription credit=this.credit description=this.description authorName=this.authorName squizEdit=squizEdit }}
         {{~/ifEquals~}}
     </div>
 {{~/ifEquals~}}

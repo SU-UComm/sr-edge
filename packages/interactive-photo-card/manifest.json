@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "interactive-photo-card",
     "type": "edge",
-    "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "2 side by side cards with 1 being a photo and 1 being a fact with the ability to flip the card over for additional information.",
     "displayName": "Interactive Photo Card",
     "mainFunction": "main",
@@ -21,21 +21,37 @@
             "input": {
                 "type": "object",
                 "properties": {
+                    "alwaysDark": {
+                        "title": "Always dark mode",
+                        "description": "If checked, this component will always display in dark mode.",
+                        "type": "boolean",
+                        "default": false,
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
+                    },
                     "title": {
                         "title": "Title",
                         "type": "string",
-                        "default": "Card title"
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "eyebrow": {
                         "title": "Eyebrow",
                         "description": "This is the superheading above the title.",
                         "type": "string",
-                        "default": "Eyebrow"
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "content": {
                         "title": "Content",
                         "description": "This is the text that goes on the flip side of the content card.",
-                        "type": "FormattedText"
+                        "type": "FormattedText",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "image": {
                         "title": "Image",
@@ -46,10 +62,20 @@
                         "title": "Image Alignment",
                         "type": "string",
                         "default": "right",
-                        "enum": ["left", "right"]
+                        "enum": [
+                            "left",
+                            "right"
+                        ],
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     }
                 },
-                "required": ["title", "content", "image"]
+                "required": [
+                    "title",
+                    "content",
+                    "image"
+                ]
             },
             "output": {
                 "responseType": "html"
@@ -60,31 +86,31 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/1": {
+        "matrix-asset://stanfordNews/1": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/2": {
+        "matrix-asset://stanfordNews/2": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/5": {
+        "matrix-asset://stanfordNews/5": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/6": {
+        "matrix-asset://stanfordNews/6": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/9": {
+        "matrix-asset://stanfordNews/9": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/10": {
+        "matrix-asset://stanfordNews/10": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://api-identifier/99100": {
+        "matrix-asset://stanfordNews/99100": {
             "type": "file",
             "path": "mocked-uris/99100.json"
         }

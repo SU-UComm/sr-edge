@@ -1,5 +1,6 @@
 import xss from "xss";
 import { basicAssetUri, isRealExternalLink } from "../../global/js/utils";
+import { processEditor } from '../../global/js/utils/processEditor';
 import multicolumnInfoSectionTemplate from './multicolumn-info-section.hbs';
 
 /**
@@ -21,61 +22,143 @@ export default {
     */
     async main(args, info) {
         // Extracting functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // Extracting environment variables from provided info
         const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
 
         // Extracting configuration data from arguments
-        const { border, callout, colOne, colTwo, colThree } = args || {};
+        let { border, callout, colOne, colTwo, colThree } = args || {};
 
-        // Validate required functions and environment vars
-        try {
-            if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                throw new Error(
-                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                );
+        // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
+        // Must fallback to false, use true to mock the editor
+        const squizEdit = componentContext?.editor || false;
+        // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
+        let squizEditTargets = null;
+
+        // NEW: add a default if squizEdit is true
+        if (squizEdit) {
+            // Add default values if content is not provided
+            border = border !== undefined ? border : true;
+            callout = callout !== undefined ? callout : true;
+            
+            colOne = colOne || {};
+            colOne.title = colOne.title || 'Title text';
+
+            colTwo = colTwo || {};
+            colTwo.infoText = colTwo.infoText || '<p>Add content</p>';
+            
+            if (colTwo.addButton) {
+                colTwo.buttonConfiguration = colTwo.buttonConfiguration || {};
+                colTwo.buttonConfiguration.buttonText = colTwo.buttonConfiguration.buttonText || 'Button text';
+                colTwo.buttonConfiguration.infoInternalUrl = colTwo.buttonConfiguration.infoInternalUrl || null;
             }
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
+
+            if (callout) {
+                colThree = colThree || {};
+                colThree.title = colThree.title || 'Heading text';
+                colThree.content = colThree.content || '<p>Add content</p>';
+                
+                colThree.imageConfiguration = colThree.imageConfiguration || {};
+                colThree.imageConfiguration.image = colThree.imageConfiguration.image || 'matrix-asset://StanfordNews/172387';
+                colThree.imageConfiguration.caption = `<span data-se="caption">${colThree?.imageConfiguration?.caption ? colThree.imageConfiguration.caption : 'Caption text'}</span>`;
+                colThree.imageConfiguration.credit = `<span data-se="credit">${colThree?.imageConfiguration?.credit ? colThree.imageConfiguration.credit : 'Credit text'}</span>`;
+                colThree.imageConfiguration.imagePlacement = colThree.imageConfiguration.imagePlacement || 'Below content';
+                
+                colThree.buttonConfiguration = colThree.buttonConfiguration || {};
+                colThree.buttonConfiguration.buttonText = colThree.buttonConfiguration.buttonText || 'Button text';
+                colThree.buttonConfiguration.internalUrl = colThree.buttonConfiguration.internalUrl || null;
             }
-        } catch (er) {
-            console.error('Error occurred in the Multicolumn Info Section component: ', er);
-            return `<!-- Error occurred in the Multicolumn Info Section component: ${er.message} -->`;
+
+            // Add the targets for the squizEdit DOM augmentation
+            // used in processSquizEdit to modify the output to add edit markup
+            // top level keys match the data-se attributes found in the template eg data-se="title"
+            // the field values are the component data fields eg data-sq-field="colOne.title"
+            squizEditTargets = {
+                "title": {
+                    "field": "colOne.title"
+                },
+                "infoText": {
+                    "field": "colTwo.infoText"
+                },
+                "button": [
+                    {
+                        "field": "colTwo.buttonConfiguration.buttonText",
+                        "target": "infoTextButton"
+                    },
+                    {
+                        "field": "colThree.buttonConfiguration.buttonText",
+                        "target": "infoBoxButton"
+                    }
+                ],
+                "infoBoxTitle": {
+                    "field": "colThree.title"
+                },
+                "infoBoxContent": {
+                    "field": "colThree.content"
+                },
+                "caption": {
+                    "field": "colThree.imageConfiguration.caption"
+                },
+                "credit": {
+                    "field": "colThree.imageConfiguration.credit"
+                }
+            };
         }
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (border !== undefined && typeof border !== "boolean") {
-                throw new Error(
-                    `The "border" field must be a boolean. The ${JSON.stringify(border)} was received.`
-                );
+        // NEW: remove overly stringent validation where it makes sense
+        // if it is to remain, wrap it in a !squizEdit check
+        if (!squizEdit) {
+            // Validate required functions and environment vars
+            try {
+                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
+                    throw new Error(
+                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
+                    );
+                }
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Multicolumn Info Section component: ', er);
+                return `<!-- Error occurred in the Multicolumn Info Section component: ${er.message} -->`;
             }
-            if (callout !== undefined && typeof callout !== "boolean") {
-                throw new Error(
-                    `The "callout" field must be a boolean. The ${JSON.stringify(callout)} was received.`
-                );
+
+            // Validate required fields and ensure correct data types
+            try {
+                if (border !== undefined && typeof border !== "boolean") {
+                    throw new Error(
+                        `The "border" field must be a boolean. The ${JSON.stringify(border)} was received.`
+                    );
+                }
+                if (callout !== undefined && typeof callout !== "boolean") {
+                    throw new Error(
+                        `The "callout" field must be a boolean. The ${JSON.stringify(callout)} was received.`
+                    );
+                }
+                if (colOne && typeof colOne !== 'object') {
+                    throw new Error(
+                        `The "colOne" must be an object. The ${JSON.stringify(colOne)} was received.`
+                    );
+                }
+                if (colTwo && typeof colTwo !== 'object') {
+                    throw new Error(
+                        `The "colTwo" must be an object. The ${JSON.stringify(colTwo)} was received.`
+                    );
+                }
+                if (callout === true && colThree && typeof colThree !== 'object') {
+                    throw new Error(
+                        `The "colThree" must be an object. The ${JSON.stringify(colThree)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Multicolumn Info Section component: ', er);
+                return `<!-- Error occurred in the Multicolumn Info Section component: ${er.message} -->`;
             }
-            if (colOne && typeof colOne !== 'object') {
-                throw new Error(
-                    `The "colOne" must be an object. The ${JSON.stringify(colOne)} was received.`
-                );
-            }
-            if (colTwo && typeof colTwo !== 'object') {
-                throw new Error(
-                    `The "colTwo" must be an object. The ${JSON.stringify(colTwo)} was received.`
-                );
-            }
-            if (callout === true && colThree && typeof colThree !== 'object') {
-                throw new Error(
-                    `The "colThree" must be an object. The ${JSON.stringify(colThree)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Multicolumn Info Section component: ', er);
-            return `<!-- Error occurred in the Multicolumn Info Section component: ${er.message} -->`;
         }
 
         // Resolve image and link URIs
@@ -84,17 +167,47 @@ export default {
         let internalLinkUrl = null;
 
         if (colThree?.imageConfiguration?.image) {
-            imageData = await basicAssetUri(fnsCtx, colThree.imageConfiguration.image);
+            if (squizEdit) {
+                // In edit mode, provide placeholder data if API call fails
+                try {
+                    imageData = await basicAssetUri(fnsCtx, colThree.imageConfiguration.image);
+                } catch (error) {
+                    // Provide mock data silently on API failure
+                    imageData = { url: null };
+                }
+            } else {
+                imageData = await basicAssetUri(fnsCtx, colThree.imageConfiguration.image);
+            }
         }
 
         if (colTwo?.buttonConfiguration?.infoInternalUrl) {
-            const infoLinkUrl = await basicAssetUri(fnsCtx, colTwo.buttonConfiguration.infoInternalUrl);
-            infoInternalLinkUrl = infoLinkUrl?.url;
+            if (squizEdit) {
+                try {
+                    const infoLinkUrl = await basicAssetUri(fnsCtx, colTwo.buttonConfiguration.infoInternalUrl);
+                    infoInternalLinkUrl = infoLinkUrl?.url;
+                } catch (error) {
+                    // Provide mock data silently on API failure
+                    infoInternalLinkUrl = null;
+                }
+            } else {
+                const infoLinkUrl = await basicAssetUri(fnsCtx, colTwo.buttonConfiguration.infoInternalUrl);
+                infoInternalLinkUrl = infoLinkUrl?.url;
+            }
         }
 
         if (colThree?.buttonConfiguration?.internalUrl) {
-            const linkUrl = await basicAssetUri(fnsCtx, colThree.buttonConfiguration.internalUrl);
-            internalLinkUrl = linkUrl?.url;
+            if (squizEdit) {
+                try {
+                    const linkUrl = await basicAssetUri(fnsCtx, colThree.buttonConfiguration.internalUrl);
+                    internalLinkUrl = linkUrl?.url;
+                } catch (error) {
+                    // Provide mock data silently on API failure
+                    internalLinkUrl = null;
+                }
+            } else {
+                const linkUrl = await basicAssetUri(fnsCtx, colThree.buttonConfiguration.internalUrl);
+                internalLinkUrl = linkUrl?.url;
+            }
         }
 
         // Generate button if needed
@@ -125,8 +238,14 @@ export default {
             infoText: xss(colTwo.infoText),
             buttonData,
             infoBoxData,
+            buttonJson: JSON.stringify(buttonData),
+            editing: squizEdit
         };
 
-        return multicolumnInfoSectionTemplate(componentData);
+        // Return original front end code when squizEdit is false, without modification
+        if (!squizEdit) return multicolumnInfoSectionTemplate(componentData);
+
+        // NEW: process the output to be editable in Squiz Editor
+        return processEditor(multicolumnInfoSectionTemplate(componentData), squizEditTargets);
     }
 };

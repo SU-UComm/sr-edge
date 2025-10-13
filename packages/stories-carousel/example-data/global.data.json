@@ -1,0 +1,11 @@
+{
+    "headingConfiguration": {
+        "title": "Read next",
+        "ctaText": "View all",
+        "ctaUrl": "matrix-asset://stanfordNews/141464",
+        "ctaNewWindow": false
+    },
+    "contentConfiguration": {
+        "searchQuery": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!nullquery&global=true&meta_taxonomyAudienceText="
+    }
+}

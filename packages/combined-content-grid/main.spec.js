@@ -99,20 +99,20 @@ describe('[Combined Content Grid]', () => {
         headingConfiguration: {
             title: "Stories",
             ctaText: "View all",
-            ctaUrl: "matrix-asset://api-identifier/128705",
+            ctaUrl: "matrix-asset://stanfordNews/128705",
             ctaNewWindow: false
         },
         contentConfiguration: {
             source: "Select",
             cards: [
                 {
-                    cardAsset: "matrix-asset://api-identifier/168663"
+                    cardAsset: "matrix-asset://stanfordNews/168663"
                 },
                 {
-                    cardAsset: "matrix-asset://api-identifier/168591"
+                    cardAsset: "matrix-asset://stanfordNews/168591"
                 },
                 {
-                    cardAsset: "matrix-asset://api-identifier/168624"
+                    cardAsset: "matrix-asset://stanfordNews/168624"
                 }
             ],
             featuredDescription: ""
@@ -132,7 +132,7 @@ describe('[Combined Content Grid]', () => {
             heading: "Announcements",
             endPoint: "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&&sort=date&meta_taxonomyAudienceText=External&meta_taxonomyContentTypeText=Announcement&num_ranks=6",
             numberOfItems: 3,
-            linkUrl: "matrix-asset://api-identifier/128705"
+            linkUrl: "matrix-asset://stanfordNews/128705"
         }
     };
 
@@ -311,13 +311,13 @@ describe('[Combined Content Grid]', () => {
                     source: 'Select',
                     cards: [
                         {
-                            "cardAsset": "matrix-asset://api-identifier/63418"
+                            "cardAsset": "matrix-asset://stanfordNews/63418"
                         },
                         {
-                            "cardAsset": "matrix-asset://api-identifier/63436"
+                            "cardAsset": "matrix-asset://stanfordNews/63436"
                         },
                         {
-                            "cardAsset": "matrix-asset://api-identifier/63412"
+                            "cardAsset": "matrix-asset://stanfordNews/63412"
                         }
                     ],
                     featuredDescription: [1,2,3]

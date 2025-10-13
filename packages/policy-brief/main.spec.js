@@ -21,7 +21,7 @@ describe('[Policy Brief Component]', () => {
 
     const defaultMockData = {
         contentConfiguration: {
-            image: "matrix-asset://api-identifier/12345",
+            image: "matrix-asset://stanfordNews/12345",
             type: "Policy Brief",
             title: "Test Policy Brief",
             summary: "Test summary content",

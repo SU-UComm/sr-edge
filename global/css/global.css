@@ -3,7 +3,6 @@
 /** Source Sans 3, Source Serif 4, Roboto Slab, Roboto Mono (regular only) */
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto+Slab:wght@300;400;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap");
 
-
 /**
  * Swiper 8.4.7
  * Most modern mobile touch slider and framework with hardware accelerated transitions
@@ -740,7 +739,7 @@ audio::-webkit-media-controls-panel {
   @apply su-w-full;
 }
 
-.su-page:not(.su-page-has-sidebar, .su-page-has-sidebar--left)
+.su-page:not(.su-page-has-sidebar, .su-page-has-sidebar--left, .su-page-updates)
   .su-page-content
   > *:not(
     [data-component],
@@ -749,11 +748,11 @@ audio::-webkit-media-controls-panel {
     .su-above-footer,
     .su-upper-content
   ),
-.su-page:not(.su-page-has-sidebar, .su-page-has-sidebar--left)
+.su-page:not(.su-page-has-sidebar, .su-page-has-sidebar--left, .su-page-updates)
   .su-page-content
   > .container
   > *:not([data-component]),
-.su-page:not(.su-page-has-sidebar, .su-page-has-sidebar--left)
+.su-page:not(.su-page-has-sidebar, .su-page-has-sidebar--left, .su-page-updates)
   .su-page-content
   > span {
   @apply su-max-w-[73.2rem] md:su-w-[84.75%] su-mx-auto su-px-20 md:su-px-50;
@@ -876,7 +875,8 @@ div[data-component="footer-component"] {
 .su-page:not(
     .su-page-story-basic,
     .su-page-story-featured,
-    .su-page-has-sidebar--left
+    .su-page-has-sidebar--left,
+    .su-page-updates
   )
   [data-component="single-image-video"]
   > div,
@@ -887,7 +887,7 @@ div[data-component="footer-component"] {
   )
   [data-component="text-callout"]
   > div {
-  @apply su-w-full su-px-20 md:su-px-50 xl:su-px-0 md:su-max-w-900 xl:su-max-w-800;
+  @apply su-w-full su-px-20 md:su-px-50 xl:su-px-0 md:su-max-w-900 xl:su-max-w-[85.867rem];
 }
 
 /* This overrides the max-width in the container around the title/summary of the Single Image Video
@@ -896,7 +896,8 @@ div[data-component="footer-component"] {
 .su-page:not(
     .su-page-story-basic,
     .su-page-story-featured,
-    .su-page-has-sidebar--left
+    .su-page-has-sidebar--left,
+    .su-page-updates
   )
   [data-component="single-image-video"]
   > div
@@ -918,7 +919,7 @@ div[data-component="footer-component"] {
     .su-above-footer,
     .su-upper-content
   ) {
-  @apply su-w-full su-max-w-900;
+    @apply su-w-full su-mx-auto su-px-20 md:su-px-50 xl:su-px-0 su-max-w-[85.867rem];
 }
 
 /*
@@ -986,22 +987,32 @@ div[data-component="footer-component"] {
   @apply su-mb-0;
 }
 
-/* Campaign CTA on basic story pages */
-.su-page-has-sidebar [data-component="campaign-cta"] {
-  @apply su--mx-20 md:su-mx-[calc(-7.65%+50px)] lg:su-mx-0 md:su-w-[calc(121.5%+100px)] md:su-ml-[calc(calc(-10.75%-50px))] lg:su-w-full;
-}
+/* Campaign CTA on basic story pages
+.su-page-has-sidebar [data-component="campaign-cta"]{margin-left:-2rem;margin-right:-2rem}
+
+@media (width >= 768px){
+.su-page-has-sidebar [data-component="campaign-cta"]{margin-right:calc(-7.65% + 50px);margin-left:calc(calc(-10.75% - 50px));width:calc(121.5% + 100px)}}
+
+@media (width >= 992px){
+.su-page-has-sidebar [data-component="campaign-cta"]{margin-left:0;margin-right:0;width:100%}}
 
 .su-page-has-sidebar
   [data-component="campaign-cta"]
-  .su-component-campaigncta-wrap {
-  @apply su-w-full su-px-20 md:su-px-50 lg:su-px-60 lg:su-flex-col;
-}
+  .su-component-campaigncta-wrap{width:100%;padding-left:2rem;padding-right:2rem}
+
+@media (width >= 768px){
+.su-page-has-sidebar
+  [data-component="campaign-cta"]
+  .su-component-campaigncta-wrap{padding-left:5rem;padding-right:5rem}}
+
+@media (width >= 992px){
+.su-page-has-sidebar
+  [data-component="campaign-cta"]
+  .su-component-campaigncta-wrap{flex-direction:column;padding-left:6rem;padding-right:6rem}
 
 .su-page-has-sidebar
   [data-component="campaign-cta"]
-  .su-component-campaigncta-content {
-  @apply lg:su-border-none lg:su-mr-0;
-}
+  .su-component-campaigncta-content{margin-right:0;border-style:none}} */
 
 /* Medium contextual spacing */
 * + [data-component="pullquote"],
@@ -1108,6 +1119,9 @@ div[data-component="footer-component"] {
 }
 
 [data-component="featured-content"]
+  + [data-component="multicolumn-listing"]
+  .component-multicolumn-listing.has-title,
+[data-component="featured-content-vv"]
   + [data-component="multicolumn-listing"]
   .component-multicolumn-listing.has-title,
 [data-component="combined-content-grid"]
@@ -1484,19 +1498,64 @@ Subscribe to Stanford Report Marketo form styles
 /**
  * Campaign page global styles
  */
-.su-page-campaign,
-.su-page-campaign body {
-  @apply su-bg-campaign-fog;
-}
+ .su-page-campaign,
+ .su-page-campaign body {
+   @apply su-bg-campaign-fog;
+ }
+ 
+ .su-page-campaign.su-dark,
+ .su-page-campaign.su-dark body {
+   @apply su-bg-black-true;
+ }
+ body.su-page-campaign .center {
+   @apply su-text-center;
+ }
+ 
+ /*
+   There is a boolean in the Stanford Campaigns schema for always presenting the page dark mode.
+   it applies the .su-always-dark class to the html tag.
+ */
+ .su-always-dark body.su-page-campaign {
+   @apply su-bg-black-true;
+ }
+ 
+ .su-always-dark .su-page-campaign main {
+   @apply su-text-white;
+ }
 
-.su-page-campaign.su-dark,
-.su-page-campaign.su-dark body {
-  @apply su-bg-black-true;
-}
+ /* Links in default wysiwyg and inner-card-content */
+ [data-component="interactive-photo-card"] [data-card-inner-content] a,
+ .su-always-dark .su-page-campaign .su-page-content > p a {
+   @apply su-text-white hocus:su-text-dark-mode-red;
+ }
+ 
+ .su-always-dark .su-page-campaign main figcaption {
+   @apply su-text-white;
+ }
+ 
+ /*
+   There is a boolean in the Stanford Campaigns schema for always presenting the page dark mode.
+   it applies the .su-always-dark class to the html tag.
+ */
+ .su-always-dark body.su-page-campaign {
+   @apply su-bg-black-true;
+ }
+ 
+ .su-always-dark .su-page-campaign main {
+   @apply su-text-white;
+ }
+ 
+ .su-always-dark .su-page-campaign main a {
+   @apply su-text-white hocus:su-text-dark-mode-red;
+ }
+ 
+ .su-always-dark .su-page-campaign main figcaption {
+   @apply su-text-white;
+ }
 
 /* Federal Issues page syle overrides */
 .fed-issues
-  .su-page:not(.su-page-has-sidebar, .su-page-has-sidebar--left)
+  .su-page:not(.su-page-has-sidebar, .su-page-has-sidebar--left, .su-page-updates)
   .su-page-content
   > *:not(
     [data-component],
@@ -1546,8 +1605,12 @@ Subscribe to Stanford Report Marketo form styles
   @apply su-rs-pb-7;
 }
 
-/* Link styles for basic hero on updates pages. */
-div[data-component="basic-hero"] a {
+/* Link styles for basic hero on updates pages,
+   and Interactive Photo Card. Both have red backgrounds and
+   shoudn't use the site's default link styles.
+*/
+[data-component="basic-hero"] a,
+[data-component="interactive-photo-card"] a {
   @apply su-text-white hocus:su-no-underline hocus:su-opacity-80 dark:hocus:su-text-white;
 }
 
@@ -1556,4 +1619,14 @@ The .su-wysiwyg-content class adds some odd stuff that I'm not sure we want here
 Will need to further evaluate, but this will do for now. */
 div[data-component="multicolumn-info-section"] a {
   @apply hocus:su-no-underline;
+}
+
+
+/* Pull quote  */
+.quote-mark::before{
+  content: '“' !important;
+}
+
+.quote-mark::after {
+  content: '”';
 }

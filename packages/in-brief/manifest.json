@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "in-brief",
     "type": "edge",
-    "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "Summary of main points in a bulleted list.",
     "displayName": "In Brief",
     "mainFunction": "main",
@@ -31,7 +31,10 @@
                         "items": {
                             "type": "string",
                             "title": "Summary Point",
-                            "format": "multi-line"
+                            "format": "multi-line",
+                            "ui:metadata": {
+                                "inlineEditable": true
+                            }
                         }
                     }
                 }

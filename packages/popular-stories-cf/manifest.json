@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "popular-stories-cf",
     "type": "edge",
-    "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "Displays a list of popular stories.",
     "displayName": "Popular Stories",
     "mainFunction": "main",
@@ -40,7 +40,12 @@
                         "description": "The maximum number of stories to display in the list.",
                         "type": "number",
                         "default": 5,
-                        "enum": [5, 10, 15, 20]
+                        "enum": [
+                            5,
+                            10,
+                            15,
+                            20
+                        ]
                     },
                     "assetExclusions": {
                         "title": "Asset ID Exclusions",
@@ -65,21 +70,32 @@
                         "description": "The number of popular stories to retrieve from Cloudflare.",
                         "type": "number",
                         "default": 30,
-                        "enum": [30, 60]
+                        "enum": [
+                            30,
+                            60
+                        ]
                     },
                     "APIdateRange": {
                         "title": "API Date Range",
                         "description": "Input for Cloudflare to source the most popular stories over the selected duration",
                         "type": "string",
                         "default": "1 week",
-                        "enum": ["1 week", "2 weeks", "1 month"]
+                        "enum": [
+                            "1 week",
+                            "2 weeks",
+                            "1 month"
+                        ]
                     },
                     "publishedDateMax": {
                         "title": "Published Date Maximum Range",
                         "description": "Filters the results from Cloudflare to only show stories within the selected date range.",
                         "type": "string",
                         "default": "Past 6 months",
-                        "enum": ["Past 6 months", "Past 1 year", "Past 2 years"]
+                        "enum": [
+                            "Past 6 months",
+                            "Past 1 year",
+                            "Past 2 years"
+                        ]
                     }
                 },
                 "required": []

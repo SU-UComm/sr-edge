@@ -2,20 +2,20 @@
     "headingConfiguration": {
         "title": "",
         "ctaText": "View all",
-        "ctaUrl": "matrix-asset://api-identifier/141464",
+        "ctaUrl": "matrix-asset://stanfordNews/141464",
         "ctaNewWindow": false
     },
     "contentConfiguration": {
         "source": "Select",
         "cards": [
             {
-                "cardAsset": "matrix-asset://api-identifier/162603"
+                "cardAsset": "matrix-asset://stanfordNews/162603"
             },
             {
-                "cardAsset": "matrix-asset://api-identifier/162707"
+                "cardAsset": "matrix-asset://stanfordNews/162707"
             },
             {
-                "cardAsset": "matrix-asset://api-identifier/162759"
+                "cardAsset": "matrix-asset://stanfordNews/162759"
             }
         ],
         "featuredDescription": ""

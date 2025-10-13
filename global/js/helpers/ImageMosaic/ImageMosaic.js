@@ -197,7 +197,7 @@ export function carouselImages(data) {
                 </div>
                 ${caption ? `
                 <div class="c-carousel-caption">
-                    <p>${caption}</p>
+                    <p data-se="image-model-caption">${caption}</p>
                 </div>
                 ` : ''}
             </article>

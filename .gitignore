@@ -7,6 +7,9 @@ export
 coverage
 cdk.out
 
+# uat instructions working folder
+uat-instructions/
+
 # temp files
 temp-*
 *.temp
@@ -24,3 +27,6 @@ temp-*
 .idea
 .vscode``
 .aider*
+
+# local file for uat instructions 
+uat-instructions/

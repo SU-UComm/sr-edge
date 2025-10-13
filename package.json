@@ -17,7 +17,7 @@
         "lint:css": "stylelint \"./packages/**/*.css\" \"./packages/**/*.scss\" --allow-empty-input",
         "lint:cspell": "npx cspell 'packages/**/*.{css,scss,ts,tsx,js,jsx,md,yml,json}' --gitignore --quiet",
         "test": "vitest --coverage",
-        "build": "npm-run-all build:*",
+        "build": "node scripts/build.js",
         "build:component": "vite build --config vite.config.js",
         "build:global": "vite build --config vite-global.config.js",
         "watch": "chokidar \"./packages/**/*.{js,scss,json,html,hbs}\" --silent -c \"CHANGED_FILE={path} vite build --config vite.config.js && CHANGED_FILE={path} vite build --config vite-global.config.js\"",

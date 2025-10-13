@@ -1,0 +1,10 @@
+{
+    "displayConfiguration": {
+        "image": "matrix-asset://stanfordNews/170202",
+        "imageOverlay": "medium",
+        "title": "Research Matters",
+        "description": "Groundbreaking innovations that begin in Stanford labs flow freely into private industry to improve human well-being, fuel the economy, and strengthen American competitiveness.",
+        "linkUrl": "matrix-asset://stanfordNews/141464",
+        "linkText": "Learn more"
+    }
+}

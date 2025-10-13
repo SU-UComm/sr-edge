@@ -210,7 +210,8 @@ export const helpers = {
         thumbnailIconClasses.set("large", 'su-left-13 su-bottom-13 [&>svg]:su-text-[4rem]');
         thumbnailIconClasses.set("featured", 'su-left-13 su-bottom-13 md:su-left-27 md:su-bottom-27 [&>svg]:su-text-[4rem] [&>svg]:md:su-text-[6rem]');
         thumbnailIconClasses.set("vertical-video", 'su-z-30 su-left-32 su-bottom-34 sm:su-left-48 sm:su-bottom-61 lg:su-left-32 lg:su-bottom-34 2xl:su-left-48 2xl:su-bottom-61 [&>svg]:su-text-[6rem]');
-        
+        thumbnailIconClasses.set("vertical-video-featured", 'su-left-1/2 su-top-1/2 -su-translate-x-1/2 -su-translate-y-1/2 [&>svg]:su-text-[6rem]');
+
         return thumbnailIconClasses.get(size)
     },
     hasFirstItem: function(items) {
@@ -387,11 +388,32 @@ export const helpers = {
                    .replace(/&gt;/g, '>')
                    .replace(/&amp;/g, '&')
                    .replace(/&quot;/g, '"')
-                   .replace(/&#039;/g, "'");
+                   .replace(/&#039;/g, "'")
+                   .replace(/&rsquo;/g, "’")
+                   .replace(/&ldquo;/g, '“')
+                   .replace(/&rdquo;/g, '”');
     },
     getStringIfGreater: function (options) {
         const { value, expectedValue, trueResult, falseResult } = options.hash;
         return value > expectedValue ? trueResult : falseResult;
+    },
+    gradientOverlayClasses: function(imageOverlay) {
+        const gradientOverlayClasses = new Map()
+
+        gradientOverlayClasses.set('light', 'su-from-black-true/50');
+        gradientOverlayClasses.set('medium', 'su-from-black-true/75');
+        gradientOverlayClasses.set('dark', 'su-from-black-true');
+
+        return gradientOverlayClasses.get(imageOverlay);
+    },
+    solidOverlayClasses: function(imageOverlay) {
+        const solidOverlayClasses = new Map()
+
+        solidOverlayClasses.set('light', 'su-bg-black-true/25');
+        solidOverlayClasses.set('medium', 'su-bg-black-true/25');
+        solidOverlayClasses.set('dark', 'su-bg-black-true/50');
+
+        return solidOverlayClasses.get(imageOverlay);
     }
 }
   

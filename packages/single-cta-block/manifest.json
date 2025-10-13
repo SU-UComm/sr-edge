@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "single-cta-block",
     "type": "edge",
-    "version": "4.0.6",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "A block of text content with a CTA and optional image.",
     "displayName": "Single CTA Block",
     "mainFunction": "main",
@@ -25,24 +25,39 @@
                     "size": {
                         "title": "Component size",
                         "description": "If you are creating a campaign page, choose 'campaign'otherwise leave as 'normal'.",
-                        "enum": ["normal", "campaign"],
-                        "default": "normal"
+                        "enum": [
+                            "normal",
+                            "campaign"
+                        ],
+                        "default": "normal",
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     },
                     "eyebrow": {
                         "title": "Eyebrow",
                         "description": "This is the superheading above the title.",
                         "type": "string",
-                        "default": "Eyebrow"
+                        "default": "Eyebrow",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "title": {
                         "title": "Heading",
                         "type": "string",
-                        "default": "Title Lorem ipsum dolor"
+                        "default": "Title Lorem ipsum dolor",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "description": {
                         "title": "Description",
                         "description": "Body content/description",
-                        "type": "FormattedText"
+                        "type": "FormattedText",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "image": {
                         "title": "Optional image",
@@ -53,7 +68,10 @@
                     "isCard": {
                         "title": "Render content inside a card. If true, the content will be wrapped in a card with padding and background color.",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     },
                     "marginTop": {
                         "title": "Spacing above (top margin)",
@@ -103,14 +121,21 @@
                         "properties": {
                             "ctaText": {
                                 "title": "CTA text",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaType": {
                                 "title": "CTA type",
                                 "description": "Select the type of CTA - link, download, or email. The appropriate icon will be added after the CTA text depending on your selection. No icon will be displayed for internal links.",
                                 "type": "string",
                                 "default": "link",
-                                "enum": ["download", "email", "link"]
+                                "enum": [
+                                    "download",
+                                    "email",
+                                    "link"
+                                ]
                             }
                         },
                         "allOf": [
@@ -130,7 +155,9 @@
                                             "type": "string"
                                         }
                                     },
-                                    "required": ["email"]
+                                    "required": [
+                                        "email"
+                                    ]
                                 },
                                 "else": {
                                     "properties": {
@@ -171,55 +198,55 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/1": {
+        "matrix-asset://stanfordNews/1": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/2": {
+        "matrix-asset://stanfordNews/2": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/5": {
+        "matrix-asset://stanfordNews/5": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/6": {
+        "matrix-asset://stanfordNews/6": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/9": {
+        "matrix-asset://stanfordNews/9": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/10": {
+        "matrix-asset://stanfordNews/10": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/3": {
+        "matrix-asset://stanfordNews/3": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/7": {
+        "matrix-asset://stanfordNews/7": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/8": {
+        "matrix-asset://stanfordNews/8": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/11": {
+        "matrix-asset://stanfordNews/11": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/14": {
+        "matrix-asset://stanfordNews/14": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/28192": {
+        "matrix-asset://stanfordNews/28192": {
             "type": "file",
             "path": "mocked-uris/28192.json"
         },
-        "matrix-asset://api-identifier/128612": {
+        "matrix-asset://stanfordNews/128612": {
             "type": "file",
             "path": "mocked-uris/128612.json"
         }

@@ -5,7 +5,7 @@
             <div class="su-flex su-flex-wrap lg:su-flex-nowrap su-gap-[68px] md:su-gap-72 lg:su-gap-[160px]">
                 <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap lg:su-flex-wrap lg:su-order-2 md:su-items-start md:su-content-start su-gap-80 md:su-gap-72 lg:su-gap-[76px] md:su-basis-[39.5%] lg:su-basis-[30%] su-grow before:su-w-full before:md:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px before:lg:su-h-full before:su-left-0 before:su--bottom-35 before:lg:su-bottom-auto before:lg:su-top-0 before:md:su-left-0 lg:before:su-w-px before:lg:su--left-80">
                     <div class="su-relative su-w-full md:su-h-full lg:su-h-auto">
-                    {{#> sidebar-list title=eventData.title icon=eventData.icon ctaText=eventData.ctaText ctaUrl=eventData.ctaUrl ctaIcon=eventData.ctaIcon headingLvl=eventData.headingLvl}}
+                    {{#> sidebar-list title=eventData.title icon=eventData.icon ctaText=eventData.ctaText ctaUrl=eventData.ctaUrl ctaIcon=eventData.ctaIcon headingLvl=eventData.headingLvl pbTitle="events"}}
                         {{#> horizontal-card-grid orientation="vertical"}}
                             {{~#each eventData.data~}}
                                 <div class="su-relative su-grow">
@@ -16,7 +16,7 @@
                     {{/ sidebar-list}}
                     </div>
                     <div class="su-relative su-w-full md:su-h-full lg:su-h-auto before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black before:su-h-px md:before:su-h-full md:before:su-w-px before:su-left-0 md:before:su--left-38 before:su--top-40 md:before:su-top-0 lg:before:su--top-38 lg:before:su-left-0 lg:before:su-w-full lg:before:su-h-px">
-                    {{#> sidebar-list title=announcementData.title icon=announcementData.icon ctaText=announcementData.ctaText ctaUrl=announcementData.ctaUrl ctaIcon=announcementData.ctaIcon headingLvl=announcementData.headingLvl}}
+                    {{#> sidebar-list title=announcementData.title icon=announcementData.icon ctaText=announcementData.ctaText ctaUrl=announcementData.ctaUrl ctaIcon=announcementData.ctaIcon headingLvl=announcementData.headingLvl pbTitle="announcements"}}
                         {{#> horizontal-card-grid orientation="vertical"}}
                             {{~#each announcementData.data~}} 
                             <div class="su-relative su-grow">

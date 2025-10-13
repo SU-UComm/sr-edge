@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "acknowledgement",
     "type": "edge",
-    "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "Acknowledgement and title area.",
     "displayName": "Acknowledgement",
     "mainFunction": "main",
@@ -29,10 +29,28 @@
                     },
                     "content": {
                         "title": "Acknowledgement",
-                        "type": "FormattedText"
+                        "type": "FormattedText",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        },
+                        "default": [
+                            {
+                                "type": "tag",
+                                "tag": "p",
+                                "children": [
+                                    {
+                                        "type": "text",
+                                        "value": "Add content"
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 },
-                "required": ["content", "title"]
+                "required": [
+                    "content",
+                    "title"
+                ]
             },
             "output": {
                 "responseType": "html"

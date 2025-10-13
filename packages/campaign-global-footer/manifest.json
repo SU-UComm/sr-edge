@@ -1,0 +1,55 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "campaign-global-footer",
+    "version": "1.0.0",
+    "type": "edge",
+    "namespace": "stanford-components",
+    "description": "Just the global footer for Campaign pages.",
+    "displayName": "Campaign Global Footer",
+    "mainFunction": "main",
+    "environment": [],
+    "icon": {
+        "id": "foundation",
+        "color": {
+            "type": "enum",
+            "value": "gray"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "properties": {
+                    "dataUrl": {
+                        "type": "string",
+                        "description": "URL to fetch site data from"
+                    }
+                },
+                "required": ["dataUrl"]
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        }
+    }
+}

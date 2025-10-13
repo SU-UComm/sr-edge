@@ -1,43 +1,36 @@
 import storyLeadTemplate from './story-lead.hbs';
 import { getFirstWord } from '../../global/js/utils';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 
 export default {
     async main(args, info) {
-        // Extracting functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        
+        const componentContext = info?.ctx || null;
+        const squizEdit = componentContext?.editor || false;
 
-        // Extracting configuration data from arguments
-        const { content, variant } = args || {};
+        let { content, variant } = args || {};
 
-        // Validate required functions
-        try {
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Story lead component: ', er);
-            return `<!-- Error occurred in the Story lead component: ${er.message} -->`;
+        if(squizEdit) {
+            content = content || "Add content";
         }
 
-
-          // Validate required fields and ensure correct data types
-        try {
-            if (content && typeof content !== 'string') {
-                throw new Error(
-                    `The "content" field must be a string. The ${JSON.stringify(content)} was received.`
-                );
+        if(!squizEdit) {
+            try {
+                if (content && typeof content !== 'string') {
+                    throw new Error(
+                        `The "content" field must be a string. The ${JSON.stringify(content)} was received.`
+                    );
+                }
+                if (variant && !['Basic Story', 'Featured Story'].includes(variant)) {
+                    throw new Error(
+                        `The "variant" field must be one of ["Basic Story", "Featured Story"]. The ${JSON.stringify(variant)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Story lead component: ', er);
+                return `<!-- Error occurred in the Story lead component: ${er.message} -->`;
             }
-            if (variant && !['Basic Story', 'Featured Story'].includes(variant)) {
-                throw new Error(
-                    `The "variant" field must be one of ["Basic Story", "Featured Story"]. The ${JSON.stringify(variant)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Story lead component: ', er);
-            return `<!-- Error occurred in the Story lead component: ${er.message} -->`;
         }
 
         const isFeaturedStory = variant === "Featured Story";
@@ -53,6 +46,17 @@ export default {
             width: "narrow"
         };
 
-        return storyLeadTemplate(componentData);
+        // Configure squizEditTargets for inline editing
+        const squizEditTargets = {
+            "content": { "field": "content" }
+        };
+
+        // Early return for non-edit mode
+        if (!squizEdit) {
+            return storyLeadTemplate(componentData);
+        }
+
+        // Process and return template with inline editing support
+        return processEditor(storyLeadTemplate(componentData), squizEditTargets);
     }
 };

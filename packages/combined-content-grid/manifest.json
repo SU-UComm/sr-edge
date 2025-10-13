@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "combined-content-grid",
     "type": "edge",
-    "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.1",
+    "namespace": "stanford-components",
     "description": "A featured content grid combined with announcements and events",
     "displayName": "Combined content grid",
     "mainFunction": "main",
@@ -44,7 +44,10 @@
                         "properties": {
                             "title": {
                                 "title": "Heading",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix Asset Link",
@@ -60,12 +63,18 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "View all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",
                                 "type": "boolean",
-                                "default": false
+                                "default": false,
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             }
                         }
                     },
@@ -73,13 +82,21 @@
                         "title": "Grid Content",
                         "description": "The cards to display in the grid area of the component. The featured card appears larger than the supplementary cards. When manually selecting cards, at least three must be selected for the grid to display.",
                         "type": "object",
-                        "required": ["source"],
+                        "required": [
+                            "source"
+                        ],
                         "properties": {
                             "source": {
                                 "title": "Content source",
                                 "default": "Search",
-                                "enum": ["Search", "Select"],
-                                "type": "string"
+                                "enum": [
+                                    "Search",
+                                    "Select"
+                                ],
+                                "type": "string",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             }
                         },
                         "allOf": [
@@ -93,7 +110,9 @@
                                     }
                                 },
                                 "then": {
-                                    "required": ["searchQuery"],
+                                    "required": [
+                                        "searchQuery"
+                                    ],
                                     "properties": {
                                         "searchQuery": {
                                             "type": "string",
@@ -113,7 +132,9 @@
                                     }
                                 },
                                 "then": {
-                                    "required": ["cards"],
+                                    "required": [
+                                        "cards"
+                                    ],
                                     "properties": {
                                         "cards": {
                                             "title": "Cards",
@@ -130,14 +151,30 @@
                                                         "title": "Card Asset"
                                                     }
                                                 },
-                                                "required": ["cardAsset"]
-                                            }
+                                                "required": [
+                                                    "cardAsset"
+                                                ]
+                                            },
+                                            "default": [
+                                                {
+                                                    "cardAsset": "matrix-asset://stanfordNews/168663"
+                                                },
+                                                {
+                                                    "cardAsset": "matrix-asset://stanfordNews/168591"
+                                                },
+                                                {
+                                                    "cardAsset": "matrix-asset://stanfordNews/168624"
+                                                }
+                                            ]
                                         },
                                         "featuredDescription": {
                                             "type": "string",
                                             "title": "Featured Content description",
                                             "format": "multi-line",
-                                            "description": "If filled out, it will replace the description of the featured card (first)."
+                                            "description": "If filled out, it will replace the description of the featured card (first card selected).",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
                                         }
                                     }
                                 }
@@ -152,37 +189,54 @@
                             "displayThumbnails": {
                                 "title": "Display Supplementary Thumbnails",
                                 "default": true,
-                                "type": "boolean"
+                                "type": "boolean",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             },
                             "displayDescriptions": {
                                 "title": "Display Supplementary Descriptions",
                                 "default": false,
-                                "type": "boolean"
+                                "type": "boolean",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             }
                         }
                     },
                     "eventsConfiguration": {
                         "title": "Events Configuration",
                         "type": "object",
-                        "required": ["endPoint", "numberOfItems"],
+                        "required": [
+                            "endPoint",
+                            "numberOfItems"
+                        ],
                         "properties": {
                             "heading": {
                                 "title": "Heading",
                                 "default": "Upcoming events",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "endPoint": {
                                 "title": "Events Endpoint",
                                 "description": "The localist JSON endpoint to fetch events from",
                                 "type": "string",
-                                "default": "https://events.stanford.edu/api/2/events?days=365&sponsored=true"
+                                "default": "https://news.stanford.edu/_api/events/query"
                             },
                             "numberOfItems": {
                                 "title": "Number of Events",
                                 "description": "The number of events to display",
                                 "type": "number",
                                 "default": 3,
-                                "enum": [3, 4, 5, 6]
+                                "enum": [
+                                    3,
+                                    4,
+                                    5,
+                                    6
+                                ]
                             },
                             "linkUrl": {
                                 "title": "Events Link",
@@ -194,12 +248,18 @@
                     "announcementsConfiguration": {
                         "title": "Announcements Configuration",
                         "type": "object",
-                        "required": ["endPoint", "numberOfItems"],
+                        "required": [
+                            "endPoint",
+                            "numberOfItems"
+                        ],
                         "properties": {
                             "heading": {
                                 "title": "Heading",
                                 "default": "Announcements",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "endPoint": {
                                 "title": "Announcements Endpoint",
@@ -212,7 +272,12 @@
                                 "description": "The number of announcements to display",
                                 "type": "number",
                                 "default": 3,
-                                "enum": [3, 4, 5, 6]
+                                "enum": [
+                                    3,
+                                    4,
+                                    5,
+                                    6
+                                ]
                             },
                             "linkUrl": {
                                 "title": "Announcements Link",
@@ -229,35 +294,35 @@
         }
     ],
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/3": {
+        "matrix-asset://stanfordNews/3": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/7": {
+        "matrix-asset://stanfordNews/7": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/8": {
+        "matrix-asset://stanfordNews/8": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/11": {
+        "matrix-asset://stanfordNews/11": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/168663": {
+        "matrix-asset://stanfordNews/168663": {
             "type": "file",
             "path": "mocked-uris/168663.json"
         },
-        "matrix-asset://api-identifier/168591": {
+        "matrix-asset://stanfordNews/168591": {
             "type": "file",
             "path": "mocked-uris/168591.json"
         },
-        "matrix-asset://api-identifier/168624": {
+        "matrix-asset://stanfordNews/168624": {
             "type": "file",
             "path": "mocked-uris/168624.json"
         },
-        "matrix-asset://api-identifier/128705": {
+        "matrix-asset://stanfordNews/128705": {
             "type": "file",
             "path": "mocked-uris/128705.json"
         }

@@ -33,7 +33,7 @@ describe('[Related Story Content]', () => {
     const mockFnsCtx = { resolveUri: vi.fn() };
     const defaultMockData = {
         contentConfiguration: {
-            story: "matrix-asset://api-identifier/63412",
+            story: "matrix-asset://stanfordNews/63412",
             descriptionOverride: "This is an override description"
         }
     };
@@ -143,7 +143,7 @@ describe('[Related Story Content]', () => {
             const mockData = {
                 ...defaultMockData,
                 contentConfiguration: {
-                    story: "matrix-asset:///api-identifier/123",
+                    story: "matrix-asset:///stanfordNews/123",
                     descriptionOverride: { text: "Override description" }
                 }
             };
@@ -228,7 +228,7 @@ describe('[Related Story Content]', () => {
             
             const mockData = {
                 contentConfiguration: {
-                    story: "matrix-asset://api-identifier/123",
+                    story: "matrix-asset://stanfordNews/123",
                     descriptionOverride: null // Set to null to test the || "" fallback
                 }
             };

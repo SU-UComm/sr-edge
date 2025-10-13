@@ -119,9 +119,11 @@ export default {
         }
 
         let heroSummary = "";
+        let childSummary = "";
 
         if (parentData && parentData.parentSummary && summary && relation === "child") {
             heroSummary = parentData.parentSummary;
+            childSummary = summary;
         } else {
             heroSummary = summary;
         }
@@ -134,6 +136,7 @@ export default {
             updatesPage,
             backgroundColor,
             relation,
+            childSummary : xss(childSummary),
             parentData: {
                 ...parentData,
                 parentTitle: xss(parentData?.parentTitle),

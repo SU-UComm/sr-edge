@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "policy-brief",
     "type": "edge",
-    "version": "4.0.4",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "This component allows a content manager to create a policy brief that can be externally linked to a policy brief or case study.",
     "displayName": "Policy brief",
     "mainFunction": "main",
@@ -34,7 +34,10 @@
                             },
                             "type": {
                                 "title": "Type",
-                                "enum": ["Policy Brief", "Case Study"],
+                                "enum": [
+                                    "Policy Brief",
+                                    "Case Study"
+                                ],
                                 "default": "Policy Brief",
                                 "type": "string"
                             },
@@ -42,12 +45,18 @@
                                 "title": "Heading",
                                 "description": "The heading text",
                                 "type": "string",
-                                "default": ""
+                                "default": "",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "summary": {
                                 "title": "Summary",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "linkUrl": {
                                 "title": "Link URL",
@@ -56,7 +65,10 @@
                             "linkText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "Read the full brief"
+                                "default": "Read the full brief",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             }
                         }
                     }
@@ -71,7 +83,7 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://api-identifier/63353": {
+        "matrix-asset://stanfordNews/63353": {
             "type": "file",
             "path": "mocked-uris/63353.json"
         }

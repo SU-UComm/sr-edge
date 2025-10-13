@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "fact-callout",
     "type": "edge",
-    "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "Display a fact on featured story pages",
     "displayName": "Fact callout",
     "mainFunction": "main",
@@ -39,7 +39,10 @@
                             "factText": {
                                 "title": "Fact text",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "indicatorPosition": {
                                 "title": "Indicator position",

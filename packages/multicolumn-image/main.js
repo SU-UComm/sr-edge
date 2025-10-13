@@ -1,4 +1,5 @@
 import { basicAssetUri } from "../../global/js/utils";
+import { processEditor } from '../../global/js/utils/processEditor';
 import multicolumnImage from './multicolumn-image.hbs';
 
 /**
@@ -25,64 +26,100 @@ export default {
      * @returns {Promise<string>} Rendered multicolumn image HTML string
      */
     async main(args, info) {
-        // Extracting environment variables from provided info
-        const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
-        const fnsCtx = info?.fns || info?.ctx || {};
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // Extract configuration data from arguments
-        const { images } = args?.contentConfiguration || {};
+        let images = [];
 
-        // Validate required functions
-        try {
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-            if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                throw new Error(
-                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Multicolumn image component: ', er);
-            return `<!-- Error occurred in the Multicolumn image component: ${er.message} -->`;
+        // if contentConfiguration is provided and images is an array, use the images from the contentConfiguration
+        if (args?.contentConfiguration && args.contentConfiguration?.images) {
+            images = args.contentConfiguration.images;
         }
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (images && !Array.isArray(images) || images.length < 2) {
-                throw new Error(
-                    `The "images" field must be an array and at least 2 elements length. The ${JSON.stringify(images)} was received.`
-                );
+        const squizEdit = componentContext?.editor || false;
+        let squizEditTargets = {
+            "caption": {
+                "field": "contentConfiguration.images",
+                "array": true,
+                "property": "imageCaption"
+            },
+            "sectionCaption": {
+                "field": "contentConfiguration.images.0.imageCaption"
             }
-        } catch (er) {
-            console.error('Error occurred in the Multicolumn image component: ', er);
-            return `<!-- Error occurred in the Multicolumn image component: ${er.message} -->`;
-        }
+        };
 
-        const imageData = [];
+        let imageData = [];
         let numberOfCaptions = 0;
         let sectionCaption = ''
         
         for (const { imageAsset, imageCaption } of images) {
-            const asset = await basicAssetUri(fnsCtx, imageAsset);
-        
+            let asset;
+            if (squizEdit && typeof imageAsset === 'undefined') {
+                break;
+            }
+
+            try {
+                asset = await basicAssetUri(componentFunctions, imageAsset);
+            } catch (error) {
+                if (squizEdit) {
+                    asset = {
+                        "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                        "attributes": {
+                            "allow_unrestricted": false,
+                            "size": 1858005,
+                            "height": 960,
+                            "width": 1440,
+                            "title": "placeholder.png",
+                            "name": "placeholder.png",
+                            "caption": "",
+                            "alt": "This is a placeholder"
+                        },
+                    };
+                } else {
+                    console.error('Error occurred in the multicolumn image component: Failed to fetch image data. ', error);
+                    return `<!-- Error occurred in the Multicolumn image component: ${error.message} -->`;
+    
+                }
+            }
             if (imageCaption) {
                 sectionCaption ||= imageCaption; // Set only if empty
                 numberOfCaptions++;
             }
-            
-            imageData.push({ ...asset, caption: imageCaption });
+            if (asset) {
+                imageData.push({ ...asset, caption: imageCaption });
+            }
         }
 
-        // Prepare template data
+        // NEW: add a default if squizEdit is true
+        if (squizEdit) {
+            // Ensure each image has default caption
+            imageData = imageData.map(image => ({
+                ...image,
+                caption: image.caption || 'Add image caption'
+            }));
+            numberOfCaptions = imageData.length;
+        }
+           // Prepare template data
         const componentData = {
             width: "wide",
             images: imageData,
             sectionCaption,
             showIndividualCaptions: numberOfCaptions > 1,
         };
-        return multicolumnImage(componentData);
+
+        
+        if (!squizEdit) {
+            return multicolumnImage(componentData);  
+        } 
+
+        // if in squiz edit and there are less than 2 images, return an empty div
+        if (imageData.length < 2) {
+            return "<div></div>";
+        } 
+        // NEW: process the output to be editable in Squiz Editor
+        return processEditor(multicolumnImage(componentData), squizEditTargets);
     }
 };

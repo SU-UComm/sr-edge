@@ -2,7 +2,7 @@
 import { defineConfig } from 'vite';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { readdirSync, statSync, readFileSync } from 'fs';
+import { readdirSync, statSync, readFileSync, writeFileSync } from 'fs';
 import process from 'process';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import handlebars from 'vite-plugin-handlebars';
@@ -30,6 +30,45 @@ function cssPlugin() {
                     code: `export default ${JSON.stringify(code)}`,
                     map: null
                 };
+            }
+        }
+    };
+}
+
+// Custom plugin to modify manifest.json namespace after static copy
+function namespacePlugin() {
+    return {
+        name: 'namespace-modifier',
+        closeBundle() {
+            // This runs after all files are built and copied
+            const namespace = process.env.BUILD_NAMESPACE || 'stanford-development';
+            
+            // Only process if we need to change the namespace
+            if (namespace !== 'stanford-components') {
+                console.log(`Updating manifest namespaces to: ${namespace}`);
+                
+                // Process each component directory
+                components.forEach(component => {
+                    const manifestPath = resolve(__dirname, 'dist', component, 'manifest.json');
+                    
+                    try {
+                        // Read the current manifest
+                        const manifestContent = JSON.parse(readFileSync(manifestPath, 'utf8'));
+                        
+                        // Update the namespace
+                        manifestContent.namespace = namespace;
+                        
+                        // Write back the updated manifest
+                        writeFileSync(manifestPath, JSON.stringify(manifestContent, null, 4));
+                        
+                        console.log(`✓ Updated namespace for ${component}/manifest.json to: ${namespace}`);
+                    } catch (error) {
+                        // File might not exist for this component, which is fine
+                        if (error.code !== 'ENOENT') {
+                            console.error(`Error updating namespace for ${component}:`, error.message);
+                        }
+                    }
+                });
             }
         }
     };
@@ -215,6 +254,7 @@ export default defineConfig(() => {
         },
         plugins: [
             cssPlugin(),
+            namespacePlugin(),
             handlebars({
                 partialDirectory: resolve(__dirname, 'global'),
             }),

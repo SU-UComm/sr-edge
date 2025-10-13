@@ -23,15 +23,15 @@ describe('[Multicolumn Image]', () => {
         contentConfiguration: {
             images: [
                 {
-                    imageAsset: "matrix-asset://api-identifier/image1",
+                    imageAsset: "matrix-asset://stanfordNews/image1",
                     imageCaption: "Test caption 1"
                 },
                 {
-                    imageAsset: "matrix-asset://api-identifier/image2",
+                    imageAsset: "matrix-asset://stanfordNews/image2",
                     imageCaption: "Test caption 2"
                 },
                 {
-                    imageAsset: "matrix-asset://api-identifier/image3",
+                    imageAsset: "matrix-asset://stanfordNews/image3",
                     imageCaption: ""
                 }
             ]
@@ -41,7 +41,7 @@ describe('[Multicolumn Image]', () => {
     const defaultMockInfo = {
         fns: mockFnsCtx,
         env: {
-            API_IDENTIFIER: 'test-api-identifier'
+            API_IDENTIFIER: 'test-stanfordNews'
         }
     };
 
@@ -150,7 +150,7 @@ describe('[Multicolumn Image]', () => {
                     ...defaultMockData.contentConfiguration,
                     images: [
                         {
-                            imageAsset: "matrix-asset://api-identifier/image1",
+                            imageAsset: "matrix-asset://stanfordNews/image1",
                             imageCaption: "Test caption 1"
                         }
                     ],
@@ -160,7 +160,7 @@ describe('[Multicolumn Image]', () => {
             const result = await main(mockData, defaultMockInfo);
 
             expect(result).toBe(
-                '<!-- Error occurred in the Multicolumn image component: The "images" field must be an array and at least 2 elements length. The [{"imageAsset":"matrix-asset://api-identifier/image1","imageCaption":"Test caption 1"}] was received. -->',
+                '<!-- Error occurred in the Multicolumn image component: The "images" field must be an array and at least 2 elements length. The [{"imageAsset":"matrix-asset://stanfordNews/image1","imageCaption":"Test caption 1"}] was received. -->',
             );
             expect(mockedError).toBeCalledTimes(1);
         });
@@ -183,15 +183,15 @@ describe('[Multicolumn Image]', () => {
                 contentConfiguration: {
                     images: [
                         {
-                            imageAsset: "matrix-asset://api-identifier/image1",
+                            imageAsset: "matrix-asset://stanfordNews/image1",
                             imageCaption: "Test caption 1"
                         },
                         {
-                            imageAsset: "matrix-asset://api-identifier/image2",
+                            imageAsset: "matrix-asset://stanfordNews/image2",
                             imageCaption: ""
                         },
                         {
-                            imageAsset: "matrix-asset://api-identifier/image3",
+                            imageAsset: "matrix-asset://stanfordNews/image3",
                             imageCaption: ""
                         }
                     ]

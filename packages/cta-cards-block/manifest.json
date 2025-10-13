@@ -1,8 +1,8 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "cta-cards-block",
-    "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "type": "edge",
     "description": "Add up to 3 CTA cards in this block.",
     "displayName": "CTA cards block",
@@ -34,16 +34,25 @@
                                 "eyebrow": {
                                     "type": "string",
                                     "title": "Eyebrow",
-                                    "description": "This is the superheading above the title."
+                                    "description": "This is the superheading above the title.",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "title": {
                                     "type": "string",
-                                    "title": "Title"
+                                    "title": "Title",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "description": {
                                     "title": "Description",
                                     "description": "This is the description that appears below the title.",
-                                    "type": "FormattedText"
+                                    "type": "FormattedText",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "linkDetails": {
                                     "title": "Link details",
@@ -83,23 +92,23 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/3": {
+        "matrix-asset://stanfordNews/3": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/7": {
+        "matrix-asset://stanfordNews/7": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/8": {
+        "matrix-asset://stanfordNews/8": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/11": {
+        "matrix-asset://stanfordNews/11": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/28192": {
+        "matrix-asset://stanfordNews/28192": {
             "type": "file",
             "path": "mocked-uris/28192.json"
         }
