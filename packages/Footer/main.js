@@ -48,7 +48,9 @@ export default {
             }
         } catch (er) {
             console.error('Error occurred in the Footer component: ', er);
-            throw er;
+            throw new Error(
+                `Error occurred in the Footer component: ${JSON.stringify(er.message)}`
+            );
             // return `<!-- Error occurred in the Footer component: ${er.message} -->`;
         }
 
@@ -66,8 +68,8 @@ export default {
                 throw new Error("Invalid API response: siteData is missing or not an object.");
             }
         } catch (er) {
-            console.error('Error occurred in the Footer component: Error parsing footer data JSON response: ', er);
-            throw er;
+            // console.error('Error occurred in the Footer component: Error parsing footer data JSON response: ', er);
+            throw new Error(`Error occurred in the Footer component: Error parsing footer data JSON response: ${er}`);
             // return `<!-- Error occurred in the Footer component: Error parsing footer data JSON response: ${er.message} -->`;
         }
         
