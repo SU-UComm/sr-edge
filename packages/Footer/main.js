@@ -64,8 +64,7 @@ export default {
                 throw new Error("Invalid API response: siteData is missing or not an object.");
             }
         } catch (er) {
-            console.error('Error occurred in the Footer component: Error parsing footer data JSON response: ', er);
-            return `<!-- Error occurred in the Footer component: Error parsing footer data JSON response: ${er.message} -->`;
+            throw new Error(`Error occurred in the Footer component: Error parsing footer data JSON response: ${er.message}`);
         }
         
 

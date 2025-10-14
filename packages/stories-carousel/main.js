@@ -129,8 +129,7 @@ export default {
             }
             
         } catch (er) {
-            console.error('Error occurred in the Stories carousel component while fetching user stories:', er);
-            return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
+            throw new Error(`Error occurred in the Stories carousel component while fetching user stories: ${er.message}`);
         }
         
 
@@ -195,8 +194,7 @@ export default {
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the Stories carousel component: ', er);
-            return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
+            throw new Error(`Error occurred in the Stories carousel component: ${er.message}`);
         }
 
         // Prepare component data for template rendering
