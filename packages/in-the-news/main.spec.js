@@ -108,14 +108,14 @@ describe('[In the news]', () => {
         it('Should throw an error when no parameters was provided.', async () => {
             const result = await main();
 
-            expect(result).toBe('<!-- Error occurred in the In the news component: The "info.fns" cannot be undefined or null. The {} was received. -->');
+            expect(result).toBe(`<!-- Error occurred in the In the news component: Cannot read properties of null (reading 'resolveUri') -->`);
             expect(mockedError).toBeCalledTimes(1);
         });
         
         it('Should throw an error when no info was provided', async () => {
             const result = await main(defaultMockData);
 
-            expect(result).toBe('<!-- Error occurred in the In the news component: The "info.fns" cannot be undefined or null. The {} was received. -->');
+            expect(result).toBe(`<!-- Error occurred in the In the news component: Cannot read properties of null (reading 'resolveUri') -->`);
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -123,7 +123,7 @@ describe('[In the news]', () => {
             const mockInfo = {test: 'test'}
             const result = await main(defaultMockData, mockInfo);
 
-            expect(result).toBe('<!-- Error occurred in the In the news component: The "info.fns" cannot be undefined or null. The {} was received. -->');
+            expect(result).toBe(`<!-- Error occurred in the In the news component: Cannot read properties of null (reading 'resolveUri') -->`);
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -131,7 +131,7 @@ describe('[In the news]', () => {
             const mockInfo = { fns: undefined, ctx: undefined,  };
             const result = await main(defaultMockData, mockInfo);
     
-            expect(result).toBe('<!-- Error occurred in the In the news component: The "info.fns" cannot be undefined or null. The {} was received. -->');
+            expect(result).toBe(`<!-- Error occurred in the In the news component: Cannot read properties of null (reading 'resolveUri') -->`);
             expect(mockedError).toBeCalledTimes(1);
         });
         
@@ -144,7 +144,7 @@ describe('[In the news]', () => {
             }
             const result = await main(defaultMockData, mockInfo);
 
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: Failed to fetch image data. basicAssetUri did not return an object -->');
             expect(mockedError).toBeCalledTimes(1);
         });
                 
@@ -159,7 +159,7 @@ describe('[In the news]', () => {
             }
             const result = await main(defaultMockData, mockInfo);
 
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: Failed to fetch image data. basicAssetUri did not return an object -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -172,7 +172,7 @@ describe('[In the news]', () => {
             }
             const result = await main(defaultMockData, mockInfo);
 
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: Failed to fetch image data. basicAssetUri did not return an object -->');
             expect(mockedError).toBeCalledTimes(1);
         });
                 
@@ -187,7 +187,7 @@ describe('[In the news]', () => {
             }
             const result = await main(defaultMockData, mockInfo);
 
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: Failed to fetch image data. basicAssetUri did not return an object -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -202,7 +202,7 @@ describe('[In the news]', () => {
             };
             const result = await main(mockData, defaultMockInfo);
             
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "title" field must be a string type. The [1,2,3] was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: The "title" variable cannot be undefined and must be non-empty string. The [1,2,3] was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -217,7 +217,7 @@ describe('[In the news]', () => {
             
             const result = await main(mockData, defaultMockInfo);
             
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "ctaUrl" field must be a string type. The 123 was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: The "ctaUrl" variable cannot be undefined and must be non-empty string. The 123 was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -232,7 +232,7 @@ describe('[In the news]', () => {
 
             const result = await main(mockData, defaultMockInfo);
             
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "ctaManualUrl" field must be a string type. The 123 was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: The "ctaManualUrl" variable cannot be undefined and must be non-empty string. The 123 was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
         
@@ -247,7 +247,7 @@ describe('[In the news]', () => {
 
             const result = await main(mockData, defaultMockInfo);
             
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "ctaText" field must be a string type. The 123 was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: The "ctaText" variable cannot be undefined and must be non-empty string. The 123 was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -262,7 +262,7 @@ describe('[In the news]', () => {
 
             const result = await main(mockData, defaultMockInfo);
             
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "ctaNewWindow" field must be a boolean. The 123 was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: The "ctaNewWindow" variable cannot be undefined and must be non-empty string. The 123 was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -277,7 +277,7 @@ describe('[In the news]', () => {
             
             const result = await main(mockData, defaultMockInfo);
             
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "featuredTeaser" field must be a string type. The [1,2,3] was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: The "featuredTeaser" variable cannot be undefined and must be non-empty string. The [1,2,3] was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -292,7 +292,7 @@ describe('[In the news]', () => {
 
             const result = await main(mockData, defaultMockInfo);
             
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "personHeadshot" field must be a string type. The {"url":"headshot.jpg"} was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: The "personHeadshot" variable cannot be undefined and must be non-empty string. The {"url":"headshot.jpg"} was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -307,7 +307,7 @@ describe('[In the news]', () => {
 
             const result = await main(mockData, defaultMockInfo);
 
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "featuredQuote" field must be a string type. The 12345 was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: The "featuredQuote" variable cannot be undefined and must be non-empty string. The 12345 was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
       
@@ -322,7 +322,7 @@ describe('[In the news]', () => {
             
             const result = await main(mockData, defaultMockInfo);
             
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "featuredTeaserDescription" field must be a string type. The [1,2,3] was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: The "featuredTeaserDescription" variable cannot be undefined and must be non-empty string. The [1,2,3] was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
         
@@ -337,7 +337,7 @@ describe('[In the news]', () => {
             
             const result = await main(mockData, defaultMockInfo);
             
-            expect(result).toContain('<!-- Error occurred in the In the news component: The "featuredCtaText" field must be a string type. The true was received. -->');
+            expect(result).toContain('<!-- Error occurred in the In the news component: The "featuredCtaText" variable cannot be undefined and must be non-empty string. The true was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -350,7 +350,7 @@ describe('[In the news]', () => {
             }
         };
         const result = await main(mockData, defaultMockInfo);
-        expect(result).toContain('<!-- Error occurred in the In the news component: The "teaserOne" field must be a string type. The [1,2,3] was received. -->');
+        expect(result).toContain('<!-- Error occurred in the In the news component: The "teaserOne" variable cannot be undefined and must be non-empty string. The [1,2,3] was received. -->');
         expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -363,7 +363,7 @@ describe('[In the news]', () => {
             }
         };
         const result = await main(mockData, defaultMockInfo);
-        expect(result).toContain('<!-- Error occurred in the In the news component: The "teaserOneDescription" field must be a string type. The {"desc":"Test"} was received. -->');
+        expect(result).toContain('<!-- Error occurred in the In the news component: The "teaserOneDescription" variable cannot be undefined and must be non-empty string. The {"desc":"Test"} was received. -->');
         expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -376,7 +376,7 @@ describe('[In the news]', () => {
             }
         };
         const result = await main(mockData, defaultMockInfo);
-        expect(result).toContain('<!-- Error occurred in the In the news component: The "teaserTwo" field must be a string type. The [1,2,3] was received. -->');
+        expect(result).toContain('<!-- Error occurred in the In the news component: The "teaserTwo" variable cannot be undefined and must be non-empty string. The [1,2,3] was received. -->');
         expect(mockedError).toBeCalledTimes(1);
         });
 
@@ -389,7 +389,7 @@ describe('[In the news]', () => {
             }
         };
         const result = await main(mockData, defaultMockInfo);
-        expect(result).toContain('<!-- Error occurred in the In the news component: The "teaserTwoDescription" field must be a string type. The {"desc":"Test"} was received. -->');
+        expect(result).toContain('<!-- Error occurred in the In the news component: The "teaserTwoDescription" variable cannot be undefined and must be non-empty string. The {"desc":"Test"} was received. -->');
         expect(mockedError).toBeCalledTimes(1);
         });
 

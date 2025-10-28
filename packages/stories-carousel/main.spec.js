@@ -133,23 +133,13 @@ describe('[Stories Carousel]', () => {
                 getCards: vi.fn().mockResolvedValue(cardData),
             }));
 
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Stories carousel component:');
-            expect(mockedError).toBeCalledTimes(1);
+            await expect(main(defaultMockData, defaultMockInfo)).rejects.toThrow(`Error occurred in the Stories carousel component: The "data" cannot be undefined or null. The [] was received.`);
         });
 
         it('Should handle fetchUserStories failure gracefully', async () => {
             fetchUserStories.mockRejectedValueOnce(new Error('Fetch failed'));
 
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Stories carousel component: Fetch failed -->');
-
-            expect(mockedError).toBeCalledWith(
-                'Error occurred in the Stories carousel component while fetching user stories:',
-                expect.any(Error)
-            );
+            await expect(main(defaultMockData, defaultMockInfo)).rejects.toThrow(`Error occurred in the Stories carousel component while fetching user stories: Fetch failed`);
         });
     });
 

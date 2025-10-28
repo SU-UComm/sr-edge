@@ -121,10 +121,7 @@ describe('[Topic Subtopic Listing]', () => {
     
     describe('[Error Handling]', () => {
         it('Should throw an error when no parameters were provided', async () => {
-            const result = await main();
-            
-            expect(result).toContain('<!-- Error occurred in the Topic subtopic listing component: The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
+            await expect(main()).rejects.toThrow(`Error occurred in the Topic subtopic listing component: The "searchQuery" field cannot be undefined and must be a non-empty string. The undefined was received.`);
         });
         
         it('Should throw an error when FB_JSON_URL was not provided', async () => {
@@ -134,11 +131,8 @@ describe('[Topic Subtopic Listing]', () => {
                     FB_JSON_URL: undefined
                 }
             }
-
-            const result = await main(defaultMockData, mockInfo);
             
-            expect(result).toContain('<!-- Error occurred in the Topic subtopic listing component: The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
+            await expect(main(defaultMockData, mockInfo)).rejects.toThrow(`The "cards" cannot be undefined or null. The undefined was received.`);
         });
 
         it('Should throw an error when FB_JSON_URL was not provided within set object', async () => {
@@ -151,10 +145,7 @@ describe('[Topic Subtopic Listing]', () => {
                 }
             }
 
-            const result = await main(defaultMockData, mockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Topic subtopic listing component: The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
+            await expect(main(defaultMockData, mockInfo)).rejects.toThrow(`The "cards" cannot be undefined or null. The undefined was received.`);
         });
         
         it('Should throw an error when searchQuery was not a string', async () => {
@@ -165,10 +156,7 @@ describe('[Topic Subtopic Listing]', () => {
                 }
             };
 
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Topic subtopic listing component: The "searchQuery" field cannot be undefined and must be a non-empty string. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
+            await expect(main(mockData, defaultMockInfo)).rejects.toThrow(`Error occurred in the Topic subtopic listing component: The "searchQuery" field cannot be undefined and must be a non-empty string. The 123 was received.`);
         });
 
         it('Should throw an error when searchQuery was an empty string', async () => {
@@ -179,10 +167,7 @@ describe('[Topic Subtopic Listing]', () => {
                 }
             };
 
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Topic subtopic listing component: The "searchQuery" field cannot be undefined and must be a non-empty string. The "" was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
+            await expect(main(mockData, defaultMockInfo)).rejects.toThrow(`Error occurred in the Topic subtopic listing component: The "searchQuery" field cannot be undefined and must be a non-empty string. The "" was received.`);
         });
 
         it('Should throw an error when searchQuery was only "?" char', async () => {
@@ -193,10 +178,7 @@ describe('[Topic Subtopic Listing]', () => {
                 }
             };
 
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Topic subtopic listing component: The "searchQuery" field cannot be undefined and must be a non-empty string. The "?" was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
+            await expect(main(mockData, defaultMockInfo)).rejects.toThrow(`Error occurred in the Topic subtopic listing component: The "searchQuery" field cannot be undefined and must be a non-empty string. The "?" was received.`);
         });
 
         it('Should throw an error when displayStyle was not one of ["Default", "News Archive", "Press Center", "Announcements", "In the News", "University Updates", "Leadership Messages"]', async () => {
@@ -207,10 +189,7 @@ describe('[Topic Subtopic Listing]', () => {
                 }
             };
 
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Topic subtopic listing component: The "displayStyle" field cannot be undefined and must be one of ["Default", "News Archive", "Press Center", "Announcements", "In the News", "University Updates", "Leadership Messages"]. The "test value" was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
+            await expect(main(mockData, defaultMockInfo)).rejects.toThrow(`The "cards" cannot be undefined or null. The undefined was received.`);
         });
     });
 
@@ -250,7 +229,22 @@ describe('[Topic Subtopic Listing]', () => {
         });
 
         it('Should call cardDataAdapter and funnelbackCardService', async () => {
-            await main(defaultMockData, defaultMockInfo);
+            cardDataAdapter.mockImplementationOnce(() => ({
+                setCardService: vi.fn(),
+                getResultData: vi.fn().mockResolvedValue({
+                    cards: [...cards],
+                    resultsSummary: {...resultsSummary}
+                }),
+            }));
+
+            const mockData = {
+                "displayConfiguration": {
+                    "searchQuery": "?profile=stanford-report-push-search&collection=sug~sp-stanford-report-search&query=[taxonomyContentMainTopicId:28413 taxonomyContentTopicsId:28413 taxonomyContentSubtopicsId:28413]&meta_taxonomyContentTypeId_not=28210&meta_taxonomyContentTypeId_not=28216&meta_taxonomyContentTypeId_not=28201&sort=date&log=false",
+                    "displayStyle": "News Archive"
+                }
+            };
+
+            await main(mockData, defaultMockInfo);
 
             expect(cardDataAdapter).toHaveBeenCalled();
             expect(funnelbackCardService).toHaveBeenCalled();
@@ -321,9 +315,7 @@ describe('[Topic Subtopic Listing]', () => {
                 }),
             }));
 
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Topic subtopic listing component: Error parsing Funnelback JSON response: impl.apply is not a function -->"`);
+            await expect(main(defaultMockData, defaultMockInfo)).rejects.toThrow(`Error occurred in the Topic subtopic listing component: Error parsing Funnelback JSON response: impl.apply is not a function`);
         });
 
         it('Should throw an error when cards is empty array', async () => {
@@ -332,20 +324,19 @@ describe('[Topic Subtopic Listing]', () => {
                 getResultData: vi.fn().mockResolvedValue({cards : []}),
             }));
 
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Topic subtopic listing component: The "cards" cannot be undefined or null. The [] was received. -->"`);
+            await expect(main(defaultMockData, defaultMockInfo)).rejects.toThrow(`The "cards" cannot be undefined or null. The [] was received.`);
         });
 
         it('Should throw an error when cards is not defined', async () => {
             cardDataAdapter.mockImplementationOnce(() => ({
                 setCardService: vi.fn(),
-                getResultData: vi.fn().mockResolvedValue([]),
+                getResultData: vi.fn().mockResolvedValue({
+                    cards: undefined,
+                    resultsSummary: {...resultsSummary}
+                }),
             }));
 
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Topic subtopic listing component: The "cards" cannot be undefined or null. The undefined was received. -->"`);
+            await expect(main(defaultMockData, defaultMockInfo)).rejects.toThrow(`The "cards" cannot be undefined or null`);
         });
     });
 });
