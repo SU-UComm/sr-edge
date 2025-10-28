@@ -52,7 +52,7 @@ export default {
                 }
             } catch (er) {
                 console.error('Error occurred in the Topic subtopic listing component: ', er);
-                return `<!-- Error occurred in the Topic subtopic listing component: ${er.message} -->`;
+                throw new Error(`Error occurred in the Topic subtopic listing component: ${er.message}`);
             }
         }
 
@@ -75,6 +75,8 @@ export default {
                 // In edit mode, provide mock data instead of throwing error
                 data = [];
                 return `<div></div>`;
+            } else {
+                throw new Error(`Error occurred in the Topic subtopic listing component: Error parsing Funnelback JSON response: ${er.message}`);
             }
         }
 
