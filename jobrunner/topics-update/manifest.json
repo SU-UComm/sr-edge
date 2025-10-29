@@ -1,0 +1,41 @@
+{
+  "$schema": "http://localhost:3000/schemas/JobV1.json",
+  "name": "jr-su-topic-edit",
+  "displayName": "Topic edit and delete job",
+  "version": "0.0.7",
+  "timeout": 600,
+  "concurrency": 30,
+  "mainFunction": "main",
+  "description": "When a Topic record is edited in Matrix, start a job to update Stories that use the Topic.",
+  "functions": [
+    {
+      "name": "main",
+      "entry": "main.js",
+      "input": {
+        "type": "object",
+        "properties": {
+          "topicId": {
+            "type": "string",
+            "description": "The asset ID of the incoming topic"
+          },
+          "action": {
+            "type": "string",
+            "description": "The action to take. Are we Updating a Topic or Deleting a Topic?",
+            "enum": [
+              "update",
+              "delete"
+            ]
+          },
+          "topicData": {
+            "type": "string",
+            "description": "The previous topic data, containing the data to be removed.",
+            "default": {}
+          }
+        },
+        "required": [
+          "topicId"
+        ]
+      }
+    }
+  ]
+}
