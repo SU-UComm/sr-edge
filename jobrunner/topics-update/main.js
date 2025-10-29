@@ -1,9 +1,9 @@
 //
 
 // Handle requests to Funnelback
-async function getTopicStoriesFromFunnelback({ endpoint, topicId }) {
+async function getTopicStoriesFromFunnelback({ endpoint, collection, profile, topicId }) {
   try {
-    const query = `${endpoint}?profile=stanford-report-global-search-dev_preview&collection=sug~sp-stanford-university-report-search-dev&query=[taxonomyContentMainTopicId:${topicId} taxonomyContentTopicsId:${topicId} taxonomyContentSubtopicsId:${topicId}]&num_ranks=1000&sort=date&log=false`;
+    const query = `${endpoint}?profile=${profile}&collection=${collection}&query=[taxonomyContentMainTopicId:${topicId} taxonomyContentTopicsId:${topicId} taxonomyContentSubtopicsId:${topicId}]&num_ranks=1000&sort=date&log=false`;
     const response = await fetch(`${query}`);
     if (!response.ok) {
       throw new Error(`Error fetching data from ${query}`);
@@ -97,6 +97,8 @@ async function topicUpdateActions({ topicId, envVars }) {
   // fetch the Story FB results that use the Topic ID
   const fbData = await getTopicStoriesFromFunnelback({
     endpoint: envVars.FB_SEARCH_ENDPOINT,
+    collection: envVars.FB_SEARCH_COLLECTION,
+    profile: envVars.FB_SEARCH_PROFILE,
     topicId,
   });
   const storiesToUpdate = fbData?.response?.resultPacket?.results;

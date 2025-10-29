@@ -6,6 +6,8 @@ async function runJobLocally() {
   const context = {
     environment: {
       FB_SEARCH_ENDPOINT: process.env.FB_SEARCH_ENDPOINT,
+      FB_SEARCH_COLLECTION: process.env.FB_SEARCH_COLLECTION,
+      FB_SEARCH_PROFILE: process.env.FB_SEARCH_PROFILE,
       MX_ENDPOINT: process.env.MX_ENDPOINT,
     },
   };
@@ -13,7 +15,7 @@ async function runJobLocally() {
   // replicate job runners input
   const input = {
     topicId: "168142",
-    action: "delete",
+    action: "update",
   };
   // run the job!
   job(input, context);
