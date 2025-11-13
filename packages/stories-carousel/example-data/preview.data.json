@@ -6,6 +6,6 @@
         "ctaNewWindow": false
     },
     "contentConfiguration": {
-        "searchQuery": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser=false&meta_taxonomyContentTypeText_not=Announcement+Leadership%20Messages&num_ranks=6"
+        "searchQuery": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&sort=date&meta_isTeaser=false&meta_taxonomyContentCategoryId=28171&meta_taxonomyContentTypeId_not=28210&meta_taxonomyContentTypeId_not=28216&meta_taxonomyContentTypeId_not=28201&meta_taxonomyContentTypeId_not=28394&meta_taxonomyContentMainTopicId_not=169602&meta_taxonomyContentMainTopicId_not=169604&num_ranks=6&start_rank=4"
     }
 }

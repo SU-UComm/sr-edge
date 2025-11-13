@@ -83,13 +83,13 @@ export default {
                     props.search.maintopic?.asset_name !== ""
                     ? `&query=[taxonomyContentMainTopicId:${props.search.maintopic?.asset_assetid} taxonomyContentTopicsId:${props.search.maintopic?.asset_assetid} taxonomyContentSubtopicsId:${props.search.maintopic?.asset_assetid}]`
                     : ""
-                }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 id:${
+                }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 taxonomyContentMainTopicId:169602 taxonomyContentMainTopicId:169604 id:${
                     props.search.currentPage
                 }]&num_ranks=${MAX_CARDS}&sort=date&meta_taxonomyAudienceText=${audience}`;
 
                 fallbackFbUrl = `?profile=${props.search.profile}&collection=${
                     props.search.collection
-                }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 id:${
+                }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 taxonomyContentMainTopicId:169602 taxonomyContentMainTopicId:169604 id:${
                     props.search.currentPage
                 }]&num_ranks=12&sort=date`;
 
@@ -129,8 +129,7 @@ export default {
             }
             
         } catch (er) {
-            console.error('Error occurred in the Stories carousel component while fetching user stories:', er);
-            return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
+            throw new Error(`Error occurred in the Stories carousel component while fetching user stories: ${er.message}`);
         }
         
 
@@ -195,8 +194,7 @@ export default {
                 );
             }
         } catch (er) {
-            console.error('Error occurred in the Stories carousel component: ', er);
-            return `<!-- Error occurred in the Stories carousel component: ${er.message} -->`;
+            throw new Error(`Error occurred in the Stories carousel component: ${er.message}`);
         }
 
         // Prepare component data for template rendering

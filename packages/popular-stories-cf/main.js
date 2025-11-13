@@ -115,8 +115,9 @@ export default {
                 .join(" ")
             : "";
 
+        // Exclude Leadership Messages, In The News, Announcement, and the topics Community Message & University Statement
         exclusionContentTypes +=
-            " taxonomyContentTypeId:28201 taxonomyContentTypeId:28216 taxonomyContentTypeId:28210";
+            " taxonomyContentTypeId:28201 taxonomyContentTypeId:28216 taxonomyContentTypeId:28210 taxonomyContentMainTopicId:169602 taxonomyContentMainTopicId:169604";
 
         const exclusionIDs =
             assetExclusions && assetExclusions.length > 0
