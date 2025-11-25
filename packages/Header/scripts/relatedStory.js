@@ -29,7 +29,7 @@ export default async function relatedStoryData(pageData = null, audience = "") {
             "search.json"
         )}?profile=${pageData.search.profile}&collection=${
             pageData.search.collection
-        }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 id:${
+        }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 taxonomyContentMainTopicId:169602 taxonomyContentMainTopicId:169604 id:${
             pageData.id
         }]&sort=date&num_ranks=1&log=false`;
 
