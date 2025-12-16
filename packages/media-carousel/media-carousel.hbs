@@ -1,5 +1,6 @@
 <section data-component="media-carousel" data-unique-id="{{id}}">
     <div class="{{containerClasses width=width}}">
+        {{> linked-heading title=headingTitle isAlwaysLight=headingIsAlwaysLight ctaLink=headingCtaLink ctaNewWindow=headingCtaNewWindow ctaText=headingCtaText }}
         {{#> carousel-media uniqueID=id}}
             {{#each slides}}
             <div class="swiper-slide">

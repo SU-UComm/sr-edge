@@ -31,6 +31,47 @@
             "input": {
                 "type": "object",
                 "properties": {
+                    "headingConfiguration": {
+                        "title": "Section Heading Configuration",
+                        "description": "The heading for the section, appearing before the grid of cards. If the title is empty, the heading and call to action link will be hidden.",
+                        "type": "object",
+                        "required": [],
+                        "properties": {
+                            "title": {
+                                "title": "Heading",
+                                "type": "string",
+                                "default": "",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
+                            },
+                            "ctaUrl": {
+                                "title": "Matrix Asset Link",
+                                "type": "string",
+                                "description": "Select an asset to link to. If this field is filled out, it will be used instead of the manual link",
+                                "format": "matrix-asset-uri"
+                            },
+                            "ctaManualUrl": {
+                                "title": "Manual Link",
+                                "type": "string",
+                                "default": "",
+                                "description": "Enter the full URL, including https://"
+                            },
+                            "ctaText": {
+                                "title": "Link text",
+                                "type": "string",
+                                "default": "",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
+                            },
+                            "ctaNewWindow": {
+                                "title": "Open link in a new window",
+                                "type": "boolean",
+                                "default": false
+                            }
+                        }
+                    },
                     "cards": {
                         "title": "Cards",
                         "description": "Enter the details for each card.",
@@ -44,11 +85,7 @@
                                     "type": "string",
                                     "title": "Type",
                                     "default": "Book",
-                                    "enum": [
-                                        "Book",
-                                        "Magazine",
-                                        "Podcast"
-                                    ]
+                                    "enum": ["Book", "Magazine", "Podcast"]
                                 },
                                 "image": {
                                     "type": "string",
@@ -73,11 +110,7 @@
                                     "title": "Link Url"
                                 }
                             },
-                            "required": [
-                                "cardType",
-                                "image",
-                                "title"
-                            ]
+                            "required": ["cardType", "image", "title"]
                         }
                     }
                 },

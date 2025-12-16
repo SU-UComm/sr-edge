@@ -1,4 +1,9 @@
 {
+    "headingConfiguration": {
+        "title": "Media Carousel",
+        "ctaText": "View all",
+        "ctaNewWindow": true
+    },
     "cards": [
         {
             "cardType": "Book",
