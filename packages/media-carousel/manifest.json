@@ -165,9 +165,9 @@
             "type": "file",
             "path": "mocked-uris/163985.json"
         },
-        "matrix-asset://stanfordNews/163996": {
+        "matrix-asset://stanfordNews/159454": {
             "type": "file",
-            "path": "mocked-uris/163996.json"
+            "path": "mocked-uris/159454.json"
         }
     },
     "previews": {

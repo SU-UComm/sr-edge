@@ -206,18 +206,18 @@ export default {
             }
         }
 
-        // FIX: Define cardsToRender outside the conditional block
+
         let cardsToRender = [];
         if (cardData !== null && cardData !== undefined) {
             cardsToRender = cardData.map((card) => {
                 card.typeIcon = typeOfIcon[card.type].typeIcon;
                 card.iconTestId = typeOfIcon[card.type].iconTestId;
                 card.isRealExternalLink = isRealExternalLink(card.liveUrl);
-                card.sidebarHeading = SidebarHeading({ 
+                card.sidebarHeading = SidebarHeading({
                     headingSize: "p",
-                    icon: typeOfIcon[card.type].headingIcon, 
+                    icon: typeOfIcon[card.type].headingIcon,
                     title: typeOfIcon[card.type].headingTitle,
-                    color: "media" 
+                    color: "media"
                 });
 
                 return card;
