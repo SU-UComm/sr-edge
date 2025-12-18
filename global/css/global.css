@@ -1062,7 +1062,7 @@ div[data-component="footer-component"] {
 [data-component="multicolumn-image"] + *:not([data-component="media-carousel"]),
 [data-component="multicolumn-listing"] + *:not([data-component="media-carousel"]),
 [data-component="stories-carousel"] + *:not([data-component="media-carousel"]),
-[data-component="policy-brief"] + * {
+[data-component="policy-brief"] + *:not([data-component="media-carousel"]) {
   @apply su-rs-mt-8 !important;
 }
 

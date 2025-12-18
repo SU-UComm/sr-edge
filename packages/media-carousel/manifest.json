@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "media-carousel",
     "type": "edge",
-    "version": "6.0.1",
+    "version": "6.1.0",
     "namespace": "stanford-components",
     "description": "Links to media, displayed as cards in a carousel.",
     "displayName": "Media carousel",
@@ -117,7 +117,7 @@
                         "title": "Spacing above (top margin)",
                         "description": "Add spacing above the section. 'Base' is the smallest with '10' (default) being the largest option. Selecting 'default' will use the default site-wide vertical spacing between components.",
                         "type": "string",
-                        "default": "10",
+                        "default": "6",
                         "enum": [
                             "default",
                             "base",
@@ -137,7 +137,7 @@
                         "title": "Spacing below (bottom margin)",
                         "description": "Add spacing below the section. 'Base' is the smallest with '10' (default) being the largest option. Selecting 'default' will use the default site-wide vertical spacing between components.",
                         "type": "string",
-                        "default": "4",
+                        "default": "6",
                         "enum": [
                             "default",
                             "base",
