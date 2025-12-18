@@ -21,6 +21,8 @@ export default {
      * @param {string} [args.headingConfiguration.ctaText] - The text for the CTA link (optional).
      * @param {string} [args.headingConfiguration.ctaNewWindow] - Flag to open CTA link in new window (optional).
      * @param {Object} args.cards - The list of media cards to render.
+     * @param {string} [args.marginTop] - The value of top margin (optional).
+     * @param {string} [args.marginBottom] - The value of bottom margin (optional).
      * @param {Object} info - Context information for the component.
      * @param {Object} info.env - Environment variables in the execution context.
      * @param {Object} info.fns - Functions available in the execution context.
@@ -34,10 +36,10 @@ export default {
         const { API_IDENTIFIER } = info?.env || info?.set?.environment || {};
 
         // CHANGE: change const to let for mutability
-        let { cards } = args || {};
+        let { cards, headingConfiguration, marginTop, marginBottom } = args || {};
 
         // Extracting configuration data from arguments
-        let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
+        let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = headingConfiguration || {};
 
         // NEW: Detect edit mode
         const squizEdit = componentContext?.editor || false;
@@ -152,24 +154,6 @@ export default {
             }
         }
 
-        if (cardData !== null && cardData !== undefined) {
-            const cardsToRender = cardData.map((card) => {
-                card.typeIcon = typeOfIcon[card.type].typeIcon;
-                card.iconTestId = typeOfIcon[card.type].iconTestId;
-                card.isRealExternalLink = isRealExternalLink(card.liveUrl);
-                card.sidebarHeading = SidebarHeading({ 
-                    headingSize: "p",
-                    icon: typeOfIcon[card.type].headingIcon, 
-                    title: typeOfIcon[card.type].headingTitle,
-                    color: "media" 
-                });
-
-                return card;
-            });
-            // REMOVE this early return - it prevents template rendering
-            // return cardsToRender;
-        }
-
         // Validate fetched card data - CHANGE: wrap in !squizEdit check
         if (!squizEdit) {
             try {
@@ -233,14 +217,11 @@ export default {
             headingCtaNewWindow: headingData?.ctaNewWindow,
             headingCtaText: headingData?.ctaText,
             slides: cardsToRender,
+            marginTop: marginTop,
+            marginBottom: marginBottom,
             width: "large"
         };
-        console.log(componentData);
-        // NEW: Early return pattern for edit mode
         if (!squizEdit) return mediaCarouselTemplate(componentData);
-
-        // NEW: Process for edit mode
-        // FIX: Typo - componentData not componentData
         return processEditor(mediaCarouselTemplate(componentData), squizEditTargets);
     }
 };

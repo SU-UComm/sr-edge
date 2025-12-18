@@ -112,6 +112,46 @@
                             },
                             "required": ["cardType", "image", "title"]
                         }
+                    },
+                    "marginTop": {
+                        "title": "Spacing above (top margin)",
+                        "description": "Add spacing above the section. 'Base' is the smallest with '10' (default) being the largest option. Selecting 'default' will use the default site-wide vertical spacing between components.",
+                        "type": "string",
+                        "default": "10",
+                        "enum": [
+                            "default",
+                            "base",
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            "8",
+                            "9",
+                            "10"
+                        ]
+                    },
+                    "marginBottom": {
+                        "title": "Spacing below (bottom margin)",
+                        "description": "Add spacing below the section. 'Base' is the smallest with '10' (default) being the largest option. Selecting 'default' will use the default site-wide vertical spacing between components.",
+                        "type": "string",
+                        "default": "4",
+                        "enum": [
+                            "default",
+                            "base",
+                            "1",
+                            "2",
+                            "3",
+                            "4",
+                            "5",
+                            "6",
+                            "7",
+                            "8",
+                            "9",
+                            "10"
+                        ]
                     }
                 },
                 "required": []

@@ -30,5 +30,7 @@
             "teaserText": "Second ipsum dolor sit amet this is a slightly shorter teaser to test how this visually displays.",
             "linkUrl": "https://www.squiz.net"
         }
-    ]
+    ],
+    "marginTop": "4",
+    "marginBottom": "4"
 }
