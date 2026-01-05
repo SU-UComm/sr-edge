@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "leadership-hero",
     "type": "edge",
-    "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "Leadership hero and title area.",
     "displayName": "Leadership Messages Hero",
     "mainFunction": "main",
@@ -38,7 +38,7 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://api-identifier/162603": {
+        "matrix-asset://stanfordNews/162603": {
             "type": "file",
             "path": "mocked-uris/162603.json"
         }

@@ -9,7 +9,7 @@
                     <div class="su-py-20 su-w-full md:su-pb-27 md:su-pt-0 *:dark:su-text-black">{{{heading}}}</div>
                     <h3 class="su-text-[35px] su-font-bold su-leading-tight su-mb-15 md:su-mb-19 md:su-text-[40px] lg:su-text-[43px]">
                         <a href="{{linkUrl}}" class="su-media-feature-title-link su-stretched-link">
-                            {{title}}
+                            <span data-se="title">{{title}}</span>
                             <span class="su-hidden lg:su-inline-block su-relative su-top-12 [&>*]:su-stroke-digital-red dark:[&>*]:su-stroke-dark-mode-red su-transition group-hocus:su--translate-y-01em group-hocus:su-translate-x-01em [&>svg]:su-translate-y-1">
                                 {{> svg-icons icon="external arrow" size="large"}}
                             </span>
@@ -24,7 +24,7 @@
                         }}
                         <span class="su-font-semibold">{{mediaType}}</span>
                     </div>
-                    <p class="su-text-18 su-w-full su-m-0 su-leading-[125%] su-text-black su-font-normal md:su-text-19 lg:su-text-21">
+                    <p class="su-text-18 su-w-full su-m-0 su-leading-[125%] su-text-black su-font-normal md:su-text-19 lg:su-text-21" data-se="teaserText">
                         {{teaserText}}
                     </p>
                 </div>

@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "featured-content",
     "type": "edge",
-    "version": "4.0.3",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.1",
+    "namespace": "stanford-components",
     "description": "",
     "displayName": "Featured content",
     "mainFunction": "main",
@@ -44,7 +44,10 @@
                         "properties": {
                             "title": {
                                 "title": "Heading",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaUrl": {
                                 "title": "Matrix Asset Link",
@@ -60,7 +63,10 @@
                             "ctaText": {
                                 "title": "Link text",
                                 "type": "string",
-                                "default": "View all"
+                                "default": "View all",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "ctaNewWindow": {
                                 "title": "Open link in a new window",
@@ -73,13 +79,21 @@
                         "title": "Grid Content",
                         "description": "The cards to display in the grid area of the component. The featured card appears larger than the supplementary cards. When manually selecting cards, at least three must be selected for the grid to display.",
                         "type": "object",
-                        "required": ["source"],
+                        "required": [
+                            "source"
+                        ],
                         "properties": {
                             "source": {
                                 "title": "Content source",
                                 "default": "Search",
-                                "enum": ["Search", "Select"],
-                                "type": "string"
+                                "enum": [
+                                    "Search",
+                                    "Select"
+                                ],
+                                "type": "string",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             }
                         },
                         "allOf": [
@@ -93,7 +107,9 @@
                                     }
                                 },
                                 "then": {
-                                    "required": ["searchQuery"],
+                                    "required": [
+                                        "searchQuery"
+                                    ],
                                     "properties": {
                                         "searchQuery": {
                                             "type": "string",
@@ -113,7 +129,9 @@
                                     }
                                 },
                                 "then": {
-                                    "required": ["cards"],
+                                    "required": [
+                                        "cards"
+                                    ],
                                     "properties": {
                                         "cards": {
                                             "title": "Cards",
@@ -130,14 +148,19 @@
                                                         "title": "Card Asset"
                                                     }
                                                 },
-                                                "required": ["cardAsset"]
+                                                "required": [
+                                                    "cardAsset"
+                                                ]
                                             }
                                         },
                                         "featuredDescription": {
                                             "type": "string",
                                             "title": "Featured Content description",
                                             "format": "multi-line",
-                                            "description": "If filled out, it will replace the description of the featured card (first)."
+                                            "description": "If filled out, it will replace the description of the featured card (first).",
+                                            "ui:metadata": {
+                                                "inlineEditable": true
+                                            }
                                         }
                                     }
                                 }
@@ -153,17 +176,29 @@
                                 "title": "Featured Card: Alignment",
                                 "description": "The position of the featured card on larger screens.",
                                 "default": "left",
-                                "enum": ["left", "right"]
+                                "enum": [
+                                    "left",
+                                    "right"
+                                ],
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             },
                             "displayThumbnails": {
                                 "title": "Display Supplementary Thumbnails",
                                 "default": true,
-                                "type": "boolean"
+                                "type": "boolean",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             },
                             "displayDescriptions": {
                                 "title": "Display Supplementary Descriptions",
                                 "default": false,
-                                "type": "boolean"
+                                "type": "boolean",
+                                "ui:metadata": {
+                                    "quickOption": true
+                                }
                             }
                         }
                     }
@@ -178,63 +213,63 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/1": {
+        "matrix-asset://stanfordNews/1": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/2": {
+        "matrix-asset://stanfordNews/2": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/5": {
+        "matrix-asset://stanfordNews/5": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/6": {
+        "matrix-asset://stanfordNews/6": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/9": {
+        "matrix-asset://stanfordNews/9": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/10": {
+        "matrix-asset://stanfordNews/10": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/3": {
+        "matrix-asset://stanfordNews/3": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/7": {
+        "matrix-asset://stanfordNews/7": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/8": {
+        "matrix-asset://stanfordNews/8": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/11": {
+        "matrix-asset://stanfordNews/11": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/141464": {
+        "matrix-asset://stanfordNews/141464": {
             "type": "file",
             "path": "mocked-uris/141464.json"
         },
-        "matrix-asset://api-identifier/162603": {
+        "matrix-asset://stanfordNews/162603": {
             "type": "file",
             "path": "mocked-uris/162603.json"
         },
-        "matrix-asset://api-identifier/162707": {
+        "matrix-asset://stanfordNews/162707": {
             "type": "file",
             "path": "mocked-uris/162707.json"
         },
-        "matrix-asset://api-identifier/162759": {
+        "matrix-asset://stanfordNews/162759": {
             "type": "file",
             "path": "mocked-uris/162759.json"
         },
-        "matrix-asset://api-identifier/166535": {
+        "matrix-asset://stanfordNews/166535": {
             "type": "file",
             "path": "mocked-uris/166535.json"
         }

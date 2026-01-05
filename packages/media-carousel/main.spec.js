@@ -65,7 +65,7 @@ describe('[Media Carousel]', () => {
         "cards": [
             {
                 "cardType": "Magazine",
-                "image": "matrix-asset://api-identifier/63356",
+                "image": "matrix-asset://stanfordNews/63356",
                 "title": "Three Example Three",
                 "author": "Susannah Young-ah Gottlieb",
                 "teaserText": "Third on W. H. Auden's work from the late 1930s, when he seeks to understand the poet's responsibility in the face of a triumphant fascism, to the late 1950s, when he discerns an irreconcilable \"divorce\" between poetry...",
@@ -73,7 +73,7 @@ describe('[Media Carousel]', () => {
             },
             {
                 "cardType": "Podcast",
-                "image": "matrix-asset://api-identifier/63357",
+                "image": "matrix-asset://stanfordNews/63357",
                 "title": "Four Example Four news.stanford.edu link",
                 "author": "Susannah Young-ah Gottlieb",
                 "teaserText": "Fourth concentrating on W. H. Auden's work from the late 1930s, when he seeks to understand the poet's responsibility in the face of a triumphant fascism, to the late 1950s, when he discerns an irreconcilable \"divorce\" between poetry...",

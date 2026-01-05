@@ -20,9 +20,9 @@ describe('[Vertical Video Panel]', () => {
         sectionConfiguration: {
             title: "Videos at Stanford",
             ctaText: "Watch all",
-            ctaUrl: "matrix-asset://api-identifier/28192",
+            ctaUrl: "matrix-asset://stanfordNews/28192",
             ctaManualUrl: "https://news.stanford.edu/video",
-            bgImage: "matrix-asset://api-identifier/9861",
+            bgImage: "matrix-asset://stanfordNews/9861",
             marginTop: "10",
             marginBottom: "10"
         },
@@ -30,19 +30,19 @@ describe('[Vertical Video Panel]', () => {
             {
                 heading: "The future of transparent tissue",
                 youtubeId: "MrbhPacSTpg",
-                videoImage: "matrix-asset://api-identifier/99100"
+                videoImage: "matrix-asset://stanfordNews/99100"
             },
             {
                 heading: "Aboard the Western Flyer, Stanford students study science and literature",
                 subheading: "The Western Flyer, the same fishing vessel that novelist John Steinbeck chartered to the Sea of Cortez, is restored and used as part of a three-week course for Stanford’s Sophomore College program.",
                 youtubeId: "DImCsDKydLA",
-                videoImage: "matrix-asset://api-identifier/128610"
+                videoImage: "matrix-asset://stanfordNews/128610"
             },
             {
                 heading: "Highlights from Big Ideas in Sustainability with Jeanne Gang",
                 subheading: "Jeanne Gang, architect and founding partner of Studio Gang, joined the Stanford Doerr School of Sustainability for a discussion on Jan. 16 about shaping healthy and livable communities through design.",
                 youtubeId: "dW7Kcgtgp7E",
-                videoImage: "matrix-asset://api-identifier/125800"
+                videoImage: "matrix-asset://stanfordNews/125800"
             }
         ]
     };
@@ -119,36 +119,36 @@ describe('[Vertical Video Panel]', () => {
                 videos: [ {
                     heading: "The future of transparent tissue",
                     youtubeId: "MrbhPacSTpg",
-                    videoImage: "matrix-asset://api-identifier/99100"
+                    videoImage: "matrix-asset://stanfordNews/99100"
                 },
                 {
                     heading: "Aboard the Western Flyer, Stanford students study science and literature",
                     subheading: "The Western Flyer, the same fishing vessel that novelist John Steinbeck chartered to the Sea of Cortez, is restored and used as part of a three-week course for Stanford’s Sophomore College program.",
                     youtubeId: "DImCsDKydLA",
-                    videoImage: "matrix-asset://api-identifier/128610"
+                    videoImage: "matrix-asset://stanfordNews/128610"
                 },
                 {
                     heading: "Highlights from Big Ideas in Sustainability with Jeanne Gang",
                     subheading: "Jeanne Gang, architect and founding partner of Studio Gang, joined the Stanford Doerr School of Sustainability for a discussion on Jan. 16 about shaping healthy and livable communities through design.",
                     youtubeId: "dW7Kcgtgp7E",
-                    videoImage: "matrix-asset://api-identifier/125800"
+                    videoImage: "matrix-asset://stanfordNews/125800"
                 },
                 {
                     heading: "The future of transparent tissue",
                     youtubeId: "MrbhPacSTpg",
-                    videoImage: "matrix-asset://api-identifier/99100"
+                    videoImage: "matrix-asset://stanfordNews/99100"
                 },
                 {
                     heading: "Aboard the Western Flyer, Stanford students study science and literature",
                     subheading: "The Western Flyer, the same fishing vessel that novelist John Steinbeck chartered to the Sea of Cortez, is restored and used as part of a three-week course for Stanford’s Sophomore College program.",
                     youtubeId: "DImCsDKydLA",
-                    videoImage: "matrix-asset://api-identifier/128610"
+                    videoImage: "matrix-asset://stanfordNews/128610"
                 },
                 {
                     heading: "Highlights from Big Ideas in Sustainability with Jeanne Gang",
                     subheading: "Jeanne Gang, architect and founding partner of Studio Gang, joined the Stanford Doerr School of Sustainability for a discussion on Jan. 16 about shaping healthy and livable communities through design.",
                     youtubeId: "dW7Kcgtgp7E",
-                    videoImage: "matrix-asset://api-identifier/125800"
+                    videoImage: "matrix-asset://stanfordNews/125800"
                 }]
             };
 

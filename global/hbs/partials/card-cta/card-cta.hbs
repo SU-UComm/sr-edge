@@ -1,6 +1,6 @@
 <article aria-label="{{title}}" class="su-group su-relative su-w-full su-flex su-flex-col su-break-words su-rounded-[8px] su-rs-pt-5 su-rs-px-4 su-max-w-900 su-mx-auto su-transition-shadow su-border dark:su-border-2 su-border-black-30/30 dark:su-border-black su-shadow dark:su-shadow-black/80 su-bg-white dark:su-bg-black-true su-text-black dark:su-text-white {{#if link}}hover:su-shadow-md focus-within:su-shadow-md su-rs-pb-4{{else}}su-rs-pb-5{{/if}}">
     {{~#if eyebrow~}}
-        <span aria-hidden="true" class="su-type-1 su-text-black-60 su-font-semibold su-rs-mb-1">
+        <span aria-hidden="true" class="su-type-1 su-text-black-60 su-font-semibold su-rs-mb-1" data-se="eyebrow">
           {{eyebrow}}
         </span>
     {{~/if~}}
@@ -8,19 +8,19 @@
         {{~#if link~}}
           <a href="{{link}}"{{#if isNewWindow}} target="_blank"{{/if}}{{#if isRealExternalLink}} rel="noopener nofollow"{{/if}} class="group-hocus-within:su-underline su-stretched-link su-text-black dark:su-text-white group-hocus-within:su-text-digital-red dark:group-hocus-within:su-text-digital-red-light">
             {{~#if eyebrow~}}<span class="su-sr-only">{{eyebrow}}: </span>{{~/if~}}
-            {{title}}
+            <span data-se="title">{{title}}</span>
             {{~#if isRealExternalLink~}}
                 <span class="su-sr-only">(link is external)</span>
             {{~/if~}}
           </a>
         {{~else~}}
             {{~#if eyebrow~}}<span class="su-sr-only">{{eyebrow}}: </span>{{~/if~}}
-            {{title}}
+            <span data-se="title">{{title}}</span>
         {{~/if~}}
       </h3>
     {{~#if description~}}
         <div class="su-grow">
-            <div data-test="cta-card-content" class="su-text-black dark:su-text-white su-big-paragraph su-rs-mt-4 *:su-leading-snug *:last:su-mb-0">
+            <div data-test="cta-card-content" class="su-text-black dark:su-text-white su-big-paragraph su-rs-mt-4 *:su-leading-snug *:last:su-mb-0" data-se="description">
                 {{{description}}}
             </div>
         </div>

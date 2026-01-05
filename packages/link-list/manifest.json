@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "link-list",
     "type": "edge",
-    "version": "4.0.3",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.1",
+    "namespace": "stanford-components",
     "description": "Recommended stories are shown in this component as a vertical list.",
     "displayName": "Link List",
     "mainFunction": "main",
@@ -30,7 +30,10 @@
                         "type": "string"
                     }
                 },
-                "required": ["dataUrl", "title"]
+                "required": [
+                    "dataUrl",
+                    "title"
+                ]
             },
             "output": {
                 "responseType": "html"

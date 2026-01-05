@@ -127,8 +127,11 @@ export function _carouselInit(section) {
  *
  * @listens DOMContentLoaded
  */
-document.addEventListener('DOMContentLoaded', function () {
+function initializeMediaCarousels() {
     document.querySelectorAll(MEDIA_CAROUSEL_SELECTOR).forEach(section => {
         _carouselInit(section)
     });    
-});
+};
+
+document.addEventListener('DOMContentLoaded', initializeMediaCarousels);
+document.addEventListener('livePreviewUpdated', initializeMediaCarousels);

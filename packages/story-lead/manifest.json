@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "story-lead",
     "type": "edge",
-    "version": "4.0.1",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "Introduction to a story, with a decorative first letter.",
     "displayName": "Story Lead",
     "mainFunction": "main",
@@ -24,13 +24,22 @@
                 "properties": {
                     "content": {
                         "title": "Lead",
-                        "type": "FormattedText"
+                        "type": "FormattedText",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "variant": {
                         "title": "Variant",
                         "type": "string",
                         "default": "Basic Story",
-                        "enum": ["Basic Story", "Featured Story"]
+                        "enum": [
+                            "Basic Story",
+                            "Featured Story"
+                        ],
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     }
                 }
             },

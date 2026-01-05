@@ -1,8 +1,8 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "button",
-    "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "A button that can be linked to internal or external pages.",
     "displayName": "Button",
     "mainFunction": "main",
@@ -24,7 +24,10 @@
                     "buttonText": {
                         "title": "Button text",
                         "type": "string",
-                        "default": "Button text"
+                        "default": "Button text",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
                     },
                     "internalUrl": {
                         "title": "Internal link (Matrix asset link)",
@@ -40,7 +43,10 @@
                     "isNewWindow": {
                         "title": "Open link in a new window",
                         "type": "boolean",
-                        "default": false
+                        "default": false,
+                        "ui:metadata": {
+                            "quickOption": true
+                        }
                     }
                 },
                 "required": []
@@ -54,47 +60,47 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/1": {
+        "matrix-asset://stanfordNews/1": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/2": {
+        "matrix-asset://stanfordNews/2": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/5": {
+        "matrix-asset://stanfordNews/5": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/6": {
+        "matrix-asset://stanfordNews/6": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/9": {
+        "matrix-asset://stanfordNews/9": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/10": {
+        "matrix-asset://stanfordNews/10": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/3": {
+        "matrix-asset://stanfordNews/3": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/7": {
+        "matrix-asset://stanfordNews/7": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/8": {
+        "matrix-asset://stanfordNews/8": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/11": {
+        "matrix-asset://stanfordNews/11": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/28192": {
+        "matrix-asset://stanfordNews/28192": {
             "type": "file",
             "path": "mocked-uris/28192.json"
         }

@@ -1,6 +1,7 @@
 import multicolumnListingTemplate from './multicolumn-listing.hbs';
 import { cardDataAdapter, funnelbackCardService, matrixCardService, linkedHeadingService, multicolumnGrid, uuid } from "../../global/js/utils";
 import { Card } from '../../global/js/helpers';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Multicolumn lisitng component that renderds a list of features cards based on fetched data
@@ -34,98 +35,75 @@ export default {
      * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
      */
     async main(args, info) {
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
+
         // Extracting environment variables from provided info
         const { FB_JSON_URL, API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
-        const fnsCtx = info?.fns || info?.ctx || {};
 
         // Extracting configuration data from arguments
-        const { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
-        const { source, searchQuery, searchMaxCards, cards } = args?.contentConfiguration || {};
+        let { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow } = args?.headingConfiguration || {};
+        let { source, searchQuery, searchMaxCards, cards } = args?.contentConfiguration || {};
         const { displayThumbnails, displayDescriptions } = args?.displayConfiguration || {};
 
-        // Validate required environment variables
-        try {
-            if (typeof FB_JSON_URL !== 'string' || FB_JSON_URL === '') {
-                throw new Error(
-                    `The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(FB_JSON_URL)} was received.`
-                );
-            }
-            if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                throw new Error(
-                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                );
-            }
-            if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
-                throw new Error(
-                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
-                );
-            }
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Multicolumn listing component: ', er);
-            return `<!-- Error occurred in the Multicolumn listing component: ${er.message} -->`;
+        // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
+        // Must fallback to false, use true to mock the editor
+        const squizEdit = info?.ctx?.editor || false;
+        // NEW: squizEditTargets is an object that contains the targets for the squizEdit DOM augmentation
+        let squizEditTargets = null;
+
+
+        if (squizEdit) {
+            // defaults
+            title = title || "Heading text";
+            ctaText = ctaText || "Link text";
+            searchQuery = (searchQuery === `?` || !searchQuery) ? '?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser=false&meta_taxonomyContentTypeText_not=Announcement+Leadership%20Messages&num_ranks=3&start_rank=4' : searchQuery;
+            // Clear ctaUrl in edit mode to prevent Matrix URI resolution issues
+            ctaUrl = ctaUrl || null;
+            cards = cards || [];
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "headingTitle": { "field": "headingConfiguration.title" },
+                "headingCtaText": { "field": "headingConfiguration.ctaText" }
+            };
         }
 
         // Validate required fields and ensure correct data types
         try {
-            if (title && typeof title !== 'string') {
-                throw new Error(
-                    `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
-                );
-            }
-            if (ctaUrl && typeof ctaUrl !== 'string') {
-                throw new Error(
-                    `The "ctaUrl" field must be a string. The ${JSON.stringify(ctaUrl)} was received.`
-                );
-            }
-            if (ctaManualUrl && typeof ctaManualUrl !== 'string') {
-                throw new Error(
-                    `The "ctaManualUrl" field must be a string. The ${JSON.stringify(ctaManualUrl)} was received.`
-                );
-            }
-            if (ctaText && typeof ctaText !== 'string') {
-                throw new Error(
-                    `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
-                );
-            }
-            if (ctaNewWindow && typeof ctaNewWindow !== 'boolean') {
-                throw new Error(
-                    `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
-                );
-            } 
-            if (!['Search', 'Select'].includes(source)) {
-                throw new Error(
-                    `The "source" field cannot be undefined and must be one of ['Search', 'Select'] value, ${JSON.stringify(source)} was received.`
-                );
-            }
-            if (source === 'Search' && (typeof searchQuery !== 'string' || searchQuery === '' || searchQuery === '?')) {
-                throw new Error(
-                    `The "searchQuery" field cannot be undefined and must be a non-empty string. The ${JSON.stringify(searchQuery)} was received.`
-                );
-            }
-            if (source === 'Search' && (typeof searchMaxCards !== 'number' || searchMaxCards  < 2 || searchMaxCards > 3)) {
-                throw new Error(
-                    `The "searchMaxCards" field cannot be undefined and must be a number between 2 and 3. The ${JSON.stringify(searchMaxCards)} was received.`
-                );
-            }
-            if (source === 'Select' && typeof cards !== 'object') {
-                throw new Error(
-                    `The "cards" field must be an array. The ${JSON.stringify(cards)} was received.`
-                );
-            }
-            if (displayDescriptions && typeof displayDescriptions !== 'boolean') {
-                throw new Error(
-                    `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
-                );
-            }
-            if (displayThumbnails && typeof displayThumbnails !== 'boolean') {
-                throw new Error(
-                    `The "displayThumbnails" field must be a boolean. The ${JSON.stringify(displayThumbnails)} was received.`
-                );
+            if (!squizEdit) {
+                // Add this in the validation try-catch block
+                if (title && typeof title !== 'string') {
+                    throw new Error(
+                        `The "title" field must be a string. The ${JSON.stringify(title)} was received.`
+                    );
+                }
+                if (ctaText && typeof ctaText !== 'string') {
+                    throw new Error(
+                        `The "ctaText" field must be a string. The ${JSON.stringify(ctaText)} was received.`
+                    );
+                }
+                if (ctaNewWindow && typeof ctaNewWindow !== 'boolean') {
+                    throw new Error(
+                        `The "ctaNewWindow" field must be a boolean. The ${JSON.stringify(ctaNewWindow)} was received.`
+                    );
+                } 
+                if (source === 'Select' && typeof cards !== 'object') {
+                    throw new Error(
+                        `The "cards" field must be an array. The ${JSON.stringify(cards)} was received.`
+                    );
+                }
+                if (displayDescriptions && typeof displayDescriptions !== 'boolean') {
+                    throw new Error(
+                        `The "displayDescriptions" field must be a boolean. The ${JSON.stringify(displayDescriptions)} was received.`
+                    );
+                }
+                if (displayThumbnails && typeof displayThumbnails !== 'boolean') {
+                    throw new Error(
+                        `The "displayThumbnails" field must be a boolean. The ${JSON.stringify(displayThumbnails)} was received.`
+                    );
+                }
             }
         } catch (er) {
             console.error('Error occurred in the Multicolumn listing component: ', er);
@@ -133,32 +111,48 @@ export default {
         }
 
         const adapter = new cardDataAdapter();
-        let data = null;
+        let dataPromise = null;
 
-        // Determine data source: "Search" (fetching from Funnelback) or "Select" (Matrix API)
+        // Determine data source and set up promise: "Search" (fetching from Funnelback) or "Select" (Matrix API)
         if (source.toLowerCase() === "search") {
             const query = searchQuery;
             const service = new funnelbackCardService({ FB_JSON_URL, query });
 
             adapter.setCardService(service);
-            data = await adapter.getCards();
+            
+            try {
+                dataPromise = adapter.getCards();
+            } catch (er) {
+                if (!squizEdit) {
+                    return `<!-- Error occurred in the Multicolumn listing component: ${er.message} -->`;
+                }
+                dataPromise = Promise.resolve([]);
+            }
+
         } else {
             const { cards } = args.contentConfiguration;
             const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
 
             adapter.setCardService(service);
-            data = await adapter.getCards(cards);
+
+            try {
+                dataPromise = adapter.getCards(cards);
+            } catch (err) {
+                if (!squizEdit) {
+                    return `<!-- Error occurred in the Multicolumn listing component: ${err.message} -->`;
+                }
+                dataPromise = Promise.resolve([]);
+            }
         }
 
-        // Resolve the URI for the section heading link
-        const headingData = await linkedHeadingService(fnsCtx, { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow });
+        // Run data fetching and heading service in parallel
+        const headingPromise = linkedHeadingService(fnsCtx, { title, ctaUrl, ctaManualUrl, ctaText, ctaNewWindow });
+        
+        const [data, headingData] = await Promise.all([dataPromise, headingPromise]);
 
         const cardsMarkup = [];
 
-        const maxNumberOfCards =
-            source === "Search"
-                ? searchMaxCards
-                : 3;
+        const maxNumberOfCards = source === "Search" ? searchMaxCards : 3;
         const numberOfCards = data.length > maxNumberOfCards ? maxNumberOfCards : data.length;
         const cardSizeMap = new Map();
 
@@ -205,6 +199,10 @@ export default {
             width: "large",
         };
 
-        return multicolumnListingTemplate(componentData);
+        // NEW: Early return pattern for edit mode
+        if (!squizEdit) return multicolumnListingTemplate(componentData);
+
+        // NEW: Process for edit mode
+        return processEditor(multicolumnListingTemplate(componentData), squizEditTargets);
     }
 };

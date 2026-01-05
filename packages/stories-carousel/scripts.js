@@ -16,7 +16,8 @@ export const STORIES_CAROUSEL_MODAL_SELECTOR = 'div[data-modal="modal"]';
 export const STORIES_CAROUSEL_OPEN_MODAL_BTN = 'button[data-click="open-modal"]';
 export const STORIES_CAROUSEL_CLOSE_MODAL_BTN = 'button[data-dismiss="modal"]';
 export const STORIES_CAROUSEL_MODAL_IFRAME = 'iframe[data-modal="iframe"]';
-
+let sliderInit = false;
+let shouldManageFocus = false;
 /**
  * Opens a modal by modifying the iframe's autoplay parameter and removing the hidden class.
  * @param {HTMLElement} modal - The modal element to open.
@@ -94,20 +95,46 @@ export function _modalInit(section) {
     });
 };
 let useFocus = false;
-// const handleClick = (e) => {
-//     e.preventDefault();
-//     if (e.detail) {
-//         useFocus = false;
-//     } else {
-//         useFocus = true;
-//     }
-//   };
+
+/**
+ * Sets up event listeners for pagination bullets and navigation buttons
+ * @param {HTMLElement} section - The carousel section
+ * @param {string} uniqueClass - The unique class identifier
+ */
+function setupFocusManagement(section, uniqueClass) {
+    // Listen for pagination bullet clicks
+    const paginationContainer = section.querySelector(`.component-slider-pagination-${uniqueClass}`);
+    if (paginationContainer) {
+        paginationContainer.addEventListener('click', function(e) {
+            if (e.target.classList.contains('swiper-pagination-bullet')) {
+                shouldManageFocus = true;
+            }
+        });
+    }
+    
+    // Listen for navigation button clicks
+    const nextBtn = section.querySelector('.component-slider-next');
+    const prevBtn = section.querySelector('.component-slider-prev');
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function() {
+            shouldManageFocus = true;
+        });
+    }
+    
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function() {
+            shouldManageFocus = true;
+        });
+    }
+}
+
+
 
 /**
  * Modal Init function for card
  * @param {HTMLElement} section - The card carousel section DOM Element
  */
-let sliderInit = false;
 export function _carouselInit(section) {
     const uniqueClass = section.dataset.uniqueId;
     const swiperSelector = `section[data-unique-id="${uniqueClass}"] .swiper`;
@@ -158,8 +185,11 @@ export function _carouselInit(section) {
             init: function () {
                 setTimeout(() => {
                     sliderInit = true;
-                    useFocus = true;
+                    // useFocus = true;
                 }, 500);
+
+                // Add event listeners after Swiper is initialized
+                setupFocusManagement(section, uniqueClass);
             },
             slideChange: function(swiper){
                 const thisSwiper = document.querySelector(swiperSelector);
@@ -174,7 +204,8 @@ export function _carouselInit(section) {
                     oldSlide.removeAttribute("tabindex");
                 }
                 // Set focus on new current
-                if (sliderInit) {
+                if (sliderInit && shouldManageFocus) {
+                    useFocus = true;
                     setTimeout(() => {
                         const slide = thisSwiper.querySelector(
                             ".swiper-slide-active"
@@ -189,6 +220,7 @@ export function _carouselInit(section) {
                             slideTarget.focus();
                         }
                     }, 300);
+                    shouldManageFocus = false;
                 }
                 // sliderInit = true;
                 // useFocus = true;
@@ -234,5 +266,3 @@ document.addEventListener('DOMContentLoaded', function () {
         _modalInit(section);
     });    
 });
-
-

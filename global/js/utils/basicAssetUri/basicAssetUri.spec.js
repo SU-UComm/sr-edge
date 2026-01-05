@@ -13,13 +13,13 @@ describe('[Basic Asset Uri]', () => {
     describe('[Error Handling]', () => {
         it('Should throw an error if fns is not an object or missing resolveUri function', async () => {
             await expect(
-                basicAssetUri('test', 'matrix-asset://api-identifier/123'),
+                basicAssetUri('test', 'matrix-asset://stanfordNews/123'),
             ).rejects.toThrow(
                 'Error occurred in the basicAssetUri function, fns cannot be undefined or null and must have resolveUri function within it. The "test" was received.',
             );
 
             await expect(
-                basicAssetUri({}, 'matrix-asset://api-identifier/123'),
+                basicAssetUri({}, 'matrix-asset://stanfordNews/123'),
             ).rejects.toThrow(
                 'Error occurred in the basicAssetUri function, fns cannot be undefined or null and must have resolveUri function within it. The "[object Object]" was received.',
             );
@@ -38,7 +38,7 @@ describe('[Basic Asset Uri]', () => {
 
     describe('[basicAssetUri Function]', () => {
         it('Should call resolveUri with the correct assetUri', async () => {
-            const assetUri = 'matrix-asset://api-identifier/123';
+            const assetUri = 'matrix-asset://stanfordNews/123';
             const mockAssetData = { id: 123, name: 'Test Asset' };
             mockFns.resolveUri.mockResolvedValue(mockAssetData);
 
@@ -49,7 +49,7 @@ describe('[Basic Asset Uri]', () => {
         });
 
         it('Should throw an error if resolveUri rejects', async () => {
-            const assetUri = 'matrix-asset://api-identifier/123';
+            const assetUri = 'matrix-asset://stanfordNews/123';
             mockFns.resolveUri.mockRejectedValue(new Error('Network Error'));
 
             await expect(basicAssetUri(mockFns, assetUri)).rejects.toThrow(

@@ -85,26 +85,34 @@ Make sure you have the following installed:
     git clone <repository-url>
     cd <repository-folder>
     ```
+2. Set Environment Variables:
 
-2. Install the dependencies:
+This project requires specific environment variables to function properly. 
 
-    ```bash
-    npm install
-    ```
+You can find an `.example.env` file in the root directory, which contains all the necessary environment variables for this project. To set up your environment, copy the `.example.env` file to a new `.env` file in the root of the project. Fill in the values for each variable in the `.env` file according to your project’s needs. 
 
-### Environment Variables
+All required environment variables can be found in the DXP Component Set settings.
 
-This project requires specific environment variables to function properly. You can find an `.example.env` file in the root directory, which contains all the necessary environment variables for this project. To set up your environment:
+Make sure your `.env` file is not included in version control, as it contains sensitive information.
 
-1. Copy the `.example.env` file to a new `.env` file in the root of the project:
+3. Install the dependencies:
 
-    ```bash
-    cp .example.env .env
-    ```
+Prior to installing dependencies, ensure the `.env` variables are available. Files such as `.npmrc` reference these variables and must be available prior to install.
 
-2. Fill in the values for each variable in the `.env` file according to your project’s needs. All required environment variables can be found in the Component Set Settings.
+```bash
+source .env
+```
+Alternatively, set individual environment variables such as the FONTAWESOME_PACKAGE_TOKEN (you will need to get this from a team member). This allows the installation of the fontawesome Pro fonts. 
 
-Make sure your .env file is not included in version control, as it contains sensitive information.
+```bash
+export FONTAWESOME_PACKAGE_TOKEN="<token here>"
+```
+
+Then install the dependencies:
+
+```bash
+npm install
+```
 
 ### Usage
 

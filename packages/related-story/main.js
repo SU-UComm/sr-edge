@@ -1,5 +1,6 @@
 import relatedStory from './related-story.hbs';
 import { cardDataAdapter, matrixCardService } from '../../global/js/utils';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Related story component that fetches and renders related story content.
@@ -24,52 +25,75 @@ export default {
      */
     async main(args, info) {
         // Extracting functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // Extracting environment variables
         const { API_IDENTIFIER, BASE_DOMAIN } = info?.env || info?.set?.environment || {};
 
-        // Extracting configuration data from arguments
-        const { story, descriptionOverride } = args && args?.contentConfiguration || {};
+        // CHANGE: change const to let for mutability
+        let { story, descriptionOverride } = args && args?.contentConfiguration || {};
 
-        // Validate required functions and environment
-        try {
-            if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-            if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
-                throw new Error(
-                    `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
-                );
-            }
-            if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
-                throw new Error(
-                    `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Related story component: ', er);
-            return `<!-- Error occurred in the Related story component: ${er.message} -->`;
+        // NEW: Detect edit mode
+        const squizEdit = info?.ctx?.editor || false;
+        let squizEditTargets = null;
+        
+        if (squizEdit) {
+            // Add default values for inline editable fields
+            descriptionOverride = descriptionOverride || '';
+            
+            // Provide default values for other required fields
+            story = story || 'matrix-asset://StanfordNews/166325';
+            
+            // Configure edit targets - maps static data-se attributes to component fields
+            squizEditTargets = {
+                "description": { "field": "contentConfiguration.descriptionOverride" }
+            };
         }
 
-        // Validate required fields and ensure correct data types
-        try {
-            if (typeof story !== 'string' || story === '') {
-                throw new Error(
-                    `The "story" field must be a string. The ${JSON.stringify(story)} was received.`,
-                );
+        // Validate required functions and environment - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof fnsCtx !== 'object' || typeof fnsCtx.resolveUri === 'undefined') {
+                    throw new Error(
+                        `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
+                    );
+                }
+                if (typeof API_IDENTIFIER !== 'string' || API_IDENTIFIER === '') {
+                    throw new Error(
+                        `The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(API_IDENTIFIER)} was received.`
+                    );
+                }
+                if (typeof BASE_DOMAIN !== 'string' || BASE_DOMAIN === '') {
+                    throw new Error(
+                        `The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The ${JSON.stringify(BASE_DOMAIN)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Related story component: ', er);
+                return `<!-- Error occurred in the Related story component: ${er.message} -->`;
+            }
+        }
 
+        // Validate required fields and ensure correct data types - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof story !== 'string' || story === '') {
+                    throw new Error(
+                        `The "story" field must be a string. The ${JSON.stringify(story)} was received.`,
+                    );
+
+                }
+                if (descriptionOverride && typeof descriptionOverride !== 'string') {
+                    throw new Error(
+                        `The "descriptionOverride" field must be a string. The ${JSON.stringify(descriptionOverride)} was received.`,
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Related story component: ', er);
+                return `<!-- Error occurred in the Related story component: ${er.message} -->`;
             }
-            if (descriptionOverride && typeof descriptionOverride !== 'string') {
-                throw new Error(
-                    `The "descriptionOverride" field must be a string. The ${JSON.stringify(descriptionOverride)} was received.`,
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Related story component: ', er);
-            return `<!-- Error occurred in the Related story component: ${er.message} -->`;
         }
 
         // Initialize card adapter and service
@@ -80,19 +104,34 @@ export default {
         const service = new matrixCardService({ BASE_DOMAIN, API_IDENTIFIER });
         adapter.setCardService(service);
 
-        // Fetch story data
-        data = await adapter.getCards([{ cardAsset: story }]);
-
-        // Validate fetched data
+        // Fetch story data with error handling
         try {
-            if (typeof data !== 'object' || data === null) {
-                throw new Error(
-                    `The data cannot be undefined or null. The ${JSON.stringify(data)} was received.`
-                );
-            }
+            data = await adapter.getCards([{ cardAsset: story }]);
         } catch (er) {
-            console.error('Error occurred in the Related story content component: ', er);
-            return `<!-- Error occurred in the Related story content component: ${er.message} -->`;
+            // NEW: In edit mode, provide mock data instead of returning error
+            if (squizEdit) {
+                data = [{
+                    title: 'Link text',
+                    description: 'This is a sample description from the API that would normally be fetched.',
+                    liveUrl: 'https://news.stanford.edu/stories/2025/03/a-new-molecule-that-targets-a-cryptic-pocket-on-the-body-s-cannabinoid-receptors-could-lead-to-safer-drugs-for-chronic-pain',
+                    imageUrl: 'https://news.stanford.edu/_designs/component-service/editorial/placeholder.png',
+                    imageAlt: 'Sample related story image'
+                }];
+            } 
+        }
+
+        // Validate fetched data - CHANGE: wrap in !squizEdit check
+        if (!squizEdit) {
+            try {
+                if (typeof data !== 'object' || data === null) {
+                    throw new Error(
+                        `The data cannot be undefined or null. The ${JSON.stringify(data)} was received.`
+                    );
+                }
+            } catch (er) {
+                console.error('Error occurred in the Related story content component: ', er);
+                return `<!-- Error occurred in the Related story content component: ${er.message} -->`;
+            }
         }
         
         let { title, description, liveUrl, imageUrl, imageAlt } = data[0]
@@ -107,6 +146,10 @@ export default {
             description: descriptionOverride ? descriptionOverride : description || "",
         };
 
-        return relatedStory(componentData);
+        // NEW: Early return pattern
+        if (!squizEdit) return relatedStory(componentData);
+
+        // NEW: Process for edit mode
+        return processEditor(relatedStory(componentData), squizEditTargets);
     }
 };

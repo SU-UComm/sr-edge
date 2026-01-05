@@ -1,6 +1,7 @@
 import xss from "xss";
 import { basicAssetUri, isRealExternalLink } from '../../global/js/utils';
 import twoColumnTemplate from './two-column-text-callout.hbs';
+import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
  * Two column text callout component that renders content blocks with optional images and buttons
@@ -34,82 +35,107 @@ export default {
      * @returns {Promise<string>} The rendered two column text callout HTML or an error message.
      */
     async main(args, info) {
-        // Extracting environment function from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
- 
+    
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
+        // Detect edit mode
+        const squizEdit = componentContext?.editor || false;
         // Extract configuration data
-        const { heading, showTopBorder = true, callouts = [] } = args;
+        let { heading, showTopBorder = true, callouts = [] } = args;
+        
+        let squizEditTargets = null;
+        if(squizEdit) {
+            heading = heading || 'Heading text';
+            callouts = callouts || [];
 
-        // Validate required context functions
-        try {
-            if (typeof fnsCtx !== "object" || typeof fnsCtx.resolveUri === "undefined") {
-                throw new Error(
-                    `The "info.fns" cannot be undefined or null. The ${JSON.stringify(fnsCtx)} was received.`
-                );
-            }
-        } catch (er) {
-            console.error("Error occurred in the Two Column Text Callout component:", er);
-            return `<!-- Error occurred in the Two Column Text Callout component: ${er.message} -->`;
-        }
-
-        // Validate inputs
-        try {
-            if (heading && typeof heading !== 'string') {
-                throw new Error(
-                    `The "heading" field must be a string. The ${JSON.stringify(heading)} was received.`
-                );
-            }
-            if (!Array.isArray(callouts)) {
-                throw new Error(
-                    `The "callouts" field must be an array. The ${JSON.stringify(callouts)} was received.`
-                );
-            }
-
-            if (callouts.length < 1) {
-                throw new Error(
-                    `The "callouts" array cannot have less than 1 element. The ${JSON.stringify(callouts.length)} elements were received.`
-                );
-            }
-
-            if (callouts.length > 2) {
-                throw new Error(
-                    `The "callouts" array cannot have more than 2 elements. The ${JSON.stringify(callouts.length)} elements were received.`
-                );
-            }
-        } catch (er) {
-            console.error('Error occurred in the Two Column Text Callout component: ', er);
-            return `<!-- Error occurred in the Two Column Text Callout component: ${er.message} -->`;
+            squizEditTargets = {
+                "heading": { "field": "heading" },
+                "infoBoxTitle": { "field": "callouts", "array": true, "property": "title" },
+                "infoBoxContent": { "field": "callouts", "array": true, "property": "content" },
+                "caption": { "field": "callouts", "array": true, "property": "imageConfiguration.caption"},
+                "credit": { "field": "callouts", "array": true, "property": "imageConfiguration.credit"},
+                "button": { "field": "callouts", "array": true, "property": "buttonConfiguration.buttonText"}
+            };
         }
 
         const calloutsData = [];
 
         for (const callout of callouts) { 
-            const { title, content, imageConfiguration, buttonConfiguration } = callout;
-            const { caption, credit, imagePlacement, image } = imageConfiguration || {};
-            const { buttonText, externalUrl, internalUrl, isNewWindow } = buttonConfiguration || {};
+            let { title, content, imageConfiguration, buttonConfiguration } = callout;
+            let { caption, credit, imagePlacement, image } = imageConfiguration || {};
+            let { buttonText, externalUrl, internalUrl, isNewWindow } = buttonConfiguration || {};
 
-            // Fetch image data
+            if(squizEdit) {
+                title = title || 'Title text';
+                content = content || 'Add content';
+
+                buttonText = buttonText || 'Link text';
+                
+                caption = `<span data-se="caption">${caption ? caption : 'Caption text'}</span>`;
+                credit = `<span data-se="credit">${credit ? credit : 'Credit text'}</span>`;
+
+            }
+
+             // Prepare caption-credit data
+            const captionCredit = [caption, credit].filter(Boolean).join(' | ');
+
+            // Fetch image data with error handling
             let imageData = null;
             if (image) {
-                imageData = await basicAssetUri(fnsCtx, image);
+                try {
+                    imageData = await basicAssetUri(fnsCtx, image);
+                } catch (er) {
+                    console.error('Error occurred in the Two Column Text Callout component: Failed to fetch image data. ', er);
+                    if (squizEdit) {
+                        imageData = {
+                            "url": "https://news.stanford.edu/_designs/component-service/editorial/placeholder.png",
+                            "attributes": {
+                                "allow_unrestricted": false,
+                                "size": 1858005,
+                                "height": 960,
+                                "width": 1440,
+                                "title": "placeholder.png",
+                                "name": "placeholder.png",
+                                "caption": "",
+                                "alt": "This is a placeholder"
+                            },
+                        };
+                    }
+                }
             }
 
             // Resolve internal link
             let linkUrl = null;
             if (internalUrl) {
-                linkUrl = await basicAssetUri(fnsCtx, internalUrl);
+                try {
+                    linkUrl = await basicAssetUri(fnsCtx, internalUrl);
+                } catch (er) {
+                    console.error('Error occurred in the Two Column Text Callout component: Failed to fetch link data. ', er);
+                    // NEW: In edit mode, provide mock data instead of returning error
+                    if (squizEdit) {
+                        linkUrl = {
+                            url: "https://news.stanford.edu",
+                            text: buttonText || "Link text"
+                        };
+                    }
+                }
             }
             const internalLinkUrl = linkUrl?.url;
 
             // Check for empty element 
-            const notEmpty = !!(title || content || image || (buttonText && (externalUrl || internalLinkUrl)))
+            let notEmpty = !!(title || content || image || (buttonText && (externalUrl || internalLinkUrl)))
+            if(squizEdit) {
+                notEmpty = true;
+            }
 
-            if (notEmpty) {
+            if (squizEdit || notEmpty) {
                 // Using data to get infoBox for each callout
                 calloutsData.push({
                     title,
                     content: xss(content),
-                    captionCredit: caption && credit ? `${caption} | ${credit}` : caption || credit,
+                    captionCredit,
                     imagePlacement,
                     imageData,
                     buttonText,
@@ -130,6 +156,12 @@ export default {
             flexContainerLength: `${calloutsData.length}`,
         };
 
-        return twoColumnTemplate(componentData);
+        // Early return for non-edit mode
+        if (!squizEdit) {
+            return twoColumnTemplate(componentData);
+        }
+
+        // Process and return template with inline editing support
+        return processEditor(twoColumnTemplate(componentData), squizEditTargets);
     }
 };

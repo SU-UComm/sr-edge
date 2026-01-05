@@ -1,0 +1,182 @@
+{
+    "$schema": "http://localhost:3000/schemas/v1.json#",
+    "name": "content-with-sidebar",
+    "type": "edge",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
+    "description": "Use this component to display WYSIWYG text with a Text Callout as a sidebar.",
+    "displayName": "Content with sidebar",
+    "mainFunction": "main",
+    "environment": [
+        {
+            "name": "API_IDENTIFIER",
+            "required": true
+        }
+    ],
+    "icon": {
+        "id": "view_column",
+        "color": {
+            "type": "enum",
+            "value": "orange"
+        }
+    },
+    "functions": [
+        {
+            "name": "main",
+            "entry": "main.js",
+            "input": {
+                "type": "object",
+                "required": [
+                    "content"
+                ],
+                "properties": {
+                    "heading": {
+                        "title": "Optional Heading",
+                        "description": "This will be added as an h2. Headings can also be added in the content field below.",
+                        "type": "string",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
+                    },
+                    "content": {
+                        "title": "Content",
+                        "description": "Body text.",
+                        "type": "FormattedText",
+                        "ui:metadata": {
+                            "inlineEditable": true
+                        }
+                    },
+                    "infoBox": {
+                        "required": [
+                            "content"
+                        ],
+                        "title": "Text Callout",
+                        "description": "A text callout component will display as a sidebar.",
+                        "properties": {
+                            "title": {
+                                "title": "Heading",
+                                "description": "The text callout heading text.",
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
+                            },
+                            "content": {
+                                "title": "Content",
+                                "description": "The body text of the text callout sidebar. This is required.",
+                                "type": "FormattedText",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
+                            },
+                            "imageConfiguration": {
+                                "title": "Image configuration",
+                                "required": [],
+                                "properties": {
+                                    "image": {
+                                        "title": "Image asset",
+                                        "type": "string",
+                                        "format": "matrix-asset-uri"
+                                    },
+                                    "caption": {
+                                        "title": "Caption",
+                                        "type": "string",
+                                        "format": "multi-line",
+                                        "ui:metadata": {
+                                            "inlineEditable": true
+                                        }
+                                    },
+                                    "credit": {
+                                        "title": "Credit",
+                                        "type": "string",
+                                        "ui:metadata": {
+                                            "inlineEditable": true
+                                        }
+                                    },
+                                    "imagePlacement": {
+                                        "title": "Image position",
+                                        "enum": [
+                                            "Below content",
+                                            "Above content"
+                                        ],
+                                        "type": "string",
+                                        "default": "Below content"
+                                    }
+                                }
+                            },
+                            "buttonConfiguration": {
+                                "title": "Button configuration",
+                                "description": "Optionally add a link button at the bottom by filling out these fields.",
+                                "required": [],
+                                "properties": {
+                                    "buttonText": {
+                                        "title": "Button text",
+                                        "type": "string",
+                                        "ui:metadata": {
+                                            "inlineEditable": true
+                                        }
+                                    },
+                                    "internalUrl": {
+                                        "title": "Internal link (Matrix asset link)",
+                                        "type": "string",
+                                        "description": "Select a page/asset to link to. If this field is filled out, it will be used instead of the external link field below.",
+                                        "format": "matrix-asset-uri"
+                                    },
+                                    "externalUrl": {
+                                        "title": "External (manual) link",
+                                        "type": "string",
+                                        "description": "Enter the full URL, including https://. A diagonal arrow icon will be automatically added after the button text if the URL does not contain news.stanford.edu."
+                                    },
+                                    "isNewWindow": {
+                                        "title": "Open link in a new window",
+                                        "type": "boolean",
+                                        "default": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "output": {
+                "responseType": "html"
+            }
+        }
+    ],
+    "staticFiles": {
+        "locationRoot": "./"
+    },
+    "mockedUris": {
+        "matrix-asset://stanfordNews/99100": {
+            "type": "file",
+            "path": "mocked-uris/99100.json"
+        },
+        "matrix-asset://stanfordNews/125800": {
+            "type": "file",
+            "path": "mocked-uris/125800.json"
+        },
+        "matrix-asset://stanfordNews/125801": {
+            "type": "file",
+            "path": "mocked-uris/125801.json"
+        },
+        "matrix-asset://stanfordNews/28192": {
+            "type": "file",
+            "path": "mocked-uris/28192.json"
+        }
+    },
+    "previews": {
+        "default": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        }
+    }
+}

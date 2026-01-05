@@ -18,7 +18,7 @@ export default async function fbFetcher(
             } taxonomyContentTopicsId:${
             pageData.mainTopicId
             } taxonomyContentSubtopicsId:${pageData.mainTopicId}]
-            &query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 id:${
+            &query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 taxonomyContentMainTopicId:169602 taxonomyContentMainTopicId:169604 id:${
                 pageData.id
             }]
             &meta_taxonomyAudienceText=${translatePersonalisationProfile(
@@ -57,7 +57,7 @@ export default async function fbFetcher(
                     ?profile=${pageData?.search?.profile}
                     &collection=${
                         pageData?.search?.collection
-                    }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 id:${
+                    }&query_not=[taxonomyContentTypeId:28210 taxonomyContentTypeId:28216 taxonomyContentTypeId:28201 taxonomyContentMainTopicId:169602 taxonomyContentMainTopicId:169604 id:${
                         pageData.id
                     }]&num_ranks=3&sort=date&log=false&meta_isTeaser=false`;
                 adapter.url = finalFallbackFbUrl.replace(/\n+|\t+| {2,}/g, "");

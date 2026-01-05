@@ -14,7 +14,7 @@
         <h3 class="su-text-[3.5rem] su-leading-tight md:su-text-[4rem] lg:su-text-[4.3rem] {{#if author}}su-mb-5{{else}}su-mb-15 md:su-mb-19{{/if}}">
             {{#if liveUrl}}
             <a href="{{liveUrl}}" class="su-group su-text-black su-transition dark:su-text-white hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red hocus:su-underline">
-                <span>{{title}}</span>
+                <span data-se="title">{{title}}</span>
                 {{#if isRealExternalLink}} 
                 {{> fontawesome-icon
                     icon="arrow-up-right"
@@ -26,11 +26,11 @@
                 {{/if}}                  
             </a>
             {{else}}
-            <span class="su-text-black su-transition dark:su-text-white">{{title}}</span>
+            <span class="su-text-black su-transition dark:su-text-white" data-se="title">{{title}}</span>
             {{/if}}
         </h3>
         {{/if}}
-        {{#if author}}<div data-test="mediacard-author" class="su-mb-15 md:su-mb-19">{{author}}</div>{{/if}}
+        {{#if author}}<div data-test="mediacard-author" class="su-mb-15 md:su-mb-19" data-se="author">{{author}}</div>{{/if}}
         {{#if type}}
         <div class="su-text-18 md:su-text-16 su-mb-15 md:su-mb-19 su-gap-6 su-text-black-70 dark:su-text-black-50 su-flex su-nowrap su-items-center su-leading-none">
             {{> fontawesome-icon
@@ -42,7 +42,7 @@
         </div>
         {{/if}}
         {{#if description}} 
-        <div data-test="mediacard-description" class="*:su-my-0 *:su-leading-[125%] su-leading-[125%] *:su-text-18 su-text-18 md:*:su-text-19 md:su-text-19 lg:*:su-text-21 lg:su-text-21 dark:su-text-white su-font-sans su-w-full">
+        <div data-test="mediacard-description" class="*:su-my-0 *:su-leading-[125%] su-leading-[125%] *:su-text-18 su-text-18 md:*:su-text-19 md:su-text-19 lg:*:su-text-21 lg:su-text-21 dark:su-text-white su-font-sans su-w-full" data-se="teaserText">
             {{description}}
         </div>
         {{/if}}

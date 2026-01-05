@@ -1,29 +1,35 @@
 <section data-component="interactive-photo-card">
     <div class="su-cc">
         <article class="su-relative su-grid xl:su-grid-cols-2 su-gap-20 [perspective:100rem] su-transition-transform">
-            <div class="su-flex su-relative [transform-style:preserve-3d] su-duration-1000 {{contentAlignmentClass}}" data-card-inner="true">
-                <div class="su-group/front su-relative su-bg-white su-backface-hidden su-rounded-[8px] su-shadow-lg su-min-w-full" aria-hidden="false" data-card-inner-content="true">
+            <div class="su-flex su-relative [transform-style:preserve-3d] su-duration-1000 su-max-w-full su-min-w-full {{contentAlignmentClass}}" data-card-inner="true">
+                <div class="su-relative su-backface-hidden su-rounded-[8px] su-min-w-full {{#if alwaysDark}}su-bg-black-true su-border-2 su-border-black{{else}}su-bg-white su-shadow-lg{{/if}}" aria-hidden="false" data-card-inner-content="true">
                     <div class="su-flex su-flex-col su-h-full su-rs-px-5 su-rs-pt-6 su-rs-pb-4">
                         {{#if eyebrow}}
-                        <div class="su-type-1 su-text-black-60 su-font-semibold su-rs-mb-1">
+                        <div class="su-type-1 su-text-black-60 su-font-semibold su-rs-mb-1" data-se="eyebrow">
                             {{eyebrow}}
                         </div>
                         {{/if}}
-                        <h2 class="su-grow su-type-4 su-font-bold su-font-sans su-text-black dark:su-text-black su-rs-mb-0">
+                        <h2 class="su-grow su-type-4 su-font-bold su-font-sans su-rs-mb-0 {{#if alwaysDark}}su-text-white{{else}}su-text-black dark:su-text-black{{/if}}" data-se="title">
                             {{title}}
                         </h2>
-                        <button type="button" tabIndex="" aria-label="See additional information" class="su-block su-ml-auto su-mr-0 su-bg-black su-text-white group-hover/front:su-bg-digital-red focus:su-bg-digital-red su-rounded-full su-p-10 su-stretched-link su-transition-all su-opacity-100 group-aria-hidden/front:su-opacity-0">
+                        <button type="button" tabIndex="" aria-label="See additional information" class="su-group su-block su-ml-auto su-mr-0 su-bg-black su-text-white su-rounded-full su-p-10 su-transition-all su-opacity-100 aria-hidden:su-opacity-0 {{#if alwaysDark}}su-bg-white su-text-black-true hocus:su-bg-dark-mode-red{{else}}su-bg-black su-text-white hocus:su-bg-digital-red{{/if}}">
                             {{> svg-icons icon="plus" classes=iconPlusClasses}}
                         </button>
                     </div>
                 </div>
-                <div class="su-group/back su-relative su-flex su-flex-col su-h-full su-min-w-full su-rounded-[8px] su-rs-px-5 su-rs-pt-6 su-rs-pb-4 su-bg-digital-red-dark su-text-white [transform:rotateY(180deg)_translate(100%,0)] su-backface-hidden su-transition-transform su-shadow-lg" aria-hidden="true" data-card-inner-content="true">
+                <div class="su-relative su-flex su-flex-col su-h-full su-min-w-full su-rounded-[8px] su-rs-px-5 su-rs-pt-6 su-rs-pb-4 su-bg-digital-red-dark su-text-white [transform:rotateY(180deg)_translate(100%,0)] su-backface-hidden su-transition-transform {{#unless alwaysDark}}su-shadow-lg{{/unless}}" aria-hidden="true" data-card-inner-content="true">
                     <div class="su-big-paragraph su-grow">
-                        {{{content}}}
-                        <button type="button" tabIndex="-1" aria-label="Dismiss content" class="su-block su-ml-auto su-mr-0 su-border-3 su-border-white su-rounded-full su-text-white focus:su-bg-black group-hover/back:su-bg-black su-p-7 lg:su-p-14 su-stretched-link su-transition-colors">
-                            {{> svg-icons icon="arrows rotate" classes=iconArrowClasses}}
-                        </button>
+                        {{#if squizEdit}}
+                        <div data-se="content">
+                            {{{content}}}
+                        </div>
+                        {{else}}
+                            {{{content}}}
+                        {{/if}}                        
                     </div>
+                    <button type="button" tabIndex="-1" aria-label="Dismiss content" class="su-group su-block su-ml-auto su-mr-0 su-border-3 su-border-white su-rounded-full su-text-white su-p-7 lg:su-p-14 su-transition-colors {{#if alwaysDark}}focus:su-bg-black-true hocus:su-bg-black-true{{else}}focus:su-bg-black hocus:su-bg-black{{/if}}">
+                        {{> svg-icons icon="arrows rotate" classes=iconArrowClasses}}
+                    </button>
                 </div>
             </div>
             <div class="su-rounded-[8px] su-overflow-hidden su-shadow-lg {{imageAlignmentClass}}">

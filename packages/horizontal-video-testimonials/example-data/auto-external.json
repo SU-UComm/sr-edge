@@ -1,0 +1,47 @@
+{
+    "sectionConfiguration": {
+        "alwaysDark": true,
+        "title": " Accelerating solutions for today’s challenges                           ",
+        "ctaText": " ",
+        "ctaManualUrl": "https://news.stanford.edu/video",
+        "marginTop": "base",
+        "marginBottom": "7"
+    },
+    "testimonials": [
+        {
+            "heading": "Exoskeletons for easier, faster walking",
+            "description": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "Stanford engineers want to help people with mobility impairments, particularly older people, move more easily through the world. "
+                        }
+                    ]
+                }
+            ],
+            "videoImage": "matrix-asset://StanfordNews/37052",
+            "youtubeId": "-vTk-TRN0C8",
+            "manualStoryUrl": "http://www.google.com"
+        },
+        {
+            "heading": "Harnessing AI to invent new medicines",
+            "description": [
+                {
+                    "type": "tag",
+                    "tag": "p",
+                    "children": [
+                        {
+                            "type": "text",
+                            "value": "An AI system loaded with the genomes of 15,000 species runs experiments in minutes instead of years, and could help scientists identify disease-curing molecules. "
+                        }
+                    ]
+                }
+            ],
+            "videoImage": "matrix-asset://StanfordNews/165741",
+            "youtubeId": "tgNDNeveCog"
+        }
+    ]
+}

@@ -1,9 +1,9 @@
 {
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "button-row",
-    "version": "4.0.2",
+    "version": "6.0.0",
     "type": "edge",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "namespace": "stanford-components",
     "description": "Add up to 3 buttons in this row component.",
     "displayName": "Button row",
     "mainFunction": "main",
@@ -38,7 +38,11 @@
                             "properties": {
                                 "buttonText": {
                                     "type": "string",
-                                    "title": "Button text"
+                                    "title": "Button text",
+                                    "default": "Button text",
+                                    "ui:metadata": {
+                                        "inlineEditable": true
+                                    }
                                 },
                                 "internalUrl": {
                                     "title": "Internal link (Matrix asset link)",
@@ -72,23 +76,23 @@
         "locationRoot": "./"
     },
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/3": {
+        "matrix-asset://stanfordNews/3": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/7": {
+        "matrix-asset://stanfordNews/7": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/8": {
+        "matrix-asset://stanfordNews/8": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/11": {
+        "matrix-asset://stanfordNews/11": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/28192": {
+        "matrix-asset://stanfordNews/28192": {
             "type": "file",
             "path": "mocked-uris/28192.json"
         }

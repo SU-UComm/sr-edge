@@ -72,22 +72,22 @@ describe('[In the news]', () => {
         headingConfiguration: {
             title: "In the news",
             ctaText: "View all",
-            ctaUrl: "matrix-asset://api-identifier/162707",
+            ctaUrl: "matrix-asset://stanfordNews/162707",
 
         },
         featuredContent: {
-            featuredTeaser: "matrix-asset://api-identifier/162707",
-            personHeadshot: "matrix-asset://api-identifier/163591",
+            featuredTeaser: "matrix-asset://stanfordNews/162707",
+            personHeadshot: "matrix-asset://stanfordNews/163591",
             featuredCtaText: "Read the story on NPR",
             featuredTeaserDescription: "This is a custom feature desc",
             featuredQuote: "A sanctuary, it’s a forever thing. And so we want to know not only what’s here now, but how it’s changing over time.”"
         },
         supplementaryTeaserOne: {
-            teaserOne: "matrix-asset://api-identifier/162707",
+            teaserOne: "matrix-asset://stanfordNews/162707",
             teaserOneDescription: "John Doe"
         },
         supplementaryTeaserTwo: {
-            teaserTwo: "matrix-asset://api-identifier/162707",
+            teaserTwo: "matrix-asset://stanfordNews/162707",
             teaserTwoDescription: "Jane Smith"
         }
     };
@@ -505,12 +505,12 @@ describe('[In the news]', () => {
                 headingConfiguration: {
                     title: "In the news",
                     ctaText: "View all",
-                    ctaUrl: "matrix-asset://api-identifier/162707",
+                    ctaUrl: "matrix-asset://stanfordNews/162707",
         
                 },
                 featuredContent: {
-                    featuredTeaser: "matrix-asset://api-identifier/162707",
-                    personHeadshot: "matrix-asset://api-identifier/163591",
+                    featuredTeaser: "matrix-asset://stanfordNews/162707",
+                    personHeadshot: "matrix-asset://stanfordNews/163591",
                     featuredCtaText: "Read the story on NPR",
                     featuredTeaserDescription: "This is a custom feature desc",
                     featuredQuote: "A sanctuary, it’s a forever thing. And so we want to know not only what’s here now, but how it’s changing over time.”"
@@ -560,11 +560,11 @@ describe('[In the news]', () => {
                 headingConfiguration: {
                     title: "In the news",
                     ctaText: "View all",
-                    ctaUrl: "matrix-asset://api-identifier/162707",
+                    ctaUrl: "matrix-asset://stanfordNews/162707",
         
                 },
                 featuredContent: {
-                    featuredTeaser: "matrix-asset://api-identifier/162707",
+                    featuredTeaser: "matrix-asset://stanfordNews/162707",
                     featuredCtaText: "Read the story on NPR",
                     featuredTeaserDescription: "This is a custom feature desc",
                     featuredQuote: "A sanctuary, it’s a forever thing. And so we want to know not only what’s here now, but how it’s changing over time.”"
@@ -651,11 +651,11 @@ describe('[In the news]', () => {
                 headingConfiguration: {
                     title: "In the news",
                     ctaText: "View all",
-                    ctaUrl: "matrix-asset://api-identifier/162707",
+                    ctaUrl: "matrix-asset://stanfordNews/162707",
         
                 },
                 featuredContent: {
-                    featuredTeaser: "matrix-asset://api-identifier/162707",
+                    featuredTeaser: "matrix-asset://stanfordNews/162707",
                     featuredCtaText: "Read the story on NPR",
                     featuredTeaserDescription: "This is a custom feature desc",
                     featuredQuote: "A sanctuary, it’s a forever thing. And so we want to know not only what’s here now, but how it’s changing over time.”"
@@ -685,11 +685,11 @@ describe('[In the news]', () => {
                 headingConfiguration: {
                     title: "In the news",
                     ctaText: "View all",
-                    ctaUrl: "matrix-asset://api-identifier/162707",
+                    ctaUrl: "matrix-asset://stanfordNews/162707",
         
                 },
                 featuredContent: {
-                    featuredTeaser: "matrix-asset://api-identifier/162707",
+                    featuredTeaser: "matrix-asset://stanfordNews/162707",
                     featuredCtaText: "Read the story on NPR",
                     featuredTeaserDescription: "This is a custom feature desc",
                     featuredQuote: "A sanctuary, it’s a forever thing. And so we want to know not only what’s here now, but how it’s changing over time.”"

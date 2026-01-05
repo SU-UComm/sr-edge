@@ -1,19 +1,19 @@
 {
     "headingConfiguration": {
         "title": "",
-        "ctaUrl": "matrix-asset://api-identifier/128705"
+        "ctaUrl": "matrix-asset://stanfordNews/128705"
     },
     "contentConfiguration": {
         "source": "Select",
         "cards": [
             {
-                "cardAsset": "matrix-asset://api-identifier/168663"
+                "cardAsset": "matrix-asset://stanfordNews/168663"
             },
             {
-                "cardAsset": "matrix-asset://api-identifier/168591"
+                "cardAsset": "matrix-asset://stanfordNews/168591"
             },
             {
-                "cardAsset": "matrix-asset://api-identifier/168624"
+                "cardAsset": "matrix-asset://stanfordNews/168624"
             }
         ],
         "featuredDescription": ""
@@ -25,7 +25,7 @@
     },
     "eventsConfiguration": {
         "heading": "Upcoming Events",
-        "endPoint": "https://events.stanford.edu/api/2/events?type=37006980803119,37006980805168,37006980807217,37006980808242&days=365",
+        "endPoint": "https://news.stanford.edu/_api/events/query/",
         "numberOfItems": 3,
         "linkUrl": "https://events.stanford.edu/calendar/upcoming?order=date&experience=&event_types%5B%5D=37006980803119&event_types%5B%5D=37006980807217&event_types%5B%5D=37006980805168"
     },
@@ -33,6 +33,6 @@
         "heading": "Announcements",
         "endPoint": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search_preview&log=false&query=!null&sort=date&meta_taxonomyContentTypeText=Announcement&meta_taxonomyAudienceText=Student",
         "numberOfItems": 3,
-        "linkUrl": "matrix-asset://api-identifier/128705"
+        "linkUrl": "matrix-asset://stanfordNews/128705"
     }
 }

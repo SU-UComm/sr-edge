@@ -2,7 +2,7 @@
  * Basic Asset Uri Fetch 
  *
  * @param {object} props.fns The fns info object.
- * @param {string} props.assetUri The Uri to fetch in the "matrix-asset://api-identifier/ID" format.
+ * @param {string} props.assetUri The Uri to fetch in the "matrix-asset://stanfordNews/ID" format.
  *  
  * @returns {object}
  */

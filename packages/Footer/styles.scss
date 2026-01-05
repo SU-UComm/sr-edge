@@ -1,9 +1,6 @@
 /* stylelint-disable at-rule-no-deprecated */
 /* stylelint-disable media-feature-range-notation */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
+
 
 .pre-footer-links-wrapper {
     align-items: flex-start;
@@ -62,32 +59,5 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-}
-
-.footer-links-wrapper ul {
-    padding-left: 0;
-}
-
-.footer-top-links ul,
-.footer-bottom-links ul {
-    list-style-type: none;
-}
-
-@media (max-width: 767px) {
-    .footer-links-wrapper {
-        justify-content: center;
-    }
-
-    .footer-top-links {
-        padding-top: 0;
-    }
-
-    .footer-top-links ul {
-        flex-direction: column;
-    }
-
-    .footer-bottom-links ul {
-        flex-direction: column;
     }
 }

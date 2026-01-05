@@ -3,7 +3,7 @@
         {{~#if title~}}
         <div class="su-relative su-justify-start su-items-center su-w-full su-gap-3 su-flex su-overflow-hidden su-rs-mb-0">
             <div>
-                <h3 class="su-font-serif su-text-21 md:su-text-23 su-inline su-pr-10 su-m-0">
+                <h3 class="su-font-serif su-text-21 md:su-text-23 su-inline su-pr-10 su-m-0" data-se="infoBoxTitle">
                     {{title}}
                 </h3>
                 <span class="su-w-full su-bg-black-40 dark:su-bg-black-70 su-h-px su-absolute su-bottom-4" />
@@ -12,7 +12,7 @@
         {{~/if~}}
         {{~#if content~}}
         <div class="{{#if imageData.url}}{{getStringByCondition value=imagePlacement expectedValue="Above content" trueResult="su-order-2" falseResult="su-order-1"}}{{/if}} su-flex su-flex-col su-gap-12">
-            <div class="su-wysiwyg-content *:su-text-16 *:md:su-text-19 *:su-leading last:*:su-mb-0">
+            <div class="su-wysiwyg-content *:su-text-16 *:md:su-text-19 *:su-leading last:*:su-mb-0" data-se="infoBoxContent">
                 {{{content}}}
             </div>
         </div>
@@ -20,13 +20,13 @@
         {{~#if imageData.url~}}
         <figure class=" {{getStringByCondition value=imagePlacement expectedValue="Above content" trueResult="su-order-1 su-pb-20 md:su-pb-12 lg:su-pb-27" falseResult="su-order-2 su-pt-20 md:su-pt-12 lg:su-pt-27"}} su-w-full">
             <img src="{{imageData.url}}" alt="{{imageData.attributes.alt}}" class="su-w-full"/>
-            <figcaption class="su-m-0 su-text-14 su-leading-[1.672rem] md:su-leading-[1.911rem] md:su-text-16 su-mt-8 md:su-mt-12">
-                {{captionCredit}}
+            <figcaption class="su-m-0 su-text-14 su-leading-[1.672rem] md:su-leading-[1.911rem] md:su-text-16 su-mt-8 md:su-mt-12" data-se="captionCredit">
+                {{{captionCredit}}}
             </figcaption>
         </figure>
         {{~/if~}}
         {{~#if buttonText~}}
-            {{> link-button buttonText=buttonText isNewWindow=isNewWindow buttonUrl=buttonUrl isRealExternalLink=isRealExternalLink ctaType="link" customClasses="su-rs-mt-1 su-order-3"}}
+            {{> link-button buttonText=buttonText isNewWindow=isNewWindow buttonUrl=buttonUrl isRealExternalLink=isRealExternalLink ctaType="link" customClasses="su-rs-mt-1 su-order-3" editTarget="infoBoxButton"}}
         {{~/if~}}
     </div>
 </div>

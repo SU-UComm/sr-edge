@@ -2,10 +2,10 @@
     "headingConfiguration": {
         "title": "Read next",
         "ctaText": "View all",
-        "ctaUrl": "matrix-asset://api-identifier/141464",
+        "ctaUrl": "matrix-asset://stanfordNews/141464",
         "ctaNewWindow": false
     },
     "contentConfiguration": {
-        "searchQuery": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!nullquery&global=true&meta_taxonomyAudienceText="
+        "searchQuery": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&sort=date&meta_isTeaser=false&meta_taxonomyContentCategoryId=28171&meta_taxonomyContentTypeId_not=28210&meta_taxonomyContentTypeId_not=28216&meta_taxonomyContentTypeId_not=28201&meta_taxonomyContentTypeId_not=28394&meta_taxonomyContentMainTopicId_not=169602&meta_taxonomyContentMainTopicId_not=169604&num_ranks=6&start_rank=4"
     }
 }

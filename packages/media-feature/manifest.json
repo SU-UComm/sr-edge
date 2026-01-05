@@ -2,8 +2,8 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "media-feature",
     "type": "edge",
-    "version": "4.0.2",
-    "namespace": "pnp-stanford-edge-components-hbs",
+    "version": "6.0.0",
+    "namespace": "stanford-components",
     "description": "The media feature component is used to feature a singular podcast or book.",
     "displayName": "Media feature",
     "mainFunction": "main",
@@ -38,18 +38,28 @@
                             },
                             "title": {
                                 "title": "Title",
-                                "type": "string"
+                                "type": "string",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "mediaType": {
                                 "title": "Media type",
-                                "enum": ["Podcast", "Book", "Magazine"],
+                                "enum": [
+                                    "Podcast",
+                                    "Book",
+                                    "Magazine"
+                                ],
                                 "type": "string",
                                 "default": "Podcast"
                             },
                             "teaserText": {
                                 "title": "Teaser text",
                                 "type": "string",
-                                "format": "multi-line"
+                                "format": "multi-line",
+                                "ui:metadata": {
+                                    "inlineEditable": true
+                                }
                             },
                             "linkUrl": {
                                 "title": "Link URL",
@@ -65,59 +75,59 @@
         }
     ],
     "mockedUris": {
-        "matrix-asset://matrixIdentifier/1": {
+        "matrix-asset://stanfordNews/1": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/2": {
+        "matrix-asset://stanfordNews/2": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/5": {
+        "matrix-asset://stanfordNews/5": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/6": {
+        "matrix-asset://stanfordNews/6": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/9": {
+        "matrix-asset://stanfordNews/9": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/10": {
+        "matrix-asset://stanfordNews/10": {
             "type": "file",
             "path": "mocked-uris/image.json"
         },
-        "matrix-asset://matrixIdentifier/3": {
+        "matrix-asset://stanfordNews/3": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/7": {
+        "matrix-asset://stanfordNews/7": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/8": {
+        "matrix-asset://stanfordNews/8": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://matrixIdentifier/11": {
+        "matrix-asset://stanfordNews/11": {
             "type": "file",
             "path": "mocked-uris/page.json"
         },
-        "matrix-asset://api-identifier/9848": {
+        "matrix-asset://stanfordNews/9848": {
             "type": "file",
             "path": "mocked-uris/9848.json"
         },
-        "matrix-asset://api-identifier/125800": {
+        "matrix-asset://stanfordNews/125800": {
             "type": "file",
             "path": "mocked-uris/125800.json"
         },
-        "matrix-asset://api-identifier/125801": {
+        "matrix-asset://stanfordNews/125801": {
             "type": "file",
             "path": "mocked-uris/125801.json"
         },
-        "matrix-asset://api-identifier/9856": {
+        "matrix-asset://stanfordNews/9856": {
             "type": "file",
             "path": "mocked-uris/9856.json"
         }

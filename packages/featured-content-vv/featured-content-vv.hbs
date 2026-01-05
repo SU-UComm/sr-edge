@@ -1,0 +1,26 @@
+<section data-component="featured-content-vv">
+    <div class="{{containerClasses}}">
+        {{#if headingConfiguration.includeSectionHeading}}
+            {{> linked-heading title=headingData.title ctaText=headingData.ctaText ctaLink=headingData.ctaLink ctaNewWindow=headingData.ctaNewWindow}}
+        {{/if}}
+        <div class="su-w-full su-component-featured-grid">
+            <div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]">
+                <div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow {{cardsGrowClasses alignment}} featured-content-vv-featured-card">
+                    {{{featuredCard}}}
+                </div>
+                <div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-36 before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start {{cardsAlignmentClasses alignment}}">
+                    <div class="su-relative su-w-full">
+                        {{> card-thumbnail imageUrl=videoImageUrl alt=videoImageAlt title=videoImageAlt aspectRatio="vertical-video" uniqueID=uniqueID videoUrl=youtubeId size="vertical-video-featured" videoIconClasses="group-hocus:su-scale-110 su-transition-transform su-z-30" rounded=true}}
+                    </div>
+                    <div class="su-relative su-w-full false before:su-left-0 before:su-top-[-40px] md:before:su-top-[-36px] lg:before:su-top-[-38px] featured-content-vv-related-card">
+                        {{{relatedCard}}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{#> modal-content titleID=videoModal.titleID uniqueID=uniqueID ariaTitle=videoModal.title}}
+        {{> embed-video isVertical=videoModal.isVertical videoId=youtubeId title=videoModal.title noAutoPlay=videoModal.noAutoPlay}}
+    {{/ modal-content}}
+</section> 

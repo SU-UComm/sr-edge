@@ -19,7 +19,9 @@ export default {
     */
     async main(args, info) {
         // Extracting functions from provided info
-        const fnsCtx = info?.fns || info?.ctx || {};
+        const componentFunctions = info?.fns || null;
+        const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // Extracting configuration data from arguments
         const { dataUrl } = args || {};
@@ -62,8 +64,7 @@ export default {
                 throw new Error("Invalid API response: siteData is missing or not an object.");
             }
         } catch (er) {
-            console.error('Error occurred in the Footer component: Error parsing footer data JSON response: ', er);
-            return `<!-- Error occurred in the Footer component: Error parsing footer data JSON response: ${er.message} -->`;
+            throw new Error(`Error occurred in the Footer component: Error parsing footer data JSON response: ${er.message}`);
         }
         
 
