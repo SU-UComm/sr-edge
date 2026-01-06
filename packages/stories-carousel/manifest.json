@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "stories-carousel",
     "type": "edge",
-    "version": "6.0.2",
+    "version": "6.0.3",
     "namespace": "stanford-components",
     "description": "Links to stories displayed as cards in a carousel.",
     "displayName": "Stories carousel",
@@ -94,7 +94,7 @@
                             "searchQuery": {
                                 "type": "string",
                                 "title": "The Funnelback search query",
-                                "default": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser=false&meta_taxonomyContentTypeText_not=Announcement+Leadership%20Messages&num_ranks=6"
+                                "default": "?collection=sug~sp-stanford-report-search&profile=stanford-report-push-search&log=false&query=!null&sort=date&meta_isTeaser=false&meta_taxonomyContentTypeText_not=Announcement+Leadership%20Messages&meta_taxonomyContentMainTopicId_not=169602&meta_taxonomyContentMainTopicId_not=169604&num_ranks=6"
                             }
                         }
                     }
