@@ -38,6 +38,7 @@ vi.mock('../../global/js/utils', () => ({
     })),
     matrixCardService: vi.fn(),
     linkedHeadingService: vi.fn(),
+    uuid: vi.fn().mockReturnValue('test-uuid-12345'),
 }));
 
 describe('[Single Featured Content Component]', () => {

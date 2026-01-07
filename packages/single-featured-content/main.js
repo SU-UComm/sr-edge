@@ -1,6 +1,6 @@
-import { cardDataAdapter, matrixCardService, linkedHeadingService } from "../../global/js/utils";
+import { cardDataAdapter, matrixCardService, linkedHeadingService, uuid } from "../../global/js/utils";
 import { processEditor } from '../../global/js/utils/processEditor';
-import { Card } from "../../global/js/helpers";
+import { Card, Modal, EmbedVideo } from "../../global/js/helpers";
 import singleFeaturedTemplate from "./single-featured-content.hbs";
 
 /**
@@ -88,6 +88,24 @@ export default {
             return itemData;
         })[0]
 
+        // Generate unique ID for the card (used for video modal linking)
+        const uniqueId = uuid();
+
+        // Create modal for video cards
+        let cardModal = '';
+        if (cardData?.type === 'Video' && cardData?.videoUrl) {
+            cardModal = Modal({
+                content: EmbedVideo({
+                    isVertical: false,
+                    videoId: cardData.videoUrl,
+                    title: `Watch ${cardData.title}`,
+                    noAutoPlay: true
+                }),
+                uniqueId,
+                titleId: 'card-modal'
+            });
+        }
+
         // Resolve the URI for the section heading link
         let headingData;
         try {
@@ -134,7 +152,8 @@ export default {
             ctaNewWindow: headingData.ctaNewWindow,
             isAlwaysLight: false,
             width: "large",
-            card: Card({ data: cardData, cardSize: "featured" }),
+            card: Card({ data: cardData, cardSize: "featured", uniqueId }),
+            cardModal,
             data: JSON.stringify(cardData)
         };
 
