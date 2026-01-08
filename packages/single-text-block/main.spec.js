@@ -18,7 +18,7 @@ describe('[Single Text Block Component]', () => {
             const result = await main();
         
             expect(result).not.toContain('Error');
-            expect(result).toContain('data-component="single-text-block"'); 
+            expect(result).toContain("data-component='single-text-block'"); 
         });
 
         it('Should return error when title is not a string', async () => {
@@ -70,7 +70,7 @@ describe('[Single Text Block Component]', () => {
             expect(result).toContain(
                 'Stanford offers comprehensive, need-based financial aid that makes it possible for all admitted undergraduate students to attend. We do not expect students to borrow to meet their need.',
             );
-            expect(result).toContain('data-component="single-text-block"');
+            expect(result).toContain("data-component='single-text-block'");
         });
 
         it('Should render with only title', async () => {

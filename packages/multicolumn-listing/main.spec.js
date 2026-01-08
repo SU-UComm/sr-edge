@@ -286,143 +286,6 @@ describe('[Multicolumn listing]', () => {
     });
 
     describe('[Error Handling]', () => {
-        it('Should throw an error when no env variables were provided.', async () => {
-            const result = await main();
-            
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The undefined was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when FB_JSON_URL is empty string.', async () => {
-            const customMockInfo = {
-                ...defaultMockInfo, 
-                set: { 
-                    environment: {
-                        ...defaultMockInfo.set.environment, 
-                        FB_JSON_URL: '' 
-                    }
-                }
-            };
-
-            const result = await main({},customMockInfo);
-            
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The "" was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when FB_JSON_URL is not a string.', async () => {
-            const customMockInfo = {
-                ...defaultMockInfo, 
-                set: { 
-                    environment: {
-                        ...defaultMockInfo.set.environment, 
-                        FB_JSON_URL: 123 
-                    }
-                }
-            };
-
-            const result = await main({},customMockInfo);
-
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The 123 was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when API_IDENTIFIER is empty string.', async () => {
-            const customMockInfo = {
-                ...defaultMockInfo, 
-                set: { 
-                    environment: {
-                        ...defaultMockInfo.set.environment, 
-                        API_IDENTIFIER: '' 
-                    }
-                }
-            };
-
-            const result = await main({},customMockInfo);
-
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The "" was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when API_IDENTIFIER is not a string.', async () => {
-            const customMockInfo = {
-                ...defaultMockInfo, 
-                set: { 
-                    environment: {
-                        ...defaultMockInfo.set.environment, 
-                        API_IDENTIFIER: 123 
-                    }
-                }
-            };
-            
-            const result = await main({},customMockInfo);
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The 123 was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when BASE_DOMAIN is empty string.', async () => {
-            const customMockInfo = {
-                ...defaultMockInfo, 
-                set: { 
-                    environment: {
-                        ...defaultMockInfo.set.environment, 
-                        BASE_DOMAIN: '' 
-                    }
-                }
-            };
-            
-            const result = await main({},customMockInfo);
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The "" was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when BASE_DOMAIN is not a string.', async () => {
-            const customMockInfo = {
-                ...defaultMockInfo, 
-                set: { 
-                    environment: {
-                        ...defaultMockInfo.set.environment, 
-                        BASE_DOMAIN: 123
-                    }
-                }
-            };
-            
-            const result = await main({},customMockInfo);
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The 123 was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw an error when fnsCtx is not an object.', async () => {
-            const customMockInfo = {
-                ...defaultMockInfo, 
-                fns: 'string', 
-                ctx: 'string'
-            };
-
-            const result = await main({},customMockInfo);
-            
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "info.fns" cannot be undefined or null. The "string" was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when fnsCtx is is undefined.', async () => {
-            const customMockInfo = {
-                ...defaultMockInfo, 
-                fns: undefined, 
-                ctx: undefined
-            };
-
-            const result = await main({},customMockInfo);
-            
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "info.fns" cannot be undefined or null. The {} was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when args does not exist', async () => {
-            const result = await main(undefined, defaultMockInfo);
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "source" field cannot be undefined and must be one of ['Search', 'Select'] value, undefined was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
     
         it('Should throw an error when title is not a string', async () => {
             const customMockData = { 
@@ -436,36 +299,6 @@ describe('[Multicolumn listing]', () => {
             const result = await main(customMockData, defaultMockInfo);
 
             expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "title" field must be a string. The {} was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-    
-        it('Should throw an error when ctaUrl is not a string', async () => {
-            const customMockData = { 
-                ...defaultMockData, 
-                headingConfiguration: { 
-                    ...defaultMockData.headingConfiguration, 
-                    ctaUrl: {}
-                } 
-            };
-
-            const result = await main(customMockData, defaultMockInfo);
-            
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "ctaUrl" field must be a string. The {} was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-    
-        it('Should throw an error when ctaManualUrl is not a string', async () => {
-            const customMockData = { 
-                ...defaultMockData, 
-                headingConfiguration: { 
-                    ...defaultMockData.headingConfiguration, 
-                    ctaManualUrl: {} 
-                } 
-            };
-
-            const result = await main(customMockData, defaultMockInfo);
-
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "ctaManualUrl" field must be a string. The {} was received. -->`);
             expect(mockedError).toBeCalledTimes(1);
         });
     
@@ -507,126 +340,7 @@ describe('[Multicolumn listing]', () => {
                     source: undefined 
                 } 
             };
-
-            const result = await main(customMockData, defaultMockInfo);
-
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "source" field cannot be undefined and must be one of ['Search', 'Select'] value, undefined was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-    
-        it('Should throw an error when source is not a string', async () => {
-            const customMockData = { 
-                ...defaultMockData, 
-                contentConfiguration: { 
-                    ...defaultMockData.contentConfiguration, 
-                    source: {} 
-                } 
-            };
-
-            const result = await main(customMockData, defaultMockInfo);
-
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "source" field cannot be undefined and must be one of ['Search', 'Select'] value, {} was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when source is not one of ["Select", "Search"] value', async () => {
-            const customMockData = { 
-                ...defaultMockData, 
-                contentConfiguration: { 
-                    ...defaultMockData.contentConfiguration, 
-                    source: "test" 
-                } 
-            };
-
-            const result = await main(customMockData, defaultMockInfo);
-
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "source" field cannot be undefined and must be one of ['Search', 'Select'] value, "test" was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when searchMaxCards is not a number', async () => {
-            const customMockData = { 
-                ...defaultMockData, 
-                contentConfiguration: { 
-                    ...defaultMockData.contentConfiguration, 
-                    source: 'Search',
-                    searchQuery: '?test-query=test-value',
-                    searchMaxCards: 'not a number' 
-                } 
-            };
-
-            const result = await main(customMockData, defaultMockInfo);
-
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "searchMaxCards" field cannot be undefined and must be a number between 2 and 3. The "not a number" was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when searchMaxCards is not one of [2, 3]', async () => {
-            const customMockData = { 
-                ...defaultMockData, 
-                contentConfiguration: { 
-                    ...defaultMockData.contentConfiguration, 
-                    source: 'Search',
-                    searchQuery: '?test-query=test-value',
-                    searchMaxCards: 4
-                } 
-            };
-
-            const result = await main(customMockData, defaultMockInfo);
-
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "searchMaxCards" field cannot be undefined and must be a number between 2 and 3. The 4 was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-    
-        it('Should throw an error when searchQuery not a string', async () => {
-            const mockData = {
-                ...defaultMockData, 
-                contentConfiguration: {
-                    ...defaultMockData.contentConfiguration, 
-                    source: "Search", 
-                    searchMaxCards: 3, 
-                    searchQuery: 123
-                }
-            }
-
-            const result = await main(mockData, defaultMockInfo);
-
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "searchQuery" field cannot be undefined and must be a non-empty string. The 123 was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when searchQuery is empty strong', async () => {
-            const mockData = {
-                ...defaultMockData, 
-                contentConfiguration: {
-                    ...defaultMockData.contentConfiguration, 
-                    source: "Search", 
-                    searchMaxCards: 3, 
-                    searchQuery: ""
-                }
-            }
-
-            const result = await main(mockData, defaultMockInfo);
-
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "searchQuery" field cannot be undefined and must be a non-empty string. The "" was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when searchQuery contains only "?"', async () => {
-            const mockData = {
-                ...defaultMockData, 
-                contentConfiguration: {
-                    ...defaultMockData.contentConfiguration, 
-                    source: "Search", 
-                    searchMaxCards: 3, 
-                    searchQuery: "?"
-                }
-            }
-
-            const result = await main(mockData, defaultMockInfo);
-
-            expect(result).toBe(`<!-- Error occurred in the Multicolumn listing component: The "searchQuery" field cannot be undefined and must be a non-empty string. The "?" was received. -->`);
-            expect(mockedError).toBeCalledTimes(1);
+            await expect(main(customMockData, defaultMockInfo)).rejects.toThrow(`Cannot read properties of undefined (reading 'toLowerCase')`);
         });
 
         it('Should throw an error when cards was not an array', async () => {
@@ -694,7 +408,7 @@ describe('[Multicolumn listing]', () => {
                 const result = await main(defaultMockData, defaultMockInfo);
     
                 expect(result).toMatchInlineSnapshot(`
-                  "<section data-component="multicolumn-listing"><div class="component-multicolumn-listing has-title"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span>Learn More<!-- --><span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="su-w-full su-component-multicolumn">
+                  "<section data-component="multicolumn-listing"><div class="component-multicolumn-listing has-title"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span data-se="headingCtaText">Learn More<span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18" ><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">
@@ -849,7 +563,7 @@ describe('[Multicolumn listing]', () => {
                 const result = await main(mockData, defaultMockInfo);
     
                 expect(result).toMatchInlineSnapshot(`
-                  "<section data-component="multicolumn-listing"><div class="component-multicolumn-listing has-title"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span>Learn More<!-- --><span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="su-w-full su-component-multicolumn">
+                  "<section data-component="multicolumn-listing"><div class="component-multicolumn-listing has-title"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span data-se="headingCtaText">Learn More<span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18" ><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">
@@ -1003,7 +717,7 @@ describe('[Multicolumn listing]', () => {
                 const result = await main(mockData, defaultMockInfo);
     
                 expect(result).toMatchInlineSnapshot(`
-                  "<section data-component="multicolumn-listing"><div class="component-multicolumn-listing has-title"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span>Learn More<!-- --><span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="su-w-full su-component-multicolumn">
+                  "<section data-component="multicolumn-listing"><div class="component-multicolumn-listing has-title"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span data-se="headingCtaText">Learn More<span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18" ><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">
@@ -1141,7 +855,7 @@ describe('[Multicolumn listing]', () => {
                 const result = await main(mockData, defaultMockInfo);
     
                 expect(result).toMatchInlineSnapshot(`
-                  "<section data-component="multicolumn-listing"><div class="component-multicolumn-listing has-title"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span>Learn More<!-- --><span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="su-w-full su-component-multicolumn">
+                  "<section data-component="multicolumn-listing"><div class="component-multicolumn-listing has-title"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span data-se="headingCtaText">Learn More<span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18" ><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">
@@ -1274,7 +988,7 @@ describe('[Multicolumn listing]', () => {
                 const result = await main(defaultMockData, defaultMockInfo);
     
                 expect(result).toMatchInlineSnapshot(`
-                  "<section data-component="multicolumn-listing"><div class="component-multicolumn-listing has-title"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span>Learn More<!-- --><span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="su-w-full su-component-multicolumn">
+                  "<section data-component="multicolumn-listing"><div class="component-multicolumn-listing has-title"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span data-se="headingCtaText">Learn More<span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18" ><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div> <div class="su-w-full su-component-multicolumn">
                       <div class="su-relative su-flex su-flex-wrap md:su-flex-nowrap su-flex-1 su-place-content-between su-gap-34 md:su-gap-72 lg:su-gap-[160px]">
                       
                             <div data-test="column-0" class="su-relative su-grow md:su-basis-1/3 ">

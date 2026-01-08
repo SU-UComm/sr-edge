@@ -202,7 +202,7 @@ describe('[Metadata Fields]', () => {
 
                           
                             <div class="" key="28349">
-                              <a href="https://news.stanford.edu/featured-unit/stanford-graduate-school-of-education" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-18">
+                              <a href="https://news.stanford.edu/featured-unit/stanford-graduate-school-of-education" class="su-w-fit su-leading-snug hocus:su-no-underline su-text-black hocus:su-text-digital-red dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-18">
                                 Stanford Graduate School of Education
                               </a>
                             </div>
@@ -223,7 +223,7 @@ describe('[Metadata Fields]', () => {
                     <div class="su-flex su-flex-col su-gap-6 su-text-21 md:su-flex-row md:su-gap-27 md:su-flex-wrap">
                       
                             <div class="" key="28403">
-                              <a href="https://news.stanford.edu/research-and-scholarship/topic/education" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-18">
+                              <a href="https://news.stanford.edu/research-and-scholarship/topic/education" class="su-leading-snug hocus:su-no-underline su-text-black hocus:su-text-digital-red dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-18">
                                 Education
                               </a>
                             </div>
@@ -245,10 +245,10 @@ describe('[Metadata Fields]', () => {
                           <button
                             data-role="copy-link"
                             type="button"
-                            class="su-text-digital-blue dark:su-text-digital-blue-vivid su-text-21 su-font-semibold su-mr-auto hocus:su-underline su-leading-snug"
+                            class="su-group su-text-digital-blue dark:su-text-digital-blue-vivid su-text-21 su-font-semibold su-mr-auto hocus:su-underline hocus:su-text-black dark:hocus:su-text-white su-leading-snug su-transition-colors"
                           >
                             <span data-copy-text>Copy link</span>
-                            <span class="*:su-inline-block *:su-ml-8">
+                            <span class="*:su-inline-block *:su-ml-8 group-hocus:*:*:su-fill-current">
                             
               	<svg
               		xmlns="http://www.w3.org/2000/svg"
@@ -341,11 +341,10 @@ describe('[Metadata Fields]', () => {
                     <h3 class="su-metadata-fields-title su-text-15 su-leading-display su-font-bold su-font-sans !su-m-0 su-pb-8 md:su-pb-9 md:su-text-19">
                       Writer
                     </h3>
-                    <div>
-                                      <p class="!su-m-0 su-text-16 su-leading-snug su-font-normal md:su-text-21" key="143459">
+                    
+                                    <p class="!su-m-0 su-text-16 su-leading-snug su-font-normal md:su-text-21" key="143459">
                                         Tara Roberts
-                                      </p>
-                                    </div>
+                                    </p>
                   </div>
                 
                             </div>
@@ -362,19 +361,20 @@ describe('[Metadata Fields]', () => {
 
                     
 
+
                     
                       <div class="su-text-center su-rs-mt-4 su-flex su-flex-col su-gap-20 md:su-gap-26">
                         <h3 class="su-text-18 su-font-bold su-leading-snug su-font-sans !su-m-0">Related topics</h3>
                         <div class="su-flex su-gap-20 su-max-w-[71.9rem] su-flex-col md:su-gap-x-27 md:su-gap-y-12 md:su-flex-row md:su-flex-wrap md:su-justify-center">
                           
                             <div key="28401">
-                              <a href="https://news.stanford.edu/research-and-scholarship/topic/earth-and-climate" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-19 su-font-semibold">
+                              <a href="https://news.stanford.edu/research-and-scholarship/topic/earth-and-climate" class="su-leading-snug hocus:su-no-underline su-text-black hocus:su-text-digital-red dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-19 su-font-semibold">
                                 Earth & Climate
                               </a>
                             </div>
                           
                             <div key="28605">
-                              <a href="https://news.stanford.edu/sustainability" class="su-no-underline su-leading-snug hover:su-underline su-text-digital-red dark:su-text-dark-mode-red dark:hover:su-text-white hover:su-text-black su-text-19 su-font-semibold">
+                              <a href="https://news.stanford.edu/sustainability" class="su-leading-snug hocus:su-no-underline su-text-black hocus:su-text-digital-red dark:su-text-white dark:hocus:su-text-dark-mode-red su-text-19 su-font-semibold">
                                 Sustainability
                               </a>
                             </div>
@@ -388,10 +388,10 @@ describe('[Metadata Fields]', () => {
                       <button
                         type="button"
                         data-role="copy-link"
-                        class="su-text-digital-blue dark:su-text-digital-blue-vivid su-text-21 su-font-semibold su-mx-auto hocus:su-underline"
+                        class="su-group su-text-digital-blue dark:su-text-digital-blue-vivid su-text-21 su-font-semibold su-mx-auto hocus:su-underline hocus:su-text-black dark:hocus:su-text-white su-transition-colors"
                       >
                         <span data-copy-text>Copy link</span>
-                        <span class="*:su-inline-block *:su-ml-8">
+                        <span class="*:su-inline-block *:su-ml-8 group-hocus:*:*:su-fill-current">
                           
               	<svg
               		xmlns="http://www.w3.org/2000/svg"

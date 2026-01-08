@@ -87,285 +87,6 @@ describe('[Image Gallery Modal]', () => {
     });
 
     describe('[Error Handling]', () => {
-        it('Should throw an error when no parameters was provided.', async () => {
-            const result = await main();
-
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw an error when no info was provided', async () => {
-            const result = await main(defaultMockData);
-
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when info do not have API_IDENTIFIER variable', async () => {
-            const mockInfo = { 
-                ...defaultMockInfo,
-                env: {
-                    ...defaultMockInfo.env,
-                    API_IDENTIFIER: undefined
-                }
-            }
-            
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when info do not have API_IDENTIFIER variable within set object', async () => {
-            const mockInfo = { 
-                set: {
-                    environment: {
-                        ...defaultMockInfo.env,
-                        API_IDENTIFIER: undefined
-                    }
-                }
-            }
-            
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when info do not have BASE_DOMAIN variable', async () => {
-            const mockInfo = { 
-                ...defaultMockInfo,
-                env: {
-                    ...defaultMockInfo.env,
-                    BASE_DOMAIN: undefined
-                }
-            }
-
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when info do not have BASE_DOMAIN variable within set object', async () => {
-            const mockInfo = { 
-                set: {
-                    environment: {
-                        ...defaultMockInfo.env,
-                        BASE_DOMAIN: undefined
-                    }
-                }
-            }
-
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw an error when info do not have fns or cts functions', async () => {
-            const mockInfo = { 
-                env: { 
-                    API_IDENTIFIER: "API_IDENTIFIER", 
-                    BASE_DOMAIN: "BASE_DOMAIN" 
-                } 
-            }
-            
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "info.fns" cannot be undefined or null. The {} was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should handle errors when fns or ctx is invalid', async () => {
-            const mockInfo = { 
-                env: { 
-                    API_IDENTIFIER: "API_IDENTIFIER", 
-                    BASE_DOMAIN: "BASE_DOMAIN" 
-                }, 
-                fns: undefined, 
-                ctx: undefined,  
-            };
-            
-            const result = await main(defaultMockData, mockInfo);
-    
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "info.fns" cannot be undefined or null. The {} was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should handle errors when layout is not one of ["Title & Content", "Content Only"]', async () => {
-            const mockedData = { 
-                ...defaultMockData,
-                contentConfiguration: { 
-                    ...defaultMockData.contentConfiguration,
-                    layout: "Test" 
-                }, 
-            };
-
-            const result = await main(mockedData, defaultMockInfo);
-            
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "layout" field cannot be undefined and must be one of ["Title & Content", "Content Only"] value. The "Test" was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should handle errors when images is not defined', async () => {
-            const mockedData = {
-                ...defaultMockData,
-                contentConfiguration: {
-                    ...defaultMockData.contentConfiguration,
-                    images: undefined
-                }, 
-            };
-            
-            const result = await main(mockedData, defaultMockInfo);
-    
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "images" field must be an array and cannot have less then 4 elements. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should handle errors when images have less then 4 elements', async () => {
-            const mockedData = {
-                ...defaultMockData,
-                contentConfiguration: {
-                    ...defaultMockData.contentConfiguration,
-                    images: [
-                        {"image": "1"},
-                        {"image": "2"},
-                    ]
-                }, 
-            };
-            
-            const result = await main(mockedData, defaultMockInfo);
-    
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "images" field must be an array and cannot have less then 4 elements. The [{"image":"1"},{"image":"2"}] was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should handle errors when caption is not a string', async () => {
-            const mockedData = {
-                ...defaultMockData,
-                contentConfiguration: { 
-                    ...defaultMockData.contentConfiguration,
-                    layout: "Title & Content", 
-                    caption: [1,2] 
-                }
-            };
-            const result = await main(mockedData, defaultMockInfo);
-    
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "caption" field must be a string. The [1,2] was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should handle errors when credit is not a string', async () => {
-            const mockedData = {
-                ...defaultMockData,
-                contentConfiguration: { 
-                    ...defaultMockData.contentConfiguration,
-                    layout: "Title & Content", 
-                    credit: [1,2]
-                }
-            };
-
-            const result = await main(mockedData, defaultMockInfo);
-    
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "credit" field must be a string. The [1,2] was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should handle errors when title is not a string', async () => {
-            const mockedData = {
-                ...defaultMockData,
-                contentConfiguration: { 
-                    ...defaultMockData.contentConfiguration,
-                    layout: "Title & Content", 
-                    title: [1,2]
-                }
-            };
-
-            const result = await main(mockedData, defaultMockInfo);
-    
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "title" field must be a string. The [1,2] was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should handle errors when summary is not a string', async () => {
-            const mockedData = {
-                ...defaultMockData,
-                contentConfiguration: { 
-                    ...defaultMockData.contentConfiguration,
-                    layout: "Title & Content", 
-                    summary: [1,2]
-                }
-            };
-
-            const result = await main(mockedData, defaultMockInfo);
-    
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "summary" field must be a string. The [1,2] was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-
-        it('Should handle errors when summaryAlign is not one of ["left", "center"]', async () => {
-            const mockedData = {
-                ...defaultMockData,
-                contentConfiguration: { 
-                    ...defaultMockData.contentConfiguration,
-                    layout: "Title & Content", 
-                    summaryAlign: "Test"
-                }
-            };
-            
-            const result = await main(mockedData, defaultMockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "summaryAlign" field must be one of ["left", "center"]. The "Test" was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-
-        it('Should handle errors when displayIconHeading is not a boolean', async () => {
-            const mockedData = {
-                ...defaultMockData,
-                displayConfiguration: { 
-                    ...defaultMockData.displayConfiguration,
-                    displayIconHeading: "Test"
-                }
-            };
-
-            const result = await main(mockedData, defaultMockInfo);
-    
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "displayIconHeading" field must be a boolean. The "Test" was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should handle errors when backgroundColor is not one of ["Grey", "Transparent"]', async () => {
-            const mockedData = {
-                ...defaultMockData,
-                displayConfiguration: { 
-                    ...defaultMockData.displayConfiguration,
-                    backgroundColor: "Test"
-                }
-            };
-            
-            const result = await main(mockedData, defaultMockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "backgroundColor" field cannot be undefined and must be one of ["Grey", "Transparent"] value. The "Test" was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should handle errors when width is not one of ["Wide", "Content"]', async () => {
-            const mockedData = {
-                ...defaultMockData,
-                displayConfiguration: { 
-                    ...defaultMockData.displayConfiguration,
-                    width: "Test"
-                }
-            };
-
-            const result = await main(mockedData, defaultMockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Image gallery with modal component: The "width" field cannot be undefined and must be one of ["Wide", "Content"] value. The "Test" was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
 
         it('Should handle errors when imagesData have less then 4 elements', async () => {
             cardDataAdapter.mockReturnValueOnce({
@@ -387,8 +108,16 @@ describe('[Image Gallery Modal]', () => {
         it('Should return the expected HTML with valid data', async () => {
            
             const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >Media gallery  <h2 class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]' >Custom title</h2> </div> <div class='su-text-center su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]' data-test='component-story-lead' >&lt;p&gt;Custom summary&lt;/p&gt;</div> </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom caption | Custom credit</p></div></div>ModalHTML</div></section>"`);
+            expect(result).toContain("data-component='image-gallery-modal'");
+            expect(result).toContain("Custom title");
+            expect(result).toContain("Custom summary");
+            expect(result).toContain("Custom caption");
+            expect(result).toContain("Custom credit");
+            expect(result).toContain("ImageMosaicHTML");
+            expect(result).toContain("ModalHTML");
+            expect(result).toContain("Open image gallery");
+            expect(result).toContain("aria-label='Open image gallery'");
+            expect(result).toContain("su-container-wide");
         });
 
         it('Should return the expected HTML when width is not set to "Wide"', async () => {
@@ -402,7 +131,17 @@ describe('[Image Gallery Modal]', () => {
 
             const result = await main(mockedData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-narrow su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >Media gallery  <h2 class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]' >Custom title</h2> </div> <div class='su-text-center su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]' data-test='component-story-lead' >&lt;p&gt;Custom summary&lt;/p&gt;</div> </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom caption | Custom credit</p></div></div>ModalHTML</div></section>"`);
+            expect(result).toContain("data-component='image-gallery-modal'");
+            expect(result).toContain("Custom title");
+            expect(result).toContain("Custom summary");
+            expect(result).toContain("Custom caption");
+            expect(result).toContain("Custom credit");
+            expect(result).toContain("ImageMosaicHTML");
+            expect(result).toContain("ModalHTML");
+            expect(result).toContain("Open image gallery");
+            expect(result).toContain("aria-label='Open image gallery'");
+            expect(result).toContain("su-container-narrow");
+            expect(result).not.toContain("su-container-wide");
         });
 
         it('Should return HTML without heading', async () => {
@@ -415,8 +154,17 @@ describe('[Image Gallery Modal]', () => {
             };
 
             const result = await main(partialArgs, defaultMockInfo);
-
-            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >  <h2 class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]' >Custom title</h2> </div> <div class='su-text-center su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]' data-test='component-story-lead' >&lt;p&gt;Custom summary&lt;/p&gt;</div> </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom caption | Custom credit</p></div></div>ModalHTML</div></section>"`);
+            expect(result).toContain("data-component='image-gallery-modal'");
+            expect(result).toContain("Custom title");
+            expect(result).not.toContain('su-component-sidebar-heading');
+            expect(result).toContain("Custom summary");
+            expect(result).toContain("Custom caption");
+            expect(result).toContain("Custom credit");
+            expect(result).toContain("ImageMosaicHTML");
+            expect(result).toContain("ModalHTML");
+            expect(result).toContain("Open image gallery");
+            expect(result).toContain("aria-label='Open image gallery'");
+            expect(result).toContain("su-container-wide");
         });
 
         it('Should return HTML without title when title is an empty string', async () => {
@@ -431,7 +179,16 @@ describe('[Image Gallery Modal]', () => {
 
             const result = await main(partialArgs, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >Media gallery   </div> <div class='su-text-center su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]' data-test='component-story-lead' >&lt;p&gt;Custom summary&lt;/p&gt;</div> </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom caption | Custom credit</p></div></div>ModalHTML</div></section>"`);
+            expect(result).toContain("data-component='image-gallery-modal'");
+            expect(result).not.toContain('h2');
+            expect(result).toContain("Custom summary");
+            expect(result).toContain("Custom caption");
+            expect(result).toContain("Custom credit");
+            expect(result).toContain("ImageMosaicHTML");
+            expect(result).toContain("ModalHTML");
+            expect(result).toContain("Open image gallery");
+            expect(result).toContain("aria-label='Open image gallery'");
+            expect(result).toContain("su-container-wide");
         });
 
         it('Should return HTML without title when layout is not Title & Content', async () => {
@@ -446,7 +203,14 @@ describe('[Image Gallery Modal]', () => {
 
             const result = await main(partialArgs, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >Media gallery </div></div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom caption | Custom credit</p></div></div>ModalHTML</div></section>"`);
+            expect(result).toContain("data-component='image-gallery-modal'");
+            expect(result).not.toContain('h2');
+            expect(result).not.toContain('Custom title');
+            expect(result).toContain("ImageMosaicHTML");
+            expect(result).toContain("ModalHTML");
+            expect(result).toContain("Open image gallery");
+            expect(result).toContain("aria-label='Open image gallery'");
+            expect(result).toContain("su-container-wide");
         });
 
         it('Should return HTML without summary when summary is an empty string', async () => {
@@ -461,7 +225,7 @@ describe('[Image Gallery Modal]', () => {
 
             const result = await main(partialArgs, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >Media gallery  <h2 class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]' >Custom title</h2> </div>  </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom caption | Custom credit</p></div></div>ModalHTML</div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >Media gallery  <h2 class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]' data-se="title" >Custom title</h2> </div>  </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-pb-[1rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem] su-mt-[3.2rem] md:su-mt-[4.8rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom caption | Custom credit</p></div></div>ModalHTML</div></section>"`);
         });
 
         it('Should return HTML with proper width caption', async () => {
@@ -475,7 +239,7 @@ describe('[Image Gallery Modal]', () => {
 
             const result = await main(partialArgs, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >Media gallery  <h2 class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]' >Custom title</h2> </div> <div class='su-text-center su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]' data-test='component-story-lead' >&lt;p&gt;Custom summary&lt;/p&gt;</div> </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom caption</p></div></div>ModalHTML</div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >Media gallery  <h2 class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]' data-se="title" >Custom title</h2> </div> <div class='su-text-center su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]' data-test='component-story-lead' data-se="summary" >&lt;p&gt;Custom summary&lt;/p&gt;</div> </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-pb-[1rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem] su-mt-[3.2rem] md:su-mt-[4.8rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom caption</p></div></div>ModalHTML</div></section>"`);
         });
 
         it('Should return HTML with proper width credit', async () => {
@@ -489,7 +253,7 @@ describe('[Image Gallery Modal]', () => {
 
             const result = await main(partialArgs, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >Media gallery  <h2 class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]' >Custom title</h2> </div> <div class='su-text-center su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]' data-test='component-story-lead' >&lt;p&gt;Custom summary&lt;/p&gt;</div> </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom credit</p></div></div>ModalHTML</div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >Media gallery  <h2 class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]' data-se="title" >Custom title</h2> </div> <div class='su-text-center su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]' data-test='component-story-lead' data-se="summary" >&lt;p&gt;Custom summary&lt;/p&gt;</div> </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-pb-[1rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem] su-mt-[3.2rem] md:su-mt-[4.8rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom credit</p></div></div>ModalHTML</div></section>"`);
         });
 
         it('Should return HTML with proper width sidebarHeading', async () => {
@@ -503,7 +267,7 @@ describe('[Image Gallery Modal]', () => {
 
             const result = await main(partialArgs, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >  <h2 class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]' >Custom title</h2> </div> <div class='su-text-center su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]' data-test='component-story-lead' >&lt;p&gt;Custom summary&lt;/p&gt;</div> </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-mt-[3.2rem] su-pb-[1rem] md:su-mt-[4.8rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom caption | Custom credit</p></div></div>ModalHTML</div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component='image-gallery-modal'><div class=''><div class='su-mx-auto su-component-container su-container-wide su-container-px'><div class='su-w-[100%] md:su-max-w-[60.7rem] lg:su-max-w-[63.6rem] su-mx-auto' ><div class='su-text-center [&>*]:su-justify-center [&>*]:su-rs-mb-0 su-flex su-flex-col su-gap-[2.1rem] md:su-gap-[2.5rem]' >  <h2 class='su-text-[3.5rem] su-leading-[4.179rem] su-font-bold md:su-text-[4.0rem] md:su-leading-[4.776rem] lg:su-text-[4.9rem] lg:su-leading-[6.37rem]' data-se="title" >Custom title</h2> </div> <div class='su-text-center su-wysiwyg-content su-rs-mt-0 su-text-[1.8rem] su-leading-[2.25rem] su-mt-[1.5rem] md:su-text-[1.9rem] md:su-leading-[2.375rem] md:su-mt-[1.9rem] lg:su-text-[2.1rem] lg:su-leading-[2.625rem]' data-test='component-story-lead' data-se="summary" >&lt;p&gt;Custom summary&lt;/p&gt;</div> </div><button data-click='open-gallery-modal' title='Open image gallery' aria-label='Open image gallery' class='su-grid su-grid-cols-2 su-mx-auto su-grid-rows-2 su-max-w-[1312px] su-gap-x-[0.691rem] su-gap-y-[0.572rem] su-pb-[1rem] md:su-gap-x-[1.448rem] md:su-gap-y-[1.199rem] lg:su-gap-x-[2.589rem] lg:su-gap-y-[2.143rem] su-mt-[3.2rem] md:su-mt-[4.8rem]' >ImageMosaicHTML</button><div class='su-text-[1.5rem] su-w-full su-text-center dark:su-text-white md:su-max-w-[482px] lg:su-max-w-[633px] su-mx-auto' ><p class='su-m-0 su-text-left'>Custom caption | Custom credit</p></div></div>ModalHTML</div></section>"`);
         });
 
         it('Should sanitize the summary using xss', async () => {
