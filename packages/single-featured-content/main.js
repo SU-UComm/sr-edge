@@ -75,18 +75,25 @@ export default {
             
             if (squizEdit) {
                 data = null;
+            } else {
+                // Return early with error message if data fetch fails in non-edit mode
+                return `<!-- Error occurred in the Single featured content: Failed to fetch feature data. ${er.message} -->`;
             }
         }
 
-        const cardData = data && data.map((item) => {
-            const itemData = {...item} 
-            
-            if(description && description !== "" && description.replace(/<[^>]+>/g, "").trim().length > 0) {
-                itemData.description = description;
-            }
+        // Safely transform card data - handle null/empty cases
+        let cardData = null;
+        if (data && Array.isArray(data) && data.length > 0) {
+            cardData = data.map((item) => {
+                const itemData = {...item} 
+                
+                if(description && description !== "" && description.replace(/<[^>]+>/g, "").trim().length > 0) {
+                    itemData.description = description;
+                }
 
-            return itemData;
-        })[0]
+                return itemData;
+            })[0];
+        }
 
         // Generate unique ID for the card (used for video modal linking)
         const uniqueId = uuid();
@@ -133,7 +140,7 @@ export default {
         if (!squizEdit) {
             // Validate fetched card data
             try {
-                if (typeof data !== 'object' || data.length < 1) {
+                if (!data || !Array.isArray(data) || data.length < 1) {
                     throw new Error(
                         `The "data" cannot be undefined or null. The ${JSON.stringify(data)} was received.`
                     );
