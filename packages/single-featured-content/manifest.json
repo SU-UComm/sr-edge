@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "single-featured-content",
     "type": "edge",
-    "version": "6.0.1",
+    "version": "6.0.2",
     "namespace": "stanford-components",
     "description": "Stanford university single featured content component",
     "displayName": "Single featured content",
@@ -73,9 +73,7 @@
                     "contentConfiguration": {
                         "title": "Single featured content inner content",
                         "description": "The featured content to display in the component",
-                        "required": [
-                            "source"
-                        ],
+                        "required": ["source"],
                         "properties": {
                             "source": {
                                 "title": "Featured content",
