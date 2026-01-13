@@ -3,7 +3,7 @@
     "name": "single-featured-content",
     "type": "edge",
     "version": "6.0.2",
-    "namespace": "su-cs-squiz-release",
+    "namespace": "stanford-components",
     "description": "Stanford university single featured content component",
     "displayName": "Single featured content",
     "mainFunction": "main",
