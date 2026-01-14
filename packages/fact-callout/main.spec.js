@@ -12,7 +12,7 @@ describe('[Fact Callout Component]', () => {
             icon: 'bar graph',
             factText: 'fact text',
             indicatorPosition: 'top',
-            width: 'wide'
+            width: 'Wide'
         }
     };
 
@@ -103,11 +103,11 @@ describe('[Fact Callout Component]', () => {
             };
             const result = await main(mockedData);
 
-            expect(result).toBe('<!-- Error occurred in the Fact callout component: The "width" field must be one of ["wide", "narrow"]. The 123 was received. -->');
+            expect(result).toBe('<!-- Error occurred in the Fact callout component: The "width" field must be one of ["Wide", "Narrow"]. The 123 was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
 
-        it('Should throw error when width is not one of ["wide", "narrow"]', async () => {
+        it('Should throw error when width is not one of ["Wide", "Narrow"]', async () => {
             const mockedData = {
                 displayConfiguration: {
                     ...defaultMockData.displayConfiguration,
@@ -116,7 +116,7 @@ describe('[Fact Callout Component]', () => {
             };
             const result = await main(mockedData);
 
-            expect(result).toBe('<!-- Error occurred in the Fact callout component: The "width" field must be one of ["wide", "narrow"]. The "test" was received. -->');
+            expect(result).toBe('<!-- Error occurred in the Fact callout component: The "width" field must be one of ["Wide", "Narrow"]. The "test" was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
        

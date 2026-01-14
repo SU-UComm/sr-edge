@@ -1,5 +1,4 @@
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import main from './main';
 
 describe('Campaign Hero Component', () => {
@@ -14,6 +13,16 @@ describe('Campaign Hero Component', () => {
             registerPartial: () => {}
         }
     };
+
+    // Suppress console.error for expected errors in tests
+    const originalConsoleError = console.error;
+    beforeEach(() => {
+        console.error = vi.fn();
+    });
+
+    afterEach(() => {
+        console.error = originalConsoleError;
+    });
 
     it('should render with background image', async () => {
         const args = {

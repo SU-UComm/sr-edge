@@ -112,132 +112,6 @@ describe('[Feature Content]', () => {
     });
 
     describe('[Error Handling]', () => {
-        it('Should throw an error when no parameters were provided', async () => {
-            const result = await main();
-            
-            expect(result).toContain('<!-- Error occurred in the Feature content component: The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw an error when FB_JSON_URL was not provided', async () => {
-            const mockInfo = {
-                env: {
-                    API_IDENTIFIER: 'sample-api',
-                    BASE_DOMAIN: 'https://example.com',
-                },
-                fns: mockFnsCtx
-            }
-            const result = await main(defaultMockData, mockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Feature content component: The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when FB_JSON_URL was not provided within set object', async () => {
-            const mockInfo = {
-                set: {
-                    environment: {
-                        API_IDENTIFIER: 'sample-api',
-                        BASE_DOMAIN: 'https://example.com',
-                    },
-                },
-                fns: mockFnsCtx
-            }
-            const result = await main(defaultMockData, mockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Feature content component: The "FB_JSON_URL" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw an error when API_IDENTIFIER was not provided', async () => {
-            const mockInfo = {
-                env: {
-                    FB_JSON_URL: 'https://example.com/json',
-                    BASE_DOMAIN: 'https://example.com',
-                },
-                fns: mockFnsCtx
-            }
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Feature content component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-                
-        it('Should throw an error when API_IDENTIFIER was not provided within set object', async () => {
-            const mockInfo = {
-                set: {
-                    environment: {
-                        FB_JSON_URL: 'https://example.com/json',
-                        BASE_DOMAIN: 'https://example.com',
-                    },
-                },
-                fns: mockFnsCtx
-            }
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Feature content component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when BASE_DOMAIN was not provided', async () => {
-            const mockInfo = {
-                env: {
-                    FB_JSON_URL: 'https://example.com/json',
-                    API_IDENTIFIER: 'sample-api',
-                },
-                fns: mockFnsCtx
-            }
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Feature content component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when BASE_DOMAIN was not provided within set object', async () => {
-            const mockInfo = {
-                set: {
-                    environment: {
-                        FB_JSON_URL: 'https://example.com/json',
-                        API_IDENTIFIER: 'sample-api',
-                    },
-                },
-                fns: mockFnsCtx
-            }
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Feature content component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when fns or ctx was not provided', async () => {
-            const mockInfo = {
-                env: {
-                    FB_JSON_URL: 'https://example.com/json',
-                    API_IDENTIFIER: 'sample-api',
-                    BASE_DOMAIN: 'https://example.com',
-                }
-            }
-
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Feature content component: The "info.fns" cannot be undefined or null. The {} was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when source was not one of ["Search", "Select"]', async () => {
-            const mockData = {
-                ...defaultMockData,
-                contentConfiguration: {
-                    source: [1,2,3],
-                    searchQuery: 'news'
-                }
-            };
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Feature content component: The "source" field cannot be undefined and must be one of ["Search", "Select"]. The [1,2,3] was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
         it('Should throw an error when searchQuery was not a string', async () => {
             const mockData = {
                 ...defaultMockData,
@@ -381,53 +255,6 @@ describe('[Feature Content]', () => {
             expect(mockedError).toBeCalledTimes(1);
         });
 
-        it('Should throw an error when alignment was not one of ["left", "right"]', async () => {
-            const mockData = {
-                ...defaultMockData,
-                displayConfiguration: {
-                    alignment: [1,2,3],
-                    displayThumbnails: true,
-                    displayDescriptions: true
-                }
-            };
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Feature content component: The "alignment" field cannot be undefined and must be one of ["left", "right"]. The [1,2,3] was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when displayThumbnails was not a string', async () => {
-            const mockData = {
-                ...defaultMockData,
-                displayConfiguration: {
-                    alignment: 'left',
-                    displayThumbnails: [1,2,3],
-                    displayDescriptions: true
-                }
-                
-            };
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Feature content component: The "displayThumbnails" field must be a boolean. The [1,2,3] was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when displayDescriptions was not a string', async () => {
-            const mockData = {
-                ...defaultMockData,
-                displayConfiguration: {
-                    alignment: 'left',
-                    displayThumbnails: true,
-                    displayDescriptions: [1,2,3]
-                }
-                
-            };
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Feature content component: The "displayDescriptions" field must be a boolean. The [1,2,3] was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
         it('Should throw an error when data was not received', async () => {
             cardDataAdapter.mockImplementationOnce(() => ({
                 setCardService: vi.fn(),
@@ -474,7 +301,7 @@ describe('[Feature Content]', () => {
             const result = await main(defaultMockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Featured Card</h2><span>Feature Description</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Featured Card</h2><span>Feature Description</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Card 1</h2></div>
                               </div>
@@ -519,7 +346,7 @@ describe('[Feature Content]', () => {
             const result = await main(selectData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Featured Card - Select</h2></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Featured Card - Select</h2></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Card 1 - Select</h2></div>
                               </div>
@@ -557,7 +384,7 @@ describe('[Feature Content]', () => {
             const result = await main(defaultMockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Bass Fellows in Undergraduate Education announced</h2><span>The Bass University Fellows in Undergraduate Education Program recognizes faculty for extraordinary contributions to undergraduate education.</span></div>
                               </div>
@@ -595,7 +422,7 @@ describe('[Feature Content]', () => {
             const result = await main(dataWithFeaturedDescription, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Featured Card</h2><span>Custom Featured Description</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Featured Card</h2><span>Custom Featured Description</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Card 1</h2></div>
                               </div>
@@ -619,7 +446,7 @@ describe('[Feature Content]', () => {
             const result = await main(rightAlignedData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow md:su-order-2"><div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-right-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-right-[-36px] before:lg:su-right-[-80px]">
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow md:su-order-2"><div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-right-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-right-[-36px] before:lg:su-right-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Bass Fellows in Undergraduate Education announced</h2><span>The Bass University Fellows in Undergraduate Education Program recognizes faculty for extraordinary contributions to undergraduate education.</span></div>
                               </div>
@@ -643,7 +470,7 @@ describe('[Feature Content]', () => {
             const result = await main(mockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
+              "<section data-component="featured-content"><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class="su-w-full su-component-featured-grid"><div class="su-flex su-flex-wrap su-gap-[68px] md:su-gap-72 md:su-flex-nowrap lg:su-gap-[160px]"><div class="md:su-basis-[58.333%] lg:su-basis-[64.5%] su-grow "><div class="card"><h2>Inaugural Lecturer’s Award winners honored</h2><span>Honorees for the annual Lecturer’s Award for Teaching and Undergraduate Education were recognized for their exceptional contributions to university life and undergraduate education.</span></div></div><div class="su-relative su-flex su-flex-wrap su-grow before:su-w-full before:su-absolute before:su-bg-black-30 dark:before:su-bg-black su-gap-80 md:su-gap-72 lg:su-gap-[76px] before:md:su-w-px before:su-h-px before:md:su-h-full md:su-basis-[39.5%] lg:su-basis-[30%] md:su-items-start md:su-content-start before:su-left-0 before:su-top-[-35px] before:md:su-top-0 before:md:su-left-[-36px] before:lg:su-left-[-80px]">
                           <div class="su-relative su-w-full">
                               <div class="card"><h2>Bass Fellows in Undergraduate Education announced</h2><span>The Bass University Fellows in Undergraduate Education Program recognizes faculty for extraordinary contributions to undergraduate education.</span></div>
                               </div>
