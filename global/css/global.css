@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /** Source Sans 3, Source Serif 4, Roboto Slab, Roboto Mono (regular only) */
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto+Slab:wght@300;400;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap");
+@import "https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto+Slab:wght@300;400;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap";
 
 /**
  * Swiper 8.4.7
@@ -79,7 +79,7 @@
  .swiper-pagination-lock{display:none}
 
 @font-face {
-  font-family: "Stanford";
+  font-family: Stanford;
   src: url("https://www-media.stanford.edu/assets/fonts/stanford.woff")
       format("woff"),
     url("https://www-media.stanford.edu/assets/fonts/stanford.ttf")
@@ -93,7 +93,7 @@
 }
 
 svg {
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 .su-dark body {
@@ -138,8 +138,8 @@ svg {
 
 
  .su-bg-gradient,
- .su-bg-gradient-before:before,
- .su-bg-gradient-after:after {
+ .su-bg-gradient-before::before,
+ .su-bg-gradient-after::after {
    @apply su-bg-gradient-to-r su-from-digital-red su-to-digital-red-dark dark:su-from-palo-verde dark:su-to-olive;
  }
  
@@ -175,9 +175,11 @@ svg {
 .su-clip-bottom {
   clip-path: inset(-100vw -100vw 0 0);
 }
+
 .font-serif-4 {
   @apply su-font-serif;
 }
+
 .su-stop-red {
   stop-color: #b1040e;
 }
@@ -205,9 +207,11 @@ svg {
 .su-bg-gradient-header-white {
   background: linear-gradient(180deg, #fff 0.11%, rgb(0 0 0 / 0%) 50%);
 }
+
 .tt-menu::before {
   @apply su-text-26 su-font-bold su-mb-19 su-text-digital-red dark:su-text-dark-mode-red;
 }
+
 .report-header .tt-menu {
   background-color: white;
 }
@@ -363,6 +367,7 @@ svg {
   .swiper-pagination-horizontal.swiper-pagination-bullets
   .swiper-pagination-bullet {
   --swiper-pagination-bullet-horizontal-gap: 0;
+
   margin: 0 !important;
 }
 
@@ -423,6 +428,7 @@ svg {
 
 .su-modal {
   @apply su-size-full su-bg-black-true su-top-0 su-left-0 su-fixed su-z-50 su-text-white su-px-20 su-py-90 md:su-py-50 md:su-px-100;
+
   animation: fadeIn 0.35s;
   opacity: 0;
   animation-fill-mode: forwards;
@@ -622,14 +628,14 @@ svg {
   transform: rotate(180deg);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (width <= 768px) {
   .mobile-hidden {
     display: none;
     visibility: hidden;
   }
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (width >= 769px) {
   .desktop-hidden {
     display: none;
     visibility: hidden;
@@ -651,7 +657,7 @@ svg {
 
 /* Hide default HTML checkbox */
 .switch input {
-  opacity: 0%;
+  opacity: 0;
   width: 0;
   height: 0;
 }
@@ -661,10 +667,7 @@ svg {
   height: 18px;
   position: absolute;
   cursor: pointer;
-  top: 2px;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 2px 0 0;
   background-color: #ccc;
   border: 1px solid #d5d5d4;
   -webkit-transition: 0.4s;
@@ -728,6 +731,7 @@ audio::-webkit-media-controls-panel {
 .section-summary p {
   @apply !su-leading-[2.715rem];
 }
+
 .su-dark .section-summary {
   @apply !su-text-black-20;
 }
@@ -928,6 +932,7 @@ div[data-component="footer-component"] {
 .su-container-narrow {
   @apply su-w-full su-max-w-[732px] md:su-w-[84.75%];
 }
+
 .su-page-has-sidebar .su-page-content > .container .su-container-narrow,
 .su-page-has-sidebar .su-page-content .su-container-narrow {
   @apply su-w-full;
@@ -941,6 +946,7 @@ div[data-component="footer-component"] {
 .su-container-wide {
   @apply su-w-full su-max-w-[141.2rem];
 }
+
 /* Site search same as container wide */
 .site-search {
   @apply su-w-full su-max-w-[1412px] !important;
@@ -1033,37 +1039,35 @@ div[data-component="footer-component"] {
 }
 
 /* Large contextual spacing */
-* + [data-component="featured-content"],
-* + [data-component="featured-content-vv"],
-* + [data-component="multicolumn-listing"],
-* + [data-component="combined-content-grid"],
-* + [data-component="events-section"],
-* + [data-component="campaign-cta"],
-* + [data-component="stories-carousel"],
-* + [data-component="media-feature"],
-* + [data-component="policy-brief"],
-* + [data-component="leadership-messages"],
-* + [data-component="single-featured-content"],
-* + [data-component="multicolumn-image"],
-[data-component="featured-content"] + *,
-[data-component="featured-content-vv"] + *,
-[data-component="image-quote"] + *,
-[data-component="media-feature"] + *,
-[data-component="campaign-cta"] + *,
-[data-component="combined-content-grid"] + *,
-[data-component="events-section"] + *,
-[data-component="single-featured-content"] + *,
-[data-component="multicolumn-image"] + *,
-[data-component="multicolumn-listing"] + *,
-[data-component="stories-carousel"] + *,
-[data-component="policy-brief"] + * {
+*:not([data-component="media-carousel"]) + [data-component="featured-content"],
+*:not([data-component="media-carousel"]) + [data-component="featured-content-vv"],
+*:not([data-component="media-carousel"]) + [data-component="multicolumn-listing"],
+*:not([data-component="media-carousel"]) + [data-component="combined-content-grid"],
+*:not([data-component="media-carousel"]) + [data-component="events-section"],
+*:not([data-component="media-carousel"]) + [data-component="campaign-cta"],
+*:not([data-component="media-carousel"]) + [data-component="stories-carousel"],
+*:not([data-component="media-carousel"]) + [data-component="media-feature"],
+*:not([data-component="media-carousel"]) + [data-component="policy-brief"],
+*:not([data-component="media-carousel"]) + [data-component="leadership-messages"],
+*:not([data-component="media-carousel"]) + [data-component="single-featured-content"],
+*:not([data-component="media-carousel"]) + [data-component="multicolumn-image"],
+[data-component="featured-content"] + *:not([data-component="media-carousel"]),
+[data-component="featured-content-vv"] + *:not([data-component="media-carousel"]),
+[data-component="image-quote"] + *:not([data-component="media-carousel"]),
+[data-component="media-feature"] + *:not([data-component="media-carousel"]),
+[data-component="campaign-cta"] + *:not([data-component="media-carousel"]),
+[data-component="combined-content-grid"] + *:not([data-component="media-carousel"]),
+[data-component="events-section"] + *:not([data-component="media-carousel"]),
+[data-component="single-featured-content"] + *:not([data-component="media-carousel"]),
+[data-component="multicolumn-image"] + *:not([data-component="media-carousel"]),
+[data-component="multicolumn-listing"] + *:not([data-component="media-carousel"]),
+[data-component="stories-carousel"] + *:not([data-component="media-carousel"]),
+[data-component="policy-brief"] + *:not([data-component="media-carousel"]) {
   @apply su-rs-mt-8 !important;
 }
 
 /* Extra large contextual spacing */
-* + [data-component="image-quote"],
-* + [data-component="media-carousel"],
-* + [data-component="media-carousel"] + [data-component="policy-brief"] {
+* + [data-component="image-quote"] {
   @apply su-rs-mt-9 !important;
 }
 
@@ -1115,6 +1119,7 @@ div[data-component="footer-component"] {
   .component-multicolumn-listing.has-no-title
   .su-component-container::before {
   content: "";
+
   @apply su-block su-w-full su-h-px su-bg-black-30 dark:su-bg-black su-rs-my-5;
 }
 
@@ -1136,6 +1141,7 @@ div[data-component="footer-component"] {
 /*
 WYSIWYG formatting styles
 */
+
 /* Use decanter styles for WYSIWYG elements */
 .su-wysiwyg-content,
 .su-page-content > span,
@@ -1223,10 +1229,10 @@ WYSIWYG formatting styles
 
 .su-wysiwyg-content ul > li::before,
 .container > span ul > li::before,
-.su-page-content > span ul > li:before,
+.su-page-content > span ul > li::before,
 .su-page-content > div:not([data-component], .site-search) ul > li::before,
 .su-page-content > ul > li::before {
-  background-color: currentColor;
+  background-color: currentcolor;
 }
 
 .container > span .bold,
@@ -1299,8 +1305,8 @@ WYSIWYG formatting styles
 
 /* campaign CTA */
 .su-campaign-cta-gradient {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 53.06%, #000 100%),
-    linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0%) 53.06%, #000 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 60%) 0%, rgba(0, 0, 0, 60%) 100%);
   width: 100%;
   height: 100%;
   position: absolute;
@@ -1369,6 +1375,7 @@ Skiplink
   background: none 0% 0% / auto repeat scroll padding-box border-box
     rgb(255 255 255) !important;
 }
+
 /*
 Subscribe to Stanford Report Marketo form styles
 */
@@ -1410,20 +1417,22 @@ Subscribe to Stanford Report Marketo form styles
 .marketo-sr-subscribe-form.mktoForm input[type="radio"] {
   @apply su-w-auto su-text-digital-blue su-cursor-pointer hocus:su-ring-digital-blue-light/40 dark:hocus:su-ring-digital-blue-vivid/60 hocus:su-ring-4 su-border-black-50 dark:su-border-black-30 dark:hocus:su-border-digital-blue-light dark:su-bg-black-true dark:checked:su-bg-digital-blue su-border-2 su-rounded hocus:su-border-digital-blue checked:su-border-digital-blue-light dark:checked:su-border-digital-blue-light focus:su-ring-offset-0 focus:su-outline-none checked:hocus:su-bg-digital-blue-dark dark:checked:hocus:su-bg-digital-blue-vivid;
 }
+
 .marketo-sr-subscribe-form.mktoForm input[type="radio"] {
   @apply su-rounded-full;
 }
 
 /* Marketo puts the asterisk before the label text(?) so
 // we use flexbox to switch the order and put the asterisk
-// after the label text.*/
+// after the label text. */
 .marketo-sr-subscribe-form.mktoForm .mktoLabel {
   @apply su-flex su-flex-row-reverse su-justify-end;
 }
 
-/* Make required asterisk red and give it a little margin.*/
+/* Make required asterisk red and give it a little margin. */
 .marketo-sr-subscribe-form.mktoForm .mktoAsterix {
   @apply su-text-digital-red-light dark:su-text-dark-mode-red;
+
   margin-inline-start: 0.2rem;
 }
 
@@ -1438,7 +1447,7 @@ Subscribe to Stanford Report Marketo form styles
   @apply su--mb-26;
 }
 
-/* Add more margin above the submit button at the bottom.*/
+/* Add more margin above the submit button at the bottom. */
 .marketo-sr-subscribe-form.mktoForm .mktoButtonRow {
   @apply su-rs-mt-3;
 }
@@ -1448,9 +1457,11 @@ Subscribe to Stanford Report Marketo form styles
 }
 
 /* Grid setup for page with left sidebar. Need to refactor all page layouts similar to this. */
+
 /* Grid areas: u = upper-content, a = aside(sidebar), c = page-content  */
 .su-page.su-page-has-sidebar--left .su-page-wrap {
   @apply su-w-full su-max-w-[141.2rem] su-px-20 md:su-px-50 su-mx-auto su-grid su-grid-cols-6 su-grid-gap su-gap-y-0 md:su-grid-cols-12 su-rs-pt-7;
+
   grid-template-areas:
     "a a a a a a"
     "u u u u u u"
@@ -1463,6 +1474,7 @@ Subscribe to Stanford Report Marketo form styles
 
 .su-page.su-page-has-sidebar--left .su-page-wrap .su-page-content {
   @apply su-m-0 su-p-0 su-w-full;
+
   grid-area: c;
 }
 
@@ -1470,7 +1482,7 @@ Subscribe to Stanford Report Marketo form styles
   grid-area: a;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (width >= 768px) {
   .su-page.su-page-has-sidebar--left .su-page-wrap {
     grid-template-areas:
       "a a a a a a a a a a a a"
@@ -1479,7 +1491,7 @@ Subscribe to Stanford Report Marketo form styles
   }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (width >= 992px) {
   .su-page.su-page-has-sidebar--left .su-page-wrap {
     grid-template-areas:
       "u u u u u u u u u u u u"
@@ -1487,7 +1499,7 @@ Subscribe to Stanford Report Marketo form styles
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (width >= 1200px) {
   .su-page.su-page-has-sidebar--left .su-page-wrap {
     grid-template-areas:
       ". u u u u u u u u u u ."
@@ -1507,6 +1519,7 @@ Subscribe to Stanford Report Marketo form styles
  .su-page-campaign.su-dark body {
    @apply su-bg-black-true;
  }
+
  body.su-page-campaign .center {
    @apply su-text-center;
  }
