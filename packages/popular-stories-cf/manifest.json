@@ -63,7 +63,7 @@
                         "title": "Source Path",
                         "description": "Input for the Cloudflare API to source data only from a certain path.",
                         "type": "string",
-                        "default": "/stories/%"
+                        "default": "/stories/%/%/%"
                     },
                     "APIrespCount": {
                         "title": "API Response Count",

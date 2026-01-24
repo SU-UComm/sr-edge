@@ -144,6 +144,12 @@ export default {
                         AND: [
                             { clientRequestPath_like: "${sourcePath.trim()}" }
                             { clientRequestPath_notlike: "%/_admin%" }
+                            { clientRequestPath_notlike: "/stories/200%/%" }
+                            { clientRequestPath_notlike: "/stories/201%/%" }
+                            { clientRequestPath_notlike: "/stories/2020/%" }
+                            { clientRequestPath_notlike: "/stories/2021/%" }
+                            { clientRequestPath_notlike: "/stories/2022/%" }
+                            { clientRequestPath_notlike: "/stories/2023/%" }
                         ]
                         }
                         orderBy: [count_DESC]
