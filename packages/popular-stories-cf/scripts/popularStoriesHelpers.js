@@ -18,6 +18,7 @@ export async function popularStoriesFetcher(
     exclusionContentTypes,
     exclusionIDs,
     dateRangeQuery,
+    APIrespCount,
     { FB_JSON_URL }
 ) {
     const adapter = new FetchAdapter();
@@ -28,7 +29,7 @@ export async function popularStoriesFetcher(
     }
 
     adapter.url = `${FB_JSON_URL}?profile=stanford-report-push-search&collection=sug~sp-stanford-report-search&num_ranks=${
-        storiesCount + 25
+        APIrespCount
     }&query=[${assets.join(
         " "
     )}]&${dateRangeQuery}&query_not=[${exclusionContentTypes} ${exclusionIDs}]`;

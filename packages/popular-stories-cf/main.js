@@ -197,6 +197,7 @@ export default {
                 exclusionContentTypes,
                 exclusionIDs,
                 dateRangeQuery,
+                APIrespCount,
                 { FB_JSON_URL }
             );
         
