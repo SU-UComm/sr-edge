@@ -215,7 +215,6 @@ export default {
 
             data = await popularStoriesFetcher(
                 urls,
-                storiesCount,
                 exclusionContentTypes,
                 exclusionIDs,
                 dateRangeQuery,

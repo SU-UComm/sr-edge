@@ -3,7 +3,6 @@ import { FetchAdapter } from "../../../global/js/utils/fetchAdapter";
  * Fetches popular stories from a Funnelback API based on provided URLs and filters.
  * @async
  * @param {string[]} urls - Array of URL paths to fetch stories for.
- * @param {number} storiesCount - The maximum number of stories to return.
  * @param {string} exclusionContentTypes - Space-separated list of content type IDs to exclude.
  * @param {string} exclusionIDs - Space-separated list of asset IDs to exclude.
  * @param {string} dateRangeQuery - Query string for date range filtering (e.g., "meta_d1=01Jan2023").
@@ -15,7 +14,6 @@ import { FetchAdapter } from "../../../global/js/utils/fetchAdapter";
  */
 export async function popularStoriesFetcher(
     urls,
-    storiesCount,
     exclusionContentTypes,
     exclusionIDs,
     dateRangeQuery,
