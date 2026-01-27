@@ -8,6 +8,7 @@ import { FetchAdapter } from "../../../global/js/utils/fetchAdapter";
  * @param {string} exclusionIDs - Space-separated list of asset IDs to exclude.
  * @param {string} dateRangeQuery - Query string for date range filtering (e.g., "meta_d1=01Jan2023").
  * @param {Object} options - Configuration options.
+ * @param {number} APIrespCount - Number of results to request from Cloudflare Analytics API used to define num_ranks in Funnelback query.
  * @param {string} options.FB_JSON_URL - The base URL for the Funnelback JSON API.
  * @returns {Promise<Object[]|undefined>} Array of story results from Funnelback, or undefined if fetch fails.
  * @throws {Error} If the fetch request fails.
