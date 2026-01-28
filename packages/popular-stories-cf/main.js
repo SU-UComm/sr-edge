@@ -130,6 +130,33 @@ export default {
         const dateRange = formatDate(getMaxPublishedDate(publishedDateMax));
         const dateRangeQuery = `meta_d1=${dateRange}`;
 
+        // Build year exclusion filters dynamically to avoid maintenance overhead
+        function buildYearExclusionFilters({ startYear, endYear, pathPrefix }) {
+            if (!Number.isInteger(startYear) || !Number.isInteger(endYear) || endYear < startYear) {
+                return "";
+            }
+
+            const filters = [
+                `{ clientRequestPath_notlike: "${pathPrefix}200%/%" }`,
+                `{ clientRequestPath_notlike: "${pathPrefix}201%/%" }`,
+            ];
+
+            for (let year = startYear; year <= endYear; year += 1) {
+                filters.push(`{ clientRequestPath_notlike: "${pathPrefix}${year}/%" }`);
+            }
+
+            return filters.join("\n                            ");
+        }
+
+        const currentYear = new Date().getFullYear();
+        // Exclude years from 2020 up to 3 years ago (or 2023 minimum)
+        const endYear = Math.max(2023, currentYear - 3);
+        const yearExclusionFilters = buildYearExclusionFilters({ 
+            startYear: 2020,
+            endYear: endYear,
+            pathPrefix: "/stories/"
+        });
+
         const payload = {
             query: `query Viewer {
                 viewer {
@@ -144,6 +171,7 @@ export default {
                         AND: [
                             { clientRequestPath_like: "${sourcePath.trim()}" }
                             { clientRequestPath_notlike: "%/_admin%" }
+                            ${yearExclusionFilters}
                         ]
                         }
                         orderBy: [count_DESC]
@@ -187,10 +215,10 @@ export default {
 
             data = await popularStoriesFetcher(
                 urls,
-                storiesCount,
                 exclusionContentTypes,
                 exclusionIDs,
                 dateRangeQuery,
+                APIrespCount,
                 { FB_JSON_URL }
             );
         
