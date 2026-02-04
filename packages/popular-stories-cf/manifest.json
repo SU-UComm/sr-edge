@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "popular-stories-cf",
     "type": "edge",
-    "version": "6.0.1",
+    "version": "6.0.2",
     "namespace": "stanford-components",
     "description": "Displays a list of popular stories.",
     "displayName": "Popular Stories",
@@ -63,7 +63,7 @@
                         "title": "Source Path",
                         "description": "Input for the Cloudflare API to source data only from a certain path.",
                         "type": "string",
-                        "default": "/stories/%"
+                        "default": "/stories/%/%/%"
                     },
                     "APIrespCount": {
                         "title": "API Response Count",
