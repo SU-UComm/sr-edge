@@ -33,6 +33,8 @@ export default {
      * @returns {Promise<string>} The rendered campaign CTA HTML or an error message.
      */
     async main(args, info) {
+        // Extracting functions from provided info
+        const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
 
         // Extracting environment variables from provided info
@@ -56,7 +58,7 @@ export default {
             summary = summary || 'Add content';
             
             // Ensure each image has a default caption
-            images = images.map((img) => ({
+            images = images.map((img, index) => ({
                 ...img,
                 caption: img.caption || `Caption text`
             }));

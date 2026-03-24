@@ -29,6 +29,7 @@ export default {
         // Extracting functions from provided info
         const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
+        const fnsCtx = componentFunctions || componentContext || {}; // for backward compatibility
 
         // Extract configuration data from arguments
         let images = [];

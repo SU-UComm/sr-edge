@@ -46,6 +46,7 @@ export default {
     */
     async main(args, info) {
 
+        const componentFunctions = info?.fns || null;
         const componentContext = info?.ctx || null;
         const componentEnvVars = info?.env || null;
         const currentAssetId = componentContext?.assetId;
