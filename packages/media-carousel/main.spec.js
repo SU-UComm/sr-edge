@@ -10,6 +10,12 @@ console.error = mockedError;
 vi.mock('../../global/js/utils', () => ({
     uuid: vi.fn(),
     isRealExternalLink: vi.fn(),
+    linkedHeadingService: vi.fn().mockImplementation(async (_, cfg) => ({
+        title: cfg?.title,
+        ctaText: cfg?.ctaText,
+        ctaLink: cfg?.ctaManualUrl || '',
+        ctaNewWindow: cfg?.ctaNewWindow,
+    })),
     cardDataAdapter: vi.fn().mockImplementation(() => ({
         setCardService: vi.fn(),
         getCards: vi.fn().mockResolvedValue([
@@ -152,7 +158,7 @@ describe('[Media Carousel]', () => {
 
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Media carousel component: The "data" cannot be undefined or null. The [] was received. -->"`);
+            expect(result).toMatchInlineSnapshot(`"<!-- Error occurred in the Media carousel component: The "cardData" cannot be undefined or null. The [] was received. -->"`);
         });
 
         it('Should return the expected HTML with external links', async () => {

@@ -1,5 +1,5 @@
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { cardDataAdapter, funnelbackCardService, matrixCardService, eventCardService, linkedHeadingService, basicAssetUri, uuid, isRealExternalLink } from "../../global/js/utils";
+import { funnelbackCardService, matrixCardService, eventCardService, linkedHeadingService, basicAssetUri, uuid, isRealExternalLink } from "../../global/js/utils";
 import moduleToTest from './main';
 
 const { main } = moduleToTest;
