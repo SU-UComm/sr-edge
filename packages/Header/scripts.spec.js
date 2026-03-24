@@ -313,6 +313,9 @@ describe('[Header Component][Client]', () => {
         });
 
         it('Should call relatedStoryData if isStory is true', async () => {
+            // Import the mock BEFORE importing scripts to get the same instance
+            const { default: relatedStoryDataMock } = await import('./scripts/relatedStory');
+
             document.body.innerHTML = `
               <header data-component="header-component"></header>
               <section data-subcomponent="header-cookie-consent-banner"></section>
@@ -320,23 +323,22 @@ describe('[Header Component][Client]', () => {
               <button data-click="faculty-persona"></button>
             `;
 
-            window.suHeaderProps = {
-                pageData: { isStory: true },
-                audienceData: 'student',
-            };
+            window.pageController = { isStory: true };
+            
+            vi.mocked(getCookie).mockImplementation((name) => {
+                if (name === 'squiz.cdp.consent') return JSON.stringify({ CDPConsent: true });
+                if (name === 'preferences_personalisation') return 'student';
+                return null;
+            });
 
             header = await import('./scripts');
             document.personaChangeEvent = new Event('personaChange');
 
             document.dispatchEvent(new Event('DOMContentLoaded'));
 
-            const relatedStoryDataMock = (
-                await import('./scripts/relatedStory')
-            ).default;
-
             expect(relatedStoryDataMock).toHaveBeenCalledWith(
-                window.suHeaderProps.pageData,
-                window.suHeaderProps.audienceData,
+                window.pageController,
+                'student',
             );
         });
 

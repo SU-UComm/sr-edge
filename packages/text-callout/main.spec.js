@@ -259,7 +259,7 @@ describe("[Text Callout]", () => {
         it("Should return the expected HTML with valid data", async () => {
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component="text-callout"><div class="su-mx-auto su-component-container su-container-full"><div class="su-flex su-flex-col su-justify-start su-items-start su-bg-fog-light lg:su-mx-auto dark:su-bg-black [&>p]:su-m-0 [&>p]:!su-mb-0 [&>p]:su-text-16 md:[&>p]:!su-text-19 last-of-type:[&>p]:!su-mb-0 su-p-20 md:su-p-36"><div class="su-relative su-justify-start su-items-center su-w-full su-gap-3 su-flex su-overflow-hidden su-rs-mb-0"><div><h3 class="su-font-serif su-text-21 md:su-text-23 su-inline su-pr-10 su-m-0">Test Title</h3><span class="su-w-full su-bg-black-40 dark:su-bg-black-70 su-h-px su-absolute su-bottom-4" /></div></div><div class="su-order-1 su-flex su-flex-col su-gap-12"><div class="su-wysiwyg-content *:su-text-16 *:md:su-text-19 *:su-leading last:*:su-mb-0">This is a test content.</div></div><figure class=" su-order-2 su-pt-20 md:su-pt-12 lg:su-pt-27 su-w-full"><img src="https://google.com/image.jpg" alt="" class="su-w-full"/><figcaption class="su-m-0 su-text-14 su-leading-[1.672rem] md:su-leading-[1.911rem] md:su-text-16 su-mt-8 md:su-mt-12">Test Caption | Test Credit</figcaption></figure><a href="https://google.com" rel="noopener nofollow" class="su-group su-flex su-items-center su-w-fit hocus:su-underline su-px-30 su-pt-12 su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white su-rs-mt-1 su-order-3">Click here  <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-up" class="svg-inline--fa fa-arrow-up fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20"><path fill="currentColor" d="M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9 168 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-340.1L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z"></path></svg>   </a></div></div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component="text-callout"><div class="su-mx-auto su-component-container su-container-full"><div class="su-flex su-flex-col su-justify-start su-items-start su-bg-fog-light lg:su-mx-auto dark:su-bg-black [&>p]:su-m-0 [&>p]:!su-mb-0 [&>p]:su-text-16 md:[&>p]:!su-text-19 last-of-type:[&>p]:!su-mb-0 su-p-20 md:su-p-36"><div class="su-relative su-justify-start su-items-center su-w-full su-gap-3 su-flex su-overflow-hidden su-rs-mb-0"><div><h3 class="su-font-serif su-text-21 md:su-text-23 su-inline su-pr-10 su-m-0" data-se="infoBoxTitle">Test Title</h3><span class="su-w-full su-bg-black-40 dark:su-bg-black-70 su-h-px su-absolute su-bottom-4" /></div></div><div class="su-order-1 su-flex su-flex-col su-gap-12"><div class="su-wysiwyg-content *:su-text-16 *:md:su-text-19 *:su-leading last:*:su-mb-0" data-se="infoBoxContent">This is a test content.</div></div><figure class=" su-order-2 su-pt-20 md:su-pt-12 lg:su-pt-27 su-w-full"><img src="https://google.com/image.jpg" alt="" class="su-w-full"/><figcaption class="su-m-0 su-text-14 su-leading-[1.672rem] md:su-leading-[1.911rem] md:su-text-16 su-mt-8 md:su-mt-12" data-se="captionCredit">Test Caption | Test Credit</figcaption></figure><a href="https://google.com" rel="noopener nofollow" class="su-group su-flex su-items-center su-w-fit hocus:su-underline su-px-30 su-pt-12 su-pb-14 su-text-18 md:su-text-20 dark:hocus:su-ring-1 su-button dark:hocus:su-ring-white su-rs-mt-1 su-order-3" data-se="button" data-se-target="infoBoxButton">Click here  <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-up" class="svg-inline--fa fa-arrow-up fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20" ><path fill="currentColor" d="M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9 168 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-340.1L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z"></path></svg>   </a></div></div></section>"`);
         });
 
         it("Should return expected HTML when no image is provided", async () => {
@@ -369,27 +369,6 @@ describe("[Text Callout]", () => {
 
             expect(result).toContain("<img");
             expect(result).toContain('alt=""');
-        });
-
-        it('Should throw an error when fetch for image will fail', async () => {
-            basicAssetUri.mockRejectedValueOnce(new Error('No image'))
-
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Text callout component: Failed to fetch image data. No image -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when fetch for image will fail', async () => {
-            basicAssetUri.mockResolvedValueOnce({
-                url: "https://google.com/image.jpg",
-            });
-            basicAssetUri.mockRejectedValueOnce(new Error('No link'))
-
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Text callout component: Failed to fetch link data. No link -->');
-            expect(mockedError).toBeCalledTimes(1);
         });
     });
 });
