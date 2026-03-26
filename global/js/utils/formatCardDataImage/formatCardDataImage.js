@@ -20,6 +20,11 @@ export function formatCardDataImage({ attributes, url }) {
         return Number.isFinite(num) ? num : undefined;
     };
 
+    const toPositiveNumber = (value) => {
+        const num = toFiniteNumber(value);
+        return num && num > 0 ? num : undefined;
+    };
+
     const inferDimsFromUrl = (rawUrl) => {
         if (!rawUrl || typeof rawUrl !== "string") return {};
 
@@ -37,11 +42,31 @@ export function formatCardDataImage({ attributes, url }) {
         const match = rawUrl.match(/\/(\d{2,5})\/(\d{2,5})(?:\/|$|\?)/);
         if (!match) return {};
 
-        const w = toFiniteNumber(match[1]);
-        const h = toFiniteNumber(match[2]);
+        const w = toPositiveNumber(match[1]);
+        const h = toPositiveNumber(match[2]);
         if (w && h) return { width: w, height: h };
 
         return {};
+    };
+
+    const inferDimsFromVarieties = (attrs) => {
+        // Matrix sometimes stores the real dimensions only on image varieties.
+        const varieties = normalizeAttrValue(attrs?.varieties);
+        const data = normalizeAttrValue(varieties?.data);
+        if (!data || typeof data !== "object") return {};
+
+        let best = null;
+        for (const key of Object.keys(data)) {
+            const v = data[key];
+            const w = toPositiveNumber(v?.variety_width ?? v?.varietyWidth ?? v?.width);
+            const h = toPositiveNumber(v?.variety_height ?? v?.varietyHeight ?? v?.height);
+            if (!w || !h) continue;
+            const area = w * h;
+            if (!best || area > best.area) best = { width: w, height: h, area };
+        }
+
+        if (!best) return {};
+        return { width: best.width, height: best.height };
     };
 
     const alt = normalizeAttrValue(attributes?.alt) ?? "";
@@ -49,21 +74,22 @@ export function formatCardDataImage({ attributes, url }) {
     const embedded = normalizeAttrValue(attributes?.embedded_data);
 
     const width =
-        toFiniteNumber(attributes?.width) ??
-        toFiniteNumber(embedded?.imagewidth) ??
-        toFiniteNumber(embedded?.ImageWidth);
+        toPositiveNumber(attributes?.width) ??
+        toPositiveNumber(embedded?.imagewidth) ??
+        toPositiveNumber(embedded?.ImageWidth);
 
     const height =
-        toFiniteNumber(attributes?.height) ??
-        toFiniteNumber(embedded?.imageheight) ??
-        toFiniteNumber(embedded?.ImageHeight);
+        toPositiveNumber(attributes?.height) ??
+        toPositiveNumber(embedded?.imageheight) ??
+        toPositiveNumber(embedded?.ImageHeight);
 
-    const inferred = inferDimsFromUrl(url);
-    const resolvedWidth = width ?? inferred.width;
-    const resolvedHeight = height ?? inferred.height;
+    const inferredVarieties = inferDimsFromVarieties(attributes);
+    const inferredUrl = inferDimsFromUrl(url);
 
-    // Default to horizontal when dimensions are unknown. This prevents
-    // "everything becomes vertical" failures when upstream data omits dims.
+    const resolvedWidth = width ?? inferredVarieties.width ?? inferredUrl.width;
+    const resolvedHeight = height ?? inferredVarieties.height ?? inferredUrl.height;
+
+    // Default to horizontal when dimensions are unknown.
     const orientation =
         resolvedWidth && resolvedHeight
             ? (resolvedWidth >= resolvedHeight ? "h" : "v")
