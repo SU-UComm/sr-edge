@@ -40,6 +40,11 @@ function namespacePlugin() {
     return {
         name: 'namespace-modifier',
         closeBundle() {
+            const isTest = process.env.VITEST !== undefined || process.argv.includes('vitest');
+            if (isTest) {
+                return;
+            }
+
             // This runs after all files are built and copied
             const namespace = process.env.BUILD_NAMESPACE || 'stanford-development';
             

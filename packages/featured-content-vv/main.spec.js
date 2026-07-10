@@ -1,6 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 import main from './main';
 
+const mockedError = vi.fn();
+console.error = mockedError;
+
 vi.mock('../../global/js/utils', () => ({
     uuid: vi.fn(),
     cardDataAdapter: vi.fn().mockImplementation(() => ({
