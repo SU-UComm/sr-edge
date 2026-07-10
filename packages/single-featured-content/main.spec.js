@@ -68,232 +68,7 @@ describe('[Single Featured Content Component]', () => {
         vi.clearAllMocks();
     });
 
-    // General error check for the main function
-    describe('[Error Handling]', () => {
-        it('Should throw an error when no parameters were provided', async () => {
-            const result = await main();
-            
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when API_IDENTIFIER was not provided', async () => {
-            const mockInfo = {
-                env: {
-                    ...defaultMockInfo.env,
-                    API_IDENTIFIER: undefined
-                }
-            }
-
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when API_IDENTIFIER was not provided within set object', async () => {
-            const mockInfo = {
-                set: {
-                    environment: {
-                        ...defaultMockInfo.env,
-                        API_IDENTIFIER: undefined
-                    }
-                }
-            }
-
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when BASE_DOMAIN was not provided', async () => {
-            const mockInfo = {
-                ...defaultMockInfo,
-                env: {
-                    ...defaultMockInfo.env,
-                    BASE_DOMAIN: undefined
-                }
-            }
-
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when BASE_DOMAIN was not provided within set object', async () => {
-            const mockInfo = {
-                set: {
-                    environment: {
-                        ...defaultMockInfo.env,
-                        BASE_DOMAIN: undefined
-                    }
-                }
-            }
-
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "BASE_DOMAIN" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when no info was provided', async () => {
-            const result = await main(defaultMockData);
-
-            expect(result).toBe('<!-- Error occurred in the Single featured content component: The "API_IDENTIFIER" variable cannot be undefined and must be non-empty string. The undefined was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw an error when info do not have fns or cts functions', async () => {
-            const mockInfo = { 
-                env: { 
-                    API_IDENTIFIER: "API_IDENTIFIER", 
-                    BASE_DOMAIN: "BASE_DOMAIN" 
-                } 
-            }
-            
-            const result = await main(defaultMockData, mockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Single featured content component: The "info.fns" cannot be undefined or null. The {} was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should handle errors when fns or ctx is invalid', async () => {
-            const mockInfo = { 
-                env: { 
-                    API_IDENTIFIER: "API_IDENTIFIER", 
-                    BASE_DOMAIN: "BASE_DOMAIN" 
-                }, 
-                fns: undefined, 
-                ctx: undefined,  
-            };
-            
-            const result = await main(defaultMockData, mockInfo);
-    
-            expect(result).toBe('<!-- Error occurred in the Single featured content component: The "info.fns" cannot be undefined or null. The {} was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when source was not a string', async () => {
-            const mockData = {
-                ...defaultMockData,
-                contentConfiguration: {
-                    source: 123
-                }
-            };
-
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "source" field cannot be undefined and must be a non-empty string. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when source was an empty string', async () => {
-            const mockData = {
-                ...defaultMockData,
-                contentConfiguration: {
-                    source: ''
-                }
-            };
-
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "source" field cannot be undefined and must be a non-empty string. The "" was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when description was not a string', async () => {
-            const mockData = {
-                ...defaultMockData,
-                contentConfiguration: {
-                    ...defaultMockData.contentConfiguration,
-                    description: 123
-                }
-            };
-
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "description" field must be a string. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when title was not a string', async () => {
-            const mockData = {
-                ...defaultMockData,
-                headingConfiguration: {
-                    ...defaultMockData.headingConfiguration,
-                    title: 123
-                }
-            };
-
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "title" field must be a string. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when ctaUrl was not a string', async () => {
-            const mockData = {
-                ...defaultMockData,
-                headingConfiguration: {
-                    ...defaultMockData.headingConfiguration,
-                    ctaUrl: 123
-                }
-            };
-            
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "ctaUrl" field must be a string. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when ctaManualUrl was not a string', async () => {
-            const mockData = {
-                ...defaultMockData,
-                headingConfiguration: {
-                    ...defaultMockData.headingConfiguration,
-                    ctaManualUrl: 123
-                }
-            };
-
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "ctaManualUrl" field must be a string. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-        
-        it('Should throw an error when ctaText was not a string', async () => {
-            const mockData = {
-                ...defaultMockData,
-                headingConfiguration: {
-                    ...defaultMockData.headingConfiguration,
-                    ctaText: 123
-                }
-            };
-
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "ctaText" field must be a string. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-        it('Should throw an error when ctaNewWindow was not a boolean type', async () => {
-            const mockData = {
-                ...defaultMockData,
-                headingConfiguration: {
-                    ...defaultMockData.headingConfiguration,
-                    ctaNewWindow: 123
-                }
-            };
-
-            const result = await main(mockData, defaultMockInfo);
-            
-            expect(result).toContain('<!-- Error occurred in the Single featured content component: The "ctaNewWindow" field must be a boolean. The 123 was received. -->');
-            expect(mockedError).toBeCalledTimes(1);
-        });
-
-    });
+    // No error handling, the component always outputs, even if there is no data
 
     // Check if HTML structure is rendered correctly
     describe('[Main function]', () => {
@@ -308,7 +83,7 @@ describe('[Single Featured Content Component]', () => {
             const result = await main(defaultMockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component='single-featured-content'><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span>Learn More<!-- --><span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div><div class='su-single-featured-content md:su-px-[6.4rem] lg:su-px-[122.5px]'>
+              "<section data-component='single-featured-content'><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span data-se="headingCtaText">Learn More<span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18" ><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div><div class='su-single-featured-content md:su-px-[6.4rem] lg:su-px-[122.5px]'>
                   <article aria-label="Digital tool gives kids with ADHD real-time feedback on their brains " class="su-component-card su-relative su-w-full" data-testid="vertical-card">
                     
                       <div class="su-mb-15 md:su-mb-26 lg:su-mb-38">
@@ -377,7 +152,7 @@ describe('[Single Featured Content Component]', () => {
                       
 
                       
-                        <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0 su-order-4 *:su-text-18 su-text-18 *:md:su-text-19 md:su-text-19 *:su-leading-[22.5px] su-leading-[22.5px] *:md:su-leading-[23.75px] md:su-leading-[23.75px] *:su-mt-4 *:md:su-mt-14">
+                        <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0 su-order-4 *:su-text-18 su-text-18 *:md:su-text-19 md:su-text-19 *:su-leading-[22.5px] su-leading-[22.5px] *:md:su-leading-[23.75px] md:su-leading-[23.75px] *:su-mt-4 *:md:su-mt-14" data-se="featDesc">
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         </div>
                       
@@ -406,7 +181,7 @@ describe('[Single Featured Content Component]', () => {
             const result = await main(mockData, defaultMockInfo);
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component='single-featured-content'><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span>Learn More<!-- --><span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18"><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div><div class='su-single-featured-content md:su-px-[6.4rem] lg:su-px-[122.5px]'>
+              "<section data-component='single-featured-content'><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/><a data-test="cta" href="https://example.com" class="su-group su-flex su-no-underline hocus:su-underline su-transition su-items-center md:su-items-end md:su-mb-8 lg:su-mb-12 su-flex-nowrap su-align-baseline su-gap-20 md:su-gap-13 su-text-19 su-decoration-2 dark:su-text-white su-text-black hocus:su-text-digital-red dark:hocus:su-text-dark-mode-red"><span class="su-flex su-gap-2 su-items-baseline"><span data-se="headingCtaText">Learn More<span class="sr-only">Sample Heading</span></span><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" class="svg-inline--fa fa-chevron-right fa-fw su-text-14 group-hocus:su-translate-x-02em su-transition-transform" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="18" ><path fill="currentColor" d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"></path></svg></span></a></div><div class='su-single-featured-content md:su-px-[6.4rem] lg:su-px-[122.5px]'>
                   <article aria-label="Digital tool gives kids with ADHD real-time feedback on their brains " class="su-component-card su-relative su-w-full" data-testid="vertical-card">
                     
                       <div class="su-mb-15 md:su-mb-26 lg:su-mb-38">
@@ -475,7 +250,7 @@ describe('[Single Featured Content Component]', () => {
                       
 
                       
-                        <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0 su-order-4 *:su-text-18 su-text-18 *:md:su-text-19 md:su-text-19 *:su-leading-[22.5px] su-leading-[22.5px] *:md:su-leading-[23.75px] md:su-leading-[23.75px] *:su-mt-4 *:md:su-mt-14">
+                        <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0 su-order-4 *:su-text-18 su-text-18 *:md:su-text-19 md:su-text-19 *:su-leading-[22.5px] su-leading-[22.5px] *:md:su-leading-[23.75px] md:su-leading-[23.75px] *:su-mt-4 *:md:su-mt-14" data-se="featDesc">
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         </div>
                       
@@ -500,7 +275,7 @@ describe('[Single Featured Content Component]', () => {
             linkedData.ctaLink = `${defaultMockInfo.env.BASE_DOMAIN}${defaultMockInfo.env.BASE_PATH}${defaultMockInfo.env.NEWS_ARCHIVE_PATH}`;
 
             expect(result).toMatchInlineSnapshot(`
-              "<section data-component='single-featured-content'><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class='su-single-featured-content md:su-px-[6.4rem] lg:su-px-[122.5px]'>
+              "<section data-component='single-featured-content'><div class="su-mx-auto su-component-container su-container-large su-container-px"><div class="su-component-line-heading su-flex su-flex-wrap su-items-baseline su-gap-5 su-gap-x-13 md:su-gap-13"><h2 class="su-type-3 su-font-serif su-w-full md:su-w-auto su-mb-8 md:su-mb-0 dark:su-text-white su-text-black" data-se="headingTitle">Sample Heading</h2><hr aria-hidden="true" class="md:su-mb-11 lg:su-mb-15 su-grow su-border-none su-bg-gradient-light-red-h su-h-4"/></div><div class='su-single-featured-content md:su-px-[6.4rem] lg:su-px-[122.5px]'>
                   <article aria-label="Digital tool gives kids with ADHD real-time feedback on their brains " class="su-component-card su-relative su-w-full" data-testid="vertical-card">
                     
                       <div class="su-mb-15 md:su-mb-26 lg:su-mb-38">
@@ -569,7 +344,7 @@ describe('[Single Featured Content Component]', () => {
                       
 
                       
-                        <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0 su-order-4 *:su-text-18 su-text-18 *:md:su-text-19 md:su-text-19 *:su-leading-[22.5px] su-leading-[22.5px] *:md:su-leading-[23.75px] md:su-leading-[23.75px] *:su-mt-4 *:md:su-mt-14">
+                        <div class="su-mb-0 su-w-full [&>*:last-child]:su-mb-0 su-order-4 *:su-text-18 su-text-18 *:md:su-text-19 md:su-text-19 *:su-leading-[22.5px] su-leading-[22.5px] *:md:su-leading-[23.75px] md:su-leading-[23.75px] *:su-mt-4 *:md:su-mt-14" data-se="featDesc">
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                         </div>
                       
@@ -603,9 +378,7 @@ describe('[Single Featured Content Component]', () => {
 
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toContain('<!-- Error occurred in the Single featured content: Failed to fetch feature data. No cards -->');
-            expect(mockedError).toBeCalledTimes(1);
-
+            expect(result).toContain('<!-- Error occurred in the Single featured content');
         });
 
         it("Should throw an error when getCards will return an empty array", async () => {

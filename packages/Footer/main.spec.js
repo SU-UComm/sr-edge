@@ -98,10 +98,7 @@ describe('[Footer]', () => {
             FetchAdapter.mockImplementation(() => ({
                 fetch: vi.fn().mockRejectedValueOnce(new Error('Network Error'))
             }));
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Footer component: Error parsing footer data JSON response: Network Error -->');
-            expect(mockedError).toBeCalledTimes(1);
+            await expect(main(defaultMockData, defaultMockInfo)).rejects.toThrow(`Error occurred in the Footer component: Error parsing footer data JSON response: Network Error`);
         });
 
         it('Should throw error when fetch for footer data will not return object', async () => {
@@ -109,10 +106,8 @@ describe('[Footer]', () => {
                 setBasicHeroService: vi.fn(),
                 fetch: vi.fn().mockResolvedValueOnce('test')
             }));
-            const result = await main(defaultMockData, defaultMockInfo);
-
-            expect(result).toBe('<!-- Error occurred in the Footer component: Error parsing footer data JSON response: Invalid API response: siteData is missing or not an object. -->');
-            expect(mockedError).toBeCalledTimes(1);
+            
+            await expect(main(defaultMockData, defaultMockInfo)).rejects.toThrow(`Error occurred in the Footer component: Error parsing footer data JSON response: Invalid API response: siteData is missing or not an object.`);
         });
     });
 });
