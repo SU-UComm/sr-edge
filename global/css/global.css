@@ -1462,7 +1462,7 @@ The styles below are specifically for forms on stoyr pages,
 using the .marketo-sr-subscribe-form--story class.
 */
 
-.marketo-sr-subscribe-form--story.mktoForm * {
+.marketo-sr-subscribe-form--story.mktoForm {
   @apply su-bg-fog-light dark:su-bg-black su-p-20 md:su-p-36;
 }
 
