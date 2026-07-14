@@ -1458,12 +1458,23 @@ Subscribe to Stanford Report Marketo form styles
 
 /*
 Subscribe to Stanford Report Marketo form styles.
-The styles below are specifically for forms on stoyr pages,
+The styles below are specifically for forms on story pages,
 using the .marketo-sr-subscribe-form--story class.
 */
-
 .marketo-sr-subscribe-form--story.mktoForm {
   @apply su-bg-fog-light dark:su-bg-black su-p-20 md:su-p-36;
+}
+
+.marketo-sr-subscribe-form.marketo-sr-subscribe-form--story.mktoForm input.mktoField {
+  @apply su-max-w-none;
+}
+
+.marketo-sr-subscribe-form.marketo-sr-subscribe-form--story.mktoForm .mktoFormRow {
+  @apply su-mb-20;
+}
+
+.marketo-sr-subscribe-form.marketo-sr-subscribe-form--story.mktoForm .mktoButtonRow {
+  @apply su-mt-20;
 }
 
 /* Grid setup for page with left sidebar. Need to refactor all page layouts similar to this. */
