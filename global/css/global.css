@@ -1426,6 +1426,16 @@ Subscribe to Stanford Report Marketo form styles
   margin-inline-start: 0.2rem;
 }
 
+/*
+Subscribe to Stanford Report Marketo form styles.
+The styles below are specifically for forms on stoyr pages,
+using the .marketo-sr-subscribe-form--story class.
+*/
+
+.marketo-sr-subscribe-form--story.mktoForm * {
+  @apply su-bg-fog-light dark:su-bg-black su-p-20 md:su-p-36;
+}
+
 /* Error messages */
 .marketo-sr-subscribe-form.mktoForm .mktoErrorMsg,
 .marketo-sr-subscribe-form.mktoForm .mktoErrorDetail {
