@@ -1429,11 +1429,18 @@ Subscribe to Stanford Report Marketo form styles
   @apply su-flex su-flex-row-reverse su-justify-end;
 }
 
-/* Make required asterisk red and give it a little margin. */
+/* Make required asterisk red and give it a little margin.
+All fields include the asterisk, hide it by default. */
 .marketo-sr-subscribe-form.mktoForm .mktoAsterix {
   @apply su-text-digital-red-light dark:su-text-dark-mode-red;
 
+  display: none;
   margin-inline-start: 0.2rem;
+}
+
+/* Display asterisk only when mktoRequiredField class is present. */
+.marketo-sr-subscribe-form.mktoForm .mktoFieldWrap.mktoRequiredField .mktoAsterix {
+  display: block;
 }
 
 /* Error messages */
