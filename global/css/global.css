@@ -1489,7 +1489,7 @@ using the .marketo-sr-subscribe-form--story class.
 }
 
 /* Marketo preferences form styles https://news.stanford.edu/email-preferences */
-.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm {
+.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFormRow {
   @apply su-mb-0
 }
 
@@ -1503,12 +1503,16 @@ using the .marketo-sr-subscribe-form--story class.
   @apply su-flex su-flex-col su-items-start su-mb-50;
 }
 
-.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap.mktoFieldWrap:not(.mktoRequiredField) .mktoLabel {
+.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap:not(.mktoRequiredField) .mktoLabel {
   @apply su-order-2;
 }
 
-.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap.mktoFieldWrap:not(.mktoRequiredField) .mktoCheckboxList {
+.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap:not(.mktoRequiredField) .mktoCheckboxList {
   @apply su-order-1;
+}
+
+.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap:not(.mktoRequiredField) label {
+  @apply su-font-regular;
 }
 
 /* Grid setup for page with left sidebar. Need to refactor all page layouts similar to this. */
