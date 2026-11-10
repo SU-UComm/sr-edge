@@ -1488,6 +1488,11 @@ using the .marketo-sr-subscribe-form--story class.
   @apply su-mt-20;
 }
 
+/* Marketo preferences form styles https://news.stanford.edu/email-preferences */
+.marketo-sr-subscribe-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap {
+  @apply su-flex su-items-end su-flex-row-reverse su-justify-start;
+}
+
 /* Grid setup for page with left sidebar. Need to refactor all page layouts similar to this. */
 
 /* Grid areas: u = upper-content, a = aside(sidebar), c = page-content  */
