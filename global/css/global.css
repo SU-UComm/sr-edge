@@ -1499,11 +1499,11 @@ using the .marketo-sr-subscribe-form--story class.
   @apply su-flex su-flex-col su-items-start;
 }
 
-.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap .mktoLabel {
+.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap.mktoFieldWrap:not(.mktoRequiredField) .mktoLabel {
   @apply su-order-2;
 }
 
-.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap .mktoCheckboxList {
+.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap.mktoFieldWrap:not(.mktoRequiredField) .mktoCheckboxList {
   @apply su-order-1;
 }
 
