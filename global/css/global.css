@@ -1490,7 +1490,21 @@ using the .marketo-sr-subscribe-form--story class.
 
 /* Marketo preferences form styles https://news.stanford.edu/email-preferences */
 .marketo-sr-subscribe-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap {
-  @apply su-flex su-items-end su-flex-row-reverse su-justify-start;
+  @apply su-flex su-items-end;
+  
+  justify-content: start;
+}
+
+.marketo-sr-subscribe-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap.mktoRequiredField {
+  @apply su-flex su-flex-col su-items-start;
+}
+
+.marketo-sr-subscribe-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap .mktoLabel {
+  @apply su-order-2;
+}
+
+.marketo-sr-subscribe-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap .mktoCheckboxList {
+  @apply su-order-1;
 }
 
 /* Grid setup for page with left sidebar. Need to refactor all page layouts similar to this. */
