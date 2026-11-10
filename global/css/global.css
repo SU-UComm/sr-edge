@@ -1456,6 +1456,11 @@ Subscribe to Stanford Report Marketo form styles
   @apply su-button hocus:su-underline su-leading-display md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 su-transition-colors dark:hocus:su-ring-1 dark:hocus:su-ring-white;
 }
 
+/* Marketo preferences form styles https://news.stanford.edu/email-preferences */
+.marketo-sr-subscribe-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap {
+  @apply su-flex su-items-end su-flex-row-reverse su-justify-start;
+}
+
 /* Grid setup for page with left sidebar. Need to refactor all page layouts similar to this. */
 
 /* Grid areas: u = upper-content, a = aside(sidebar), c = page-content  */
