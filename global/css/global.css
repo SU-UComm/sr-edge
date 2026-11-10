@@ -1489,6 +1489,10 @@ using the .marketo-sr-subscribe-form--story class.
 }
 
 /* Marketo preferences form styles https://news.stanford.edu/email-preferences */
+.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm {
+  @apply su-mb-0
+}
+
 .marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap:not(.mktoRequiredField) {
   @apply su-flex su-items-end;
 
@@ -1496,7 +1500,7 @@ using the .marketo-sr-subscribe-form--story class.
 }
 
 .marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap.mktoRequiredField {
-  @apply su-flex su-flex-col su-items-start;
+  @apply su-flex su-flex-col su-items-start su-mb-50;
 }
 
 .marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap.mktoFieldWrap:not(.mktoRequiredField) .mktoLabel {
