@@ -2,17 +2,21 @@ import { setCookie } from "../../global/js/utils/setCookie";
 import { getCookie } from "../../global/js/utils/getCookie";
 import { cdpSetPersona } from "../../global/js/utils/cdpSetPersona";
 import { cdpSetConsent } from "../../global/js/utils/cdpSetConsent";
+import {
+    audienceForUi,
+    shouldApplyLocalPersona,
+} from "../../global/js/utils/localCampaignPersona";
 import { _preferencesSettings } from './scripts/preferenceSettings';
 import { ReportHeader } from './scripts/reportHeader';
 import relatedStoryData from './scripts/relatedStory';
 import { updateStoryHeadline } from './scripts/updateStoryHeadline.js';
 
 /**
- * Globals variables 
+ * Globals variables
  * @constant {string} HEADER_SELECTOR - Selector for header elements.
  * @constant {string} HEADER_COOKIE_CONSENT_BANNER_SELECTOR - Selector for cookie consent banner elements.
  * @constant {string} HEADER_COOKIE_CONSENT_BANNER_HIDDEN_CLASS - CSS class to hide elements.
- * 
+ *
  */
 
 export const HEADER_SELECTOR = 'header[data-component="header-component"]';
@@ -23,7 +27,7 @@ export let consent = false;
 
 export function _hideConsentBanner() {
     const content = document.querySelector(HEADER_COOKIE_CONSENT_BANNER_SELECTOR);
-    
+
     content && content.classList.add(HEADER_HIDDEN_CLASS);
     content && content.classList.remove('active');
 }
@@ -55,7 +59,7 @@ export function _manageAudience(audience) {
             element.setAttribute('aria-pressed', 'false');
         }
     });
-  
+
     // Show or set atrybut to true the element corresponding to the selected audience
     if (audienceElements[audience]) {
         audienceElements[audience].forEach((el) => {
@@ -93,13 +97,13 @@ export const handlePersona = async (personaVal, audienceData, removeConsent = fa
     }
 
     setCookie("preferences_personalisation", persona, true, 130);
-    
+
     audienceData = persona;
 
-    _manageAudience(audienceData); 
+    _manageAudience(audienceData);
 
     document.dispatchEvent(document.personaChangeEvent);
-   
+
     window.location.reload();
 };
 
@@ -116,6 +120,22 @@ export const handleConsent = async (value) => {
     }
 };
 
+/**
+ * Sets local persona from local email campaign URL params when allowed.
+ *
+ * @returns {Promise<boolean>} True when handlePersona ran and the page will reload.
+ */
+export async function applyLocalPersonaFromUrlIfNeeded() {
+    const audienceData = getCookie("preferences_personalisation");
+    const searchParams = new URLSearchParams(window.location.search);
+
+    if (!shouldApplyLocalPersona(audienceData, searchParams)) {
+        return false;
+    }
+
+    await handlePersona("local", audienceData);
+    return true;
+}
 
 /**
  * Initializes menu, search and preferences trace when the DOM content is fully loaded.
@@ -126,7 +146,15 @@ export const handleConsent = async (value) => {
  *
  * @listens DOMContentLoaded
  */
-document.addEventListener('DOMContentLoaded', function () {    
+document.addEventListener('DOMContentLoaded', async function () {
+    const storedPersona = getCookie("preferences_personalisation");
+    const searchParams = new URLSearchParams(window.location.search);
+
+    if (shouldApplyLocalPersona(storedPersona, searchParams)) {
+        await handlePersona("local", storedPersona);
+        return;
+    }
+
     const studentPersona = document.querySelector(`button[data-click="student-persona"]`)
     const facultyPersona = document.querySelector(`button[data-click="faculty-persona"]`)
 
@@ -138,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const headerDom = document.querySelector(HEADER_SELECTOR);
     // eslint-disable-next-line no-unused-vars
     const reportHeaderInit = headerDom && new ReportHeader(headerDom);
-    
+
     let relatedStory = null;
 
     const cdpConsentCookie = JSON.parse(getCookie("squiz.cdp.consent"));
@@ -160,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     _preferencesSettings();
 
-   
+
     pageController && links && links.forEach((link) => {
         if (pageController?.id === link.dataset.id) {
             link.classList.remove('su-border-transparent');
@@ -179,13 +207,13 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         fetchRelatedStoryData();
     }
-    
+
     if(!consentData && consentData != 0){
         _showConsentBanner();
     }
     if (consentData) {
         _hideConsentBanner();
-        
+
         if (clearPreferences) {
             clearPreferences.removeAttribute('disabled');
             clearPreferences.setAttribute("aria-pressed", "false");
@@ -195,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 await handlePersona(null, null, true);
             });
         }
-    } 
+    }
 
     const acceptCookieConsent = document.querySelector('button[data-click="accept-consent"]');
     const rejectCookieConsent = document.querySelector('button[data-click="reject-consent"]');
@@ -210,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const audienceData = getCookie("preferences_personalisation");
 
-    audienceData === "null" || !audienceData ? _manageAudience("external") : _manageAudience(audienceData);
+    _manageAudience(audienceForUi(audienceData));
 
     studentPersona && studentPersona.addEventListener('click', function() {
         handlePersona("student", audienceData);
