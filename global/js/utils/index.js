@@ -17,6 +17,11 @@ export { getCookie } from './getCookie';
 export { getFirstWord } from './getFirstWord';
 export { isRealExternalLink } from './isRealExternalLink';
 export { linkedHeadingService } from './linkedHeadingService';
+export {
+    audienceForUi,
+    getLocalPersonaFromSearchParams,
+    shouldApplyLocalPersona,
+} from './localCampaignPersona';
 export { matrixBasicHeroService } from './matrixBasicHeroService';
 export { matrixCardService } from './matrixCardService';
 export { matrixImageCardService } from './matrixImageCardService';

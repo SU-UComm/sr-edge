@@ -1,9 +1,10 @@
 import { getCookie } from "../../global/js/utils/getCookie";
+import { audienceForUi } from "../../global/js/utils/localCampaignPersona";
 
 /**
- * Globals variables 
+ * Globals variables
  * @constant {string} FOOTER_HIDDEN_CLASS - CSS class to hide elements.
- * 
+ *
  */
 export const FOOTER_HIDDEN_CLASS = 'su-hidden';
 
@@ -20,7 +21,7 @@ export function _manageAudience(audience) {
             el.classList.add(FOOTER_HIDDEN_CLASS);
         });
     });
-  
+
     // Show the element corresponding to the selected audience
     if (audienceElements[audience]) {
         audienceElements[audience].forEach((el) => {
@@ -38,5 +39,5 @@ export function _manageAudience(audience) {
 document.addEventListener('DOMContentLoaded', function () {
     const audienceData = getCookie("preferences_personalisation");
 
-    audienceData === "null" || !audienceData ? _manageAudience("external") : _manageAudience(audienceData);
+    _manageAudience(audienceForUi(audienceData));
 });
