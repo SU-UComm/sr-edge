@@ -3,6 +3,7 @@ import { cdpSetConsent } from '../../global/js/utils/cdpSetConsent';
 import { cdpSetPersona } from '../../global/js/utils/cdpSetPersona';
 import { setCookie } from '../../global/js/utils/setCookie';
 import { getCookie } from '../../global/js/utils/getCookie';
+import { shouldApplyLocalPersona } from '../../global/js/utils/localCampaignPersona';
 
 // Mock external utilities and modules
 vi.mock('../../global/js/utils/cdpSetConsent', () => ({
@@ -34,11 +35,22 @@ vi.mock('./scripts/relatedStory', () => ({
     ),
 }));
 
+vi.mock('../../global/js/utils/localCampaignPersona', async (importOriginal) => {
+    const actual = await importOriginal();
+    return {
+        ...actual,
+        shouldApplyLocalPersona: vi.fn(() => false),
+    };
+});
+
 describe('[Header Component][Client]', () => {
     describe('[Functions]', () => {
         let header;
 
         beforeEach(async () => {
+            vi.clearAllMocks();
+            vi.mocked(shouldApplyLocalPersona).mockReturnValue(false);
+
             // Minimal DOM setup for initial tests
             document.body.innerHTML = `
             <section data-subcomponent="header-cookie-consent-banner"></section>
@@ -254,6 +266,112 @@ describe('[Header Component][Client]', () => {
             expect(reloadSpy).toHaveBeenCalled();
 
             reloadSpy.mockRestore();
+        });
+
+        it('Should set persona to local with cookie and CDP when selecting local', async () => {
+            const reloadSpy = vi
+                .spyOn(window.location, 'reload')
+                .mockImplementation(() => {});
+            const dispatchSpy = vi.spyOn(document, 'dispatchEvent');
+
+            document.body.innerHTML = `
+              <section data-subcomponent="header-cookie-consent-banner"></section>
+              <div data-audience="external"></div>
+              <div data-audience="student"></div>
+              <div data-audience="faculty"></div>
+            `;
+
+            header = await import('./scripts');
+            document.personaChangeEvent = new Event('personaChange');
+
+            await header.handlePersona('local', null);
+
+            expect(cdpSetPersona).toHaveBeenCalledWith(
+                'persona-selector',
+                'local',
+            );
+            expect(setCookie).toHaveBeenCalledWith(
+                'preferences_personalisation',
+                'local',
+                true,
+                130,
+            );
+            expect(dispatchSpy).toHaveBeenCalled();
+            expect(reloadSpy).toHaveBeenCalled();
+
+            reloadSpy.mockRestore();
+        });
+
+        it('Should apply local persona from URL when cookie is not student, faculty, or local', async () => {
+            const reload = vi.fn();
+            const actualLocalCampaign = await vi.importActual(
+                '../../global/js/utils/localCampaignPersona',
+            );
+
+            vi.mocked(shouldApplyLocalPersona).mockImplementation(
+                actualLocalCampaign.shouldApplyLocalPersona,
+            );
+
+            vi.stubGlobal('location', {
+                ...window.location,
+                search: '?utm_medium=email&utm_campaign=local',
+                reload,
+            });
+
+            vi.mocked(getCookie).mockImplementation((name) => {
+                if (name === 'preferences_personalisation') {
+                    return null;
+                }
+                return null;
+            });
+
+            document.body.innerHTML = `
+              <section data-subcomponent="header-cookie-consent-banner"></section>
+              <div data-audience="external"></div>
+            `;
+
+            header = await import('./scripts');
+            document.personaChangeEvent = new Event('personaChange');
+
+            const applied = await header.applyLocalPersonaFromUrlIfNeeded();
+
+            expect(applied).toBe(true);
+            expect(setCookie).toHaveBeenCalledWith(
+                'preferences_personalisation',
+                'local',
+                true,
+                130,
+            );
+            expect(reload).toHaveBeenCalled();
+
+            vi.unstubAllGlobals();
+        });
+
+        it('Should not apply local persona from URL when cookie is student', async () => {
+            const actualLocalCampaign = await vi.importActual(
+                '../../global/js/utils/localCampaignPersona',
+            );
+
+            vi.mocked(shouldApplyLocalPersona).mockImplementation(
+                actualLocalCampaign.shouldApplyLocalPersona,
+            );
+
+            vi.stubGlobal('location', {
+                ...window.location,
+                search: '?utm_medium=email&utm_campaign=local',
+                reload: vi.fn(),
+            });
+
+            vi.mocked(getCookie).mockReturnValue('student');
+
+            header = await import('./scripts');
+
+            const applied = await header.applyLocalPersonaFromUrlIfNeeded();
+
+            expect(applied).toBe(false);
+            expect(setCookie).not.toHaveBeenCalled();
+
+            vi.unstubAllGlobals();
         });
 
         it('Should clear consent and set persona to null when removeConsent is true', async () => {
