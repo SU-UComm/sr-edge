@@ -4,6 +4,7 @@ import { cdpSetPersona } from "../../global/js/utils/cdpSetPersona";
 import { cdpSetConsent } from "../../global/js/utils/cdpSetConsent";
 import {
     audienceForUi,
+    normalizePersonaCookieValue,
     shouldApplyLocalPersona,
 } from "../../global/js/utils/localCampaignPersona";
 import { _preferencesSettings } from './scripts/preferenceSettings';
@@ -81,7 +82,11 @@ export const handlePersona = async (personaVal, audienceData, removeConsent = fa
         _hideConsentBanner();
     }
     if (personaVal) {
-        if (audienceData === personaVal) {
+        const normalizedAudience = normalizePersonaCookieValue(audienceData);
+
+        if (personaVal === "local") {
+            persona = "local";
+        } else if (normalizedAudience === personaVal) {
             // if we've selected the same option again, we need to un-check it
             // so, force into external
             persona = "external";
@@ -100,7 +105,7 @@ export const handlePersona = async (personaVal, audienceData, removeConsent = fa
 
     audienceData = persona;
 
-    _manageAudience(audienceData);
+    _manageAudience(audienceForUi(persona));
 
     document.dispatchEvent(document.personaChangeEvent);
 
@@ -179,10 +184,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     // do we have consent data
     props.consentData = cdpConsentCookie?.CDPConsent;
 
-    props.audienceData = getCookie("preferences_personalisation");;
-    if (props.audienceData === "null" || !props.audienceData) {
-        props.audienceData = "external";
-    }
+    props.audienceData =
+        normalizePersonaCookieValue(getCookie("preferences_personalisation")) ||
+        "external";
     // set the props we need, to a window variable
     window.suHeaderProps = props;
 

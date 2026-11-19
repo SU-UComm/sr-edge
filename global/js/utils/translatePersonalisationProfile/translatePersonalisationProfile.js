@@ -1,3 +1,5 @@
+import { normalizePersonaCookieValue } from '../localCampaignPersona';
+
 /**
  * this function converts audience (personalisation profiles)
  * from their Matrix taxonomies (faculty, student, "") to
@@ -9,7 +11,9 @@
  * @returns {string}
  */
 export function translatePersonalisationProfile(profile) {
-  switch (profile) {
+  const normalizedProfile = normalizePersonaCookieValue(profile);
+
+  switch (normalizedProfile) {
       case 'local':
           return 'Local';
       case 'faculty':
