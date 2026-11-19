@@ -20,6 +20,7 @@ export { linkedHeadingService } from './linkedHeadingService';
 export {
     audienceForUi,
     getLocalPersonaFromSearchParams,
+    normalizePersonaCookieValue,
     shouldApplyLocalPersona,
 } from './localCampaignPersona';
 export { matrixBasicHeroService } from './matrixBasicHeroService';
