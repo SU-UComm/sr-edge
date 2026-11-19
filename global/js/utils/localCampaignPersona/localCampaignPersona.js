@@ -1,6 +1,39 @@
 const MANUAL_PERSONAS = ["student", "faculty"];
 
 /**
+ * Normalizes preferences_personalisation cookie values (quotes, encoding, "null").
+ *
+ * @param {string|null|undefined} cookieValue
+ * @returns {string|null}
+ */
+export function normalizePersonaCookieValue(cookieValue) {
+    if (cookieValue == null || cookieValue === "") {
+        return null;
+    }
+
+    let value = cookieValue;
+
+    try {
+        value = decodeURIComponent(value);
+    } catch {
+        value = cookieValue;
+    }
+
+    if (
+        (value.startsWith('"') && value.endsWith('"')) ||
+        (value.startsWith("'") && value.endsWith("'"))
+    ) {
+        value = value.slice(1, -1);
+    }
+
+    if (value === "null") {
+        return null;
+    }
+
+    return value;
+}
+
+/**
  * Returns "local" when URL search params match the local email campaign.
  *
  * @param {URLSearchParams} searchParams
@@ -34,11 +67,13 @@ export function shouldApplyLocalPersona(cookieValue, searchParams) {
         return false;
     }
 
-    if (cookieValue === "local") {
+    const persona = normalizePersonaCookieValue(cookieValue);
+
+    if (persona === "local") {
         return false;
     }
 
-    if (MANUAL_PERSONAS.includes(cookieValue)) {
+    if (persona && MANUAL_PERSONAS.includes(persona)) {
         return false;
     }
 
@@ -52,13 +87,15 @@ export function shouldApplyLocalPersona(cookieValue, searchParams) {
  * @returns {string}
  */
 export function audienceForUi(cookieValue) {
-    if (cookieValue === "null" || !cookieValue) {
+    const persona = normalizePersonaCookieValue(cookieValue);
+
+    if (!persona) {
         return "external";
     }
 
-    if (cookieValue === "local") {
+    if (persona === "local") {
         return "external";
     }
 
-    return cookieValue;
+    return persona;
 }
