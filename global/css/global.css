@@ -1429,18 +1429,11 @@ Subscribe to Stanford Report Marketo form styles
   @apply su-flex su-flex-row-reverse su-justify-end;
 }
 
-/* Make required asterisk red and give it a little margin.
-All fields include the asterisk, hide it by default. */
+/* Make required asterisk red and give it a little margin. */
 .marketo-sr-subscribe-form.mktoForm .mktoAsterix {
   @apply su-text-digital-red-light dark:su-text-dark-mode-red;
 
-  display: none;
   margin-inline-start: 0.2rem;
-}
-
-/* Display asterisk only when mktoRequiredField class is present. */
-.marketo-sr-subscribe-form.mktoForm .mktoFieldWrap.mktoRequiredField .mktoAsterix {
-  display: block;
 }
 
 /* Error messages */
@@ -1461,58 +1454,6 @@ All fields include the asterisk, hide it by default. */
 
 .marketo-sr-subscribe-form.mktoForm .mktoButton {
   @apply su-button hocus:su-underline su-leading-display md:su-px-30 md:su-pt-12 md:su-pb-14 su-text-18 md:su-text-20 su-transition-colors dark:hocus:su-ring-1 dark:hocus:su-ring-white;
-}
-
-/*
-Subscribe to Stanford Report Marketo form styles.
-The styles below are specifically for forms on story pages,
-using the .marketo-sr-subscribe-form--story class.
-*/
-.marketo-sr-subscribe-form.marketo-sr-subscribe-form--story.mktoForm {
-  @apply su-bg-fog-light dark:su-bg-black su-p-20 md:su-p-36;
-}
-
-.marketo-sr-subscribe-form.marketo-sr-subscribe-form--story.mktoForm h2 {
-  @apply su-type-1;
-}
-
-.marketo-sr-subscribe-form.marketo-sr-subscribe-form--story.mktoForm input.mktoField {
-  @apply su-max-w-none;
-}
-
-.marketo-sr-subscribe-form.marketo-sr-subscribe-form--story.mktoForm .mktoFormRow {
-  @apply su-mb-20;
-}
-
-.marketo-sr-subscribe-form.marketo-sr-subscribe-form--story.mktoForm .mktoButtonRow {
-  @apply su-mt-20;
-}
-
-/* Marketo preferences form styles https://news.stanford.edu/email-preferences */
-.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFormRow {
-  @apply su-mb-0
-}
-
-.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap:not(.mktoRequiredField) {
-  @apply su-flex su-items-end;
-
-  justify-content: start;
-}
-
-.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap.mktoRequiredField {
-  @apply su-flex su-flex-col su-items-start su-mb-50;
-}
-
-.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap:not(.mktoRequiredField) .mktoLabel {
-  @apply su-order-2;
-}
-
-.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap:not(.mktoRequiredField) .mktoCheckboxList {
-  @apply su-order-1;
-}
-
-.marketo-sr-subscribe-form.marketo-sr-preferences-form.mktoForm .mktoFieldDescriptor.mktoFormCol .mktoFieldWrap:not(.mktoRequiredField) label {
-  @apply su-font-regular;
 }
 
 /* Grid setup for page with left sidebar. Need to refactor all page layouts similar to this. */
