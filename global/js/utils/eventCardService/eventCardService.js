@@ -12,15 +12,28 @@ export class eventCardService {
      */
     async getCards() {
         const res = await fetch(this.api).catch((error) => {
-            throw new Error(error);
+            throw new Error(`Events API request failed. ${error?.message || error}`);
         });
 
-        const json = await res.json();
+        if (!res.ok) {
+            throw new Error(`Events API returned ${res.status} ${res.statusText}`.trim());
+        }
 
-        return Promise.all(json.events)
-            .then((data) => data.map((card) => formatCardDataEvents(card)))
-            .catch((error) => {
-                throw new Error(error);
-        });
+        let json;
+        try {
+            json = await res.json();
+        } catch (error) {
+            throw new Error(`Events API returned invalid JSON. ${error?.message || error}`);
+        }
+
+        if (!Array.isArray(json?.events)) {
+            throw new Error('Events API response missing events array');
+        }
+
+        try {
+            return json.events.map((card) => formatCardDataEvents(card));
+        } catch (error) {
+            throw new Error(`Events API returned malformed event data. ${error?.message || error}`);
+        }
     }
 }
