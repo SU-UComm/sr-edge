@@ -7,13 +7,7 @@ const { main } = moduleToTest;
 const mockedError = vi.fn();
 console.error = mockedError;
 
-vi.mock('../../global/js/utils', () => ({
-    uuid: vi.fn(),
-    basicAssetUri: vi.fn(),
-    isRealExternalLink: vi.fn().mockReturnValue(true),
-    cardDataAdapter: vi.fn().mockImplementation(() => ({
-        setCardService: vi.fn(),
-        getCards: vi.fn().mockResolvedValue([
+const defaultCardPayload = [
             {
                 "type": "Video",
                 "title": "Study uncovers hundreds of billions in missing revenue from U.S. ‘tax gap’",
@@ -77,7 +71,20 @@ vi.mock('../../global/js/utils', () => ({
                 "displayDescription": false,
                 "headingLvl": "h3"
             }
-        ]),
+];
+
+let getCardsInvocation = 0;
+
+vi.mock('../../global/js/utils', () => ({
+    uuid: vi.fn(),
+    basicAssetUri: vi.fn(),
+    isRealExternalLink: vi.fn().mockReturnValue(true),
+    cardDataAdapter: vi.fn().mockImplementation(() => ({
+        setCardService: vi.fn(),
+        getCards: vi.fn().mockImplementation(() => {
+            getCardsInvocation += 1;
+            return Promise.resolve(defaultCardPayload);
+        }),
     })),
     funnelbackCardService: vi.fn(),
     matrixCardService: vi.fn(),
@@ -147,6 +154,14 @@ describe('[Combined Content Grid]', () => {
 
     beforeEach(() => {
         vi.clearAllMocks();
+        getCardsInvocation = 0;
+        cardDataAdapter.mockImplementation(() => ({
+            setCardService: vi.fn(),
+            getCards: vi.fn().mockImplementation(() => {
+                getCardsInvocation += 1;
+                return Promise.resolve(defaultCardPayload);
+            }),
+        }));
     });
 
     describe('[Error Handling]', () => {
@@ -948,5 +963,67 @@ describe('[Combined Content Grid]', () => {
         });
 
 
+    });
+
+    describe('[Graceful failure]', () => {
+        beforeAll(() => {
+            uuid.mockReturnValue('36bcda50-8e16-4255-a8aa-d558dd550b8b');
+            basicAssetUri.mockReturnValue({ url: 'https://example.com' });
+        });
+
+        it('Should render the grid and emit an error comment when the events API fails', async () => {
+            cardDataAdapter.mockImplementation(() => ({
+                setCardService: vi.fn(),
+                getCards: vi.fn().mockImplementation(() => {
+                    getCardsInvocation += 1;
+                    if (getCardsInvocation === 2) {
+                        return Promise.reject(new Error('Events API returned 400 Bad Request'));
+                    }
+                    return Promise.resolve(defaultCardPayload);
+                }),
+            }));
+
+            const result = await main(defaultMockData, defaultMockInfo);
+
+            expect(result).toContain('<!-- Error occurred in the Combined Content Grid component: Failed to fetch event cards data. Events API returned 400 Bad Request -->');
+            expect(result).toContain('data-component="combined-content-grid"');
+            expect(result).toContain('Study uncovers hundreds of billions in missing revenue');
+        });
+
+        it('Should render the grid and emit an error comment when announcements fail', async () => {
+            cardDataAdapter.mockImplementation(() => ({
+                setCardService: vi.fn(),
+                getCards: vi.fn().mockImplementation(() => {
+                    getCardsInvocation += 1;
+                    if (getCardsInvocation === 3) {
+                        return Promise.reject(new Error('Funnelback request failed'));
+                    }
+                    return Promise.resolve(defaultCardPayload);
+                }),
+            }));
+
+            const result = await main(defaultMockData, defaultMockInfo);
+
+            expect(result).toContain('<!-- Error occurred in the Combined Content Grid component: Failed to fetch announcements cards data. Funnelback request failed -->');
+            expect(result).toContain('data-component="combined-content-grid"');
+        });
+
+        it('Should still return an error comment only when primary card data fails', async () => {
+            cardDataAdapter.mockImplementation(() => ({
+                setCardService: vi.fn(),
+                getCards: vi.fn().mockImplementation(() => {
+                    getCardsInvocation += 1;
+                    if (getCardsInvocation === 1) {
+                        return Promise.reject(new Error('Matrix API unavailable'));
+                    }
+                    return Promise.resolve(defaultCardPayload);
+                }),
+            }));
+
+            const result = await main(defaultMockData, defaultMockInfo);
+
+            expect(result).toBe('<!-- Error occurred in the Combined Content Grid component: Failed to fetch cards data. Matrix API unavailable -->');
+            expect(result).not.toContain('data-component="combined-content-grid"');
+        });
     });
 });
