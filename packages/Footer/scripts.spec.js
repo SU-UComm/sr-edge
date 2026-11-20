@@ -3,6 +3,7 @@
  */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { getCookie } from '../../global/js/utils/getCookie';
+import { audienceForUi } from '../../global/js/utils/localCampaignPersona';
 import * as footerScripts from './scripts';
 
 vi.mock('../../global/js/utils/getCookie', () => ({
@@ -47,6 +48,14 @@ describe('[Footer][Client]', () => {
             expect(externalElement.classList.contains(footerScripts.FOOTER_HIDDEN_CLASS)).toBe(true);
             expect(facultyElement.classList.contains(footerScripts.FOOTER_HIDDEN_CLASS)).toBe(true);
             expect(studentElement.classList.contains(footerScripts.FOOTER_HIDDEN_CLASS)).toBe(false);
+        });
+
+        it('Should show external when audience is local via audienceForUi', () => {
+            footerScripts._manageAudience(audienceForUi('local'));
+
+            expect(externalElement.classList.contains(footerScripts.FOOTER_HIDDEN_CLASS)).toBe(false);
+            expect(facultyElement.classList.contains(footerScripts.FOOTER_HIDDEN_CLASS)).toBe(true);
+            expect(studentElement.classList.contains(footerScripts.FOOTER_HIDDEN_CLASS)).toBe(true);
         });
 
         it('Should hide all elements when audience is invalid', () => {
