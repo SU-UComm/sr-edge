@@ -2,6 +2,7 @@ import { cardDataAdapter, funnelbackCardService, matrixCardService, eventCardSer
 import { EventStartEndDate } from '../../global/js/helpers';
 import { processEditor } from '../../global/js/utils/processEditor';
 import combinedContentGridTemplate from './combined-content-grid.hbs';
+import { formatComponentErrorComment, fetchWithGracefulFailure, prependErrorComments } from './fetchWithGracefulFailure';
 
 /**
  * Combined Content Grid component that renders Stories, Events and Announcements within the grid
@@ -252,43 +253,19 @@ export default {
 
         // Start events data fetching if configured
         if (eventsConfiguration?.endPoint) {
-            // Create our service
             const eventService = new eventCardService({ api: eventsConfiguration.endPoint });
             const eventAdapter = new cardDataAdapter();
-
-            // Set our card service
             eventAdapter.setCardService(eventService);
-
-            // Get the event cards data
-            try {
-                eventDataPromise = eventAdapter.getCards();
-            } catch (er) {
-                console.error('Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ', er);
-                if (!squizEdit) {
-                    return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch event cards data. ${er.message} -->`;
-                }
-                eventDataPromise = Promise.resolve([]);
-            }
+            eventDataPromise = eventAdapter.getCards();
         }
 
         // Start announcements data fetching if configured
         if (announcementsConfiguration?.endPoint) {
-            // Create our service
             const announcementService = new funnelbackCardService({ FB_JSON_URL, query: announcementsConfiguration.endPoint });
             const announcementAdapter = new cardDataAdapter();
-
-            // Set our card service
             announcementAdapter.setCardService(announcementService);
+            announcementDataPromise = announcementAdapter.getCards();
 
-             // Get the announcements cards data
-             try {
-                announcementDataPromise = announcementAdapter.getCards();
-            } catch (er) {
-                console.error('Error occurred in the Combined Content Grid component: Failed to fetch announcements cards data. ', er);
-                return `<!-- Error occurred in the Combined Content Grid component: Failed to fetch announcements cards data. ${er.message} -->`;
-            }
-
-            // Start announcements page data fetching if configured
             if (announcementsConfiguration.linkUrl && announcementsConfiguration.linkUrl !== "") {
                 announcementPageDataPromise = basicAssetUri(
                     fnsCtx,
@@ -297,33 +274,43 @@ export default {
             }
         }
 
-        // Wait for all promises to resolve in parallel
-        const promises = [dataPromise, headingDataPromise];
-        if (eventDataPromise) promises.push(eventDataPromise);
-        if (announcementDataPromise) promises.push(announcementDataPromise);
-        if (announcementPageDataPromise) promises.push(announcementPageDataPromise);
-
-        const results = await Promise.all(promises);
-
-        // if ( results ) return JSON.stringify(results[2]);
-
-        // Extract results
-        const data = results[0];
-        const headingData = results[1];
-        let events = null;
-        let announcements = null;
-        let announcementPageData = null;
-        
-        let resultIndex = 2;
-        if (eventDataPromise) {
-            events = results[resultIndex++];
+        const errorComments = [];
+        let data;
+        try {
+            data = await dataPromise;
+        } catch (er) {
+            console.error('Error occurred in the Combined Content Grid component: Failed to fetch cards data. ', er);
+            return formatComponentErrorComment(`Failed to fetch cards data. ${er.message}`);
         }
-        if (announcementDataPromise) {
-            announcements = results[resultIndex++];
-        }
-        if (announcementPageDataPromise) {
-            announcementPageData = results[resultIndex++];
-        }
+
+        const [
+            headingResult,
+            eventsResult,
+            announcementsResult,
+            announcementPageResult,
+        ] = await Promise.all([
+            fetchWithGracefulFailure(headingDataPromise, 'Failed to fetch heading data'),
+            eventDataPromise
+                ? fetchWithGracefulFailure(eventDataPromise, 'Failed to fetch event cards data')
+                : Promise.resolve({ value: null, errorComment: null }),
+            announcementDataPromise
+                ? fetchWithGracefulFailure(announcementDataPromise, 'Failed to fetch announcements cards data')
+                : Promise.resolve({ value: null, errorComment: null }),
+            announcementPageDataPromise
+                ? fetchWithGracefulFailure(announcementPageDataPromise, 'Failed to fetch announcements link data')
+                : Promise.resolve({ value: null, errorComment: null }),
+        ]);
+
+        [headingResult, eventsResult, announcementsResult, announcementPageResult].forEach((result) => {
+            if (result.errorComment) {
+                errorComments.push(result.errorComment);
+            }
+        });
+
+        const headingData = headingResult.value;
+        const events = eventsResult.value;
+        const announcements = announcementsResult.value;
+        const announcementPageData = announcementPageResult.value;
 
         // Process events data
         let eventData = null;
@@ -426,10 +413,9 @@ export default {
             announcementData,
         };
 
-        // Return original front end code when squizEdit is false, without modification
-        if (!squizEdit) return combinedContentGridTemplate(componentData);
+        const html = combinedContentGridTemplate(componentData);
+        const output = prependErrorComments(errorComments, squizEdit ? processEditor(html, squizEditTargets) : html);
 
-        // NEW: process the output to be editable in Squiz Editor
-        return processEditor(combinedContentGridTemplate(componentData), squizEditTargets);
+        return output;
     }
 };
