@@ -1,0 +1,10 @@
+{
+    "displayConfiguration": {
+        "image": "matrix-asset://stanfordNews/170202",
+        "imageOverlay": "medium",
+        "title": "Community Connections",
+        "description": "Deep relationship with our neighbors, cultivated over decades, ensures our mission – to improve lives through education and innovation – bears fruit close to home.",
+        "externalUrl": "https://www.stanford.edu/community-connections",
+        "linkText": "Hello neighbor"
+    }
+}

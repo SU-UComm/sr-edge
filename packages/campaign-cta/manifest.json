@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "campaign-cta",
     "type": "edge",
-    "version": "6.0.0",
+    "version": "6.1.0",
     "namespace": "stanford-components",
     "description": "This component serves as a preview & to promote campaign pages.",
     "displayName": "Campaign CTA",
@@ -25,9 +25,7 @@
                     "displayConfiguration": {
                         "title": "Campaign CTA configuration",
                         "description": "These options will output to the frontend of the Campaign CTA component",
-                        "required": [
-                            "image"
-                        ],
+                        "required": ["image"],
                         "properties": {
                             "image": {
                                 "title": "Background image",
@@ -40,11 +38,7 @@
                                 "description": "An overlay is required to maintain accessibility and readability. Use this to control the darkness of the overlay.",
                                 "type": "string",
                                 "default": "dark",
-                                "enum": [
-                                    "light",
-                                    "medium",
-                                    "dark"
-                                ]
+                                "enum": ["light", "medium", "dark"]
                             },
                             "title": {
                                 "title": "Title",
@@ -66,9 +60,14 @@
                             },
                             "linkUrl": {
                                 "title": "CTA Destination",
-                                "description": "The CTA link destination",
+                                "description": "The CTA link destination. If an external URL is also entered, it will override this field.",
                                 "type": "string",
                                 "format": "matrix-asset-uri"
+                            },
+                            "externalUrl": {
+                                "title": "External (manual) link",
+                                "type": "string",
+                                "description": "Enter the full URL, including https://. A diagonal arrow icon will be automatically added after the button text if the URL does not contain news.stanford.edu."
                             },
                             "linkText": {
                                 "title": "CTA text",
@@ -152,6 +151,19 @@
                     "inputData": {
                         "type": "file",
                         "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "externalLink": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/external.data.json"
                     },
                     "wrapper": {
                         "path": "previews/preview.html"

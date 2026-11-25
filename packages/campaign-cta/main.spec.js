@@ -7,9 +7,14 @@ const { main } = moduleToTest;
 const mockedError = vi.fn();
 console.error = mockedError;
 
-vi.mock('../../global/js/utils', () => ({
-    basicAssetUri: vi.fn(),
-}));
+vi.mock('../../global/js/utils', async (importOriginal) => {
+    const actual = await importOriginal();
+    return {
+        basicAssetUri: vi.fn(),
+        isRealExternalLink: actual.isRealExternalLink,
+        uuid: vi.fn(() => 'test-uuid'),
+    };
+});
 
 describe('[Campaign CTA]', () => {
     const mockFnsCtx = {
@@ -142,6 +147,107 @@ describe('[Campaign CTA]', () => {
             expect(result).toBe('<!-- Error occurred in the Campaign cta component: The "linkUrl" field must be a string type. The 123 was received. -->');
             expect(mockedError).toBeCalledTimes(1);
         });
+
+        it('Should handle errors when externalUrl is not a string', async () => {
+            const mockedData = {
+                displayConfiguration: {
+                    ...defaultMockData.displayConfiguration,
+                    externalUrl: 123,
+                }
+            };
+            const result = await main(mockedData, defaultMockInfo);
+    
+            expect(result).toBe('<!-- Error occurred in the Campaign cta component: The "externalUrl" field must be a string type. The 123 was received. -->');
+            expect(mockedError).toBeCalledTimes(1);
+        });
+    });
+
+    describe('[External Link]', () => {
+        const imageData = { url: 'https://picsum.photos/400/400', attributes: { alt: 'Alt Text' } };
+
+        it('Should use externalUrl and show the external icon when linkUrl is not set', async () => {
+            basicAssetUri.mockResolvedValueOnce(imageData);
+            const mockData = {
+                displayConfiguration: {
+                    ...defaultMockData.displayConfiguration,
+                    linkUrl: undefined,
+                    externalUrl: 'https://example.com/campaign',
+                }
+            };
+
+            const result = await main(mockData, defaultMockInfo);
+
+            expect(result).toContain("href='https://example.com/campaign'");
+            expect(result).toContain("rel='noopener nofollow'");
+            expect(result).toContain('data-icon="arrow-up"');
+            expect(result).toContain('svg-inline--fa-title-test-uuid');
+        });
+
+        it('Should not show the external icon when externalUrl is a news.stanford.edu link', async () => {
+            basicAssetUri.mockResolvedValueOnce(imageData);
+            const mockData = {
+                displayConfiguration: {
+                    ...defaultMockData.displayConfiguration,
+                    linkUrl: undefined,
+                    externalUrl: 'https://news.stanford.edu/stories/2025/01/example',
+                }
+            };
+
+            const result = await main(mockData, defaultMockInfo);
+
+            expect(result).toContain("href='https://news.stanford.edu/stories/2025/01/example'");
+            expect(result).not.toContain("rel='noopener nofollow'");
+            expect(result).not.toContain('data-icon="arrow-up"');
+        });
+
+        it('Should prefer linkUrl over externalUrl when both are set', async () => {
+            basicAssetUri.mockResolvedValueOnce({ url: 'https://news.stanford.edu/internal-page' });
+            basicAssetUri.mockResolvedValueOnce(imageData);
+            const mockData = {
+                displayConfiguration: {
+                    ...defaultMockData.displayConfiguration,
+                    externalUrl: 'https://example.com/campaign',
+                }
+            };
+
+            const result = await main(mockData, defaultMockInfo);
+
+            expect(result).toContain("href='https://news.stanford.edu/internal-page'");
+            expect(result).not.toContain('https://example.com/campaign');
+            expect(result).not.toContain('data-icon="arrow-up"');
+        });
+
+        it('Should not render the link when neither linkUrl nor externalUrl is set', async () => {
+            basicAssetUri.mockResolvedValueOnce(imageData);
+            const mockData = {
+                displayConfiguration: {
+                    ...defaultMockData.displayConfiguration,
+                    linkUrl: undefined,
+                    externalUrl: undefined,
+                }
+            };
+
+            const result = await main(mockData, defaultMockInfo);
+
+            expect(result).not.toContain('data-se=\'linkText\'');
+        });
+
+        it('Should keep externalUrl in the editor instead of the default asset link', async () => {
+            basicAssetUri.mockResolvedValueOnce(imageData);
+            const mockData = {
+                displayConfiguration: {
+                    ...defaultMockData.displayConfiguration,
+                    linkUrl: undefined,
+                    externalUrl: 'https://example.com/campaign',
+                }
+            };
+
+            const result = await main(mockData, { ctx: { ...mockFnsCtx, editor: true } });
+
+            expect(result).toContain("href='https://example.com/campaign'");
+            expect(result).toContain('data-icon="arrow-up"');
+            expect(basicAssetUri).toHaveBeenCalledTimes(1);
+        });
     });
 
     describe('[Main Function]', () => {
@@ -152,7 +258,7 @@ describe('[Campaign CTA]', () => {
 
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='campaign-cta'><div class='su-mx-auto su-component-container su-container-full'><div class='su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col' ><div class='su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row' ><div class='su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25' ><h2 class='su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold' >Campaign Title</h2> <div class='su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]' >Campaign Description</div></div><a href='https://example.com' class='su-text-18 su-mt-50 su-font-normal su-leading-display su-inline-block su-px-30 su-pt-10 su-pb-12 su-bg-digital-red su-mr-auto su-text-white su-no-underline hover:su-bg-black su-transition md:su-px-35 md:su-pt-14 md:su-pb-16 md:su-text-24 md:su-leading-[119.415%] md:su-mt-auto su-shrink-0' >Click Here</a></div><img class='su-absolute su-object-cover su-size-full su-z-[1]' src='https://picsum.photos/400/400' alt='' /><div class='su-campaign-cta-gradient su-z-[1]'></div></div></div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component='campaign-cta'><div class='su-mx-auto su-component-container su-container-full'><div class='su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col' ><div class='su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row' ><div class='su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25 su-text-shadow-[-3px_3px_5px_rgba(0,0,0,0.33)]' ><h2 class='su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold' data-se='title' >Campaign Title</h2> <div class='su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]' data-se='description' >Campaign Description</div></div><a href='https://example.com'  class='su-group su-text-18 su-mt-50 su-font-normal su-leading-display su-inline-block su-px-30 su-pt-10 su-pb-12 su-bg-digital-red su-mr-auto su-text-white su-no-underline hover:su-bg-black su-transition md:su-px-35 md:su-pt-14 md:su-pb-16 md:su-text-24 md:su-leading-[119.415%] md:su-mt-auto su-shrink-0' data-se='linkText' >Click Here </a></div><img class='su-absolute su-object-cover su-size-full su-z-[1]' src='https://picsum.photos/400/400' alt='' /><div class='su-absolute su-w-full su-h-full su-z-[1] ' ></div><div class='su-absolute su-w-full su-h-full su-bg-gradient-to-t  su-z-[1]' ></div></div></div></section>"`);
         });
 
         it('Should return HTML without link when linkUrl is missing', async () => {
@@ -165,7 +271,7 @@ describe('[Campaign CTA]', () => {
 
             const result = await main(mockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='campaign-cta'><div class='su-mx-auto su-component-container su-container-full'><div class='su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col' ><div class='su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row' ><div class='su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25' ><h2 class='su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold' >Campaign Title</h2> <div class='su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]' >Campaign Description</div></div></div><div class='su-campaign-cta-gradient su-z-[1]'></div></div></div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component='campaign-cta'><div class='su-mx-auto su-component-container su-container-full'><div class='su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col' ><div class='su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row' ><div class='su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25 su-text-shadow-[-3px_3px_5px_rgba(0,0,0,0.33)]' ><h2 class='su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold' data-se='title' >Campaign Title</h2> <div class='su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]' data-se='description' >Campaign Description</div></div></div><div class='su-absolute su-w-full su-h-full su-z-[1] ' ></div><div class='su-absolute su-w-full su-h-full su-bg-gradient-to-t  su-z-[1]' ></div></div></div></section>"`);
         });
 
         it('Should return HTML without title when title is an empty string', async () => {
@@ -178,7 +284,7 @@ describe('[Campaign CTA]', () => {
 
             const result = await main(mockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='campaign-cta'><div class='su-mx-auto su-component-container su-container-full'><div class='su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col' ><div class='su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row' ><div class='su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25' > <div class='su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]' >Campaign Description</div></div></div><div class='su-campaign-cta-gradient su-z-[1]'></div></div></div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component='campaign-cta'><div class='su-mx-auto su-component-container su-container-full'><div class='su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col' ><div class='su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row' ><div class='su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25 su-text-shadow-[-3px_3px_5px_rgba(0,0,0,0.33)]' > <div class='su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]' data-se='description' >Campaign Description</div></div></div><div class='su-absolute su-w-full su-h-full su-z-[1] ' ></div><div class='su-absolute su-w-full su-h-full su-bg-gradient-to-t  su-z-[1]' ></div></div></div></section>"`);
         });
 
         it('Should return HTML without description when description is an empty string', async () => {
@@ -191,7 +297,7 @@ describe('[Campaign CTA]', () => {
 
             const result = await main(mockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='campaign-cta'><div class='su-mx-auto su-component-container su-container-full'><div class='su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col' ><div class='su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row' ><div class='su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25' ><h2 class='su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold' >Campaign Title</h2> </div></div><div class='su-campaign-cta-gradient su-z-[1]'></div></div></div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component='campaign-cta'><div class='su-mx-auto su-component-container su-container-full'><div class='su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col' ><div class='su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row' ><div class='su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25 su-text-shadow-[-3px_3px_5px_rgba(0,0,0,0.33)]' ><h2 class='su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold' data-se='title' >Campaign Title</h2> </div></div><div class='su-absolute su-w-full su-h-full su-z-[1] ' ></div><div class='su-absolute su-w-full su-h-full su-bg-gradient-to-t  su-z-[1]' ></div></div></div></section>"`);
         });
 
         it('Should return HTML with empty alt attribute when attributes alt is missing', async () => {
@@ -201,7 +307,7 @@ describe('[Campaign CTA]', () => {
 
             const result = await main(defaultMockData, defaultMockInfo);
 
-            expect(result).toMatchInlineSnapshot(`"<section data-component='campaign-cta'><div class='su-mx-auto su-component-container su-container-full'><div class='su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col' ><div class='su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row' ><div class='su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25' ><h2 class='su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold' >Campaign Title</h2> <div class='su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]' >Campaign Description</div></div><a href='https://example.com' class='su-text-18 su-mt-50 su-font-normal su-leading-display su-inline-block su-px-30 su-pt-10 su-pb-12 su-bg-digital-red su-mr-auto su-text-white su-no-underline hover:su-bg-black su-transition md:su-px-35 md:su-pt-14 md:su-pb-16 md:su-text-24 md:su-leading-[119.415%] md:su-mt-auto su-shrink-0' >Click Here</a></div><img class='su-absolute su-object-cover su-size-full su-z-[1]' src='https://picsum.photos/400/400' alt='' /><div class='su-campaign-cta-gradient su-z-[1]'></div></div></div></section>"`);
+            expect(result).toMatchInlineSnapshot(`"<section data-component='campaign-cta'><div class='su-mx-auto su-component-container su-container-full'><div class='su-container-inner su-relative su-flex su-items-center su-justify-center su-flex-col' ><div class='su-component-campaigncta-wrap su-pt-126 su-pb-108 su-relative su-z-[2] su-text-white su-p-20 md:su-px-50 su-flex su-flex-col md:su-flex-row' ><div class='su-component-campaigncta-content su-relative md:su-border-r-black-30 md:su-border-r md:su-mr-25 su-w-full md:su-max-w-[65.5rem] md:su-pr-25 su-text-shadow-[-3px_3px_5px_rgba(0,0,0,0.33)]' ><h2 class='su-font-serif su-text-[5.5rem] su-leading-none md:su-text-[7.2rem] su-m-0 su-font-bold' data-se='title' >Campaign Title</h2> <div class='su-mt-34 su-font-serif su-text-20 md:su-text-24 su-mb-0 md:su-mb-[5.9rem] su-text-semibold md:su-mt-61 su-font-semibold su-leading-[130.245%]' data-se='description' >Campaign Description</div></div><a href='https://example.com'  class='su-group su-text-18 su-mt-50 su-font-normal su-leading-display su-inline-block su-px-30 su-pt-10 su-pb-12 su-bg-digital-red su-mr-auto su-text-white su-no-underline hover:su-bg-black su-transition md:su-px-35 md:su-pt-14 md:su-pb-16 md:su-text-24 md:su-leading-[119.415%] md:su-mt-auto su-shrink-0' data-se='linkText' >Click Here </a></div><img class='su-absolute su-object-cover su-size-full su-z-[1]' src='https://picsum.photos/400/400' alt='' /><div class='su-absolute su-w-full su-h-full su-z-[1] ' ></div><div class='su-absolute su-w-full su-h-full su-bg-gradient-to-t  su-z-[1]' ></div></div></div></section>"`);
         });
 
         it('Should sanitize the description using xss', async () => {

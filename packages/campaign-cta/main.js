@@ -1,5 +1,5 @@
 import campaignCtaTemplate from './campaign-cta.hbs';
-import { basicAssetUri } from "../../global/js/utils";
+import { basicAssetUri, isRealExternalLink, uuid } from "../../global/js/utils";
 import { processEditor } from '../../global/js/utils/processEditor';
 
 /**
@@ -18,6 +18,7 @@ export default {
      * @param {string} [args.displayConfiguration.title] - The title text for the CTA (optional).
      * @param {string} [args.displayConfiguration.description] - The description text for the CTA (optional).
      * @param {string} [args.displayConfiguration.linkUrl] - The URL for the CTA link (optional).
+     * @param {string} [args.displayConfiguration.externalUrl] - A manual URL for the CTA link, used when linkUrl is not set (optional).
      * @param {string} [args.displayConfiguration.linkText] - The text for the CTA link (optional).
      * @param {Object} info - Context information for the component.
      * @param {Object} info.fns - Functions available in the execution context.
@@ -33,7 +34,7 @@ export default {
         const fnsCtx = componentFunctions || componentContext || {};
         
         // CHANGE: change const to let so we can modify later for squizEdit default values
-        let { image, imageOverlay, title, description, linkUrl, linkText } = (args && args.displayConfiguration) || {};
+        let { image, imageOverlay, title, description, linkUrl, externalUrl, linkText } = (args && args.displayConfiguration) || {};
 
         // NEW: squizEdit is a boolean that indicates if the component is being edited in Squiz Editor
         // Must fallback to false, use true to mock the editor
@@ -47,7 +48,9 @@ export default {
             title = title || 'Title text';
             description = description || 'Add content';
             linkText = linkText || 'Link text';
-            linkUrl = linkUrl || "matrix-asset://StanfordNews/29389"
+            // Only default the asset link when no link of either type is set,
+            // so a manual external link still shows in the editor
+            if (!linkUrl && !externalUrl) linkUrl = "matrix-asset://StanfordNews/29389";
             // Provide default image if none exists
             image = image || 'matrix-asset://StanfordNews/172387';
             
@@ -103,6 +106,11 @@ export default {
                         `The "linkUrl" field must be a string type. The ${JSON.stringify(linkUrl)} was received.`,
                     );
                 }
+                if (externalUrl && typeof externalUrl !== 'string') {
+                    throw new Error(
+                        `The "externalUrl" field must be a string type. The ${JSON.stringify(externalUrl)} was received.`,
+                    );
+                }
                 if (linkText && typeof linkText !== 'string') {
                     throw new Error(
                         `The "linkText" field must be a string type. The ${JSON.stringify(linkText)} was received.`,
@@ -156,13 +164,20 @@ export default {
             }
         }
         
+        // The asset link takes priority, the manual external link is the fallback
+        const buttonUrl = linkData?.url || externalUrl;
+        // Only show the external link icon when the manual link is the one in use
+        const isExternal = !linkData?.url && externalUrl ? isRealExternalLink(externalUrl) : false;
+
         // Prepare component data for template rendering
         const componentData = {
             imageOverlay,
             title,
             description,
             linkText,
-            linkData,
+            buttonUrl,
+            isRealExternalLink: isExternal,
+            iconUniqueID: uuid(),
             imageData,
             width: "full",
             paddingX: false
