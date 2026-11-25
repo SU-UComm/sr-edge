@@ -14,11 +14,23 @@
         <div class='su-card-paragraph'>{{description}}</div>
     </div>
 
-    <a
-        href='{{linkData.url}}'
-        class='su-button su-stretched-link su-text-16 md:su-text-20'
-    >
-        {{linkText}}
-    </a>
+    {{#if buttonUrl}}
+        <a
+            href='{{buttonUrl}}'
+            {{#if isRealExternalLink}}rel='noopener nofollow'{{/if}}
+            class='su-group su-button su-stretched-link su-text-16 md:su-text-20'
+        >
+            {{linkText}}
+            {{#if isRealExternalLink}}
+                {{> fontawesome-icon
+                    icon="arrow-up"
+                    set="regular"
+                    width=20
+                    classes="fa-fw su-inline-block su-shrink-0 su-text-white group-hocus:su-text-white su-text-[0.9em] su-ml-04em su-transition-transform su-rotate-45 group-hocus:su-translate-x-01em group-hocus:su--translate-y-01em"
+                    iconUniqueID=iconUniqueID
+                }}
+            {{/if}}
+        </a>
+    {{/if}}
 
 </div>

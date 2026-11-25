@@ -2,7 +2,7 @@
     "$schema": "http://localhost:3000/schemas/v1.json#",
     "name": "campaign-sidebar-cta",
     "type": "edge",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "namespace": "stanford-components",
     "description": "This component is used to promote campaign pages on basic story pages with a sidebar.",
     "displayName": "Campaign Sidebar CTA",
@@ -24,7 +24,6 @@
                     "image",
                     "title",
                     "description",
-                    "linkUrl",
                     "linkText"
                 ],
                 "properties": {
@@ -51,6 +50,11 @@
                         "description": "The CTA link destination.",
                         "type": "string",
                         "format": "matrix-asset-uri"
+                    },
+                    "externalUrl": {
+                        "title": "External (manual) link",
+                        "type": "string",
+                        "description": "Enter the full URL, including https://. A diagonal arrow icon will be automatically added after the button text if the URL does not contain news.stanford.edu."
                     },
                     "linkText": {
                         "title": "CTA text",
@@ -124,6 +128,19 @@
                     "inputData": {
                         "type": "file",
                         "path": "example-data/preview.data.json"
+                    },
+                    "wrapper": {
+                        "path": "previews/preview.html"
+                    }
+                }
+            }
+        },
+        "externalLink": {
+            "functionData": {
+                "main": {
+                    "inputData": {
+                        "type": "file",
+                        "path": "example-data/external.data.json"
                     },
                     "wrapper": {
                         "path": "previews/preview.html"

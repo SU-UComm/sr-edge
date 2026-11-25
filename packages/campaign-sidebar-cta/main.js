@@ -1,5 +1,5 @@
 import campaignSidebarCtaTemplate from './campaign-sidebar-cta.hbs';
-import { basicAssetUri } from "../../global/js/utils";
+import { basicAssetUri, isRealExternalLink, uuid } from "../../global/js/utils";
 
 /**
  * Campaign Sidebar CTA (Call-to-Action) component that renders a campaign block with an image, title, description, and link.
@@ -15,6 +15,7 @@ export default {
      * @param {string} [args.title] - The title text for the CTA (optional).
      * @param {string} [args.description] - The description text for the CTA (optional).
      * @param {string} [args.linkUrl] - The URL for the CTA link (optional).
+     * @param {string} [args.externalUrl] - A manual URL for the CTA link, used when linkUrl is not set (optional).
      * @param {string} [args.linkText] - The text for the CTA link (optional).
      * @param {Object} info - Context information for the component.
      * @param {Object} info.fns - Functions available in the execution context.
@@ -26,7 +27,7 @@ export default {
         const fnsCtx = info?.fns || info?.ctx || {};
 
         // Extracting configuration data from arguments
-        const { image, title, description, linkUrl, linkText } = (args) || {};
+        const { image, title, description, linkUrl, externalUrl, linkText } = (args) || {};
 
         // Validate required functions
         try {
@@ -62,6 +63,11 @@ export default {
                     `The "linkUrl" field must be a string type. The ${JSON.stringify(linkUrl)} was received.`,
                 );
             }
+            if (externalUrl && typeof externalUrl !== 'string') {
+                throw new Error(
+                    `The "externalUrl" field must be a string type. The ${JSON.stringify(externalUrl)} was received.`,
+                );
+            }
             if (linkText && typeof linkText !== 'string') {
                 throw new Error(
                     `The "linkText" field must be a string type. The ${JSON.stringify(linkText)} was received.`,
@@ -85,12 +91,19 @@ export default {
             imageData = await basicAssetUri(fnsCtx, image);
         }
 
+        // The asset link takes priority, the manual external link is the fallback
+        const buttonUrl = linkData?.url || externalUrl;
+        // Only show the external link icon when the manual link is the one in use
+        const isExternal = !linkData?.url && externalUrl ? isRealExternalLink(externalUrl) : false;
+
         // Prepare component data for template rendering
         const componentData = {
             title,
             description,
             linkText,
-            linkData,
+            buttonUrl,
+            isRealExternalLink: isExternal,
+            iconUniqueID: uuid(),
             imageData,
         };
 
